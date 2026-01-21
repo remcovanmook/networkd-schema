@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://systemd.io/schemas/v254/network.json",
+  "$id": "https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v254/systemd.network.schema.json",
   "title": "Systemd network Configuration (v254)",
   "type": "object",
   "additionalProperties": false,

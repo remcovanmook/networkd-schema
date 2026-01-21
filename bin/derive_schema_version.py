@@ -126,6 +126,7 @@ def main():
     parser.add_argument("--generated-base", required=True, help="Path to Generated vBase schema")
     parser.add_argument("--generated-target", required=True, help="Path to Generated vTarget schema")
     parser.add_argument("--out", required=True, help="Output path for Curated vTarget schema")
+    parser.add_argument("--id-url", required=True, help="The $id URL for the new schema")
     
     args = parser.parse_args()
     
@@ -134,14 +135,7 @@ def main():
     generated_base = load_json(args.generated_base)
     generated_target = load_json(args.generated_target)
     
-    print(f"Computing diff between Generated Base and Generated Target...")
-    # We want: 
-    #   Add = (GenTarget - GenBase)
-    #   Remove = (GenBase - GenTarget)
-    
-    # Wait, my deep_diff logic was (base, target). 
-    # If I pass (GenBase, GenTarget), it returns what to Add/Remove to make Base look like Target.
-    # That's exactly what we want to apply to CuratedBase.
+    # ... (diff computation)
     
     diff = deep_diff_structure(generated_base, generated_target)
     
@@ -154,7 +148,8 @@ def main():
         # We assume generated_target['title'] has the correct version string
         target_ver = args.generated_target.split('.')[-3] # naive file parsing or extract from title
         new_schema["title"] = f"{new_schema['title'].split('(')[0].strip()} ({target_ver})"
-        new_schema["$id"] = new_schema["$id"].replace("v257", target_ver)
+        
+    new_schema["$id"] = args.id_url
 
     print(f"Saving to {args.out}")
     save_json(new_schema, args.out)

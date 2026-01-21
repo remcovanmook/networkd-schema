@@ -13,6 +13,18 @@ These schemas are suitable for:
 -   `schemas/`: The final generated schemas for various systemd versions, derived from the curated baseline.
 -   `src/original/`: Raw schemas generated directly from systemd source/man pages (used for diffing).
 
+## Setup
+
+Before running the build script, set up the Python environment:
+
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+This creates a virtual environment in `.venv` and installs dependencies (including `jsonschema` for strict validation).
+`build.py` will automatically use this environment if it exists.
+
 ## Usage
 
 ### Using the Schemas

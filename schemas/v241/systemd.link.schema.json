@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://systemd.io/schemas/v241/link.json",
+  "$id": "https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v241/systemd.link.schema.json",
   "title": "Systemd link Configuration (v241)",
   "type": "object",
   "additionalProperties": false,

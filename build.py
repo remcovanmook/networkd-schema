@@ -60,6 +60,13 @@ def main():
 
     ensure_dirs()
     
+    # Auto-detect venv python
+    venv_python = os.path.join(os.getcwd(), ".venv", "bin", "python3")
+    if os.path.exists(venv_python):
+        python_cmd = venv_python
+    else:
+        python_cmd = "python3"
+        
     target_versions = VERSIONS
     if args.version:
         if args.version not in VERSIONS:
@@ -88,7 +95,7 @@ def main():
         if not exists:
             print(f"Generating raw schemas for {ver}...")
             run_command([
-                "python3", "bin/generate_systemd_schema.py",
+                python_cmd, "bin/generate_systemd_schema.py",
                 "--version", ver,
                 "--out", ver_dir
             ])
@@ -104,28 +111,51 @@ def main():
         out_dir = os.path.join(SCHEMAS_DIR, ver)
         os.makedirs(out_dir, exist_ok=True)
         
+        # Canonical URL Base
+        id_base = "https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas"
+
         if ver == BASE_VERSION:
-            # For base version, just copy curated files
+            # For base version, load, update ID, and save (instead of just copy)
+            import json
             for f in FILES:
                 src = os.path.join(CURATED_BASE_DIR, f"{f}.{ver}.schema.json")
                 dst = os.path.join(out_dir, f"{f}.schema.json")
-                shutil.copy2(src, dst)
-            continue
+                
+                # Construct ID: .../schemas/v257/systemd.network.schema.json
+                # The filename in repo is {f}.schema.json (no version)
+                canonical_id = f"{id_base}/{ver}/{f}.schema.json"
+                
+                with open(src, 'r') as fh:
+                    data = json.load(fh)
+                
+                data['$id'] = canonical_id
+                
+                with open(dst, 'w') as fh:
+                    json.dump(data, fh, indent=2)
             
-        # For other versions, derive
-        for f in FILES:
-            curated_base = os.path.join(CURATED_BASE_DIR, f"{f}.{BASE_VERSION}.schema.json")
-            generated_base = os.path.join(SRC_ORIGINAL_DIR, BASE_VERSION, f"{f}.{BASE_VERSION}.schema.json")
-            generated_target = os.path.join(SRC_ORIGINAL_DIR, ver, f"{f}.{ver}.schema.json")
-            out_file = os.path.join(out_dir, f"{f}.schema.json")
+        else:
+            # For other versions, derive
+            for f in FILES:
+                curated_base = os.path.join(CURATED_BASE_DIR, f"{f}.{BASE_VERSION}.schema.json")
+                generated_base = os.path.join(SRC_ORIGINAL_DIR, BASE_VERSION, f"{f}.{BASE_VERSION}.schema.json")
+                generated_target = os.path.join(SRC_ORIGINAL_DIR, ver, f"{f}.{ver}.schema.json")
+                out_file = os.path.join(out_dir, f"{f}.schema.json")
+                
+                canonical_id = f"{id_base}/{ver}/{f}.schema.json"
+                
+                run_command([
+                    python_cmd, "bin/derive_schema_version.py",
+                    "--curated-base", curated_base,
+                    "--generated-base", generated_base,
+                    "--generated-target", generated_target,
+                    "--out", out_file,
+                    "--id-url", canonical_id
+                ])
             
-            run_command([
-                "python3", "bin/derive_schema_version.py",
-                "--curated-base", curated_base,
-                "--generated-base", generated_base,
-                "--generated-target", generated_target,
-                "--out", out_file
-            ])
+        # 3. Validate Generated Schemas
+        print(f"Validating schemas for {ver}...")
+        built_files = [os.path.join(out_dir, f"{f}.schema.json") for f in FILES]
+        run_command([python_cmd, "bin/validate_schema.py"] + built_files)
 
     print("\nBuild Complete!")
 
