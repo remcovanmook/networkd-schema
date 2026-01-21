@@ -1,0 +1,105 @@
+name: Update Systemd Schemas
+
+on:
+  schedule:
+    # Run weekly on Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  check-and-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed to push new schemas back to the repo
+
+    steps:
+      - name: Checkout networkd-schema
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install requests packaging jsonschema
+          # Install any other deps your specific build script needs here
+
+      - name: Identify Missing Versions
+        id: target-versions
+        shell: python
+        run: |
+          import requests
+          import os
+          import re
+          from packaging.version import parse
+
+          # 1. Fetch tags from systemd/systemd
+          url = "https://api.github.com/repos/systemd/systemd/tags"
+          response = requests.get(url)
+          response.raise_for_status()
+          tags = response.json()
+
+          # 2. Parse and filter tags (keep only stable versions like v255, v256)
+          # We skip RC versions or weird tags
+          stable_versions = []
+          for tag in tags:
+              name = tag['name']
+              # Systemd tags are usually v255, v254. Skip anything with '-', 'rc', etc.
+              if re.match(r'^v\d+$', name):
+                  stable_versions.append(name)
+
+          # 3. Sort descending (Newest first)
+          stable_versions.sort(key=lambda x: int(x.strip('v')), reverse=True)
+
+          # 4. Select top 3 latest
+          top_3 = stable_versions[:3]
+          print(f"Top 3 upstream stable versions: {top_3}")
+
+          # 5. Check which ones are missing in local repo
+          # Assuming schemas are stored in folders like ./schemas/v255/ or files like v255.json
+          # Adjust the path check below to match your repo structure
+          missing_versions = []
+          for ver in top_3:
+              # EXAMPLE: checking if folder 'schemas/v255' exists
+              if not os.path.exists(f"schemas/{ver}"):
+                  missing_versions.append(ver)
+              else:
+                  print(f"Skipping {ver}: already exists.")
+
+          # 6. Output to GitHub Actions variables
+          print(f"Missing versions to build: {missing_versions}")
+          # We join them with spaces to loop over them in bash
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+              fh.write(f"matrix={' '.join(missing_versions)}\n")
+
+      - name: Build Missing Schemas
+        if: steps.target-versions.outputs.matrix != ''
+        run: |
+          # Split the string back into an array
+          VERSIONS="${{ steps.target-versions.outputs.matrix }}"
+          
+          for VER in $VERSIONS; do
+            echo "Building schema for $VER..."
+            
+            python3 build.py --version $VER
+            
+            echo "Build for $VER complete."
+          done
+
+      - name: Commit and Push
+        if: steps.target-versions.outputs.matrix != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add schemas/
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "feat: add schemas for ${{ steps.target-versions.outputs.matrix }}"
+            git push
+          fi
