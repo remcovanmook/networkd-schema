@@ -386,7 +386,8 @@
       "required": [
         "Type"
       ],
-      "title": "Match"
+      "title": "Match",
+      "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BMatch%5D%20Section%20Options"
     },
     "Link": {
       "type": "object",
@@ -526,7 +527,8 @@
         }
       },
       "additionalProperties": false,
-      "title": "Link"
+      "title": "Link",
+      "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BLink%5D%20Section%20Options"
     },
     "Network": {
       "type": "object",
@@ -1045,7 +1047,8 @@
         }
       },
       "additionalProperties": false,
-      "title": "Network"
+      "title": "Network",
+      "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BNetwork%5D%20Section%20Options"
     },
     "Address": {
       "oneOf": [
@@ -1163,7 +1166,8 @@
                 "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BAddress%5D%20Section%20Options"
           }
         },
         {
@@ -1282,7 +1286,8 @@
               "description": "This setting provides a method for integrating network configuration into firewall rules with NFT sets. The benefit of using the setting is that static network configuration (or dynamically obtained network addresses, see similar directives in other sections) can be used in firewall rules with the indirection of NFT set types. For example, access could be granted for hosts in the local subnetwork only. Firewall rules using IP address of an interface are also instantly updated when the network configuration changes, for example via DHCP. This option expects a whitespace separated list of NFT set definitions. Each definition consists of a colon-separated tuple of source type (one of 'address', 'prefix' or 'ifindex'), NFT address family (one of 'arp', 'bridge', 'inet', 'ip', 'ip6', or 'netdev'), table name and set name. The names of tables and sets must conform to lexical restrictions of NFT table names. The type of the element used in the NFT filter must match the type implied by the directive ('address', 'prefix' or 'ifindex') and address type (IPv4 or IPv6) as shown in the table below. When an interface is configured with IP addresses, the addresses, subnetwork masks or interface index will be appended to the NFT sets. The information will be removed when the interface is deconfigured. systemd-networkd only inserts elements to (or removes from) the sets, so the related NFT rules, tables and sets must be prepared elsewhere in advance. Failures to manage the sets will be ignored. Example: [Address] NFTSet=prefix:netdev:filter:eth_ipv4_prefix Corresponding NFT rules: table netdev filter { set eth_ipv4_prefix { type ipv4_addr flags interval } chain eth_ingress { type filter hook ingress device \"eth0\" priority filter; policy drop; ip daddr != @eth_ipv4_prefix drop accept } }"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BAddress%5D%20Section%20Options"
         }
       ],
       "description": "[Address] configuration (Can be repeated)",
@@ -1317,7 +1322,8 @@
             "additionalProperties": false,
             "required": [
               "Label"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6AddressLabel%5D%20Section%20Options"
           }
         },
         {
@@ -1345,7 +1351,8 @@
           "additionalProperties": false,
           "required": [
             "Label"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6AddressLabel%5D%20Section%20Options"
         }
       ],
       "description": "[IPv6AddressLabel] configuration (Can be repeated)",
@@ -1387,7 +1394,8 @@
                 "description": "The hardware address to set for the device."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BNeighbor%5D%20Section%20Options"
           }
         },
         {
@@ -1422,7 +1430,8 @@
               "description": "The hardware address to set for the device."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BNeighbor%5D%20Section%20Options"
         }
       ],
       "description": "[Neighbor] configuration (Can be repeated)",
@@ -1582,7 +1591,8 @@
             "required": [
               "GoTo",
               "Type"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BRoutingPolicyRule%5D%20Section%20Options"
           }
         },
         {
@@ -1735,7 +1745,8 @@
           "required": [
             "GoTo",
             "Type"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BRoutingPolicyRule%5D%20Section%20Options"
         }
       ],
       "description": "[RoutingPolicyRule] configuration (Can be repeated)",
@@ -1942,7 +1953,8 @@
                 "type": "string"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BRoute%5D%20Section%20Options"
           }
         },
         {
@@ -2155,7 +2167,8 @@
               "type": "string"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BRoute%5D%20Section%20Options"
         }
       ],
       "description": "[Route] configuration (Can be repeated)",
@@ -2210,7 +2223,8 @@
             "additionalProperties": false,
             "required": [
               "Id"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BNextHop%5D%20Section%20Options"
           }
         },
         {
@@ -2258,7 +2272,8 @@
           "additionalProperties": false,
           "required": [
             "Id"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BNextHop%5D%20Section%20Options"
         }
       ],
       "description": "[NextHop] configuration (Can be repeated)",
@@ -2503,7 +2518,8 @@
                 "type": "boolean"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPv4%5D%20Section%20Options"
           }
         },
         {
@@ -2802,7 +2818,8 @@
               "type": "boolean"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPv4%5D%20Section%20Options"
         }
       ],
       "description": "[DHCPv4] configuration (Can be repeated)",
@@ -2922,7 +2939,8 @@
                 "type": "boolean"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPv6%5D%20Section%20Options"
           }
         },
         {
@@ -3063,7 +3081,8 @@
               "type": "boolean"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPv6%5D%20Section%20Options"
         }
       ],
       "description": "[DHCPv6] configuration (Can be repeated)",
@@ -3177,7 +3196,8 @@
             "additionalProperties": false,
             "required": [
               "Token"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6AcceptRA%5D%20Section%20Options"
           }
         },
         {
@@ -3343,7 +3363,8 @@
           "additionalProperties": false,
           "required": [
             "Token"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6AcceptRA%5D%20Section%20Options"
         }
       ],
       "description": "[IPv6AcceptRA] configuration (Can be repeated)",
@@ -3525,7 +3546,8 @@
                 "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPServer%5D%20Section%20Options"
           }
         },
         {
@@ -3708,7 +3730,8 @@
               "description": "When true, the DHCP server will load and save leases in the persistent storage. When false, the DHCP server will neither load nor save leases in the persistent storage. Hence, bound leases will be lost when the interface is reconfigured e.g. by networkctl reconfigure, or systemd-networkd.service8 is restarted. That may cause address conflict on the network. So, please take an extra care when disable this setting. When unspecified, the value specified in the same setting in networkd.conf5, which defaults to 'yes', will be used."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPServer%5D%20Section%20Options"
         }
       ],
       "description": "[DHCPServer] configuration (Can be repeated)",
@@ -3745,7 +3768,8 @@
                 "_mandatory": true
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPServerStaticLease%5D%20Section%20Options"
           }
         },
         {
@@ -3771,7 +3795,8 @@
               "_mandatory": true
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPServerStaticLease%5D%20Section%20Options"
         }
       ],
       "description": "[DHCPServerStaticLease] configuration (Can be repeated)",
@@ -3856,7 +3881,8 @@
                 "description": "Configures this port for having multicast routers attached. A port with a multicast router will receive all multicast traffic. When unset, the kernel's default will be used."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBridge%5D%20Section%20Options"
           }
         },
         {
@@ -3934,7 +3960,8 @@
               "description": "Configures this port for having multicast routers attached. A port with a multicast router will receive all multicast traffic. When unset, the kernel's default will be used."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBridge%5D%20Section%20Options"
         }
       ],
       "description": "[Bridge] configuration (Can be repeated)",
@@ -4002,7 +4029,8 @@
                 "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBridgeFDB%5D%20Section%20Options"
           }
         },
         {
@@ -4063,7 +4091,8 @@
               "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBridgeFDB%5D%20Section%20Options"
         }
       ],
       "description": "[BridgeFDB] configuration (Can be repeated)",
@@ -4096,7 +4125,8 @@
                 "description": "The VLAN ID for the new entry. Valid ranges are 0 (no VLAN) to 4094. Optional, defaults to 0."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBridgeMDB%5D%20Section%20Options"
           }
         },
         {
@@ -4122,7 +4152,8 @@
               "description": "The VLAN ID for the new entry. Valid ranges are 0 (no VLAN) to 4094. Optional, defaults to 0."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBridgeMDB%5D%20Section%20Options"
         }
       ],
       "description": "[BridgeMDB] configuration (Can be repeated)",
@@ -4190,7 +4221,8 @@
                 "description": "The VLAN ID specified here will be used to untag frames on egress. Configuring EgressUntagged= implicates the use of VLAN= above and will enable the VLAN ID for ingress as well. This can be either a single ID or a range M-N. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBridgeVLAN%5D%20Section%20Options"
           }
         },
         {
@@ -4251,7 +4283,8 @@
               "description": "The VLAN ID specified here will be used to untag frames on egress. Configuring EgressUntagged= implicates the use of VLAN= above and will enable the VLAN ID for ingress as well. This can be either a single ID or a range M-N. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBridgeVLAN%5D%20Section%20Options"
         }
       ],
       "description": "[BridgeVLAN] configuration (Can be repeated)",
@@ -4304,7 +4337,8 @@
                 "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPPrefixDelegation%5D%20Section%20Options"
           }
         },
         {
@@ -4354,7 +4388,8 @@
               "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPPrefixDelegation%5D%20Section%20Options"
         }
       ],
       "description": "[DHCPPrefixDelegation] configuration (Can be repeated)",
@@ -4434,7 +4469,8 @@
                 "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS servers or search domains is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the value specified to the same setting in the [DHCPPrefixDelegation] section will be used if DHCPPrefixDelegation= is enabled, otherwise the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6SendRA%5D%20Section%20Options"
           }
         },
         {
@@ -4556,7 +4592,8 @@
               "description": "Configures IPv6 Home Agent preference. Defaults to 0."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6SendRA%5D%20Section%20Options"
         }
       ],
       "description": "[IPv6SendRA] configuration (Can be repeated)",
@@ -4620,7 +4657,8 @@
                 "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6Prefix%5D%20Section%20Options"
           }
         },
         {
@@ -4669,7 +4707,8 @@
               "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6Prefix%5D%20Section%20Options"
         }
       ],
       "description": "[IPv6Prefix] configuration (Can be repeated)",
@@ -4697,7 +4736,8 @@
                 "default": "3600"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6RoutePrefix%5D%20Section%20Options"
           }
         },
         {
@@ -4718,7 +4758,8 @@
               "default": "3600"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6RoutePrefix%5D%20Section%20Options"
         }
       ],
       "description": "[IPv6RoutePrefix] configuration (Can be repeated)",
@@ -4737,7 +4778,8 @@
                 "description": "When configured, the specified Manufacturer Usage Descriptions (MUD) URL will be sent in LLDP packets. The syntax and semantics are the same as for MUDURL= in the [DHCPv4] section described above. The MUD URLs received via LLDP packets are saved and can be read using the sd_lldp_neighbor_get_mud_url() function."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BLLDP%5D%20Section%20Options"
           }
         },
         {
@@ -4749,7 +4791,8 @@
               "description": "When configured, the specified Manufacturer Usage Descriptions (MUD) URL will be sent in LLDP packets. The syntax and semantics are the same as for MUDURL= in the [DHCPv4] section described above. The MUD URLs received via LLDP packets are saved and can be read using the sd_lldp_neighbor_get_mud_url() function."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BLLDP%5D%20Section%20Options"
         }
       ],
       "description": "[LLDP] configuration (Can be repeated)",
@@ -4876,7 +4919,8 @@
                 "description": "When 'yes', the interface will ignore missing CAN ACKs. When unset, the kernel's default will be used."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BCAN%5D%20Section%20Options"
           }
         },
         {
@@ -4996,7 +5040,8 @@
               "description": "When 'yes', the interface will ignore missing CAN ACKs. When unset, the kernel's default will be used."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BCAN%5D%20Section%20Options"
         }
       ],
       "description": "[CAN] configuration (Can be repeated)",
@@ -5021,7 +5066,8 @@
                 "type": "boolean"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPoIB%5D%20Section%20Options"
           }
         },
         {
@@ -5039,7 +5085,8 @@
               "type": "boolean"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPoIB%5D%20Section%20Options"
         }
       ],
       "description": "[IPoIB] configuration (Can be repeated)",
@@ -5063,7 +5110,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BQDisc%5D%20Section%20Options"
           }
         },
         {
@@ -5080,7 +5128,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BQDisc%5D%20Section%20Options"
         }
       ],
       "description": "[QDisc] configuration (Can be repeated)",
@@ -5117,7 +5166,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBFIFO%5D%20Section%20Options"
           }
         },
         {
@@ -5142,7 +5192,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BBFIFO%5D%20Section%20Options"
         }
       ],
       "description": "[BFIFO] configuration (Can be repeated)",
@@ -5250,7 +5301,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BCAKE%5D%20Section%20Options"
           }
         },
         {
@@ -5351,7 +5403,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BCAKE%5D%20Section%20Options"
         }
       ],
       "description": "[CAKE] configuration (Can be repeated)",
@@ -5407,7 +5460,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BControlledDelay%5D%20Section%20Options"
           }
         },
         {
@@ -5460,7 +5514,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BControlledDelay%5D%20Section%20Options"
         }
       ],
       "description": "[ControlledDelay] configuration (Can be repeated)",
@@ -5489,7 +5544,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDeficitRoundRobinScheduler%5D%20Section%20Options"
           }
         },
         {
@@ -5506,7 +5562,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDeficitRoundRobinScheduler%5D%20Section%20Options"
         }
       ],
       "description": "[DeficitRoundRobinScheduler] configuration (Can be repeated)",
@@ -5540,7 +5597,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDeficitRoundRobinSchedulerClass%5D%20Section%20Options"
           }
         },
         {
@@ -5562,7 +5620,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDeficitRoundRobinSchedulerClass%5D%20Section%20Options"
         }
       ],
       "description": "[DeficitRoundRobinSchedulerClass] configuration (Can be repeated)",
@@ -5611,7 +5670,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BEnhancedTransmissionSelection%5D%20Section%20Options"
           }
         },
         {
@@ -5648,7 +5708,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BEnhancedTransmissionSelection%5D%20Section%20Options"
         }
       ],
       "description": "[EnhancedTransmissionSelection] configuration (Can be repeated)",
@@ -5681,7 +5742,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BPFIFO%5D%20Section%20Options"
           }
         },
         {
@@ -5702,7 +5764,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BPFIFO%5D%20Section%20Options"
         }
       ],
       "description": "[PFIFO] configuration (Can be repeated)",
@@ -5731,7 +5794,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BPFIFOFast%5D%20Section%20Options"
           }
         },
         {
@@ -5748,7 +5812,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BPFIFOFast%5D%20Section%20Options"
         }
       ],
       "description": "[PFIFOFast] configuration (Can be repeated)",
@@ -5781,7 +5846,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BPFIFOHeadDrop%5D%20Section%20Options"
           }
         },
         {
@@ -5802,7 +5868,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BPFIFOHeadDrop%5D%20Section%20Options"
         }
       ],
       "description": "[PFIFOHeadDrop] configuration (Can be repeated)",
@@ -5831,7 +5898,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BQuickFairQueueing%5D%20Section%20Options"
           }
         },
         {
@@ -5848,7 +5916,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BQuickFairQueueing%5D%20Section%20Options"
         }
       ],
       "description": "[QuickFairQueueing] configuration (Can be repeated)",
@@ -5886,7 +5955,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BQuickFairQueueingClass%5D%20Section%20Options"
           }
         },
         {
@@ -5917,7 +5987,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BQuickFairQueueingClass%5D%20Section%20Options"
         }
       ],
       "description": "[QuickFairQueueingClass] configuration (Can be repeated)",
@@ -6009,7 +6080,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BFairQueueing%5D%20Section%20Options"
           }
         },
         {
@@ -6094,7 +6166,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BFairQueueing%5D%20Section%20Options"
         }
       ],
       "description": "[FairQueueing] configuration (Can be repeated)",
@@ -6182,7 +6255,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BFairQueueingControlledDelay%5D%20Section%20Options"
           }
         },
         {
@@ -6263,7 +6337,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BFairQueueingControlledDelay%5D%20Section%20Options"
         }
       ],
       "description": "[FairQueueingControlledDelay] configuration (Can be repeated)",
@@ -6291,7 +6366,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BFlowQueuePIE%5D%20Section%20Options"
           }
         },
         {
@@ -6312,7 +6388,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BFlowQueuePIE%5D%20Section%20Options"
         }
       ],
       "description": "[FlowQueuePIE] configuration (Can be repeated)",
@@ -6352,7 +6429,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BGenericRandomEarlyDetection%5D%20Section%20Options"
           }
         },
         {
@@ -6385,7 +6463,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BGenericRandomEarlyDetection%5D%20Section%20Options"
         }
       ],
       "description": "[GenericRandomEarlyDetection] configuration (Can be repeated)",
@@ -6417,7 +6496,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BHeavyHitterFilter%5D%20Section%20Options"
           }
         },
         {
@@ -6442,7 +6522,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BHeavyHitterFilter%5D%20Section%20Options"
         }
       ],
       "description": "[HeavyHitterFilter] configuration (Can be repeated)",
@@ -6479,7 +6560,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BHierarchyTokenBucket%5D%20Section%20Options"
           }
         },
         {
@@ -6509,7 +6591,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BHierarchyTokenBucket%5D%20Section%20Options"
         }
       ],
       "description": "[HierarchyTokenBucket] configuration (Can be repeated)",
@@ -6594,7 +6677,8 @@
             "required": [
               "Parent",
               "Rate"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BHierarchyTokenBucketClass%5D%20Section%20Options"
           }
         },
         {
@@ -6664,7 +6748,8 @@
           "required": [
             "Parent",
             "Rate"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BHierarchyTokenBucketClass%5D%20Section%20Options"
         }
       ],
       "description": "[HierarchyTokenBucketClass] configuration (Can be repeated)",
@@ -6729,7 +6814,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BNetworkEmulator%5D%20Section%20Options"
           }
         },
         {
@@ -6787,7 +6873,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BNetworkEmulator%5D%20Section%20Options"
         }
       ],
       "description": "[NetworkEmulator] configuration (Can be repeated)",
@@ -6819,7 +6906,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BPIE%5D%20Section%20Options"
           }
         },
         {
@@ -6844,7 +6932,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BPIE%5D%20Section%20Options"
         }
       ],
       "description": "[PIE] configuration (Can be repeated)",
@@ -6876,7 +6965,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BStochasticFairBlue%5D%20Section%20Options"
           }
         },
         {
@@ -6901,7 +6991,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BStochasticFairBlue%5D%20Section%20Options"
         }
       ],
       "description": "[StochasticFairBlue] configuration (Can be repeated)",
@@ -6933,7 +7024,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BStochasticFairnessQueueing%5D%20Section%20Options"
           }
         },
         {
@@ -6958,7 +7050,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BStochasticFairnessQueueing%5D%20Section%20Options"
         }
       ],
       "description": "[StochasticFairnessQueueing] configuration (Can be repeated)",
@@ -7045,7 +7138,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BTokenBucketFilter%5D%20Section%20Options"
           }
         },
         {
@@ -7125,7 +7219,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BTokenBucketFilter%5D%20Section%20Options"
         }
       ],
       "description": "[TokenBucketFilter] configuration (Can be repeated)",
@@ -7154,7 +7249,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BTrivialLinkEqualizer%5D%20Section%20Options"
           }
         },
         {
@@ -7176,7 +7272,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BTrivialLinkEqualizer%5D%20Section%20Options"
         }
       ],
       "description": "[TrivialLinkEqualizer] configuration (Can be repeated)",
@@ -7251,7 +7348,8 @@
                 "default": "3600"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6PrefixDelegation%5D%20Section%20Options"
           }
         },
         {
@@ -7319,7 +7417,8 @@
               "default": "3600"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BIPv6PrefixDelegation%5D%20Section%20Options"
         }
       ],
       "description": "[IPv6PrefixDelegation] configuration (Can be repeated)",
@@ -7468,7 +7567,8 @@
                 "description": "When true, the 'Other Configuration' flag in the DHCPv6 Request is set. Defaults to false."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCP%5D%20Section%20Options"
           }
         },
         {
@@ -7600,7 +7700,8 @@
               "description": "When true, the 'Other Configuration' flag in the DHCPv6 Request is set. Defaults to false."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCP%5D%20Section%20Options"
         }
       ],
       "description": "[DHCP] configuration (Can be repeated)",
@@ -7664,7 +7765,8 @@
                 "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPv6PrefixDelegation%5D%20Section%20Options"
           }
         },
         {
@@ -7700,7 +7802,8 @@
               "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BDHCPv6PrefixDelegation%5D%20Section%20Options"
         }
       ],
       "description": "[DHCPv6PrefixDelegation] configuration (Can be repeated)",
@@ -7756,7 +7859,8 @@
             "additionalProperties": false,
             "required": [
               "Parent"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BTrafficControlQueueingDiscipline%5D%20Section%20Options"
           }
         },
         {
@@ -7805,7 +7909,8 @@
           "additionalProperties": false,
           "required": [
             "Parent"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.network.html#%5BTrafficControlQueueingDiscipline%5D%20Section%20Options"
         }
       ],
       "description": "[TrafficControlQueueingDiscipline] configuration (Can be repeated)",

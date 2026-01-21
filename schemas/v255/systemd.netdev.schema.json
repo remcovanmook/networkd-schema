@@ -232,7 +232,8 @@
         }
       },
       "additionalProperties": false,
-      "title": "Match"
+      "title": "Match",
+      "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMatch%5D%20Section%20Options"
     },
     "NetDev": {
       "type": "object",
@@ -300,7 +301,8 @@
         "Name",
         "Kind"
       ],
-      "title": "Net Dev"
+      "title": "Net Dev",
+      "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BNetDev%5D%20Section%20Options"
     },
     "VLAN": {
       "oneOf": [
@@ -346,7 +348,8 @@
             "additionalProperties": false,
             "required": [
               "Id"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BVLAN%5D%20Section%20Options"
           }
         },
         {
@@ -398,7 +401,8 @@
           "additionalProperties": false,
           "required": [
             "Id"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BVLAN%5D%20Section%20Options"
         }
       ],
       "description": "[VLAN] configuration (Can be repeated)",
@@ -440,7 +444,8 @@
                 "description": "Specifies the length of the receive queue for broadcast/multicast packets. An unsigned integer in the range 0...4294967294. Defaults to unset."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACVLAN%5D%20Section%20Options"
           }
         },
         {
@@ -481,7 +486,8 @@
               "description": "Controls the threshold for broadcast queueing of the macvlan device. Takes the special value 'no', or an integer in the range 0...2147483647. When 'no' is specified, the broadcast queueing is disabled altogether. When an integer is specified, a multicast address will be queued as broadcast if the number of devices using the macvlan is greater than the given value. Defaults to unset, and the kernel default will be used."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACVLAN%5D%20Section%20Options"
         }
       ],
       "description": "[MACVLAN] configuration (Can be repeated)",
@@ -515,7 +521,8 @@
                 "description": "A whitespace-separated list of remote hardware addresses allowed on the MACVLAN. This option only has an effect in source mode. Use full colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACVTAP%5D%20Section%20Options"
           }
         },
         {
@@ -542,7 +549,8 @@
               "description": "A whitespace-separated list of remote hardware addresses allowed on the MACVLAN. This option only has an effect in source mode. Use full colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACVTAP%5D%20Section%20Options"
         }
       ],
       "description": "[MACVTAP] configuration (Can be repeated)",
@@ -575,7 +583,8 @@
                 "description": "The IPVLAN flags to use."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BIPVLAN%5D%20Section%20Options"
           }
         },
         {
@@ -601,7 +610,8 @@
               "description": "The IPVLAN flags to use."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BIPVLAN%5D%20Section%20Options"
         }
       ],
       "description": "[IPVLAN] configuration (Can be repeated)",
@@ -636,7 +646,8 @@
                 "description": "The IPVTAP flags to use."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BIPVTAP%5D%20Section%20Options"
           }
         },
         {
@@ -664,7 +675,8 @@
               "description": "The IPVTAP flags to use."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BIPVTAP%5D%20Section%20Options"
         }
       ],
       "description": "[IPVTAP] configuration (Can be repeated)",
@@ -858,7 +870,8 @@
             "additionalProperties": false,
             "required": [
               "FOUDestinationPort"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BTunnel%5D%20Section%20Options"
           }
         },
         {
@@ -1029,7 +1042,8 @@
           "additionalProperties": false,
           "required": [
             "FOUDestinationPort"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BTunnel%5D%20Section%20Options"
         }
       ],
       "description": "[Tunnel] configuration (Can be repeated)",
@@ -1087,7 +1101,8 @@
               "Port",
               "PeerPort",
               "Peer"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BFooOverUDP%5D%20Section%20Options"
           }
         },
         {
@@ -1142,7 +1157,8 @@
             "Port",
             "PeerPort",
             "Peer"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BFooOverUDP%5D%20Section%20Options"
         }
       ],
       "description": "[FooOverUDP] configuration (Can be repeated)",
@@ -1243,7 +1259,8 @@
               "TunnelId",
               "PeerTunnelId",
               "Remote"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BL2TP%5D%20Section%20Options"
           }
         },
         {
@@ -1338,7 +1355,8 @@
             "TunnelId",
             "PeerTunnelId",
             "Remote"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BL2TP%5D%20Section%20Options"
         }
       ],
       "description": "[L2TP] configuration (Can be repeated)",
@@ -1379,7 +1397,8 @@
               "SessionId",
               "PeerSessionId",
               "Name"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BL2TPSession%5D%20Section%20Options"
           }
         },
         {
@@ -1413,7 +1432,8 @@
             "SessionId",
             "PeerSessionId",
             "Name"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BL2TPSession%5D%20Section%20Options"
         }
       ],
       "description": "[L2TPSession] configuration (Can be repeated)",
@@ -1443,7 +1463,8 @@
             "additionalProperties": false,
             "required": [
               "Name"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BPeer%5D%20Section%20Options"
           }
         },
         {
@@ -1466,7 +1487,8 @@
           "additionalProperties": false,
           "required": [
             "Name"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BPeer%5D%20Section%20Options"
         }
       ],
       "description": "[Peer] configuration (Can be repeated)",
@@ -1488,7 +1510,8 @@
             "additionalProperties": false,
             "required": [
               "Peer"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BVXCAN%5D%20Section%20Options"
           }
         },
         {
@@ -1503,7 +1526,8 @@
           "additionalProperties": false,
           "required": [
             "Peer"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BVXCAN%5D%20Section%20Options"
         }
       ],
       "description": "[VXCAN] configuration (Can be repeated)",
@@ -1685,7 +1709,8 @@
             "additionalProperties": false,
             "required": [
               "Id"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BVXLAN%5D%20Section%20Options"
           }
         },
         {
@@ -1860,7 +1885,8 @@
           "additionalProperties": false,
           "required": [
             "Id"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BVXLAN%5D%20Section%20Options"
         }
       ],
       "description": "[VXLAN] configuration (Can be repeated)",
@@ -1944,7 +1970,8 @@
             "additionalProperties": false,
             "required": [
               "Id"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BGENEVE%5D%20Section%20Options"
           }
         },
         {
@@ -2023,7 +2050,8 @@
           "additionalProperties": false,
           "required": [
             "Id"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BGENEVE%5D%20Section%20Options"
         }
       ],
       "description": "[GENEVE] configuration (Can be repeated)",
@@ -2048,7 +2076,8 @@
                 "description": "When true, enable encryption. Defaults to unset."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACsec%5D%20Section%20Options"
           }
         },
         {
@@ -2066,7 +2095,8 @@
               "description": "When true, enable encryption. Defaults to unset."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACsec%5D%20Section%20Options"
         }
       ],
       "description": "[MACsec] configuration (Can be repeated)",
@@ -2099,7 +2129,8 @@
             "additionalProperties": false,
             "required": [
               "Port"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACsecReceiveChannel%5D%20Section%20Options"
           }
         },
         {
@@ -2125,7 +2156,8 @@
           "additionalProperties": false,
           "required": [
             "Port"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACsecReceiveChannel%5D%20Section%20Options"
         }
       ],
       "description": "[MACsecReceiveChannel] configuration (Can be repeated)",
@@ -2168,7 +2200,8 @@
             "required": [
               "KeyId",
               "Key"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACsecTransmitAssociation%5D%20Section%20Options"
           }
         },
         {
@@ -2204,7 +2237,8 @@
           "required": [
             "KeyId",
             "Key"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACsecTransmitAssociation%5D%20Section%20Options"
         }
       ],
       "description": "[MACsecTransmitAssociation] configuration (Can be repeated)",
@@ -2251,7 +2285,8 @@
                 "description": "Accepts the same key as in [MACsecTransmitAssociation] section."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACsecReceiveAssociation%5D%20Section%20Options"
           }
         },
         {
@@ -2291,7 +2326,8 @@
               "description": "Accepts the same key as in [MACsecTransmitAssociation] section."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BMACsecReceiveAssociation%5D%20Section%20Options"
         }
       ],
       "description": "[MACsecReceiveAssociation] configuration (Can be repeated)",
@@ -2337,7 +2373,8 @@
                 "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BTun%5D%20Section%20Options"
           }
         },
         {
@@ -2376,7 +2413,8 @@
               "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BTun%5D%20Section%20Options"
         }
       ],
       "description": "[Tun] configuration (Can be repeated)",
@@ -2422,7 +2460,8 @@
                 "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BTap%5D%20Section%20Options"
           }
         },
         {
@@ -2461,7 +2500,8 @@
               "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BTap%5D%20Section%20Options"
         }
       ],
       "description": "[Tap] configuration (Can be repeated)",
@@ -2641,7 +2681,8 @@
                 "description": "Specifies the 802.3ad system MAC address. This cannot be a null or multicast address."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BBond%5D%20Section%20Options"
           }
         },
         {
@@ -2826,7 +2867,8 @@
               "description": "Specify the maximum number of arp interval monitor cycle for missed ARP replies. If this number is exceeded, link is reported as down. Defaults to unset."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BBond%5D%20Section%20Options"
         }
       ],
       "description": "[Bond] configuration (Can be repeated)",
@@ -2909,7 +2951,8 @@
                 "description": "Allows changing bridge's multicast Internet Group Management Protocol (IGMP) version. Takes an integer 2 or 3. When unset, the kernel's default will be used."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BBridge%5D%20Section%20Options"
           }
         },
         {
@@ -2989,7 +3032,8 @@
               "description": "Specifies the maximum number of learned Ethernet addresses for the bridge. When the limit is reached, no more addresses are learned. When unset, the kernel's default will be used. 0 disables the limit."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BBridge%5D%20Section%20Options"
         }
       ],
       "description": "[Bridge] configuration (Can be repeated)",
@@ -3023,7 +3067,8 @@
             "additionalProperties": false,
             "required": [
               "Table"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BVRF%5D%20Section%20Options"
           }
         },
         {
@@ -3050,7 +3095,8 @@
           "additionalProperties": false,
           "required": [
             "Table"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BVRF%5D%20Section%20Options"
         }
       ],
       "description": "[VRF] configuration (Can be repeated)",
@@ -3087,7 +3133,8 @@
             "required": [
               "DestinationPort",
               "EtherType"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BBareUDP%5D%20Section%20Options"
           }
         },
         {
@@ -3125,7 +3172,8 @@
           "required": [
             "DestinationPort",
             "EtherType"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BBareUDP%5D%20Section%20Options"
         }
       ],
       "description": "[BareUDP] configuration (Can be repeated)",
@@ -3190,7 +3238,8 @@
             "additionalProperties": false,
             "required": [
               "PrivateKey"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BWireGuard%5D%20Section%20Options"
           }
         },
         {
@@ -3248,7 +3297,8 @@
           "additionalProperties": false,
           "required": [
             "PrivateKey"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BWireGuard%5D%20Section%20Options"
         }
       ],
       "description": "[WireGuard] configuration (Can be repeated)",
@@ -3312,7 +3362,8 @@
             "additionalProperties": false,
             "required": [
               "PublicKey"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BWireGuardPeer%5D%20Section%20Options"
           }
         },
         {
@@ -3373,7 +3424,8 @@
           "additionalProperties": false,
           "required": [
             "PublicKey"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BWireGuardPeer%5D%20Section%20Options"
         }
       ],
       "description": "[WireGuardPeer] configuration (Can be repeated)",
@@ -3399,7 +3451,8 @@
             "additionalProperties": false,
             "required": [
               "InterfaceId"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BXfrm%5D%20Section%20Options"
           }
         },
         {
@@ -3418,7 +3471,8 @@
           "additionalProperties": false,
           "required": [
             "InterfaceId"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BXfrm%5D%20Section%20Options"
         }
       ],
       "description": "[Xfrm] configuration (Can be repeated)",
@@ -3493,7 +3547,8 @@
                 "description": "This can be either 'batman-v' or 'batman-iv' and describes which routing_algo of batctl8 to use. The algorithm cannot be changed after interface creation. Defaults to 'batman-v'."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BBatmanAdvanced%5D%20Section%20Options"
           }
         },
         {
@@ -3561,7 +3616,8 @@
               "description": "This can be either 'batman-v' or 'batman-iv' and describes which routing_algo of batctl8 to use. The algorithm cannot be changed after interface creation. Defaults to 'batman-v'."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BBatmanAdvanced%5D%20Section%20Options"
         }
       ],
       "description": "[BatmanAdvanced] configuration (Can be repeated)",
@@ -3597,7 +3653,8 @@
                 "description": "Takes an boolean value. When true, the kernel ignores multicast groups handled by userspace. Defaults to unset, and the kernel's default is used."
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BIPoIB%5D%20Section%20Options"
           }
         },
         {
@@ -3626,7 +3683,8 @@
               "description": "Takes an boolean value. When true, the kernel ignores multicast groups handled by userspace. Defaults to unset, and the kernel's default is used."
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BIPoIB%5D%20Section%20Options"
         }
       ],
       "description": "[IPoIB] configuration (Can be repeated)",
@@ -3671,7 +3729,8 @@
             "required": [
               "PhysicalDevice",
               "Type"
-            ]
+            ],
+            "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BWLAN%5D%20Section%20Options"
           }
         },
         {
@@ -3709,7 +3768,8 @@
           "required": [
             "PhysicalDevice",
             "Type"
-          ]
+          ],
+          "documentation": "https://www.freedesktop.org/software/systemd/man/255/systemd.netdev.html#%5BWLAN%5D%20Section%20Options"
         }
       ],
       "description": "[WLAN] configuration (Can be repeated)",

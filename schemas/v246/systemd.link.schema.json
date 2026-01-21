@@ -293,7 +293,8 @@
         }
       },
       "additionalProperties": false,
-      "title": "Match"
+      "title": "Match",
+      "documentation": "https://www.freedesktop.org/software/systemd/man/246/systemd.link.html#%5BMatch%5D%20Section%20Options"
     },
     "Link": {
       "type": "object",
@@ -569,7 +570,8 @@
         }
       },
       "additionalProperties": false,
-      "title": "Link"
+      "title": "Link",
+      "documentation": "https://www.freedesktop.org/software/systemd/man/246/systemd.link.html#%5BLink%5D%20Section%20Options"
     }
   }
 }
