@@ -1,11 +1,18 @@
 # Systemd Networkd JSON Schemas
 
-This repository provides high-quality, curated JSON schemas for `systemd-networkd` configuration files (`.network`, `.netdev`, `.link`).
+This repository provides high-quality, curated JSON schemas for `systemd-networkd` configuration files (`.network`, `.netdev`, `.link`, and `networkd.conf`).
 
 These schemas are suitable for:
 -   **Input Validation**: Strict typing and regex patterns for API backends.
 -   **UI Generation**: Human-readable titles, examples, and format hints for frontend forms.
 -   **IDE Autocompletion**: Providing meaningful suggestions and documentation.
+
+## Documentation Links
+
+The schemas include a custom `documentation` field for each section, linking to the official systemd man pages.
+
+-   For **recent versions (>= v247)**, these links point to the specific version's documentation (e.g., `.../man/257/...`).
+-   For **older versions (< v247)**, the `documentation` field is omitted as online documentation is not reliably available.
 
 ## Directory Structure
 
@@ -32,6 +39,7 @@ The schemas in `schemas/<version>/` are ready to use.
 -   `systemd.network.schema.json`
 -   `systemd.netdev.schema.json`
 -   `systemd.link.schema.json`
+-   `systemd.networkd.conf.schema.json`
 
 ### generating Schemas
 To generate schemas for all supported versions:

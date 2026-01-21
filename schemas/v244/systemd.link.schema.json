@@ -284,8 +284,7 @@
         }
       },
       "additionalProperties": false,
-      "title": "Match",
-      "documentation": "https://www.freedesktop.org/software/systemd/man/244/systemd.link.html#%5BMatch%5D%20Section%20Options"
+      "title": "Match"
     },
     "Link": {
       "type": "object",
@@ -485,8 +484,7 @@
         }
       },
       "additionalProperties": false,
-      "title": "Link",
-      "documentation": "https://www.freedesktop.org/software/systemd/man/244/systemd.link.html#%5BLink%5D%20Section%20Options"
+      "title": "Link"
     }
   }
 }

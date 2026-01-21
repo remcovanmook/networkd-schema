@@ -154,14 +154,26 @@ def main():
     # Update documentation links to point to the correct version
     target_ver_clean = args.generated_target.split('.')[-3].replace('v', '') # extract "241" from "...v241..."
     
+    # Convert version to int for comparison
+    try:
+        target_ver_int = int(target_ver_clean)
+    except ValueError:
+        # Fallback if version is not a simple integer (e.g. "241-rc1"), assume recent enough or handle differently
+        # For this specific task, we assume version numbers are integers as seen in paths
+        target_ver_int = 999 
+
     def update_doc_links(obj):
         if isinstance(obj, dict):
-            for k, v in obj.items():
+            # Iterate over a list of keys so we can modify the dict
+            for k, v in list(obj.items()):
                 if k == "documentation" and isinstance(v, string_types):
-                     # specific replace for the version in the URL
-                     # Match: .../man/257/... -> .../man/{target_ver_clean}/...
-                     # We only replace 257 if it follows /man/
-                     obj[k] = v.replace("/man/257/", f"/man/{target_ver_clean}/")
+                     if target_ver_int < 247:
+                         del obj[k]
+                     else:
+                         # specific replace for the version in the URL
+                         # Match: .../man/257/... -> .../man/{target_ver_clean}/...
+                         # We only replace 257 if it follows /man/
+                         obj[k] = v.replace("/man/257/", f"/man/{target_ver_clean}/")
                 else:
                     update_doc_links(v)
         elif isinstance(obj, list):

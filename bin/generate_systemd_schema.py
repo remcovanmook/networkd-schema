@@ -595,7 +595,8 @@ def main():
     targets = [
         {"name": "network", "gperf_names": ["networkd-network-gperf.gperf"], "xml": "man/systemd.network.xml"},
         {"name": "netdev", "gperf_names": ["netdev-gperf.gperf", "networkd-netdev-gperf.gperf"], "xml": "man/systemd.netdev.xml"},
-        {"name": "link", "gperf_names": ["link-config-gperf.gperf"], "xml": "man/systemd.link.xml"}
+        {"name": "link", "gperf_names": ["link-config-gperf.gperf"], "xml": "man/systemd.link.xml"},
+        {"name": "networkd.conf", "gperf_names": ["networkd-gperf.gperf"], "xml": "man/networkd.conf.xml"}
     ]
 
     with tempfile.TemporaryDirectory() as temp_dir:

@@ -38,7 +38,8 @@ SCHEMAS_DIR = "schemas"
 FILES = [
     "systemd.network",
     "systemd.netdev",
-    "systemd.link"
+    "systemd.link",
+    "systemd.networkd.conf"
 ]
 
 def run_command(cmd):
