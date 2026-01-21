@@ -1,0 +1,479 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://systemd.io/schemas/v251/link.json",
+  "title": "Systemd link Configuration (v251)",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "mac_address": {
+      "type": "string",
+      "description": "MAC Address (Hex separated by colons or hyphens)",
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$"
+    },
+    "ipv4_address": {
+      "type": "string",
+      "description": "IPv4 Address",
+      "format": "ipv4"
+    },
+    "ipv6_address": {
+      "type": "string",
+      "description": "IPv6 Address",
+      "format": "ipv6"
+    },
+    "ip_address": {
+      "description": "IPv4 or IPv6 Address",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_address"
+        },
+        {
+          "$ref": "#/definitions/ipv6_address"
+        }
+      ]
+    },
+    "ipv4_prefix": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$"
+    },
+    "ipv6_prefix": {
+      "type": "string",
+      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
+      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$"
+    },
+    "ip_prefix": {
+      "description": "IPv4 or IPv6 Prefix (CIDR)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_prefix"
+        },
+        {
+          "$ref": "#/definitions/ipv6_prefix"
+        }
+      ]
+    },
+    "filename": {
+      "type": "string",
+      "description": "Filesystem path",
+      "format": "uri-reference"
+    },
+    "seconds": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
+      "description": "Time duration (e.g. 5s, 1min, 500ms)"
+    },
+    "bytes": {
+      "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?B?)?$"
+        }
+      ]
+    }
+  },
+  "properties": {
+    "Match": {
+      "type": "object",
+      "description": "[Match] section configuration",
+      "properties": {
+        "MACAddress": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/mac_address"
+            }
+          ],
+          "description": "A whitespace-separated list of hardware addresses. The acceptable formats are: Each field must be one byte. E.g. '12:34:56:78:90:ab' or 'AA:BB:CC:DD:EE:FF'. Each field must be one byte. E.g. '12-34-56-78-90-ab' or 'AA-BB-CC-DD-EE-FF'. Each field must be two bytes. E.g. '1234.5678.90ab' or 'AABB.CCDD.EEFF'. E.g. '127.0.0.1' or '192.168.0.1'. E.g. '2001:0db8:85a3::8a2e:0370:7334' or '::1'. The total length of each MAC address must be 4 (for IPv4 tunnel), 6 (for Ethernet), 16 (for IPv6 tunnel), or 20 (for InfiniBand). This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset."
+        },
+        "PermanentMACAddress": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/mac_address"
+            }
+          ],
+          "description": "A whitespace-separated list of hardware's permanent addresses. While MACAddress= matches the device's current MAC address, this matches the device's permanent MAC address, which may be different from the current one. Use full colon-, hyphen- or dot-delimited hexadecimal, or IPv4 or IPv6 address format. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset."
+        },
+        "OriginalName": {
+          "type": "string",
+          "description": "A whitespace-separated list of shell-style globs matching the device name, as exposed by the udev property \"INTERFACE\". This cannot be used to match on names that have already been changed from userspace. Caution is advised when matching on kernel-assigned names, as they are known to be unstable between reboots."
+        },
+        "Path": {
+          "type": "string",
+          "description": "A whitespace-separated list of shell-style globs matching the persistent path, as exposed by the udev property ID_PATH."
+        },
+        "Driver": {
+          "type": "string",
+          "description": "A whitespace-separated list of shell-style globs matching the driver currently bound to the device, as exposed by the udev property ID_NET_DRIVER of its parent device, or if that is not set, the driver as exposed by ethtool -i of the device itself. If the list is prefixed with a \"!\", the test is inverted."
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "ether",
+            "loopback",
+            "wlan",
+            "wwan"
+          ],
+          "description": "A whitespace-separated list of shell-style globs matching the device type, as exposed by networkctl list. If the list is prefixed with a \"!\", the test is inverted. Some valid Valid types are named either from the udev 'DEVTYPE' attribute, or 'ARPHRD_' macros in 'linux/if_arp.h', so this is not comprehensive."
+        },
+        "Kind": {
+          "type": "string",
+          "enum": [
+            "bond",
+            "bridge",
+            "gre",
+            "tun",
+            "veth"
+          ],
+          "description": "A whitespace-separated list of shell-style globs matching the device kind, as exposed by networkctl status INTERFACE or ip -d link show INTERFACE. If the list is prefixed with a \"!\", the test is inverted. Some valid Valid kinds are given by netlink's 'IFLA_INFO_KIND' attribute, so this is not comprehensive."
+        },
+        "Property": {
+          "type": "string",
+          "description": "A whitespace-separated list of udev property names with their values after equals sign ('='). If multiple properties are specified, the test results are ANDed. If the list is prefixed with a \"!\", the test is inverted. If a value contains white spaces, then please quote whole key and value pair. If a value contains quotation, then please escape the quotation with '\\'. Example: if a.link file has the following: Property=ID_MODEL_ID=9999 \"ID_VENDOR_FROM_DATABASE=vendor name\" \"KEY=with \\\"quotation\\\"\" then, the.link file matches only when an interface has all the above three properties."
+        },
+        "Host": {
+          "type": "string",
+          "description": "Matches against the hostname or machine ID of the host. See ConditionHost= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, then previously assigned value is cleared."
+        },
+        "Virtualization": {
+          "type": "string",
+          "description": "Checks whether the system is executed in a virtualized environment and optionally test whether it is a specific implementation. See ConditionVirtualization= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, then previously assigned value is cleared."
+        },
+        "KernelCommandLine": {
+          "type": "string",
+          "description": "Checks whether a specific kernel command line option is set. See ConditionKernelCommandLine= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, then previously assigned value is cleared."
+        },
+        "KernelVersion": {
+          "type": "string",
+          "description": "Checks whether the kernel version (as reported by uname -r) matches a certain expression. See ConditionKernelVersion= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, then previously assigned value is cleared."
+        },
+        "Architecture": {
+          "type": "string",
+          "description": "Checks whether the system is running on a specific architecture. See ConditionArchitecture= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, then previously assigned value is cleared."
+        },
+        "Firmware": {
+          "type": "string",
+          "description": "Checks whether the system is running on a machine with the specified firmware. See ConditionFirmware= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, then previously assigned value is cleared."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Link": {
+      "type": "object",
+      "description": "[Link] section configuration",
+      "properties": {
+        "Description": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/string"
+            }
+          ],
+          "description": "A description of the device."
+        },
+        "MACAddressPolicy": {
+          "type": "string",
+          "description": "The policy by which the MAC address should be set. The available policies are: If the hardware has a persistent MAC address, as most hardware should, and if it is used by the kernel, nothing is done. Otherwise, a new MAC address is generated which is guaranteed to be the same on every boot for the given machine and the given device, but which is otherwise random. This feature depends on ID_NET_NAME_* properties to exist for the link. On hardware where these properties are not set, the generation of a persistent MAC address will fail. If the kernel is using a random MAC address, nothing is done. Otherwise, a new address is randomly generated each time the device appears, typically at boot. Either way, the random address will have the 'unicast' and 'locally administered' bits set. Keeps the MAC address assigned by the kernel. Or use the MAC address specified in MACAddress=. An empty string assignment is equivalent to setting 'none'."
+        },
+        "MACAddress": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/mac_address"
+            }
+          ],
+          "description": "The interface MAC address to use. For this setting to take effect, MACAddressPolicy= must either be unset, empty, or 'none'."
+        },
+        "NamePolicy": {
+          "type": "string",
+          "description": "An ordered, space-separated list of policies by which the interface name should be set. NamePolicy= may be disabled by specifying 'net.ifnames=0' on the kernel command line. Each of the policies may fail, and the first successful one is used. The name is not set directly, but is exported to udev as the property 'ID_NET_NAME', which is, by default, used by a udev7, rule to set NAME. The available policies are: If the kernel claims that the name it has set for a device is predictable, then no renaming is performed. The name is set based on entries in the udev's Hardware Database with the key ID_NET_NAME_FROM_DATABASE. The name is set based on information given by the firmware for on-board devices, as exported by the udev property ID_NET_NAME_ONBOARD. See systemd.net-naming-scheme7. The name is set based on information given by the firmware for hot-plug devices, as exported by the udev property ID_NET_NAME_SLOT. See systemd.net-naming-scheme7. The name is set based on the device's physical location, as exported by the udev property ID_NET_NAME_PATH. See systemd.net-naming-scheme7. The name is set based on the device's persistent MAC address, as exported by the udev property ID_NET_NAME_MAC. See systemd.net-naming-scheme7. If the device already had a name given by userspace (as part of creation of the device or a rename), keep it."
+        },
+        "Name": {
+          "type": "string",
+          "description": "The interface name to use. This option has lower precedence than NamePolicy=, so for this setting to take effect, NamePolicy= must either be unset, empty, disabled, or all policies configured there must fail. Also see the example below with 'Name=dmz0'. Note that specifying a name that the kernel might use for another interface (for example 'eth0') is dangerous because the name assignment done by udev will race with the assignment done by the kernel, and only one interface may use the name. Depending on the order of operations, either udev or the kernel will win, making the naming unpredictable. It is best to use some different prefix, for example 'internal0'/'external0' or 'lan0'/'lan1'/'lan3'."
+        },
+        "AlternativeName": {
+          "type": "string",
+          "description": "The alternative interface name to use. This option can be specified multiple times. If the empty string is assigned to this option, the list is reset, and all prior assignments have no effect. If the kernel does not support the alternative names, then this setting will be ignored."
+        },
+        "AlternativeNamesPolicy": {
+          "type": "string",
+          "description": "A space-separated list of policies by which the interface's alternative names should be set. Each of the policies may fail, and all successful policies are used. The available policies are 'database', 'onboard', 'slot', 'path', and 'mac'. If the kernel does not support the alternative names, then this setting will be ignored."
+        },
+        "Alias": {
+          "type": "string",
+          "description": "The ifalias interface property is set to this value."
+        },
+        "TransmitQueues": {
+          "type": "string",
+          "description": "Specifies the device's number of transmit queues. An integer in the range 1...4096. When unset, the kernel's default will be used."
+        },
+        "ReceiveQueues": {
+          "type": "string",
+          "description": "Specifies the device's number of receive queues. An integer in the range 1...4096. When unset, the kernel's default will be used."
+        },
+        "TransmitQueueLength": {
+          "type": "string",
+          "description": "Specifies the transmit queue length of the device in number of packets. An unsigned integer in the range 0...4294967294. When unset, the kernel's default will be used."
+        },
+        "MTUBytes": {
+          "type": "integer",
+          "minimum": 68,
+          "description": "The maximum transmission unit in bytes to set for the device. The usual suffixes K, M, G are supported and are understood to the base of 1024."
+        },
+        "BitsPerSecond": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/bytes"
+            }
+          ],
+          "description": "The speed to set for the device, the value is rounded down to the nearest Mbps. The usual suffixes K, M, G are supported and are understood to the base of 1000."
+        },
+        "Duplex": {
+          "type": "string",
+          "enum": [
+            "full",
+            "half"
+          ],
+          "description": "The duplex mode to set for the device. The accepted"
+        },
+        "AutoNegotiation": {
+          "type": "boolean",
+          "description": "If set to yes, automatic negotiation of transmission parameters is enabled. Autonegotiation is a procedure by which two connected ethernet devices choose common transmission parameters, such as speed, duplex mode, and flow control. When unset, the kernel's default will be used. Note that if autonegotiation is enabled, speed and duplex settings are read-only. If autonegotiation is disabled, speed and duplex settings are writable if the driver supports multiple link modes."
+        },
+        "WakeOnLan": {
+          "type": "string",
+          "description": "The Wake-on-LAN policy to set for the device. Takes the special value 'off' which disables Wake-on-LAN, or space separated list of the following words: Wake on PHY activity. Wake on unicast messages. Wake on multicast messages. Wake on broadcast messages. Wake on ARP. Wake on receipt of a magic packet. Enable SecureOn password for MagicPacket. Implied when WakeOnLanPassword= is specified. If specified without WakeOnLanPassword= option, then the password is read from the credential 'LINK.link.wol.password' (e.g., '60-foo.link.wol.password'), and if the credential not found, then read from 'wol.password'. See LoadCredential=/SetCredential= in systemd.exec1 for details. The password in the credential, must be 6 bytes in hex format with each byte separated by a colon (':') like an Ethernet MAC address, e.g., 'aa:bb:cc:dd:ee:ff'. Defaults to unset, and the device's default will be used. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared."
+        },
+        "WakeOnLanPassword": {
+          "type": "string",
+          "description": "Specifies the SecureOn password for MagicPacket. Takes an absolute path to a regular file or an 'AF_UNIX' stream socket, or the plain password. When a path to a regular file is specified, the password is read from it. When an 'AF_UNIX' stream socket is specified, a connection is made to it and the password is read from it. The password must be 6 bytes in hex format with each byte separated by a colon (':') like an Ethernet MAC address, e.g., 'aa:bb:cc:dd:ee:ff'. This implies WakeOnLan=secureon. Defaults to unset, and the current value will not be changed."
+        },
+        "Port": {
+          "type": "string",
+          "description": "The port option is used to select the device port. The supported values are: An Ethernet interface using Twisted-Pair cable as the medium. Attachment Unit Interface (AUI). Normally used with hubs. An Ethernet interface using BNC connectors and co-axial cable. An Ethernet interface using a Media Independent Interface (MII). An Ethernet interface using Optical Fibre as the medium."
+        },
+        "ReceiveChecksumOffload": {
+          "type": "boolean",
+          "description": "If set to true, hardware offload for checksumming of ingress network packets is enabled. When unset, the kernel's default will be used."
+        },
+        "TransmitChecksumOffload": {
+          "type": "boolean",
+          "description": "If set to true, hardware offload for checksumming of egress network packets is enabled. When unset, the kernel's default will be used."
+        },
+        "GenericSegmentationOffload": {
+          "type": "boolean",
+          "description": "If set to true, Generic Segmentation Offload (GSO) is enabled. When unset, the kernel's default will be used."
+        },
+        "TCPSegmentationOffload": {
+          "type": "boolean",
+          "description": "If set to true, TCP Segmentation Offload (TSO) is enabled. When unset, the kernel's default will be used."
+        },
+        "TCP6SegmentationOffload": {
+          "type": "boolean",
+          "description": "If set to true, TCP6 Segmentation Offload (tx-tcp6-segmentation) is enabled. When unset, the kernel's default will be used."
+        },
+        "UDPSegmentationOffload": {
+          "type": "string"
+        },
+        "GenericReceiveOffload": {
+          "type": "boolean",
+          "description": "If set to true, Generic Receive Offload (GRO) is enabled. When unset, the kernel's default will be used."
+        },
+        "GenericReceiveOffloadHardware": {
+          "type": "boolean",
+          "description": "If set to true, hardware accelerated Generic Receive Offload (GRO) is enabled. When unset, the kernel's default will be used."
+        },
+        "LargeReceiveOffload": {
+          "type": "boolean",
+          "description": "If set to true, Large Receive Offload (LRO) is enabled. When unset, the kernel's default will be used."
+        },
+        "ReceiveVLANCTAGHardwareAcceleration": {
+          "type": "boolean",
+          "description": "If set to true, receive VLAN CTAG hardware acceleration is enabled. When unset, the kernel's default will be used."
+        },
+        "TransmitVLANCTAGHardwareAcceleration": {
+          "type": "boolean",
+          "description": "If set to true, transmit VLAN CTAG hardware acceleration is enabled. When unset, the kernel's default will be used."
+        },
+        "ReceiveVLANCTAGFilter": {
+          "type": "boolean",
+          "description": "If set to true, receive filtering on VLAN CTAGs is enabled. When unset, the kernel's default will be used."
+        },
+        "TransmitVLANSTAGHardwareAcceleration": {
+          "type": "boolean",
+          "description": "If set to true, transmit VLAN STAG hardware acceleration is enabled. When unset, the kernel's default will be used."
+        },
+        "NTupleFilter": {
+          "type": "boolean",
+          "description": "If set to true, receive N-tuple filters and actions are enabled. When unset, the kernel's default will be used."
+        },
+        "RxChannels": {
+          "type": "string",
+          "description": "Specifies the number of receive, transmit, other, or combined channels, respectively. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset."
+        },
+        "TxChannels": {
+          "type": "string"
+        },
+        "OtherChannels": {
+          "type": "string"
+        },
+        "CombinedChannels": {
+          "type": "string"
+        },
+        "Advertise": {
+          "type": "string",
+          "enum": [
+            "10000basekr-full",
+            "10000basekx4-full",
+            "10000baser-fec",
+            "10000baset-full",
+            "1000basekx-full",
+            "1000baset-full",
+            "1000baset-half",
+            "100baset-full",
+            "100baset-half",
+            "10baset-full",
+            "10baset-half",
+            "20000basekr2-full",
+            "20000basemld2-full",
+            "2500basex-full"
+          ],
+          "description": "This sets what speeds and duplex modes of operation are advertised for auto-negotiation. This implies 'AutoNegotiation=yes'. The e. all possible modes will be advertised. This option may be specified more than once, in which case all specified speeds and modes are advertised. If the empty string is assigned to this option, the list is reset, and all prior assignments have no effect."
+        },
+        "RxBufferSize": {
+          "type": "string",
+          "description": "Specifies the maximum number of pending packets in the NIC receive buffer, mini receive buffer, jumbo receive buffer, or transmit buffer, respectively. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset."
+        },
+        "RxMiniBufferSize": {
+          "type": "string"
+        },
+        "RxJumboBufferSize": {
+          "type": "string"
+        },
+        "TxBufferSize": {
+          "type": "string"
+        },
+        "RxFlowControl": {
+          "type": "boolean",
+          "description": "When set, enables receive flow control, also known as the ethernet receive PAUSE message (generate and send ethernet PAUSE frames). When unset, the kernel's default will be used."
+        },
+        "TxFlowControl": {
+          "type": "boolean",
+          "description": "When set, enables transmit flow control, also known as the ethernet transmit PAUSE message (respond to received ethernet PAUSE frames). When unset, the kernel's default will be used."
+        },
+        "AutoNegotiationFlowControl": {
+          "type": "boolean",
+          "description": "When set, auto negotiation enables the interface to exchange state advertisements with the connected peer so that the two devices can agree on the ethernet PAUSE configuration. When unset, the kernel's default will be used."
+        },
+        "GenericSegmentOffloadMaxBytes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/bytes"
+            }
+          ],
+          "description": "Specifies the maximum size of a Generic Segment Offload (GSO) packet the device should accept. The usual suffixes K, M, G are supported and are understood to the base of 1024. An unsigned integer in the range 1...65536. Defaults to unset."
+        },
+        "GenericSegmentOffloadMaxSegments": {
+          "type": "string",
+          "description": "Specifies the maximum number of Generic Segment Offload (GSO) segments the device should accept. An unsigned integer in the range 1...65535. Defaults to unset."
+        },
+        "RxCoalesceSec": {
+          "type": "string",
+          "description": "These properties configure the delay before Rx/Tx interrupts are generated after a packet is sent/received. The 'Irq' properties come into effect when the host is servicing an IRQ. The 'Low' and 'High' properties come into effect when the packet rate drops below the low packet rate threshold or exceeds the high packet rate threshold respectively if adaptive Rx/Tx coalescing is enabled. When unset, the kernel's defaults will be used."
+        },
+        "RxMaxCoalescedFrames": {
+          "type": "string",
+          "description": "These properties configure the maximum number of frames that are sent/received before a Rx/Tx interrupt is generated. The 'Irq' properties come into effect when the host is servicing an IRQ. The 'Low' and 'High' properties come into effect when the packet rate drops below the low packet rate threshold or exceeds the high packet rate threshold respectively if adaptive Rx/Tx coalescing is enabled. When unset, the kernel's defaults will be used."
+        },
+        "RxCoalesceIrqSec": {
+          "type": "string"
+        },
+        "RxMaxCoalescedIrqFrames": {
+          "type": "string"
+        },
+        "TxCoalesceSec": {
+          "type": "string"
+        },
+        "TxMaxCoalescedFrames": {
+          "type": "string"
+        },
+        "TxCoalesceIrqSec": {
+          "type": "string"
+        },
+        "TxMaxCoalescedIrqFrames": {
+          "type": "string"
+        },
+        "StatisticsBlockCoalesceSec": {
+          "type": "string",
+          "description": "How long to delay driver in-memory statistics block updates. If the driver does not have an in-memory statistic block, this property is ignored. This property cannot be zero. If unset, the kernel's default will be used."
+        },
+        "UseAdaptiveRxCoalesce": {
+          "type": "boolean",
+          "description": "Boolean properties that, when set, enable/disable adaptive Rx/Tx coalescing if the hardware supports it. When unset, the kernel's default will be used."
+        },
+        "UseAdaptiveTxCoalesce": {
+          "type": "boolean"
+        },
+        "CoalescePacketRateLow": {
+          "type": "string",
+          "description": "These properties configure the low and high packet rate (expressed in packets per second) threshold respectively and are used to determine when the corresponding coalescing settings for low and high packet rates come into effect if adaptive Rx/Tx coalescing is enabled. If unset, the kernel's defaults will be used."
+        },
+        "RxCoalesceLowSec": {
+          "type": "string"
+        },
+        "RxMaxCoalescedLowFrames": {
+          "type": "string"
+        },
+        "TxCoalesceLowSec": {
+          "type": "string"
+        },
+        "TxMaxCoalescedLowFrames": {
+          "type": "string"
+        },
+        "CoalescePacketRateHigh": {
+          "type": "string"
+        },
+        "RxCoalesceHighSec": {
+          "type": "string"
+        },
+        "RxMaxCoalescedHighFrames": {
+          "type": "string"
+        },
+        "TxCoalesceHighSec": {
+          "type": "string"
+        },
+        "TxMaxCoalescedHighFrames": {
+          "type": "string"
+        },
+        "CoalescePacketRateSampleIntervalSec": {
+          "type": "string",
+          "description": "Configures how often to sample the packet rate used for adaptive Rx/Tx coalescing. This property cannot be zero. This lowest time granularity supported by this property is seconds. Partial seconds will be rounded up before being passed to the kernel. If unset, the kernel's default will be used."
+        },
+        "MDI": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "crossover",
+            "mdi",
+            "mdi-x",
+            "mdix",
+            "straight"
+          ],
+          "description": "Specifies the medium dependent interface (MDI) mode for the interface. A MDI describes the interface from a physical layer implementation to the physical medium used to carry the transmission. When 'straight', the MDI straight through mode will be used. When 'crossover', the MDI crossover (MDI-X) mode will be used. When 'auto', the MDI status is automatically detected. Defaults to unset, and the kernel's default will be used."
+        },
+        "SR-IOVVirtualFunctions": {
+          "type": "string"
+        },
+        "IOVVirtualFunctions": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647,
+          "description": "Specifies the number of SR-IOV virtual functions. Defaults to unset, and automatically determined from the values specified in the VirtualFunction= settings in the [SR-IOV] sections."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

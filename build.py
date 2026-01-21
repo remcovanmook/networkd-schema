@@ -1,0 +1,133 @@
+import os
+import subprocess
+import shutil
+
+# Top 10 most commonly used/LTS systemd versions (recent 5 roughly)
+# + v257 (current)
+VERSIONS = [
+    "v259",
+    "v258",
+    "v257",
+    "v256",
+    "v255",
+    "v254",
+    "v253",
+    "v252",
+    "v251",
+    "v250",
+    "v249",
+    "v248",
+    "v247",
+    "v246",
+    "v245",
+    "v244",
+    "v243",
+    "v242",
+    "v241",
+    "v240",
+    "v239",
+    "v238",
+    "v237"
+]
+
+BASE_VERSION = "v257"
+CURATED_BASE_DIR = f"curated/{BASE_VERSION}"
+SRC_ORIGINAL_DIR = "src/original"
+SCHEMAS_DIR = "schemas"
+
+FILES = [
+    "systemd.network",
+    "systemd.netdev",
+    "systemd.link"
+]
+
+def run_command(cmd):
+    print(f"Running: {' '.join(cmd)}")
+    subprocess.check_call(cmd)
+
+def ensure_dirs():
+    os.makedirs(SRC_ORIGINAL_DIR, exist_ok=True)
+    os.makedirs(SCHEMAS_DIR, exist_ok=True)
+
+import argparse
+
+# ... (imports)
+
+def main():
+    parser = argparse.ArgumentParser(description="Build systemd networkd schemas.")
+    parser.add_argument("-v", "--version", help="Build a specific version (e.g. v255)")
+    args = parser.parse_args()
+
+    ensure_dirs()
+    
+    target_versions = VERSIONS
+    if args.version:
+        if args.version not in VERSIONS:
+            print(f"Error: Version {args.version} not in supported list.")
+            print("Supported versions:", ", ".join(VERSIONS))
+            return
+        target_versions = [args.version]
+    
+    # 1. Generate Raw Schemas for all versions
+    for ver in target_versions:
+        # ... logic ...
+        ver_dir = os.path.join(SRC_ORIGINAL_DIR, ver)
+        os.makedirs(ver_dir, exist_ok=True)
+        
+        # Check if already generated to save time (optional, but good for retries)
+        # But user asked to "Build a directory... pre-build". So we just build.
+        # We assume generate_systemd_schema.py supports --out
+        
+        # Check if output files exist
+        exists = True
+        for f in FILES:
+             if not os.path.exists(os.path.join(ver_dir, f"{f}.{ver}.schema.json")):
+                 exists = False
+                 break
+        
+        if not exists:
+            print(f"Generating raw schemas for {ver}...")
+            run_command([
+                "python3", "bin/generate_systemd_schema.py",
+                "--version", ver,
+                "--out", ver_dir
+            ])
+        else:
+            print(f"Raw schemas for {ver} already exist.")
+
+    # 2. Derive Curated Schemas for all versions
+    # Base Curated is curated/v257/systemd.*.v257.schema.json
+    # Base Generated is src/original/v257/systemd.*.v257.schema.json
+    
+    for ver in target_versions:
+        print(f"Deriving curated schemas for {ver}...")
+        out_dir = os.path.join(SCHEMAS_DIR, ver)
+        os.makedirs(out_dir, exist_ok=True)
+        
+        if ver == BASE_VERSION:
+            # For base version, just copy curated files
+            for f in FILES:
+                src = os.path.join(CURATED_BASE_DIR, f"{f}.{ver}.schema.json")
+                dst = os.path.join(out_dir, f"{f}.schema.json")
+                shutil.copy2(src, dst)
+            continue
+            
+        # For other versions, derive
+        for f in FILES:
+            curated_base = os.path.join(CURATED_BASE_DIR, f"{f}.{BASE_VERSION}.schema.json")
+            generated_base = os.path.join(SRC_ORIGINAL_DIR, BASE_VERSION, f"{f}.{BASE_VERSION}.schema.json")
+            generated_target = os.path.join(SRC_ORIGINAL_DIR, ver, f"{f}.{ver}.schema.json")
+            out_file = os.path.join(out_dir, f"{f}.schema.json")
+            
+            run_command([
+                "python3", "bin/derive_schema_version.py",
+                "--curated-base", curated_base,
+                "--generated-base", generated_base,
+                "--generated-target", generated_target,
+                "--out", out_file
+            ])
+
+    print("\nBuild Complete!")
+
+if __name__ == "__main__":
+    main()
