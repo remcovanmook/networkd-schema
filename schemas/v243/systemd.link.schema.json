@@ -220,7 +220,8 @@
             "12:34:56:78:9a:bc",
             "00:11:22:33:44:55 66:77:88:99:aa:bb"
           ],
-          "version_added": "250"
+          "version_added": "250",
+          "x-subcategory": "Hardware"
         },
         "OriginalName": {
           "type": "string",
@@ -232,13 +233,15 @@
           "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the persistent path, as exposed by the udev property ID_PATH.",
           "title": "Path",
-          "version_added": "211"
+          "version_added": "211",
+          "x-subcategory": "Hardware"
         },
         "Driver": {
           "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the driver currently bound to the device, as exposed by the udev property ID_NET_DRIVER of its parent device, or if that is not set, the driver as exposed by ethtool -i of the device itself. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "Driver",
-          "version_added": "211"
+          "version_added": "211",
+          "x-subcategory": "Hardware"
         },
         "Type": {
           "type": "string",
@@ -255,7 +258,8 @@
             "link",
             "host"
           ],
-          "version_added": "211"
+          "version_added": "211",
+          "x-subcategory": "Hardware"
         },
         "Property": {
           "type": "string",
@@ -273,7 +277,8 @@
           "type": "string",
           "description": "Checks whether the system is executed in a virtualized environment and optionally test whether it is a specific implementation. See ConditionVirtualization= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Virtualization",
-          "version_added": "211"
+          "version_added": "211",
+          "x-subcategory": "Virtualization"
         },
         "KernelCommandLine": {
           "type": "string",
@@ -333,7 +338,8 @@
             "12:34:56:78:9a:bc",
             "none"
           ],
-          "version_added": "211"
+          "version_added": "211",
+          "x-subcategory": "Hardware"
         },
         "NamePolicy": {
           "type": "string",
@@ -370,7 +376,8 @@
             "9000",
             "auto"
           ],
-          "version_added": "211"
+          "version_added": "211",
+          "x-subcategory": "Hardware"
         },
         "BitsPerSecond": {
           "allOf": [
@@ -424,13 +431,15 @@
           "type": "boolean",
           "description": "If set to true, Generic Segmentation Offload (GSO) is enabled. When unset, the kernel's default will be used.",
           "title": "Generic Segmentation Offload",
-          "version_added": "232"
+          "version_added": "232",
+          "x-subcategory": "Offload"
         },
         "TCPSegmentationOffload": {
           "type": "boolean",
           "description": "If set to true, TCP Segmentation Offload (TSO) is enabled. When unset, the kernel's default will be used.",
           "title": "TCP Segmentation Offload",
-          "version_added": "232"
+          "version_added": "232",
+          "x-subcategory": "Offload"
         },
         "TCP6SegmentationOffload": {
           "type": "boolean",
@@ -446,13 +455,15 @@
           "type": "boolean",
           "description": "If set to true, Generic Receive Offload (GRO) is enabled. When unset, the kernel's default will be used.",
           "title": "Generic Receive Offload",
-          "version_added": "232"
+          "version_added": "232",
+          "x-subcategory": "Offload"
         },
         "LargeReceiveOffload": {
           "type": "boolean",
           "description": "If set to true, Large Receive Offload (LRO) is enabled. When unset, the kernel's default will be used.",
           "title": "Large Receive Offload",
-          "version_added": "232"
+          "version_added": "232",
+          "x-subcategory": "Offload"
         },
         "RxChannels": {
           "type": "string",
@@ -482,5 +493,10 @@
       "additionalProperties": false,
       "title": "Link"
     }
+  },
+  "dependencies": {
+    "Link": [
+      "Match"
+    ]
   }
 }
