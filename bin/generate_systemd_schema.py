@@ -313,7 +313,7 @@ def setup_sparse_repo(tag, temp_dir):
 # --- 6. Parsing Logic (Section Aware) ---
 
 def parse_man_pages(man_path, specific_file):
-    docs = defaultdict(lambda: defaultdict(str))
+    docs = defaultdict(lambda: defaultdict(dict))
     file_path = os.path.join(man_path, specific_file)
     if not os.path.exists(file_path): return docs
 
@@ -344,9 +344,20 @@ def parse_man_pages(man_path, specific_file):
                             key = match.group(1)
                             desc_parts = [ to_ascii(get_text_with_semantics(p)) for p in listitem.findall(".//{*}para") ]
                             cleaned_desc = clean_whitespace(" ".join(desc_parts))
-                            docs[current_section][key] = cleaned_desc
+                            
+                            version_added = None
+                            # Look for version info in XInclude (e.g. <xi:include href="version-info.xml" xpointer="v211"/>)
+                            for child in listitem.findall(".//{http://www.w3.org/2001/XInclude}include"):
+                                xpointer = child.get("xpointer")
+                                if xpointer and xpointer.startswith("v"):
+                                    match = re.match(r"^v(\d+)$", xpointer)
+                                    if match:
+                                        version_added = match.group(1)
+                                        break
+                            
+                            docs[current_section][key] = {"desc": cleaned_desc, "version": version_added}
                             if key not in docs['Global']:
-                                docs['Global'][key] = cleaned_desc
+                                docs['Global'][key] = {"desc": cleaned_desc, "version": version_added}
 
     except Exception as e:
         print(f"XML Parse Warning: {e}")
@@ -377,7 +388,7 @@ def find_gperf_file(root_dir, possible_names):
             if name in files: return os.path.join(root, name)
     return None
 
-def process_item_schema(section, key, parse_func, arg, desc, repo_path):
+def process_item_schema(section, key, parse_func, arg, desc, version, repo_path):
     item_schema = None
     raw_map = PARSER_TYPE_MAP.get(parse_func)
     ref_name = None
@@ -454,6 +465,12 @@ def process_item_schema(section, key, parse_func, arg, desc, repo_path):
         else:
             item_schema["description"] = desc
 
+    if version:
+        # If we have an allOf/ref wrapper, we should put it at the top level?
+        # Standard JSON schema doesn't forbid extra properties in allOf, but it's cleaner to put it in the schema dict.
+        # If we just converted to allOf, item_schema is the wrapper.
+        item_schema["version_added"] = version
+
     return item_schema
 
 def parse_gperf_file(repo_path, target_names, docs):
@@ -467,17 +484,21 @@ def parse_gperf_file(repo_path, target_names, docs):
             match = re.match(r'^([A-Z][a-zA-Z0-9]+)\.([A-Z][a-zA-Z0-9-]+)\s*,\s*([a-zA-Z0-9_]+)\s*,\s*[^,]+\s*,\s*([a-zA-Z0-9_]+)', line.strip())
             if match:
                 section, key, parse_func, arg = match.groups()
-                desc = docs[section].get(key, docs['Global'].get(key, ""))
-                item_schema = process_item_schema(section, key, parse_func, arg, desc, repo_path)
+                entry = docs[section].get(key, docs['Global'].get(key, {}))
+                desc = entry.get("desc", "")
+                version = entry.get("version", None)
+                item_schema = process_item_schema(section, key, parse_func, arg, desc, version, repo_path)
                 schema_structure[section][key] = item_schema
 
     for section_name, section_items in docs.items():
         if section_name == "Global": continue
         if section_name in schema_structure:
-            for key, desc in section_items.items():
+            for key, entry in section_items.items():
                 if key not in schema_structure[section_name]:
+                    desc = entry.get("desc", "")
+                    version = entry.get("version", None)
                     item_schema = process_item_schema(
-                        section_name, key, 'config_parse_string', '0', desc, repo_path
+                        section_name, key, 'config_parse_string', '0', desc, version, repo_path
                     )
                     schema_structure[section_name][key] = item_schema
 

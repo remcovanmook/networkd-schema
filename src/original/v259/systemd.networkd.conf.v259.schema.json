@@ -84,7 +84,8 @@
         "SpeedMeter": {
           "type": "boolean",
           "default": false,
-          "description": "If set to yes, then systemd-networkd measures the traffic of each interface, and networkctl status INTERFACE shows the measured speed. Defaults to no."
+          "description": "If set to yes, then systemd-networkd measures the traffic of each interface, and networkctl status INTERFACE shows the measured speed. Defaults to no.",
+          "version_added": "244"
         },
         "SpeedMeterIntervalSec": {
           "allOf": [
@@ -93,46 +94,55 @@
               "default": "10sec"
             }
           ],
-          "description": "Specifies the time interval to calculate the traffic speed of each interface. If SpeedMeter=no, the value is ignored. Defaults to 10sec."
+          "description": "Specifies the time interval to calculate the traffic speed of each interface. If SpeedMeter=no, the value is ignored. Defaults to 10sec.",
+          "version_added": "244"
         },
         "ManageForeignRoutingPolicyRules": {
           "type": "boolean",
           "default": true,
-          "description": "A boolean. When true, systemd-networkd will remove rules that are not configured in.network files (except for rules with protocol 'kernel'). When false, it will not remove any foreign rules, keeping them even if they are not configured in a.network file. Defaults to yes."
+          "description": "A boolean. When true, systemd-networkd will remove rules that are not configured in.network files (except for rules with protocol 'kernel'). When false, it will not remove any foreign rules, keeping them even if they are not configured in a.network file. Defaults to yes.",
+          "version_added": "249"
         },
         "ManageForeignRoutes": {
           "type": "boolean",
           "default": true,
-          "description": "A boolean. When true, systemd-networkd will remove routes that are not configured in.network files (except for routes with protocol 'kernel', 'dhcp' when KeepConfiguration= is true or 'dhcp', and 'static' when KeepConfiguration= is true or 'static'). When false, it will not remove any foreign routes, keeping them even if they are not configured in a.network file. Defaults to yes."
+          "description": "A boolean. When true, systemd-networkd will remove routes that are not configured in.network files (except for routes with protocol 'kernel', 'dhcp' when KeepConfiguration= is true or 'dhcp', and 'static' when KeepConfiguration= is true or 'static'). When false, it will not remove any foreign routes, keeping them even if they are not configured in a.network file. Defaults to yes.",
+          "version_added": "246"
         },
         "ManageForeignNextHops": {
           "type": "boolean",
           "default": true,
-          "description": "A boolean. When true, systemd-networkd will remove nexthops that are not configured in.network files (except for routes with protocol 'kernel'). When false, it will not remove any foreign nexthops, keeping them even if they are not configured in a.network file. Defaults to yes."
+          "description": "A boolean. When true, systemd-networkd will remove nexthops that are not configured in.network files (except for routes with protocol 'kernel'). When false, it will not remove any foreign nexthops, keeping them even if they are not configured in a.network file. Defaults to yes.",
+          "version_added": "256"
         },
         "RouteTable": {
           "type": "integer",
           "minimum": 1,
           "maximum": 4294967295,
-          "description": "Defines the route table name. Takes a whitespace-separated list of the pairs of route table name and number. The route table name and number in each pair are separated with a colon, i.e., 'name:number'. The route table name must not be 'default', 'main', or 'local', as these route table names are predefined with route table number 253, 254, and 255, respectively. The route table number , except for predefined numbers 253, 254, and 255. This setting can be specified multiple times. If an empty string is specified, then the list specified earlier are cleared. Defaults to unset."
+          "description": "Defines the route table name. Takes a whitespace-separated list of the pairs of route table name and number. The route table name and number in each pair are separated with a colon, i.e., 'name:number'. The route table name must not be 'default', 'main', or 'local', as these route table names are predefined with route table number 253, 254, and 255, respectively. The route table number , except for predefined numbers 253, 254, and 255. This setting can be specified multiple times. If an empty string is specified, then the list specified earlier are cleared. Defaults to unset.",
+          "version_added": "248"
         },
         "IPv4Forwarding": {
           "type": "boolean",
-          "description": "Configures IPv4 packet forwarding for the system. Takes a boolean value. This controls the 'net.ipv4.conf.default.forwarding' and 'net.ipv4.conf.all.forwarding' sysctl options. See IP Sysctl for more details about the sysctl options. Defaults to unset and the sysctl options will not be changed. If an interface is configured with a.network file that enables IPMasquerade= for IPv4 (that is, 'ipv4' or 'both'), this setting is implied unless explicitly specified. See IPMasquerade= in systemd.network5 for more details."
+          "description": "Configures IPv4 packet forwarding for the system. Takes a boolean value. This controls the 'net.ipv4.conf.default.forwarding' and 'net.ipv4.conf.all.forwarding' sysctl options. See IP Sysctl for more details about the sysctl options. Defaults to unset and the sysctl options will not be changed. If an interface is configured with a.network file that enables IPMasquerade= for IPv4 (that is, 'ipv4' or 'both'), this setting is implied unless explicitly specified. See IPMasquerade= in systemd.network5 for more details.",
+          "version_added": "256"
         },
         "IPv6Forwarding": {
           "type": "boolean",
-          "description": "Configures IPv6 packet forwarding for the system. Takes a boolean value. This controls the 'net.ipv6.conf.default.forwarding' and 'net.ipv6.conf.all.forwarding' sysctl options. See IP Sysctl for more details about the sysctl options. Defaults to unset and the sysctl options will not be changed. If an interface is configured with a.network file that enables IPMasquerade= for IPv6 (that is, 'ipv6' or 'both'), this setting is implied unless explicitly specified. See IPMasquerade= in systemd.network5 for more details."
+          "description": "Configures IPv6 packet forwarding for the system. Takes a boolean value. This controls the 'net.ipv6.conf.default.forwarding' and 'net.ipv6.conf.all.forwarding' sysctl options. See IP Sysctl for more details about the sysctl options. Defaults to unset and the sysctl options will not be changed. If an interface is configured with a.network file that enables IPMasquerade= for IPv6 (that is, 'ipv6' or 'both'), this setting is implied unless explicitly specified. See IPMasquerade= in systemd.network5 for more details.",
+          "version_added": "256"
         },
         "IPv6PrivacyExtensions": {
           "type": "boolean",
           "default": false,
-          "description": "Specifies the default value for per-network IPv6PrivacyExtensions=. Takes a boolean or the special values 'prefer-public' and 'kernel'. See for details in systemd.network5. Defaults to 'no'."
+          "description": "Specifies the default value for per-network IPv6PrivacyExtensions=. Takes a boolean or the special values 'prefer-public' and 'kernel'. See for details in systemd.network5. Defaults to 'no'.",
+          "version_added": "254"
         },
         "UseDomains": {
           "type": "boolean",
           "default": false,
-          "description": "Specifies the network- and protocol-independent default value for the same settings in [IPv6AcceptRA], [DHCPv4], and [DHCPv6] sections below. Takes a boolean, or the special value 'route'. See the same setting in systemd.network5. Defaults to 'no'."
+          "description": "Specifies the network- and protocol-independent default value for the same settings in [IPv6AcceptRA], [DHCPv4], and [DHCPv6] sections below. Takes a boolean, or the special value 'route'. See the same setting in systemd.network5. Defaults to 'no'.",
+          "version_added": "256"
         }
       },
       "additionalProperties": false
@@ -148,7 +158,8 @@
               "UseDomains": {
                 "type": "boolean",
                 "default": false,
-                "description": "Specifies the network-independent default value for the same setting in the [IPv6AcceptRA] section in systemd.network5. Takes a boolean, or the special value 'route'. When unspecified, the value specified in the [Network] section in networkd.conf5, which defaults to 'no', will be used."
+                "description": "Specifies the network-independent default value for the same setting in the [IPv6AcceptRA] section in systemd.network5. Takes a boolean, or the special value 'route'. When unspecified, the value specified in the [Network] section in networkd.conf5, which defaults to 'no', will be used.",
+                "version_added": "256"
               }
             },
             "additionalProperties": false
@@ -161,7 +172,8 @@
             "UseDomains": {
               "type": "boolean",
               "default": false,
-              "description": "Specifies the network-independent default value for the same setting in the [IPv6AcceptRA] section in systemd.network5. Takes a boolean, or the special value 'route'. When unspecified, the value specified in the [Network] section in networkd.conf5, which defaults to 'no', will be used."
+              "description": "Specifies the network-independent default value for the same setting in the [IPv6AcceptRA] section in systemd.network5. Takes a boolean, or the special value 'route'. When unspecified, the value specified in the [Network] section in networkd.conf5, which defaults to 'no', will be used.",
+              "version_added": "256"
             }
           },
           "additionalProperties": false
@@ -179,11 +191,13 @@
             "properties": {
               "Prefix": {
                 "type": "string",
-                "description": "IPv6 prefix is an address with a prefix length, separated by a slash '/' character. This setting is mandatory."
+                "description": "IPv6 prefix is an address with a prefix length, separated by a slash '/' character. This setting is mandatory.",
+                "version_added": "257"
               },
               "Label": {
                 "type": "string",
-                "description": "The label for the prefix, an unsigned integer in the range 0...4294967294. 0xffffffff is reserved. This setting is mandatory."
+                "description": "The label for the prefix, an unsigned integer in the range 0...4294967294. 0xffffffff is reserved. This setting is mandatory.",
+                "version_added": "257"
               }
             },
             "additionalProperties": false,
@@ -199,11 +213,13 @@
           "properties": {
             "Prefix": {
               "type": "string",
-              "description": "IPv6 prefix is an address with a prefix length, separated by a slash '/' character. This setting is mandatory."
+              "description": "IPv6 prefix is an address with a prefix length, separated by a slash '/' character. This setting is mandatory.",
+              "version_added": "257"
             },
             "Label": {
               "type": "string",
-              "description": "The label for the prefix, an unsigned integer in the range 0...4294967294. 0xffffffff is reserved. This setting is mandatory."
+              "description": "The label for the prefix, an unsigned integer in the range 0...4294967294. 0xffffffff is reserved. This setting is mandatory.",
+              "version_added": "257"
             }
           },
           "additionalProperties": false,
@@ -225,7 +241,8 @@
             "properties": {
               "UseDomains": {
                 "type": "string",
-                "description": "Same as the one in the [IPv6AcceptRA] section, but applied for DHCPv4 protocol."
+                "description": "Same as the one in the [IPv6AcceptRA] section, but applied for DHCPv4 protocol.",
+                "version_added": "256"
               },
               "ClientIdentifier": {
                 "type": "string",
@@ -234,17 +251,20 @@
                   "mac"
                 ],
                 "default": "duid",
-                "description": "Specifies the default DHCPv4 client identifier to be used. If set to 'mac', the MAC address of each link will be used. If set to 'duid', an RFC4361-compliant Client ID, which is the combination of IAID and DUID, is used. IAID can be configured by IAID= in each matching '.network' file. DUID can be configured by DUIDType= and DUIDRawData=. Defaults to 'duid'."
+                "description": "Specifies the default DHCPv4 client identifier to be used. If set to 'mac', the MAC address of each link will be used. If set to 'duid', an RFC4361-compliant Client ID, which is the combination of IAID and DUID, is used. IAID can be configured by IAID= in each matching '.network' file. DUID can be configured by DUIDType= and DUIDRawData=. Defaults to 'duid'.",
+                "version_added": "258"
               },
               "DUIDType": {
                 "type": "integer",
                 "minimum": 0,
                 "maximum": 65535,
-                "description": "Specifies how the DUID should be generated. See RFC 3315 for a description of all the options. This , or one of the following string values: 'vendor' If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. 'uuid' If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. 'link-layer-time[:TIME]' 'link-layer' If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. In all cases, DUIDRawData= can be used to override the actual DUID value that is used."
+                "description": "Specifies how the DUID should be generated. See RFC 3315 for a description of all the options. This , or one of the following string values: 'vendor' If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. 'uuid' If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. 'link-layer-time[:TIME]' 'link-layer' If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. In all cases, DUIDRawData= can be used to override the actual DUID value that is used.",
+                "version_added": "230"
               },
               "DUIDRawData": {
                 "type": "string",
-                "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'."
+                "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'.",
+                "version_added": "230"
               }
             },
             "additionalProperties": false
@@ -256,7 +276,8 @@
           "properties": {
             "UseDomains": {
               "type": "string",
-              "description": "Same as the one in the [IPv6AcceptRA] section, but applied for DHCPv4 protocol."
+              "description": "Same as the one in the [IPv6AcceptRA] section, but applied for DHCPv4 protocol.",
+              "version_added": "256"
             },
             "ClientIdentifier": {
               "type": "string",
@@ -265,17 +286,20 @@
                 "mac"
               ],
               "default": "duid",
-              "description": "Specifies the default DHCPv4 client identifier to be used. If set to 'mac', the MAC address of each link will be used. If set to 'duid', an RFC4361-compliant Client ID, which is the combination of IAID and DUID, is used. IAID can be configured by IAID= in each matching '.network' file. DUID can be configured by DUIDType= and DUIDRawData=. Defaults to 'duid'."
+              "description": "Specifies the default DHCPv4 client identifier to be used. If set to 'mac', the MAC address of each link will be used. If set to 'duid', an RFC4361-compliant Client ID, which is the combination of IAID and DUID, is used. IAID can be configured by IAID= in each matching '.network' file. DUID can be configured by DUIDType= and DUIDRawData=. Defaults to 'duid'.",
+              "version_added": "258"
             },
             "DUIDType": {
               "type": "integer",
               "minimum": 0,
               "maximum": 65535,
-              "description": "Specifies how the DUID should be generated. See RFC 3315 for a description of all the options. This , or one of the following string values: 'vendor' If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. 'uuid' If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. 'link-layer-time[:TIME]' 'link-layer' If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. In all cases, DUIDRawData= can be used to override the actual DUID value that is used."
+              "description": "Specifies how the DUID should be generated. See RFC 3315 for a description of all the options. This , or one of the following string values: 'vendor' If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. 'uuid' If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. 'link-layer-time[:TIME]' 'link-layer' If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. In all cases, DUIDRawData= can be used to override the actual DUID value that is used.",
+              "version_added": "230"
             },
             "DUIDRawData": {
               "type": "string",
-              "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'."
+              "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'.",
+              "version_added": "230"
             }
           },
           "additionalProperties": false
@@ -293,15 +317,18 @@
             "properties": {
               "UseDomains": {
                 "type": "string",
-                "description": "As in the [DHCPv4] section."
+                "description": "As in the [DHCPv4] section.",
+                "version_added": "256"
               },
               "DUIDType": {
                 "type": "string",
-                "description": "As in the [DHCPv4] section."
+                "description": "As in the [DHCPv4] section.",
+                "version_added": "249"
               },
               "DUIDRawData": {
                 "type": "string",
-                "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'."
+                "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'.",
+                "version_added": "230"
               }
             },
             "additionalProperties": false
@@ -313,15 +340,18 @@
           "properties": {
             "UseDomains": {
               "type": "string",
-              "description": "As in the [DHCPv4] section."
+              "description": "As in the [DHCPv4] section.",
+              "version_added": "256"
             },
             "DUIDType": {
               "type": "string",
-              "description": "As in the [DHCPv4] section."
+              "description": "As in the [DHCPv4] section.",
+              "version_added": "249"
             },
             "DUIDRawData": {
               "type": "string",
-              "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'."
+              "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'.",
+              "version_added": "230"
             }
           },
           "additionalProperties": false
@@ -340,7 +370,8 @@
               "PersistLeases": {
                 "type": "boolean",
                 "default": true,
-                "description": "Specifies the default value for per-network PersistLeases=. Takes a boolean or special value 'runtime'. See for details in systemd.network5. Defaults to 'yes'."
+                "description": "Specifies the default value for per-network PersistLeases=. Takes a boolean or special value 'runtime'. See for details in systemd.network5. Defaults to 'yes'.",
+                "version_added": "256"
               }
             },
             "additionalProperties": false
@@ -353,7 +384,8 @@
             "PersistLeases": {
               "type": "boolean",
               "default": true,
-              "description": "Specifies the default value for per-network PersistLeases=. Takes a boolean or special value 'runtime'. See for details in systemd.network5. Defaults to 'yes'."
+              "description": "Specifies the default value for per-network PersistLeases=. Takes a boolean or special value 'runtime'. See for details in systemd.network5. Defaults to 'yes'.",
+              "version_added": "256"
             }
           },
           "additionalProperties": false
@@ -373,11 +405,13 @@
                 "type": "integer",
                 "minimum": 0,
                 "maximum": 65535,
-                "description": "Specifies how the DUID should be generated. See RFC 3315 for a description of all the options. This , or one of the following string values: 'vendor' If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. 'uuid' If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. 'link-layer-time[:TIME]' 'link-layer' If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. In all cases, DUIDRawData= can be used to override the actual DUID value that is used."
+                "description": "Specifies how the DUID should be generated. See RFC 3315 for a description of all the options. This , or one of the following string values: 'vendor' If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. 'uuid' If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. 'link-layer-time[:TIME]' 'link-layer' If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. In all cases, DUIDRawData= can be used to override the actual DUID value that is used.",
+                "version_added": "230"
               },
               "DUIDRawData": {
                 "type": "string",
-                "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'."
+                "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'.",
+                "version_added": "230"
               }
             },
             "additionalProperties": false
@@ -391,11 +425,13 @@
               "type": "integer",
               "minimum": 0,
               "maximum": 65535,
-              "description": "Specifies how the DUID should be generated. See RFC 3315 for a description of all the options. This , or one of the following string values: 'vendor' If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. 'uuid' If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. 'link-layer-time[:TIME]' 'link-layer' If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. In all cases, DUIDRawData= can be used to override the actual DUID value that is used."
+              "description": "Specifies how the DUID should be generated. See RFC 3315 for a description of all the options. This , or one of the following string values: 'vendor' If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. 'uuid' If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. 'link-layer-time[:TIME]' 'link-layer' If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. If 'DUIDType=vendor', then the DUID value will be generated using '43793' as the vendor identifier (systemd) and hashed contents of machine-id5. This is the default if DUIDType= is not specified. If 'DUIDType=uuid', and DUIDRawData= is not set, then the product UUID is used as a DUID value. If a system does not have valid product UUID, then an application-specific machine-id5 is used as a DUID value. About the application-specific machine ID, see sd_id128_get_machine_app_specific3. If 'link-layer-time' or 'link-layer' is specified, then the MAC address of the interface is used as a DUID value. The value 'link-layer-time' can take additional time value after a colon, e.g. 'link-layer-time:2018-01-23 12:34:56 UTC'. The default time value is '2000-01-01 00:00:00 UTC'. In all cases, DUIDRawData= can be used to override the actual DUID value that is used.",
+              "version_added": "230"
             },
             "DUIDRawData": {
               "type": "string",
-              "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'."
+              "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'.",
+              "version_added": "230"
             }
           },
           "additionalProperties": false

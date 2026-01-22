@@ -219,22 +219,26 @@
           "examples": [
             "12:34:56:78:9a:bc",
             "00:11:22:33:44:55 66:77:88:99:aa:bb"
-          ]
+          ],
+          "version_added": "250"
         },
         "OriginalName": {
           "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the device name, as exposed by the udev property \"INTERFACE\". This cannot be used to match on names that have already been changed from userspace. Caution is advised when matching on kernel-assigned names, as they are known to be unstable between reboots.",
-          "title": "Original Name"
+          "title": "Original Name",
+          "version_added": "218"
         },
         "Path": {
           "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the persistent path, as exposed by the udev property ID_PATH.",
-          "title": "Path"
+          "title": "Path",
+          "version_added": "211"
         },
         "Driver": {
           "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the driver currently bound to the device, as exposed by the udev property ID_NET_DRIVER of its parent device, or if that is not set, the driver as exposed by ethtool -i of the device itself. If the list is prefixed with a \"!\", the test is inverted.",
-          "title": "Driver"
+          "title": "Driver",
+          "version_added": "211"
         },
         "Type": {
           "type": "string",
@@ -250,37 +254,44 @@
             "global",
             "link",
             "host"
-          ]
+          ],
+          "version_added": "211"
         },
         "Property": {
           "type": "string",
           "description": "A whitespace-separated list of udev property names with their values after equals sign ('='). If multiple properties are specified, the test results are ANDed. If the list is prefixed with a \"!\", the test is inverted. If a value contains white spaces, then please quote whole key and value pair. If a value contains quotation, then please escape the quotation with '\\'. Example: if a.link file has the following: Property=ID_MODEL_ID=9999 \"ID_VENDOR_FROM_DATABASE=vendor name\" \"KEY=with \\\"quotation\\\"\" then, the.link file matches only when an interface has all the above three properties.",
-          "title": "Property"
+          "title": "Property",
+          "version_added": "243"
         },
         "Host": {
           "type": "string",
           "description": "Matches against the hostname or machine ID of the host. See ConditionHost= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
-          "title": "Host"
+          "title": "Host",
+          "version_added": "211"
         },
         "Virtualization": {
           "type": "string",
           "description": "Checks whether the system is executed in a virtualized environment and optionally test whether it is a specific implementation. See ConditionVirtualization= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
-          "title": "Virtualization"
+          "title": "Virtualization",
+          "version_added": "211"
         },
         "KernelCommandLine": {
           "type": "string",
           "description": "Checks whether a specific kernel command line option is set. See ConditionKernelCommandLine= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
-          "title": "Kernel Command Line"
+          "title": "Kernel Command Line",
+          "version_added": "211"
         },
         "KernelVersion": {
           "type": "string",
           "description": "Checks whether the kernel version (as reported by uname -r) matches a certain expression. See ConditionKernelVersion= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
-          "title": "Kernel Version"
+          "title": "Kernel Version",
+          "version_added": "237"
         },
         "Architecture": {
           "type": "string",
           "description": "Checks whether the system is running on a specific architecture. See ConditionArchitecture= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
-          "title": "Architecture"
+          "title": "Architecture",
+          "version_added": "211"
         }
       },
       "additionalProperties": false,
@@ -301,12 +312,14 @@
           "examples": [
             "My Interface",
             "Uplink to ISP"
-          ]
+          ],
+          "version_added": "211"
         },
         "MACAddressPolicy": {
           "type": "string",
           "description": "The policy by which the MAC address should be set. The available policies are: If the hardware has a persistent MAC address, as most hardware should, and if it is used by the kernel, nothing is done. Otherwise, a new MAC address is generated which is guaranteed to be the same on every boot for the given machine and the given device, but which is otherwise random. This feature depends on ID_NET_NAME_* properties to exist for the link. On hardware where these properties are not set, the generation of a persistent MAC address will fail. If the kernel is using a random MAC address, nothing is done. Otherwise, a new address is randomly generated each time the device appears, typically at boot. Either way, the random address will have the 'unicast' and 'locally administered' bits set. Keeps the MAC address assigned by the kernel. Or use the MAC address specified in MACAddress=. An empty string assignment is equivalent to setting 'none'.",
-          "title": "MAC Address Policy"
+          "title": "MAC Address Policy",
+          "version_added": "211"
         },
         "MACAddress": {
           "allOf": [
@@ -319,12 +332,14 @@
           "examples": [
             "12:34:56:78:9a:bc",
             "none"
-          ]
+          ],
+          "version_added": "211"
         },
         "NamePolicy": {
           "type": "string",
           "description": "An ordered, space-separated list of policies by which the interface name should be set. NamePolicy= may be disabled by specifying 'net.ifnames=0' on the kernel command line. Each of the policies may fail, and the first successful one is used. The name is not set directly, but is exported to udev as the property 'ID_NET_NAME', which is, by default, used by a udev7, rule to set NAME. The available policies are: If the kernel claims that the name it has set for a device is predictable, then no renaming is performed. The name is set based on entries in the udev's Hardware Database with the key ID_NET_NAME_FROM_DATABASE. The name is set based on information given by the firmware for on-board devices, as exported by the udev property ID_NET_NAME_ONBOARD. See systemd.net-naming-scheme7. The name is set based on information given by the firmware for hot-plug devices, as exported by the udev property ID_NET_NAME_SLOT. See systemd.net-naming-scheme7. The name is set based on the device's physical location, as exported by the udev property ID_NET_NAME_PATH. See systemd.net-naming-scheme7. The name is set based on the device's persistent MAC address, as exported by the udev property ID_NET_NAME_MAC. See systemd.net-naming-scheme7. If the device already had a name given by userspace (as part of creation of the device or a rename), keep it.",
-          "title": "Name Policy"
+          "title": "Name Policy",
+          "version_added": "216"
         },
         "Name": {
           "type": "string",
@@ -333,12 +348,14 @@
           "examples": [
             "eth0",
             "br0"
-          ]
+          ],
+          "version_added": "211"
         },
         "Alias": {
           "type": "string",
           "description": "The ifalias interface property is set to this value.",
-          "title": "Alias"
+          "title": "Alias",
+          "version_added": "211"
         },
         "MTUBytes": {
           "allOf": [
@@ -352,7 +369,8 @@
             "1500",
             "9000",
             "auto"
-          ]
+          ],
+          "version_added": "211"
         },
         "BitsPerSecond": {
           "allOf": [
@@ -361,7 +379,8 @@
             }
           ],
           "description": "The speed to set for the device, the value is rounded down to the nearest Mbps. The usual suffixes K, M, G are supported and are understood to the base of 1000.",
-          "title": "Bits Per Second"
+          "title": "Bits Per Second",
+          "version_added": "211"
         },
         "Duplex": {
           "type": "string",
@@ -370,12 +389,14 @@
             "half"
           ],
           "description": "The duplex mode to set for the device. The accepted values are 'full' and 'half'.",
-          "title": "Duplex"
+          "title": "Duplex",
+          "version_added": "211"
         },
         "AutoNegotiation": {
           "type": "boolean",
           "description": "If set to yes, automatic negotiation of transmission parameters is enabled. Autonegotiation is a procedure by which two connected ethernet devices choose common transmission parameters, such as speed, duplex mode, and flow control. When unset, the kernel's default will be used. Note that if autonegotiation is enabled, speed and duplex settings are read-only. If autonegotiation is disabled, speed and duplex settings are writable if the driver supports multiple link modes.",
-          "title": "Auto Negotiation"
+          "title": "Auto Negotiation",
+          "version_added": "233"
         },
         "WakeOnLan": {
           "type": "string",
@@ -390,27 +411,32 @@
             "secureon"
           ],
           "description": "The Wake-on-LAN policy to set for the device. Takes the special value 'off' which disables Wake-on-LAN, or space separated list of the following words: Wake on PHY activity. Wake on unicast messages. Wake on multicast messages. Wake on broadcast messages. Wake on ARP. Wake on receipt of a magic packet. Enable SecureOn password for MagicPacket. Implied when WakeOnLanPassword= is specified. If specified without WakeOnLanPassword= option, then the password is read from the credential 'LINK.link.wol.password' (e.g., '60-foo.link.wol.password'), and if the credential not found, then read from 'wol.password'. See ImportCredential=/LoadCredential=/SetCredential= in systemd.exec5 for details. The password in the credential, must be 6 bytes in hex format with each byte separated by a colon (':') like an Ethernet MAC address, e.g., 'aa:bb:cc:dd:ee:ff'. Defaults to unset, and the device's default will be used. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
-          "title": "Wake On Lan"
+          "title": "Wake On Lan",
+          "version_added": "211"
         },
         "Port": {
           "type": "string",
           "description": "The port option is used to select the device port. The supported values are: An Ethernet interface using Twisted-Pair cable as the medium. Attachment Unit Interface (AUI). Normally used with hubs. An Ethernet interface using BNC connectors and co-axial cable. An Ethernet interface using a Media Independent Interface (MII). An Ethernet interface using Optical Fibre as the medium.",
-          "title": "Port"
+          "title": "Port",
+          "version_added": "234"
         },
         "GenericSegmentationOffload": {
           "type": "boolean",
           "description": "If set to true, Generic Segmentation Offload (GSO) is enabled. When unset, the kernel's default will be used.",
-          "title": "Generic Segmentation Offload"
+          "title": "Generic Segmentation Offload",
+          "version_added": "232"
         },
         "TCPSegmentationOffload": {
           "type": "boolean",
           "description": "If set to true, TCP Segmentation Offload (TSO) is enabled. When unset, the kernel's default will be used.",
-          "title": "TCP Segmentation Offload"
+          "title": "TCP Segmentation Offload",
+          "version_added": "232"
         },
         "TCP6SegmentationOffload": {
           "type": "boolean",
           "description": "If set to true, TCP6 Segmentation Offload (tx-tcp6-segmentation) is enabled. When unset, the kernel's default will be used.",
-          "title": "TCP6 Segmentation Offload"
+          "title": "TCP6 Segmentation Offload",
+          "version_added": "235"
         },
         "UDPSegmentationOffload": {
           "type": "string",
@@ -419,17 +445,20 @@
         "GenericReceiveOffload": {
           "type": "boolean",
           "description": "If set to true, Generic Receive Offload (GRO) is enabled. When unset, the kernel's default will be used.",
-          "title": "Generic Receive Offload"
+          "title": "Generic Receive Offload",
+          "version_added": "232"
         },
         "LargeReceiveOffload": {
           "type": "boolean",
           "description": "If set to true, Large Receive Offload (LRO) is enabled. When unset, the kernel's default will be used.",
-          "title": "Large Receive Offload"
+          "title": "Large Receive Offload",
+          "version_added": "232"
         },
         "RxChannels": {
           "type": "string",
           "description": "Specifies the number of receive, transmit, other, or combined channels, respectively. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
-          "title": "Rx Channels"
+          "title": "Rx Channels",
+          "version_added": "239"
         },
         "TxChannels": {
           "type": "string",
@@ -446,7 +475,8 @@
         "Advertise": {
           "type": "string",
           "description": "This sets what speeds and duplex modes of operation are advertised for auto-negotiation. This implies 'AutoNegotiation=yes'. The supported values are: Supported advertise values Advertise Speed (Mbps) Duplex Mode By default this is unset, i.e. all possible modes will be advertised. This option may be specified more than once, in which case all specified speeds and modes are advertised. If the empty string is assigned to this option, the list is reset, and all prior assignments have no effect.",
-          "title": "Advertise"
+          "title": "Advertise",
+          "version_added": "240"
         }
       },
       "additionalProperties": false,
