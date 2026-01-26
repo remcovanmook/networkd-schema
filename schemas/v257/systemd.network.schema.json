@@ -5,7 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_address": {
+    "mac_addressType": {
       "type": "string",
       "description": "MAC Address (Hex separated by colons or hyphens)",
       "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
@@ -14,7 +14,7 @@
         "00:11:22:33:44:55"
       ]
     },
-    "ipv4_address": {
+    "ipv4_addressType": {
       "type": "string",
       "description": "IPv4 Address",
       "format": "ipv4",
@@ -23,7 +23,7 @@
         "192.168.1.1"
       ]
     },
-    "ipv6_address": {
+    "ipv6_addressType": {
       "type": "string",
       "description": "IPv6 Address",
       "format": "ipv6",
@@ -32,18 +32,18 @@
         "2001:db8::1"
       ]
     },
-    "ip_address": {
+    "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_address"
+          "$ref": "#/definitions/ipv4_addressType"
         },
         {
-          "$ref": "#/definitions/ipv6_address"
+          "$ref": "#/definitions/ipv6_addressType"
         }
       ]
     },
-    "ipv4_prefix": {
+    "ipv4_prefixType": {
       "type": "string",
       "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
       "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
@@ -52,7 +52,7 @@
         "192.168.1.0/24"
       ]
     },
-    "ipv6_prefix": {
+    "ipv6_prefixType": {
       "type": "string",
       "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
       "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
@@ -61,18 +61,18 @@
         "2001:db8::/64"
       ]
     },
-    "ip_prefix": {
+    "ip_prefixType": {
       "description": "IPv4 or IPv6 Prefix (CIDR)",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_prefix"
+          "$ref": "#/definitions/ipv4_prefixType"
         },
         {
-          "$ref": "#/definitions/ipv6_prefix"
+          "$ref": "#/definitions/ipv6_prefixType"
         }
       ]
     },
-    "filename": {
+    "filenameType": {
       "type": "string",
       "description": "Filesystem path",
       "format": "uri-reference",
@@ -81,7 +81,7 @@
         "/etc/issue"
       ]
     },
-    "seconds": {
+    "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
       "format": "duration",
@@ -93,7 +93,7 @@
         "1min"
       ]
     },
-    "bytes": {
+    "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
         {
@@ -113,7 +113,7 @@
       ],
       "format": "bytes"
     },
-    "MTUBytes": {
+    "MTUBytesType": {
       "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
@@ -134,7 +134,7 @@
       ],
       "format": "bytes"
     },
-    "MTUv6Bytes": {
+    "MTUv6BytesType": {
       "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
@@ -154,7 +154,7 @@
       ],
       "format": "bytes"
     },
-    "rate": {
+    "rateType": {
       "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
       "oneOf": [
         {
@@ -172,7 +172,7 @@
         "100M"
       ]
     },
-    "percentage": {
+    "percentageType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?%$",
       "description": "Percentage value (e.g. 10%, 0.5%)",
@@ -183,7 +183,7 @@
       ],
       "format": "percent"
     },
-    "vlan_id": {
+    "vlan_idType": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4094,
@@ -195,7 +195,7 @@
         4094
       ]
     },
-    "qdisc_handle": {
+    "qdisc_handleType": {
       "type": "string",
       "pattern": "^[0-9a-fA-F]{1,4}:([0-9a-fA-F]{1,4})?$",
       "description": "Queueing Discipline handle (hex major:minor).",
@@ -205,11 +205,11 @@
         "10:"
       ]
     },
-    "qdisc_parent": {
+    "qdisc_parentType": {
       "description": "Queueing Discipline parent.",
       "oneOf": [
         {
-          "$ref": "#/definitions/qdisc_handle"
+          "$ref": "#/definitions/qdisc_handleType"
         },
         {
           "type": "string",
@@ -228,7 +228,7 @@
         "1:1"
       ]
     },
-    "uint8": {
+    "uint8Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 255,
@@ -238,7 +238,7 @@
         128
       ]
     },
-    "uint16": {
+    "uint16Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 65535,
@@ -248,7 +248,7 @@
         1024
       ]
     },
-    "uint32": {
+    "uint32Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4294967294,
@@ -256,6 +256,18 @@
       "title": "Integer (32-bit)",
       "examples": [
         65535
+      ]
+    },
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+      "examples": [
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
       ]
     }
   },
@@ -267,7 +279,7 @@
         "MACAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/mac_address"
+              "$ref": "#/definitions/mac_addressType"
             }
           ],
           "description": "A whitespace-separated list of hardware addresses.",
@@ -280,13 +292,13 @@
           "x-subcategory": "Hardware"
         },
         "PermanentMACAddress": {
-          "$ref": "#/definitions/mac_address",
+          "$ref": "#/definitions/mac_addressType",
           "title": "Permanent MAC Address"
         },
         "Path": {
           "allOf": [
             {
-              "$ref": "#/definitions/filename"
+              "$ref": "#/definitions/filenameType"
             }
           ],
           "description": "The path to the device.",
@@ -299,25 +311,17 @@
           "x-subcategory": "Hardware"
         },
         "Type": {
-          "type": "string",
-          "enum": [
-            "blackhole",
-            "goto",
-            "nop",
-            "prohibit",
-            "table",
-            "unreachable"
-          ],
-          "default": "table",
-          "description": "Specifies Routing Policy Database (RPDB) rule type. When 'goto', the target priority must be specified in GoTo=. Defaults to 'table'.",
+          "description": "A whitespace-separated list of shell-style globs matching the device type, as exposed by networkctl list. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "Type",
           "examples": [
-            "global",
-            "link",
-            "host"
+            "ether",
+            "wlan",
+            "loopback",
+            "vlan"
           ],
-          "version_added": "248",
-          "x-subcategory": "Hardware"
+          "version_added": "211",
+          "x-subcategory": "Hardware",
+          "$ref": "#/definitions/globsType"
         },
         "Kind": {
           "type": "string",
@@ -339,11 +343,11 @@
           "x-subcategory": "Network"
         },
         "SSID": {
-          "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the SSID of the currently connected wireless LAN. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "SSID",
           "version_added": "244",
-          "x-subcategory": "Network"
+          "x-subcategory": "Network",
+          "$ref": "#/definitions/globsType"
         },
         "BSSID": {
           "type": "string",
@@ -353,7 +357,6 @@
           "version_added": "244"
         },
         "Name": {
-          "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the device name, as exposed by the udev property 'INTERFACE', or device's alternative names. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "Name",
           "examples": [
@@ -361,7 +364,8 @@
             "br0"
           ],
           "version_added": "211",
-          "x-subcategory": "Network"
+          "x-subcategory": "Network",
+          "$ref": "#/definitions/globsType"
         },
         "Property": {
           "type": "string",
@@ -411,7 +415,7 @@
         "MACAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/mac_address"
+              "$ref": "#/definitions/mac_addressType"
             }
           ],
           "description": "The hardware address to set for the device.",
@@ -426,7 +430,7 @@
         "MTUBytes": {
           "allOf": [
             {
-              "$ref": "#/definitions/MTUBytes"
+              "$ref": "#/definitions/MTUBytesType"
             }
           ],
           "description": "The maximum transmission unit in bytes to set for the device. The usual suffixes K, M, G, are supported and are understood to the base of 1024. Note that if IPv6 is enabled on the interface, and the MTU is chosen below 1280 (the minimum MTU for IPv6) it will automatically be increased to this value.",
@@ -634,7 +638,7 @@
         "VLAN": {
           "allOf": [
             {
-              "$ref": "#/definitions/vlan_id"
+              "$ref": "#/definitions/vlan_idType"
             }
           ],
           "minimum": 1,
@@ -728,7 +732,7 @@
         "IPv6StableSecretAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/ipv6_address"
+              "$ref": "#/definitions/ipv6_addressType"
             }
           ],
           "description": "Takes an IPv6 address. The specified address will be used as a stable secret for generating IPv6 link-local address. If this setting is specified, and IPv6LinkLocalAddressGenerationMode= is unset, then IPv6LinkLocalAddressGenerationMode=stable-privacy is implied. If this setting is not specified, and 'stable-privacy' is set to IPv6LinkLocalAddressGenerationMode=, then a stable secret address will be generated from the local machine ID and the interface name.",
@@ -738,7 +742,7 @@
         "IPv4LLStartAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/ipv4_address"
+              "$ref": "#/definitions/ipv4_addressType"
             }
           ],
           "description": "Specifies the first IPv4 link-local address to try. Takes an IPv4 address for example 169.254.1.2, from the link-local address range: 169.254.0.0/16 except for 169.254.0.0/24 and 169.254.255.0/24. This setting may be useful if the device should always have the same address as long as there is no address conflict. When unset, a random address will be automatically selected. Defaults to unset.",
@@ -798,7 +802,7 @@
         "Address": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ip_prefix"
+            "$ref": "#/definitions/ip_prefixType"
           },
           "description": "A static IPv4 or IPv6 address and its prefix length, separated by a '/' character. Specify this key more than once to configure several addresses. The format of the address must be as described in inet_pton3. This is a short-hand for an [Address] section only containing an Address key (see below). This option may be specified more than once. If the specified address is '0.0.0.0' (for IPv4) or '::' (for IPv6), a new address range of the requested size is automatically allocated from a system-wide pool of unused ranges. Note that the prefix length must be equal or larger than 8 for IPv4, and 64 for IPv6. The allocated range is checked against all current network interfaces and all known network configuration files to avoid address range conflicts. The default system-wide pool consists of 192.168.0.0/16, 172.16.0.0/12 and 10.0.0.0/8 for IPv4, and fd00::/8 for IPv6. This functionality is useful to manage a large number of dynamically created network interfaces with the same network configuration and automatic address range assignment. If an IPv4 link-local address (169.254.0.0/16) is specified, IPv4 Address Conflict Detection (RFC 5227) is enabled for the address. To assign an IPv4 link-local address without IPv4 Address Conflict Detection, please use [Address] section to configure the address and disable DuplicateAddressDetection=. [Address] Address=169.254.10.1/24 DuplicateAddressDetection=none If an empty string is specified, then the all previous assignments in both [Network] and [Address] sections are cleared.",
           "title": "Address",
@@ -808,7 +812,7 @@
         "Gateway": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ip_address"
+            "$ref": "#/definitions/ip_addressType"
           },
           "description": "The gateway address, which must be in the format described in inet_pton3. This is a short-hand for a [Route] section only containing a Gateway= key. This option may be specified more than once.",
           "title": "Gateway",
@@ -842,7 +846,7 @@
         "DNS": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ip_address"
+            "$ref": "#/definitions/ip_addressType"
           },
           "description": "A DNS server address, which must be in the format described in inet_pton3. This option may be specified more than once. Each address can optionally take a port number separated with ':', a network interface name or index separated with '%', and a Server Name Indication (SNI) separated with '#'. When IPv6 address is specified with a port number, then the address must be in the square brackets. That is, the acceptable full formats are '111.222.333.444:9953%ifname#example.com' for IPv4 and '[1111:2222::3333]:9953%ifname#example.com' for IPv6. If an empty string is assigned, then the all previous assignments are cleared. This setting is read by systemd-resolved.service8.",
           "title": "DNS",
@@ -924,7 +928,7 @@
         "NTP": {
           "allOf": [
             {
-              "$ref": "#/definitions/ip_address"
+              "$ref": "#/definitions/ip_addressType"
             }
           ],
           "description": "An NTP server address (either an IP address, or a hostname). This option may be specified more than once. This setting is read by systemd-timesyncd.service8.",
@@ -1016,7 +1020,7 @@
         "IPv6RetransmissionTimeSec": {
           "allOf": [
             {
-              "$ref": "#/definitions/seconds"
+              "$ref": "#/definitions/secondsType"
             }
           ],
           "description": "Configures IPv6 Retransmission Time. The time between retransmitted Neighbor Solicitation messages. Used by address resolution and the Neighbor Unreachability Detection algorithm. A value of zero is ignored and the kernel's current value will be used. Defaults to unset, and the kernel's current value will be used.",
@@ -1032,7 +1036,7 @@
         "IPv6MTUBytes": {
           "allOf": [
             {
-              "$ref": "#/definitions/MTUv6Bytes"
+              "$ref": "#/definitions/MTUv6BytesType"
             }
           ],
           "description": "Configures IPv6 maximum transmission unit (MTU). An integer greater than or equal to 1280 bytes. When unset, the kernel's default will be used.",
@@ -1086,7 +1090,7 @@
         "IPv6ProxyNDPAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/ip_address"
+              "$ref": "#/definitions/ip_addressType"
             }
           ],
           "description": "An IPv6 address, for which Neighbour Advertisement messages will be proxied. This option may be specified more than once. systemd-networkd will add the IPv6ProxyNDPAddress= entries to the kernel's IPv6 neighbor proxy table. This setting implies IPv6ProxyNDP=yes but has no effect if IPv6ProxyNDP= has been set to false. When unset, the kernel's default will be used.",
@@ -1207,7 +1211,7 @@
               "Address": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "As in the [Network] section. This setting is mandatory. Each [Address] section can contain one Address= setting.",
@@ -1218,7 +1222,7 @@
               "Peer": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "The peer address in a point-to-point connection. Accepts the same format as the Address= setting.",
@@ -1228,7 +1232,7 @@
               "Broadcast": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ipv4_address"
+                    "$ref": "#/definitions/ipv4_addressType"
                   },
                   {
                     "type": "boolean"
@@ -1316,7 +1320,7 @@
                   {
                     "allOf": [
                       {
-                        "$ref": "#/definitions/uint8"
+                        "$ref": "#/definitions/uint8Type"
                       }
                     ]
                   }
@@ -1364,7 +1368,7 @@
             "Address": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "As in the [Network] section. This setting is mandatory. Each [Address] section can contain one Address= setting.",
@@ -1375,7 +1379,7 @@
             "Peer": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "The peer address in a point-to-point connection. Accepts the same format as the Address= setting.",
@@ -1385,7 +1389,7 @@
             "Broadcast": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ipv4_address"
+                  "$ref": "#/definitions/ipv4_addressType"
                 },
                 {
                   "type": "boolean"
@@ -1471,7 +1475,7 @@
                 {
                   "allOf": [
                     {
-                      "$ref": "#/definitions/uint8"
+                      "$ref": "#/definitions/uint8Type"
                     }
                   ]
                 }
@@ -1528,7 +1532,7 @@
               "Prefix": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ipv6_prefix"
+                    "$ref": "#/definitions/ipv6_prefixType"
                   }
                 ],
                 "description": "Takes an IPv6 address with a prefix length, separated by a slash '/' character. This setting is mandatory.",
@@ -1539,7 +1543,7 @@
               "Label": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "The label for the prefix. Takes an unsigned integer in the range 0...4294967294 (0xfffffffe). 4294967295 (0xffffffff) is reserved. This setting is mandatory.",
@@ -1562,7 +1566,7 @@
             "Prefix": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ipv6_prefix"
+                  "$ref": "#/definitions/ipv6_prefixType"
                 }
               ],
               "description": "Takes an IPv6 address with a prefix length, separated by a slash '/' character. This setting is mandatory.",
@@ -1573,7 +1577,7 @@
             "Label": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "The label for the prefix. Takes an unsigned integer in the range 0...4294967294 (0xfffffffe). 4294967295 (0xffffffff) is reserved. This setting is mandatory.",
@@ -1603,7 +1607,7 @@
               "Address": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "The IP address of the neighbor.",
@@ -1613,10 +1617,10 @@
               "LinkLayerAddress": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   },
                   {
-                    "$ref": "#/definitions/mac_address"
+                    "$ref": "#/definitions/mac_addressType"
                   }
                 ],
                 "description": "The link layer address (MAC address or IP address) of the neighbor.",
@@ -1626,7 +1630,7 @@
               "MACAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/mac_address"
+                    "$ref": "#/definitions/mac_addressType"
                   }
                 ],
                 "description": "The hardware address to set for the device.",
@@ -1645,7 +1649,7 @@
             "Address": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "The IP address of the neighbor.",
@@ -1655,10 +1659,10 @@
             "LinkLayerAddress": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 },
                 {
-                  "$ref": "#/definitions/mac_address"
+                  "$ref": "#/definitions/mac_addressType"
                 }
               ],
               "description": "The link layer address (MAC address or IP address) of the neighbor.",
@@ -1668,7 +1672,7 @@
             "MACAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/mac_address"
+                  "$ref": "#/definitions/mac_addressType"
                 }
               ],
               "description": "The hardware address to set for the device.",
@@ -1755,10 +1759,10 @@
               "From": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   },
                   {
-                    "$ref": "#/definitions/ip_prefix"
+                    "$ref": "#/definitions/ip_prefixType"
                   }
                 ],
                 "description": "Specifies the source address prefix to match. Possibly followed by a slash and the prefix length.",
@@ -1768,10 +1772,10 @@
               "To": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   },
                   {
-                    "$ref": "#/definitions/ip_prefix"
+                    "$ref": "#/definitions/ip_prefixType"
                   }
                 ],
                 "description": "Specifies the destination address prefix to match. Possibly followed by a slash and the prefix length.",
@@ -1912,7 +1916,7 @@
             "TypeOfService": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint8"
+                  "$ref": "#/definitions/uint8Type"
                 }
               ],
               "description": "This specifies the Type of Service (ToS) field of packets to match; it takes an unsigned integer in the range 0...255. The field can be used to specify precedence (the first 3 bits) and ToS (the next 3 bits). The field can be also used to specify Differentiated Services Code Point (DSCP) (the first 6 bits) and Explicit Congestion Notification (ECN) (the last 2 bits). See Type of Service and Differentiated services for more details.",
@@ -1984,10 +1988,10 @@
             "From": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 },
                 {
-                  "$ref": "#/definitions/ip_prefix"
+                  "$ref": "#/definitions/ip_prefixType"
                 }
               ],
               "description": "Specifies the source address prefix to match. Possibly followed by a slash and the prefix length.",
@@ -1997,10 +2001,10 @@
             "To": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 },
                 {
-                  "$ref": "#/definitions/ip_prefix"
+                  "$ref": "#/definitions/ip_prefixType"
                 }
               ],
               "description": "Specifies the destination address prefix to match. Possibly followed by a slash and the prefix length.",
@@ -2126,7 +2130,7 @@
               "Gateway": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   },
                   {
                     "type": "string",
@@ -2147,7 +2151,7 @@
               "Destination": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_prefix"
+                    "$ref": "#/definitions/ip_prefixType"
                   }
                 ],
                 "description": "The destination prefix of the route. Possibly followed by a slash and the prefix length. If omitted, a full-length host route is assumed.",
@@ -2162,7 +2166,7 @@
               "Source": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_prefix"
+                    "$ref": "#/definitions/ip_prefixType"
                   }
                 ],
                 "description": "The source prefix of the route. Possibly followed by a slash and the prefix length. If omitted, a full-length host route is assumed.",
@@ -2201,7 +2205,7 @@
               "PreferredSource": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "The preferred source address of the route. The address must be in the format described in inet_pton3.",
@@ -2265,7 +2269,7 @@
                   {
                     "allOf": [
                       {
-                        "$ref": "#/definitions/uint8"
+                        "$ref": "#/definitions/uint8Type"
                       }
                     ]
                   },
@@ -2331,7 +2335,7 @@
               "MTUBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/MTUBytes"
+                    "$ref": "#/definitions/MTUBytesType"
                   }
                 ],
                 "description": "The maximum transmission unit in bytes to set for the route. The usual suffixes K, M, G, are supported and are understood to the base of 1024.",
@@ -2346,7 +2350,7 @@
               "TCPAdvertisedMaximumSegmentSize": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the Path MSS (in bytes) hints given on TCP layer. The usual suffixes K, M, G, are supported and are understood to the base of 1024. An unsigned integer in the range 1...4294967294. When unset, the kernel's default will be used.",
@@ -2372,7 +2376,7 @@
               "TCPRetransmissionTimeoutSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the TCP Retransmission Timeout (RTO) for the route. Takes time values in seconds. This value specifies the timeout of an alive TCP connection, when retransmissions remain unacknowledged. When unset, the kernel's default will be used.",
@@ -2382,7 +2386,7 @@
               "InitialAdvertisedReceiveWindow": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   },
                   {
                     "type": "integer",
@@ -2428,7 +2432,7 @@
             "Gateway": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 },
                 {
                   "type": "string",
@@ -2449,10 +2453,10 @@
             "Destination": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ip_prefix"
+                  "$ref": "#/definitions/ip_prefixType"
                 },
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "The destination prefix of the route. Possibly followed by a slash and the prefix length. If omitted, a full-length host route is assumed.",
@@ -2467,10 +2471,10 @@
             "Source": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ip_prefix"
+                  "$ref": "#/definitions/ip_prefixType"
                 },
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "The source prefix of the route. Possibly followed by a slash and the prefix length. If omitted, a full-length host route is assumed.",
@@ -2510,7 +2514,7 @@
             "PreferredSource": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "The preferred source address of the route. The address must be in the format described in inet_pton3.",
@@ -2570,7 +2574,7 @@
                 {
                   "allOf": [
                     {
-                      "$ref": "#/definitions/uint8"
+                      "$ref": "#/definitions/uint8Type"
                     }
                   ]
                 },
@@ -2636,7 +2640,7 @@
             "MTUBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/MTUBytes"
+                  "$ref": "#/definitions/MTUBytesType"
                 }
               ],
               "description": "The maximum transmission unit in bytes to set for the route. The usual suffixes K, M, G, are supported and are understood to the base of 1024.",
@@ -2651,7 +2655,7 @@
             "TCPAdvertisedMaximumSegmentSize": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the Path MSS (in bytes) hints given on TCP layer. The usual suffixes K, M, G, are supported and are understood to the base of 1024. An unsigned integer in the range 1...4294967294. When unset, the kernel's default will be used.",
@@ -2677,7 +2681,7 @@
             "TCPRetransmissionTimeoutSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the TCP Retransmission Timeout (RTO) for the route. Takes time values in seconds. This value specifies the timeout of an alive TCP connection, when retransmissions remain unacknowledged. When unset, the kernel's default will be used.",
@@ -2687,7 +2691,7 @@
             "InitialAdvertisedReceiveWindow": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "The TCP initial advertised receive window is the amount of receive data (in bytes) that can initially be buffered at one time on a connection. The sending host can send only that amount of data before waiting for an acknowledgment and window update from the receiving host. Note that 100 is considered an extremely large value for this option. When unset, the kernel's default will be used.",
@@ -2743,7 +2747,7 @@
               "Gateway": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "As in the [Network] section.",
@@ -2808,7 +2812,7 @@
             "Gateway": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "As in the [Network] section.",
@@ -2872,7 +2876,7 @@
               "RequestAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Takes an IPv4 address. When specified, the Requested IP Address option (option code 50) is added with it to the initial DHCPDISCOVER message sent by the DHCP client. Defaults to unset, and an already assigned dynamic address to the interface is automatically picked.",
@@ -3178,7 +3182,7 @@
               "InitialAdvertisedReceiveWindow": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "As in the [Route] section.",
@@ -3267,7 +3271,7 @@
             "RequestAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Takes an IPv4 address. When specified, the Requested IP Address option (option code 50) is added with it to the initial DHCPDISCOVER message sent by the DHCP client. Defaults to unset, and an already assigned dynamic address to the interface is automatically picked.",
@@ -3583,7 +3587,7 @@
             "InitialAdvertisedReceiveWindow": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "As in the [Route] section.",
@@ -3769,7 +3773,7 @@
               "PrefixDelegationHint": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ipv6_prefix"
+                    "$ref": "#/definitions/ipv6_prefixType"
                   }
                 ],
                 "description": "Takes an IPv6 address with prefix length in the same format as the Address= in the [Network] section. The DHCPv6 client will include a prefix hint in the DHCPv6 solicitation sent to the server. The prefix length Defaults to unset.",
@@ -3966,7 +3970,7 @@
             "PrefixDelegationHint": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ipv6_prefix"
+                  "$ref": "#/definitions/ipv6_prefixType"
                 }
               ],
               "description": "Takes an IPv6 address with prefix length in the same format as the Address= in the [Network] section. The DHCPv6 client will include a prefix hint in the DHCPv6 solicitation sent to the server. The prefix length Defaults to unset.",
@@ -4517,7 +4521,7 @@
               "ServerAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Specifies the server address for the DHCP server. Takes an IPv4 address with prefix length separated with a slash, e.g. '192.168.0.1/24'. Defaults to unset, and one of static IPv4 addresses configured in [Network] or [Address] section will be automatically selected. This setting may be useful when the interface on which the DHCP server is running has multiple static IPv4 addresses. This implies Address= in [Network] or [Address] section with the same address and prefix length. That is, [Network] DHCPServer=yes Address=192.168.0.1/24 Address=192.168.0.2/24 [DHCPServer] ServerAddress=192.168.0.1/24 or [Network] DHCPServer=yes [Address] Address=192.168.0.1/24 [Address] Address=192.168.0.2/24 [DHCPServer] ServerAddress=192.168.0.1/24 are equivalent to the following: [Network] DHCPServer=yes Address=192.168.0.2/24 [DHCPServer] ServerAddress=192.168.0.1/24 Since version 255, like the Address= setting in [Network] or [Address] section, this also supports a null address, e.g. '0.0.0.0/24', and an unused address will be automatically selected. For more details about the automatic address selection, see Address= setting in [Network] section in the above.",
@@ -4534,7 +4538,7 @@
               "RelayTarget": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Takes an IPv4 address, which must be in the format described in inet_pton3. Turns this DHCP server into a DHCP relay agent. See RFC 1542. The address is the address of DHCP server or another relay agent to forward DHCP messages to and from.",
@@ -4554,13 +4558,13 @@
                 "title": "Relay Agent Remote Id"
               },
               "MaxLeaseTimeSec": {
-                "$ref": "#/definitions/seconds",
+                "$ref": "#/definitions/secondsType",
                 "title": "Max Lease Time Sec"
               },
               "DefaultLeaseTimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Control the default and maximum DHCP lease time to pass to clients. These settings take time values in seconds or another common time unit, depending on the suffix. The default lease time is used for clients that did not ask for a specific lease time. If a client asks for a lease time longer than the maximum lease time, it is automatically shortened to the specified time. The default lease time defaults to 1h, the maximum lease time to 12h. Shorter lease times are beneficial if the configuration data in DHCP leases changes frequently and clients shall learn the new settings with shorter latencies. Longer lease times reduce the generated DHCP network traffic.",
@@ -4584,7 +4588,7 @@
               "DNS": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "A DNS server address, which must be in the format described in inet_pton3. This option may be specified more than once. Each address can optionally take a port number separated with ':', a network interface name or index separated with '%', and a Server Name Indication (SNI) separated with '#'. When IPv6 address is specified with a port number, then the address must be in the square brackets. That is, the acceptable full formats are '111.222.333.444:9953%ifname#example.com' for IPv4 and '[1111:2222::3333]:9953%ifname#example.com' for IPv6. If an empty string is assigned, then the all previous assignments are cleared. This setting is read by systemd-resolved.service8.",
@@ -4604,7 +4608,7 @@
               "NTP": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "An NTP server address (either an IP address, or a hostname). This option may be specified more than once. This setting is read by systemd-timesyncd.service8.",
@@ -4654,7 +4658,7 @@
                 "title": "Emit Router"
               },
               "Router": {
-                "$ref": "#/definitions/ip_address",
+                "$ref": "#/definitions/ip_addressType",
                 "title": "Router"
               },
               "EmitTimezone": {
@@ -4717,7 +4721,7 @@
               "BootServerAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Takes an IPv4 address of the boot server used by e.g. PXE boot systems. When specified, this address is sent in the 'siaddr' field of the DHCP message header. See RFC 2131 for more details. Defaults to unset.",
@@ -4733,7 +4737,7 @@
               "BootFilename": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/filename"
+                    "$ref": "#/definitions/filenameType"
                   }
                 ],
                 "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -4766,7 +4770,7 @@
             "ServerAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Specifies the server address for the DHCP server. Takes an IPv4 address with prefix length separated with a slash, e.g. '192.168.0.1/24'. Defaults to unset, and one of static IPv4 addresses configured in [Network] or [Address] section will be automatically selected. This setting may be useful when the interface on which the DHCP server is running has multiple static IPv4 addresses. This implies Address= in [Network] or [Address] section with the same address and prefix length. That is, [Network] DHCPServer=yes Address=192.168.0.1/24 Address=192.168.0.2/24 [DHCPServer] ServerAddress=192.168.0.1/24 or [Network] DHCPServer=yes [Address] Address=192.168.0.1/24 [Address] Address=192.168.0.2/24 [DHCPServer] ServerAddress=192.168.0.1/24 are equivalent to the following: [Network] DHCPServer=yes Address=192.168.0.2/24 [DHCPServer] ServerAddress=192.168.0.1/24 Since version 255, like the Address= setting in [Network] or [Address] section, this also supports a null address, e.g. '0.0.0.0/24', and an unused address will be automatically selected. For more details about the automatic address selection, see Address= setting in [Network] section in the above.",
@@ -4783,7 +4787,7 @@
             "RelayTarget": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Takes an IPv4 address, which must be in the format described in inet_pton3. Turns this DHCP server into a DHCP relay agent. See RFC 1542. The address is the address of DHCP server or another relay agent to forward DHCP messages to and from.",
@@ -4803,13 +4807,13 @@
               "title": "Relay Agent Remote Id"
             },
             "MaxLeaseTimeSec": {
-              "$ref": "#/definitions/seconds",
+              "$ref": "#/definitions/secondsType",
               "title": "Max Lease Time Sec"
             },
             "DefaultLeaseTimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Control the default and maximum DHCP lease time to pass to clients. These settings take time values in seconds or another common time unit, depending on the suffix. The default lease time is used for clients that did not ask for a specific lease time. If a client asks for a lease time longer than the maximum lease time, it is automatically shortened to the specified time. The default lease time defaults to 1h, the maximum lease time to 12h. Shorter lease times are beneficial if the configuration data in DHCP leases changes frequently and clients shall learn the new settings with shorter latencies. Longer lease times reduce the generated DHCP network traffic.",
@@ -4833,7 +4837,7 @@
             "DNS": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "A DNS server address, which must be in the format described in inet_pton3. This option may be specified more than once. Each address can optionally take a port number separated with ':', a network interface name or index separated with '%', and a Server Name Indication (SNI) separated with '#'. When IPv6 address is specified with a port number, then the address must be in the square brackets. That is, the acceptable full formats are '111.222.333.444:9953%ifname#example.com' for IPv4 and '[1111:2222::3333]:9953%ifname#example.com' for IPv6. If an empty string is assigned, then the all previous assignments are cleared. This setting is read by systemd-resolved.service8.",
@@ -4853,7 +4857,7 @@
             "NTP": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "An NTP server address (either an IP address, or a hostname). This option may be specified more than once. This setting is read by systemd-timesyncd.service8.",
@@ -4903,7 +4907,7 @@
               "title": "Emit Router"
             },
             "Router": {
-              "$ref": "#/definitions/ip_address",
+              "$ref": "#/definitions/ip_addressType",
               "title": "Router"
             },
             "EmitTimezone": {
@@ -4964,7 +4968,7 @@
             "BootServerAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Takes an IPv4 address of the boot server used by e.g. PXE boot systems. When specified, this address is sent in the 'siaddr' field of the DHCP message header. See RFC 2131 for more details. Defaults to unset.",
@@ -4980,7 +4984,7 @@
             "BootFilename": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/filename"
+                  "$ref": "#/definitions/filenameType"
                 }
               ],
               "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -5024,7 +5028,7 @@
               "Address": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "The IPv4 address that should be assigned to the device that was matched with MACAddress=. This key is mandatory.",
@@ -5035,7 +5039,7 @@
               "MACAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/mac_address"
+                    "$ref": "#/definitions/mac_addressType"
                   }
                 ],
                 "description": "The hardware address of a device to match. This key is mandatory.",
@@ -5055,7 +5059,7 @@
             "Address": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "The IPv4 address that should be assigned to the device that was matched with MACAddress=. This key is mandatory.",
@@ -5066,7 +5070,7 @@
             "MACAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/mac_address"
+                  "$ref": "#/definitions/mac_addressType"
                 }
               ],
               "description": "The hardware address of a device to match. This key is mandatory.",
@@ -5326,7 +5330,7 @@
               "MACAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/mac_address"
+                    "$ref": "#/definitions/mac_addressType"
                   }
                 ],
                 "description": "As in the [Network] section. This key is mandatory.",
@@ -5337,7 +5341,7 @@
               "VLANId": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/vlan_id"
+                    "$ref": "#/definitions/vlan_idType"
                   }
                 ],
                 "description": "The VLAN ID for the new static MAC table entry. If omitted, no VLAN ID information is appended to the new static MAC table entry.",
@@ -5352,7 +5356,7 @@
               "Destination": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_prefix"
+                    "$ref": "#/definitions/ip_prefixType"
                   }
                 ],
                 "description": "Takes an IP address of the destination VXLAN tunnel endpoint.",
@@ -5413,7 +5417,7 @@
             "MACAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/mac_address"
+                  "$ref": "#/definitions/mac_addressType"
                 }
               ],
               "description": "As in the [Network] section. This key is mandatory.",
@@ -5424,7 +5428,7 @@
             "VLANId": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/vlan_id"
+                  "$ref": "#/definitions/vlan_idType"
                 }
               ],
               "description": "The VLAN ID for the new static MAC table entry. If omitted, no VLAN ID information is appended to the new static MAC table entry.",
@@ -5439,7 +5443,7 @@
             "Destination": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_prefix"
+                  "$ref": "#/definitions/ip_prefixType"
                 }
               ],
               "description": "Takes an IP address of the destination VXLAN tunnel endpoint.",
@@ -5507,7 +5511,7 @@
               "MulticastGroupAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Specifies the IPv4, IPv6, or L2 MAC multicast group address to add. This setting is mandatory.",
@@ -5518,7 +5522,7 @@
               "VLANId": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/vlan_id"
+                    "$ref": "#/definitions/vlan_idType"
                   }
                 ],
                 "default": 0,
@@ -5546,7 +5550,7 @@
             "MulticastGroupAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Specifies the IPv4, IPv6, or L2 MAC multicast group address to add. This setting is mandatory.",
@@ -5557,7 +5561,7 @@
             "VLANId": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/vlan_id"
+                  "$ref": "#/definitions/vlan_idType"
                 }
               ],
               "default": 0,
@@ -5594,7 +5598,7 @@
                   {
                     "allOf": [
                       {
-                        "$ref": "#/definitions/vlan_id"
+                        "$ref": "#/definitions/vlan_idType"
                       }
                     ],
                     "minimum": 1
@@ -5615,7 +5619,7 @@
                   {
                     "allOf": [
                       {
-                        "$ref": "#/definitions/vlan_id"
+                        "$ref": "#/definitions/vlan_idType"
                       }
                     ],
                     "minimum": 1
@@ -5634,7 +5638,7 @@
                   {
                     "allOf": [
                       {
-                        "$ref": "#/definitions/vlan_id"
+                        "$ref": "#/definitions/vlan_idType"
                       }
                     ],
                     "minimum": 1
@@ -5662,7 +5666,7 @@
                 {
                   "allOf": [
                     {
-                      "$ref": "#/definitions/vlan_id"
+                      "$ref": "#/definitions/vlan_idType"
                     }
                   ],
                   "minimum": 1
@@ -5683,7 +5687,7 @@
                 {
                   "allOf": [
                     {
-                      "$ref": "#/definitions/vlan_id"
+                      "$ref": "#/definitions/vlan_idType"
                     }
                   ],
                   "minimum": 1
@@ -5702,7 +5706,7 @@
                 {
                   "allOf": [
                     {
-                      "$ref": "#/definitions/vlan_id"
+                      "$ref": "#/definitions/vlan_idType"
                     }
                   ],
                   "minimum": 1
@@ -5880,7 +5884,7 @@
               "RouterLifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Takes a timespan. Configures the IPv6 router lifetime in seconds. The value must be 0 seconds, or between 4 seconds and 9000 seconds. When set to 0, the host is not acting as a router. Defaults to 1800 seconds (30 minutes).",
@@ -5891,7 +5895,7 @@
               "ReachableTimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "default": "0",
@@ -5902,7 +5906,7 @@
               "RetransmitSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "default": "0",
@@ -5938,7 +5942,7 @@
               "HopLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint8"
+                    "$ref": "#/definitions/uint8Type"
                   }
                 ],
                 "description": "Configures hop limit. See also IPv6HopLimit=.",
@@ -5955,7 +5959,7 @@
               "DNS": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "A DNS server address, which must be in the format described in inet_pton3. This option may be specified more than once. Each address can optionally take a port number separated with ':', a network interface name or index separated with '%', and a Server Name Indication (SNI) separated with '#'. When IPv6 address is specified with a port number, then the address must be in the square brackets. That is, the acceptable full formats are '111.222.333.444:9953%ifname#example.com' for IPv4 and '[1111:2222::3333]:9953%ifname#example.com' for IPv6. If an empty string is assigned, then the all previous assignments are cleared. This setting is read by systemd-resolved.service8.",
@@ -5986,7 +5990,7 @@
               "DNSLifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Lifetime in seconds for the DNS server addresses listed in DNS= and search domains listed in Domains=. Defaults to 3600 seconds (one hour).",
@@ -6011,7 +6015,7 @@
               "HomeAgentLifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "default": "value",
@@ -6022,7 +6026,7 @@
               "HomeAgentPreference": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint16"
+                    "$ref": "#/definitions/uint16Type"
                   }
                 ],
                 "default": 0,
@@ -6042,7 +6046,7 @@
             "RouterLifetimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. Configures the IPv6 router lifetime in seconds. The value must be 0 seconds, or between 4 seconds and 9000 seconds. When set to 0, the host is not acting as a router. Defaults to 1800 seconds (30 minutes).",
@@ -6053,7 +6057,7 @@
             "ReachableTimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "default": "0",
@@ -6064,7 +6068,7 @@
             "RetransmitSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "default": "0",
@@ -6100,7 +6104,7 @@
             "HopLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint8"
+                  "$ref": "#/definitions/uint8Type"
                 }
               ],
               "description": "Configures hop limit. See also IPv6HopLimit=.",
@@ -6117,7 +6121,7 @@
             "DNS": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "A DNS server address, which must be in the format described in inet_pton3. This option may be specified more than once. Each address can optionally take a port number separated with ':', a network interface name or index separated with '%', and a Server Name Indication (SNI) separated with '#'. When IPv6 address is specified with a port number, then the address must be in the square brackets. That is, the acceptable full formats are '111.222.333.444:9953%ifname#example.com' for IPv4 and '[1111:2222::3333]:9953%ifname#example.com' for IPv6. If an empty string is assigned, then the all previous assignments are cleared. This setting is read by systemd-resolved.service8.",
@@ -6148,7 +6152,7 @@
             "DNSLifetimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Lifetime in seconds for the DNS server addresses listed in DNS= and search domains listed in Domains=. Defaults to 3600 seconds (one hour).",
@@ -6173,7 +6177,7 @@
             "HomeAgentLifetimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "default": "value",
@@ -6184,7 +6188,7 @@
             "HomeAgentPreference": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "default": 0,
@@ -6235,7 +6239,7 @@
               "ValidLifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "title": "Valid Lifetime Sec"
@@ -6243,7 +6247,7 @@
               "PreferredLifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Preferred and valid lifetimes for the prefix measured in seconds. PreferredLifetimeSec= defaults to 1800 seconds (30 minutes) and ValidLifetimeSec= defaults to 3600 seconds (one hour).",
@@ -6311,7 +6315,7 @@
             "PreferredLifetimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Preferred and valid lifetimes for the prefix measured in seconds. PreferredLifetimeSec= defaults to 1800 seconds (30 minutes) and ValidLifetimeSec= defaults to 3600 seconds (one hour).",
@@ -6368,7 +6372,7 @@
               "LifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Lifetime for the route prefix measured in seconds. LifetimeSec= defaults to 3600 seconds (one hour).",
@@ -6394,7 +6398,7 @@
             "LifetimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Lifetime for the route prefix measured in seconds. LifetimeSec= defaults to 3600 seconds (one hour).",
@@ -6427,7 +6431,7 @@
               "LifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Lifetime for the prefix measured in seconds. Should be greater than or equal to RouterLifetimeSec=. LifetimeSec= defaults to 1800 seconds.",
@@ -6453,7 +6457,7 @@
             "LifetimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Lifetime for the prefix measured in seconds. Should be greater than or equal to RouterLifetimeSec=. LifetimeSec= defaults to 1800 seconds.",
@@ -6589,7 +6593,7 @@
               "RestartSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Automatic restart delay time. If set to a non-zero value, a restart of the CAN controller will be triggered automatically in case of a bus-off condition after the specified delay time. Subsecond delays can be specified using decimals (e.g. '0.1s') or a 'ms' or 'us' postfix. Using 'infinity' or '0' will turn the automatic restart off. By default automatic restart is disabled.",
@@ -6652,7 +6656,7 @@
                   {
                     "allOf": [
                       {
-                        "$ref": "#/definitions/uint16"
+                        "$ref": "#/definitions/uint16Type"
                       }
                     ]
                   }
@@ -6751,7 +6755,7 @@
             "RestartSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Automatic restart delay time. If set to a non-zero value, a restart of the CAN controller will be triggered automatically in case of a bus-off condition after the specified delay time. Subsecond delays can be specified using decimals (e.g. '0.1s') or a 'ms' or 'us' postfix. Using 'infinity' or '0' will turn the automatic restart off. By default automatic restart is disabled.",
@@ -6814,7 +6818,7 @@
                 {
                   "allOf": [
                     {
-                      "$ref": "#/definitions/uint16"
+                      "$ref": "#/definitions/uint16Type"
                     }
                   ]
                 }
@@ -6895,12 +6899,12 @@
             "description": "[QDisc] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               }
             },
@@ -6916,12 +6920,12 @@
           "description": "[QDisc] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             }
           },
@@ -6960,7 +6964,7 @@
               "LimitBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the hard limit in bytes on the FIFO buffer size. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel default is used.",
@@ -6980,7 +6984,7 @@
           "description": "[BFIFO] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -6991,7 +6995,7 @@
             "LimitBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the hard limit in bytes on the FIFO buffer size. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel default is used.",
@@ -7018,12 +7022,12 @@
             "description": "[CAKE] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "Bandwidth": {
@@ -7151,12 +7155,12 @@
           "description": "[CAKE] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "Bandwidth": {
@@ -7291,18 +7295,18 @@
             "description": "[ControlledDelay] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -7318,7 +7322,7 @@
               "IntervalSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Takes a timespan. This is used to ensure that the measured minimum delay does not become too stale. Defaults to unset and kernel's default is used.",
@@ -7328,7 +7332,7 @@
               "CEThresholdSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Takes a timespan. This sets a threshold above which all packets are marked with ECN Congestion Experienced (CE). Defaults to unset and kernel's default is used.",
@@ -7354,18 +7358,18 @@
           "description": "[ControlledDelay] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -7375,7 +7379,7 @@
             "TargetSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. Specifies the acceptable minimum standing/persistent queue delay. Defaults to unset and kernel's default is used.",
@@ -7385,7 +7389,7 @@
             "IntervalSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. This is used to ensure that the measured minimum delay does not become too stale. Defaults to unset and kernel's default is used.",
@@ -7395,7 +7399,7 @@
             "CEThresholdSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. This sets a threshold above which all packets are marked with ECN Congestion Experienced (CE). Defaults to unset and kernel's default is used.",
@@ -7454,7 +7458,7 @@
           "description": "[DeficitRoundRobinScheduler] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -7515,7 +7519,7 @@
           "description": "[DeficitRoundRobinSchedulerClass] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -7584,7 +7588,7 @@
               "PriorityMap": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint8"
+                    "$ref": "#/definitions/uint8Type"
                   }
                 ],
                 "description": "The priority map maps the priority of a packet to a band. The argument is a whitespace separated list of numbers. The first number indicates which band the packets with priority 0 should be put to, the second is for priority 1, and so on. There can be up to 16 numbers in the list. If there are fewer, the default band that traffic with one of the unmentioned priorities goes to is the last one. Each band number This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
@@ -7604,7 +7608,7 @@
           "description": "[EnhancedTransmissionSelection] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -7633,7 +7637,7 @@
             "PriorityMap": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint8"
+                  "$ref": "#/definitions/uint8Type"
                 }
               ],
               "description": "The priority map maps the priority of a packet to a band. The argument is a whitespace separated list of numbers. The first number indicates which band the packets with priority 0 should be put to, the second is for priority 1, and so on. There can be up to 16 numbers in the list. If there are fewer, the default band that traffic with one of the unmentioned priorities goes to is the last one. Each band number This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
@@ -7692,7 +7696,7 @@
           "description": "[PFIFO] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -7752,7 +7756,7 @@
           "description": "[PFIFOFast] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -7812,7 +7816,7 @@
           "description": "[PFIFOHeadDrop] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -7872,7 +7876,7 @@
           "description": "[QuickFairQueueing] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -7900,12 +7904,12 @@
             "description": "[QuickFairQueueingClass] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "ClassId": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Class Id"
               },
               "Weight": {
@@ -7922,7 +7926,7 @@
               "MaxPacketBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the maximum packet size in bytes for the class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. When unset, the kernel default is used.",
@@ -7942,12 +7946,12 @@
           "description": "[QuickFairQueueingClass] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "ClassId": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Class Id"
             },
             "Weight": {
@@ -7964,7 +7968,7 @@
             "MaxPacketBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the maximum packet size in bytes for the class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. When unset, the kernel default is used.",
@@ -7991,18 +7995,18 @@
             "description": "[FairQueueing] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the hard limit on the real queue size. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -8012,7 +8016,7 @@
               "FlowLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the hard limit on the maximum number of packets queued per flow. Defaults to unset and kernel's default is used.",
@@ -8022,7 +8026,7 @@
               "QuantumBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the credit per dequeue RR round, i.e. the amount of bytes a flow is allowed to dequeue at once. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel's default is used.",
@@ -8032,7 +8036,7 @@
               "InitialQuantumBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the initial sending rate credit, i.e. the amount of bytes a new flow is allowed to dequeue initially. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel's default is used.",
@@ -8056,7 +8060,7 @@
               "OrphanMask": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Takes an unsigned integer. For packets not owned by a socket, fq is able to mask a part of hash and reduce number of buckets associated with the traffic. Defaults to unset and kernel's default is used.",
@@ -8072,7 +8076,7 @@
               "CEThresholdSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Takes a timespan. This sets a threshold above which all packets are marked with ECN Congestion Experienced (CE). Defaults to unset and kernel's default is used.",
@@ -8100,18 +8104,18 @@
           "description": "[FairQueueing] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the hard limit on the real queue size. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -8121,7 +8125,7 @@
             "FlowLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the hard limit on the maximum number of packets queued per flow. Defaults to unset and kernel's default is used.",
@@ -8131,7 +8135,7 @@
             "QuantumBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the credit per dequeue RR round, i.e. the amount of bytes a flow is allowed to dequeue at once. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel's default is used.",
@@ -8141,7 +8145,7 @@
             "InitialQuantumBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the initial sending rate credit, i.e. the amount of bytes a new flow is allowed to dequeue initially. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel's default is used.",
@@ -8165,7 +8169,7 @@
             "OrphanMask": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Takes an unsigned integer. For packets not owned by a socket, fq is able to mask a part of hash and reduce number of buckets associated with the traffic. Defaults to unset and kernel's default is used.",
@@ -8181,7 +8185,7 @@
             "CEThresholdSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. This sets a threshold above which all packets are marked with ECN Congestion Experienced (CE). Defaults to unset and kernel's default is used.",
@@ -8216,18 +8220,18 @@
             "description": "[FairQueueingControlledDelay] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the hard limit on the real queue size. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -8237,7 +8241,7 @@
               "MemoryLimitBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the limit on the total number of bytes that can be queued in this FQ-CoDel instance. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel's default is used.",
@@ -8255,7 +8259,7 @@
               "QuantumBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the number of bytes used as the \"deficit\" in the fair queuing algorithm timespan. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel's default is used.",
@@ -8265,7 +8269,7 @@
               "TargetSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Takes a timespan. Specifies the acceptable minimum standing/persistent queue delay. Defaults to unset and kernel's default is used.",
@@ -8275,7 +8279,7 @@
               "IntervalSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Takes a timespan. This is used to ensure that the measured minimum delay does not become too stale. Defaults to unset and kernel's default is used.",
@@ -8285,7 +8289,7 @@
               "CEThresholdSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Takes a timespan. This sets a threshold above which all packets are marked with ECN Congestion Experienced (CE). Defaults to unset and kernel's default is used.",
@@ -8319,18 +8323,18 @@
           "description": "[FairQueueingControlledDelay] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the hard limit on the real queue size. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -8340,7 +8344,7 @@
             "MemoryLimitBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the limit on the total number of bytes that can be queued in this FQ-CoDel instance. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel's default is used.",
@@ -8358,7 +8362,7 @@
             "QuantumBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the number of bytes used as the \"deficit\" in the fair queuing algorithm timespan. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel's default is used.",
@@ -8368,7 +8372,7 @@
             "TargetSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. Specifies the acceptable minimum standing/persistent queue delay. Defaults to unset and kernel's default is used.",
@@ -8378,7 +8382,7 @@
             "IntervalSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. This is used to ensure that the measured minimum delay does not become too stale. Defaults to unset and kernel's default is used.",
@@ -8388,7 +8392,7 @@
             "CEThresholdSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. This sets a threshold above which all packets are marked with ECN Congestion Experienced (CE). Defaults to unset and kernel's default is used.",
@@ -8429,12 +8433,12 @@
             "description": "[FlowQueuePIE] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
@@ -8456,12 +8460,12 @@
           "description": "[FlowQueuePIE] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
@@ -8490,12 +8494,12 @@
             "description": "[GenericRandomEarlyDetection] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "VirtualQueues": {
@@ -8533,12 +8537,12 @@
           "description": "[GenericRandomEarlyDetection] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "VirtualQueues": {
@@ -8583,18 +8587,18 @@
             "description": "[HeavyHitterFilter] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -8614,18 +8618,18 @@
           "description": "[HeavyHitterFilter] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -8652,12 +8656,12 @@
             "description": "[HierarchyTokenBucket] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "DefaultClass": {
@@ -8670,7 +8674,7 @@
               "RateToQuantum": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Takes an unsigned integer. The DRR quantums are calculated by dividing the value configured in Rate= by RateToQuantum=.",
@@ -8690,12 +8694,12 @@
           "description": "[HierarchyTokenBucket] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "DefaultClass": {
@@ -8708,7 +8712,7 @@
             "RateToQuantum": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Takes an unsigned integer. The DRR quantums are calculated by dividing the value configured in Rate= by RateToQuantum=.",
@@ -8735,18 +8739,18 @@
             "description": "[HierarchyTokenBucketClass] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "ClassId": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Class Id"
               },
               "Priority": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the priority of the class. In the round-robin process, classes with the lowest priority field are tried for packets first.",
@@ -8760,7 +8764,7 @@
               "QuantumBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies how many bytes to serve from leaf at once. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
@@ -8770,7 +8774,7 @@
               "MTUBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/MTUBytes"
+                    "$ref": "#/definitions/MTUBytesType"
                   }
                 ],
                 "description": "Specifies the maximum packet size we create. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
@@ -8785,7 +8789,7 @@
               "OverheadBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Takes an unsigned integer which specifies per-packet size overhead used in rate computations. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
@@ -8795,7 +8799,7 @@
               "Rate": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/rate"
+                    "$ref": "#/definitions/rateType"
                   }
                 ],
                 "description": "Specifies the maximum rate this class and all its children are guaranteed. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. This setting is mandatory.",
@@ -8805,7 +8809,7 @@
               "CeilRate": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/rate"
+                    "$ref": "#/definitions/rateType"
                   }
                 ],
                 "description": "Specifies the maximum rate at which a class can send, if its parent has bandwidth to spare. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. When unset, the value specified with Rate= is used.",
@@ -8815,7 +8819,7 @@
               "BufferBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the maximum bytes burst which can be accumulated during idle period. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
@@ -8842,18 +8846,18 @@
           "description": "[HierarchyTokenBucketClass] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "ClassId": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Class Id"
             },
             "Priority": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the priority of the class. In the round-robin process, classes with the lowest priority field are tried for packets first.",
@@ -8867,7 +8871,7 @@
             "QuantumBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies how many bytes to serve from leaf at once. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
@@ -8877,7 +8881,7 @@
             "MTUBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/MTUBytes"
+                  "$ref": "#/definitions/MTUBytesType"
                 }
               ],
               "description": "Specifies the maximum packet size we create. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
@@ -8892,7 +8896,7 @@
             "OverheadBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Takes an unsigned integer which specifies per-packet size overhead used in rate computations. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
@@ -8914,7 +8918,7 @@
             "BufferBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the maximum bytes burst which can be accumulated during idle period. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
@@ -8948,12 +8952,12 @@
             "description": "[ClassfulMultiQueueing] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               }
             },
@@ -8969,12 +8973,12 @@
           "description": "[ClassfulMultiQueueing] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             }
           },
@@ -8997,12 +9001,12 @@
             "description": "[BandMultiQueueing] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               }
             },
@@ -9018,12 +9022,12 @@
           "description": "[BandMultiQueueing] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             }
           },
@@ -9046,18 +9050,18 @@
             "description": "[NetworkEmulator] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "DelaySec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the fixed amount of delay to be added to all packets going out of the interface. Defaults to unset.",
@@ -9067,7 +9071,7 @@
               "DelayJitterSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the chosen delay to be added to the packets outgoing to the network interface. Defaults to unset.",
@@ -9077,7 +9081,7 @@
               "LossRate": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/percentage"
+                    "$ref": "#/definitions/percentageType"
                   }
                 ],
                 "description": "Specifies an independent loss probability to be added to the packets outgoing from the network interface. Takes a percentage value, suffixed with \"%\". Defaults to unset.",
@@ -9087,7 +9091,7 @@
               "DuplicateRate": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/percentage"
+                    "$ref": "#/definitions/percentageType"
                   }
                 ],
                 "description": "Specifies that the chosen percent of packets is duplicated before queuing them. Takes a percentage value, suffixed with \"%\". Defaults to unset.",
@@ -9097,7 +9101,7 @@
               "PacketLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "default": 1000,
@@ -9118,18 +9122,18 @@
           "description": "[NetworkEmulator] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "DelaySec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the fixed amount of delay to be added to all packets going out of the interface. Defaults to unset.",
@@ -9139,7 +9143,7 @@
             "DelayJitterSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the chosen delay to be added to the packets outgoing to the network interface. Defaults to unset.",
@@ -9149,7 +9153,7 @@
             "LossRate": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/percentage"
+                  "$ref": "#/definitions/percentageType"
                 }
               ],
               "description": "Specifies an independent loss probability to be added to the packets outgoing from the network interface. Takes a percentage value, suffixed with \"%\". Defaults to unset.",
@@ -9159,7 +9163,7 @@
             "DuplicateRate": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/percentage"
+                  "$ref": "#/definitions/percentageType"
                 }
               ],
               "description": "Specifies that the chosen percent of packets is duplicated before queuing them. Takes a percentage value, suffixed with \"%\". Defaults to unset.",
@@ -9169,7 +9173,7 @@
             "PacketLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "default": 1000,
@@ -9197,18 +9201,18 @@
             "description": "[PIE] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -9228,18 +9232,18 @@
           "description": "[PIE] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -9266,18 +9270,18 @@
             "description": "[StochasticFairBlue] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -9297,18 +9301,18 @@
           "description": "[StochasticFairBlue] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
@@ -9335,18 +9339,18 @@
             "description": "[StochasticFairnessQueueing] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PerturbPeriodSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the interval in seconds for queue algorithm perturbation. Defaults to unset.",
@@ -9366,18 +9370,18 @@
           "description": "[StochasticFairnessQueueing] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PerturbPeriodSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the interval in seconds for queue algorithm perturbation. Defaults to unset.",
@@ -9404,18 +9408,18 @@
             "description": "[TokenBucketFilter] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "Rate": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/rate"
+                    "$ref": "#/definitions/rateType"
                   }
                 ],
                 "description": "Specifies the device specific bandwidth. When suffixed with K, M, or G, the specified bandwidth is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset.",
@@ -9425,7 +9429,7 @@
               "BurstBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Specifies the size of the bucket. This is the maximum amount of bytes that tokens can be available for instantaneous transfer. When the size is suffixed with K, M, or G, it is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset.",
@@ -9435,7 +9439,7 @@
               "LimitBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "Takes the number of bytes that can be queued waiting for tokens to become available. When the size is suffixed with K, M, or G, it is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset.",
@@ -9445,7 +9449,7 @@
               "MTUBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/MTUBytes"
+                    "$ref": "#/definitions/MTUBytesType"
                   }
                 ],
                 "description": "Specifies the size of the peakrate bucket. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset.",
@@ -9460,7 +9464,7 @@
               "MPUBytes": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/bytes"
+                    "$ref": "#/definitions/bytesType"
                   }
                 ],
                 "description": "The Minimum Packet Unit (MPU) determines the minimal token usage (specified in bytes) for a packet. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to zero.",
@@ -9471,7 +9475,7 @@
               "PeakRate": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/rate"
+                    "$ref": "#/definitions/rateType"
                   }
                 ],
                 "description": "Takes the maximum depletion rate of the bucket. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset.",
@@ -9481,7 +9485,7 @@
               "LatencySec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the latency parameter, which specifies the maximum amount of time a packet can sit in the Token Bucket Filter (TBF). Defaults to unset.",
@@ -9509,7 +9513,7 @@
           "description": "[TokenBucketFilter] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
@@ -9520,7 +9524,7 @@
             "Rate": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/rate"
+                  "$ref": "#/definitions/rateType"
                 }
               ],
               "description": "Specifies the device specific bandwidth. When suffixed with K, M, or G, the specified bandwidth is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset.",
@@ -9530,7 +9534,7 @@
             "BurstBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Specifies the size of the bucket. This is the maximum amount of bytes that tokens can be available for instantaneous transfer. When the size is suffixed with K, M, or G, it is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset.",
@@ -9540,7 +9544,7 @@
             "LimitBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "Takes the number of bytes that can be queued waiting for tokens to become available. When the size is suffixed with K, M, or G, it is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset.",
@@ -9550,7 +9554,7 @@
             "MTUBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/MTUBytes"
+                  "$ref": "#/definitions/MTUBytesType"
                 }
               ],
               "description": "Specifies the size of the peakrate bucket. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset.",
@@ -9565,7 +9569,7 @@
             "MPUBytes": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/bytes"
+                  "$ref": "#/definitions/bytesType"
                 }
               ],
               "description": "The Minimum Packet Unit (MPU) determines the minimal token usage (specified in bytes) for a packet. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to zero.",
@@ -9576,7 +9580,7 @@
             "PeakRate": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/rate"
+                  "$ref": "#/definitions/rateType"
                 }
               ],
               "description": "Takes the maximum depletion rate of the bucket. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset.",
@@ -9586,7 +9590,7 @@
             "LatencySec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the latency parameter, which specifies the maximum amount of time a packet can sit in the Token Bucket Filter (TBF). Defaults to unset.",
@@ -9621,12 +9625,12 @@
             "description": "[TrivialLinkEqualizer] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "Handle": {
-                "$ref": "#/definitions/qdisc_handle",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "Id": {
@@ -9649,12 +9653,12 @@
           "description": "[TrivialLinkEqualizer] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "Handle": {
-              "$ref": "#/definitions/qdisc_handle",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "Id": {
@@ -9686,7 +9690,7 @@
               "RouterLifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Takes a timespan. Configures the IPv6 router lifetime in seconds. The value must be 0 seconds, or between 4 seconds and 9000 seconds. When set to 0, the host is not acting as a router. Defaults to 1800 seconds (30 minutes).",
@@ -9729,7 +9733,7 @@
               "DNS": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "A DNS server address, which must be in the format described in inet_pton3. This option may be specified more than once. Each address can optionally take a port number separated with ':', a network interface name or index separated with '%', and a Server Name Indication (SNI) separated with '#'. When IPv6 address is specified with a port number, then the address must be in the square brackets. That is, the acceptable full formats are '111.222.333.444:9953%ifname#example.com' for IPv4 and '[1111:2222::3333]:9953%ifname#example.com' for IPv6. If an empty string is assigned, then the all previous assignments are cleared. This setting is read by systemd-resolved.service8.",
@@ -9760,7 +9764,7 @@
               "DNSLifetimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Lifetime in seconds for the DNS server addresses listed in DNS= and search domains listed in Domains=. Defaults to 3600 seconds (one hour).",
@@ -9780,7 +9784,7 @@
             "RouterLifetimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Takes a timespan. Configures the IPv6 router lifetime in seconds. The value must be 0 seconds, or between 4 seconds and 9000 seconds. When set to 0, the host is not acting as a router. Defaults to 1800 seconds (30 minutes).",
@@ -9823,7 +9827,7 @@
             "DNS": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "A DNS server address, which must be in the format described in inet_pton3. This option may be specified more than once. Each address can optionally take a port number separated with ':', a network interface name or index separated with '%', and a Server Name Indication (SNI) separated with '#'. When IPv6 address is specified with a port number, then the address must be in the square brackets. That is, the acceptable full formats are '111.222.333.444:9953%ifname#example.com' for IPv4 and '[1111:2222::3333]:9953%ifname#example.com' for IPv6. If an empty string is assigned, then the all previous assignments are cleared. This setting is read by systemd-resolved.service8.",
@@ -9854,7 +9858,7 @@
             "DNSLifetimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Lifetime in seconds for the DNS server addresses listed in DNS= and search domains listed in Domains=. Defaults to 3600 seconds (one hour).",
@@ -10378,14 +10382,14 @@
             "description": "[TrafficControlQueueingDiscipline] section configuration",
             "properties": {
               "Parent": {
-                "$ref": "#/definitions/qdisc_parent",
+                "$ref": "#/definitions/qdisc_parentType",
                 "version_added": "244",
                 "title": "Parent"
               },
               "NetworkEmulatorDelaySec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "title": "Network Emulator Delay Sec"
@@ -10393,7 +10397,7 @@
               "NetworkEmulatorDelayJitterSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "title": "Network Emulator Delay Jitter Sec"
@@ -10401,7 +10405,7 @@
               "NetworkEmulatorLossRate": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/percentage"
+                    "$ref": "#/definitions/percentageType"
                   }
                 ],
                 "title": "Network Emulator Loss Rate"
@@ -10409,7 +10413,7 @@
               "NetworkEmulatorDuplicateRate": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/percentage"
+                    "$ref": "#/definitions/percentageType"
                   }
                 ],
                 "title": "Network Emulator Duplicate Rate"
@@ -10417,7 +10421,7 @@
               "NetworkEmulatorPacketLimit": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "title": "Network Emulator Packet Limit"
@@ -10435,14 +10439,14 @@
           "description": "[TrafficControlQueueingDiscipline] section configuration",
           "properties": {
             "Parent": {
-              "$ref": "#/definitions/qdisc_parent",
+              "$ref": "#/definitions/qdisc_parentType",
               "version_added": "244",
               "title": "Parent"
             },
             "NetworkEmulatorDelaySec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "title": "Network Emulator Delay Sec"
@@ -10450,7 +10454,7 @@
             "NetworkEmulatorDelayJitterSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "title": "Network Emulator Delay Jitter Sec"
@@ -10458,7 +10462,7 @@
             "NetworkEmulatorLossRate": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/percentage"
+                  "$ref": "#/definitions/percentageType"
                 }
               ],
               "title": "Network Emulator Loss Rate"
@@ -10466,7 +10470,7 @@
             "NetworkEmulatorDuplicateRate": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/percentage"
+                  "$ref": "#/definitions/percentageType"
                 }
               ],
               "title": "Network Emulator Duplicate Rate"
@@ -10474,7 +10478,7 @@
             "NetworkEmulatorPacketLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "title": "Network Emulator Packet Limit"

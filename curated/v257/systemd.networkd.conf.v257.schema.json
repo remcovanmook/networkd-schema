@@ -5,64 +5,64 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_address": {
+    "mac_addressType": {
       "type": "string",
       "description": "MAC Address (Hex separated by colons or hyphens)",
       "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$"
     },
-    "ipv4_address": {
+    "ipv4_addressType": {
       "type": "string",
       "description": "IPv4 Address",
       "format": "ipv4"
     },
-    "ipv6_address": {
+    "ipv6_addressType": {
       "type": "string",
       "description": "IPv6 Address",
       "format": "ipv6"
     },
-    "ip_address": {
+    "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_address"
+          "$ref": "#/definitions/ipv4_addressType"
         },
         {
-          "$ref": "#/definitions/ipv6_address"
+          "$ref": "#/definitions/ipv6_addressType"
         }
       ]
     },
-    "ipv4_prefix": {
+    "ipv4_prefixType": {
       "type": "string",
       "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
       "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$"
     },
-    "ipv6_prefix": {
+    "ipv6_prefixType": {
       "type": "string",
       "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
       "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$"
     },
-    "ip_prefix": {
+    "ip_prefixType": {
       "description": "IPv4 or IPv6 Prefix (CIDR)",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_prefix"
+          "$ref": "#/definitions/ipv4_prefixType"
         },
         {
-          "$ref": "#/definitions/ipv6_prefix"
+          "$ref": "#/definitions/ipv6_prefixType"
         }
       ]
     },
-    "filename": {
+    "filenameType": {
       "type": "string",
       "description": "Filesystem path",
       "format": "uri-reference"
     },
-    "seconds": {
+    "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
       "description": "Time duration (e.g. 5s, 1min, 500ms)"
     },
-    "bytes": {
+    "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
         {
@@ -90,7 +90,7 @@
         "SpeedMeterIntervalSec": {
           "allOf": [
             {
-              "$ref": "#/definitions/seconds",
+              "$ref": "#/definitions/secondsType",
               "default": "10sec"
             }
           ],

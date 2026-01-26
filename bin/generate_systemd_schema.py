@@ -6,6 +6,7 @@ import subprocess
 import tempfile
 import unicodedata
 import xml.etree.ElementTree as ET
+import shutil
 from collections import defaultdict, Counter
 
 # --- 1. Constants & Heuristics ---
@@ -638,6 +639,15 @@ def main():
                 with open(out_path, 'w') as f:
                     json.dump(schema, f, indent=2)
                 print(f" -> Created {out_path}")
+
+                # Copy XML file
+                xml_src = os.path.join(temp_dir, target['xml'])
+                xml_dst = os.path.join(args.out, os.path.basename(target['xml']))
+                if os.path.exists(xml_src):
+                    shutil.copy2(xml_src, xml_dst)
+                    print(f" -> Copied {os.path.basename(target['xml'])} to {args.out}")
+                else:
+                    print(f"Warning: XML source not found: {xml_src}")
 
 if __name__ == "__main__":
     main()

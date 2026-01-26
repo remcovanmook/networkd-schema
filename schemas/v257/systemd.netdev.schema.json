@@ -5,7 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_address": {
+    "mac_addressType": {
       "type": "string",
       "description": "MAC Address (Hex separated by colons or hyphens)",
       "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
@@ -14,7 +14,7 @@
         "00:11:22:33:44:55"
       ]
     },
-    "ipv4_address": {
+    "ipv4_addressType": {
       "type": "string",
       "description": "IPv4 Address",
       "format": "ipv4",
@@ -23,7 +23,7 @@
         "192.168.1.1"
       ]
     },
-    "ipv6_address": {
+    "ipv6_addressType": {
       "type": "string",
       "description": "IPv6 Address",
       "format": "ipv6",
@@ -32,18 +32,18 @@
         "2001:db8::1"
       ]
     },
-    "ip_address": {
+    "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_address"
+          "$ref": "#/definitions/ipv4_addressType"
         },
         {
-          "$ref": "#/definitions/ipv6_address"
+          "$ref": "#/definitions/ipv6_addressType"
         }
       ]
     },
-    "ipv4_prefix": {
+    "ipv4_prefixType": {
       "type": "string",
       "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
       "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
@@ -52,7 +52,7 @@
         "192.168.1.0/24"
       ]
     },
-    "ipv6_prefix": {
+    "ipv6_prefixType": {
       "type": "string",
       "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
       "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
@@ -61,18 +61,18 @@
         "2001:db8::/64"
       ]
     },
-    "ip_prefix": {
+    "ip_prefixType": {
       "description": "IPv4 or IPv6 Prefix (CIDR)",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_prefix"
+          "$ref": "#/definitions/ipv4_prefixType"
         },
         {
-          "$ref": "#/definitions/ipv6_prefix"
+          "$ref": "#/definitions/ipv6_prefixType"
         }
       ]
     },
-    "filename": {
+    "filenameType": {
       "type": "string",
       "description": "Filesystem path",
       "format": "uri-reference",
@@ -81,7 +81,7 @@
         "/etc/issue"
       ]
     },
-    "seconds": {
+    "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
       "format": "duration",
@@ -93,7 +93,7 @@
         "1min"
       ]
     },
-    "bytes": {
+    "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
         {
@@ -113,7 +113,7 @@
       ],
       "format": "bytes"
     },
-    "MTUBytes": {
+    "MTUBytesType": {
       "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
@@ -134,7 +134,7 @@
       ],
       "format": "bytes"
     },
-    "MTUv6Bytes": {
+    "MTUv6BytesType": {
       "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
@@ -154,7 +154,7 @@
       ],
       "format": "bytes"
     },
-    "vlan_id": {
+    "vlan_idType": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4094,
@@ -166,7 +166,7 @@
         4094
       ]
     },
-    "uint8": {
+    "uint8Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 255,
@@ -176,7 +176,7 @@
         128
       ]
     },
-    "uint16": {
+    "uint16Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 65535,
@@ -186,7 +186,7 @@
         1024
       ]
     },
-    "uint32": {
+    "uint32Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4294967294,
@@ -278,7 +278,7 @@
         "MTUBytes": {
           "allOf": [
             {
-              "$ref": "#/definitions/MTUBytes"
+              "$ref": "#/definitions/MTUBytesType"
             }
           ],
           "description": "The maximum transmission unit in bytes to set for the device. The usual suffixes K, M, G are supported and are understood to the base of 1024. For 'tun' or 'tap' devices, MTUBytes= setting is not currently supported in [NetDev] section. Please specify it in [Link] section of corresponding systemd.network5 files.",
@@ -294,7 +294,7 @@
         "MACAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/mac_address"
+              "$ref": "#/definitions/mac_addressType"
             }
           ],
           "description": "Specifies the MAC address to use for the device, or takes the special value 'none'. When 'none', systemd-networkd does not request the MAC address for the device, and the kernel will assign a random MAC address. For 'tun', 'tap', or 'l2tp' devices, the MACAddress= setting in the [NetDev] section is not supported and will be ignored. Please specify it in the [Link] section of the corresponding systemd.network5 file. If this option is not set, 'vlan' device inherits the MAC address of the master interface. For other kind of netdevs, if this option is not set, then the MAC address is generated based on the interface name and the machine-id5. Note, even if 'none' is specified, systemd-udevd will assign the persistent MAC address for the device, as '99-default.link' has MACAddressPolicy=persistent. So, it is also necessary to create a custom.link file for the device, if the MAC address assignment is not desired.",
@@ -391,7 +391,7 @@
             "Id": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/vlan_id"
+                  "$ref": "#/definitions/vlan_idType"
                 }
               ],
               "description": "The VLAN ID to use. An integer in the range 0...4094. This setting is compulsory.",
@@ -485,7 +485,7 @@
               "SourceMACAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/mac_address"
+                    "$ref": "#/definitions/mac_addressType"
                   }
                 ],
                 "description": "A whitespace-separated list of remote hardware addresses allowed on the MACVLAN. This option only has an effect in source mode. Use full colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset.",
@@ -495,7 +495,7 @@
               "BroadcastMulticastQueueLength": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint32"
+                    "$ref": "#/definitions/uint32Type"
                   }
                 ],
                 "description": "Specifies the length of the receive queue for broadcast/multicast packets. An unsigned integer in the range 0...4294967294. Defaults to unset.",
@@ -535,7 +535,7 @@
             "SourceMACAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/mac_address"
+                  "$ref": "#/definitions/mac_addressType"
                 }
               ],
               "description": "A whitespace-separated list of remote hardware addresses allowed on the MACVLAN. This option only has an effect in source mode. Use full colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset.",
@@ -545,7 +545,7 @@
             "BroadcastMulticastQueueLength": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint32"
+                  "$ref": "#/definitions/uint32Type"
                 }
               ],
               "description": "Specifies the length of the receive queue for broadcast/multicast packets. An unsigned integer in the range 0...4294967294. Defaults to unset.",
@@ -592,7 +592,7 @@
               "SourceMACAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/mac_address"
+                    "$ref": "#/definitions/mac_addressType"
                   }
                 ],
                 "description": "A whitespace-separated list of remote hardware addresses allowed on the MACVLAN. This option only has an effect in source mode. Use full colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset.",
@@ -624,7 +624,7 @@
             "SourceMACAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/mac_address"
+                  "$ref": "#/definitions/mac_addressType"
                 }
               ],
               "description": "A whitespace-separated list of remote hardware addresses allowed on the MACVLAN. This option only has an effect in source mode. Use full colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset.",
@@ -792,7 +792,7 @@
               "Local": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   },
                   {
                     "type": "string",
@@ -814,7 +814,7 @@
               "Remote": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   },
                   {
                     "type": "string",
@@ -944,7 +944,7 @@
               "FOUSourcePort": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint16"
+                    "$ref": "#/definitions/uint16Type"
                   }
                 ],
                 "default": 0,
@@ -1043,7 +1043,7 @@
             "Remote": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "The remote endpoint of the tunnel. Takes an IP address or the special value 'any'.",
@@ -1060,7 +1060,7 @@
             "TTL": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint8"
+                  "$ref": "#/definitions/uint8Type"
                 }
               ],
               "default": 0,
@@ -1127,7 +1127,7 @@
             "EncapsulationLimit": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint8"
+                  "$ref": "#/definitions/uint8Type"
                 }
               ],
               "default": "4",
@@ -1172,7 +1172,7 @@
             "FOUSourcePort": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "default": 0,
@@ -1305,7 +1305,7 @@
               "Local": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Configures local IP address.",
@@ -1315,7 +1315,7 @@
               "Peer": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Configures peer IP address. Note that when peer address is set 'PeerPort=' is mandatory.",
@@ -1358,7 +1358,7 @@
             "Port": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "description": "Specifies the port number where the encapsulated packets will arrive. Those packets will be removed and manually fed back into the network stack with the encapsulation removed to be sent to the real destination. This option is mandatory.",
@@ -1368,7 +1368,7 @@
             "PeerPort": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "description": "Specifies the peer port number. Defaults to unset. Note that when peer port is set 'Peer=' address is mandatory.",
@@ -1378,7 +1378,7 @@
             "Local": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Configures local IP address.",
@@ -1388,7 +1388,7 @@
             "Peer": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Configures peer IP address. Note that when peer address is set 'PeerPort=' is mandatory.",
@@ -1436,7 +1436,7 @@
               "UDPSourcePort": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint16"
+                    "$ref": "#/definitions/uint16Type"
                   }
                 ],
                 "description": "Specifies the UDP source port to be used for the tunnel. When UDP encapsulation is selected it's mandatory. Ignored when IP encapsulation is selected.",
@@ -1446,7 +1446,7 @@
               "UDPDestinationPort": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint16"
+                    "$ref": "#/definitions/uint16Type"
                   }
                 ],
                 "description": "Specifies destination port. When UDP encapsulation is selected it's mandatory. Ignored when IP encapsulation is selected.",
@@ -1456,7 +1456,7 @@
               "Local": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   },
                   {
                     "type": "string",
@@ -1474,7 +1474,7 @@
               "Remote": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Specifies the IP address of the remote peer. This setting is compulsory.",
@@ -1554,7 +1554,7 @@
             "UDPSourcePort": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "description": "Specifies the UDP source port to be used for the tunnel. When UDP encapsulation is selected it's mandatory. Ignored when IP encapsulation is selected.",
@@ -1564,7 +1564,7 @@
             "UDPDestinationPort": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "description": "Specifies destination port. When UDP encapsulation is selected it's mandatory. Ignored when IP encapsulation is selected.",
@@ -1574,7 +1574,7 @@
             "Local": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ip_address",
+                  "$ref": "#/definitions/ip_addressType",
                   "default": "auto"
                 },
                 {
@@ -1593,7 +1593,7 @@
             "Remote": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Specifies the IP address of the remote peer. This setting is compulsory.",
@@ -1775,7 +1775,7 @@
               "MACAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/mac_address"
+                    "$ref": "#/definitions/mac_addressType"
                   }
                 ],
                 "description": "The peer MACAddress, if not set, it is generated in the same way as the MAC address of the main interface.",
@@ -1807,7 +1807,7 @@
             "MACAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/mac_address"
+                  "$ref": "#/definitions/mac_addressType"
                 }
               ],
               "description": "The peer MACAddress, if not set, it is generated in the same way as the MAC address of the main interface.",
@@ -1888,7 +1888,7 @@
               "Id": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/vlan_id"
+                    "$ref": "#/definitions/vlan_idType"
                   }
                 ],
                 "description": "The VLAN ID to use. An integer in the range 0...4094. This setting is compulsory.",
@@ -1898,7 +1898,7 @@
               "Group": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Configures VXLAN multicast group IP address. All members of a VXLAN must use the same multicast group address.",
@@ -1909,7 +1909,7 @@
               "Local": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Configures local IP address. It must be an address on the underlying interface of the VXLAN interface, or one of the special values 'ipv4_link_local', 'ipv6_link_local', 'dhcp4', 'dhcp6', and 'slaac'. If one of the special values is specified, an address which matches the corresponding type on the underlying interface will be used. Defaults to unset.",
@@ -1920,7 +1920,7 @@
               "Remote": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Configures destination IP address.",
@@ -1940,7 +1940,7 @@
                   {
                     "allOf": [
                       {
-                        "$ref": "#/definitions/uint8"
+                        "$ref": "#/definitions/uint8Type"
                       }
                     ]
                   },
@@ -2035,7 +2035,7 @@
               "FDBAgeingSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "The lifetime of Forwarding Database entry learnt by the kernel, in seconds.",
@@ -2072,7 +2072,7 @@
               "DestinationPort": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint16"
+                    "$ref": "#/definitions/uint16Type"
                   }
                 ],
                 "description": "Configures the default destination UDP port. If the destination port is not specified then Linux kernel default will be used. Set to 4789 to get the IANA assigned value.",
@@ -2126,7 +2126,7 @@
             "Id": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/vlan_id"
+                  "$ref": "#/definitions/vlan_idType"
                 }
               ],
               "description": "The VLAN ID to use. An integer in the range 0...4094. This setting is compulsory.",
@@ -2136,7 +2136,7 @@
             "Group": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Configures VXLAN multicast group IP address. All members of a VXLAN must use the same multicast group address.",
@@ -2147,7 +2147,7 @@
             "Local": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Configures local IP address. It must be an address on the underlying interface of the VXLAN interface, or one of the special values 'ipv4_link_local', 'ipv6_link_local', 'dhcp4', 'dhcp6', and 'slaac'. If one of the special values is specified, an address which matches the corresponding type on the underlying interface will be used. Defaults to unset.",
@@ -2158,7 +2158,7 @@
             "Remote": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Configures destination IP address.",
@@ -2178,7 +2178,7 @@
                 {
                   "allOf": [
                     {
-                      "$ref": "#/definitions/uint8"
+                      "$ref": "#/definitions/uint8Type"
                     }
                   ]
                 },
@@ -2273,7 +2273,7 @@
             "FDBAgeingSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "The lifetime of Forwarding Database entry learnt by the kernel, in seconds.",
@@ -2310,7 +2310,7 @@
             "DestinationPort": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "description": "Configures the default destination UDP port. If the destination port is not specified then Linux kernel default will be used. Set to 4789 to get the IANA assigned value.",
@@ -2370,7 +2370,7 @@
               "Remote": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_address"
+                    "$ref": "#/definitions/ip_addressType"
                   }
                 ],
                 "description": "Specifies the unicast destination IP address to use in outgoing packets.",
@@ -2388,7 +2388,7 @@
               "TTL": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint8"
+                    "$ref": "#/definitions/uint8Type"
                   }
                 ],
                 "description": "Accepts the same values as in the [VXLAN] section, except that when unset or set to 0, the kernel's default will be used, meaning that packet TTL will be set from '/proc/sys/net/ipv4/ip_default_ttl'.",
@@ -2472,7 +2472,7 @@
             "Remote": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/ip_address"
+                  "$ref": "#/definitions/ip_addressType"
                 }
               ],
               "description": "Specifies the unicast destination IP address to use in outgoing packets.",
@@ -2490,7 +2490,7 @@
             "TTL": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint8"
+                  "$ref": "#/definitions/uint8Type"
                 }
               ],
               "description": "Accepts the same values as in the [VXLAN] section, except that when unset or set to 0, the kernel's default will be used, meaning that packet TTL will be set from '/proc/sys/net/ipv4/ip_default_ttl'.",
@@ -2526,7 +2526,7 @@
             "DestinationPort": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "default": 6081,
@@ -2636,7 +2636,7 @@
               "MACAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/mac_address",
+                    "$ref": "#/definitions/mac_addressType",
                     "_mandatory": true
                   }
                 ],
@@ -2667,7 +2667,7 @@
             "MACAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/mac_address",
+                  "$ref": "#/definitions/mac_addressType",
                   "_mandatory": true
                 }
               ],
@@ -2808,7 +2808,7 @@
               "MACAddress": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/mac_address"
+                    "$ref": "#/definitions/mac_addressType"
                   }
                 ],
                 "description": "Accepts the same key as in [MACsecReceiveChannel] section.",
@@ -2863,7 +2863,7 @@
             "MACAddress": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/mac_address"
+                  "$ref": "#/definitions/mac_addressType"
                 }
               ],
               "description": "Accepts the same key as in [MACsecReceiveChannel] section.",
@@ -3284,7 +3284,7 @@
               "MIIMonitorSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the frequency that Media Independent Interface link monitoring will occur. A value of zero disables MII link monitoring. This value is rounded down to the nearest millisecond. The default value is 0.",
@@ -3294,7 +3294,7 @@
               "UpDelaySec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the delay before a link is enabled after a link up status has been detected. This value is rounded down to a multiple of MIIMonitorSec=. The default value is 0.",
@@ -3304,7 +3304,7 @@
               "DownDelaySec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the delay before a link is disabled after a link down status has been detected. This value is rounded down to a multiple of MIIMonitorSec=. The default value is 0.",
@@ -3314,7 +3314,7 @@
               "ARPIntervalSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the ARP link monitoring frequency. A value of 0 disables ARP monitoring. The default value is 0, and the default unit seconds.",
@@ -3324,7 +3324,7 @@
               "LearnPacketIntervalSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the number of seconds between instances where the bonding driver sends learning packets to each slave peer switch. The valid range is 1...0x7fffffff; the default value is 1. This option has an effect only for the balance-tlb and balance-alb modes.",
@@ -3334,7 +3334,7 @@
               "PeerNotifyDelaySec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "Specifies the number of seconds the delay between each peer notification (gratuitous ARP and unsolicited IPv6 Neighbor Advertisement) when they are issued after a failover event. This delay should be a multiple of the MII link monitor interval (miimon). The valid range is 0...300s. The default value is 0, which means to match the value of the MIIMonitorSec=.",
@@ -3520,7 +3520,7 @@
             "MIIMonitorSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the frequency that Media Independent Interface link monitoring will occur. A value of zero disables MII link monitoring. This value is rounded down to the nearest millisecond. The default value is 0.",
@@ -3530,7 +3530,7 @@
             "UpDelaySec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the delay before a link is enabled after a link up status has been detected. This value is rounded down to a multiple of MIIMonitorSec=. The default value is 0.",
@@ -3540,7 +3540,7 @@
             "DownDelaySec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the delay before a link is disabled after a link down status has been detected. This value is rounded down to a multiple of MIIMonitorSec=. The default value is 0.",
@@ -3550,7 +3550,7 @@
             "ARPIntervalSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the ARP link monitoring frequency. A value of 0 disables ARP monitoring. The default value is 0, and the default unit seconds.",
@@ -3560,7 +3560,7 @@
             "LearnPacketIntervalSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the number of seconds between instances where the bonding driver sends learning packets to each slave peer switch. The valid range is 1...0x7fffffff; the default value is 1. This option has an effect only for the balance-tlb and balance-alb modes.",
@@ -3570,7 +3570,7 @@
             "PeerNotifyDelaySec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "Specifies the number of seconds the delay between each peer notification (gratuitous ARP and unsolicited IPv6 Neighbor Advertisement) when they are issued after a failover event. This delay should be a multiple of the MII link monitor interval (miimon). The valid range is 0...300s. The default value is 0, which means to match the value of the MIIMonitorSec=.",
@@ -3624,7 +3624,7 @@
               "HelloTimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "HelloTimeSec specifies the number of seconds between two hello packets sent out by the root bridge and the designated bridges. Hello packets are used to communicate information about the topology throughout the entire bridged local area network.",
@@ -3634,7 +3634,7 @@
               "MaxAgeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "MaxAgeSec specifies the number of seconds of maximum message age. If the last seen (received) hello packet is more than this number of seconds old, the bridge in question will start the takeover procedure in attempt to become the Root Bridge itself.",
@@ -3644,7 +3644,7 @@
               "AgeingTimeSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "This specifies the number of seconds a MAC Address will be kept in the forwarding database after having a packet received from this MAC Address.",
@@ -3654,7 +3654,7 @@
               "ForwardDelaySec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "ForwardDelaySec specifies the number of seconds spent in each of the Listening and Learning states before the Forwarding state is entered.",
@@ -3737,7 +3737,7 @@
             "HelloTimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "HelloTimeSec specifies the number of seconds between two hello packets sent out by the root bridge and the designated bridges. Hello packets are used to communicate information about the topology throughout the entire bridged local area network.",
@@ -3747,7 +3747,7 @@
             "MaxAgeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "MaxAgeSec specifies the number of seconds of maximum message age. If the last seen (received) hello packet is more than this number of seconds old, the bridge in question will start the takeover procedure in attempt to become the Root Bridge itself.",
@@ -3757,7 +3757,7 @@
             "AgeingTimeSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "This specifies the number of seconds a MAC Address will be kept in the forwarding database after having a packet received from this MAC Address.",
@@ -3767,7 +3767,7 @@
             "ForwardDelaySec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "ForwardDelaySec specifies the number of seconds spent in each of the Listening and Learning states before the Forwarding state is entered.",
@@ -3938,7 +3938,7 @@
               "DestinationPort": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint16"
+                    "$ref": "#/definitions/uint16Type"
                   }
                 ],
                 "description": "Specifies the destination UDP port (in range 1...65535). This is mandatory.",
@@ -3948,7 +3948,7 @@
               "MinSourcePort": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/uint16"
+                    "$ref": "#/definitions/uint16Type"
                   }
                 ],
                 "description": "Specifies the lowest value of the UDP tunnel source UDP port (in range 1...65535). Defaults to unset.",
@@ -3983,7 +3983,7 @@
             "DestinationPort": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "description": "Specifies the destination UDP port (in range 1...65535). This is mandatory.",
@@ -3993,7 +3993,7 @@
             "MinSourcePort": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/uint16"
+                  "$ref": "#/definitions/uint16Type"
                 }
               ],
               "description": "Specifies the lowest value of the UDP tunnel source UDP port (in range 1...65535). Defaults to unset.",
@@ -4491,7 +4491,7 @@
               "OriginatorIntervalSec": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/seconds"
+                    "$ref": "#/definitions/secondsType"
                   }
                 ],
                 "description": "The value specifies the interval in seconds, unless another time unit is specified in which batman-adv floods the network with its protocol information. See systemd.time7 for more information.",
@@ -4582,7 +4582,7 @@
             "OriginatorIntervalSec": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/seconds"
+                  "$ref": "#/definitions/secondsType"
                 }
               ],
               "description": "The value specifies the interval in seconds, unless another time unit is specified in which batman-adv floods the network with its protocol information. See systemd.time7 for more information.",

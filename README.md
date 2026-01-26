@@ -1,63 +1,24 @@
-# Systemd Networkd JSON Schemas
+# Systemd Network Configuration Schemas and Documentation
 
-This repository provides high-quality, curated JSON schemas for `systemd-networkd` configuration files (`.network`, `.netdev`, `.link`, and `networkd.conf`).
+This repository hosts JSON schemas and enhanced HTML documentation for systemd network configuration files (`systemd.network`, `systemd.netdev`, `systemd.link`, `networkd.conf`).
 
-These schemas are suitable for:
--   **Input Validation**: Strict typing and regex patterns for API backends.
--   **UI Generation**: Human-readable titles, examples, and format hints for frontend forms.
--   **IDE Autocompletion**: Providing meaningful suggestions and documentation.
+## Features
+- **Validation**: JSON Schemas for validating configuration files.
+- **Enhanced Documentation**: Interactive HTML manual pages with rich types, cross-references, and recursive option descriptions.
+- **Versioning**: Documentation and schemas available for multiple systemd versions.
 
-## Documentation Links
+## Documentation
+The latest documentation is hosted at:
+[https://remcovanmook.github.io/networkd-schema/latest/systemd.network.html](https://remcovanmook.github.io/networkd-schema/latest/systemd.network.html)
 
-The schemas include a custom `documentation` field for each section, linking to the official systemd man pages.
-
--   For **recent versions (>= v247)**, these links point to the specific version's documentation (e.g., `.../man/257/...`).
--   For **older versions (< v247)**, the `documentation` field is omitted as online documentation is not reliably available.
-
-## Directory Structure
-
--   `curated/`: The "Gold Standard" definitions (based on v257). **Do not edit.**
--   `schemas/`: The final generated schemas for various systemd versions, derived from the curated baseline.
--   `src/original/`: Raw schemas generated directly from systemd source/man pages (used for diffing).
-
-## Setup
-
-Before running the build script, set up the Python environment:
-
-```bash
-chmod +x setup.sh
-./setup.sh
-```
-
-This creates a virtual environment in `.venv` and installs dependencies (including `jsonschema` for strict validation).
-`build.py` will automatically use this environment if it exists.
+## Schemas
+Schemas are available for direct use or validation:
+- **Latest**: https://remcovanmook.github.io/networkd-schema/schemas/latest/
+- **Specific Version**: `https://remcovanmook.github.io/networkd-schema/schemas/v257/systemd.network.schema.json`
 
 ## Usage
+To validate a `.network` file using `check-jsonschema`:
 
-### Using the Schemas
-The schemas in `schemas/<version>/` are ready to use.
--   `systemd.network.schema.json`
--   `systemd.netdev.schema.json`
--   `systemd.link.schema.json`
--   `systemd.networkd.conf.schema.json`
-
-### generating Schemas
-To generate schemas for all supported versions:
 ```bash
-python3 build.py
+check-jsonschema --schemafile https://remcovanmook.github.io/networkd-schema/schemas/latest/systemd.network.schema.json my-config.network
 ```
-
-To generate schemas for a specific version:
-```bash
-python3 build.py --version v250
-```
-
-Supported versions: v237 - v259+ (and newer).
-
-This will:
-1.  Fetch the systemd source code for specified versions.
-2.  Generate raw schemas in `src/original/`.
-3.  Derive curated schemas in `schemas/` by applying version-specific differences to the `curated/v257` baseline.
-
-## License
-LGPL-2.1+ (Inherited from systemd)

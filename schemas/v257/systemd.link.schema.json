@@ -5,7 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_address": {
+    "mac_addressType": {
       "type": "string",
       "description": "MAC Address (Hex separated by colons or hyphens)",
       "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
@@ -14,7 +14,7 @@
         "00:11:22:33:44:55"
       ]
     },
-    "ipv4_address": {
+    "ipv4_addressType": {
       "type": "string",
       "description": "IPv4 Address",
       "format": "ipv4",
@@ -23,7 +23,7 @@
         "192.168.1.1"
       ]
     },
-    "ipv6_address": {
+    "ipv6_addressType": {
       "type": "string",
       "description": "IPv6 Address",
       "format": "ipv6",
@@ -32,18 +32,18 @@
         "2001:db8::1"
       ]
     },
-    "ip_address": {
+    "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_address"
+          "$ref": "#/definitions/ipv4_addressType"
         },
         {
-          "$ref": "#/definitions/ipv6_address"
+          "$ref": "#/definitions/ipv6_addressType"
         }
       ]
     },
-    "ipv4_prefix": {
+    "ipv4_prefixType": {
       "type": "string",
       "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
       "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
@@ -52,7 +52,7 @@
         "192.168.1.0/24"
       ]
     },
-    "ipv6_prefix": {
+    "ipv6_prefixType": {
       "type": "string",
       "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
       "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
@@ -61,18 +61,18 @@
         "2001:db8::/64"
       ]
     },
-    "ip_prefix": {
+    "ip_prefixType": {
       "description": "IPv4 or IPv6 Prefix (CIDR)",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_prefix"
+          "$ref": "#/definitions/ipv4_prefixType"
         },
         {
-          "$ref": "#/definitions/ipv6_prefix"
+          "$ref": "#/definitions/ipv6_prefixType"
         }
       ]
     },
-    "filename": {
+    "filenameType": {
       "type": "string",
       "description": "Filesystem path",
       "format": "uri-reference",
@@ -81,7 +81,7 @@
         "/etc/issue"
       ]
     },
-    "seconds": {
+    "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
       "format": "duration",
@@ -93,7 +93,7 @@
         "1min"
       ]
     },
-    "rate": {
+    "rateType": {
       "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
       "oneOf": [
         {
@@ -111,7 +111,7 @@
         "100M"
       ]
     },
-    "bytes": {
+    "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
         {
@@ -131,7 +131,7 @@
       ],
       "format": "bytes"
     },
-    "MTUBytes": {
+    "MTUBytesType": {
       "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
@@ -152,7 +152,7 @@
       ],
       "format": "bytes"
     },
-    "MTUv6Bytes": {
+    "MTUv6BytesType": {
       "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
@@ -172,7 +172,7 @@
       ],
       "format": "bytes"
     },
-    "uint8": {
+    "uint8Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 255,
@@ -182,7 +182,7 @@
         128
       ]
     },
-    "uint16": {
+    "uint16Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 65535,
@@ -192,7 +192,7 @@
         1024
       ]
     },
-    "uint32": {
+    "uint32Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4294967294,
@@ -200,6 +200,18 @@
       "title": "Integer (32-bit)",
       "examples": [
         65535
+      ]
+    },
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+      "examples": [
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
       ]
     }
   },
@@ -211,7 +223,7 @@
         "MACAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/mac_address"
+              "$ref": "#/definitions/mac_addressType"
             }
           ],
           "description": "A whitespace-separated list of hardware addresses.",
@@ -226,7 +238,7 @@
         "PermanentMACAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/mac_address"
+              "$ref": "#/definitions/mac_addressType"
             }
           ],
           "description": "A whitespace-separated list of hardware's permanent addresses. While MACAddress= matches the device's current MAC address, this matches the device's permanent MAC address, which may be different from the current one. Use full colon-, hyphen- or dot-delimited hexadecimal, or IPv4 or IPv6 address format. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset.",
@@ -234,27 +246,26 @@
           "version_added": "245"
         },
         "OriginalName": {
-          "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the device name, as exposed by the udev property \"INTERFACE\". This cannot be used to match on names that have already been changed from userspace. Caution is advised when matching on kernel-assigned names, as they are known to be unstable between reboots.",
           "title": "Original Name",
-          "version_added": "218"
+          "version_added": "218",
+          "$ref": "#/definitions/globsType"
         },
         "Path": {
-          "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the persistent path, as exposed by the udev property ID_PATH.",
           "title": "Path",
           "version_added": "211",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "$ref": "#/definitions/globsType"
         },
         "Driver": {
-          "type": "string",
           "description": "A whitespace-separated list of shell-style globs matching the driver currently bound to the device, as exposed by the udev property ID_NET_DRIVER of its parent device, or if that is not set, the driver as exposed by ethtool -i of the device itself. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "Driver",
           "version_added": "211",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "$ref": "#/definitions/globsType"
         },
         "Type": {
-          "type": "string",
           "enum": [
             "ether",
             "loopback",
@@ -269,10 +280,10 @@
             "host"
           ],
           "version_added": "211",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "$ref": "#/definitions/globsType"
         },
         "Kind": {
-          "type": "string",
           "enum": [
             "bond",
             "bridge",
@@ -289,7 +300,8 @@
             "veth"
           ],
           "version_added": "251",
-          "x-subcategory": "Virtualization"
+          "x-subcategory": "Virtualization",
+          "$ref": "#/definitions/globsType"
         },
         "Property": {
           "type": "string",
@@ -390,7 +402,7 @@
         "MACAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/mac_address"
+              "$ref": "#/definitions/mac_addressType"
             }
           ],
           "description": "The interface MAC address to use. For this setting to take effect, MACAddressPolicy= must either be unset, empty, or 'none'.",
@@ -470,7 +482,7 @@
         "MTUBytes": {
           "allOf": [
             {
-              "$ref": "#/definitions/MTUBytes"
+              "$ref": "#/definitions/MTUBytesType"
             }
           ],
           "description": "The maximum transmission unit in bytes to set for the device. The usual suffixes K, M, G are supported and are understood to the base of 1024.",
@@ -486,7 +498,7 @@
         "BitsPerSecond": {
           "allOf": [
             {
-              "$ref": "#/definitions/rate"
+              "$ref": "#/definitions/rateType"
             }
           ],
           "description": "The speed to set for the device, the value is rounded down to the nearest Mbps. The usual suffixes K, M, G are supported and are understood to the base of 1000.",
@@ -737,7 +749,7 @@
         "GenericSegmentOffloadMaxBytes": {
           "allOf": [
             {
-              "$ref": "#/definitions/bytes"
+              "$ref": "#/definitions/bytesType"
             }
           ],
           "description": "Specifies the maximum size of a Generic Segment Offload (GSO) packet the device should accept. The usual suffixes K, M, G are supported and are understood to the base of 1024. An unsigned integer in the range 1...65536. Defaults to unset.",

@@ -1,0 +1,101 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Build Documentation
+        run: |
+          # 1. Identify available versions from schemas/ directory
+          # structure: schemas/v257, schemas/v256, etc.
+          # output: "v257 v256"
+          VERSIONS=$(ls -d schemas/v* | xargs -n 1 basename)
+          
+          # 2. Determine latest version (sort -V for version sort)
+          LATEST_VERSION=$(echo "$VERSIONS" | sort -V | tail -n 1)
+          
+          echo "Found versions: $VERSIONS"
+          echo "Latest version: $LATEST_VERSION"
+          
+          # 3. Build each version
+          # We pass the full list of available versions to the generator for the switcher.
+          # We also add 'latest' to the list so it appears in the dropdown.
+          ALL_VERSIONS="$VERSIONS latest"
+          
+          for VER in $VERSIONS; do
+            echo "Building $VER..."
+            python3 bin/generate_html.py --version "$VER" --web-schemas --available-versions $ALL_VERSIONS
+          done
+          
+          # 4. Create 'latest' alias
+          # We simply copy the output of the latest version to a 'latest' directory.
+          echo "Creating latest alias from $LATEST_VERSION..."
+          cp -r "docs/html/$LATEST_VERSION" "docs/html/latest"
+          
+          # 5. Fix up 'latest' pages?
+          # Since links are ../../schemas/$VER/..., copying to latest (one level deep) means ../../schemas/$VER/... still points to valid path.
+          # The sidebar selector for 'latest' will point to ../latest/FILE.html.
+          
+      - name: Prepare Schemas for Publishing
+        run: |
+          # Create global schemas directory in docs/html/schemas
+          mkdir -p docs/html/schemas
+          
+          # Indentify versions again
+          VERSIONS=$(ls -d schemas/v* | xargs -n 1 basename)
+          LATEST_VERSION=$(echo "$VERSIONS" | sort -V | tail -n 1)
+
+          for VER in $VERSIONS; do
+            mkdir -p docs/html/schemas/$VER
+            cp schemas/$VER/*.json docs/html/schemas/$VER/
+          done
+          
+          # Also for latest alias for schemas?
+          # User requested "links to the json schemas (under /schemas/<version>/)"
+          # But having /schemas/latest/ is also good practice.
+          mkdir -p docs/html/schemas/latest
+          cp schemas/$LATEST_VERSION/*.json docs/html/schemas/latest/
+          
+      - name: Generate Landing Page
+        run: |
+           # Create a simple index.html at root to redirect to latest or list versions
+           # We can use python one-liner or simple echo
+           # Let's link to latest
+           echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=latest/systemd.network.html" /></head><body>Redirecting to <a href="latest/systemd.network.html">latest documentation</a>...</body></html>' > docs/html/index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'docs/html'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

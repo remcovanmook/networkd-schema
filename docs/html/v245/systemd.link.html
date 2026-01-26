@@ -1,0 +1,1195 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systemd systemd.link (vv245)</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .docbook-para { margin-bottom: 1em; }
+    </style>
+</head>
+<body>
+    
+    <div id="sidebar">
+        <div class="sidebar-header">
+             <h3><a href="index.html" style="color:var(--heading-color);">Documentation</a></h3>
+             <select class="version-selector" onchange="window.location.href=this.value;">
+                <option value="../latest/systemd.link.html" >latest</option><option value="../v259/systemd.link.html" >v259</option><option value="../v258/systemd.link.html" >v258</option><option value="../v257/systemd.link.html" >v257</option><option value="../v256/systemd.link.html" >v256</option><option value="../v255/systemd.link.html" >v255</option><option value="../v254/systemd.link.html" >v254</option><option value="../v253/systemd.link.html" >v253</option><option value="../v252/systemd.link.html" >v252</option><option value="../v251/systemd.link.html" >v251</option><option value="../v250/systemd.link.html" >v250</option><option value="../v249/systemd.link.html" >v249</option><option value="../v248/systemd.link.html" >v248</option><option value="../v247/systemd.link.html" >v247</option><option value="../v246/systemd.link.html" >v246</option><option value="../v245/systemd.link.html" selected>v245</option><option value="../v244/systemd.link.html" >v244</option><option value="../v243/systemd.link.html" >v243</option><option value="../v242/systemd.link.html" >v242</option><option value="../v241/systemd.link.html" >v241</option><option value="../v240/systemd.link.html" >v240</option><option value="../v239/systemd.link.html" >v239</option><option value="../v238/systemd.link.html" >v238</option><option value="../v237/systemd.link.html" >v237</option>
+            </select>
+             <h2>systemd.link</h2>
+        </div>
+        <div class="sidebar-content">
+            <ul>
+                <li><details><summary><a href="#section-Match">[Match]</a></summary><ul class="sub-menu"><li class="nav-subcat"><span>General</span></li><li><a href="#Match-PermanentMACAddress" style="font-size: 0.9em; margin-left: 20px;">PermanentMACAddress</a></li><li><a href="#Match-Property" style="font-size: 0.9em; margin-left: 20px;">Property</a></li><li><a href="#Match-OriginalName" style="font-size: 0.9em; margin-left: 20px;">OriginalName</a></li><li><a href="#Match-Host" style="font-size: 0.9em; margin-left: 20px;">Host</a></li><li><a href="#Match-KernelCommandLine" style="font-size: 0.9em; margin-left: 20px;">KernelCommandLine</a></li><li><a href="#Match-KernelVersion" style="font-size: 0.9em; margin-left: 20px;">KernelVersion</a></li><li><a href="#Match-Architecture" style="font-size: 0.9em; margin-left: 20px;">Architecture</a></li><li class="nav-subcat"><span>Hardware</span></li><li><a href="#Match-MACAddress" style="font-size: 0.9em; margin-left: 20px;">MACAddress</a></li><li><a href="#Match-Path" style="font-size: 0.9em; margin-left: 20px;">Path</a></li><li><a href="#Match-Driver" style="font-size: 0.9em; margin-left: 20px;">Driver</a></li><li><a href="#Match-Type" style="font-size: 0.9em; margin-left: 20px;">Type</a></li><li class="nav-subcat"><span>Virtualization</span></li><li><a href="#Match-Virtualization" style="font-size: 0.9em; margin-left: 20px;">Virtualization</a></li></ul></details></li><li><details><summary><a href="#section-Link">[Link]</a></summary><ul class="sub-menu"><li class="nav-subcat"><span>General</span></li><li><a href="#Link-Description" style="font-size: 0.9em; margin-left: 20px;">Description</a></li><li><a href="#Link-Alias" style="font-size: 0.9em; margin-left: 20px;">Alias</a></li><li><a href="#Link-MACAddressPolicy" style="font-size: 0.9em; margin-left: 20px;">MACAddressPolicy</a></li><li><a href="#Link-NamePolicy" style="font-size: 0.9em; margin-left: 20px;">NamePolicy</a></li><li><a href="#Link-Name" style="font-size: 0.9em; margin-left: 20px;">Name</a></li><li><a href="#Link-AlternativeNamesPolicy" style="font-size: 0.9em; margin-left: 20px;">AlternativeNamesPolicy</a></li><li><a href="#Link-AlternativeName" style="font-size: 0.9em; margin-left: 20px;">AlternativeName</a></li><li><a href="#Link-BitsPerSecond" style="font-size: 0.9em; margin-left: 20px;">BitsPerSecond</a></li><li><a href="#Link-Duplex" style="font-size: 0.9em; margin-left: 20px;">Duplex</a></li><li><a href="#Link-AutoNegotiation" style="font-size: 0.9em; margin-left: 20px;">AutoNegotiation</a></li><li><a href="#Link-WakeOnLan" style="font-size: 0.9em; margin-left: 20px;">WakeOnLan</a></li><li><a href="#Link-Port" style="font-size: 0.9em; margin-left: 20px;">Port</a></li><li><a href="#Link-Advertise" style="font-size: 0.9em; margin-left: 20px;">Advertise</a></li><li><a href="#Link-ReceiveChecksumOffload" style="font-size: 0.9em; margin-left: 20px;">ReceiveChecksumOffload</a></li><li><a href="#Link-TransmitChecksumOffload" style="font-size: 0.9em; margin-left: 20px;">TransmitChecksumOffload</a></li><li><a href="#Link-TCP6SegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">TCP6SegmentationOffload</a></li><li><a href="#Link-RxChannels" style="font-size: 0.9em; margin-left: 20px;">RxChannels</a></li><li><a href="#Link-TxChannels" style="font-size: 0.9em; margin-left: 20px;">TxChannels</a></li><li><a href="#Link-OtherChannels" style="font-size: 0.9em; margin-left: 20px;">OtherChannels</a></li><li><a href="#Link-CombinedChannels" style="font-size: 0.9em; margin-left: 20px;">CombinedChannels</a></li><li><a href="#Link-RxBufferSize" style="font-size: 0.9em; margin-left: 20px;">RxBufferSize</a></li><li><a href="#Link-TxBufferSize" style="font-size: 0.9em; margin-left: 20px;">TxBufferSize</a></li><li class="nav-subcat"><span>Hardware</span></li><li><a href="#Link-MACAddress" style="font-size: 0.9em; margin-left: 20px;">MACAddress</a></li><li><a href="#Link-MTUBytes" style="font-size: 0.9em; margin-left: 20px;">MTUBytes</a></li><li class="nav-subcat"><span>Offload</span></li><li><a href="#Link-TCPSegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">TCPSegmentationOffload</a></li><li><a href="#Link-GenericSegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">GenericSegmentationOffload</a></li><li><a href="#Link-GenericReceiveOffload" style="font-size: 0.9em; margin-left: 20px;">GenericReceiveOffload</a></li><li><a href="#Link-LargeReceiveOffload" style="font-size: 0.9em; margin-left: 20px;">LargeReceiveOffload</a></li></ul></details></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="content">
+        <h1>systemd.link <span style="font-size:0.5em; color:var(--meta-color); font-weight:normal;">/ v245</span></h1>
+        <div id="section-Match" class="section-block"><h2>[Match] Section</h2><h3 class="subcategory-header">General</h3>
+                <div id="Match-PermanentMACAddress" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-PermanentMACAddress" class="anchor-link">#</a>PermanentMACAddress
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22PermanentMACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v245+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A whitespace-separated list of hardware&#x27;s permanent addresses. While
+          <code class="varname">MACAddress=</code> matches the device&#x27;s current MAC address, this matches the
+          device&#x27;s permanent MAC address, which may be different from the current one. Use full
+          colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in
+          which case the lists are merged. If the empty string is assigned to this option, the list
+          of hardware addresses defined prior to this is reset.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PermanentMACAddress=00:11:22:33:44:55
+</code></pre></div></div>
+                <div id="Match-Property" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-Property" class="anchor-link">#</a>Property
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Property%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v243+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A whitespace-separated list of udev property name with its value after a equal
+          (<code>=</code>). If multiple properties are specified, the test results are ANDed.
+          If the list is prefixed with a &quot;!&quot;, the test is inverted. If a value contains white
+          spaces, then please quote whole key and value pair. If a value contains quotation, then
+          please escape the quotation with <code>\</code>.</p>
+
+          <p>Example: if a .link file has the following:
+          <pre><code>Property=ID_MODEL_ID=9999 &quot;ID_VENDOR_FROM_DATABASE=vendor name&quot; &quot;KEY=with \&quot;quotation\&quot;&quot;</code></pre>
+          then, the .link file matches only when an interface has all the above three properties.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=SomeString
+</code></pre></div></div>
+                <div id="Match-OriginalName" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-OriginalName" class="anchor-link">#</a>OriginalName
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#globsType" class="badge badge-type">Shell Globs</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22OriginalName%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v218+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A whitespace-separated list of shell-style globs matching the device name, as exposed by the
+          udev property &quot;INTERFACE&quot;. This cannot be used to match on names that have already been changed
+          from userspace. Caution is advised when matching on kernel-assigned names, as they are known to be
+          unstable between reboots.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OriginalName=eth*
+OriginalName=en* wlan*
+</code></pre></div></div>
+                <div id="Match-Host" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-Host" class="anchor-link">#</a>Host
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Host%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Matches against the hostname or machine ID of the host. See <code class="varname">ConditionHost=</code> in
+          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a>
+          for details. When prefixed with an exclamation mark (<code>!</code>), the result is negated.
+          If an empty string is assigned, then previously assigned value is cleared.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=SomeString
+</code></pre></div></div>
+                <div id="Match-KernelCommandLine" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-KernelCommandLine" class="anchor-link">#</a>KernelCommandLine
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22KernelCommandLine%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Checks whether a specific kernel command line option is set. See
+          <code class="varname">ConditionKernelCommandLine=</code> in
+          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a>
+          for details. When prefixed with an exclamation mark (<code>!</code>), the result is negated.
+          If an empty string is assigned, then previously assigned value is cleared.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=SomeString
+</code></pre></div></div>
+                <div id="Match-KernelVersion" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-KernelVersion" class="anchor-link">#</a>KernelVersion
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22KernelVersion%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v237+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Checks whether the kernel version (as reported by <code class="command">uname -r</code>) matches a certain
+          expression. See <code class="varname">ConditionKernelVersion=</code> in
+          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a> for
+          details. When prefixed with an exclamation mark (<code>!</code>), the result is negated.
+          If an empty string is assigned, then previously assigned value is cleared.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=SomeString
+</code></pre></div></div>
+                <div id="Match-Architecture" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-Architecture" class="anchor-link">#</a>Architecture
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Architecture%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Checks whether the system is running on a specific architecture. See
+          <code class="varname">ConditionArchitecture=</code> in
+          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a>
+          for details. When prefixed with an exclamation mark (<code>!</code>), the result is negated.
+          If an empty string is assigned, then previously assigned value is cleared.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=SomeString
+</code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
+                <div id="Match-MACAddress" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-MACAddress" class="anchor-link">#</a>MACAddress
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22MACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v250+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A whitespace-separated list of hardware addresses. Use full colon-, hyphen- or dot-delimited hexadecimal. See the example below.
+          This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list
+          of hardware addresses defined prior to this is reset.</p>
+
+          <p>Example:
+          <pre><code>MACAddress=01:23:45:67:89:ab 00-11-22-33-44-55 AABB.CCDD.EEFF</code></pre></p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddress=12:34:56:78:9a:bc
+MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
+</code></pre></div></div>
+                <div id="Match-Path" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-Path" class="anchor-link">#</a>Path
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#globsType" class="badge badge-type">Shell Globs</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Path%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A whitespace-separated list of shell-style globs matching
+          the persistent path, as exposed by the udev property
+          <code class="varname">ID_PATH</code>.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=eth*
+Path=en* wlan*
+</code></pre></div></div>
+                <div id="Match-Driver" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-Driver" class="anchor-link">#</a>Driver
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#globsType" class="badge badge-type">Shell Globs</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Driver%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A whitespace-separated list of shell-style globs matching the driver currently bound to the
+          device, as exposed by the udev property <code class="varname">ID_NET_DRIVER</code> of its parent device, or
+          if that is not set, the driver as exposed by <code class="command">ethtool -i</code> of the device itself.
+          If the list is prefixed with a &quot;!&quot;, the test is inverted.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Driver=eth*
+Driver=en* wlan*
+</code></pre></div></div>
+                <div id="Match-Type" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-Type" class="anchor-link">#</a>Type
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#globsType" class="badge badge-type">Shell Globs</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Type%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A whitespace-separated list of shell-style globs matching the device type, as exposed by
+          <code class="command">networkctl status</code>. If the list is prefixed with a &quot;!&quot;, the test is inverted.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Type=global
+Type=link
+</code></pre></div></div><h3 class="subcategory-header">Virtualization</h3>
+                <div id="Match-Virtualization" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Match-Virtualization" class="anchor-link">#</a>Virtualization
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Virtualization%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Checks whether the system is executed in a virtualized environment and optionally test
+          whether it is a specific implementation. See <code class="varname">ConditionVirtualization=</code> in
+          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a>
+          for details. When prefixed with an exclamation mark (<code>!</code>), the result is negated.
+          If an empty string is assigned, then previously assigned value is cleared.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=SomeString
+</code></pre></div></div></div><div id="section-Link" class="section-block"><h2>[Link] Section</h2><h3 class="subcategory-header">General</h3>
+                <div id="Link-Description" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-Description" class="anchor-link">#</a>Description
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Description%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A description of the device.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Description=My Interface
+Description=Uplink to ISP
+</code></pre></div></div>
+                <div id="Link-Alias" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-Alias" class="anchor-link">#</a>Alias
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Alias%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The <code class="varname">ifalias</code> interface property is set to this value.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=SomeString
+</code></pre></div></div>
+                <div id="Link-MACAddressPolicy" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-MACAddressPolicy" class="anchor-link">#</a>MACAddressPolicy
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22MACAddressPolicy%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The policy by which the MAC address should be set. The
+          available policies are:
+          </p>
+
+          <dl>
+            <dt><span class="docbook-option">persistent</span></dt><dd>
+                <p>If the hardware has a persistent MAC address, as
+                most hardware should, and if it is used by the kernel,
+                nothing is done. Otherwise, a new MAC address is
+                generated which is guaranteed to be the same on every
+                boot for the given machine and the given device, but
+                which is otherwise random. This feature depends on ID_NET_NAME_*
+                properties to exist for the link. On hardware where these
+                properties are not set, the generation of a persistent MAC address
+                will fail.</p>
+              </dd>
+            <dt><span class="docbook-option">random</span></dt><dd>
+                <p>If the kernel is using a random MAC address,
+                nothing is done. Otherwise, a new address is randomly
+                generated each time the device appears, typically at
+                boot. Either way, the random address will have the
+                <code>unicast</code> and
+                <code>locally administered</code> bits set.</p>
+              </dd>
+            <dt><span class="docbook-option">none</span></dt><dd>
+                <p>Keeps the MAC address assigned by the kernel.</p>
+              </dd>
+          </dl>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=SomeString
+</code></pre></div></div>
+                <div id="Link-NamePolicy" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-NamePolicy" class="anchor-link">#</a>NamePolicy
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22NamePolicy%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v216+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>An ordered, space-separated list of policies by which the interface name should be set.
+          <code class="varname">NamePolicy=</code> may be disabled by specifying <span class="docbook-option">net.ifnames=0</span> on the
+          kernel command line. Each of the policies may fail, and the first successful one is used. The name
+          is not set directly, but is exported to udev as the property <span class="docbook-option">ID_NET_NAME</span>, which
+          is, by default, used by a
+          <a href="https://www.freedesktop.org/software/systemd/man/latest/udev.html" target="_blank" class="external-link">udev</a>,
+          rule to set <code class="varname">NAME</code>. The available policies are:
+          </p>
+
+          <dl>
+            <dt><span class="docbook-option">kernel</span></dt><dd>
+                <p>If the kernel claims that the name it has set
+                for a device is predictable, then no renaming is
+                performed.</p>
+              </dd>
+            <dt><span class="docbook-option">database</span></dt><dd>
+                <p>The name is set based on entries in the udev&#x27;s
+                Hardware Database with the key
+                <code class="varname">ID_NET_NAME_FROM_DATABASE</code>.
+                </p>
+              </dd>
+            <dt><span class="docbook-option">onboard</span></dt><dd>
+                <p>The name is set based on information given by
+                the firmware for on-board devices, as exported by the
+                udev property <code class="varname">ID_NET_NAME_ONBOARD</code>.
+                See <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.net-naming-scheme.html" target="_blank" class="external-link">systemd.net-naming-scheme</a>.
+                </p>
+              </dd>
+            <dt><span class="docbook-option">slot</span></dt><dd>
+                <p>The name is set based on information given by
+                the firmware for hot-plug devices, as exported by the
+                udev property <code class="varname">ID_NET_NAME_SLOT</code>.
+                See <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.net-naming-scheme.html" target="_blank" class="external-link">systemd.net-naming-scheme</a>.
+                </p>
+              </dd>
+            <dt><span class="docbook-option">path</span></dt><dd>
+                <p>The name is set based on the device&#x27;s physical
+                location, as exported by the udev property
+                <code class="varname">ID_NET_NAME_PATH</code>.
+                See <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.net-naming-scheme.html" target="_blank" class="external-link">systemd.net-naming-scheme</a>.
+                </p>
+              </dd>
+            <dt><span class="docbook-option">mac</span></dt><dd>
+                <p>The name is set based on the device&#x27;s persistent
+                MAC address, as exported by the udev property
+                <code class="varname">ID_NET_NAME_MAC</code>.
+                See <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.net-naming-scheme.html" target="_blank" class="external-link">systemd.net-naming-scheme</a>.
+                </p>
+              </dd>
+            <dt><span class="docbook-option">keep</span></dt><dd>
+                <p>If the device already had a name given by userspace (as part of creation of the device
+                or a rename), keep it.</p>
+              </dd>
+          </dl>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=SomeString
+</code></pre></div></div>
+                <div id="Link-Name" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-Name" class="anchor-link">#</a>Name
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Name%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The interface name to use. This option has lower precedence than
+          <code class="varname">NamePolicy=</code>, so for this setting to take effect, <code class="varname">NamePolicy=</code>
+          must either be unset, empty, disabled, or all policies configured there must fail. Also see the
+          example below with <code>Name=dmz0</code>.</p>
+
+          <p>Note that specifying a name that the kernel might use for another
+          interface (for example <code>eth0</code>) is dangerous because the
+          name assignment done by udev will race with the assignment done by the
+          kernel, and only one interface may use the name. Depending on the order of
+          operations, either udev or the kernel will win, making the naming
+          unpredictable. It is best to use some different prefix, for example
+          <code>internal0</code>/<code>external0</code> or
+          <code>lan0</code>/<code>lan1</code>/<code>lan3</code>.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Name=eth0
+Name=br0
+</code></pre></div></div>
+                <div id="Link-AlternativeNamesPolicy" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-AlternativeNamesPolicy" class="anchor-link">#</a>AlternativeNamesPolicy
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#enum" class="badge badge-type">enum</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22AlternativeNamesPolicy%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v245+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>A space-separated list of policies by which the interface&#x27;s alternative names
+          should be set. Each of the policies may fail, and all successful policies are used. The
+          available policies are <code>database</code>, <code>onboard</code>,
+          <code>slot</code>, <code>path</code>, and <code>mac</code>. If the
+          kernel does not support the alternative names, then this setting will be ignored.
+          </p>
+        
+                    </div>
+                <div class="option-values"><strong>Allowed:</strong> <code>database</code>, <code>onboard</code>, <code>slot</code>, <code>path</code>, <code>mac</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AlternativeNamesPolicy=database
+AlternativeNamesPolicy=mac
+</code></pre></div></div>
+                <div id="Link-AlternativeName" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-AlternativeName" class="anchor-link">#</a>AlternativeName
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22AlternativeName%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v245+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The alternative interface name to use. This option can be specified multiple times.
+          If the empty string is assigned to this option, the list is reset, and all prior assignments
+          have no effect. If the kernel does not support the alternative names, then this setting will
+          be ignored.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AlternativeName=SomeString
+</code></pre></div></div>
+                <div id="Link-BitsPerSecond" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-BitsPerSecond" class="anchor-link">#</a>BitsPerSecond
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22BitsPerSecond%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The speed to set for the device, the value is rounded
+          down to the nearest Mbps. The usual suffixes K, M, G, are
+          supported and are understood to the base of 1000.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BitsPerSecond=1G
+BitsPerSecond=100M
+</code></pre></div></div>
+                <div id="Link-Duplex" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-Duplex" class="anchor-link">#</a>Duplex
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#enum" class="badge badge-type">enum</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Duplex%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The duplex mode to set for the device. The accepted values are <span class="docbook-option">half</span> and
+          <span class="docbook-option">full</span>.</p>
+        
+                    </div>
+                <div class="option-values"><strong>Allowed:</strong> <code>full</code>, <code>half</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Duplex=full
+Duplex=half
+</code></pre></div></div>
+                <div id="Link-AutoNegotiation" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-AutoNegotiation" class="anchor-link">#</a>AutoNegotiation
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22AutoNegotiation%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v233+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a boolean. If set to yes, automatic negotiation of transmission parameters is enabled.
+          Autonegotiation is a procedure by which two connected ethernet devices choose
+          common transmission parameters, such as speed, duplex mode, and flow control.
+          When unset, the kernel&#x27;s default will be used.</p>
+
+          <p>Note that if autonegotiation is enabled, speed and duplex settings are
+          read-only. If autonegotiation is disabled, speed and duplex settings are writable
+          if the driver supports multiple link modes.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoNegotiation=false
+</code></pre></div></div>
+                <div id="Link-WakeOnLan" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-WakeOnLan" class="anchor-link">#</a>WakeOnLan
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#enum" class="badge badge-type">enum</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22WakeOnLan%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The Wake-on-LAN policy to set for the device. The
+          supported values are:</p>
+
+          <dl>
+            <dt><span class="docbook-option">phy</span></dt><dd>
+                <p>Wake on PHY activity.</p>
+              </dd>
+            <dt><span class="docbook-option">unicast</span></dt><dd>
+                <p>Wake on unicast messages.</p>
+              </dd>
+            <dt><span class="docbook-option">multicast</span></dt><dd>
+                <p>Wake on multicast messages.</p>
+              </dd>
+            <dt><span class="docbook-option">broadcast</span></dt><dd>
+                <p>Wake on broadcast messages.</p>
+              </dd>
+            <dt><span class="docbook-option">arp</span></dt><dd>
+                <p>Wake on ARP.</p>
+              </dd>
+            <dt><span class="docbook-option">magic</span></dt><dd>
+                <p>Wake on receipt of a magic packet.
+                </p>
+              </dd>
+            <dt><span class="docbook-option">secureon</span></dt><dd>
+                <p>Enable secureon(tm) password for MagicPacket(tm).
+                </p>
+              </dd>
+            <dt><span class="docbook-option">off</span></dt><dd>
+                <p>Never wake.</p>
+              </dd>
+          </dl>
+
+          <p>Defaults to <span class="docbook-option">off</span>.</p>
+        
+                    </div>
+                <div class="option-values"><strong>Allowed:</strong> <code>off</code>, <code>phy</code>, <code>unicast</code>, <code>multicast</code>, <code>broadcast</code>, <code>arp</code>, <code>magic</code>, <code>secureon</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>WakeOnLan=arp
+WakeOnLan=broadcast
+</code></pre></div></div>
+                <div id="Link-Port" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-Port" class="anchor-link">#</a>Port
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Port%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v234+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The port option is used to select the device port. The
+          supported values are:</p>
+
+          <dl>
+            <dt><span class="docbook-option">tp</span></dt><dd>
+                <p>An Ethernet interface using Twisted-Pair cable as the medium.</p>
+              </dd>
+            <dt><span class="docbook-option">aui</span></dt><dd>
+                <p>Attachment Unit Interface (AUI). Normally used with hubs.
+                </p>
+              </dd>
+            <dt><span class="docbook-option">bnc</span></dt><dd>
+                <p>An Ethernet interface using BNC connectors and co-axial cable.</p>
+              </dd>
+            <dt><span class="docbook-option">mii</span></dt><dd>
+                <p>An Ethernet interface using a Media Independent Interface (MII).</p>
+              </dd>
+            <dt><span class="docbook-option">fibre</span></dt><dd>
+                <p>An Ethernet interface using Optical Fibre as the medium.</p>
+              </dd>
+          </dl>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=SomeString
+</code></pre></div></div>
+                <div id="Link-Advertise" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-Advertise" class="anchor-link">#</a>Advertise
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22Advertise%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v240+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>This sets what speeds and duplex modes of operation are advertised for auto-negotiation.
+          This implies <code>AutoNegotiation=yes</code>. The supported values are:
+
+          <span class="docbook-table">
+            <span class="docbook-title">Supported advertise values</span>
+            <span class="docbook-tgroup">
+              <span class="docbook-colspec"></span>
+              <span class="docbook-colspec"></span>
+              <span class="docbook-colspec"></span>
+
+              <span class="docbook-thead"><span class="docbook-row">
+                <span class="docbook-entry">Advertise</span>
+                <span class="docbook-entry">Speed (Mbps)</span>
+                <span class="docbook-entry">Duplex Mode</span>
+              </span></span>
+              <span class="docbook-tbody">
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">10baset-half</span></span>
+                <span class="docbook-entry">10</span><span class="docbook-entry">half</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">10baset-full</span></span>
+                <span class="docbook-entry">10</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">100baset-half</span></span>
+                <span class="docbook-entry">100</span><span class="docbook-entry">half</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">100baset-full</span></span>
+                <span class="docbook-entry">100</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">1000baset-half</span></span>
+                <span class="docbook-entry">1000</span><span class="docbook-entry">half</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">1000baset-full</span></span>
+                <span class="docbook-entry">1000</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">10000baset-full</span></span>
+                <span class="docbook-entry">10000</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">2500basex-full</span></span>
+                <span class="docbook-entry">2500</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">1000basekx-full</span></span>
+                <span class="docbook-entry">1000</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">10000basekx4-full</span></span>
+                <span class="docbook-entry">10000</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">10000basekr-full</span></span>
+                <span class="docbook-entry">10000</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">10000baser-fec</span></span>
+                <span class="docbook-entry">10000</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">20000basemld2-full</span></span>
+                <span class="docbook-entry">20000</span><span class="docbook-entry">full</span></span>
+
+                <span class="docbook-row"><span class="docbook-entry"><span class="docbook-option">20000basekr2-full</span></span>
+                <span class="docbook-entry">20000</span><span class="docbook-entry">full</span></span>
+              </span>
+            </span>
+          </span>
+
+          By default this is unset, i.e. all possible modes will be advertised.
+          This option may be specified more than once, in which case all specified speeds and modes are advertised.
+          If the empty string is assigned to this option, the list is reset, and all prior assignments have no effect.
+          </p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Advertise=SomeString
+</code></pre></div></div>
+                <div id="Link-ReceiveChecksumOffload" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-ReceiveChecksumOffload" class="anchor-link">#</a>ReceiveChecksumOffload
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22ReceiveChecksumOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v245+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a boolean. If set to true, the hardware offload for checksumming of ingress
+          network packets is enabled. When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveChecksumOffload=false
+</code></pre></div></div>
+                <div id="Link-TransmitChecksumOffload" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-TransmitChecksumOffload" class="anchor-link">#</a>TransmitChecksumOffload
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22TransmitChecksumOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v245+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a boolean. If set to true, the hardware offload for checksumming of egress
+          network packets is enabled. When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitChecksumOffload=false
+</code></pre></div></div>
+                <div id="Link-TCP6SegmentationOffload" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-TCP6SegmentationOffload" class="anchor-link">#</a>TCP6SegmentationOffload
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22TCP6SegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v235+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a boolean. If set to true, the TCP6 Segmentation Offload (tx-tcp6-segmentation) is enabled.
+          When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCP6SegmentationOffload=false
+</code></pre></div></div>
+                <div id="Link-RxChannels" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-RxChannels" class="anchor-link">#</a>RxChannels
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22RxChannels%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v239+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Sets the number of receive channels (a number between 1 and 4294967295) .</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxChannels=SomeString
+</code></pre></div></div>
+                <div id="Link-TxChannels" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-TxChannels" class="anchor-link">#</a>TxChannels
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22TxChannels%22" target="_blank" class="badge badge-schema">Schema</a>
+                            
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Sets the number of transmit channels (a number between 1 and 4294967295).</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TxChannels=SomeString
+</code></pre></div></div>
+                <div id="Link-OtherChannels" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-OtherChannels" class="anchor-link">#</a>OtherChannels
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22OtherChannels%22" target="_blank" class="badge badge-schema">Schema</a>
+                            
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Sets the number of other channels (a number between 1 and 4294967295).</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OtherChannels=SomeString
+</code></pre></div></div>
+                <div id="Link-CombinedChannels" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-CombinedChannels" class="anchor-link">#</a>CombinedChannels
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22CombinedChannels%22" target="_blank" class="badge badge-schema">Schema</a>
+                            
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Sets the number of combined set channels (a number between 1 and 4294967295).</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CombinedChannels=SomeString
+</code></pre></div></div>
+                <div id="Link-RxBufferSize" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-RxBufferSize" class="anchor-link">#</a>RxBufferSize
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22RxBufferSize%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v244+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a integer. Specifies the NIC receive ring buffer size. When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxBufferSize=max
+</code></pre></div></div>
+                <div id="Link-TxBufferSize" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-TxBufferSize" class="anchor-link">#</a>TxBufferSize
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22TxBufferSize%22" target="_blank" class="badge badge-schema">Schema</a>
+                            
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a integer. Specifies the NIC transmit ring buffer size. When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TxBufferSize=max
+</code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
+                <div id="Link-MACAddress" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-MACAddress" class="anchor-link">#</a>MACAddress
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#string" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22MACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The MAC address to use, if no
+          <code class="varname">MACAddressPolicy=</code>
+          is specified.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddress=12:34:56:78:9a:bc
+MACAddress=none
+</code></pre></div></div>
+                <div id="Link-MTUBytes" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-MTUBytes" class="anchor-link">#</a>MTUBytes
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#bytes" class="badge badge-type">string</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22MTUBytes%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v211+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>The maximum transmission unit in bytes to set for the
+          device. The usual suffixes K, M, G, are supported and are
+          understood to the base of 1024.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
+MTUBytes=9000
+</code></pre></div></div><h3 class="subcategory-header">Offload</h3>
+                <div id="Link-TCPSegmentationOffload" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-TCPSegmentationOffload" class="anchor-link">#</a>TCPSegmentationOffload
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22TCPSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v232+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a boolean. If set to true, the TCP Segmentation Offload (TSO) is enabled.
+          When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCPSegmentationOffload=false
+</code></pre></div></div>
+                <div id="Link-GenericSegmentationOffload" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-GenericSegmentationOffload" class="anchor-link">#</a>GenericSegmentationOffload
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22GenericSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v232+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a boolean. If set to true, the Generic Segmentation Offload (GSO) is enabled.
+          When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentationOffload=false
+</code></pre></div></div>
+                <div id="Link-GenericReceiveOffload" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-GenericReceiveOffload" class="anchor-link">#</a>GenericReceiveOffload
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22GenericReceiveOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v232+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a boolean. If set to true, the Generic Receive Offload (GRO) is enabled.
+          When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericReceiveOffload=false
+</code></pre></div></div>
+                <div id="Link-LargeReceiveOffload" class="option-block">
+                    <div class="option-header">
+                        <div class="option-title">
+                            <a href="#Link-LargeReceiveOffload" class="anchor-link">#</a>LargeReceiveOffload
+                        </div>
+                        <div class="option-meta">
+                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
+                            <a href="../../schemas/v245/systemd.link.schema.json#:~:text=%22LargeReceiveOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <span class="badge badge-version">v232+</span>
+                            <span class="badge badge-default">Optional</span>
+                            
+                        </div>
+                    </div>
+                    <div class="option-desc">
+                        
+          <p>Takes a boolean. If set to true, the Large Receive Offload (LRO) is enabled.
+          When unset, the kernel&#x27;s default will be used.</p>
+        
+                    </div>
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LargeReceiveOffload=false
+</code></pre></div></div></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarLinks = document.querySelectorAll('#sidebar a');
+            const sections = document.querySelectorAll('.section-block, .option-block');
+            const sidebar = document.getElementById('sidebar');
+            
+            // Map IDs to sidebar links
+            const linkMap = new Map();
+            sidebarLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    linkMap.set(href.substring(1), link);
+                }
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        const link = linkMap.get(id);
+                        if (link) {
+                            // Remove active from all
+                            sidebarLinks.forEach(l => l.classList.remove('active'));
+                            
+                            // Add active to current
+                            link.classList.add('active');
+                            
+                            // Open parent details
+                            let parent = link.parentElement;
+                            while (parent) {
+                                if (parent.tagName === 'DETAILS') {
+                                    parent.open = true;
+                                }
+                                parent = parent.parentElement;
+                            }
+                            
+                            // Scroll sidebar to keep active link in view
+                            const rect = link.getBoundingClientRect();
+                            const sidebarRect = sidebar.getBoundingClientRect();
+                            if (rect.top < sidebarRect.top || rect.bottom > sidebarRect.bottom) {
+                                link.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                            }
+                        }
+                    }
+                });
+            }, {
+                root: document.getElementById('content'),
+                threshold: 0.1,
+                rootMargin: "-40% 0px -40% 0px" // Trigger when element is in middle of screen
+            });
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
+    
