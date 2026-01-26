@@ -54,10 +54,16 @@ def main():
     
     for ver in versions:
         print(f"Building HTML for {ver}...")
+        
+        # Ensure version directory exists
+        ver_out_dir = os.path.join("docs/html", ver)
+        os.makedirs(ver_out_dir, exist_ok=True)
+        
         cmd = [
             "python3", "bin/generate_html.py",
             "--version", ver,
             "--web-schemas",
+            "--out", ver_out_dir,
             "--available-versions"
         ] + all_versions_arg
         run_command(cmd)

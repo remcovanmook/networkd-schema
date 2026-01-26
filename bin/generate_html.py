@@ -983,13 +983,18 @@ def main():
     parser.add_argument("--version", required=True, help="e.g. v257")
     parser.add_argument("--web-schemas", action="store_true", help="Use relative paths for schemas (for GitHub Pages)")
     parser.add_argument("--available-versions", nargs="*", help="List of other available versions for the switcher")
+    parser.add_argument("--out", help="Output directory")
     args = parser.parse_args()
     
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     src_dir = os.path.join(base_dir, "src", "original", args.version)
     # UPDATED: Use schemas directory (user request)
     schema_dir = os.path.join(base_dir, "schemas", args.version)
-    output_dir = os.path.join(base_dir, "docs", "html", args.version)
+    
+    if args.out:
+        output_dir = args.out
+    else:
+        output_dir = os.path.join(base_dir, "docs", "html", args.version)
     
     if not os.path.exists(src_dir):
         print(f"Error: Source directory {src_dir} does not exist. Run build.py first.")
