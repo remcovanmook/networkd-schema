@@ -83,6 +83,9 @@ jobs:
           
       - name: Generate Landing Page
         run: |
+           # Identify versions again for the index generation
+           VERSIONS=$(ls -d schemas/v* | xargs -n 1 basename)
+           
            # Generate premium landing page with list of versions
            python3 bin/generate_index.py --out docs/html --versions $VERSIONS
 
