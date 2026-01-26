@@ -83,10 +83,8 @@ jobs:
           
       - name: Generate Landing Page
         run: |
-           # Create a simple index.html at root to redirect to latest or list versions
-           # We can use python one-liner or simple echo
-           # Let's link to latest
-           echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=latest/systemd.network.html" /></head><body>Redirecting to <a href="latest/systemd.network.html">latest documentation</a>...</body></html>' > docs/html/index.html
+           # Generate premium landing page with list of versions
+           python3 bin/generate_index.py --out docs/html --versions $VERSIONS
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

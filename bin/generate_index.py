@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Systemd Network Documentation</title>
-    <style>
+import os
+import argparse
+import sys
+
+# Reusing styles from generate_html.py for consistency
+CSS_STYLES = """
 :root {
     --bg-color: #0f111a;
     --text-color: #c9d1d9;
@@ -96,7 +95,33 @@ footer {
     border-top: 1px solid var(--border-color);
     padding-top: 20px;
 }
-</style>
+"""
+
+def generate_index(output_dir, versions):
+    # Sort versions: latest first (numeric descending)
+    # Filter out 'latest' string if present in list to avoid dupe, but create specific card
+    
+    clean_versions = []
+    for v in versions:
+        if v == 'latest': continue
+        if v.startswith('v'):
+            clean_versions.append(v)
+    
+    # Sort descending
+    try:
+        clean_versions.sort(key=lambda x: int(x[1:]), reverse=True)
+    except:
+        clean_versions.sort(reverse=True) # Fallback lexicographical
+        
+    latest_ver = clean_versions[0] if clean_versions else "unknown"
+
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systemd Network Documentation</title>
+    <style>{CSS_STYLES}</style>
 </head>
 <body>
     <div class="container">
@@ -104,14 +129,14 @@ footer {
         
         <div class="hero">
             <h2>Latest Documentation</h2>
-            <p>Comprehensive reference manuals and JSON schemas for systemd version <strong>v259</strong>.</p>
-            <a href="latest/systemd.network.html" class="btn">Read Latest Docs (v259)</a>
+            <p>Comprehensive reference manuals and JSON schemas for systemd version <strong>{latest_ver}</strong>.</p>
+            <a href="latest/systemd.network.html" class="btn">Read Latest Docs ({latest_ver})</a>
         </div>
 
         <h3>All Versions</h3>
         <p>Documentation archives for previous systemd releases.</p>
         <div class="versions-grid">
-            <div class="version-card"><a href="v259/systemd.network.html">v259</a></div><div class="version-card"><a href="v258/systemd.network.html">v258</a></div><div class="version-card"><a href="v257/systemd.network.html">v257</a></div><div class="version-card"><a href="v256/systemd.network.html">v256</a></div><div class="version-card"><a href="v255/systemd.network.html">v255</a></div><div class="version-card"><a href="v254/systemd.network.html">v254</a></div><div class="version-card"><a href="v253/systemd.network.html">v253</a></div><div class="version-card"><a href="v252/systemd.network.html">v252</a></div><div class="version-card"><a href="v251/systemd.network.html">v251</a></div><div class="version-card"><a href="v250/systemd.network.html">v250</a></div><div class="version-card"><a href="v249/systemd.network.html">v249</a></div><div class="version-card"><a href="v248/systemd.network.html">v248</a></div><div class="version-card"><a href="v247/systemd.network.html">v247</a></div><div class="version-card"><a href="v246/systemd.network.html">v246</a></div><div class="version-card"><a href="v245/systemd.network.html">v245</a></div><div class="version-card"><a href="v244/systemd.network.html">v244</a></div><div class="version-card"><a href="v243/systemd.network.html">v243</a></div><div class="version-card"><a href="v242/systemd.network.html">v242</a></div><div class="version-card"><a href="v241/systemd.network.html">v241</a></div><div class="version-card"><a href="v240/systemd.network.html">v240</a></div><div class="version-card"><a href="v239/systemd.network.html">v239</a></div><div class="version-card"><a href="v238/systemd.network.html">v238</a></div><div class="version-card"><a href="v237/systemd.network.html">v237</a></div>
+            {''.join([f'<div class="version-card"><a href="{v}/systemd.network.html">{v}</a></div>' for v in clean_versions])}
         </div>
         
         <footer>
@@ -120,3 +145,16 @@ footer {
     </div>
 </body>
 </html>
+"""
+    
+    with open(os.path.join(output_dir, "index.html"), "w") as f:
+        f.write(html)
+    print(f"Generated landing page at {os.path.join(output_dir, 'index.html')}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--out", required=True)
+    parser.add_argument("--versions", nargs="+", required=True)
+    args = parser.parse_args()
+    
+    generate_index(args.out, args.versions)

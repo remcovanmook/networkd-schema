@@ -45,6 +45,6 @@ cp schemas/$LATEST_VERSION/*.json docs/html/schemas/latest/
 
 # Generate Landing Page
 echo "Generating landing page..."
-echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=latest/systemd.network.html" /></head><body>Redirecting to <a href="latest/systemd.network.html">latest documentation</a>...</body></html>' > docs/html/index.html
+python3 bin/generate_index.py --out docs/html --versions $VERSIONS
 
 echo "Documentation Rebuild Complete."
