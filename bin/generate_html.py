@@ -690,7 +690,7 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
             #   docs/html/schemas/v257/systemd.network.schema.json
             # Relative link from html: ../../schemas/v257/systemd.network.schema.json
             if web_schemas:
-                 base_url = f"../../schemas/{version}/{schema_name}.schema.json"
+                 base_url = f"../schemas/{version}/{schema_name}.schema.json"
             else:
                  # Fallback to GitHub Raw? User requested schemas in /schemas/.
                  # We assume main branch schemas structure
