@@ -238,7 +238,7 @@ def generate_schemas_index(output_dir, versions, clean_versions):
             f.write(v_html)
         print(f"Generated schema listing for {v} in browse/")
 
-def generate_index(output_dir, versions):
+def generate_index(output_dir, versions, force=False):
     # Sort versions: latest first (numeric descending)
     # Filter out 'latest' string if present in list to avoid dupe, but create specific card
     
@@ -269,13 +269,15 @@ def generate_index(output_dir, versions):
         <h1>Systemd Network Documentation</h1>
         
         <p style="text-align: center; font-size: 1.2em; color: #8b949e; margin-bottom: 40px;">
-            Enhanced interactive documentation and strict JSON schemas for systemd's network configuration files 
-            (<code>systemd.network</code>, <code>systemd.netdev</code>, <code>systemd.link</code>, <code>networkd.conf</code>).
+            Enhanced interactive documentation and strictly typed JSON schemas for systemd's network configuration files.
+            <br>
+            <span style="font-size: 0.9em;">(Type-Aware &middot; Version-Controlled &middot; Hybrid Generation)</span>
         </p>
         
         <div class="hero">
             <h2>Latest Documentation</h2>
-            <a href="latest/" class="btn">Read Latest Docs ({latest_ver})</a>
+            <p>Interactive manuals for version <strong>{latest_ver}</strong>.</p>
+            <a href="latest/" class="btn">Read Latest Docs</a>
         </div>
         
         <div style="text-align: center; margin-bottom: 50px;">
@@ -298,9 +300,20 @@ def generate_index(output_dir, versions):
 </html>
 """
     
-    with open(os.path.join(output_dir, "index.html"), "w") as f:
-        f.write(html)
-    print(f"Generated landing page at {os.path.join(output_dir, 'index.html')}")
+    out_path = os.path.join(output_dir, "index.html")
+    write = True
+    if not force and os.path.exists(out_path):
+         try:
+             with open(out_path, 'r') as f:
+                 if f.read() == html:
+                     write = False
+                     print(f"Skipping {out_path} (unchanged)")
+         except: pass
+         
+    if write:
+        with open(out_path, "w") as f:
+            f.write(html)
+        print(f"Generated landing page at {out_path}")
     
     # Also generate Schema Index
     generate_schemas_index(output_dir, versions, clean_versions)
@@ -309,6 +322,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", required=True)
     parser.add_argument("--versions", nargs="+", required=True)
+    parser.add_argument("--force", action="store_true", help="Force overwrite")
     args = parser.parse_args()
     
-    generate_index(args.out, args.versions)
+    generate_index(args.out, args.versions, force=args.force)

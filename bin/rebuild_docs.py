@@ -126,6 +126,8 @@ def main():
     # 7. Generate Landing Page
     print("Generating landing page...")
     cmd_index = ["python3", "bin/generate_index.py", "--out", "docs/html", "--versions"] + versions
+    if args.force:
+        cmd_index.append("--force")
     run_command(cmd_index)
 
     print("Documentation Rebuild Complete.")
