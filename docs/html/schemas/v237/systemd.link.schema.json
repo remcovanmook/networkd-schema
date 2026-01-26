@@ -1,1 +1,484 @@
-../../../schemas/v237/systemd.link.schema.json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v237/systemd.link.schema.json",
+  "title": "Systemd link Configuration (v237)",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "mac_addressType": {
+      "type": "string",
+      "description": "MAC Address (Hex separated by colons or hyphens)",
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "title": "MAC Address",
+      "examples": [
+        "00:11:22:33:44:55"
+      ]
+    },
+    "ipv4_addressType": {
+      "type": "string",
+      "description": "IPv4 Address",
+      "format": "ipv4",
+      "title": "IPv4 Address",
+      "examples": [
+        "192.168.1.1"
+      ]
+    },
+    "ipv6_addressType": {
+      "type": "string",
+      "description": "IPv6 Address",
+      "format": "ipv6",
+      "title": "IPv6 Address",
+      "examples": [
+        "2001:db8::1"
+      ]
+    },
+    "ip_addressType": {
+      "description": "IPv4 or IPv6 Address",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_addressType"
+        },
+        {
+          "$ref": "#/definitions/ipv6_addressType"
+        }
+      ]
+    },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
+      "examples": [
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6_prefixType": {
+      "type": "string",
+      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
+      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
+      "title": "IPv6 CIDR",
+      "examples": [
+        "2001:db8::/64"
+      ]
+    },
+    "ip_prefixType": {
+      "description": "IPv4 or IPv6 Prefix (CIDR)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_prefixType"
+        },
+        {
+          "$ref": "#/definitions/ipv6_prefixType"
+        }
+      ]
+    },
+    "filenameType": {
+      "type": "string",
+      "description": "Filesystem path",
+      "format": "uri-reference",
+      "title": "File Path",
+      "examples": [
+        "/etc/issue"
+      ]
+    },
+    "secondsType": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
+      "format": "duration",
+      "description": "Time duration (e.g. 5s, 1min, 500ms)",
+      "title": "Duration",
+      "examples": [
+        "5s",
+        "100ms",
+        "1min"
+      ]
+    },
+    "rateType": {
+      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "Data Rate",
+      "examples": [
+        "1G",
+        "100M"
+      ]
+    },
+    "bytesType": {
+      "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?B?)?$"
+        }
+      ],
+      "title": "Size in Bytes",
+      "examples": [
+        "1G",
+        "512M",
+        "1024"
+      ],
+      "format": "bytes"
+    },
+    "MTUBytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 68,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$",
+          "format": "bytes"
+        }
+      ],
+      "title": "MTU (Bytes)",
+      "examples": [
+        "1500",
+        "9000"
+      ],
+      "format": "bytes"
+    },
+    "MTUv6BytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1280,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "IPv6 MTU (Bytes)",
+      "examples": [
+        "1280",
+        "1500"
+      ],
+      "format": "bytes"
+    },
+    "uint8Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Unsigned 8-bit integer (0...255).",
+      "title": "Integer (8-bit)",
+      "examples": [
+        128
+      ]
+    },
+    "uint16Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535,
+      "description": "Unsigned 16-bit integer (0...65535).",
+      "title": "Integer (16-bit)",
+      "examples": [
+        1024
+      ]
+    },
+    "uint32Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967294,
+      "description": "Unsigned 32-bit integer (0...4294967294).",
+      "title": "Integer (32-bit)",
+      "examples": [
+        65535
+      ]
+    },
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+      "examples": [
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
+      ]
+    }
+  },
+  "properties": {
+    "Match": {
+      "type": "object",
+      "description": "[Match] section configuration",
+      "properties": {
+        "MACAddress": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/mac_addressType"
+            }
+          ],
+          "description": "A whitespace-separated list of hardware addresses.",
+          "title": "MAC Address Match",
+          "examples": [
+            "12:34:56:78:9a:bc",
+            "00:11:22:33:44:55 66:77:88:99:aa:bb"
+          ],
+          "version_added": "250",
+          "x-subcategory": "Hardware"
+        },
+        "OriginalName": {
+          "description": "A whitespace-separated list of shell-style globs matching the device name, as exposed by the udev property \"INTERFACE\". This cannot be used to match on names that have already been changed from userspace. Caution is advised when matching on kernel-assigned names, as they are known to be unstable between reboots.",
+          "title": "Original Name",
+          "version_added": "218",
+          "$ref": "#/definitions/globsType"
+        },
+        "Path": {
+          "description": "A whitespace-separated list of shell-style globs matching the persistent path, as exposed by the udev property ID_PATH.",
+          "title": "Path",
+          "version_added": "211",
+          "x-subcategory": "Hardware",
+          "$ref": "#/definitions/globsType"
+        },
+        "Driver": {
+          "description": "A whitespace-separated list of shell-style globs matching the driver currently bound to the device, as exposed by the udev property ID_NET_DRIVER of its parent device, or if that is not set, the driver as exposed by ethtool -i of the device itself. If the list is prefixed with a \"!\", the test is inverted.",
+          "title": "Driver",
+          "version_added": "211",
+          "x-subcategory": "Hardware",
+          "$ref": "#/definitions/globsType"
+        },
+        "Type": {
+          "enum": [
+            "ether",
+            "loopback",
+            "wlan",
+            "wwan"
+          ],
+          "description": "A whitespace-separated list of shell-style globs matching the device type, as exposed by networkctl list. If the list is prefixed with a \"!\", the test is inverted. Some valid Valid types are named either from the udev 'DEVTYPE' attribute, or 'ARPHRD_' macros in 'linux/if_arp.h', so this is not comprehensive.",
+          "title": "Type",
+          "examples": [
+            "global",
+            "link",
+            "host"
+          ],
+          "version_added": "211",
+          "x-subcategory": "Hardware",
+          "$ref": "#/definitions/globsType"
+        },
+        "Host": {
+          "type": "string",
+          "description": "Matches against the hostname or machine ID of the host. See ConditionHost= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
+          "title": "Host",
+          "version_added": "211"
+        },
+        "Virtualization": {
+          "type": "string",
+          "description": "Checks whether the system is executed in a virtualized environment and optionally test whether it is a specific implementation. See ConditionVirtualization= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
+          "title": "Virtualization",
+          "version_added": "211",
+          "x-subcategory": "Virtualization"
+        },
+        "KernelCommandLine": {
+          "type": "string",
+          "description": "Checks whether a specific kernel command line option is set. See ConditionKernelCommandLine= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
+          "title": "Kernel Command Line",
+          "version_added": "211"
+        },
+        "KernelVersion": {
+          "type": "string",
+          "description": "Checks whether the kernel version (as reported by uname -r) matches a certain expression. See ConditionKernelVersion= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
+          "title": "Kernel Version",
+          "version_added": "237"
+        },
+        "Architecture": {
+          "type": "string",
+          "description": "Checks whether the system is running on a specific architecture. See ConditionArchitecture= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
+          "title": "Architecture",
+          "version_added": "211"
+        }
+      },
+      "additionalProperties": false,
+      "title": "Match"
+    },
+    "Link": {
+      "type": "object",
+      "description": "[Link] section configuration",
+      "properties": {
+        "Description": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/string"
+            }
+          ],
+          "description": "A description of the device.",
+          "title": "Description",
+          "examples": [
+            "My Interface",
+            "Uplink to ISP"
+          ],
+          "version_added": "211"
+        },
+        "MACAddressPolicy": {
+          "type": "string",
+          "description": "The policy by which the MAC address should be set. The available policies are: If the hardware has a persistent MAC address, as most hardware should, and if it is used by the kernel, nothing is done. Otherwise, a new MAC address is generated which is guaranteed to be the same on every boot for the given machine and the given device, but which is otherwise random. This feature depends on ID_NET_NAME_* properties to exist for the link. On hardware where these properties are not set, the generation of a persistent MAC address will fail. If the kernel is using a random MAC address, nothing is done. Otherwise, a new address is randomly generated each time the device appears, typically at boot. Either way, the random address will have the 'unicast' and 'locally administered' bits set. Keeps the MAC address assigned by the kernel. Or use the MAC address specified in MACAddress=. An empty string assignment is equivalent to setting 'none'.",
+          "title": "MAC Address Policy",
+          "version_added": "211"
+        },
+        "MACAddress": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/mac_addressType"
+            }
+          ],
+          "description": "The interface MAC address to use. For this setting to take effect, MACAddressPolicy= must either be unset, empty, or 'none'.",
+          "title": "Set MAC Address",
+          "examples": [
+            "12:34:56:78:9a:bc",
+            "none"
+          ],
+          "version_added": "211",
+          "x-subcategory": "Hardware"
+        },
+        "NamePolicy": {
+          "type": "string",
+          "description": "An ordered, space-separated list of policies by which the interface name should be set. NamePolicy= may be disabled by specifying 'net.ifnames=0' on the kernel command line. Each of the policies may fail, and the first successful one is used. The name is not set directly, but is exported to udev as the property 'ID_NET_NAME', which is, by default, used by a udev7, rule to set NAME. The available policies are: If the kernel claims that the name it has set for a device is predictable, then no renaming is performed. The name is set based on entries in the udev's Hardware Database with the key ID_NET_NAME_FROM_DATABASE. The name is set based on information given by the firmware for on-board devices, as exported by the udev property ID_NET_NAME_ONBOARD. See systemd.net-naming-scheme7. The name is set based on information given by the firmware for hot-plug devices, as exported by the udev property ID_NET_NAME_SLOT. See systemd.net-naming-scheme7. The name is set based on the device's physical location, as exported by the udev property ID_NET_NAME_PATH. See systemd.net-naming-scheme7. The name is set based on the device's persistent MAC address, as exported by the udev property ID_NET_NAME_MAC. See systemd.net-naming-scheme7. If the device already had a name given by userspace (as part of creation of the device or a rename), keep it.",
+          "title": "Name Policy",
+          "version_added": "216"
+        },
+        "Name": {
+          "type": "string",
+          "description": "The interface name to use. This option has lower precedence than NamePolicy=, so for this setting to take effect, NamePolicy= must either be unset, empty, disabled, or all policies configured there must fail. Also see the example below with 'Name=dmz0'. Note that specifying a name that the kernel might use for another interface (for example 'eth0') is dangerous because the name assignment done by udev will race with the assignment done by the kernel, and only one interface may use the name. Depending on the order of operations, either udev or the kernel will win, making the naming unpredictable. It is best to use some different prefix, for example 'internal0'/'external0' or 'lan0'/'lan1'/'lan3'. Interface names must have a minimum length of 1 character and a maximum length of 15 characters, and may contain any 7bit ASCII character, with the exception of control characters, ':', '/' and '%'. While '.' is an allowed character, it's recommended to avoid it when naming interfaces as various tools (such as resolvconf1) use it as separator character. Also, fully numeric interface names are not allowed (in order to avoid ambiguity with interface specification by numeric indexes), nor are the special strings '.', '..', 'all' and 'default'.",
+          "title": "Name",
+          "examples": [
+            "eth0",
+            "br0"
+          ],
+          "version_added": "211"
+        },
+        "Alias": {
+          "type": "string",
+          "description": "The ifalias interface property is set to this value.",
+          "title": "Alias",
+          "version_added": "211"
+        },
+        "MTUBytes": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MTUBytesType"
+            }
+          ],
+          "description": "The maximum transmission unit in bytes to set for the device. The usual suffixes K, M, G are supported and are understood to the base of 1024.",
+          "title": "MTU (Bytes)",
+          "examples": [
+            "1500",
+            "9000",
+            "auto"
+          ],
+          "version_added": "211",
+          "x-subcategory": "Hardware"
+        },
+        "BitsPerSecond": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/rateType"
+            }
+          ],
+          "description": "The speed to set for the device, the value is rounded down to the nearest Mbps. The usual suffixes K, M, G are supported and are understood to the base of 1000.",
+          "title": "Bits Per Second",
+          "version_added": "211"
+        },
+        "Duplex": {
+          "type": "string",
+          "enum": [
+            "full",
+            "half"
+          ],
+          "description": "The duplex mode to set for the device. The accepted values are 'full' and 'half'.",
+          "title": "Duplex",
+          "version_added": "211"
+        },
+        "AutoNegotiation": {
+          "type": "boolean",
+          "description": "If set to yes, automatic negotiation of transmission parameters is enabled. Autonegotiation is a procedure by which two connected ethernet devices choose common transmission parameters, such as speed, duplex mode, and flow control. When unset, the kernel's default will be used. Note that if autonegotiation is enabled, speed and duplex settings are read-only. If autonegotiation is disabled, speed and duplex settings are writable if the driver supports multiple link modes.",
+          "title": "Auto Negotiation",
+          "version_added": "233"
+        },
+        "WakeOnLan": {
+          "type": "string",
+          "enum": [
+            "off",
+            "phy",
+            "unicast",
+            "multicast",
+            "broadcast",
+            "arp",
+            "magic",
+            "secureon"
+          ],
+          "description": "The Wake-on-LAN policy to set for the device. Takes the special value 'off' which disables Wake-on-LAN, or space separated list of the following words: Wake on PHY activity. Wake on unicast messages. Wake on multicast messages. Wake on broadcast messages. Wake on ARP. Wake on receipt of a magic packet. Enable SecureOn password for MagicPacket. Implied when WakeOnLanPassword= is specified. If specified without WakeOnLanPassword= option, then the password is read from the credential 'LINK.link.wol.password' (e.g., '60-foo.link.wol.password'), and if the credential not found, then read from 'wol.password'. See ImportCredential=/LoadCredential=/SetCredential= in systemd.exec5 for details. The password in the credential, must be 6 bytes in hex format with each byte separated by a colon (':') like an Ethernet MAC address, e.g., 'aa:bb:cc:dd:ee:ff'. Defaults to unset, and the device's default will be used. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
+          "title": "Wake On Lan",
+          "version_added": "211"
+        },
+        "Port": {
+          "type": "string",
+          "description": "The port option is used to select the device port. The supported values are: An Ethernet interface using Twisted-Pair cable as the medium. Attachment Unit Interface (AUI). Normally used with hubs. An Ethernet interface using BNC connectors and co-axial cable. An Ethernet interface using a Media Independent Interface (MII). An Ethernet interface using Optical Fibre as the medium.",
+          "title": "Port",
+          "version_added": "234"
+        },
+        "GenericSegmentationOffload": {
+          "type": "boolean",
+          "description": "If set to true, Generic Segmentation Offload (GSO) is enabled. When unset, the kernel's default will be used.",
+          "title": "Generic Segmentation Offload",
+          "version_added": "232",
+          "x-subcategory": "Offload"
+        },
+        "TCPSegmentationOffload": {
+          "type": "boolean",
+          "description": "If set to true, TCP Segmentation Offload (TSO) is enabled. When unset, the kernel's default will be used.",
+          "title": "TCP Segmentation Offload",
+          "version_added": "232",
+          "x-subcategory": "Offload"
+        },
+        "TCP6SegmentationOffload": {
+          "type": "boolean",
+          "description": "If set to true, TCP6 Segmentation Offload (tx-tcp6-segmentation) is enabled. When unset, the kernel's default will be used.",
+          "title": "TCP6 Segmentation Offload",
+          "version_added": "235"
+        },
+        "UDPSegmentationOffload": {
+          "type": "string",
+          "title": "UDP Segmentation Offload"
+        },
+        "GenericReceiveOffload": {
+          "type": "boolean",
+          "description": "If set to true, Generic Receive Offload (GRO) is enabled. When unset, the kernel's default will be used.",
+          "title": "Generic Receive Offload",
+          "version_added": "232",
+          "x-subcategory": "Offload"
+        },
+        "LargeReceiveOffload": {
+          "type": "boolean",
+          "description": "If set to true, Large Receive Offload (LRO) is enabled. When unset, the kernel's default will be used.",
+          "title": "Large Receive Offload",
+          "version_added": "232",
+          "x-subcategory": "Offload"
+        }
+      },
+      "additionalProperties": false,
+      "title": "Link"
+    }
+  },
+  "dependencies": {
+    "Link": [
+      "Match"
+    ]
+  }
+}

@@ -25,7 +25,8 @@ def main():
          os.makedirs("docs/css")
 
     # Create the link inside docs/html
-    os.symlink("../css", "docs/html/css")
+    # Use copytree to avoid symlink issues in artifact upload
+    shutil.copytree("docs/css", "docs/html/css")
 
     # 3. Identify Versions
     # schemas/vXXX
@@ -92,42 +93,25 @@ def main():
         # cp -r docs/html/vXXX docs/html/latest
         shutil.copytree(f"docs/html/{latest_version}", "docs/html/latest")
 
-    # 6. Publish Schemas (Symlinks) to docs/html/schemas
-    print("Publishing schemas (symlinking)...")
+    # 6. Publish Schemas (Copy) to docs/html/schemas
+    print("Publishing schemas (copying)...")
     schemas_out = "docs/html/schemas"
     os.makedirs(schemas_out, exist_ok=True)
     
     for ver in versions:
-        ver_dir = os.path.join(schemas_out, ver)
-        os.makedirs(ver_dir, exist_ok=True)
-        
-        # Symlink JSON files from ../../../schemas/vXXX/*.json to docs/html/schemas/vXXX/
-        # Relative path from docs/html/schemas/vXXX to schemas/vXXX
-        # is ../../../schemas/vXXX
-        
-        # We need to glob the source files
-        source_files = glob.glob(f"schemas/{ver}/*.json")
-        for src in source_files:
-            fname = os.path.basename(src)
-            # Link target (relative)
-            link_target = os.path.join("../../../", src) 
-            link_name = os.path.join(ver_dir, fname)
-            if os.path.exists(link_name):
-                os.remove(link_name)
-            os.symlink(link_target, link_name)
+        # Copy schemas/vXXX to docs/html/schemas/vXXX
+        src_dir = os.path.join("schemas", ver)
+        dst_dir = os.path.join(schemas_out, ver)
+        shutil.copytree(src_dir, dst_dir)
             
     # Also for latest schema
     if latest_version:
         latest_schema_dir = os.path.join(schemas_out, "latest")
-        os.makedirs(latest_schema_dir, exist_ok=True)
-        source_files = glob.glob(f"schemas/{latest_version}/*.json")
-        for src in source_files:
-            fname = os.path.basename(src)
-            link_target = os.path.join("../../../", src)
-            link_name = os.path.join(latest_schema_dir, fname)
-            if os.path.exists(link_name):
-                os.remove(link_name)
-            os.symlink(link_target, link_name)
+        if os.path.exists(latest_schema_dir):
+            shutil.rmtree(latest_schema_dir)
+        # Copy from schemas/latest_version
+        src_dir = os.path.join("schemas", latest_version)
+        shutil.copytree(src_dir, latest_schema_dir)
 
     # 7. Generate Landing Page
     print("Generating landing page...")
