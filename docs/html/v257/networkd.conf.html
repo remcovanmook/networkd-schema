@@ -52,14 +52,14 @@
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. If set to yes, then <code class="command">systemd-networkd</code>
+                        <p>If set to yes, then <code class="command">systemd-networkd</code>
         measures the traffic of each interface, and
         <code class="command">networkctl status <span class="docbook-replaceable">INTERFACE</span></code> shows the measured speed.
         Defaults to no.</p>
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeter=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeter=no
 </code></pre></div></div>
                 <div id="Network-SpeedMeterIntervalSec" class="option-block">
                     <div class="option-header">
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>A boolean. When true, <code class="command">systemd-networkd</code> will remove rules
+                        <p>When true, <code class="command">systemd-networkd</code> will remove rules
         that are not configured in .network files (except for rules with protocol
         <code>kernel</code>). When false, it will not remove any foreign rules, keeping them even
         if they are not configured in a .network file. Defaults to yes.
@@ -104,7 +104,7 @@
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignRoutingPolicyRules=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignRoutingPolicyRules=yes
 </code></pre></div></div>
                 <div id="Network-ManageForeignRoutes" class="option-block">
                     <div class="option-header">
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>A boolean. When true, <code class="command">systemd-networkd</code> will remove routes
+                        <p>When true, <code class="command">systemd-networkd</code> will remove routes
         that are not configured in .network files (except for routes with protocol
         <code>kernel</code>, <code>dhcp</code> when <code class="varname">KeepConfiguration=</code>
         is true or <code>dhcp</code>, and <code>static</code> when
@@ -130,7 +130,7 @@
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignRoutes=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignRoutes=yes
 </code></pre></div></div>
                 <div id="Network-ManageForeignNextHops" class="option-block">
                     <div class="option-header">
@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>A boolean. When true, <code class="command">systemd-networkd</code> will remove nexthops
+                        <p>When true, <code class="command">systemd-networkd</code> will remove nexthops
         that are not configured in .network files (except for routes with protocol
         <code>kernel</code>). When false, it will
         not remove any foreign nexthops, keeping them even if they are not configured in a .network file.
@@ -154,7 +154,7 @@
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignNextHops=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignNextHops=yes
 </code></pre></div></div>
                 <div id="Network-RouteTable" class="option-block">
                     <div class="option-header">
@@ -199,7 +199,7 @@
                     </div>
                     <div class="option-desc">
                         
-          <p>Configures IPv4 packet forwarding for the system. Takes a boolean value. This controls the
+          <p>Configures IPv4 packet forwarding for the system. This controls the
           <code>net.ipv4.conf.default.forwarding</code> and
           <code>net.ipv4.conf.all.forwarding</code>sysctl options. See
           <a href="https://docs.kernel.org/networking/ip-sysctl.html" target="_blank">IP Sysctl</a>
@@ -215,7 +215,7 @@
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4Forwarding=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4Forwarding=yes
 </code></pre></div></div>
                 <div id="Network-IPv6Forwarding" class="option-block">
                     <div class="option-header">
@@ -232,7 +232,7 @@
                     </div>
                     <div class="option-desc">
                         
-          <p>Configures IPv6 packet forwarding for the system. Takes a boolean value. This controls the
+          <p>Configures IPv6 packet forwarding for the system. This controls the
           <code>net.ipv6.conf.default.forwarding</code> and
           <code>net.ipv6.conf.all.forwarding</code> sysctl options. See
           <a href="https://docs.kernel.org/networking/ip-sysctl.html" target="_blank">IP Sysctl</a>
@@ -248,7 +248,7 @@
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6Forwarding=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6Forwarding=yes
 </code></pre></div></div>
                 <div id="Network-IPv6PrivacyExtensions" class="option-block">
                     <div class="option-header">

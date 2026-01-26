@@ -94,7 +94,7 @@ Run the main build script to generate schemas for all supported versions. This u
 # Incremental build (skips unchanged files)
 python3 build.py
 
-# Force full regeneration
+# Force full regeneration (be aware this will do a checkout of all described versions of systemd source - v237 and up)
 python3 build.py --force
 ```
 

@@ -52,12 +52,12 @@
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. If set to yes, then <code class="command">systemd-networkd</code>
+                        <p>If set to yes, then <code class="command">systemd-networkd</code>
         measures the traffic of each interface, and
         <code class="command">networkctl status <span class="docbook-replaceable">INTERFACE</span></code> shows the measured speed.
         Defaults to no.</p>
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeter=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeter=no
 </code></pre></div></div>
                 <div id="Network-SpeedMeterIntervalSec" class="option-block">
                     <div class="option-header">
@@ -92,12 +92,12 @@
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>A boolean. When true, <code class="command">systemd-networkd</code> will store any routes
+                        <p>When true, <code class="command">systemd-networkd</code> will store any routes
         configured by other tools in its memory. When false, <code class="command">systemd-networkd</code> will
         not manage the foreign routes, thus they are kept even if <code class="varname">KeepConfiguration=</code>
         is false. Defaults to yes.</p>
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignRoutes=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignRoutes=yes
 </code></pre></div></div></div><div id="section-DHCP" class="section-block"><h2>[DHCP] Section</h2>
                 <div id="DHCP-DUIDType" class="option-block">
                     <div class="option-header">

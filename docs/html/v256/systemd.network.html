@@ -566,7 +566,7 @@ Kind=bond
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, the ARP (low-level Address Resolution Protocol)
+          <p>If set to true, the ARP (low-level Address Resolution Protocol)
           for this interface is enabled. When unset, the kernel&#x27;s default will be used.</p>
           <p> For example, disabling ARP is useful when creating multiple MACVLAN or VLAN virtual
           interfaces atop a single lower-level physical interface, which will then only serve as a
@@ -576,7 +576,7 @@ Kind=bond
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ARP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ARP=yes
 </code></pre></div></div>
                 <div id="Link-Multicast" class="option-block">
                     <div class="option-header">
@@ -593,13 +593,13 @@ Kind=bond
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, the multicast flag on the device is enabled. Defaults
+          <p>If set to true, the multicast flag on the device is enabled. Defaults
           to unset.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Multicast=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Multicast=yes
 </code></pre></div></div>
                 <div id="Link-AllMulticast" class="option-block">
                     <div class="option-header">
@@ -616,13 +616,13 @@ Kind=bond
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, the driver retrieves all multicast packets from the
+          <p>If set to true, the driver retrieves all multicast packets from the
           network. This happens when multicast routing is enabled. Defaults to unset.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AllMulticast=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AllMulticast=yes
 </code></pre></div></div>
                 <div id="Link-Promiscuous" class="option-block">
                     <div class="option-header">
@@ -639,7 +639,7 @@ Kind=bond
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, promiscuous mode of the interface is enabled. Defaults
+          <p>If set to true, promiscuous mode of the interface is enabled. Defaults
           to unset.</p>
           <p>If this is set to false for the underlying link of a <code>passthru</code> mode
           MACVLAN/MACVTAP, the virtual interface will be created with the <code>nopromisc</code>
@@ -648,7 +648,7 @@ Kind=bond
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Promiscuous=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Promiscuous=yes
 </code></pre></div></div>
                 <div id="Link-Unmanaged" class="option-block">
                     <div class="option-header">
@@ -665,7 +665,7 @@ Kind=bond
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, no attempts are made to bring up or
+          <p>When <code>yes</code>, no attempts are made to bring up or
           configure matching links, equivalent to when there are no matching network files. Defaults to
           <code>no</code>.</p>
           <p>This is useful for preventing later matching network files from interfering with
@@ -674,7 +674,7 @@ Kind=bond
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Unmanaged=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Unmanaged=yes
 </code></pre></div></div>
                 <div id="Link-Group" class="option-block">
                     <div class="option-header">
@@ -1028,13 +1028,13 @@ IPv6LinkLocalAddressGenerationMode=none
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, sets up the route needed for non-IPv4LL hosts to
+          <p>If set to true, sets up the route needed for non-IPv4LL hosts to
           communicate with IPv4LL-only hosts. Defaults to false.</p>
 
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4LLRoute=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4LLRoute=no
 </code></pre></div></div>
                 <div id="Network-DefaultRouteOnDevice" class="option-block">
                     <div class="option-header">
@@ -1051,7 +1051,7 @@ IPv6LinkLocalAddressGenerationMode=none
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, sets up the IPv4 default route bound to the interface.
+          <p>If set to true, sets up the IPv4 default route bound to the interface.
           Defaults to false. This is useful when creating routes on point-to-point interfaces. This is
           equivalent to e.g. the following,
           <pre><code>ip route add default dev veth99</code></pre>
@@ -1073,7 +1073,7 @@ Table=1234</code></pre></p>
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DefaultRouteOnDevice=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DefaultRouteOnDevice=no
 </code></pre></div></div>
                 <div id="Network-LLMNR" class="option-block">
                     <div class="option-header">
@@ -1090,7 +1090,7 @@ Table=1234</code></pre></p>
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean or <code>resolve</code>. When true, enables
+          <p>or <code>resolve</code>. When true, enables
           <a href="https://tools.ietf.org/html/rfc4795" target="_blank">Link-Local Multicast Name Resolution</a>
           on the link. When set to <code>resolve</code>, only resolution is enabled, but not host
           registration and announcement. Defaults to true. This setting is read by
@@ -1100,7 +1100,7 @@ Table=1234</code></pre></p>
         
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LLMNR=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LLMNR=yes
 </code></pre></div></div>
                 <div id="Network-MulticastDNS" class="option-block">
                     <div class="option-header">
@@ -1344,13 +1344,13 @@ EmitLLDP=customer-bridge
                     <div class="option-desc">
                         
           <p>Specifies the protocol-independent default value for the same settings in
-          [IPv6AcceptRA], [DHCPv4], and [DHCPv6] sections below. Takes a boolean, or the special value
+          [IPv6AcceptRA], [DHCPv4], and [DHCPv6] sections below. , or the special value
           <span class="docbook-option">route</span>. See also the same setting in [DHCPv4] below. Defaults to unset.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=yes
 </code></pre></div></div>
                 <div id="Network-DNSDefaultRoute" class="option-block">
                     <div class="option-header">
@@ -1367,7 +1367,7 @@ EmitLLDP=customer-bridge
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean argument. If true, this link&#x27;s configured DNS servers are used for
+          <p>If true, this link&#x27;s configured DNS servers are used for
           resolving domain names that do not match any link&#x27;s configured <code class="varname">Domains=</code>
           setting. If false, this link&#x27;s configured DNS servers are never used for such domains, and
           are exclusively used for resolving names that match at least one of the domains configured on
@@ -1378,7 +1378,7 @@ EmitLLDP=customer-bridge
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DNSDefaultRoute=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DNSDefaultRoute=yes
 </code></pre></div></div>
                 <div id="Network-IPv6PrivacyExtensions" class="option-block">
                     <div class="option-header">
@@ -1533,14 +1533,14 @@ IPv4ReversePathFilter=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Accept packets with local source addresses. In combination with
+          <p>Accept packets with local source addresses. In combination with
           suitable routing, this can be used to direct packets between two local interfaces over the
           wire and have them accepted properly. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4AcceptLocal=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4AcceptLocal=yes
 </code></pre></div></div>
                 <div id="Network-IPv4RouteLocalnet" class="option-block">
                     <div class="option-header">
@@ -1557,14 +1557,14 @@ IPv4ReversePathFilter=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the kernel does not consider loopback addresses as martian
+          <p>When true, the kernel does not consider loopback addresses as martian
           source or destination while routing. This enables the use of 127.0.0.0/8 for local routing
           purposes. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4RouteLocalnet=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4RouteLocalnet=yes
 </code></pre></div></div>
                 <div id="Network-IPv4ProxyARP" class="option-block">
                     <div class="option-header">
@@ -1581,7 +1581,7 @@ IPv4ReversePathFilter=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures proxy ARP for IPv4. Proxy ARP is the technique in which one
+          <p>Configures proxy ARP for IPv4. Proxy ARP is the technique in which one
           host, usually a router, answers ARP requests intended for another machine. By &quot;faking&quot; its
           identity, the router accepts responsibility for routing packets to the &quot;real&quot; destination.
           See <a href="https://tools.ietf.org/html/rfc1027" target="_blank">RFC 1027</a>. When unset, the
@@ -1590,7 +1590,7 @@ IPv4ReversePathFilter=no
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4ProxyARP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4ProxyARP=yes
 </code></pre></div></div>
                 <div id="Network-IPv4ProxyARPPrivateVLAN" class="option-block">
                     <div class="option-header">
@@ -1607,7 +1607,7 @@ IPv4ReversePathFilter=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures proxy ARP private VLAN for IPv4, also known as VLAN aggregation,
+          <p>Configures proxy ARP private VLAN for IPv4, also known as VLAN aggregation,
           private VLAN, source-port filtering, port-isolation, or MAC-forced forwarding.</p>
 
           <p>This variant of the ARP proxy technique will allow the ARP proxy to reply back to the same
@@ -1618,7 +1618,7 @@ IPv4ReversePathFilter=no
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4ProxyARPPrivateVLAN=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4ProxyARPPrivateVLAN=yes
 </code></pre></div></div>
                 <div id="Network-IPv6ProxyNDP" class="option-block">
                     <div class="option-header">
@@ -1635,7 +1635,7 @@ IPv4ReversePathFilter=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures proxy NDP for IPv6. Proxy NDP (Neighbor Discovery Protocol)
+          <p>Configures proxy NDP for IPv6. Proxy NDP (Neighbor Discovery Protocol)
           is a technique for IPv6 to allow routing of addresses to a different destination when peers
           expect them to be present on a certain physical link. In this case a router answers Neighbour
           Advertisement messages intended for another machine by offering its own MAC address as
@@ -1648,7 +1648,7 @@ IPv4ReversePathFilter=no
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6ProxyNDP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6ProxyNDP=yes
 </code></pre></div></div>
                 <div id="Network-IPv6ProxyNDPAddress" class="option-block">
                     <div class="option-header">
@@ -1692,7 +1692,7 @@ IPv4ReversePathFilter=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value. When enabled, requests subnet prefixes on another link via the DHCPv6
+          <p>When enabled, requests subnet prefixes on another link via the DHCPv6
           protocol or via the 6RD option in the DHCPv4 protocol. An address within each delegated prefix will
           be assigned, and the prefixes will be announced through IPv6 Router Advertisement if
           <code class="varname">IPv6SendRA=</code> is enabled. This behaviour can be configured in the
@@ -1701,7 +1701,7 @@ IPv4ReversePathFilter=no
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DHCPPrefixDelegation=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DHCPPrefixDelegation=no
 </code></pre></div></div>
                 <div id="Network-IPv6MTUBytes" class="option-block">
                     <div class="option-header">
@@ -1742,7 +1742,7 @@ IPv6MTUBytes=1500
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value. When enabled, the current master interface index will not be
+          <p>When enabled, the current master interface index will not be
           changed, and <code class="varname">BatmanAdvanced=</code>, <code class="varname">Bond=</code>,
           <code class="varname">Bridge=</code>, and <code class="varname">VRF=</code> settings are ignored. This may be
           useful when a netdev with a master interface is created by another program, e.g.
@@ -1752,7 +1752,7 @@ IPv6MTUBytes=1500
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KeepMaster=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KeepMaster=no
 </code></pre></div></div>
                 <div id="Network-BatmanAdvanced" class="option-block">
                     <div class="option-header">
@@ -1819,14 +1819,14 @@ IPv6MTUBytes=1500
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Specifies the new active slave. The <code>ActiveSlave=</code>
+          <p>Specifies the new active slave. The <code>ActiveSlave=</code>
           option is only valid for following modes: <code>active-backup</code>,
           <code>balance-alb</code>, and <code>balance-tlb</code>. Defaults to false.</p>
 
         
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ActiveSlave=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ActiveSlave=no
 </code></pre></div></div>
                 <div id="Network-PrimarySlave" class="option-block">
                     <div class="option-header">
@@ -1843,7 +1843,7 @@ IPv6MTUBytes=1500
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Specifies which slave is the primary device. The specified device will
+          <p>Specifies which slave is the primary device. The specified device will
           always be the active slave while it is available. Only when the primary is off-line will
           alternate devices be used.  This is useful when one slave is preferred over another, e.g.
           when one slave has higher throughput than another. The <code>PrimarySlave=</code>
@@ -1853,7 +1853,7 @@ IPv6MTUBytes=1500
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PrimarySlave=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PrimarySlave=no
 </code></pre></div></div>
                 <div id="Network-ConfigureWithoutCarrier" class="option-block">
                     <div class="option-header">
@@ -1870,14 +1870,14 @@ IPv6MTUBytes=1500
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Allows networkd to configure a specific link even if it has no
+          <p>Allows networkd to configure a specific link even if it has no
           carrier. Defaults to false. If enabled, and the <code class="varname">IgnoreCarrierLoss=</code> setting
           is not explicitly set, then it is enabled as well.</p>
 
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ConfigureWithoutCarrier=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ConfigureWithoutCarrier=no
 </code></pre></div></div>
                 <div id="Network-IgnoreCarrierLoss" class="option-block">
                     <div class="option-header">
@@ -2194,7 +2194,7 @@ DHCP=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to <code>yes</code>, DHCPv4 server will be started.
+          <p>If set to <code>yes</code>, DHCPv4 server will be started.
           Defaults to <code>no</code>. Further settings for the DHCP server may be set in the
           [DHCPServer] section described below.</p>
 
@@ -2210,7 +2210,7 @@ DHCP=no
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DHCPServer=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DHCPServer=yes
 </code></pre></div></div>
                 <div id="Network-IPv6AcceptRA" class="option-block">
                     <div class="option-header">
@@ -2227,7 +2227,7 @@ DHCP=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Controls IPv6 Router Advertisement (RA) reception support for the interface.
+          <p>Controls IPv6 Router Advertisement (RA) reception support for the interface.
           If true, RAs are accepted; if false, RAs are ignored. When RAs are accepted, they may trigger the
           start of the DHCPv6 client if the relevant flags are set in the RA data, or if no routers are found
           on the link. Defaults to false for bridge devices, when IP forwarding is enabled,
@@ -2254,7 +2254,7 @@ DHCP=no
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6AcceptRA=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6AcceptRA=yes
 </code></pre></div></div>
                 <div id="Network-IPv6SendRA" class="option-block">
                     <div class="option-header">
@@ -2271,8 +2271,7 @@ DHCP=no
                     </div>
                     <div class="option-desc">
                         
-          <p>Whether to enable or disable Router Advertisement sending on a link. Takes a boolean
-          value. When enabled, prefixes configured in [IPv6Prefix] sections and routes configured in
+          <p>Whether to enable or disable Router Advertisement sending on a link. value. When enabled, prefixes configured in [IPv6Prefix] sections and routes configured in
           the [IPv6RoutePrefix] sections are distributed as defined in the [IPv6SendRA] section. If
           <code class="varname">DHCPPrefixDelegation=</code> is enabled, then the delegated prefixes are also
           distributed. See <code class="varname">DHCPPrefixDelegation=</code> setting and the [IPv6SendRA],
@@ -2285,7 +2284,7 @@ DHCP=no
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6SendRA=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6SendRA=yes
 </code></pre></div></div><h3 class="subcategory-header">Link Configuration</h3>
                 <div id="Network-LinkLocalAddressing" class="option-block">
                     <div class="option-header">
@@ -2335,7 +2334,7 @@ LinkLocalAddressing=ipv6
                     </div>
                     <div class="option-desc">
                         
-          <p>Configures IPv4 packet forwarding for the interface. Takes a boolean value. This controls the
+          <p>Configures IPv4 packet forwarding for the interface. This controls the
           <code>net.ipv4.conf.<span class="docbook-replaceable">INTERFACE</span>.forwarding</code> sysctl option of
           the network interface. See
           <a href="https://docs.kernel.org/networking/ip-sysctl.html" target="_blank">IP Sysctl</a>
@@ -2351,7 +2350,7 @@ LinkLocalAddressing=ipv6
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4Forwarding=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4Forwarding=yes
 </code></pre></div></div>
                 <div id="Network-IPv6Forwarding" class="option-block">
                     <div class="option-header">
@@ -2368,7 +2367,7 @@ LinkLocalAddressing=ipv6
                     </div>
                     <div class="option-desc">
                         
-          <p>Configures IPv6 packet forwarding for the interface. Takes a boolean value. This controls the
+          <p>Configures IPv6 packet forwarding for the interface. This controls the
           <code>net.ipv6.conf.<span class="docbook-replaceable">INTERFACE</span>.forwarding</code> sysctl option of
           the network interface. See
           <a href="https://docs.kernel.org/networking/ip-sysctl.html" target="_blank">IP Sysctl</a>
@@ -2385,7 +2384,7 @@ LinkLocalAddressing=ipv6
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6Forwarding=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6Forwarding=yes
 </code></pre></div></div>
                 <div id="Network-IPMasquerade" class="option-block">
                     <div class="option-header">
@@ -2617,14 +2616,14 @@ Scope=link
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Designates this address the &quot;home address&quot; as defined in
+          <p>Designates this address the &quot;home address&quot; as defined in
           <a href="https://tools.ietf.org/html/rfc6275" target="_blank">RFC 6275</a>. Supported only on IPv6.
           Defaults to false.</p>
 
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>false</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>HomeAddress=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>HomeAddress=no
 </code></pre></div></div>
                 <div id="Address-DuplicateAddressDetection" class="option-block">
                     <div class="option-header">
@@ -2670,7 +2669,7 @@ DuplicateAddressDetection=both
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If true the kernel manage temporary addresses created from this one as
+          <p>If true the kernel manage temporary addresses created from this one as
           template on behalf of Privacy Extensions
           <a href="https://tools.ietf.org/html/rfc3041" target="_blank">RFC 3041</a>. For this to become active,
           the use_tempaddr sysctl setting has to be set to a value greater than zero. The given address
@@ -2681,7 +2680,7 @@ DuplicateAddressDetection=both
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>false</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageTemporaryAddress=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageTemporaryAddress=no
 </code></pre></div></div>
                 <div id="Address-AddPrefixRoute" class="option-block">
                     <div class="option-header">
@@ -2698,13 +2697,13 @@ DuplicateAddressDetection=both
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the prefix route for the address is automatically added.
+          <p>When true, the prefix route for the address is automatically added.
           Defaults to true.</p>
 
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AddPrefixRoute=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AddPrefixRoute=yes
 </code></pre></div></div>
                 <div id="Address-AutoJoin" class="option-block">
                     <div class="option-header">
@@ -2721,7 +2720,7 @@ DuplicateAddressDetection=both
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Joining multicast group on ethernet level via
+          <p>Joining multicast group on ethernet level via
           <code class="command">ip maddr</code> command would not work if we have an Ethernet switch that does
           IGMP snooping since the switch would not replicate multicast packets on  ports that did not
           have IGMP reports for the multicast addresses. Linux vxlan interfaces created via
@@ -2734,7 +2733,7 @@ DuplicateAddressDetection=both
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoJoin=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoJoin=no
 </code></pre></div></div>
                 <div id="Address-NetLabel" class="option-block">
                     <div class="option-header">
@@ -3230,7 +3229,7 @@ Priority=20
                     </div>
                     <div class="option-desc">
                         
-          <p>A boolean. Specifies whether the rule is to direct lookups to the tables associated with
+          <p>Specifies whether the rule is to direct lookups to the tables associated with
           level 3 master devices (also known as Virtual Routing and Forwarding or VRF devices).
           For further details see <a href="https://docs.kernel.org/networking/vrf.html" target="_blank">
           Virtual Routing and Forwarding (VRF)</a>. Defaults to false.</p>
@@ -3238,7 +3237,7 @@ Priority=20
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>L3MasterDevice=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>L3MasterDevice=no
 </code></pre></div></div>
                 <div id="RoutingPolicyRule-SourcePort" class="option-block">
                     <div class="option-header">
@@ -3523,7 +3522,7 @@ Family=ipv6
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, the kernel does not have to check if the gateway is
+          <p>If set to true, the kernel does not have to check if the gateway is
           reachable directly by the current machine (i.e., attached to the local network), so that we
           can insert the nexthop in the kernel table without it being complained about. Defaults to
           <code>no</code>.</p>
@@ -3531,7 +3530,7 @@ Family=ipv6
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OnLink=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OnLink=no
 </code></pre></div></div>
                 <div id="NextHop-Blackhole" class="option-block">
                     <div class="option-header">
@@ -3548,14 +3547,14 @@ Family=ipv6
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If enabled, packets to the corresponding routes are discarded
+          <p>If enabled, packets to the corresponding routes are discarded
           silently, and <code class="varname">Gateway=</code> cannot be specified. Defaults to
           <code>no</code>.</p>
 
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Blackhole=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Blackhole=no
 </code></pre></div></div>
                 <div id="NextHop-Group" class="option-block">
                     <div class="option-header">
@@ -3626,7 +3625,7 @@ Gateway=_ipv6ra
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, the kernel does not have to check if the gateway is
+          <p>If set to true, the kernel does not have to check if the gateway is
           reachable directly by the current machine (i.e., attached to the local network), so that we
           can insert the route in the kernel table without it being complained about. Defaults to
           <code>no</code>.</p>
@@ -3634,7 +3633,7 @@ Gateway=_ipv6ra
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GatewayOnLink=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GatewayOnLink=no
 </code></pre></div></div>
                 <div id="Route-Destination" class="option-block">
                     <div class="option-header">
@@ -3998,13 +3997,13 @@ InitialAdvertisedReceiveWindow=512M
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the TCP quick ACK mode for the route is enabled. When unset,
+          <p>When true, the TCP quick ACK mode for the route is enabled. When unset,
           the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuickAck=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuickAck=yes
 </code></pre></div></div>
                 <div id="Route-FastOpenNoCookie" class="option-block">
                     <div class="option-header">
@@ -4021,13 +4020,13 @@ InitialAdvertisedReceiveWindow=512M
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true enables TCP fastopen without a cookie on a per-route basis.
+          <p>When true enables TCP fastopen without a cookie on a per-route basis.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FastOpenNoCookie=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FastOpenNoCookie=yes
 </code></pre></div></div>
                 <div id="Route-MTUBytes" class="option-block">
                     <div class="option-header">
@@ -4443,7 +4442,7 @@ ClientIdentifier=mac
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. The DHCPv4 client can obtain configuration parameters from a DHCPv4 server
+          <p>The DHCPv4 client can obtain configuration parameters from a DHCPv4 server
           through a rapid two-message exchange (discover and ack). When the rapid commit option is set by
           both the DHCPv4 client and the DHCPv4 server, the two-message exchange is used. Otherwise, the
           four-message exchange (discover, offer, request, and ack) is used. The two-message exchange
@@ -4455,7 +4454,7 @@ ClientIdentifier=mac
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RapidCommit=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RapidCommit=yes
 </code></pre></div></div>
                 <div id="DHCPv4-Anonymize" class="option-block">
                     <div class="option-header">
@@ -4472,7 +4471,7 @@ ClientIdentifier=mac
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the options sent to the DHCP server will follow the
+          <p>When true, the options sent to the DHCP server will follow the
           <a href="https://tools.ietf.org/html/rfc7844" target="_blank">RFC 7844</a> (Anonymity Profiles for
           DHCP Clients) to minimize disclosure of identifying information. Defaults to false.</p>
 
@@ -4510,7 +4509,7 @@ ClientIdentifier=mac
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Anonymize=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Anonymize=no
 </code></pre></div></div>
                 <div id="DHCPv4-RequestOptions" class="option-block">
                     <div class="option-header">
@@ -4701,7 +4700,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDNS=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDNS=yes
 </code></pre></div></div>
                 <div id="DHCPv4-RoutesToDNS" class="option-block">
                     <div class="option-header">
@@ -4725,7 +4724,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RoutesToDNS=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RoutesToDNS=yes
 </code></pre></div></div>
                 <div id="DHCPv4-UseNTP" class="option-block">
                     <div class="option-header">
@@ -4748,7 +4747,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseNTP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseNTP=yes
 </code></pre></div></div>
                 <div id="DHCPv4-RoutesToNTP" class="option-block">
                     <div class="option-header">
@@ -4772,7 +4771,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RoutesToNTP=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RoutesToNTP=yes
 </code></pre></div></div>
                 <div id="DHCPv4-UseSIP" class="option-block">
                     <div class="option-header">
@@ -4795,7 +4794,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseSIP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseSIP=yes
 </code></pre></div></div>
                 <div id="DHCPv4-UseCaptivePortal" class="option-block">
                     <div class="option-header">
@@ -4820,7 +4819,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseCaptivePortal=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseCaptivePortal=yes
 </code></pre></div></div>
                 <div id="DHCPv4-UseMTU" class="option-block">
                     <div class="option-header">
@@ -4848,7 +4847,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseMTU=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseMTU=no
 </code></pre></div></div>
                 <div id="DHCPv4-UseHostname" class="option-block">
                     <div class="option-header">
@@ -4871,7 +4870,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseHostname=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseHostname=yes
 </code></pre></div></div>
                 <div id="DHCPv4-UseDomains" class="option-block">
                     <div class="option-header">
@@ -4888,7 +4887,7 @@ IPServiceType=CS4
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean, or the special value <span class="docbook-option">route</span>. When true, the domain name
+          <p>, or the special value <span class="docbook-option">route</span>. When true, the domain name
           received from the DHCP server will be used as DNS search domain over this link, similarly to the
           effect of the <span class="docbook-option">Domains=</span> setting. If set to <span class="docbook-option">route</span>, the domain name
           received from the DHCP server will be used for routing DNS queries only, but not for searching,
@@ -4915,7 +4914,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=no
 </code></pre></div></div>
                 <div id="DHCPv4-UseRoutes" class="option-block">
                     <div class="option-header">
@@ -4943,7 +4942,7 @@ IPServiceType=CS4
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRoutes=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRoutes=yes
 </code></pre></div></div>
                 <div id="DHCPv4-RouteMetric" class="option-block">
                     <div class="option-header">
@@ -5037,13 +5036,13 @@ RouteTable=local
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the TCP quick ACK mode is enabled for the routes configured by
+          <p>When true, the TCP quick ACK mode is enabled for the routes configured by
           the acquired DHCPv4 lease. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuickAck=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuickAck=yes
 </code></pre></div></div>
                 <div id="DHCPv4-InitialCongestionWindow" class="option-block">
                     <div class="option-header">
@@ -5116,7 +5115,7 @@ InitialAdvertisedReceiveWindow=512M
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseGateway=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseGateway=yes
 </code></pre></div></div>
                 <div id="DHCPv4-UseTimezone" class="option-block">
                     <div class="option-header">
@@ -5137,7 +5136,7 @@ InitialAdvertisedReceiveWindow=512M
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseTimezone=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseTimezone=no
 </code></pre></div></div>
                 <div id="DHCPv4-Use6RD" class="option-block">
                     <div class="option-header">
@@ -5163,7 +5162,7 @@ InitialAdvertisedReceiveWindow=512M
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Use6RD=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Use6RD=no
 </code></pre></div></div>
                 <div id="DHCPv4-IPv6OnlyMode" class="option-block">
                     <div class="option-header">
@@ -5188,7 +5187,7 @@ InitialAdvertisedReceiveWindow=512M
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6OnlyMode=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6OnlyMode=no
 </code></pre></div></div>
                 <div id="DHCPv4-FallbackLeaseLifetimeSec" class="option-block">
                     <div class="option-header">
@@ -5238,7 +5237,7 @@ FallbackLeaseLifetimeSec=infinity
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RequestBroadcast=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RequestBroadcast=yes
 </code></pre></div></div>
                 <div id="DHCPv4-MaxAttempts" class="option-block">
                     <div class="option-header">
@@ -5386,7 +5385,7 @@ FallbackLeaseLifetimeSec=infinity
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SendRelease=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SendRelease=yes
 </code></pre></div></div>
                 <div id="DHCPv4-SendDecline" class="option-block">
                     <div class="option-header">
@@ -5403,7 +5402,7 @@ FallbackLeaseLifetimeSec=infinity
                     </div>
                     <div class="option-desc">
                         
-          <p>A boolean. When true, <code class="command">systemd-networkd</code> performs IPv4 Duplicate
+          <p>When true, <code class="command">systemd-networkd</code> performs IPv4 Duplicate
           Address Detection to the acquired address by the DHCPv4 client. If duplicate is detected,
           the DHCPv4 client rejects the address by sending a <code class="constant">DHCPDECLINE</code> packet to
           the DHCP server, and tries to obtain an IP address again. See
@@ -5412,7 +5411,7 @@ FallbackLeaseLifetimeSec=infinity
         
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SendDecline=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SendDecline=no
 </code></pre></div></div>
                 <div id="DHCPv4-NetLabel" class="option-block">
                     <div class="option-header">
@@ -5636,7 +5635,7 @@ FallbackLeaseLifetimeSec=infinity
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. The DHCPv6 client can obtain configuration parameters from a DHCPv6 server
+          <p>The DHCPv6 client can obtain configuration parameters from a DHCPv6 server
           through a rapid two-message exchange (solicit and reply). When the rapid commit option is set by
           both the DHCPv6 client and the DHCPv6 server, the two-message exchange is used. Otherwise, the
           four-message exchange (solicit, advertise, request, and reply) is used. The two-message exchange
@@ -5647,7 +5646,7 @@ FallbackLeaseLifetimeSec=infinity
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RapidCommit=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RapidCommit=yes
 </code></pre></div></div>
                 <div id="DHCPv6-SendHostname" class="option-block">
                     <div class="option-header">
@@ -5720,7 +5719,7 @@ FallbackLeaseLifetimeSec=infinity
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseAddress=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseAddress=yes
 </code></pre></div></div>
                 <div id="DHCPv6-UseCaptivePortal" class="option-block">
                     <div class="option-header">
@@ -5745,7 +5744,7 @@ FallbackLeaseLifetimeSec=infinity
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseCaptivePortal=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseCaptivePortal=yes
 </code></pre></div></div>
                 <div id="DHCPv6-UseDelegatedPrefix" class="option-block">
                     <div class="option-header">
@@ -5773,7 +5772,7 @@ FallbackLeaseLifetimeSec=infinity
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDelegatedPrefix=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDelegatedPrefix=yes
 </code></pre></div></div>
                 <div id="DHCPv6-UseDNS" class="option-block">
                     <div class="option-header">
@@ -5795,7 +5794,7 @@ FallbackLeaseLifetimeSec=infinity
         
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDNS=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDNS=yes
 </code></pre></div></div>
                 <div id="DHCPv6-NFTSet" class="option-block">
                     <div class="option-header">
@@ -5922,7 +5921,7 @@ WithoutRA=information-request
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When enabled, and <code class="varname">IPv6SendRA=</code> in [Network] section
+          <p>When enabled, and <code class="varname">IPv6SendRA=</code> in [Network] section
           is enabled, the delegated prefixes are distributed through the IPv6 Router Advertisement.
           This setting will be ignored when the <code class="varname">DHCPPrefixDelegation=</code> setting is
           enabled on the upstream interface. Defaults to yes.</p>
@@ -5930,7 +5929,7 @@ WithoutRA=information-request
         
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Announce=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Announce=yes
 </code></pre></div></div>
                 <div id="DHCPPrefixDelegation-Assign" class="option-block">
                     <div class="option-header">
@@ -5947,7 +5946,7 @@ WithoutRA=information-request
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Specifies whether to add an address from the delegated prefixes which
+          <p>Specifies whether to add an address from the delegated prefixes which
           are received from the WAN interface by the DHCPv6 Prefix Delegation. When true (on LAN
           interface), the EUI-64 algorithm will be used by default to form an interface identifier from
           the delegated prefixes. See also <code class="varname">Token=</code> setting below. Defaults to yes.
@@ -5956,7 +5955,7 @@ WithoutRA=information-request
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Assign=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Assign=yes
 </code></pre></div></div>
                 <div id="DHCPPrefixDelegation-Token" class="option-block">
                     <div class="option-header">
@@ -6003,7 +6002,7 @@ WithoutRA=information-request
         
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageTemporaryAddress=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageTemporaryAddress=yes
 </code></pre></div></div>
                 <div id="DHCPPrefixDelegation-RouteMetric" class="option-block">
                     <div class="option-header">
@@ -6199,7 +6198,7 @@ Token=prefixstable:2002:da8:1::</code></pre></p>
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRedirect=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRedirect=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseDNS" class="option-block">
                     <div class="option-header">
@@ -6223,7 +6222,7 @@ Token=prefixstable:2002:da8:1::</code></pre></p>
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDNS=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDNS=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseDomains" class="option-block">
                     <div class="option-header">
@@ -6331,13 +6330,13 @@ UseDomains=route
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the TCP quick ACK mode is enabled for the routes configured by
+          <p>When true, the TCP quick ACK mode is enabled for the routes configured by
           the received RAs. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuickAck=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuickAck=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseMTU" class="option-block">
                     <div class="option-header">
@@ -6354,13 +6353,13 @@ UseDomains=route
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the MTU received in the Router Advertisement will be
+          <p>When true, the MTU received in the Router Advertisement will be
           used. Defaults to true.</p>
 
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseMTU=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseMTU=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseHopLimit" class="option-block">
                     <div class="option-header">
@@ -6377,13 +6376,13 @@ UseDomains=route
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the hop limit received in the Router Advertisement will be set to routes
+          <p>When true, the hop limit received in the Router Advertisement will be set to routes
           configured based on the advertisement. See also <code class="varname">IPv6HopLimit=</code>. Defaults to true.</p>
 
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseHopLimit=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseHopLimit=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseReachableTime" class="option-block">
                     <div class="option-header">
@@ -6400,14 +6399,14 @@ UseDomains=route
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the reachable time received in the Router Advertisement will be
+          <p>When true, the reachable time received in the Router Advertisement will be
           set on the interface receiving the advertisement. It is used as the base timespan of the validity
           of a neighbor entry. Defaults to true.</p>
 
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseReachableTime=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseReachableTime=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseRetransmissionTime" class="option-block">
                     <div class="option-header">
@@ -6424,7 +6423,7 @@ UseDomains=route
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the retransmission time received in the Router Advertisement will be set
+          <p>When true, the retransmission time received in the Router Advertisement will be set
           on the interface receiving the advertisement. It is used as the time between retransmissions of Neighbor
           Solicitation messages to a neighbor when resolving the address or when probing the reachability of a neighbor.
           Defaults to true.</p>
@@ -6432,7 +6431,7 @@ UseDomains=route
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRetransmissionTime=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRetransmissionTime=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseGateway" class="option-block">
                     <div class="option-header">
@@ -6455,7 +6454,7 @@ UseDomains=route
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseGateway=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseGateway=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseRoutePrefix" class="option-block">
                     <div class="option-header">
@@ -6478,7 +6477,7 @@ UseDomains=route
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRoutePrefix=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRoutePrefix=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseCaptivePortal" class="option-block">
                     <div class="option-header">
@@ -6503,7 +6502,7 @@ UseDomains=route
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseCaptivePortal=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseCaptivePortal=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UsePREF64" class="option-block">
                     <div class="option-header">
@@ -6529,7 +6528,7 @@ UseDomains=route
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UsePREF64=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UsePREF64=no
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseAutonomousPrefix" class="option-block">
                     <div class="option-header">
@@ -6552,7 +6551,7 @@ UseDomains=route
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseAutonomousPrefix=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseAutonomousPrefix=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-UseOnLinkPrefix" class="option-block">
                     <div class="option-header">
@@ -6575,7 +6574,7 @@ UseDomains=route
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseOnLinkPrefix=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseOnLinkPrefix=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-RouterDenyList" class="option-block">
                     <div class="option-header">
@@ -6739,7 +6738,7 @@ UseDomains=route
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean, or the special value <code>always</code>. When true, the
+          <p>, or the special value <code>always</code>. When true, the
           DHCPv6 client will be started in <code>solicit</code> mode if the RA has the
           <code>managed</code> flag or <code>information-request</code> mode if the RA
           lacks the <code>managed</code> flag but has the
@@ -6754,7 +6753,7 @@ UseDomains=route
         
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DHCPv6Client=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DHCPv6Client=yes
 </code></pre></div></div>
                 <div id="IPv6AcceptRA-NetLabel" class="option-block">
                     <div class="option-header">
@@ -6961,7 +6960,7 @@ DefaultLeaseTimeSec=100ms
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p><code class="varname">EmitDNS=</code> takes a boolean. Configures whether the DHCP leases
+                        <p><code class="varname">EmitDNS=</code> Configures whether the DHCP leases
         handed out to clients shall contain DNS server information. Defaults to <code>yes</code>.
         The DNS servers to pass to clients may be configured with the <code class="varname">DNS=</code> option,
         which takes a list of IPv4 addresses, or special value <code>_server_address</code> which
@@ -6983,7 +6982,7 @@ DefaultLeaseTimeSec=100ms
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitDNS=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitDNS=yes
 </code></pre></div></div>
                 <div id="DHCPServer-EmitNTP" class="option-block">
                     <div class="option-header">
@@ -7006,7 +7005,7 @@ DefaultLeaseTimeSec=100ms
 
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitNTP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitNTP=yes
 </code></pre></div></div>
                 <div id="DHCPServer-EmitRouter" class="option-block">
                     <div class="option-header">
@@ -7022,7 +7021,7 @@ DefaultLeaseTimeSec=100ms
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>The <code class="varname">EmitRouter=</code> setting takes a boolean value, and configures
+                        <p>The <code class="varname">EmitRouter=</code> setting , and configures
         whether the DHCP lease should contain the router option. The <code class="varname">Router=</code> setting
         takes an IPv4 address, and configures the router address to be emitted. When the
         <code class="varname">Router=</code> setting is not specified, then the server address will be used for
@@ -7033,7 +7032,7 @@ DefaultLeaseTimeSec=100ms
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitRouter=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitRouter=yes
 </code></pre></div></div>
                 <div id="DHCPServer-EmitTimezone" class="option-block">
                     <div class="option-header">
@@ -7049,7 +7048,7 @@ DefaultLeaseTimeSec=100ms
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. Configures whether the DHCP leases handed out
+                        <p>Configures whether the DHCP leases handed out
         to clients shall contain timezone information. Defaults to <code>yes</code>. The
         <code class="varname">Timezone=</code> setting takes a timezone string
         (such as <code>Europe/Berlin</code> or
@@ -7060,7 +7059,7 @@ DefaultLeaseTimeSec=100ms
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitTimezone=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitTimezone=yes
 </code></pre></div></div>
                 <div id="DHCPServer-BootServerAddress" class="option-block">
                     <div class="option-header">
@@ -7238,7 +7237,7 @@ SendVendorOption=string
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value. When <code>yes</code>, DHCP server socket will be bound
+          <p>When <code>yes</code>, DHCP server socket will be bound
           to its network interface and all socket communication will be restricted to this interface.
           Defaults to <code>yes</code>, except if <code class="varname">RelayTarget=</code> is used (see below),
           in which case it defaults to <code>no</code>.</p>
@@ -7246,7 +7245,7 @@ SendVendorOption=string
         
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BindToInterface=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BindToInterface=yes
 </code></pre></div></div>
                 <div id="DHCPServer-RelayTarget" class="option-block">
                     <div class="option-header">
@@ -7340,7 +7339,7 @@ SendVendorOption=string
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the server supports
+          <p>When true, the server supports
           <a href="https://datatracker.ietf.org/doc/html/rfc4039" target="_blank">RFC 4039</a>. When a client sends
           a DHCPDISCOVER message with the Rapid Commit option to the server, then the server will reply with
           a DHCPACK message to the client, instead of DHCPOFFER. Defaults to true.</p>
@@ -7348,7 +7347,7 @@ SendVendorOption=string
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RapidCommit=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RapidCommit=yes
 </code></pre></div></div>
                 <div id="DHCPServer-PersistLeases" class="option-block">
                     <div class="option-header">
@@ -7365,7 +7364,7 @@ SendVendorOption=string
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the DHCP server will load and save leases in the persistent
+          <p>When true, the DHCP server will load and save leases in the persistent
           storage. When false, the DHCP server will neither load nor save leases in the persistent storage.
           Hence, bound leases will be lost when the interface is reconfigured e.g. by
           <code class="command">networkctl reconfigure</code>, or <code>systemd-networkd.service</code>
@@ -7377,7 +7376,7 @@ SendVendorOption=string
           
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PersistLeases=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PersistLeases=yes
 </code></pre></div></div></div><div id="section-DHCPServerStaticLease" class="section-block"><h2>[DHCPServerStaticLease] Section</h2>
                 <div id="DHCPServerStaticLease-MACAddress" class="option-block">
                     <div class="option-header">
@@ -7434,7 +7433,7 @@ SendVendorOption=string
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. Controls whether a DHCPv6 server is used to acquire IPv6
+                        <p>Controls whether a DHCPv6 server is used to acquire IPv6
         addresses on the network link when <code class="varname">Managed=</code>
         is set to <code>true</code> or if only additional network
         information can be obtained via DHCPv6 for the network link when
@@ -7445,7 +7444,7 @@ SendVendorOption=string
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Managed=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Managed=no
 </code></pre></div></div>
                 <div id="IPv6SendRA-RouterLifetimeSec" class="option-block">
                     <div class="option-header">
@@ -7626,7 +7625,7 @@ RouterPreference=default
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitDNS=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitDNS=yes
 </code></pre></div></div>
                 <div id="IPv6SendRA-EmitDomains" class="option-block">
                     <div class="option-header">
@@ -7652,7 +7651,7 @@ RouterPreference=default
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitDomains=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitDomains=yes
 </code></pre></div></div>
                 <div id="IPv6SendRA-DNSLifetimeSec" class="option-block">
                     <div class="option-header">
@@ -7691,14 +7690,14 @@ DNSLifetimeSec=100ms
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. Specifies that IPv6 router advertisements which indicate to hosts that
+                        <p>Specifies that IPv6 router advertisements which indicate to hosts that
         the router acts as a Home Agent and includes a Home Agent option. Defaults to false. See
         <a href="https://tools.ietf.org/html/rfc6275" target="_blank">RFC 6275</a> for further details.</p>
 
          
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>HomeAgent=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>HomeAgent=no
 </code></pre></div></div>
                 <div id="IPv6SendRA-HomeAgentLifetimeSec" class="option-block">
                     <div class="option-header">
@@ -7783,7 +7782,7 @@ HomeAgentLifetimeSec=100ms
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean to specify whether IPv6 addresses can be
+                        <p>to specify whether IPv6 addresses can be
         autoconfigured with this prefix and whether the prefix can be used for
         onlink determination. Both settings default to <code>true</code>
         in order to ease configuration.
@@ -7791,7 +7790,7 @@ HomeAgentLifetimeSec=100ms
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>True</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AddressAutoconfiguration=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AddressAutoconfiguration=yes
 </code></pre></div></div>
                 <div id="IPv6Prefix-PreferredLifetimeSec" class="option-block">
                     <div class="option-header">
@@ -7830,12 +7829,12 @@ PreferredLifetimeSec=100ms
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. When true, adds an address from the prefix. Default to false.
+                        <p>When true, adds an address from the prefix. Default to false.
         </p>
 
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Assign=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Assign=no
 </code></pre></div></div>
                 <div id="IPv6Prefix-Token" class="option-block">
                     <div class="option-header">
@@ -7992,7 +7991,7 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Controls whether the bridge should flood
+          <p>Controls whether the bridge should flood
           traffic for which an FDB entry is missing and the destination
           is unknown through this port. When unset, the kernel&#x27;s default will be used.
           </p>
@@ -8000,7 +7999,7 @@ LifetimeSec=100ms
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UnicastFlood=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UnicastFlood=yes
 </code></pre></div></div>
                 <div id="Bridge-MulticastFlood" class="option-block">
                     <div class="option-header">
@@ -8017,7 +8016,7 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Controls whether the bridge should flood
+          <p>Controls whether the bridge should flood
           traffic for which an MDB entry is missing and the destination
           is unknown through this port. When unset, the kernel&#x27;s default will be used.
           </p>
@@ -8025,7 +8024,7 @@ LifetimeSec=100ms
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MulticastFlood=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MulticastFlood=yes
 </code></pre></div></div>
                 <div id="Bridge-MulticastToUnicast" class="option-block">
                     <div class="option-header">
@@ -8042,7 +8041,7 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Multicast to unicast works on top of the multicast snooping feature of
+          <p>Multicast to unicast works on top of the multicast snooping feature of
           the bridge. Which means unicast copies are only delivered to hosts which are interested in it.
           When unset, the kernel&#x27;s default will be used.
           </p>
@@ -8050,7 +8049,7 @@ LifetimeSec=100ms
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MulticastToUnicast=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MulticastToUnicast=yes
 </code></pre></div></div>
                 <div id="Bridge-NeighborSuppression" class="option-block">
                     <div class="option-header">
@@ -8067,14 +8066,14 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures whether ARP and ND neighbor suppression is enabled for
+          <p>Configures whether ARP and ND neighbor suppression is enabled for
           this port. When unset, the kernel&#x27;s default will be used.
           </p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NeighborSuppression=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NeighborSuppression=yes
 </code></pre></div></div>
                 <div id="Bridge-Learning" class="option-block">
                     <div class="option-header">
@@ -8091,14 +8090,14 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures whether MAC address learning is enabled for
+          <p>Configures whether MAC address learning is enabled for
           this port. When unset, the kernel&#x27;s default will be used.
           </p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Learning=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Learning=yes
 </code></pre></div></div>
                 <div id="Bridge-HairPin" class="option-block">
                     <div class="option-header">
@@ -8115,14 +8114,14 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures whether traffic may be sent back out of the port on which it
+          <p>Configures whether traffic may be sent back out of the port on which it
           was received. When this flag is false, then the bridge will not forward traffic back out of the
           receiving port. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>HairPin=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>HairPin=yes
 </code></pre></div></div>
                 <div id="Bridge-Isolated" class="option-block">
                     <div class="option-header">
@@ -8139,7 +8138,7 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures whether this port is isolated or not. Within a bridge,
+          <p>Configures whether this port is isolated or not. Within a bridge,
           isolated ports can only communicate with non-isolated ports. When set to true, this port can only
           communicate with other ports whose Isolated setting is false.  When set to false, this port
           can communicate with any other ports. When unset, the kernel&#x27;s default will be used.</p>
@@ -8147,7 +8146,7 @@ LifetimeSec=100ms
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Isolated=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Isolated=yes
 </code></pre></div></div>
                 <div id="Bridge-UseBPDU" class="option-block">
                     <div class="option-header">
@@ -8164,13 +8163,13 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures whether STP Bridge Protocol Data Units will be
+          <p>Configures whether STP Bridge Protocol Data Units will be
           processed by the bridge port. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseBPDU=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseBPDU=yes
 </code></pre></div></div>
                 <div id="Bridge-FastLeave" class="option-block">
                     <div class="option-header">
@@ -8187,14 +8186,14 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. This flag allows the bridge to immediately stop multicast
+          <p>This flag allows the bridge to immediately stop multicast
           traffic on a port that receives an IGMP Leave message. It is only used with
           IGMP snooping if enabled on the bridge. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FastLeave=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FastLeave=yes
 </code></pre></div></div>
                 <div id="Bridge-AllowPortToBeRoot" class="option-block">
                     <div class="option-header">
@@ -8211,14 +8210,14 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures whether a given port is allowed to
+          <p>Configures whether a given port is allowed to
           become a root port. Only used when STP is enabled on the bridge.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AllowPortToBeRoot=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AllowPortToBeRoot=yes
 </code></pre></div></div>
                 <div id="Bridge-ProxyARP" class="option-block">
                     <div class="option-header">
@@ -8235,13 +8234,13 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures whether proxy ARP to be enabled on this port.
+          <p>Configures whether proxy ARP to be enabled on this port.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ProxyARP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ProxyARP=yes
 </code></pre></div></div>
                 <div id="Bridge-ProxyARPWiFi" class="option-block">
                     <div class="option-header">
@@ -8258,14 +8257,14 @@ LifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Configures whether proxy ARP to be enabled on this port
+          <p>Configures whether proxy ARP to be enabled on this port
           which meets extended requirements by IEEE 802.11 and Hotspot 2.0 specifications.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ProxyARPWiFi=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ProxyARPWiFi=yes
 </code></pre></div></div>
                 <div id="Bridge-MulticastRouter" class="option-block">
                     <div class="option-header">
@@ -8707,7 +8706,7 @@ VLANId=100
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, CAN-FD mode is enabled for the interface.
+          <p>When <code>yes</code>, CAN-FD mode is enabled for the interface.
           Note, that a bitrate and optional sample point should also be set for the CAN-FD data phase using
           the <code class="varname">DataBitRate=</code> and <code class="varname">DataSamplePoint=</code> keys, or
           <code class="varname">DataTimeQuanta=</code> and related settings.</p>
@@ -8715,7 +8714,7 @@ VLANId=100
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FDMode=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FDMode=yes
 </code></pre></div></div>
                 <div id="CAN-FDNonISO" class="option-block">
                     <div class="option-header">
@@ -8732,13 +8731,13 @@ VLANId=100
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, non-ISO CAN-FD mode is enabled for the
+          <p>When <code>yes</code>, non-ISO CAN-FD mode is enabled for the
           interface. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FDNonISO=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FDNonISO=yes
 </code></pre></div></div>
                 <div id="CAN-RestartSec" class="option-block">
                     <div class="option-header">
@@ -8808,13 +8807,13 @@ Termination=true
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, three samples (instead of one) are used to determine
+          <p>When <code>yes</code>, three samples (instead of one) are used to determine
           the value of a received bit by majority rule. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TripleSampling=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TripleSampling=yes
 </code></pre></div></div>
                 <div id="CAN-BusErrorReporting" class="option-block">
                     <div class="option-header">
@@ -8831,7 +8830,7 @@ Termination=true
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, reporting of CAN bus errors is activated
+          <p>When <code>yes</code>, reporting of CAN bus errors is activated
           (those include single bit, frame format, and bit stuffing errors, unable to send dominant bit,
           unable to send recessive bit, bus overload, active error announcement, error occurred on
           transmission). When unset, the kernel&#x27;s default will be used. Note: in case of a CAN bus with a
@@ -8840,7 +8839,7 @@ Termination=true
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BusErrorReporting=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BusErrorReporting=yes
 </code></pre></div></div>
                 <div id="CAN-ListenOnly" class="option-block">
                     <div class="option-header">
@@ -8857,7 +8856,7 @@ Termination=true
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, listen-only mode is enabled. When the
+          <p>When <code>yes</code>, listen-only mode is enabled. When the
           interface is in listen-only mode, the interface neither transmit CAN frames nor send ACK
           bit. Listen-only mode is important to debug CAN networks without interfering with the
           communication or acknowledge the CAN frame. When unset, the kernel&#x27;s default will be used.
@@ -8866,7 +8865,7 @@ Termination=true
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ListenOnly=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ListenOnly=yes
 </code></pre></div></div>
                 <div id="CAN-Loopback" class="option-block">
                     <div class="option-header">
@@ -8883,7 +8882,7 @@ Termination=true
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, loopback mode is enabled. When the
+          <p>When <code>yes</code>, loopback mode is enabled. When the
           loopback mode is enabled, the interface treats messages transmitted by itself as received
           messages. The loopback mode is important to debug CAN networks. When unset, the kernel&#x27;s
           default will be used.</p>
@@ -8891,7 +8890,7 @@ Termination=true
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Loopback=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Loopback=yes
 </code></pre></div></div>
                 <div id="CAN-OneShot" class="option-block">
                     <div class="option-header">
@@ -8908,13 +8907,13 @@ Termination=true
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, one-shot mode is enabled. When unset,
+          <p>When <code>yes</code>, one-shot mode is enabled. When unset,
           the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OneShot=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OneShot=yes
 </code></pre></div></div>
                 <div id="CAN-PresumeAck" class="option-block">
                     <div class="option-header">
@@ -8931,13 +8930,13 @@ Termination=true
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, the interface will ignore missing CAN
+          <p>When <code>yes</code>, the interface will ignore missing CAN
           ACKs. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PresumeAck=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PresumeAck=yes
 </code></pre></div></div>
                 <div id="CAN-ClassicDataLengthCode" class="option-block">
                     <div class="option-header">
@@ -8954,13 +8953,13 @@ Termination=true
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When <code>yes</code>, the interface will handle the 4bit data
+          <p>When <code>yes</code>, the interface will handle the 4bit data
           length code (DLC). When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ClassicDataLengthCode=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ClassicDataLengthCode=yes
 </code></pre></div></div></div><div id="section-IPoIB" class="section-block"><h2>[IPoIB] Section</h2>
                 <div id="IPoIB-Mode" class="option-block">
                     <div class="option-header">
@@ -9522,7 +9521,7 @@ LimitBytes=512M
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value. Enables automatic capacity estimation based on traffic arriving
+          <p>Enables automatic capacity estimation based on traffic arriving
           at this qdisc. This is most likely to be useful with cellular links, which tend to change
           quality randomly. If this setting is enabled, the <code class="varname">Bandwidth=</code> setting is
           used as an initial estimate. Defaults to unset, and the kernel&#x27;s default is used.</p>
@@ -9530,7 +9529,7 @@ LimitBytes=512M
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoRateIngress=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoRateIngress=yes
 </code></pre></div></div>
                 <div id="CAKE-OverheadBytes" class="option-block">
                     <div class="option-header">
@@ -9622,14 +9621,14 @@ CompensationMode=none
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value. When true, the packet size reported by the Linux kernel will be
+          <p>When true, the packet size reported by the Linux kernel will be
           used, instead of the underlying IP packet size. Defaults to unset, and the kernel&#x27;s default
           is used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRawPacketSize=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseRawPacketSize=yes
 </code></pre></div></div>
                 <div id="CAKE-FlowIsolationMode" class="option-block">
                     <div class="option-header">
@@ -9738,7 +9737,7 @@ FlowIsolationMode=dual-dsthost
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value. When true, CAKE performs a NAT lookup before applying
+          <p>When true, CAKE performs a NAT lookup before applying
           flow-isolation rules, to determine the true addresses and port numbers of the packet, to
           improve fairness between hosts inside the NAT. This has no practical effect when
           <code class="varname">FlowIsolationMode=</code> is <code>none</code> or <code>flows</code>,
@@ -9748,7 +9747,7 @@ FlowIsolationMode=dual-dsthost
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NAT=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NAT=yes
 </code></pre></div></div>
                 <div id="CAKE-PriorityQueueingPreset" class="option-block">
                     <div class="option-header">
@@ -9853,13 +9852,13 @@ PriorityQueueingPreset=diffserv3
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value. When true, CAKE clears the DSCP fields, except for ECN bits, of
+          <p>When true, CAKE clears the DSCP fields, except for ECN bits, of
           any packet passing through CAKE. Defaults to unset, and the kernel&#x27;s default is used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Wash=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Wash=yes
 </code></pre></div></div>
                 <div id="CAKE-SplitGSO" class="option-block">
                     <div class="option-header">
@@ -9876,14 +9875,14 @@ PriorityQueueingPreset=diffserv3
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value. When true, CAKE will split General Segmentation Offload (GSO)
+          <p>When true, CAKE will split General Segmentation Offload (GSO)
           super-packets into their on-the-wire components and dequeue them individually. Defaults to
           unset, and the kernel&#x27;s default is used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SplitGSO=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SplitGSO=yes
 </code></pre></div></div>
                 <div id="CAKE-RTTSec" class="option-block">
                     <div class="option-header">
@@ -9925,7 +9924,7 @@ PriorityQueueingPreset=diffserv3
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean value, or special value <code>aggressive</code>. If enabled, ACKs in
+          <p>, or special value <code>aggressive</code>. If enabled, ACKs in
           each flow are queued and redundant ACKs to the upstream are dropped. If yes, the filter will always
           keep at least two redundant ACKs in the queue, while in <code>aggressive</code> mode, it will
           filter down to a single ACK. This may improve download throughput on links with very asymmetrical
@@ -9934,7 +9933,7 @@ PriorityQueueingPreset=diffserv3
         
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AckFilter=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AckFilter=yes
 </code></pre></div></div></div><div id="section-ControlledDelay" class="section-block"><h2>[ControlledDelay] Section</h2>
                 <div id="ControlledDelay-PacketLimit" class="option-block">
                     <div class="option-header">
@@ -10023,13 +10022,13 @@ IntervalSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. This can be used to mark packets instead of dropping them. Defaults to
+          <p>This can be used to mark packets instead of dropping them. Defaults to
           unset and kernel&#x27;s default is used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ECN=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ECN=yes
 </code></pre></div></div>
                 <div id="ControlledDelay-CEThresholdSec" class="option-block">
                     <div class="option-header">
@@ -10240,13 +10239,13 @@ CEThresholdSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. It turns on the RIO-like buffering scheme. Defaults to
+          <p>It turns on the RIO-like buffering scheme. Defaults to
           unset and kernel&#x27;s default is used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericRIO=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericRIO=yes
 </code></pre></div></div></div><div id="section-FairQueueingControlledDelay" class="section-block"><h2>[FairQueueingControlledDelay] Section</h2>
                 <div id="FairQueueingControlledDelay-PacketLimit" class="option-block">
                     <div class="option-header">
@@ -10407,13 +10406,13 @@ QuantumBytes=512M
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. This can be used to mark packets instead of dropping them. Defaults to
+          <p>This can be used to mark packets instead of dropping them. Defaults to
           unset and kernel&#x27;s default is used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ECN=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ECN=yes
 </code></pre></div></div>
                 <div id="FairQueueingControlledDelay-CEThresholdSec" class="option-block">
                     <div class="option-header">
@@ -10623,13 +10622,13 @@ InitialQuantumBytes=512M
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean, and enables or disables flow pacing. Defaults to unset and kernel&#x27;s
+          <p>, and enables or disables flow pacing. Defaults to unset and kernel&#x27;s
           default is used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Pacing=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Pacing=yes
 </code></pre></div></div>
                 <div id="FairQueueing-CEThresholdSec" class="option-block">
                     <div class="option-header">

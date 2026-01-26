@@ -432,14 +432,24 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
             has_enum_restriction = collect_allowed(res_schema)
             
             # Validate Examples if we have restricted values
+            # Validate Examples if we have restricted values
             if has_enum_restriction and examples:
                  valid_examples = []
                  for ex in examples:
                      # Normalize boolean to string for comparison
                      ex_str = str(ex).lower() if isinstance(ex, bool) else str(ex)
+                     
+                     # Normalize boolean examples to yes/no for display
+                     if value_type == 'boolean':
+                         if ex_str == 'true' or ex_str == 'yes' or ex_str == '1':
+                             valid_examples.append("yes")
+                             continue
+                         elif ex_str == 'false' or ex_str == 'no' or ex_str == '0':
+                             valid_examples.append("no")
+                             continue
+                     
                      # Case-sensitive check usually for enums? But 'true'/'false' are case-insensitive in systemd mostly,
                      # here we stick to schema strictness or loose equality.
-                     # Let's try exact match in set first.
                      if ex_str in allowed_values:
                          valid_examples.append(ex)
                      # Maybe case mismatch?
@@ -452,7 +462,17 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
 
             # Synthetic Examples (if empty after filter or not present)
             if not examples:
-                if has_enum_restriction:
+                if value_type == 'boolean':
+                     # User Request: Prefer yes/no
+                     if default_val is not None:
+                         # Normalize default
+                         d_str = str(default_val).lower()
+                         if d_str in ['true', '1', 'yes']: examples.append("yes")
+                         else: examples.append("no")
+                     else:
+                         examples.append("yes")
+                         
+                elif has_enum_restriction:
                      # Pick from allowed values
                      # Sort for determinism
                      sorted_allowed = sorted(list(allowed_values))
@@ -488,6 +508,26 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                 examples = examples[:2]
                 
             desc_html = get_description(entry, version)
+            
+            # User Request: Remove redundant boolean text
+            # Ensure we don't match complex types (like oneOf where one option is boolean)
+            # Only filter if it's a simple boolean without variants.
+            if value_type == 'boolean' and 'oneOf' not in res_schema and 'anyOf' not in res_schema:
+                # Remove common phrases. Use Regex.
+                # "Takes a boolean..." "A boolean..."
+                # We need to be careful not to break HTML.
+                # Regex for "Takes a boolean argument." "Takes a boolean." "A boolean." 
+                # Case insensitive.
+                patterns = [
+                    r'Takes a boolean argument\.?\s*',
+                    r'Takes a boolean value\.?\s*',
+                    r'Takes a boolean\.?\s*',
+                    r'A boolean argument\.?\s*',
+                    r'A boolean value\.?\s*',
+                    r'A boolean\.?\s*'
+                ]
+                for pat in patterns:
+                    desc_html = re.sub(pat, '', desc_html, flags=re.IGNORECASE)
             
             # Map type to linkable name
             type_slug = value_type
@@ -608,7 +648,13 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                     
                 # Show Default
                 if opt['default'] is not None:
-                     html_content.append(f'<div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>{opt["default"]}</code></div>')
+                     default_disp = opt['default']
+                     if opt['type'] == 'boolean':
+                         d_str = str(default_disp).lower()
+                         if d_str in ['true', '1', 'yes']: default_disp = "yes"
+                         elif d_str in ['false', '0', 'no']: default_disp = "no"
+                     
+                     html_content.append(f'<div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>{default_disp}</code></div>')
                      
                 # Show Examples
                 if opt['examples']:

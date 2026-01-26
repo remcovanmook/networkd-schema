@@ -1027,7 +1027,7 @@ Duplex=half
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to yes, automatic negotiation of transmission parameters is enabled.
+          <p>If set to yes, automatic negotiation of transmission parameters is enabled.
           Autonegotiation is a procedure by which two connected ethernet devices choose
           common transmission parameters, such as speed, duplex mode, and flow control.
           When unset, the kernel&#x27;s default will be used.</p>
@@ -1039,7 +1039,7 @@ Duplex=half
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoNegotiation=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoNegotiation=yes
 </code></pre></div></div>
                 <div id="Link-WakeOnLan" class="option-block">
                     <div class="option-header">
@@ -1259,13 +1259,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, hardware offload for checksumming of ingress
+          <p>If set to true, hardware offload for checksumming of ingress
           network packets is enabled. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveChecksumOffload=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveChecksumOffload=yes
 </code></pre></div></div>
                 <div id="Link-TransmitChecksumOffload" class="option-block">
                     <div class="option-header">
@@ -1282,13 +1282,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, hardware offload for checksumming of egress
+          <p>If set to true, hardware offload for checksumming of egress
           network packets is enabled. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitChecksumOffload=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitChecksumOffload=yes
 </code></pre></div></div>
                 <div id="Link-TCP6SegmentationOffload" class="option-block">
                     <div class="option-header">
@@ -1305,13 +1305,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, TCP6 Segmentation Offload (tx-tcp6-segmentation) is enabled.
+          <p>If set to true, TCP6 Segmentation Offload (tx-tcp6-segmentation) is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCP6SegmentationOffload=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCP6SegmentationOffload=yes
 </code></pre></div></div>
                 <div id="Link-PartialGenericSegmentationOffload" class="option-block">
                     <div class="option-header">
@@ -1328,7 +1328,7 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, Partial Generic Segmentation Offload (GSO_Partial) is
+          <p>If set to true, Partial Generic Segmentation Offload (GSO_Partial) is
           enabled. See
           <a href="https://docs.kernel.org/networking/segmentation-offloads.html#partial-generic-segmentation-offload" target="_blank">
           Partial Generic Segmentation Offload</a> for more details.
@@ -1337,7 +1337,7 @@ WakeOnLan=broadcast
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PartialGenericSegmentationOffload=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PartialGenericSegmentationOffload=yes
 </code></pre></div></div>
                 <div id="Link-GenericReceiveOffloadHardware" class="option-block">
                     <div class="option-header">
@@ -1354,13 +1354,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, hardware accelerated Generic Receive Offload (GRO) is
+          <p>If set to true, hardware accelerated Generic Receive Offload (GRO) is
           enabled. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericReceiveOffloadHardware=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericReceiveOffloadHardware=yes
 </code></pre></div></div>
                 <div id="Link-ReceivePacketSteeringCPUMask" class="option-block">
                     <div class="option-header">
@@ -1406,13 +1406,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, receive VLAN CTAG hardware acceleration is enabled.
+          <p>If set to true, receive VLAN CTAG hardware acceleration is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveVLANCTAGHardwareAcceleration=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveVLANCTAGHardwareAcceleration=yes
 </code></pre></div></div>
                 <div id="Link-TransmitVLANCTAGHardwareAcceleration" class="option-block">
                     <div class="option-header">
@@ -1429,13 +1429,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, transmit VLAN CTAG hardware acceleration is enabled.
+          <p>If set to true, transmit VLAN CTAG hardware acceleration is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitVLANCTAGHardwareAcceleration=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitVLANCTAGHardwareAcceleration=yes
 </code></pre></div></div>
                 <div id="Link-ReceiveVLANCTAGFilter" class="option-block">
                     <div class="option-header">
@@ -1452,13 +1452,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, receive filtering on VLAN CTAGs is enabled.
+          <p>If set to true, receive filtering on VLAN CTAGs is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveVLANCTAGFilter=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveVLANCTAGFilter=yes
 </code></pre></div></div>
                 <div id="Link-TransmitVLANSTAGHardwareAcceleration" class="option-block">
                     <div class="option-header">
@@ -1475,13 +1475,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, transmit VLAN STAG hardware acceleration is enabled.
+          <p>If set to true, transmit VLAN STAG hardware acceleration is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitVLANSTAGHardwareAcceleration=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitVLANSTAGHardwareAcceleration=yes
 </code></pre></div></div>
                 <div id="Link-NTupleFilter" class="option-block">
                     <div class="option-header">
@@ -1498,13 +1498,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, receive N-tuple filters and actions are enabled.
+          <p>If set to true, receive N-tuple filters and actions are enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NTupleFilter=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NTupleFilter=yes
 </code></pre></div></div>
                 <div id="Link-ReceiveFCS" class="option-block">
                     <div class="option-header">
@@ -1521,14 +1521,14 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, pass the Frame Check Sequence (FCS) value up the stack
+          <p>If set to true, pass the Frame Check Sequence (FCS) value up the stack
           without trimming it, and allow userspace to calculate error rate or link health.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveFCS=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveFCS=yes
 </code></pre></div></div>
                 <div id="Link-ReceiveAll" class="option-block">
                     <div class="option-header">
@@ -1545,13 +1545,13 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, allow the interface to also receive damaged ethernet frames.
+          <p>If set to true, allow the interface to also receive damaged ethernet frames.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveAll=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveAll=yes
 </code></pre></div></div>
                 <div id="Link-RxChannels" class="option-block">
                     <div class="option-header">
@@ -1619,14 +1619,14 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When set, enables receive flow control, also known as the ethernet
+          <p>When set, enables receive flow control, also known as the ethernet
           receive PAUSE message (generate and send ethernet PAUSE frames). When unset, the kernel&#x27;s
           default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxFlowControl=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxFlowControl=yes
 </code></pre></div></div>
                 <div id="Link-TxFlowControl" class="option-block">
                     <div class="option-header">
@@ -1643,14 +1643,14 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When set, enables transmit flow control, also known as the ethernet
+          <p>When set, enables transmit flow control, also known as the ethernet
           transmit PAUSE message (respond to received ethernet PAUSE frames). When unset, the kernel&#x27;s
           default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TxFlowControl=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TxFlowControl=yes
 </code></pre></div></div>
                 <div id="Link-AutoNegotiationFlowControl" class="option-block">
                     <div class="option-header">
@@ -1667,14 +1667,14 @@ WakeOnLan=broadcast
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When set, auto negotiation enables the interface to exchange state
+          <p>When set, auto negotiation enables the interface to exchange state
           advertisements with the connected peer so that the two devices can agree on the ethernet
           PAUSE configuration. When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoNegotiationFlowControl=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoNegotiationFlowControl=yes
 </code></pre></div></div>
                 <div id="Link-GenericSegmentOffloadMaxBytes" class="option-block">
                     <div class="option-header">
@@ -1746,7 +1746,7 @@ GenericSegmentOffloadMaxBytes=512M
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseAdaptiveRxCoalesce=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseAdaptiveRxCoalesce=yes
 </code></pre></div></div>
                 <div id="Link-RxCoalesceSec" class="option-block">
                     <div class="option-header">
@@ -1996,13 +1996,13 @@ MTUBytes=9000
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, TCP Segmentation Offload (TSO) is enabled.
+          <p>If set to true, TCP Segmentation Offload (TSO) is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCPSegmentationOffload=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCPSegmentationOffload=yes
 </code></pre></div></div>
                 <div id="Link-GenericSegmentationOffload" class="option-block">
                     <div class="option-header">
@@ -2019,13 +2019,13 @@ MTUBytes=9000
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, Generic Segmentation Offload (GSO) is enabled.
+          <p>If set to true, Generic Segmentation Offload (GSO) is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentationOffload=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentationOffload=yes
 </code></pre></div></div>
                 <div id="Link-GenericReceiveOffload" class="option-block">
                     <div class="option-header">
@@ -2042,13 +2042,13 @@ MTUBytes=9000
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, Generic Receive Offload (GRO) is enabled.
+          <p>If set to true, Generic Receive Offload (GRO) is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericReceiveOffload=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericReceiveOffload=yes
 </code></pre></div></div>
                 <div id="Link-LargeReceiveOffload" class="option-block">
                     <div class="option-header">
@@ -2065,13 +2065,13 @@ MTUBytes=9000
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to true, Large Receive Offload (LRO) is enabled.
+          <p>If set to true, Large Receive Offload (LRO) is enabled.
           When unset, the kernel&#x27;s default will be used.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LargeReceiveOffload=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LargeReceiveOffload=yes
 </code></pre></div></div></div><div id="section-EnergyEfficientEthernet" class="section-block"><h2>[EnergyEfficientEthernet] Section</h2>
                 <div id="EnergyEfficientEthernet-Enable" class="option-block">
                     <div class="option-header">
@@ -2088,13 +2088,13 @@ MTUBytes=9000
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean argument. When true, the Energy Efficient Ethernet (EEE) feature will be
+          <p>When true, the Energy Efficient Ethernet (EEE) feature will be
           enabled on the interface. Defaults to unset, and the enablement of EEE will be unchanged.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Enable=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Enable=yes
 </code></pre></div></div>
                 <div id="EnergyEfficientEthernet-TxLowPowerIdle" class="option-block">
                     <div class="option-header">
@@ -2111,14 +2111,14 @@ MTUBytes=9000
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean argument. When true, the transmit Low Power Idle (Tx-LPI) mode of the Energy
+          <p>When true, the transmit Low Power Idle (Tx-LPI) mode of the Energy
           Efficient Ethernet feature will be enabled on the interface. Defaults to unset, and the enablement
           of the mode will be unchanged.</p>
 
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TxLowPowerIdle=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TxLowPowerIdle=yes
 </code></pre></div></div>
                 <div id="EnergyEfficientEthernet-TxLowPowerIdleSec" class="option-block">
                     <div class="option-header">

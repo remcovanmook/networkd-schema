@@ -459,7 +459,7 @@ Priority=20
                     </div>
                     <div class="option-desc">
                         
-            <p>Takes a boolean. This setting controls the IFLA_BR_MCAST_QUERIER option in the kernel.
+            <p>This setting controls the IFLA_BR_MCAST_QUERIER option in the kernel.
             If enabled, the kernel will send general ICMP queries from a zero source address.
             This feature should allow faster convergence on startup, but it causes some
             multicast-aware switches to misbehave and disrupt forwarding of multicast packets.
@@ -467,7 +467,7 @@ Priority=20
             </p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MulticastQuerier=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MulticastQuerier=yes
 </code></pre></div></div>
                 <div id="Bridge-MulticastSnooping" class="option-block">
                     <div class="option-header">
@@ -484,13 +484,13 @@ Priority=20
                     </div>
                     <div class="option-desc">
                         
-            <p>Takes a boolean. This setting controls the IFLA_BR_MCAST_SNOOPING option in the kernel.
+            <p>This setting controls the IFLA_BR_MCAST_SNOOPING option in the kernel.
             If enabled, IGMP snooping monitors the Internet Group Management Protocol (IGMP) traffic
             between hosts and multicast routers. When unset, the kernel&#x27;s default will be used.
             </p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MulticastSnooping=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MulticastSnooping=yes
 </code></pre></div></div>
                 <div id="Bridge-VLANFiltering" class="option-block">
                     <div class="option-header">
@@ -507,12 +507,12 @@ Priority=20
                     </div>
                     <div class="option-desc">
                         
-            <p>Takes a boolean. This setting controls the IFLA_BR_VLAN_FILTERING option in the kernel.
+            <p>This setting controls the IFLA_BR_VLAN_FILTERING option in the kernel.
             If enabled, the bridge will be started in VLAN-filtering mode. When unset, the kernel&#x27;s default will be used.
             </p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>VLANFiltering=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>VLANFiltering=yes
 </code></pre></div></div>
                 <div id="Bridge-STP" class="option-block">
                     <div class="option-header">
@@ -529,12 +529,12 @@ Priority=20
                     </div>
                     <div class="option-desc">
                         
-            <p>Takes a boolean. This enables the bridge&#x27;s Spanning Tree Protocol (STP).
+            <p>This enables the bridge&#x27;s Spanning Tree Protocol (STP).
             When unset, the kernel&#x27;s default will be used.
             </p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>STP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>STP=yes
 </code></pre></div></div></div><div id="section-VLAN" class="section-block"><h2>[VLAN] Section</h2><h3 class="subcategory-header">Required</h3>
                 <div id="VLAN-Id" class="option-block">
                     <div class="option-header">
@@ -573,13 +573,13 @@ Id=100
                     </div>
                     <div class="option-desc">
                         
-            <p>Takes a boolean. The Generic VLAN Registration Protocol (GVRP) is a protocol that
+            <p>The Generic VLAN Registration Protocol (GVRP) is a protocol that
             allows automatic learning of VLANs on a network.
             When unset, the kernel&#x27;s default will be used.
             </p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GVRP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GVRP=yes
 </code></pre></div></div>
                 <div id="VLAN-MVRP" class="option-block">
                     <div class="option-header">
@@ -596,14 +596,14 @@ Id=100
                     </div>
                     <div class="option-desc">
                         
-            <p>Takes a boolean. Multiple VLAN Registration Protocol (MVRP) formerly known as GARP VLAN
+            <p>Multiple VLAN Registration Protocol (MVRP) formerly known as GARP VLAN
             Registration Protocol (GVRP) is a standards-based Layer 2 network protocol,
             for automatic configuration of VLAN information on switches. It was defined
             in the 802.1ak amendment to 802.1Q-2005. When unset, the kernel&#x27;s default will be used.
             </p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MVRP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MVRP=yes
 </code></pre></div></div>
                 <div id="VLAN-LooseBinding" class="option-block">
                     <div class="option-header">
@@ -620,12 +620,12 @@ Id=100
                     </div>
                     <div class="option-desc">
                         
-            <p>Takes a boolean. The VLAN loose binding mode, in which only the operational state is passed
+            <p>The VLAN loose binding mode, in which only the operational state is passed
             from the parent to the associated VLANs, but the VLAN device state is not changed.
             When unset, the kernel&#x27;s default will be used.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LooseBinding=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LooseBinding=yes
 </code></pre></div></div>
                 <div id="VLAN-ReorderHeader" class="option-block">
                     <div class="option-header">
@@ -642,11 +642,11 @@ Id=100
                     </div>
                     <div class="option-desc">
                         
-            <p>Takes a boolean. The VLAN reorder header is set VLAN interfaces behave like physical interfaces.
+            <p>The VLAN reorder header is set VLAN interfaces behave like physical interfaces.
             When unset, the kernel&#x27;s default will be used.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReorderHeader=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReorderHeader=yes
 </code></pre></div></div></div><div id="section-MACVLAN" class="section-block"><h2>[MACVLAN] Section</h2>
                 <div id="MACVLAN-Mode" class="option-block">
                     <div class="option-header">
@@ -799,11 +799,11 @@ Id=100
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, enables dynamic MAC learning
+          <p>When true, enables dynamic MAC learning
           to discover remote MAC addresses.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MacLearning=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MacLearning=yes
 </code></pre></div></div>
                 <div id="VXLAN-FDBAgeingSec" class="option-block">
                     <div class="option-header">
@@ -862,14 +862,14 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, bridge-connected VXLAN tunnel
+          <p>When true, bridge-connected VXLAN tunnel
           endpoint answers ARP requests from the local bridge on behalf
           of remote Distributed Overlay Virtual Ethernet
           <a href="https://en.wikipedia.org/wiki/Distributed_Overlay_Virtual_Ethernet" target="_blank">
           (DVOE)</a> clients. Defaults to false.</p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReduceARPProxy=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReduceARPProxy=no
 </code></pre></div></div>
                 <div id="VXLAN-L2MissNotification" class="option-block">
                     <div class="option-header">
@@ -886,11 +886,11 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, enables netlink LLADDR miss
+          <p>When true, enables netlink LLADDR miss
           notifications.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>L2MissNotification=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>L2MissNotification=yes
 </code></pre></div></div>
                 <div id="VXLAN-L3MissNotification" class="option-block">
                     <div class="option-header">
@@ -907,11 +907,11 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, enables netlink IP address miss
+          <p>When true, enables netlink IP address miss
           notifications.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>L3MissNotification=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>L3MissNotification=yes
 </code></pre></div></div>
                 <div id="VXLAN-RouteShortCircuit" class="option-block">
                     <div class="option-header">
@@ -928,11 +928,11 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, route short circuiting is turned
+          <p>When true, route short circuiting is turned
           on.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteShortCircuit=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteShortCircuit=yes
 </code></pre></div></div>
                 <div id="VXLAN-UDPChecksum" class="option-block">
                     <div class="option-header">
@@ -949,10 +949,10 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, transmitting UDP checksums when doing VXLAN/IPv4 is turned on.</p>
+          <p>When true, transmitting UDP checksums when doing VXLAN/IPv4 is turned on.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDPChecksum=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDPChecksum=yes
 </code></pre></div></div>
                 <div id="VXLAN-UDP6ZeroChecksumTx" class="option-block">
                     <div class="option-header">
@@ -969,10 +969,10 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, sending zero checksums in VXLAN/IPv6 is turned on.</p>
+          <p>When true, sending zero checksums in VXLAN/IPv6 is turned on.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumTx=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumTx=yes
 </code></pre></div></div>
                 <div id="VXLAN-UDP6ZeroChecksumRx" class="option-block">
                     <div class="option-header">
@@ -989,10 +989,10 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, receiving zero checksums in VXLAN/IPv6 is turned on.</p>
+          <p>When true, receiving zero checksums in VXLAN/IPv6 is turned on.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumRx=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumRx=yes
 </code></pre></div></div>
                 <div id="VXLAN-RemoteChecksumTx" class="option-block">
                     <div class="option-header">
@@ -1009,10 +1009,10 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, remote transmit checksum offload of VXLAN is turned on.</p>
+          <p>When true, remote transmit checksum offload of VXLAN is turned on.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RemoteChecksumTx=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RemoteChecksumTx=yes
 </code></pre></div></div>
                 <div id="VXLAN-RemoteChecksumRx" class="option-block">
                     <div class="option-header">
@@ -1029,10 +1029,10 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, remote receive checksum offload in VXLAN is turned on.</p>
+          <p>When true, remote receive checksum offload in VXLAN is turned on.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RemoteChecksumRx=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RemoteChecksumRx=yes
 </code></pre></div></div>
                 <div id="VXLAN-GroupPolicyExtension" class="option-block">
                     <div class="option-header">
@@ -1049,13 +1049,13 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-        <p>Takes a boolean. When true, it enables Group Policy VXLAN extension security label mechanism
+        <p>When true, it enables Group Policy VXLAN extension security label mechanism
         across network peers based on VXLAN. For details about the Group Policy VXLAN, see the
         <a href="https://tools.ietf.org/html/draft-smith-vxlan-group-policy" target="_blank">
         VXLAN Group Policy </a> document. Defaults to false.</p>
       
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GroupPolicyExtension=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GroupPolicyExtension=no
 </code></pre></div></div>
                 <div id="VXLAN-PortRange" class="option-block">
                     <div class="option-header">
@@ -1261,10 +1261,10 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, specifies if UDP checksum is calculated for transmitted packets over IPv4.</p>
+          <p>When true, specifies if UDP checksum is calculated for transmitted packets over IPv4.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDPChecksum=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDPChecksum=yes
 </code></pre></div></div>
                 <div id="GENEVE-UDP6ZeroChecksumTx" class="option-block">
                     <div class="option-header">
@@ -1281,10 +1281,10 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, skip UDP checksum calculation for transmitted packets over IPv6.</p>
+          <p>When true, skip UDP checksum calculation for transmitted packets over IPv6.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumTx=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumTx=yes
 </code></pre></div></div>
                 <div id="GENEVE-UDP6ZeroChecksumRx" class="option-block">
                     <div class="option-header">
@@ -1301,10 +1301,10 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, allows incoming UDP packets over IPv6 with zero checksum field.</p>
+          <p>When true, allows incoming UDP packets over IPv6 with zero checksum field.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumRx=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumRx=yes
 </code></pre></div></div>
                 <div id="GENEVE-DestinationPort" class="option-block">
                     <div class="option-header">
@@ -1492,10 +1492,10 @@ EncapsulationType=udp
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, specifies if UDP checksum is calculated for transmitted packets over IPv4.</p>
+          <p>When true, specifies if UDP checksum is calculated for transmitted packets over IPv4.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDPChecksum=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDPChecksum=yes
 </code></pre></div></div>
                 <div id="L2TP-UDP6ZeroChecksumTx" class="option-block">
                     <div class="option-header">
@@ -1512,10 +1512,10 @@ EncapsulationType=udp
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, skip UDP checksum calculation for transmitted packets over IPv6.</p>
+          <p>When true, skip UDP checksum calculation for transmitted packets over IPv6.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumTx=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumTx=yes
 </code></pre></div></div>
                 <div id="L2TP-UDP6ZeroChecksumRx" class="option-block">
                     <div class="option-header">
@@ -1532,10 +1532,10 @@ EncapsulationType=udp
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, allows incoming UDP packets over IPv6 with zero checksum field.</p>
+          <p>When true, allows incoming UDP packets over IPv6 with zero checksum field.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumRx=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDP6ZeroChecksumRx=yes
 </code></pre></div></div></div><div id="section-L2TPSession" class="section-block"><h2>[L2TPSession] Section</h2><h3 class="subcategory-header">Required</h3>
                 <div id="L2TPSession-Name" class="option-block">
                     <div class="option-header">
@@ -1746,11 +1746,11 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, enables Path MTU Discovery on
+          <p>When true, enables Path MTU Discovery on
           the tunnel.</p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DiscoverPathMTU=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DiscoverPathMTU=no
 </code></pre></div></div>
                 <div id="Tunnel-IPv6FlowLabel" class="option-block">
                     <div class="option-header">
@@ -1794,7 +1794,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true, the Differentiated Service Code
+          <p>When true, the Differentiated Service Code
           Point (DSCP) field will be copied to the inner header from
           outer header during the decapsulation of an IPv6 tunnel
           packet. DSCP is a field in an IP packet that enables different
@@ -1803,7 +1803,7 @@ Name=br0
           </p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CopyDSCP=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CopyDSCP=no
 </code></pre></div></div>
                 <div id="Tunnel-EncapsulationLimit" class="option-block">
                     <div class="option-header">
@@ -1944,12 +1944,12 @@ Mode=ip6ip6
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true tunnel does not require .network file. Created as &quot;tunnel@NONE&quot;.
+          <p>When true tunnel does not require .network file. Created as &quot;tunnel@NONE&quot;.
           Defaults to <code>false</code>.
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Independent=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Independent=yes
 </code></pre></div></div>
                 <div id="Tunnel-AllowLocalRemote" class="option-block">
                     <div class="option-header">
@@ -1966,12 +1966,12 @@ Mode=ip6ip6
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. When true allows tunnel traffic on <code class="varname">ip6tnl</code> devices where the remote endpoint is a local host address.
+          <p>When true allows tunnel traffic on <code class="varname">ip6tnl</code> devices where the remote endpoint is a local host address.
           When unset, the kernel&#x27;s default will be used.
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AllowLocalRemote=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AllowLocalRemote=yes
 </code></pre></div></div>
                 <div id="Tunnel-FooOverUDP" class="option-block">
                     <div class="option-header">
@@ -1988,13 +1988,13 @@ Mode=ip6ip6
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Specifies whether <code class="varname">FooOverUDP=</code> tunnel is to be configured.
+          <p>Specifies whether <code class="varname">FooOverUDP=</code> tunnel is to be configured.
           Defaults to false. This takes effects only for IPIP, SIT, GRE, and GRETAP tunnels.
           For more detail information see
           <a href="https://lwn.net/Articles/614348" target="_blank">Foo over UDP</a></p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FooOverUDP=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FooOverUDP=no
 </code></pre></div></div>
                 <div id="Tunnel-FOUSourcePort" class="option-block">
                     <div class="option-header">
@@ -2074,11 +2074,11 @@ Mode=ip6ip6
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set, configures the tunnel as Intra-Site Automatic Tunnel Addressing Protocol (ISATAP) tunnel.
+          <p>If set, configures the tunnel as Intra-Site Automatic Tunnel Addressing Protocol (ISATAP) tunnel.
           Only applicable to SIT tunnels. When unset, the kernel&#x27;s default will be used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ISATAP=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ISATAP=yes
 </code></pre></div></div>
                 <div id="Tunnel-SerializeTunneledPackets" class="option-block">
                     <div class="option-header">
@@ -2095,12 +2095,12 @@ Mode=ip6ip6
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. If set to yes, then packets are serialized. Only applies for GRE,
+          <p>If set to yes, then packets are serialized. Only applies for GRE,
           GRETAP, and ERSPAN tunnels. When unset, the kernel&#x27;s default will be used.
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SerializeTunneledPackets=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SerializeTunneledPackets=yes
 </code></pre></div></div>
                 <div id="Tunnel-ERSPANIndex" class="option-block">
                     <div class="option-header">
@@ -2301,13 +2301,13 @@ Name=br0
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. Configures whether
+                        <p>Configures whether
         to use multiple file descriptors (queues) to parallelize
         packets sending and receiving. Defaults to
         <code>no</code>.</p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MultiQueue=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MultiQueue=no
 </code></pre></div></div>
                 <div id="Tun-PacketInfo" class="option-block">
                     <div class="option-header">
@@ -2323,14 +2323,14 @@ Name=br0
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. Configures whether
+                        <p>Configures whether
         packets should be prepended with four extra bytes (two flag
         bytes and two protocol bytes). If disabled, it indicates that
         the packets will be pure IP packets. Defaults to
         <code>no</code>.</p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketInfo=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketInfo=no
 </code></pre></div></div>
                 <div id="Tun-VNetHeader" class="option-block">
                     <div class="option-header">
@@ -2346,7 +2346,7 @@ Name=br0
                         </div>
                     </div>
                     <div class="option-desc">
-                        <p>Takes a boolean. Configures
+                        <p>Configures
         IFF_VNET_HDR flag for a tap device. It allows sending
         and receiving larger Generic Segmentation Offload (GSO)
         packets. This may increase throughput significantly.
@@ -2354,7 +2354,7 @@ Name=br0
         <code>no</code>.</p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>False</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>VNetHeader=false
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>VNetHeader=no
 </code></pre></div></div>
                 <div id="Tun-User" class="option-block">
                     <div class="option-header">
@@ -3162,7 +3162,7 @@ PrimaryReselectPolicy=better
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Specifies that duplicate frames (received on inactive ports)
+          <p>Specifies that duplicate frames (received on inactive ports)
           should be dropped when false, or delivered when true. Normally, bonding will drop
           duplicate frames (received on inactive ports), which is desirable for
           most users. But there are some times it is nice to allow duplicate
@@ -3171,7 +3171,7 @@ PrimaryReselectPolicy=better
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AllSlavesActive=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AllSlavesActive=yes
 </code></pre></div></div>
                 <div id="Bond-DynamicTransmitLoadBalancing" class="option-block">
                     <div class="option-header">
@@ -3188,12 +3188,12 @@ PrimaryReselectPolicy=better
                     </div>
                     <div class="option-desc">
                         
-          <p>Takes a boolean. Specifies if dynamic shuffling of flows is enabled. Applies only
+          <p>Specifies if dynamic shuffling of flows is enabled. Applies only
           for balance-tlb mode. Defaults to unset.
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DynamicTransmitLoadBalancing=false
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DynamicTransmitLoadBalancing=yes
 </code></pre></div></div>
                 <div id="Bond-MinLinks" class="option-block">
                     <div class="option-header">
