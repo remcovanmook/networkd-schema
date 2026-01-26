@@ -1,2 +1,11 @@
 deps/
 .DS_Store
+docs/html/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Build Artifacts
+src/original/

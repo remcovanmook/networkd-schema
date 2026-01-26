@@ -6,187 +6,8 @@ import html
 import xml.etree.ElementTree as ET
 from xml.sax.saxutils import escape as xml_escape
 
+
 # --- Constants ---
-
-CSS_STYLES = """
-:root {
-    --bg-color: #0f111a;
-    --text-color: #c9d1d9;
-    --heading-color: #58a6ff;
-    --link-color: #58a6ff;
-    --code-bg: #161b22;
-    --border-color: #30363d;
-    --accent-color: #238636;
-    --meta-color: #8b949e;
-    --warning-color: #d29922;
-    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: var(--font-main);
-    line-height: 1.6;
-    margin: 0;
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-}
-
-a { color: var(--link-color); text-decoration: none; }
-a:hover { text-decoration: underline; }
-code { font-family: var(--font-mono); background: var(--code-bg); padding: 0.2em 0.4em; border-radius: 4px; font-size: 0.9em; }
-pre { background: var(--code-bg); padding: 1em; border-radius: 6px; overflow-x: auto; border: 1px solid var(--border-color); }
-pre code { background: none; padding: 0; }
-
-/* Sidebar */
-#sidebar {
-    width: 300px;
-    background: #0d1117;
-    border-right: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-}
-.sidebar-header {
-    padding: 20px;
-    border-bottom: 1px solid var(--border-color);
-    flex-shrink: 0;
-}
-.sidebar-content {
-    overflow-y: auto;
-    padding: 20px;
-    flex-grow: 1;
-}
-.version-selector {
-    width: 100%;
-    background: var(--code-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    padding: 8px;
-    border-radius: 6px;
-    margin-top: 10px;
-    font-family: var(--font-main);
-    cursor: pointer;
-}
-#sidebar h2 { font-size: 1.2em; margin-top: 0; color: var(--text-color); margin-bottom: 0; }
-#sidebar ul { list-style: none; padding: 0; margin: 0; }
-#sidebar li { margin-bottom: 8px; }
-#sidebar li a { display: block; color: var(--meta-color); padding: 4px 8px; border-radius: 4px; transition: all 0.2s; }
-#sidebar li a:hover, #sidebar li a.active { background: var(--code-bg); color: var(--heading-color); }
-#sidebar .sub-menu { margin-left: 15px; border-left: 1px solid var(--border-color); padding-left: 10px; margin-top: 5px; font-size: 0.9em; }
-
-summary { cursor: pointer; color: var(--text-color); font-weight: 600; padding: 5px 0; user-select: none; }
-summary:hover { color: var(--heading-color); }
-summary a { display: inline-block !important; width: auto !important; }
-details > summary { list-style: none; }
-details > summary::-webkit-details-marker { display: none; }
-details > summary::before { content: '▶'; display: inline-block; margin-right: 8px; font-size: 0.8em; transition: transform 0.2s; }
-details[open] > summary::before { transform: rotate(90deg); }
-
-/* Anchor Links */
-.anchor-link { opacity: 0; color: var(--meta-color); margin-right: 8px; text-decoration: none !important; transition: opacity 0.2s; user-select: none; }
-.option-header:hover .anchor-link { opacity: 1; }
-.anchor-link:hover { color: var(--link-color); }
-
-/* Main Content */
-#content {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 40px;
-    max-width: 1000px;
-}
-
-h1, h2, h3 { color: var(--heading-color); margin-top: 1.5em; }
-h1 { border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-top: 0; }
-h2 { border-bottom: 1px dashed var(--border-color); padding-bottom: 8px; }
-
-.subcategory-header {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 1.1em;
-    color: var(--accent-color);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 5px;
-}
-
-.nav-subcat {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    padding-left: 10px;
-    color: var(--accent-color);
-    font-weight: 600;
-    font-size: 0.8em;
-    text-transform: uppercase;
-}
-
-/* Option Blocks */
-.option-block {
-    background: #151920;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    margin-bottom: 25px;
-    padding: 20px;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.option-block:hover {
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    border-color: #58a6ff;
-}
-.option-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-}
-.option-title {
-    font-family: var(--font-mono);
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #e2b93d;
-}
-.option-meta {
-    display: flex;
-    gap: 10px;
-    font-size: 0.85em;
-}
-.badge {
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75em;
-    letter-spacing: 0.5px;
-}
-.badge-type { background: #1f6feb; color: #fff; }
-.badge-version { background: #238636; color: #fff; }
-.badge-mandatory { background: #da3633; color: #fff; }
-.badge-default { background: #6e7681; color: #fff; }
-.badge-schema { background: #6f42c1; color: #fff; text-decoration: none; }
-.badge-deprecated { background: #9e6a03; color: #fff; }
-
-.option-desc { color: var(--text-color); }
-.option-desc p { margin-top: 0; }
-
-/* Tables */
-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #161b22; border-radius: 6px; overflow: hidden; }
-th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
-th { background: #21262d; font-weight: 600; color: var(--heading-color); }
-tr:last-child td { border-bottom: none; }
-
-/* Responsive */
-@media (max-width: 800px) {
-    body { flex-direction: column; overflow: auto; }
-    #sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
-    #content { padding: 20px; overflow: visible; }
-}
-"""
 
 FILES = [
     "systemd.network",
@@ -196,6 +17,7 @@ FILES = [
 ]
 
 NAMESPACE = {'xi': 'http://www.w3.org/2001/XInclude'}
+
 
 # --- Helpers ---
 
@@ -700,6 +522,7 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                  
             options_data.append({
                 'name': name,
+                'section_name': section_name, # Stored for link generation
                 'subcategory': subcategory,
                 'type': value_type,
                 'type_slug': type_slug,
@@ -803,6 +626,20 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
         html_content.append('</div>') 
         nav_items.append('</ul></details></li>')
 
+    # Return options for search index
+    searchable_items = []
+    for opt in options_data:
+        # Minimal data for search
+        # We need: name, link (file#anchor), desc_snippet?, file_title
+        searchable_items.append({
+            'name': opt['name'],
+            'section': opt['subcategory'],
+            'file': f"{doc_name}.html",
+            'anchor': f"#{opt['section_name']}-{opt['name']}",
+            # Strip HTML from description for search
+            'desc': re.sub('<[^<]+?>', '', opt['desc_html'])[:150] # Snippet
+        })
+
     # Complete HTML Page
     # Build Version Options
     version_options_html = ""
@@ -825,6 +662,14 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
     <div id="sidebar">
         <div class="sidebar-header">
              <h3><a href="index.html" style="color:var(--heading-color);">Documentation</a></h3>
+             <div id="search-container">
+                 <input type="text" id="search-input" placeholder="Search options... (e.g. DHCP)">
+                 <div id="search-results"></div>
+             </div>
+             <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
+                 <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
+                 {f'&middot; <a href="changes.html">Changes</a>' if available_versions and version != sorted(available_versions)[0] and version != 'latest' else ''}
+             </div>
              {f'''<select class="version-selector" onchange="window.location.href=this.value;">
                 {version_options_html}
             </select>''' if available_versions else f'<p style="color:var(--meta-color); font-size:0.8em; margin-bottom:20px;">Version {version}</p>'}
@@ -845,7 +690,7 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Systemd {doc_name} ({version})</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         .docbook-para {{ margin-bottom: 1em; }}
     </style>
@@ -913,6 +758,7 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
             sections.forEach(section => observer.observe(section));
         });
     </script>
+    <script src="../js/search.js"></script>
 </body>
 </html>
     """
@@ -922,6 +768,8 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
     with open(os.path.join(output_dir, f"{doc_name}.html"), 'w') as f:
         f.write(full_html)
     print(f" -> Generated {doc_name}.html")
+    
+    return searchable_items
 
 
 def generate_types_page(output_dir, version, schema_dir):
@@ -1066,7 +914,7 @@ def generate_types_page(output_dir, version, schema_dir):
 <html>
 <head>
     <title>Systemd Configuration Types {version}</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         body {{ display: block; max-width: 800px; margin: 0 auto; padding: 50px; overflow: auto; }}
         h1 {{ border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }}
@@ -1091,7 +939,7 @@ def generate_index(output_dir, version):
 <html>
 <head>
     <title>Systemd Network Configuration {version}</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         body {{ display: block; max-width: 800px; margin: 0 auto; padding: 50px; overflow: auto; }}
         .card {{ background: #161b22; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #30363d; }}
@@ -1149,18 +997,28 @@ def main():
  
     os.makedirs(output_dir, exist_ok=True)
     
-    # Write CSS
-    with open(os.path.join(output_dir, "style.css"), "w") as f:
-        f.write(CSS_STYLES)
+    
+    # Write CSS - Removed in favor of centralized CSS
+    # with open(os.path.join(output_dir, "style.css"), "w") as f:
+    #     f.write(CSS_STYLES)
         
+    search_index = []
+    
     for doc in FILES:
         try:
-            generate_page(doc, args.version, src_dir, schema_dir, output_dir, web_schemas=args.web_schemas, available_versions=args.available_versions)
+            page_options = generate_page(doc, args.version, src_dir, schema_dir, output_dir, web_schemas=args.web_schemas, available_versions=args.available_versions)
+            if page_options:
+                search_index.extend(page_options)
         except Exception as e:
             print(f"Error processing {doc}: {e}")
             import traceback
             traceback.print_exc()
             
+    # Write Search Index
+    with open(os.path.join(output_dir, "search_index.json"), "w") as f:
+        json.dump(search_index, f, indent=None)
+    print(f"Generated search_index.json with {len(search_index)} entries.")
+
     generate_types_page(output_dir, args.version, schema_dir)
     generate_index(output_dir, args.version)
     print("\nDocumentation Generation Complete.")

@@ -110,7 +110,7 @@
         }
       },
       "additionalProperties": false,
-      "documentation": "https://www.freedesktop.org/software/systemd/man/248/networkd.conf.html#%5BNetwork%5D%20Section%20Options"
+      "documentation": "https://remcovanmook.github.io/networkd-schema/v248/networkd.conf.html#section-Network"
     },
     "DHCP": {
       "oneOf": [
@@ -141,7 +141,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/248/networkd.conf.html#%5BDHCP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v248/networkd.conf.html#section-DHCP"
           }
         },
         {
@@ -169,7 +169,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/248/networkd.conf.html#%5BDHCP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v248/networkd.conf.html#section-DHCP"
         }
       ],
       "description": "[DHCP] configuration (Can be repeated)"

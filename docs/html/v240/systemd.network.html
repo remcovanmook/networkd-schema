@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Systemd systemd.network (v240)</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         .docbook-para { margin-bottom: 1em; }
     </style>
@@ -15,6 +15,14 @@
     <div id="sidebar">
         <div class="sidebar-header">
              <h3><a href="index.html" style="color:var(--heading-color);">Documentation</a></h3>
+             <div id="search-container">
+                 <input type="text" id="search-input" placeholder="Search options... (e.g. DHCP)">
+                 <div id="search-results"></div>
+             </div>
+             <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
+                 <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
+                 &middot; <a href="changes.html">Changes</a>
+             </div>
              <select class="version-selector" onchange="window.location.href=this.value;">
                 <option value="../latest/systemd.network.html" >latest</option><option value="../v259/systemd.network.html" >v259</option><option value="../v258/systemd.network.html" >v258</option><option value="../v257/systemd.network.html" >v257</option><option value="../v256/systemd.network.html" >v256</option><option value="../v255/systemd.network.html" >v255</option><option value="../v254/systemd.network.html" >v254</option><option value="../v253/systemd.network.html" >v253</option><option value="../v252/systemd.network.html" >v252</option><option value="../v251/systemd.network.html" >v251</option><option value="../v250/systemd.network.html" >v250</option><option value="../v249/systemd.network.html" >v249</option><option value="../v248/systemd.network.html" >v248</option><option value="../v247/systemd.network.html" >v247</option><option value="../v246/systemd.network.html" >v246</option><option value="../v245/systemd.network.html" >v245</option><option value="../v244/systemd.network.html" >v244</option><option value="../v243/systemd.network.html" >v243</option><option value="../v242/systemd.network.html" >v242</option><option value="../v241/systemd.network.html" >v241</option><option value="../v240/systemd.network.html" selected>v240</option><option value="../v239/systemd.network.html" >v239</option><option value="../v238/systemd.network.html" >v238</option><option value="../v237/systemd.network.html" >v237</option>
             </select>
@@ -3869,6 +3877,7 @@ PVID=false
             sections.forEach(section => observer.observe(section));
         });
     </script>
+    <script src="../js/search.js"></script>
 </body>
 </html>
     

@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+        exclude: ^src/original/ # Should be ignored anyway but to be safe
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.272
+    hooks:
+      - id: ruff
+        args: [ --fix, --exit-non-zero-on-fix ]

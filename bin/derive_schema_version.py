@@ -172,8 +172,12 @@ def main():
                      else:
                          # specific replace for the version in the URL
                          # Match: .../man/257/... -> .../man/{target_ver_clean}/...
-                         # We only replace 257 if it follows /man/
-                         obj[k] = v.replace("/man/257/", f"/man/{target_ver_clean}/")
+                         # Match: .../v257/... -> .../v{target_ver}/... (GitHub Pages)
+                         
+                         if "/v257/" in v:
+                              obj[k] = v.replace("/v257/", f"/{target_ver}/")
+                         elif "/man/257/" in v:
+                              obj[k] = v.replace("/man/257/", f"/man/{target_ver_clean}/")
                 else:
                     update_doc_links(v)
         elif isinstance(obj, list):

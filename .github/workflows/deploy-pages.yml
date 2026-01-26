@@ -29,65 +29,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Build Documentation
+      - name: Validate Schemas
         run: |
-          # 1. Identify available versions from schemas/ directory
-          # structure: schemas/v257, schemas/v256, etc.
-          # output: "v257 v256"
-          VERSIONS=$(ls -d schemas/v* | xargs -n 1 basename)
-          
-          # 2. Determine latest version (sort -V for version sort)
-          LATEST_VERSION=$(echo "$VERSIONS" | sort -V | tail -n 1)
-          
-          echo "Found versions: $VERSIONS"
-          echo "Latest version: $LATEST_VERSION"
-          
-          # 3. Build each version
-          # We pass the full list of available versions to the generator for the switcher.
-          # We also add 'latest' to the list so it appears in the dropdown.
-          ALL_VERSIONS="$VERSIONS latest"
-          
-          for VER in $VERSIONS; do
-            echo "Building $VER..."
-            python3 bin/generate_html.py --version "$VER" --web-schemas --available-versions $ALL_VERSIONS
-          done
-          
-          # 4. Create 'latest' alias
-          # We simply copy the output of the latest version to a 'latest' directory.
-          echo "Creating latest alias from $LATEST_VERSION..."
-          cp -r "docs/html/$LATEST_VERSION" "docs/html/latest"
-          
-          # 5. Fix up 'latest' pages?
-          # Since links are ../../schemas/$VER/..., copying to latest (one level deep) means ../../schemas/$VER/... still points to valid path.
-          # The sidebar selector for 'latest' will point to ../latest/FILE.html.
-          
-      - name: Prepare Schemas for Publishing
-        run: |
-          # Create global schemas directory in docs/html/schemas
-          mkdir -p docs/html/schemas
-          
-          # Indentify versions again
-          VERSIONS=$(ls -d schemas/v* | xargs -n 1 basename)
-          LATEST_VERSION=$(echo "$VERSIONS" | sort -V | tail -n 1)
+          python3 bin/validate_schema.py schemas/v*/*.json
 
-          for VER in $VERSIONS; do
-            mkdir -p docs/html/schemas/$VER
-            cp schemas/$VER/*.json docs/html/schemas/$VER/
-          done
-          
-          # Also for latest alias for schemas?
-          # User requested "links to the json schemas (under /schemas/<version>/)"
-          # But having /schemas/latest/ is also good practice.
-          mkdir -p docs/html/schemas/latest
-          cp schemas/$LATEST_VERSION/*.json docs/html/schemas/latest/
-          
-      - name: Generate Landing Page
-        run: |
-           # Identify versions again for the index generation
-           VERSIONS=$(ls -d schemas/v* | xargs -n 1 basename)
-           
-           # Generate premium landing page with list of versions
-           python3 bin/generate_index.py --out docs/html --versions $VERSIONS
+      - name: Build Documentation
+        run: python3 bin/rebuild_docs.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

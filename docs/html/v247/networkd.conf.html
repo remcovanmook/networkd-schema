@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Systemd networkd.conf (v247)</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         .docbook-para { margin-bottom: 1em; }
     </style>
@@ -15,6 +15,14 @@
     <div id="sidebar">
         <div class="sidebar-header">
              <h3><a href="index.html" style="color:var(--heading-color);">Documentation</a></h3>
+             <div id="search-container">
+                 <input type="text" id="search-input" placeholder="Search options... (e.g. DHCP)">
+                 <div id="search-results"></div>
+             </div>
+             <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
+                 <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
+                 &middot; <a href="changes.html">Changes</a>
+             </div>
              <select class="version-selector" onchange="window.location.href=this.value;">
                 <option value="../latest/networkd.conf.html" >latest</option><option value="../v259/networkd.conf.html" >v259</option><option value="../v258/networkd.conf.html" >v258</option><option value="../v257/networkd.conf.html" >v257</option><option value="../v256/networkd.conf.html" >v256</option><option value="../v255/networkd.conf.html" >v255</option><option value="../v254/networkd.conf.html" >v254</option><option value="../v253/networkd.conf.html" >v253</option><option value="../v252/networkd.conf.html" >v252</option><option value="../v251/networkd.conf.html" >v251</option><option value="../v250/networkd.conf.html" >v250</option><option value="../v249/networkd.conf.html" >v249</option><option value="../v248/networkd.conf.html" >v248</option><option value="../v247/networkd.conf.html" selected>v247</option><option value="../v246/networkd.conf.html" >v246</option><option value="../v245/networkd.conf.html" >v245</option><option value="../v244/networkd.conf.html" >v244</option><option value="../v243/networkd.conf.html" >v243</option><option value="../v242/networkd.conf.html" >v242</option><option value="../v241/networkd.conf.html" >v241</option><option value="../v240/networkd.conf.html" >v240</option><option value="../v239/networkd.conf.html" >v239</option><option value="../v238/networkd.conf.html" >v238</option><option value="../v237/networkd.conf.html" >v237</option>
             </select>
@@ -235,6 +243,7 @@ DUIDRawData=00:00:ab:11:f9:2a:c2:77:29:f9:5c:00</code></pre>
             sections.forEach(section => observer.observe(section));
         });
     </script>
+    <script src="../js/search.js"></script>
 </body>
 </html>
     

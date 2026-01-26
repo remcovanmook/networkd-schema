@@ -234,7 +234,7 @@
       },
       "additionalProperties": false,
       "title": "Match",
-      "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMatch%5D%20Section%20Options"
+      "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Match"
     },
     "NetDev": {
       "type": "object",
@@ -313,7 +313,7 @@
         "Kind"
       ],
       "title": "Net Dev",
-      "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BNetDev%5D%20Section%20Options"
+      "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-NetDev"
     },
     "VLAN": {
       "oneOf": [
@@ -381,7 +381,7 @@
             "required": [
               "Id"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BVLAN%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-VLAN"
           }
         },
         {
@@ -455,7 +455,7 @@
           "required": [
             "Id"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BVLAN%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-VLAN"
         }
       ],
       "description": "[VLAN] configuration (Can be repeated)",
@@ -504,7 +504,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACVLAN%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACVLAN"
           }
         },
         {
@@ -554,7 +554,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACVLAN%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACVLAN"
         }
       ],
       "description": "[MACVLAN] configuration (Can be repeated)",
@@ -593,7 +593,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACVTAP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACVTAP"
           }
         },
         {
@@ -625,7 +625,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACVTAP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACVTAP"
         }
       ],
       "description": "[MACVTAP] configuration (Can be repeated)",
@@ -663,7 +663,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BIPVLAN%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-IPVLAN"
           }
         },
         {
@@ -694,7 +694,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BIPVLAN%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-IPVLAN"
         }
       ],
       "description": "[IPVLAN] configuration (Can be repeated)",
@@ -734,7 +734,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BIPVTAP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-IPVTAP"
           }
         },
         {
@@ -767,7 +767,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BIPVTAP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-IPVTAP"
         }
       ],
       "description": "[IPVTAP] configuration (Can be repeated)",
@@ -1018,7 +1018,7 @@
             "required": [
               "FOUDestinationPort"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BTunnel%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Tunnel"
           }
         },
         {
@@ -1246,7 +1246,7 @@
           "required": [
             "FOUDestinationPort"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BTunnel%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Tunnel"
         }
       ],
       "description": "[Tunnel] configuration (Can be repeated)",
@@ -1322,7 +1322,7 @@
               "PeerPort",
               "Peer"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BFooOverUDP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-FooOverUDP"
           }
         },
         {
@@ -1395,7 +1395,7 @@
             "PeerPort",
             "Peer"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BFooOverUDP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-FooOverUDP"
         }
       ],
       "description": "[FooOverUDP] configuration (Can be repeated)",
@@ -1520,7 +1520,7 @@
               "PeerTunnelId",
               "Remote"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BL2TP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-L2TP"
           }
         },
         {
@@ -1639,7 +1639,7 @@
             "PeerTunnelId",
             "Remote"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BL2TP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-L2TP"
         }
       ],
       "description": "[L2TP] configuration (Can be repeated)",
@@ -1693,7 +1693,7 @@
               "PeerSessionId",
               "Name"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BL2TPSession%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-L2TPSession"
           }
         },
         {
@@ -1740,7 +1740,7 @@
             "PeerSessionId",
             "Name"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BL2TPSession%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-L2TPSession"
         }
       ],
       "description": "[L2TPSession] configuration (Can be repeated)",
@@ -1779,7 +1779,7 @@
             "required": [
               "Name"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BPeer%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Peer"
           }
         },
         {
@@ -1811,7 +1811,7 @@
           "required": [
             "Name"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BPeer%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Peer"
         }
       ],
       "description": "[Peer] configuration (Can be repeated)",
@@ -1836,7 +1836,7 @@
             "required": [
               "Peer"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BVXCAN%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-VXCAN"
           }
         },
         {
@@ -1854,7 +1854,7 @@
           "required": [
             "Peer"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BVXCAN%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-VXCAN"
         }
       ],
       "description": "[VXCAN] configuration (Can be repeated)",
@@ -2099,7 +2099,7 @@
               "Id",
               "VNI"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BVXLAN%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-VXLAN"
           }
         },
         {
@@ -2337,7 +2337,7 @@
             "Id",
             "VNI"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BVXLAN%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-VXLAN"
         }
       ],
       "description": "[VXLAN] configuration (Can be repeated)",
@@ -2446,7 +2446,7 @@
             "required": [
               "Id"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BGENEVE%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-GENEVE"
           }
         },
         {
@@ -2550,7 +2550,7 @@
           "required": [
             "Id"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BGENEVE%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-GENEVE"
         }
       ],
       "description": "[GENEVE] configuration (Can be repeated)",
@@ -2580,7 +2580,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACsec%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACsec"
           }
         },
         {
@@ -2603,7 +2603,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACsec%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACsec"
         }
       ],
       "description": "[MACsec] configuration (Can be repeated)",
@@ -2641,7 +2641,7 @@
             "required": [
               "Port"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACsecReceiveChannel%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACsecReceiveChannel"
           }
         },
         {
@@ -2672,7 +2672,7 @@
           "required": [
             "Port"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACsecReceiveChannel%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACsecReceiveChannel"
         }
       ],
       "description": "[MACsecReceiveChannel] configuration (Can be repeated)",
@@ -2728,7 +2728,7 @@
               "KeyId",
               "Key"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACsecTransmitAssociation%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACsecTransmitAssociation"
           }
         },
         {
@@ -2777,7 +2777,7 @@
             "KeyId",
             "Key"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACsecTransmitAssociation%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACsecTransmitAssociation"
         }
       ],
       "description": "[MACsecTransmitAssociation] configuration (Can be repeated)",
@@ -2839,7 +2839,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACsecReceiveAssociation%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACsecReceiveAssociation"
           }
         },
         {
@@ -2894,7 +2894,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BMACsecReceiveAssociation%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-MACsecReceiveAssociation"
         }
       ],
       "description": "[MACsecReceiveAssociation] configuration (Can be repeated)",
@@ -2954,7 +2954,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BTun%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Tun"
           }
         },
         {
@@ -3007,7 +3007,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BTun%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Tun"
         }
       ],
       "description": "[Tun] configuration (Can be repeated)",
@@ -3067,7 +3067,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BTap%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Tap"
           }
         },
         {
@@ -3120,7 +3120,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BTap%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Tap"
         }
       ],
       "description": "[Tap] configuration (Can be repeated)",
@@ -3347,7 +3347,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BBond%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Bond"
           }
         },
         {
@@ -3583,7 +3583,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BBond%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Bond"
         }
       ],
       "description": "[Bond] configuration (Can be repeated)",
@@ -3697,7 +3697,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BBridge%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Bridge"
           }
         },
         {
@@ -3810,7 +3810,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BBridge%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Bridge"
         }
       ],
       "description": "[Bridge] configuration (Can be repeated)",
@@ -3854,7 +3854,7 @@
             "required": [
               "Table"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BVRF%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-VRF"
           }
         },
         {
@@ -3891,7 +3891,7 @@
           "required": [
             "Table"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BVRF%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-VRF"
         }
       ],
       "description": "[VRF] configuration (Can be repeated)",
@@ -3933,7 +3933,7 @@
               "DestinationPort",
               "EtherType"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BBareUDP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-BareUDP"
           }
         },
         {
@@ -3978,7 +3978,7 @@
             "DestinationPort",
             "EtherType"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BBareUDP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-BareUDP"
         }
       ],
       "description": "[BareUDP] configuration (Can be repeated)",
@@ -4061,7 +4061,7 @@
             "required": [
               "PrivateKey"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BWireGuard%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-WireGuard"
           }
         },
         {
@@ -4137,7 +4137,7 @@
           "required": [
             "PrivateKey"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BWireGuard%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-WireGuard"
         }
       ],
       "description": "[WireGuard] configuration (Can be repeated)",
@@ -4223,7 +4223,7 @@
             "required": [
               "PublicKey"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BWireGuardPeer%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-WireGuardPeer"
           }
         },
         {
@@ -4308,7 +4308,7 @@
           "required": [
             "PublicKey"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BWireGuardPeer%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-WireGuardPeer"
         }
       ],
       "description": "[WireGuardPeer] configuration (Can be repeated)",
@@ -4339,7 +4339,7 @@
             "required": [
               "InterfaceId"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BXfrm%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Xfrm"
           }
         },
         {
@@ -4363,7 +4363,7 @@
           "required": [
             "InterfaceId"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BXfrm%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-Xfrm"
         }
       ],
       "description": "[Xfrm] configuration (Can be repeated)",
@@ -4461,7 +4461,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BBatmanAdvanced%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-BatmanAdvanced"
           }
         },
         {
@@ -4552,7 +4552,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BBatmanAdvanced%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-BatmanAdvanced"
         }
       ],
       "description": "[BatmanAdvanced] configuration (Can be repeated)",
@@ -4596,7 +4596,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BIPoIB%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-IPoIB"
           }
         },
         {
@@ -4633,7 +4633,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BIPoIB%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-IPoIB"
         }
       ],
       "description": "[IPoIB] configuration (Can be repeated)",
@@ -4690,7 +4690,7 @@
               "PhysicalDevice",
               "Type"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BWLAN%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-WLAN"
           }
         },
         {
@@ -4740,7 +4740,7 @@
             "PhysicalDevice",
             "Type"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/254/systemd.netdev.html#%5BWLAN%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v254/systemd.netdev.html#section-WLAN"
         }
       ],
       "description": "[WLAN] configuration (Can be repeated)",

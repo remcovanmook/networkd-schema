@@ -409,7 +409,7 @@
         "Type"
       ],
       "title": "Match",
-      "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BMatch%5D%20Section%20Options"
+      "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Match"
     },
     "Link": {
       "type": "object",
@@ -563,7 +563,7 @@
       },
       "additionalProperties": false,
       "title": "Link",
-      "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BLink%5D%20Section%20Options"
+      "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Link"
     },
     "Network": {
       "type": "object",
@@ -1206,7 +1206,7 @@
       },
       "additionalProperties": false,
       "title": "Network",
-      "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BNetwork%5D%20Section%20Options"
+      "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Network"
     },
     "Address": {
       "oneOf": [
@@ -1363,7 +1363,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BAddress%5D%20Section%20Options",
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Address",
             "required": [
               "Address"
             ]
@@ -1520,7 +1520,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BAddress%5D%20Section%20Options",
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Address",
           "required": [
             "Address"
           ]
@@ -1564,7 +1564,7 @@
               "Label",
               "Prefix"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6AddressLabel%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6AddressLabel"
           }
         },
         {
@@ -1598,7 +1598,7 @@
             "Label",
             "Prefix"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6AddressLabel%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6AddressLabel"
         }
       ],
       "description": "[IPv6AddressLabel] configuration (Can be repeated)",
@@ -1647,7 +1647,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BNeighbor%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Neighbor"
           }
         },
         {
@@ -1689,7 +1689,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BNeighbor%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Neighbor"
         }
       ],
       "description": "[Neighbor] configuration (Can be repeated)",
@@ -1914,7 +1914,7 @@
               "GoTo",
               "Type"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BRoutingPolicyRule%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-RoutingPolicyRule"
           }
         },
         {
@@ -2121,7 +2121,7 @@
             "GoTo",
             "Type"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BRoutingPolicyRule%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-RoutingPolicyRule"
         }
       ],
       "description": "[RoutingPolicyRule] configuration (Can be repeated)",
@@ -2430,7 +2430,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BRoute%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Route"
           }
         },
         {
@@ -2730,7 +2730,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BRoute%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Route"
         }
       ],
       "description": "[Route] configuration (Can be repeated)",
@@ -2802,7 +2802,7 @@
             "required": [
               "Id"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BNextHop%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-NextHop"
           }
         },
         {
@@ -2867,7 +2867,7 @@
           "required": [
             "Id"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BNextHop%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-NextHop"
         }
       ],
       "description": "[NextHop] configuration (Can be repeated)",
@@ -3275,7 +3275,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPv4%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv4"
           }
         },
         {
@@ -3680,7 +3680,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPv4%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv4"
         }
       ],
       "description": "[DHCPv4] configuration (Can be repeated)",
@@ -3889,7 +3889,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPv6%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv6"
           }
         },
         {
@@ -4086,7 +4086,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPv6%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv6"
         }
       ],
       "description": "[DHCPv6] configuration (Can be repeated)",
@@ -4294,7 +4294,7 @@
             "required": [
               "Token"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6AcceptRA%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6AcceptRA"
           }
         },
         {
@@ -4519,7 +4519,7 @@
           "required": [
             "Token"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6AcceptRA%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6AcceptRA"
         }
       ],
       "description": "[IPv6AcceptRA] configuration (Can be repeated)",
@@ -4779,7 +4779,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPServer%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPServer"
           }
         },
         {
@@ -5026,7 +5026,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPServer%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPServer"
         }
       ],
       "description": "[DHCPServer] configuration (Can be repeated)",
@@ -5068,7 +5068,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPServerStaticLease%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPServerStaticLease"
           }
         },
         {
@@ -5099,7 +5099,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPServerStaticLease%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPServerStaticLease"
         }
       ],
       "description": "[DHCPServerStaticLease] configuration (Can be repeated)",
@@ -5232,7 +5232,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBridge%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Bridge"
           }
         },
         {
@@ -5345,7 +5345,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBridge%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Bridge"
         }
       ],
       "description": "[Bridge] configuration (Can be repeated)",
@@ -5436,7 +5436,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBridgeFDB%5D%20Section%20Options",
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeFDB",
             "required": [
               "MACAddress"
             ]
@@ -5523,7 +5523,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBridgeFDB%5D%20Section%20Options",
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeFDB",
           "required": [
             "MACAddress"
           ]
@@ -5569,7 +5569,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBridgeMDB%5D%20Section%20Options",
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeMDB",
             "required": [
               "MulticastGroupAddress"
             ]
@@ -5608,7 +5608,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBridgeMDB%5D%20Section%20Options",
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeMDB",
           "required": [
             "MulticastGroupAddress"
           ]
@@ -5686,7 +5686,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBridgeVLAN%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeVLAN"
           }
         },
         {
@@ -5754,7 +5754,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBridgeVLAN%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeVLAN"
         }
       ],
       "description": "[BridgeVLAN] configuration (Can be repeated)",
@@ -5830,7 +5830,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPPrefixDelegation%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPPrefixDelegation"
           }
         },
         {
@@ -5899,7 +5899,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPPrefixDelegation%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPPrefixDelegation"
         }
       ],
       "description": "[DHCPPrefixDelegation] configuration (Can be repeated)",
@@ -6068,7 +6068,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6SendRA%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6SendRA"
           }
         },
         {
@@ -6230,7 +6230,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6SendRA%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6SendRA"
         }
       ],
       "description": "[IPv6SendRA] configuration (Can be repeated)",
@@ -6310,7 +6310,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6Prefix%5D%20Section%20Options",
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6Prefix",
             "required": [
               "Prefix"
             ]
@@ -6378,7 +6378,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6Prefix%5D%20Section%20Options",
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6Prefix",
           "required": [
             "Prefix"
           ]
@@ -6425,7 +6425,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6RoutePrefix%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6RoutePrefix"
           }
         },
         {
@@ -6451,7 +6451,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6RoutePrefix%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6RoutePrefix"
         }
       ],
       "description": "[IPv6RoutePrefix] configuration (Can be repeated)",
@@ -6484,7 +6484,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6PREF64Prefix%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6PREF64Prefix"
           }
         },
         {
@@ -6510,7 +6510,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6PREF64Prefix%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6PREF64Prefix"
         }
       ],
       "description": "[IPv6PREF64Prefix] configuration (Can be repeated)",
@@ -6532,7 +6532,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BLLDP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-LLDP"
           }
         },
         {
@@ -6547,7 +6547,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BLLDP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-LLDP"
         }
       ],
       "description": "[LLDP] configuration (Can be repeated)",
@@ -6710,7 +6710,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BCAN%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-CAN"
           }
         },
         {
@@ -6872,7 +6872,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BCAN%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-CAN"
         }
       ],
       "description": "[CAN] configuration (Can be repeated)",
@@ -6900,7 +6900,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPoIB%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPoIB"
           }
         },
         {
@@ -6921,7 +6921,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPoIB%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPoIB"
         }
       ],
       "description": "[IPoIB] configuration (Can be repeated)",
@@ -6949,7 +6949,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BQDisc%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QDisc"
           }
         },
         {
@@ -6970,7 +6970,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BQDisc%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QDisc"
         }
       ],
       "description": "[QDisc] configuration (Can be repeated)",
@@ -7013,7 +7013,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBFIFO%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BFIFO"
           }
         },
         {
@@ -7044,7 +7044,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBFIFO%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BFIFO"
         }
       ],
       "description": "[BFIFO] configuration (Can be repeated)",
@@ -7184,7 +7184,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BCAKE%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-CAKE"
           }
         },
         {
@@ -7317,7 +7317,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BCAKE%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-CAKE"
         }
       ],
       "description": "[CAKE] configuration (Can be repeated)",
@@ -7387,7 +7387,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BControlledDelay%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-ControlledDelay"
           }
         },
         {
@@ -7454,7 +7454,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BControlledDelay%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-ControlledDelay"
         }
       ],
       "description": "[ControlledDelay] configuration (Can be repeated)",
@@ -7487,7 +7487,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDeficitRoundRobinScheduler%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DeficitRoundRobinScheduler"
           }
         },
         {
@@ -7508,7 +7508,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDeficitRoundRobinScheduler%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DeficitRoundRobinScheduler"
         }
       ],
       "description": "[DeficitRoundRobinScheduler] configuration (Can be repeated)",
@@ -7548,7 +7548,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDeficitRoundRobinSchedulerClass%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DeficitRoundRobinSchedulerClass"
           }
         },
         {
@@ -7576,7 +7576,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDeficitRoundRobinSchedulerClass%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DeficitRoundRobinSchedulerClass"
         }
       ],
       "description": "[DeficitRoundRobinSchedulerClass] configuration (Can be repeated)",
@@ -7637,7 +7637,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BEnhancedTransmissionSelection%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-EnhancedTransmissionSelection"
           }
         },
         {
@@ -7686,7 +7686,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BEnhancedTransmissionSelection%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-EnhancedTransmissionSelection"
         }
       ],
       "description": "[EnhancedTransmissionSelection] configuration (Can be repeated)",
@@ -7725,7 +7725,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BPFIFO%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFO"
           }
         },
         {
@@ -7752,7 +7752,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BPFIFO%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFO"
         }
       ],
       "description": "[PFIFO] configuration (Can be repeated)",
@@ -7785,7 +7785,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BPFIFOFast%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFOFast"
           }
         },
         {
@@ -7806,7 +7806,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BPFIFOFast%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFOFast"
         }
       ],
       "description": "[PFIFOFast] configuration (Can be repeated)",
@@ -7845,7 +7845,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BPFIFOHeadDrop%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFOHeadDrop"
           }
         },
         {
@@ -7872,7 +7872,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BPFIFOHeadDrop%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFOHeadDrop"
         }
       ],
       "description": "[PFIFOHeadDrop] configuration (Can be repeated)",
@@ -7905,7 +7905,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BQuickFairQueueing%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QuickFairQueueing"
           }
         },
         {
@@ -7926,7 +7926,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BQuickFairQueueing%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QuickFairQueueing"
         }
       ],
       "description": "[QuickFairQueueing] configuration (Can be repeated)",
@@ -7975,7 +7975,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BQuickFairQueueingClass%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QuickFairQueueingClass"
           }
         },
         {
@@ -8017,7 +8017,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BQuickFairQueueingClass%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QuickFairQueueingClass"
         }
       ],
       "description": "[QuickFairQueueingClass] configuration (Can be repeated)",
@@ -8133,7 +8133,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BFairQueueing%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FairQueueing"
           }
         },
         {
@@ -8242,7 +8242,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BFairQueueing%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FairQueueing"
         }
       ],
       "description": "[FairQueueing] configuration (Can be repeated)",
@@ -8352,7 +8352,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BFairQueueingControlledDelay%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FairQueueingControlledDelay"
           }
         },
         {
@@ -8455,7 +8455,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BFairQueueingControlledDelay%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FairQueueingControlledDelay"
         }
       ],
       "description": "[FairQueueingControlledDelay] configuration (Can be repeated)",
@@ -8489,7 +8489,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BFlowQueuePIE%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FlowQueuePIE"
           }
         },
         {
@@ -8516,7 +8516,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BFlowQueuePIE%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FlowQueuePIE"
         }
       ],
       "description": "[FlowQueuePIE] configuration (Can be repeated)",
@@ -8566,7 +8566,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BGenericRandomEarlyDetection%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-GenericRandomEarlyDetection"
           }
         },
         {
@@ -8609,7 +8609,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BGenericRandomEarlyDetection%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-GenericRandomEarlyDetection"
         }
       ],
       "description": "[GenericRandomEarlyDetection] configuration (Can be repeated)",
@@ -8647,7 +8647,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BHeavyHitterFilter%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HeavyHitterFilter"
           }
         },
         {
@@ -8678,7 +8678,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BHeavyHitterFilter%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HeavyHitterFilter"
         }
       ],
       "description": "[HeavyHitterFilter] configuration (Can be repeated)",
@@ -8723,7 +8723,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BHierarchyTokenBucket%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HierarchyTokenBucket"
           }
         },
         {
@@ -8761,7 +8761,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BHierarchyTokenBucket%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HierarchyTokenBucket"
         }
       ],
       "description": "[HierarchyTokenBucket] configuration (Can be repeated)",
@@ -8875,7 +8875,7 @@
               "Parent",
               "Rate"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BHierarchyTokenBucketClass%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HierarchyTokenBucketClass"
           }
         },
         {
@@ -8974,7 +8974,7 @@
             "Parent",
             "Rate"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BHierarchyTokenBucketClass%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HierarchyTokenBucketClass"
         }
       ],
       "description": "[HierarchyTokenBucketClass] configuration (Can be repeated)",
@@ -9002,7 +9002,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BClassfulMultiQueueing%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-ClassfulMultiQueueing"
           }
         },
         {
@@ -9023,7 +9023,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BClassfulMultiQueueing%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-ClassfulMultiQueueing"
         }
       ],
       "description": "[ClassfulMultiQueueing] configuration (Can be repeated)",
@@ -9051,7 +9051,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBandMultiQueueing%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BandMultiQueueing"
           }
         },
         {
@@ -9072,7 +9072,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BBandMultiQueueing%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BandMultiQueueing"
         }
       ],
       "description": "[BandMultiQueueing] configuration (Can be repeated)",
@@ -9151,7 +9151,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BNetworkEmulator%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-NetworkEmulator"
           }
         },
         {
@@ -9223,7 +9223,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BNetworkEmulator%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-NetworkEmulator"
         }
       ],
       "description": "[NetworkEmulator] configuration (Can be repeated)",
@@ -9261,7 +9261,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BPIE%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PIE"
           }
         },
         {
@@ -9292,7 +9292,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BPIE%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PIE"
         }
       ],
       "description": "[PIE] configuration (Can be repeated)",
@@ -9330,7 +9330,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BStochasticFairBlue%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-StochasticFairBlue"
           }
         },
         {
@@ -9361,7 +9361,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BStochasticFairBlue%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-StochasticFairBlue"
         }
       ],
       "description": "[StochasticFairBlue] configuration (Can be repeated)",
@@ -9399,7 +9399,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BStochasticFairnessQueueing%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-StochasticFairnessQueueing"
           }
         },
         {
@@ -9430,7 +9430,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BStochasticFairnessQueueing%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-StochasticFairnessQueueing"
         }
       ],
       "description": "[StochasticFairnessQueueing] configuration (Can be repeated)",
@@ -9542,7 +9542,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BTokenBucketFilter%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TokenBucketFilter"
           }
         },
         {
@@ -9647,7 +9647,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BTokenBucketFilter%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TokenBucketFilter"
         }
       ],
       "description": "[TokenBucketFilter] configuration (Can be repeated)",
@@ -9682,7 +9682,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BTrivialLinkEqualizer%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TrivialLinkEqualizer"
           }
         },
         {
@@ -9710,7 +9710,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BTrivialLinkEqualizer%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TrivialLinkEqualizer"
         }
       ],
       "description": "[TrivialLinkEqualizer] configuration (Can be repeated)",
@@ -9811,7 +9811,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6PrefixDelegation%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6PrefixDelegation"
           }
         },
         {
@@ -9905,7 +9905,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BIPv6PrefixDelegation%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6PrefixDelegation"
         }
       ],
       "description": "[IPv6PrefixDelegation] configuration (Can be repeated)",
@@ -10100,7 +10100,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCP"
           }
         },
         {
@@ -10278,7 +10278,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCP"
         }
       ],
       "description": "[DHCP] configuration (Can be repeated)",
@@ -10355,7 +10355,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPv6PrefixDelegation%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv6PrefixDelegation"
           }
         },
         {
@@ -10404,7 +10404,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BDHCPv6PrefixDelegation%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv6PrefixDelegation"
         }
       ],
       "description": "[DHCPv6PrefixDelegation] configuration (Can be repeated)",
@@ -10468,7 +10468,7 @@
             "required": [
               "Parent"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BTrafficControlQueueingDiscipline%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TrafficControlQueueingDiscipline"
           }
         },
         {
@@ -10525,7 +10525,7 @@
           "required": [
             "Parent"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/systemd.network.html#%5BTrafficControlQueueingDiscipline%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TrafficControlQueueingDiscipline"
         }
       ],
       "description": "[TrafficControlQueueingDiscipline] configuration (Can be repeated)",

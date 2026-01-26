@@ -164,7 +164,7 @@
         }
       },
       "additionalProperties": false,
-      "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BNetwork%5D%20Section%20Options"
+      "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-Network"
     },
     "IPv6AcceptRA": {
       "oneOf": [
@@ -191,7 +191,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BIPv6AcceptRA%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-IPv6AcceptRA"
           }
         },
         {
@@ -215,7 +215,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BIPv6AcceptRA%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-IPv6AcceptRA"
         }
       ],
       "description": "[IPv6AcceptRA] configuration (Can be repeated)"
@@ -244,7 +244,7 @@
               "Prefix",
               "Label"
             ],
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BIPv6AddressLabel%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-IPv6AddressLabel"
           }
         },
         {
@@ -267,7 +267,7 @@
             "Prefix",
             "Label"
           ],
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BIPv6AddressLabel%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-IPv6AddressLabel"
         }
       ],
       "description": "[IPv6AddressLabel] configuration (Can be repeated)"
@@ -326,7 +326,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BDHCPv4%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-DHCPv4"
           }
         },
         {
@@ -369,7 +369,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BDHCPv4%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-DHCPv4"
         }
       ],
       "description": "[DHCPv4] configuration (Can be repeated)"
@@ -418,7 +418,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BDHCPv6%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-DHCPv6"
           }
         },
         {
@@ -461,7 +461,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BDHCPv6%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-DHCPv6"
         }
       ],
       "description": "[DHCPv6] configuration (Can be repeated)"
@@ -479,7 +479,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BDHCPServer%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-DHCPServer"
           }
         },
         {
@@ -506,7 +506,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BDHCPServer%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-DHCPServer"
         }
       ],
       "description": "[DHCPServer] configuration (Can be repeated)"
@@ -540,7 +540,7 @@
               }
             },
             "additionalProperties": false,
-            "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BDHCP%5D%20Section%20Options"
+            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-DHCP"
           }
         },
         {
@@ -568,7 +568,7 @@
             }
           },
           "additionalProperties": false,
-          "documentation": "https://www.freedesktop.org/software/systemd/man/258/networkd.conf.html#%5BDHCP%5D%20Section%20Options"
+          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/networkd.conf.html#section-DHCP"
         }
       ],
       "description": "[DHCP] configuration (Can be repeated)"
