@@ -350,3 +350,84 @@ footer {
     text-align: center;
     color: var(--meta-color);
 }
+/* Type Prominence (User Request) */
+.option-type-line {
+    margin-bottom: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+}
+
+.type-label {
+    color: var(--meta-color);
+    margin-right: 12px;
+    font-weight: 600;
+}
+
+.badge-type-prominent {
+    background: #17a2b8; /* Vibrant Teal */
+    color: white;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.badge-type-prominent:hover {
+    background: #138496;
+    text-decoration: none;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Type Color Coding (User Request) */
+.badge-type-boolean {
+    background: #6f42c1; /* Purple */
+}
+
+.badge-type-integer {
+    background: #0366d6; /* Blue */
+}
+
+.badge-type-string {
+    background: #17a2b8; /* Teal */
+}
+
+.badge-type-enum {
+    background: #d29922; /* Orange */
+}
+
+.badge-type-complex {
+    background: #545d68; /* Gray */
+}
+
+/* Multiple Occurrence Indicator (User Request) */
+.badge-multiple {
+    background: transparent;
+    color: #8b949e;
+    margin-left: 12px;
+    font-size: 0.85em;
+    padding: 2px 8px;
+    border: 1px solid #768390;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge-multiple::before {
+    content: "+";
+    margin-right: 4px;
+    font-size: 1.1em;
+    line-height: 1;
+    font-weight: bold;
+    color: #58a6ff;
+}

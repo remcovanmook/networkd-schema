@@ -332,6 +332,22 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
         html_content.append(f'<div id="{section_id}" class="section-block">')
         html_content.append(f'<h2>[{section_name}] Section</h2>')
         
+        # Dependency Info
+        deps = schema.get('dependencies', {}).get(section_name)
+        if deps:
+            req_sections = []
+            if isinstance(deps, list):
+                req_sections = deps
+            elif isinstance(deps, dict) and 'required' in deps:
+                req_sections = deps['required']
+            
+            if req_sections:
+                links = []
+                for req in req_sections:
+                     links.append(f'<a href="#section-{req}" class="dependency-link">[{req}]</a>')
+                
+                html_content.append(f'<div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> {", ".join(links)}</div>')
+        
         section_schema = schema['properties'][section_name]
         # Handle oneOf wrapper for sections that can be repeated
         if 'oneOf' in section_schema:
@@ -369,22 +385,97 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
 
             res_schema = resolve(prop_schema)
             
-            # Extract Metadata
-            value_type = res_schema.get('type', 'string')
-            if 'enum' in res_schema: value_type = "enum"
-            
-            is_mandatory = name in section_schema.get('required', [])
-            default_val = res_schema.get('default')
-            
-            # Helper to get deep property even through refs for x-subcategory
+            # Helper: Calculate Type Label (Recursive)
+            def calculate_type_label(s, depth=0):
+                if depth > 3: return "complex"
+                
+                # Check Refs first
+                if '$ref' in s:
+                    ref_name = s['$ref'].split('/')[-1]
+                    if ref_name in schema['definitions']:
+                         def_schema = schema['definitions'][ref_name]
+                         if 'title' in def_schema:
+                             return def_schema['title']
+                         return calculate_type_label(def_schema, depth+1)
+                    return ref_name
+
+                # Check allOf matches
+                if 'allOf' in s and len(s['allOf']) > 0:
+                     return calculate_type_label(s['allOf'][0], depth+1)
+
+                # Check oneOf/anyOf matches
+                variants = []
+                if 'oneOf' in s: variants = s['oneOf']
+                elif 'anyOf' in s: variants = s['anyOf']
+                
+                if variants:
+                    labels = []
+                    for v in variants:
+                        lbl = calculate_type_label(v, depth+1)
+                        if lbl and lbl not in labels:
+                            labels.append(lbl)
+                    if labels:
+                        return " | ".join(sorted(labels))
+                
+                # Enum
+                if 'enum' in s:
+                    return "enum"
+                    
+                # Base types
+                t = s.get('type')
+                if t == 'array':
+                    # User Request: Unwrap Array ("Array of X" -> "X")
+                    # The "Multiple" indicator will handle the array aspect.
+                    if 'items' in s:
+                        return calculate_type_label(s['items'], depth+1)
+                    return "complex" # Array without items?
+                    
+                if t: return t
+                
+                return "string" # Fallback
+
+            # Helper to get deep property even through refs for x-subcategory or default
             def get_deep_prop(s, key):
                 if key in s: return s[key]
-                if 'allOf' in s: return get_deep_prop(s['allOf'][0], key)
+                if 'allOf' in s and len(s['allOf']) > 0: return get_deep_prop(s['allOf'][0], key)
                 if '$ref' in s:
                     ref = s['$ref'].split('/')[-1]
                     if ref in schema['definitions']:
                         return get_deep_prop(schema['definitions'][ref], key)
                 return None
+                
+            # Helper to check if type is/contains array (for Multiple indicator)
+            def check_is_multiple(s, depth=0):
+                 if depth > 3: return False
+                 if '$ref' in s:
+                    ref_name = s['$ref'].split('/')[-1]
+                    if ref_name in schema['definitions']:
+                        return check_is_multiple(schema['definitions'][ref_name], depth+1)
+                 
+                 if s.get('type') == 'array': return True
+                 
+                 if 'oneOf' in s:
+                     return any(check_is_multiple(v, depth+1) for v in s['oneOf'])
+                 if 'anyOf' in s:
+                     return any(check_is_multiple(v, depth+1) for v in s['anyOf'])
+                 
+                 return False
+
+            # Extract Metadata
+            value_type = calculate_type_label(prop_schema)
+            if value_type == 'complex' and res_schema.get('type') == 'array':
+                 # Fallback if unwrap failed or top level array without obvious items
+                 pass
+            
+            is_multiple = check_is_multiple(prop_schema)
+            # If resolve returned enum but calculate returned string (maybe missed?), re-check?
+            # calculate_type_label handles enum check.
+            
+            is_mandatory = name in section_schema.get('required', [])
+            
+            default_val = res_schema.get('default')
+            if default_val is None:
+                default_val = get_deep_prop(prop_schema, 'default')
             
             subcategory = get_deep_prop(prop_schema, 'x-subcategory') or "General"
             
@@ -531,13 +622,27 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
             
             # Map type to linkable name
             type_slug = value_type
-            if '$ref' in prop_schema:
-                 ref_name = prop_schema['$ref'].split('/')[-1]
+            
+            # Helper to find ref in prop_schema or allOf
+            def find_ref(s):
+                if '$ref' in s: return s['$ref']
+                if 'allOf' in s and len(s['allOf']) > 0:
+                     # Check first element of allOf?
+                     return find_ref(s['allOf'][0])
+                return None
+                
+            ref_str = find_ref(prop_schema)
+            
+            if ref_str:
+                 ref_name = ref_str.split('/')[-1]
                  if ref_name in schema.get('definitions', {}):
                      type_slug = ref_name
                      # Use title or ref name as label
                      def_schema = schema['definitions'][ref_name]
                      value_type = def_schema.get('title', ref_name)
+                     # Strip 'Type' suffix from ref name if used as label (e.g. secondsType -> seconds)
+                     if value_type == ref_name and value_type.endswith('Type'):
+                         value_type = value_type[:-4]
             elif 'format' in res_schema:
                  type_slug = res_schema['format']
                  
@@ -573,7 +678,8 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                 'desc_html': desc_html,
                 'schema': res_schema,
                 'full_schema': prop_schema,
-                'schema_url': schema_url
+                'schema_url': schema_url,
+                'is_multiple': is_multiple # Added
             })
             
         # 2. Group and Sort
@@ -628,12 +734,35 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                             <a href="#{section_name}-{name}" class="anchor-link">#</a>{name}
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#{opt['type_slug']}" class="badge badge-type">{opt['type']}</a>
                             <a href="{opt['schema_url']}" target="_blank" class="badge badge-schema">Schema</a>
                             {f'<span class="badge badge-version">v{opt["version_added"]}+</span>' if opt["version_added"] else ''}
                             {f'<span class="badge badge-mandatory">Required</span>' if opt['required'] else '<span class="badge badge-default">Optional</span>'}
                             {f'<span class="badge badge-warning">Deprecated</span>' if 'deprecated' in str(opt['full_schema']).lower() else ''}
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         { 
+                             (lambda t, disp: 
+                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-boolean">{disp}</a>' if t == "boolean" else
+                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-integer">{disp}</a>' if t == "integer" else
+                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-enum">{disp}</a>' if t == "enum" else
+                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-string">{disp}</a>' if "string" in t or t == "filename" or t == "path" else
+                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-complex">{disp}</a>'
+                             )(opt['type'].lower(), opt['type'])
+                         }
+                         {
+                             f'<span class="badge badge-multiple" title="Can be specified multiple times">Multiple</span>' if opt.get('is_multiple') else ''
+                         }
                     </div>
                     <div class="option-desc">
                         {opt['desc_html']}

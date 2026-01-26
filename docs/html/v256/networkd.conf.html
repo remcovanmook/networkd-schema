@@ -44,12 +44,25 @@
                             <a href="#Network-SpeedMeter" class="anchor-link">#</a>SpeedMeter
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22SpeedMeter%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v244+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>If set to yes, then <code class="command">systemd-networkd</code>
@@ -67,12 +80,25 @@
                             <a href="#Network-SpeedMeterIntervalSec" class="anchor-link">#</a>SpeedMeterIntervalSec
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22SpeedMeterIntervalSec%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v244+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#secondsType" class="badge badge-type-prominent badge-type-complex">Seconds</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>Specifies the time interval to calculate the traffic speed of each interface.
@@ -80,7 +106,7 @@
 
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeterIntervalSec=SomeString
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>10sec</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeterIntervalSec=10sec
 </code></pre></div></div>
                 <div id="Network-ManageForeignRoutingPolicyRules" class="option-block">
                     <div class="option-header">
@@ -88,12 +114,25 @@
                             <a href="#Network-ManageForeignRoutingPolicyRules" class="anchor-link">#</a>ManageForeignRoutingPolicyRules
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22ManageForeignRoutingPolicyRules%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v249+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>When true, <code class="command">systemd-networkd</code> will remove rules
@@ -112,12 +151,25 @@
                             <a href="#Network-ManageForeignRoutes" class="anchor-link">#</a>ManageForeignRoutes
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22ManageForeignRoutes%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v246+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>When true, <code class="command">systemd-networkd</code> will remove routes
@@ -138,12 +190,25 @@
                             <a href="#Network-ManageForeignNextHops" class="anchor-link">#</a>ManageForeignNextHops
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22ManageForeignNextHops%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>When true, <code class="command">systemd-networkd</code> will remove nexthops
@@ -162,12 +227,25 @@
                             <a href="#Network-RouteTable" class="anchor-link">#</a>RouteTable
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22RouteTable%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v248+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>Defines the route table name. Takes a whitespace-separated list of the pairs of
@@ -190,12 +268,25 @@
                             <a href="#Network-IPv4Forwarding" class="anchor-link">#</a>IPv4Forwarding
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22IPv4Forwarding%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                         
                     </div>
                     <div class="option-desc">
                         
@@ -217,12 +308,25 @@
                             <a href="#Network-IPv6Forwarding" class="anchor-link">#</a>IPv6Forwarding
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22IPv6Forwarding%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                         
                     </div>
                     <div class="option-desc">
                         
@@ -244,12 +348,25 @@
                             <a href="#Network-IPv6PrivacyExtensions" class="anchor-link">#</a>IPv6PrivacyExtensions
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22IPv6PrivacyExtensions%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v254+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                         
                     </div>
                     <div class="option-desc">
                         
@@ -271,12 +388,25 @@ IPv6PrivacyExtensions=kernel
                             <a href="#Network-UseDomains" class="anchor-link">#</a>UseDomains
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22UseDomains%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                         
                     </div>
                     <div class="option-desc">
                         
@@ -298,12 +428,25 @@ UseDomains=route
                             <a href="#IPv6AcceptRA-UseDomains" class="anchor-link">#</a>UseDomains
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22UseDomains%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                         
                     </div>
                     <div class="option-desc">
                         
@@ -327,12 +470,25 @@ UseDomains=route
                             <a href="#DHCPv4-DUIDType" class="anchor-link">#</a>DUIDType
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22DUIDType%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v230+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#integer | string" class="badge badge-type-prominent badge-type-string">integer | string</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>Specifies how the DUID should be generated. See
@@ -382,12 +538,25 @@ UseDomains=route
                             <a href="#DHCPv4-DUIDRawData" class="anchor-link">#</a>DUIDRawData
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22DUIDRawData%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v230+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
@@ -425,12 +594,25 @@ DUIDRawData=00:00:ab:11:f9:2a:c2:77:29:f9:5c:00</code></pre>
                             <a href="#DHCPv4-UseDomains" class="anchor-link">#</a>UseDomains
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22UseDomains%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                         
                     </div>
                     <div class="option-desc">
                         
@@ -448,12 +630,25 @@ UseDomains=route
                             <a href="#DHCPv6-DUIDType" class="anchor-link">#</a>DUIDType
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22DUIDType%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v249+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#integer | string" class="badge badge-type-prominent badge-type-string">integer | string</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>As in the [DHCPv4] section.</p>
@@ -468,12 +663,25 @@ UseDomains=route
                             <a href="#DHCPv6-UseDomains" class="anchor-link">#</a>UseDomains
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22UseDomains%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>As in the [DHCPv4] section.</p>
@@ -489,12 +697,25 @@ UseDomains=route
                             <a href="#DHCPServer-UseDomains" class="anchor-link">#</a>UseDomains
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v256/systemd.networkd.conf.schema.json#:~:text=%22UseDomains%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                         
                     </div>
                     <div class="option-desc">
                         

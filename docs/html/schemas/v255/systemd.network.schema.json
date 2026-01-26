@@ -41,7 +41,8 @@
         {
           "$ref": "#/definitions/ipv6_addressType"
         }
-      ]
+      ],
+      "title": "IP Address"
     },
     "ipv4_prefixType": {
       "type": "string",
@@ -70,7 +71,8 @@
         {
           "$ref": "#/definitions/ipv6_prefixType"
         }
-      ]
+      ],
+      "title": "IP Prefix"
     },
     "filenameType": {
       "type": "string",
@@ -153,6 +155,25 @@
         "1500"
       ],
       "format": "bytes"
+    },
+    "hostType": {
+      "description": "IP Address or Hostname",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ip_addressType"
+        },
+        {
+          "type": "string",
+          "format": "hostname",
+          "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])$",
+          "title": "Hostname"
+        }
+      ],
+      "title": "Host",
+      "examples": [
+        "192.168.1.1",
+        "example.com"
+      ]
     },
     "rateType": {
       "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
@@ -920,11 +941,14 @@
           "version_added": "229"
         },
         "NTP": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ip_addressType"
-            }
-          ],
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/hostType"
+              }
+            ]
+          },
           "description": "An NTP server address (either an IP address, or a hostname). This option may be specified more than once. This setting is read by systemd-timesyncd.service8.",
           "title": "NTP",
           "examples": [
@@ -4476,7 +4500,7 @@
               "NTP": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/ip_addressType"
+                    "$ref": "#/definitions/hostnameType"
                   }
                 ],
                 "description": "An NTP server address (either an IP address, or a hostname). This option may be specified more than once. This setting is read by systemd-timesyncd.service8.",
@@ -4716,11 +4740,14 @@
               "title": "Emit NTP"
             },
             "NTP": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ip_addressType"
-                }
-              ],
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/hostType"
+                  }
+                ]
+              },
               "description": "An NTP server address (either an IP address, or a hostname). This option may be specified more than once. This setting is read by systemd-timesyncd.service8.",
               "version_added": "216",
               "title": "NTP Servers",

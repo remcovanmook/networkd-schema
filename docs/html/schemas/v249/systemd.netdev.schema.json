@@ -41,7 +41,8 @@
         {
           "$ref": "#/definitions/ipv6_addressType"
         }
-      ]
+      ],
+      "title": "IP Address"
     },
     "ipv4_prefixType": {
       "type": "string",
@@ -70,7 +71,8 @@
         {
           "$ref": "#/definitions/ipv6_prefixType"
         }
-      ]
+      ],
+      "title": "IP Prefix"
     },
     "filenameType": {
       "type": "string",

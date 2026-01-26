@@ -44,12 +44,25 @@
                             <a href="#Network-SpeedMeter" class="anchor-link">#</a>SpeedMeter
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#boolean" class="badge badge-type">boolean</a>
                             <a href="../schemas/v244/systemd.networkd.conf.schema.json#:~:text=%22SpeedMeter%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v244+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>If set to yes, then <code class="command">systemd-networkd</code>
@@ -65,18 +78,31 @@
                             <a href="#Network-SpeedMeterIntervalSec" class="anchor-link">#</a>SpeedMeterIntervalSec
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v244/systemd.networkd.conf.schema.json#:~:text=%22SpeedMeterIntervalSec%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v244+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
                     </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#secondsType" class="badge badge-type-prominent badge-type-complex">Seconds</a>
+                         
+                    </div>
                     <div class="option-desc">
                         <p>Specifies the time interval to calculate the traffic speed of each interface.
         If <code class="varname">SpeedMeter=no</code>, the value is ignored. Defaults to 10sec.</p>
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeterIntervalSec=SomeString
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>10sec</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeterIntervalSec=10sec
 </code></pre></div></div></div><div id="section-DHCP" class="section-block"><h2>[DHCP] Section</h2>
                 <div id="DHCP-DUIDType" class="option-block">
                     <div class="option-header">
@@ -84,12 +110,25 @@
                             <a href="#DHCP-DUIDType" class="anchor-link">#</a>DUIDType
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v244/systemd.networkd.conf.schema.json#:~:text=%22DUIDType%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v230+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#integer | string" class="badge badge-type-prominent badge-type-string">integer | string</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>Specifies how the DUID should be generated. See
@@ -131,12 +170,25 @@
                             <a href="#DHCP-DUIDRawData" class="anchor-link">#</a>DUIDRawData
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v244/systemd.networkd.conf.schema.json#:~:text=%22DUIDRawData%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v230+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each

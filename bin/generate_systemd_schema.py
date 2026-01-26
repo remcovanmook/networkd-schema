@@ -39,58 +39,68 @@ SCHEMA_DEFINITIONS = {
     "mac_address": {
         "type": "string",
         "description": "MAC Address (Hex separated by colons or hyphens)",
-        "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$"
+        "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+        "title": "MAC Address"
     },
     "ipv4_address": {
         "type": "string",
         "description": "IPv4 Address",
-        "format": "ipv4"
+        "format": "ipv4",
+        "title": "IPv4 Address"
     },
     "ipv6_address": {
         "type": "string",
         "description": "IPv6 Address",
-        "format": "ipv6"
+        "format": "ipv6",
+        "title": "IPv6 Address"
     },
     "ip_address": {
         "description": "IPv4 or IPv6 Address",
         "oneOf": [
             { "$ref": "#/definitions/ipv4_address" },
             { "$ref": "#/definitions/ipv6_address" }
-        ]
+        ],
+        "title": "IP Address"
     },
     "ipv4_prefix": {
         "type": "string",
         "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-        "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$"
+        "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+        "title": "IPv4 Prefix"
     },
     "ipv6_prefix": {
         "type": "string",
         "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
-        "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$"
+        "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
+        "title": "IPv6 Prefix"
     },
     "ip_prefix": {
         "description": "IPv4 or IPv6 Prefix (CIDR)",
         "oneOf": [
             { "$ref": "#/definitions/ipv4_prefix" },
             { "$ref": "#/definitions/ipv6_prefix" }
-        ]
+        ],
+        "title": "IP Prefix"
     },
     "filename": {
         "type": "string",
         "description": "Filesystem path",
-        "format": "uri-reference"
+        "format": "uri-reference",
+        "title": "Filename"
     },
     "seconds": {
         "type": "string",
         "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
-        "description": "Time duration (e.g. 5s, 1min, 500ms)"
+        "description": "Time duration (e.g. 5s, 1min, 500ms)",
+        "title": "Seconds"
     },
     "bytes": {
         "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
         "oneOf": [
             { "type": "integer", "minimum": 0 },
             { "type": "string", "pattern": "^[0-9]+(\\s*[KMGTPE]i?B?)?$" }
-        ]
+        ],
+        "title": "Bytes"
     }
 }
 

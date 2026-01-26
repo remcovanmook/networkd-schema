@@ -8,17 +8,20 @@
     "mac_addressType": {
       "type": "string",
       "description": "MAC Address (Hex separated by colons or hyphens)",
-      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$"
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "title": "MAC Address"
     },
     "ipv4_addressType": {
       "type": "string",
       "description": "IPv4 Address",
-      "format": "ipv4"
+      "format": "ipv4",
+      "title": "IPv4 Address"
     },
     "ipv6_addressType": {
       "type": "string",
       "description": "IPv6 Address",
-      "format": "ipv6"
+      "format": "ipv6",
+      "title": "IPv6 Address"
     },
     "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
@@ -29,17 +32,20 @@
         {
           "$ref": "#/definitions/ipv6_addressType"
         }
-      ]
+      ],
+      "title": "IP Address"
     },
     "ipv4_prefixType": {
       "type": "string",
       "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$"
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 Prefix"
     },
     "ipv6_prefixType": {
       "type": "string",
       "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
-      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$"
+      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
+      "title": "IPv6 Prefix"
     },
     "ip_prefixType": {
       "description": "IPv4 or IPv6 Prefix (CIDR)",
@@ -50,17 +56,20 @@
         {
           "$ref": "#/definitions/ipv6_prefixType"
         }
-      ]
+      ],
+      "title": "IP Prefix"
     },
     "filenameType": {
       "type": "string",
       "description": "Filesystem path",
-      "format": "uri-reference"
+      "format": "uri-reference",
+      "title": "Filename"
     },
     "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
-      "description": "Time duration (e.g. 5s, 1min, 500ms)"
+      "description": "Time duration (e.g. 5s, 1min, 500ms)",
+      "title": "Seconds"
     },
     "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
@@ -73,7 +82,8 @@
           "type": "string",
           "pattern": "^[0-9]+(\\s*[KMGTPE]i?B?)?$"
         }
-      ]
+      ],
+      "title": "Bytes"
     }
   },
   "properties": {

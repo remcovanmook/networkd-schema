@@ -44,12 +44,25 @@
                             <a href="#DHCP-DUIDType" class="anchor-link">#</a>DUIDType
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v238/systemd.networkd.conf.schema.json#:~:text=%22DUIDType%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v230+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#integer | string" class="badge badge-type-prominent badge-type-string">integer | string</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>Specifies how the DUID should be generated. See
@@ -81,12 +94,25 @@
                             <a href="#DHCP-DUIDRawData" class="anchor-link">#</a>DUIDRawData
                         </div>
                         <div class="option-meta">
-                            <a href="types.html#string" class="badge badge-type">string</a>
                             <a href="../schemas/v238/systemd.networkd.conf.schema.json#:~:text=%22DUIDRawData%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v230+</span>
                             <span class="badge badge-default">Optional</span>
                             
                         </div>
+                    </div>
+                    <!-- Type Prominence (User Request) -->
+                    <div class="option-type-line">
+                         <!-- Dynamically assign class based on type -->
+                         <!-- boolean, integer, string, enum, complex -->
+                         <!-- Logic: -->
+                         <!-- If type is 'boolean' -> badge-type-boolean -->
+                         <!-- If type is 'integer' -> badge-type-integer -->
+                         <!-- If type contains '|' -> badge-type-complex -->
+                         <!-- If type is 'string' or similar -> badge-type-string -->
+                         <!-- Fallback -> badge-type-complex -->
+                         
+                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         
                     </div>
                     <div class="option-desc">
                         <p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
