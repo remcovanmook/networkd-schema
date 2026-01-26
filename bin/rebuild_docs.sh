@@ -4,6 +4,7 @@ set -e
 # Recreate docs dir
 rm -rf docs/html
 mkdir -p docs/html
+cp style.css docs/html/
 
 # Identify available versions from schemas/ directory
 VERSIONS=$(ls -d schemas/v* | xargs -n 1 basename)

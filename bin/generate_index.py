@@ -149,7 +149,7 @@ def generate_schemas_index(output_dir, versions, clean_versions):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Systemd Network JSON Schemas</title>
-    <style>{CSS_STYLES}</style>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <div class="container">
@@ -207,7 +207,7 @@ def generate_index(output_dir, versions):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Systemd Network Documentation</title>
-    <style>{CSS_STYLES}</style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">

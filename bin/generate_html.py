@@ -844,7 +844,7 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Systemd {doc_name} (v{version})</title>
+    <title>Systemd {doc_name} ({version})</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .docbook-para {{ margin-bottom: 1em; }}
@@ -1065,7 +1065,7 @@ def generate_types_page(output_dir, version, schema_dir):
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Systemd Configuration Types v{version}</title>
+    <title>Systemd Configuration Types {version}</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {{ display: block; max-width: 800px; margin: 0 auto; padding: 50px; overflow: auto; }}
@@ -1090,7 +1090,7 @@ def generate_index(output_dir, version):
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Systemd Network Configuration v{version}</title>
+    <title>Systemd Network Configuration {version}</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {{ display: block; max-width: 800px; margin: 0 auto; padding: 50px; overflow: auto; }}
@@ -1100,7 +1100,7 @@ def generate_index(output_dir, version):
     </style>
 </head>
 <body>
-    <h1>Systemd Network Configuration <small style="color: #8b949e">v{version}</small></h1>
+    <h1>Systemd Network Configuration <small style="color: #8b949e">{version}</small></h1>
     
     <div class="card">
         <h2><a href="systemd.network.html">systemd.network</a></h2>
