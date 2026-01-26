@@ -57,6 +57,7 @@ import argparse
 def main():
     parser = argparse.ArgumentParser(description="Build systemd networkd schemas.")
     parser.add_argument("-v", "--version", help="Build a specific version (e.g. v255)")
+    parser.add_argument("--force", action="store_true", help="Force rebuild even if files exist/unchanged")
     args = parser.parse_args()
 
     ensure_dirs()
@@ -93,13 +94,16 @@ def main():
                  exists = False
                  break
         
-        if not exists:
+        if not exists or args.force:
             print(f"Generating raw schemas for {ver}...")
-            run_command([
+            cmd = [
                 python_cmd, "bin/generate_systemd_schema.py",
                 "--version", ver,
                 "--out", ver_dir
-            ])
+            ]
+            if args.force:
+                cmd.append("--force")
+            run_command(cmd)
         else:
             print(f"Raw schemas for {ver} already exist.")
 
@@ -144,14 +148,17 @@ def main():
                 
                 canonical_id = f"{id_base}/{ver}/{f}.schema.json"
                 
-                run_command([
+                cmd = [
                     python_cmd, "bin/derive_schema_version.py",
                     "--curated-base", curated_base,
                     "--generated-base", generated_base,
                     "--generated-target", generated_target,
                     "--out", out_file,
                     "--id-url", canonical_id
-                ])
+                ]
+                if args.force:
+                    cmd.append("--force")
+                run_command(cmd)
             
         # 3. Validate Generated Schemas
         print(f"Validating schemas for {ver}...")

@@ -145,6 +145,7 @@ def main():
     parser.add_argument("--prev", required=True)
     parser.add_argument("--schemas-dir", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--force", action="store_true", help="Force overwrite")
     args = parser.parse_args()
     
     curr_dir = os.path.join(args.schemas_dir, args.current)
@@ -157,9 +158,19 @@ def main():
     changes = compare_versions(prev_dir, curr_dir)
     html = generate_html_fragment(changes, args.current, args.prev)
     
-    with open(args.output, 'w') as f:
-        f.write(html)
-    print(f"Generated {args.output}")
+    write = True
+    if not args.force and os.path.exists(args.output):
+        try:
+           with open(args.output, 'r') as f:
+               if f.read() == html:
+                   write = False
+                   print(f"Skipping {args.output} (unchanged)")
+        except: pass
+        
+    if write:
+        with open(args.output, 'w') as f:
+            f.write(html)
+        print(f"Generated {args.output}")
 
 if __name__ == "__main__":
     main()

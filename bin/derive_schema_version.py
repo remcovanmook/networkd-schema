@@ -2,14 +2,26 @@ import json
 import argparse
 import sys
 import copy
+import os
 
 def load_json(path):
     with open(path, 'r') as f:
         return json.load(f)
 
-def save_json(data, path):
+def save_json(data, path, force=False):
+    new_content = json.dumps(data, indent=2)
+    
+    if not force and os.path.exists(path):
+        with open(path, 'r') as f:
+            try:
+                old_content = f.read()
+                if old_content == new_content:
+                    print(f"Skipping {path} (unchanged)")
+                    return
+            except: pass # Read error, just overwrite
+            
     with open(path, 'w') as f:
-        json.dump(data, f, indent=2)
+        f.write(new_content)
 
 def deep_diff_structure(base, target):
     """
@@ -127,6 +139,7 @@ def main():
     parser.add_argument("--generated-target", required=True, help="Path to Generated vTarget schema")
     parser.add_argument("--out", required=True, help="Output path for Curated vTarget schema")
     parser.add_argument("--id-url", required=True, help="The $id URL for the new schema")
+    parser.add_argument("--force", action="store_true", help="Force overwrite even if unchanged")
     
     args = parser.parse_args()
     
@@ -189,7 +202,7 @@ def main():
     update_doc_links(new_schema)
 
     print(f"Saving to {args.out}")
-    save_json(new_schema, args.out)
+    save_json(new_schema, args.out, force=args.force)
 
 if __name__ == "__main__":
     main()

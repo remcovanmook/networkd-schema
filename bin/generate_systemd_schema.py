@@ -612,6 +612,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--version", required=True, help="e.g. v257")
     parser.add_argument("--out", default=".", help="Output dir")
+    parser.add_argument("--force", action="store_true", help="Force overwrite")
     args = parser.parse_args()
 
     targets = [
@@ -636,9 +637,21 @@ def main():
                 schema = generate_json_schema(structure, target['name'], args.version)
                 filename = f"systemd.{target['name']}.{args.version}.schema.json"
                 out_path = os.path.join(args.out, filename)
-                with open(out_path, 'w') as f:
-                    json.dump(schema, f, indent=2)
-                print(f" -> Created {out_path}")
+                
+                new_json = json.dumps(schema, indent=2)
+                write = True
+                if not args.force and os.path.exists(out_path):
+                    try:
+                        with open(out_path, 'r') as f:
+                            if f.read() == new_json:
+                                write = False
+                                print(f" -> Skipping {out_path} (unchanged)")
+                    except: pass
+                
+                if write:
+                    with open(out_path, 'w') as f:
+                        f.write(new_json)
+                    print(f" -> Created {out_path}")
 
                 # Copy XML file
                 xml_src = os.path.join(temp_dir, target['xml'])

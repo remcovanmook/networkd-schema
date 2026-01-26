@@ -3,30 +3,33 @@ import os
 import shutil
 import subprocess
 import glob
+import argparse
 
 def run_command(cmd):
     print(f"Running: {' '.join(cmd)}")
     subprocess.check_call(cmd)
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--force", action="store_true", help="Force rebuild")
+    args = parser.parse_args()
+
     # 1. Clean and Prepare Output Directory
-    if os.path.exists("docs/html"):
-        shutil.rmtree("docs/html")
-    os.makedirs("docs/html")
+    # We removed rmtree to allow incremental builds (atomic updates)
+    # If user wants clean build, they can rm -rf docs/html manually for now, or we rely on overwrites.
+    # if os.path.exists("docs/html") and args.force:
+    #     shutil.rmtree("docs/html")
+    
+    os.makedirs("docs/html", exist_ok=True)
     
     # 2. Setup CSS
-    # User requirement: CSS in docs/css, not docs/html/css
-    # But deployment artifact comes from docs/html.
-    # So we symlink docs/css -> docs/html/css to include it in the upload without duplication.
-    # Relative path: ../css relative to docs/html/css
-    
-    # Ensure docs/css exists (it should, we moved it there)
     if not os.path.exists("docs/css"):
          os.makedirs("docs/css")
 
     # Create the link inside docs/html
     # Use copytree to avoid symlink issues in artifact upload
-    shutil.copytree("docs/css", "docs/html/css")
+    # dirs_exist_ok=True allows updating existing file
+    shutil.copytree("docs/css", "docs/html/css", dirs_exist_ok=True)
 
     # 3. Identify Versions
     # schemas/vXXX
@@ -67,6 +70,10 @@ def main():
             "--out", ver_out_dir,
             "--available-versions"
         ] + all_versions_arg
+        
+        if args.force:
+            cmd.append("--force")
+            
         run_command(cmd)
 
         # Build Changelog (if not first version)
@@ -82,6 +89,9 @@ def main():
                 "--schemas-dir", "schemas",
                 "--output", changelog_out
             ]
+            if args.force:
+                cmd_cl.append("--force")
+                
             try:
                 run_command(cmd_cl)
             except Exception as e:
@@ -91,7 +101,7 @@ def main():
     if latest_version:
         print(f"Creating latest alias from {latest_version}...")
         # cp -r docs/html/vXXX docs/html/latest
-        shutil.copytree(f"docs/html/{latest_version}", "docs/html/latest")
+        shutil.copytree(f"docs/html/{latest_version}", "docs/html/latest", dirs_exist_ok=True)
 
     # 6. Publish Schemas (Copy) to docs/html/schemas
     print("Publishing schemas (copying)...")
@@ -102,16 +112,16 @@ def main():
         # Copy schemas/vXXX to docs/html/schemas/vXXX
         src_dir = os.path.join("schemas", ver)
         dst_dir = os.path.join(schemas_out, ver)
-        shutil.copytree(src_dir, dst_dir)
+        shutil.copytree(src_dir, dst_dir, dirs_exist_ok=True)
             
     # Also for latest schema
     if latest_version:
         latest_schema_dir = os.path.join(schemas_out, "latest")
-        if os.path.exists(latest_schema_dir):
-            shutil.rmtree(latest_schema_dir)
+        # if os.path.exists(latest_schema_dir):
+        #    shutil.rmtree(latest_schema_dir)
         # Copy from schemas/latest_version
         src_dir = os.path.join("schemas", latest_version)
-        shutil.copytree(src_dir, latest_schema_dir)
+        shutil.copytree(src_dir, latest_schema_dir, dirs_exist_ok=True)
 
     # 7. Generate Landing Page
     print("Generating landing page...")

@@ -267,7 +267,7 @@ def get_version_added(varlistentry, base_path):
 
 # --- Main ---
 
-def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schemas=False, available_versions=None):
+def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schemas=False, available_versions=None, force=False):
     xml_file = os.path.join(src_dir, f"{doc_name}.xml")
     
     # Determine Schema Name
@@ -765,9 +765,22 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
 
     full_html = html_header + html_scripts
     
-    with open(os.path.join(output_dir, f"{doc_name}.html"), 'w') as f:
-        f.write(full_html)
-    print(f" -> Generated {doc_name}.html")
+    full_html = html_header + html_scripts
+    out_path = os.path.join(output_dir, f"{doc_name}.html")
+    
+    write = True
+    if not force and os.path.exists(out_path):
+        try:
+           with open(out_path, 'r') as f:
+               if f.read() == full_html:
+                   write = False
+                   print(f" -> Skipping {doc_name}.html (unchanged)")
+        except: pass
+        
+    if write:
+        with open(out_path, 'w') as f:
+            f.write(full_html)
+        print(f" -> Generated {doc_name}.html")
     
     return searchable_items
 
@@ -984,6 +997,7 @@ def main():
     parser.add_argument("--web-schemas", action="store_true", help="Use relative paths for schemas (for GitHub Pages)")
     parser.add_argument("--available-versions", nargs="*", help="List of other available versions for the switcher")
     parser.add_argument("--out", help="Output directory")
+    parser.add_argument("--force", action="store_true", help="Force overwrite")
     args = parser.parse_args()
     
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -1011,7 +1025,7 @@ def main():
     
     for doc in FILES:
         try:
-            page_options = generate_page(doc, args.version, src_dir, schema_dir, output_dir, web_schemas=args.web_schemas, available_versions=args.available_versions)
+            page_options = generate_page(doc, args.version, src_dir, schema_dir, output_dir, web_schemas=args.web_schemas, available_versions=args.available_versions, force=args.force)
             if page_options:
                 search_index.extend(page_options)
         except Exception as e:
