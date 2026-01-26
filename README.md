@@ -13,13 +13,13 @@ Systemd configuration files use a custom INI-style format that lacks a standardi
 We chose **JSON Schema** to strictly define the structure and types of these files (Sections, Keys, Value Types, Enums). While systemd does not natively read JSON, these schemas act as the **definitive intermediate representation (IR)** for the configuration logic. They power our conversion tools (`ini2json`/`json2ini`) and enriched documentation, enabling validation and tooling that wasn't possible before.
 
 ## Architecture: Curated vs. Derived
-Maintaining strict schemas for 20+ versions manually is impossible, but generating them purely from source lacks semantic richness. We use a **Hybrid Approach**:
+Maintaining schemas for 20+ versions manually is impossible, but generating them purely from source lacks semantic richness. We use a **Hybrid Approach**:
 
-1.  **Curated Base**: We maintain one high-quality schema manually (currently `v257`). This contains rich descriptions, verified types, and custom constraints.
+1.  **Curated Base**: This is the **only** place where manual improvements reside (`curated/v257/*.json`). If you want to improve descriptions, refine constraints, or add **richer, specific examples** (highly welcome!), you must edit these files.
 2.  **Generated Targets**: For every version (e.g., `v245`), we generate a "raw" schema from systemd's source code (XML docs + gperf tables). This tells us *what options exist*, but lacks rich type info.
 3.  **Derivation**: Our build system (`bin/derive_schema_version.py`) calculates the difference between "Raw Base" (`v257`) and "Raw Target" (`v245`). It then applies this difference (adding/removing options) to the "Curated Base" to produce a **Curated Target**.
 
-This ensures that every version has the correct options for that release, while retaining the high-quality descriptions and types from our curated work.
+This ensures that every version has the correct options for that release, while retaining the high-quality descriptions and examples from our curated work across the board.
 
 ## Features
 
