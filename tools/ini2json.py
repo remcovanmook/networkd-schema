@@ -14,40 +14,86 @@ def load_schema(schema_path):
     with open(schema_path, 'r') as f:
         return json.load(f)
 
-def parse_ini(content):
+def get_logical_lines(content):
     """
-    Parses INI content into a structure:
-    {
-      "SectionName": [ {"Key": ["Val1", "Val2"]}, {"Key": ["Val"]} ] 
-    }
-    Wait, repeated sections...
-    Structure:
-    List of Section Objects. Each Section Object has a Name and Properties.
-    [
-        { "name": "Match", "props": {"Name": ["en*"]} },
-        { "name": "Network", "props": {"DHCP": ["yes"]} },
-        { "name": "Address", "props": {"Address": ["1.1.1.1/24"]} },
-        { "name": "Address", "props": {"Address": ["2.2.2.2/24"]} }
-    ]
+    Generator that yields (type, content) tuples.
+    type is 'COMMENT' or 'LINE'.
+    Handles backslash line continuation and comment skipping inside continuation.
     """
-    sections = []
-    current_section = None
+    buffer = []
+    in_continuation = False
     
     for line in content.splitlines():
-        line = line.strip()
-        if not line or line.startswith('#') or line.startswith(';'):
+        stripped = line.strip()
+        
+        # Determine if this line is a comment
+        is_comment = stripped.startswith('#') or stripped.startswith(';')
+        
+        if is_comment:
+            if in_continuation:
+                # Inside a continuation, comments are ignored completely (merged into the gap)
+                continue
+            else:
+                yield ('COMMENT', line.strip()) # Preserve raw comment content (striped of whitespace around? maybe keep #)
+                continue
+                
+        if not stripped:
+            # Empty line
+            if in_continuation:
+                continue 
+            else:
+                yield ('COMMENT', "") # Treat empty lines as comments to preserve spacing?
+                # Or just ignore empty lines for now to simplify? 
+                # User asked to capture comments. Empty lines are style.
+                # Let's ignore empty lines for structural matching, or maybe treat as comment ""?
+                # Let's ignore empty lines to stay safer, unless requested.
+                continue
+
+        # Check for continuation
+        if stripped.endswith('\\'):
+            # Append content without the backslash
+            segment = stripped[:-1].strip()
+            buffer.append(segment)
+            in_continuation = True
+        else:
+            # End of logical line
+            buffer.append(stripped)
+            # Join with space as per spec ("backslash is replaced by a space character")
+            yield ('LINE', " ".join(buffer))
+            buffer = []
+            in_continuation = False
+            
+    # Flush remaining if file ends with backslash (edge case)
+    if buffer:
+        yield ('LINE', " ".join(buffer))
+
+def unescape_value(val):
+    # ... existing unescape_value implementation ...
+    # (We are not replacing unescape_value here, just keeping context if needed, but the tool replaces range)
+    # The user instruction implies replacing parse_ini too.
+    return val # Placeholder for the diff, real code below
+
+def parse_ini(content):
+    sections = []
+    current_section = None
+    pending_comments = []
+    
+    # Use logical lines
+    for kind, line in get_logical_lines(content):
+        if kind == 'COMMENT':
+            pending_comments.append(line)
             continue
             
-        # Check continuation (simple heuristic: ends with \) - systemd supports this? 
-        # Yes, line continuation is supported.
-        # But let's stick to basic processing first or assume the input is clean.
-        
         match_sec = SECTION_RE.match(line)
         if match_sec:
+            # Start of a new section
             current_section = {
                 "name": match_sec.group(1),
                 "props": defaultdict(list)
             }
+            if pending_comments:
+                current_section["_comments"] = pending_comments
+                pending_comments = []
             sections.append(current_section)
             continue
             
@@ -55,11 +101,31 @@ def parse_ini(content):
         if match_kv and current_section:
             k = match_kv.group(1).strip()
             v = match_kv.group(2).strip()
-            # Handle quotes? Systemd usually takes raw values, but quotes can be used.
-            # We'll take raw for now or strip surrounding quotes if present.
-            if (v.startswith('"') and v.endswith('"')) or (v.startswith("'") and v.endswith("'")):
-                 v = v[1:-1]
+            v = unescape_value(v)
             current_section["props"][k].append(v)
+            
+            if pending_comments:
+                if "_property_comments" not in current_section:
+                    current_section["_property_comments"] = defaultdict(list)
+                # If key repeated? Attach to list? 
+                # For simplicity, just append to the list for this key.
+                # But multiple props with same key? 
+                # Ideally _property_comments maps "Key" -> ["Comment1", "Comment2"]?
+                # But if we have Key=1, Key=2. Comment before Key=2?
+                # The structure is defaultdict(list) for props.
+                # Maybe _property_comments should be a list of objects or parallel structure?
+                # Or simplistic: Key -> list of comments. All comments for that key key accumulated?
+                # Let's append new comments to existing list for that key.
+                current_section["_property_comments"][k].extend(pending_comments)
+                pending_comments = []
+            
+    # Trailing comments?
+    # If pending_comments exist at EOF, where do they go?
+    # Attach to last section?
+    if pending_comments and sections:
+        if "_comments" not in sections[-1]:
+             sections[-1]["_comments"] = []
+        sections[-1]["_comments"].extend(pending_comments)
             
     return sections
 
@@ -135,27 +201,30 @@ def convert_to_json(sections, schema):
             singleton_sections.add(sec_name)
     
     # Group by name
+    # Group by name
     grouped = defaultdict(list)
     for sec in sections:
-        grouped[sec['name']].append(sec['props'])
+        grouped[sec['name']].append(sec)
         
-    for name, list_of_props in grouped.items():
+    for name, list_of_sec_objs in grouped.items():
         processed_sections = []
         
-        for props in list_of_props:
+        for sec_obj in list_of_sec_objs:
+            props = sec_obj['props']
             clean_props = {}
+            
+            # Transfer metadata
+            if "_comments" in sec_obj:
+                clean_props["_comments"] = sec_obj["_comments"]
+            if "_property_comments" in sec_obj:
+                clean_props["_property_comments"] = sec_obj["_property_comments"]
+            
             for k, vals in props.items():
                 # Resolve type
                 type_def = resolve_type(k, name, schema)
                 converted_vals = [convert_value(v, type_def) for v in vals]
                 
                 # Check if array or scalar
-                # If schema accepts array, use array. If schema expects scalar, use last item?
-                # Systemd: duplicate keys usually mean list.
-                # If schema has "type": "array" OR logic implies list.
-                # Actually our schema defines almost everything as scalar or reference.
-                # Wait, "DNS" in Network is a list.
-                
                 is_array = False
                 if type_def and type_def.get('type') == 'array':
                     is_array = True
@@ -173,12 +242,22 @@ def convert_to_json(sections, schema):
             processed_sections.append(clean_props)
 
         if name in singleton_sections:
-            # Merge logic for singletons?
-            # User might define [Match] ... [Match] ...
-            # Systemd merges them.
+            # Merge logic for singletons
             merged = {}
+            merged_comments = []
+            merged_prop_comments = defaultdict(list)
+            
             for p in processed_sections:
+                # Merge metadata
+                if "_comments" in p:
+                    merged_comments.extend(p["_comments"])
+                if "_property_comments" in p:
+                    for pk, pv in p["_property_comments"].items():
+                        merged_prop_comments[pk].extend(pv)
+                        
                 for k, v in p.items():
+                    if k.startswith("_"): continue
+                    
                     if k in merged:
                         # Conflict? Listify?
                         if not isinstance(merged[k], list):
@@ -186,6 +265,12 @@ def convert_to_json(sections, schema):
                         merged[k].append(v)
                     else:
                         merged[k] = v
+            
+            if merged_comments:
+                merged["_comments"] = merged_comments
+            if merged_prop_comments:
+                merged["_property_comments"] = dict(merged_prop_comments)
+                
             output[name] = merged
         else:
             # Repeated sections (Address)

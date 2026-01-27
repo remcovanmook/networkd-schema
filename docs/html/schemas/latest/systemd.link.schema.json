@@ -5,44 +5,119 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_addressType": {
-      "type": "string",
-      "description": "MAC Address (Hex separated by colons or hyphens)",
-      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
-      "title": "MAC Address",
+    "MTUBytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 68,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "MTU (Bytes)",
       "examples": [
-        "00:11:22:33:44:55"
+        "1500",
+        "9000"
       ]
     },
-    "ipv4_addressType": {
-      "type": "string",
-      "description": "IPv4 Address",
-      "format": "ipv4",
-      "title": "IPv4 Address",
+    "MTUv6BytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1280,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "IPv6 MTU (Bytes)",
       "examples": [
-        "192.168.1.1"
+        "1280",
+        "1500"
       ]
     },
-    "ipv6_addressType": {
-      "type": "string",
-      "description": "IPv6 Address",
-      "format": "ipv6",
-      "title": "IPv6 Address",
+    "bytesType": {
+      "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?B?)?$"
+        }
+      ],
+      "title": "Size in Bytes",
       "examples": [
-        "2001:db8::1"
+        "1G",
+        "512M",
+        "1024"
+      ]
+    },
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+      "examples": [
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
+      ]
+    },
+    "hostType": {
+      "description": "IP Address or Hostname",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ip_addressType"
+        },
+        {
+          "type": "string",
+          "format": "hostname",
+          "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])$",
+          "title": "Hostname"
+        }
+      ],
+      "title": "Host",
+      "examples": [
+        "192.168.1.1",
+        "example.com"
       ]
     },
     "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_addressType"
+          "type": "string",
+          "format": "ipv4"
         },
         {
-          "$ref": "#/definitions/ipv6_addressType"
+          "type": "string",
+          "format": "ipv6"
         }
       ],
       "title": "IP Address"
+    },
+    "ip_prefixType": {
+      "description": "IPv4 or IPv6 Prefix (CIDR)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_prefixType"
+        },
+        {
+          "$ref": "#/definitions/ipv6_prefixType"
+        }
+      ],
+      "title": "IP Prefix"
     },
     "ipv4_prefixType": {
       "type": "string",
@@ -62,37 +137,69 @@
         "2001:db8::/64"
       ]
     },
-    "ip_prefixType": {
-      "description": "IPv4 or IPv6 Prefix (CIDR)",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/ipv4_prefixType"
-        },
-        {
-          "$ref": "#/definitions/ipv6_prefixType"
-        }
-      ],
-      "title": "IP Prefix"
-    },
-    "filenameType": {
+    "mac_addressType": {
       "type": "string",
-      "description": "Filesystem path",
-      "format": "uri-reference",
-      "title": "File Path",
+      "description": "MAC Address (Hex separated by colons or hyphens)",
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "title": "MAC Address",
       "examples": [
-        "/etc/issue"
+        "00:11:22:33:44:55"
       ]
     },
-    "secondsType": {
+    "percentageType": {
       "type": "string",
-      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
-      "format": "duration",
-      "description": "Time duration (e.g. 5s, 1min, 500ms)",
-      "title": "Duration",
+      "pattern": "^[0-9]+(\\.[0-9]+)?%$",
+      "description": "Percentage value (e.g. 10%, 0.5%)",
+      "title": "Percentage",
       "examples": [
-        "5s",
-        "100ms",
-        "1min"
+        "10%",
+        "0.5%"
+      ]
+    },
+    "property_comments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Comments associated with properties in this section"
+    },
+    "qdisc_handleType": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{1,4}:([0-9a-fA-F]{1,4})?$",
+      "description": "Queueing Discipline handle (hex major:minor).",
+      "title": "QDisc Handle",
+      "examples": [
+        "1:0",
+        "10:"
+      ]
+    },
+    "qdisc_parentType": {
+      "description": "Queueing Discipline parent.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/qdisc_handleType"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "root",
+            "clsact",
+            "ingress",
+            "egress"
+          ],
+          "examples": [
+            "root"
+          ]
+        }
+      ],
+      "title": "QDisc Parent",
+      "examples": [
+        "root",
+        "ingress",
+        "1:1"
       ]
     },
     "rateType": {
@@ -113,114 +220,61 @@
         "100M"
       ]
     },
-    "bytesType": {
-      "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 0
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?B?)?$"
-        }
-      ],
-      "title": "Size in Bytes",
+    "secondsType": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
+      "description": "Time duration (e.g. 5s, 1min, 500ms)",
+      "title": "Duration",
       "examples": [
-        "1G",
-        "512M",
-        "1024"
-      ],
-      "format": "bytes"
-    },
-    "MTUBytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 68,
-          "maximum": 65535
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$",
-          "format": "bytes"
-        }
-      ],
-      "title": "MTU (Bytes)",
-      "examples": [
-        "1500",
-        "9000"
-      ],
-      "format": "bytes"
-    },
-    "MTUv6BytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 1280,
-          "maximum": 65535
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
-        }
-      ],
-      "title": "IPv6 MTU (Bytes)",
-      "examples": [
-        "1280",
-        "1500"
-      ],
-      "format": "bytes"
-    },
-    "uint8Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 255,
-      "description": "Unsigned 8-bit integer (0...255).",
-      "title": "Integer (8-bit)",
-      "examples": [
-        128
+        "5s",
+        "100ms",
+        "1min"
       ]
+    },
+    "section_comments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Comments associated with this section"
     },
     "uint16Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 65535,
       "description": "Unsigned 16-bit integer (0...65535).",
-      "title": "Integer (16-bit)",
-      "examples": [
-        1024
-      ]
+      "title": "Integer (16-bit)"
     },
     "uint32Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4294967294,
       "description": "Unsigned 32-bit integer (0...4294967294).",
-      "title": "Integer (32-bit)",
-      "examples": [
-        65535
-      ]
+      "title": "Integer (32-bit)"
     },
-    "globsType": {
-      "type": "string",
-      "description": "A whitespace-separated list of shell-style globs.",
-      "title": "Shell Globs",
-      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+    "uint8Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Unsigned 8-bit integer (0...255).",
+      "title": "Integer (8-bit)"
+    },
+    "vlan_idType": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4094,
+      "description": "The VLAN ID. An integer in the range 0...4094.",
+      "title": "VLAN ID",
       "examples": [
-        "eth*",
-        "en* wlan*",
-        "!virbr*",
-        "!eth0 eth1"
+        1,
+        100,
+        4094
       ]
     }
   },
   "properties": {
     "Match": {
       "type": "object",
-      "description": "[Match] section configuration",
       "properties": {
         "MACAddress": {
           "allOf": [
@@ -354,19 +408,24 @@
           "title": "Firmware",
           "version_added": "249"
         },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
+        },
         "Version": {
           "type": "string",
           "description": "Checks whether a software version matches a certain expression. See ConditionVersion= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "version_added": "258"
         }
       },
-      "additionalProperties": false,
       "title": "Match",
-      "documentation": "https://remcovanmook.github.io/networkd-schema/v259/systemd.link.html#section-Match"
+      "description": "[Match] section configuration",
+      "additionalProperties": false
     },
     "Link": {
       "type": "object",
-      "description": "[Link] section configuration",
       "properties": {
         "Description": {
           "allOf": [
@@ -927,6 +986,12 @@
           "title": "IOV Virtual Functions",
           "version_added": "251"
         },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
+        },
         "PartialGenericSegmentationOffload": {
           "type": "boolean",
           "description": "If set to true, Partial Generic Segmentation Offload (GSO_Partial) is enabled. See Partial Generic Segmentation Offload for more details. When unset, the kernel's default will be used.",
@@ -943,9 +1008,9 @@
           "version_added": "258"
         }
       },
-      "additionalProperties": false,
       "title": "Link",
-      "documentation": "https://remcovanmook.github.io/networkd-schema/v259/systemd.link.html#section-Link"
+      "description": "[Link] section configuration",
+      "additionalProperties": false
     },
     "EnergyEfficientEthernet": {
       "oneOf": [

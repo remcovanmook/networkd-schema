@@ -5,71 +5,43 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_addressType": {
-      "type": "string",
-      "description": "MAC Address (Hex separated by colons or hyphens)",
-      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
-      "title": "MAC Address"
-    },
-    "ipv4_addressType": {
-      "type": "string",
-      "description": "IPv4 Address",
-      "format": "ipv4",
-      "title": "IPv4 Address"
-    },
-    "ipv6_addressType": {
-      "type": "string",
-      "description": "IPv6 Address",
-      "format": "ipv6",
-      "title": "IPv6 Address"
-    },
-    "ip_addressType": {
-      "description": "IPv4 or IPv6 Address",
+    "MTUBytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_addressType"
+          "type": "integer",
+          "minimum": 68,
+          "maximum": 65535
         },
         {
-          "$ref": "#/definitions/ipv6_addressType"
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
         }
       ],
-      "title": "IP Address"
+      "title": "MTU (Bytes)",
+      "examples": [
+        "1500",
+        "9000"
+      ]
     },
-    "ipv4_prefixType": {
-      "type": "string",
-      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
-      "title": "IPv4 Prefix"
-    },
-    "ipv6_prefixType": {
-      "type": "string",
-      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
-      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
-      "title": "IPv6 Prefix"
-    },
-    "ip_prefixType": {
-      "description": "IPv4 or IPv6 Prefix (CIDR)",
+    "MTUv6BytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_prefixType"
+          "type": "integer",
+          "minimum": 1280,
+          "maximum": 65535
         },
         {
-          "$ref": "#/definitions/ipv6_prefixType"
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
         }
       ],
-      "title": "IP Prefix"
-    },
-    "filenameType": {
-      "type": "string",
-      "description": "Filesystem path",
-      "format": "uri-reference",
-      "title": "Filename"
-    },
-    "secondsType": {
-      "type": "string",
-      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
-      "description": "Time duration (e.g. 5s, 1min, 500ms)",
-      "title": "Seconds"
+      "title": "IPv6 MTU (Bytes)",
+      "examples": [
+        "1280",
+        "1500"
+      ]
     },
     "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
@@ -83,13 +55,226 @@
           "pattern": "^[0-9]+(\\s*[KMGTPE]i?B?)?$"
         }
       ],
-      "title": "Bytes"
+      "title": "Size in Bytes",
+      "examples": [
+        "1G",
+        "512M",
+        "1024"
+      ]
+    },
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+      "examples": [
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
+      ]
+    },
+    "hostType": {
+      "description": "IP Address or Hostname",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ip_addressType"
+        },
+        {
+          "type": "string",
+          "format": "hostname",
+          "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])$",
+          "title": "Hostname"
+        }
+      ],
+      "title": "Host",
+      "examples": [
+        "192.168.1.1",
+        "example.com"
+      ]
+    },
+    "ip_addressType": {
+      "description": "IPv4 or IPv6 Address",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "ipv4"
+        },
+        {
+          "type": "string",
+          "format": "ipv6"
+        }
+      ],
+      "title": "IP Address"
+    },
+    "ip_prefixType": {
+      "description": "IPv4 or IPv6 Prefix (CIDR)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_prefixType"
+        },
+        {
+          "$ref": "#/definitions/ipv6_prefixType"
+        }
+      ],
+      "title": "IP Prefix"
+    },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
+      "examples": [
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6_prefixType": {
+      "type": "string",
+      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
+      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
+      "title": "IPv6 CIDR",
+      "examples": [
+        "2001:db8::/64"
+      ]
+    },
+    "mac_addressType": {
+      "type": "string",
+      "description": "MAC Address (Hex separated by colons or hyphens)",
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "title": "MAC Address",
+      "examples": [
+        "00:11:22:33:44:55"
+      ]
+    },
+    "percentageType": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?%$",
+      "description": "Percentage value (e.g. 10%, 0.5%)",
+      "title": "Percentage",
+      "examples": [
+        "10%",
+        "0.5%"
+      ]
+    },
+    "property_comments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Comments associated with properties in this section"
+    },
+    "qdisc_handleType": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{1,4}:([0-9a-fA-F]{1,4})?$",
+      "description": "Queueing Discipline handle (hex major:minor).",
+      "title": "QDisc Handle",
+      "examples": [
+        "1:0",
+        "10:"
+      ]
+    },
+    "qdisc_parentType": {
+      "description": "Queueing Discipline parent.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/qdisc_handleType"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "root",
+            "clsact",
+            "ingress",
+            "egress"
+          ],
+          "examples": [
+            "root"
+          ]
+        }
+      ],
+      "title": "QDisc Parent",
+      "examples": [
+        "root",
+        "ingress",
+        "1:1"
+      ]
+    },
+    "rateType": {
+      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "Data Rate",
+      "examples": [
+        "1G",
+        "100M"
+      ]
+    },
+    "secondsType": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
+      "description": "Time duration (e.g. 5s, 1min, 500ms)",
+      "title": "Duration",
+      "examples": [
+        "5s",
+        "100ms",
+        "1min"
+      ]
+    },
+    "section_comments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Comments associated with this section"
+    },
+    "uint16Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535,
+      "description": "Unsigned 16-bit integer (0...65535).",
+      "title": "Integer (16-bit)"
+    },
+    "uint32Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967294,
+      "description": "Unsigned 32-bit integer (0...4294967294).",
+      "title": "Integer (32-bit)"
+    },
+    "uint8Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Unsigned 8-bit integer (0...255).",
+      "title": "Integer (8-bit)"
+    },
+    "vlan_idType": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4094,
+      "description": "The VLAN ID. An integer in the range 0...4094.",
+      "title": "VLAN ID",
+      "examples": [
+        1,
+        100,
+        4094
+      ]
     }
   },
   "properties": {
     "Network": {
       "type": "object",
-      "description": "[Network] section configuration",
       "properties": {
         "SpeedMeter": {
           "type": "boolean",
@@ -106,8 +291,15 @@
           ],
           "description": "Specifies the time interval to calculate the traffic speed of each interface. If SpeedMeter=no, the value is ignored. Defaults to 10sec.",
           "version_added": "244"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
         }
       },
+      "description": "[Network] section configuration",
       "additionalProperties": false
     },
     "DHCP": {
@@ -116,14 +308,11 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCP] section configuration",
             "properties": {
               "DUIDType": {
                 "oneOf": [
                   {
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 65535
+                    "$ref": "#/definitions/uint16Type"
                   },
                   {
                     "type": "string"
@@ -136,21 +325,25 @@
                 "type": "string",
                 "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'.",
                 "version_added": "230"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[DHCP] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCP] section configuration",
           "properties": {
             "DUIDType": {
               "oneOf": [
                 {
-                  "type": "integer",
-                  "minimum": 0,
-                  "maximum": 65535
+                  "$ref": "#/definitions/uint16Type"
                 },
                 {
                   "type": "string"
@@ -163,8 +356,15 @@
               "type": "string",
               "description": "Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by ':'. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN ('00:02'), enterprise number 43793 ('00:00:ab:11'), and identifier value 'f9:2a:c2:77:29:f9:5c:00'.",
               "version_added": "230"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[DHCP] section configuration",
           "additionalProperties": false
         }
       ],

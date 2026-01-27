@@ -5,94 +5,42 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_addressType": {
-      "type": "string",
-      "description": "MAC Address (Hex separated by colons or hyphens)",
-      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
-      "title": "MAC Address",
-      "examples": [
-        "00:11:22:33:44:55"
-      ]
-    },
-    "ipv4_addressType": {
-      "type": "string",
-      "description": "IPv4 Address",
-      "format": "ipv4",
-      "title": "IPv4 Address",
-      "examples": [
-        "192.168.1.1"
-      ]
-    },
-    "ipv6_addressType": {
-      "type": "string",
-      "description": "IPv6 Address",
-      "format": "ipv6",
-      "title": "IPv6 Address",
-      "examples": [
-        "2001:db8::1"
-      ]
-    },
-    "ip_addressType": {
-      "description": "IPv4 or IPv6 Address",
+    "MTUBytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_addressType"
+          "type": "integer",
+          "minimum": 68,
+          "maximum": 65535
         },
         {
-          "$ref": "#/definitions/ipv6_addressType"
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
         }
       ],
-      "title": "IP Address"
-    },
-    "ipv4_prefixType": {
-      "type": "string",
-      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
-      "title": "IPv4 CIDR",
+      "title": "MTU (Bytes)",
       "examples": [
-        "192.168.1.0/24"
+        "1500",
+        "9000"
       ]
     },
-    "ipv6_prefixType": {
-      "type": "string",
-      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
-      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
-      "title": "IPv6 CIDR",
-      "examples": [
-        "2001:db8::/64"
-      ]
-    },
-    "ip_prefixType": {
-      "description": "IPv4 or IPv6 Prefix (CIDR)",
+    "MTUv6BytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_prefixType"
+          "type": "integer",
+          "minimum": 1280,
+          "maximum": 65535
         },
         {
-          "$ref": "#/definitions/ipv6_prefixType"
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
         }
       ],
-      "title": "IP Prefix"
-    },
-    "filenameType": {
-      "type": "string",
-      "description": "Filesystem path",
-      "format": "uri-reference",
-      "title": "File Path",
+      "title": "IPv6 MTU (Bytes)",
       "examples": [
-        "/etc/issue"
-      ]
-    },
-    "secondsType": {
-      "type": "string",
-      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
-      "format": "duration",
-      "description": "Time duration (e.g. 5s, 1min, 500ms)",
-      "title": "Duration",
-      "examples": [
-        "5s",
-        "100ms",
-        "1min"
+        "1280",
+        "1500"
       ]
     },
     "bytesType": {
@@ -112,49 +60,204 @@
         "1G",
         "512M",
         "1024"
-      ],
-      "format": "bytes"
+      ]
     },
-    "MTUBytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+      "examples": [
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
+      ]
+    },
+    "hostType": {
+      "description": "IP Address or Hostname",
       "oneOf": [
         {
-          "type": "integer",
-          "minimum": 68,
-          "maximum": 65535
+          "$ref": "#/definitions/ip_addressType"
         },
         {
           "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$",
-          "format": "bytes"
+          "format": "hostname",
+          "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])$",
+          "title": "Hostname"
         }
       ],
-      "title": "MTU (Bytes)",
+      "title": "Host",
       "examples": [
-        "1500",
-        "9000"
-      ],
-      "format": "bytes"
+        "192.168.1.1",
+        "example.com"
+      ]
     },
-    "MTUv6BytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
+    "ip_addressType": {
+      "description": "IPv4 or IPv6 Address",
       "oneOf": [
         {
-          "type": "integer",
-          "minimum": 1280,
-          "maximum": 65535
+          "type": "string",
+          "format": "ipv4"
         },
         {
           "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
+          "format": "ipv6"
         }
       ],
-      "title": "IPv6 MTU (Bytes)",
-      "examples": [
-        "1280",
-        "1500"
+      "title": "IP Address"
+    },
+    "ip_prefixType": {
+      "description": "IPv4 or IPv6 Prefix (CIDR)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_prefixType"
+        },
+        {
+          "$ref": "#/definitions/ipv6_prefixType"
+        }
       ],
-      "format": "bytes"
+      "title": "IP Prefix"
+    },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
+      "examples": [
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6_prefixType": {
+      "type": "string",
+      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
+      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
+      "title": "IPv6 CIDR",
+      "examples": [
+        "2001:db8::/64"
+      ]
+    },
+    "mac_addressType": {
+      "type": "string",
+      "description": "MAC Address (Hex separated by colons or hyphens)",
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "title": "MAC Address",
+      "examples": [
+        "00:11:22:33:44:55"
+      ]
+    },
+    "percentageType": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?%$",
+      "description": "Percentage value (e.g. 10%, 0.5%)",
+      "title": "Percentage",
+      "examples": [
+        "10%",
+        "0.5%"
+      ]
+    },
+    "property_comments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Comments associated with properties in this section"
+    },
+    "qdisc_handleType": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{1,4}:([0-9a-fA-F]{1,4})?$",
+      "description": "Queueing Discipline handle (hex major:minor).",
+      "title": "QDisc Handle",
+      "examples": [
+        "1:0",
+        "10:"
+      ]
+    },
+    "qdisc_parentType": {
+      "description": "Queueing Discipline parent.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/qdisc_handleType"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "root",
+            "clsact",
+            "ingress",
+            "egress"
+          ],
+          "examples": [
+            "root"
+          ]
+        }
+      ],
+      "title": "QDisc Parent",
+      "examples": [
+        "root",
+        "ingress",
+        "1:1"
+      ]
+    },
+    "rateType": {
+      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "Data Rate",
+      "examples": [
+        "1G",
+        "100M"
+      ]
+    },
+    "secondsType": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
+      "description": "Time duration (e.g. 5s, 1min, 500ms)",
+      "title": "Duration",
+      "examples": [
+        "5s",
+        "100ms",
+        "1min"
+      ]
+    },
+    "section_comments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Comments associated with this section"
+    },
+    "uint16Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535,
+      "description": "Unsigned 16-bit integer (0...65535).",
+      "title": "Integer (16-bit)"
+    },
+    "uint32Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967294,
+      "description": "Unsigned 32-bit integer (0...4294967294).",
+      "title": "Integer (32-bit)"
+    },
+    "uint8Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Unsigned 8-bit integer (0...255).",
+      "title": "Integer (8-bit)"
     },
     "vlan_idType": {
       "type": "integer",
@@ -167,42 +270,11 @@
         100,
         4094
       ]
-    },
-    "uint8Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 255,
-      "description": "Unsigned 8-bit integer (0...255).",
-      "title": "Integer (8-bit)",
-      "examples": [
-        128
-      ]
-    },
-    "uint16Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 65535,
-      "description": "Unsigned 16-bit integer (0...65535).",
-      "title": "Integer (16-bit)",
-      "examples": [
-        1024
-      ]
-    },
-    "uint32Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 4294967294,
-      "description": "Unsigned 32-bit integer (0...4294967294).",
-      "title": "Integer (32-bit)",
-      "examples": [
-        65535
-      ]
     }
   },
   "properties": {
     "Match": {
       "type": "object",
-      "description": "[Match] section configuration",
       "properties": {
         "Host": {
           "type": "string",
@@ -232,15 +304,20 @@
         "Firmware": {
           "type": "string",
           "title": "Firmware"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
         }
       },
-      "additionalProperties": false,
       "title": "Match",
-      "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Match"
+      "description": "[Match] section configuration",
+      "additionalProperties": false
     },
     "NetDev": {
       "type": "object",
-      "description": "[NetDev] section configuration",
       "properties": {
         "Description": {
           "type": "string",
@@ -307,15 +384,21 @@
           ],
           "version_added": "215",
           "x-subcategory": "Hardware"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
         }
       },
-      "additionalProperties": false,
       "required": [
         "Name",
         "Kind"
       ],
       "title": "Net Dev",
-      "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-NetDev"
+      "description": "[NetDev] section configuration",
+      "additionalProperties": false
     },
     "VLAN": {
       "oneOf": [
@@ -323,7 +406,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[VLAN] section configuration",
             "properties": {
               "Id": {
                 "type": "string",
@@ -377,18 +459,23 @@
                 "type": "string",
                 "description": "Defines a mapping of Linux internal packet priority ('SO_PRIORITY') to VLAN header PCP field for outgoing and incoming frames, respectively. Takes a whitespace-separated list of integer pairs, where each integer , in the format 'from'-'to', e.g., '21-7 45-5'. Note that 'from' must be greater than or equal to 'to'. When unset, the kernel's default will be used.",
                 "title": "Ingress QOS Maps"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Id"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-VLAN"
+            "description": "[VLAN] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[VLAN] section configuration",
           "properties": {
             "Id": {
               "allOf": [
@@ -451,13 +538,19 @@
             "IngressQOSMaps": {
               "type": "string",
               "title": "Ingress QOS Maps"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Id"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-VLAN"
+          "description": "[VLAN] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[VLAN] configuration (Can be repeated)",
@@ -469,7 +562,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[MACVLAN] section configuration",
             "properties": {
               "Mode": {
                 "type": "string",
@@ -514,15 +606,20 @@
                 "description": "Controls the threshold for broadcast queueing of the macvlan device. Takes the special value 'no', or an integer in the range 0...2147483647. When 'no' is specified, the broadcast queueing is disabled altogether. When an integer is specified, a multicast address will be queued as broadcast if the number of devices using the macvlan is greater than the given value. Defaults to unset, and the kernel default will be used.",
                 "version_added": "256",
                 "title": "Broadcast Queue Threshold"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACVLAN"
+            "description": "[MACVLAN] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[MACVLAN] section configuration",
           "properties": {
             "Mode": {
               "type": "string",
@@ -567,10 +664,16 @@
               "description": "Controls the threshold for broadcast queueing of the macvlan device. Takes the special value 'no', or an integer in the range 0...2147483647. When 'no' is specified, the broadcast queueing is disabled altogether. When an integer is specified, a multicast address will be queued as broadcast if the number of devices using the macvlan is greater than the given value. Defaults to unset, and the kernel default will be used.",
               "version_added": "256",
               "title": "Broadcast Queue Threshold"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACVLAN"
+          "description": "[MACVLAN] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[MACVLAN] configuration (Can be repeated)",
@@ -582,7 +685,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[MACVTAP] section configuration",
             "properties": {
               "Mode": {
                 "type": "string",
@@ -609,15 +711,20 @@
                 "description": "A whitespace-separated list of remote hardware addresses allowed on the MACVLAN. This option only has an effect in source mode. Use full colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset.",
                 "version_added": "246",
                 "title": "Source MAC Address"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACVTAP"
+            "description": "[MACVTAP] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[MACVTAP] section configuration",
           "properties": {
             "Mode": {
               "type": "string",
@@ -644,10 +751,16 @@
               "description": "A whitespace-separated list of remote hardware addresses allowed on the MACVLAN. This option only has an effect in source mode. Use full colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list of hardware addresses defined prior to this is reset. Defaults to unset.",
               "version_added": "246",
               "title": "Source MAC Address"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACVTAP"
+          "description": "[MACVTAP] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[MACVTAP] configuration (Can be repeated)",
@@ -659,7 +772,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPVLAN] section configuration",
             "properties": {
               "Mode": {
                 "type": "string",
@@ -688,15 +800,20 @@
                 "examples": [
                   "bridge"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-IPVLAN"
+            "description": "[IPVLAN] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPVLAN] section configuration",
           "properties": {
             "Mode": {
               "type": "string",
@@ -725,10 +842,16 @@
               "examples": [
                 "bridge"
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-IPVLAN"
+          "description": "[IPVLAN] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPVLAN] configuration (Can be repeated)",
@@ -740,7 +863,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPVTAP] section configuration",
             "properties": {
               "Mode": {
                 "type": "string",
@@ -771,15 +893,20 @@
                 "examples": [
                   "bridge"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-IPVTAP"
+            "description": "[IPVTAP] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPVTAP] section configuration",
           "properties": {
             "Mode": {
               "type": "string",
@@ -810,10 +937,16 @@
               "examples": [
                 "bridge"
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-IPVTAP"
+          "description": "[IPVTAP] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPVTAP] configuration (Can be repeated)",
@@ -825,7 +958,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Tunnel] section configuration",
             "properties": {
               "Local": {
                 "oneOf": [
@@ -946,10 +1078,8 @@
                 "title": "Copy DSCP"
               },
               "EncapsulationLimit": {
-                "type": "integer",
+                "$ref": "#/definitions/uint8Type",
                 "default": "4",
-                "minimum": 0,
-                "maximum": 255,
                 "description": "The Tunnel Encapsulation Limit option specifies how many additional levels of encapsulation are permitted to be prepended to the packet. For example, a Tunnel Encapsulation Limit option containing a limit value of zero means that a packet carrying that option may not enter another tunnel before exiting the current tunnel. (see RFC 2473). The valid range is 0...255 and 'none'. Defaults to 4.",
                 "version_added": "226",
                 "title": "Encapsulation Limit"
@@ -1070,18 +1200,23 @@
                 "description": "When true, then the tunnel is externally controlled, which is also known as collect metadata mode, and most settings below like Local= or Remote= are ignored. This implies Independent=. Defaults to false.",
                 "version_added": "251",
                 "title": "External"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "FOUDestinationPort"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Tunnel"
+            "description": "[Tunnel] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Tunnel] section configuration",
           "properties": {
             "Local": {
               "type": "string",
@@ -1304,13 +1439,19 @@
               "description": "When true, then the tunnel is externally controlled, which is also known as collect metadata mode, and most settings below like Local= or Remote= are ignored. This implies Independent=. Defaults to false.",
               "version_added": "251",
               "title": "External"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "FOUDestinationPort"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Tunnel"
+          "description": "[Tunnel] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Tunnel] configuration (Can be repeated)",
@@ -1322,7 +1463,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[FooOverUDP] section configuration",
             "properties": {
               "Protocol": {
                 "type": "string",
@@ -1377,21 +1517,26 @@
                 "description": "Configures peer IP address. Note that when peer address is set 'PeerPort=' is mandatory.",
                 "version_added": "243",
                 "title": "Peer"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Protocol",
               "Port",
               "PeerPort",
               "Peer"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-FooOverUDP"
+            "description": "[FooOverUDP] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[FooOverUDP] section configuration",
           "properties": {
             "Protocol": {
               "type": "string",
@@ -1450,16 +1595,22 @@
               "description": "Configures peer IP address. Note that when peer address is set 'PeerPort=' is mandatory.",
               "version_added": "243",
               "title": "Peer"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Protocol",
             "Port",
             "PeerPort",
             "Peer"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-FooOverUDP"
+          "description": "[FooOverUDP] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[FooOverUDP] configuration (Can be repeated)",
@@ -1471,7 +1622,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[L2TP] section configuration",
             "properties": {
               "TunnelId": {
                 "type": "integer",
@@ -1582,20 +1732,25 @@
                 "description": "When true, allows incoming UDP packets over IPv6 with zero checksum field.",
                 "version_added": "242",
                 "title": "UDP6 Zero Checksum Rx"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "TunnelId",
               "PeerTunnelId",
               "Remote"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-L2TP"
+            "description": "[L2TP] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[L2TP] section configuration",
           "properties": {
             "TunnelId": {
               "type": "integer",
@@ -1707,15 +1862,21 @@
               "description": "When true, allows incoming UDP packets over IPv6 with zero checksum field.",
               "version_added": "242",
               "title": "UDP6 Zero Checksum Rx"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "TunnelId",
             "PeerTunnelId",
             "Remote"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-L2TP"
+          "description": "[L2TP] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[L2TP] configuration (Can be repeated)",
@@ -1727,7 +1888,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[L2TPSession] section configuration",
             "properties": {
               "SessionId": {
                 "type": "integer",
@@ -1761,20 +1921,25 @@
                   "eth0",
                   "br0"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "SessionId",
               "PeerSessionId",
               "Name"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-L2TPSession"
+            "description": "[L2TPSession] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[L2TPSession] section configuration",
           "properties": {
             "SessionId": {
               "type": "integer",
@@ -1808,15 +1973,21 @@
                 "eth0",
                 "br0"
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "SessionId",
             "PeerSessionId",
             "Name"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-L2TPSession"
+          "description": "[L2TPSession] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[L2TPSession] configuration (Can be repeated)",
@@ -1828,7 +1999,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Peer] section configuration",
             "properties": {
               "Name": {
                 "type": "string",
@@ -1849,18 +2019,23 @@
                 "description": "The peer MACAddress, if not set, it is generated in the same way as the MAC address of the main interface.",
                 "version_added": "215",
                 "title": "MAC Address"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Name"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Peer"
+            "description": "[Peer] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Peer] section configuration",
           "properties": {
             "Name": {
               "type": "string",
@@ -1881,13 +2056,19 @@
               "description": "The peer MACAddress, if not set, it is generated in the same way as the MAC address of the main interface.",
               "version_added": "215",
               "title": "MAC Address"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Name"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Peer"
+          "description": "[Peer] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Peer] configuration (Can be repeated)",
@@ -1899,38 +2080,48 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[VXCAN] section configuration",
             "properties": {
               "Peer": {
                 "type": "string",
                 "description": "The peer interface name used when creating the netdev. This setting is compulsory.",
                 "version_added": "236",
                 "title": "Peer"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Peer"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-VXCAN"
+            "description": "[VXCAN] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[VXCAN] section configuration",
           "properties": {
             "Peer": {
               "type": "string",
               "description": "The peer interface name used when creating the netdev. This setting is compulsory.",
               "version_added": "236",
               "title": "Peer"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Peer"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-VXCAN"
+          "description": "[VXCAN] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[VXCAN] configuration (Can be repeated)",
@@ -1942,7 +2133,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[VXLAN] section configuration",
             "properties": {
               "VNI": {
                 "type": "integer",
@@ -2171,19 +2361,24 @@
                 "description": "When true, the vxlan interface is created without any underlying network interface. Defaults to false, which means that a.network file that requests this VXLAN interface using VXLAN= is required for the VXLAN to be created.",
                 "version_added": "247",
                 "title": "Independent"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Id",
               "VNI"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-VXLAN"
+            "description": "[VXLAN] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[VXLAN] section configuration",
           "properties": {
             "VNI": {
               "type": "integer",
@@ -2412,14 +2607,20 @@
               "description": "When true, the vxlan interface is created without any underlying network interface. Defaults to false, which means that a.network file that requests this VXLAN interface using VXLAN= is required for the VXLAN to be created.",
               "version_added": "247",
               "title": "Independent"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Id",
             "VNI"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-VXLAN"
+          "description": "[VXLAN] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[VXLAN] configuration (Can be repeated)",
@@ -2431,7 +2632,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[GENEVE] section configuration",
             "properties": {
               "Id": {
                 "type": "integer",
@@ -2522,18 +2722,23 @@
                 "description": "When true, inner Layer 3 protocol is set as Protocol Type in the GENEVE header instead of Ethernet. Defaults to false.",
                 "version_added": "254",
                 "title": "Inherit Inner Protocol"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Id"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-GENEVE"
+            "description": "[GENEVE] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[GENEVE] section configuration",
           "properties": {
             "Id": {
               "type": "integer",
@@ -2626,13 +2831,19 @@
               "description": "When true, inner Layer 3 protocol is set as Protocol Type in the GENEVE header instead of Ethernet. Defaults to false.",
               "version_added": "254",
               "title": "Inherit Inner Protocol"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Id"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-GENEVE"
+          "description": "[GENEVE] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[GENEVE] configuration (Can be repeated)",
@@ -2644,7 +2855,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[MACsec] section configuration",
             "properties": {
               "Port": {
                 "type": "integer",
@@ -2659,15 +2869,20 @@
                 "description": "When true, enable encryption. Defaults to unset.",
                 "version_added": "243",
                 "title": "Encrypt"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACsec"
+            "description": "[MACsec] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[MACsec] section configuration",
           "properties": {
             "Port": {
               "type": "integer",
@@ -2682,10 +2897,16 @@
               "description": "When true, enable encryption. Defaults to unset.",
               "version_added": "243",
               "title": "Encrypt"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACsec"
+          "description": "[MACsec] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[MACsec] configuration (Can be repeated)",
@@ -2697,7 +2918,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[MACsecReceiveChannel] section configuration",
             "properties": {
               "Port": {
                 "type": "integer",
@@ -2717,18 +2937,23 @@
                 "description": "Specifies the MAC address to be used for the MACsec receive channel. The MAC address used to make secure channel identifier (SCI). This setting is compulsory, and is not set by default.",
                 "version_added": "243",
                 "title": "MAC Address"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Port"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACsecReceiveChannel"
+            "description": "[MACsecReceiveChannel] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[MACsecReceiveChannel] section configuration",
           "properties": {
             "Port": {
               "type": "integer",
@@ -2748,13 +2973,19 @@
               "description": "Specifies the MAC address to be used for the MACsec receive channel. The MAC address used to make secure channel identifier (SCI). This setting is compulsory, and is not set by default.",
               "version_added": "243",
               "title": "MAC Address"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Port"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACsecReceiveChannel"
+          "description": "[MACsecReceiveChannel] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[MACsecReceiveChannel] configuration (Can be repeated)",
@@ -2766,7 +2997,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[MACsecTransmitAssociation] section configuration",
             "properties": {
               "PacketNumber": {
                 "type": "string",
@@ -2803,19 +3033,24 @@
                 "description": "If enabled, then the security association is used for encoding. Only one [MACsecTransmitAssociation] section can enable this option. When enabled, Activate=yes is implied. Defaults to unset.",
                 "version_added": "243",
                 "title": "Use For Encoding"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "KeyId",
               "Key"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACsecTransmitAssociation"
+            "description": "[MACsecTransmitAssociation] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[MACsecTransmitAssociation] section configuration",
           "properties": {
             "PacketNumber": {
               "type": "string",
@@ -2852,14 +3087,20 @@
               "description": "If enabled, then the security association is used for encoding. Only one [MACsecTransmitAssociation] section can enable this option. When enabled, Activate=yes is implied. Defaults to unset.",
               "version_added": "243",
               "title": "Use For Encoding"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "KeyId",
             "Key"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACsecTransmitAssociation"
+          "description": "[MACsecTransmitAssociation] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[MACsecTransmitAssociation] configuration (Can be repeated)",
@@ -2871,7 +3112,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[MACsecReceiveAssociation] section configuration",
             "properties": {
               "Port": {
                 "type": "string",
@@ -2918,15 +3158,20 @@
                 "description": "Accepts the same key as in [MACsecTransmitAssociation] section.",
                 "version_added": "243",
                 "title": "Activate"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACsecReceiveAssociation"
+            "description": "[MACsecReceiveAssociation] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[MACsecReceiveAssociation] section configuration",
           "properties": {
             "Port": {
               "type": "string",
@@ -2973,10 +3218,16 @@
               "description": "Accepts the same key as in [MACsecTransmitAssociation] section.",
               "version_added": "243",
               "title": "Activate"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-MACsecReceiveAssociation"
+          "description": "[MACsecReceiveAssociation] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[MACsecReceiveAssociation] configuration (Can be repeated)",
@@ -2988,7 +3239,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Tun] section configuration",
             "properties": {
               "OneQueue": {
                 "type": "string",
@@ -3033,15 +3283,20 @@
                 "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'.",
                 "version_added": "252",
                 "title": "Keep Carrier"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Tun"
+            "description": "[Tun] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Tun] section configuration",
           "properties": {
             "OneQueue": {
               "type": "string",
@@ -3086,10 +3341,16 @@
               "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'.",
               "version_added": "252",
               "title": "Keep Carrier"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Tun"
+          "description": "[Tun] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Tun] configuration (Can be repeated)",
@@ -3101,7 +3362,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Tap] section configuration",
             "properties": {
               "OneQueue": {
                 "type": "string",
@@ -3146,15 +3406,20 @@
                 "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'.",
                 "version_added": "252",
                 "title": "Keep Carrier"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Tap"
+            "description": "[Tap] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Tap] section configuration",
           "properties": {
             "OneQueue": {
               "type": "string",
@@ -3199,10 +3464,16 @@
               "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'.",
               "version_added": "252",
               "title": "Keep Carrier"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Tap"
+          "description": "[Tap] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Tap] configuration (Can be repeated)",
@@ -3214,7 +3485,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Bond] section configuration",
             "properties": {
               "Mode": {
                 "type": "string",
@@ -3466,15 +3736,20 @@
                 "description": "Specify the maximum number of arp interval monitor cycle for missed ARP replies. If this number is exceeded, link is reported as down. Defaults to unset.",
                 "version_added": "256",
                 "title": "ARP Missed Max"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Bond"
+            "description": "[Bond] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Bond] section configuration",
           "properties": {
             "Mode": {
               "type": "string",
@@ -3726,10 +4001,16 @@
               "description": "Specify the maximum number of arp interval monitor cycle for missed ARP replies. If this number is exceeded, link is reported as down. Defaults to unset.",
               "version_added": "256",
               "title": "ARP Missed Max"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Bond"
+          "description": "[Bond] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Bond] configuration (Can be repeated)",
@@ -3741,7 +4022,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Bridge] section configuration",
             "properties": {
               "HelloTimeSec": {
                 "allOf": [
@@ -3846,15 +4126,20 @@
                 "description": "Specifies the maximum number of learned Ethernet addresses for the bridge. When the limit is reached, no more addresses are learned. When unset, the kernel's default will be used. 0 disables the limit.",
                 "version_added": "257",
                 "title": "FDB Max Learned"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Bridge"
+            "description": "[Bridge] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Bridge] section configuration",
           "properties": {
             "HelloTimeSec": {
               "allOf": [
@@ -3959,10 +4244,16 @@
               "description": "Specifies the maximum number of learned Ethernet addresses for the bridge. When the limit is reached, no more addresses are learned. When unset, the kernel's default will be used. 0 disables the limit.",
               "version_added": "257",
               "title": "FDB Max Learned"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Bridge"
+          "description": "[Bridge] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Bridge] configuration (Can be repeated)",
@@ -3974,7 +4265,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[VRF] section configuration",
             "properties": {
               "TableId": {
                 "type": "string",
@@ -4000,18 +4290,23 @@
                   "default",
                   100
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Table"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-VRF"
+            "description": "[VRF] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[VRF] section configuration",
           "properties": {
             "TableId": {
               "type": "string",
@@ -4037,13 +4332,19 @@
                 "default",
                 100
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Table"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-VRF"
+          "description": "[VRF] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[VRF] configuration (Can be repeated)",
@@ -4055,7 +4356,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BareUDP] section configuration",
             "properties": {
               "DestinationPort": {
                 "allOf": [
@@ -4091,19 +4391,24 @@
                 "examples": [
                   "ipv4"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "DestinationPort",
               "EtherType"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-BareUDP"
+            "description": "[BareUDP] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BareUDP] section configuration",
           "properties": {
             "DestinationPort": {
               "allOf": [
@@ -4139,14 +4444,20 @@
               "examples": [
                 "ipv4"
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "DestinationPort",
             "EtherType"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-BareUDP"
+          "description": "[BareUDP] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[BareUDP] configuration (Can be repeated)",
@@ -4158,7 +4469,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[WireGuard] section configuration",
             "properties": {
               "FirewallMark": {
                 "type": "integer",
@@ -4216,25 +4526,28 @@
                 "title": "Route Table"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "default": 0,
                 "description": "The priority of the routes to the addresses specified in the AllowedIPs=. Defaults to 0 for IPv4 addresses, and 1024 for IPv6 addresses. This setting will be ignored when the same setting is specified in the [WireGuardPeer] section.",
                 "version_added": "250",
                 "title": "Route Metric"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "PrivateKey"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-WireGuard"
+            "description": "[WireGuard] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[WireGuard] section configuration",
           "properties": {
             "FirewallMark": {
               "type": "integer",
@@ -4292,20 +4605,24 @@
               "title": "Route Table"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "default": 0,
               "description": "The priority of the routes to the addresses specified in the AllowedIPs=. Defaults to 0 for IPv4 addresses, and 1024 for IPv6 addresses. This setting will be ignored when the same setting is specified in the [WireGuardPeer] section.",
               "version_added": "250",
               "title": "Route Metric"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "PrivateKey"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-WireGuard"
+          "description": "[WireGuard] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[WireGuard] configuration (Can be repeated)",
@@ -4317,7 +4634,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[WireGuardPeer] section configuration",
             "properties": {
               "AllowedIPs": {
                 "type": "string",
@@ -4385,24 +4701,27 @@
                 "title": "Route Table"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The priority of the routes to the addresses specified in the AllowedIPs=. Defaults to unset, and the value specified in the same setting in the [WireGuard] section will be used.",
                 "version_added": "250",
                 "title": "Route Metric"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "PublicKey"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-WireGuardPeer"
+            "description": "[WireGuardPeer] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[WireGuardPeer] section configuration",
           "properties": {
             "AllowedIPs": {
               "type": "string",
@@ -4470,19 +4789,23 @@
               "title": "Route Table"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The priority of the routes to the addresses specified in the AllowedIPs=. Defaults to unset, and the value specified in the same setting in the [WireGuard] section will be used.",
               "version_added": "250",
               "title": "Route Metric"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "PublicKey"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-WireGuardPeer"
+          "description": "[WireGuardPeer] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[WireGuardPeer] configuration (Can be repeated)",
@@ -4494,7 +4817,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Xfrm] section configuration",
             "properties": {
               "InterfaceId": {
                 "type": "string",
@@ -4507,18 +4829,23 @@
                 "description": "If false (the default), the xfrm interface must have an underlying device which can be used for hardware offloading.",
                 "version_added": "243",
                 "title": "Independent"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "InterfaceId"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Xfrm"
+            "description": "[Xfrm] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Xfrm] section configuration",
           "properties": {
             "InterfaceId": {
               "type": "string",
@@ -4531,13 +4858,19 @@
               "description": "If false (the default), the xfrm interface must have an underlying device which can be used for hardware offloading.",
               "version_added": "243",
               "title": "Independent"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "InterfaceId"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-Xfrm"
+          "description": "[Xfrm] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Xfrm] configuration (Can be repeated)",
@@ -4549,7 +4882,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BatmanAdvanced] section configuration",
             "properties": {
               "Aggregation": {
                 "type": "boolean",
@@ -4635,15 +4967,20 @@
                 "description": "This can be either 'batman-v' or 'batman-iv' and describes which routing_algo of batctl8 to use. The algorithm cannot be changed after interface creation. Defaults to 'batman-v'.",
                 "version_added": "248",
                 "title": "Routing Algorithm"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-BatmanAdvanced"
+            "description": "[BatmanAdvanced] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BatmanAdvanced] section configuration",
           "properties": {
             "Aggregation": {
               "type": "boolean",
@@ -4729,10 +5066,16 @@
               "description": "This can be either 'batman-v' or 'batman-iv' and describes which routing_algo of batctl8 to use. The algorithm cannot be changed after interface creation. Defaults to 'batman-v'.",
               "version_added": "248",
               "title": "Routing Algorithm"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-BatmanAdvanced"
+          "description": "[BatmanAdvanced] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[BatmanAdvanced] configuration (Can be repeated)",
@@ -4744,7 +5087,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPoIB] section configuration",
             "properties": {
               "PartitionKey": {
                 "type": "integer",
@@ -4776,15 +5118,20 @@
                 "description": "Takes an boolean value. When true, the kernel ignores multicast groups handled by userspace. Defaults to unset, and the kernel's default is used.",
                 "version_added": "250",
                 "title": "Ignore Userspace Multicast Group"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-IPoIB"
+            "description": "[IPoIB] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPoIB] section configuration",
           "properties": {
             "PartitionKey": {
               "type": "integer",
@@ -4816,10 +5163,16 @@
               "description": "Takes an boolean value. When true, the kernel ignores multicast groups handled by userspace. Defaults to unset, and the kernel's default is used.",
               "version_added": "250",
               "title": "Ignore Userspace Multicast Group"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-IPoIB"
+          "description": "[IPoIB] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPoIB] configuration (Can be repeated)",
@@ -4831,7 +5184,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[WLAN] section configuration",
             "properties": {
               "PhysicalDevice": {
                 "type": "string",
@@ -4869,19 +5221,24 @@
                 "description": "Enables the Wireless Distribution System (WDS) mode on the interface. The mode is also known as the '4 address mode'. Takes a boolean value. Defaults to unset, and the kernel's default will be used.",
                 "version_added": "251",
                 "title": "WDS"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "PhysicalDevice",
               "Type"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-WLAN"
+            "description": "[WLAN] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[WLAN] section configuration",
           "properties": {
             "PhysicalDevice": {
               "type": "string",
@@ -4919,14 +5276,20 @@
               "description": "Enables the Wireless Distribution System (WDS) mode on the interface. The mode is also known as the '4 address mode'. Takes a boolean value. Defaults to unset, and the kernel's default will be used.",
               "version_added": "251",
               "title": "WDS"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "PhysicalDevice",
             "Type"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html#section-WLAN"
+          "description": "[WLAN] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[WLAN] configuration (Can be repeated)",

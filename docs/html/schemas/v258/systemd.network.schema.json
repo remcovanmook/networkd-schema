@@ -5,94 +5,42 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_addressType": {
-      "type": "string",
-      "description": "MAC Address (Hex separated by colons or hyphens)",
-      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
-      "title": "MAC Address",
-      "examples": [
-        "00:11:22:33:44:55"
-      ]
-    },
-    "ipv4_addressType": {
-      "type": "string",
-      "description": "IPv4 Address",
-      "format": "ipv4",
-      "title": "IPv4 Address",
-      "examples": [
-        "192.168.1.1"
-      ]
-    },
-    "ipv6_addressType": {
-      "type": "string",
-      "description": "IPv6 Address",
-      "format": "ipv6",
-      "title": "IPv6 Address",
-      "examples": [
-        "2001:db8::1"
-      ]
-    },
-    "ip_addressType": {
-      "description": "IPv4 or IPv6 Address",
+    "MTUBytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_addressType"
+          "type": "integer",
+          "minimum": 68,
+          "maximum": 65535
         },
         {
-          "$ref": "#/definitions/ipv6_addressType"
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
         }
       ],
-      "title": "IP Address"
-    },
-    "ipv4_prefixType": {
-      "type": "string",
-      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
-      "title": "IPv4 CIDR",
+      "title": "MTU (Bytes)",
       "examples": [
-        "192.168.1.0/24"
+        "1500",
+        "9000"
       ]
     },
-    "ipv6_prefixType": {
-      "type": "string",
-      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
-      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
-      "title": "IPv6 CIDR",
-      "examples": [
-        "2001:db8::/64"
-      ]
-    },
-    "ip_prefixType": {
-      "description": "IPv4 or IPv6 Prefix (CIDR)",
+    "MTUv6BytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_prefixType"
+          "type": "integer",
+          "minimum": 1280,
+          "maximum": 65535
         },
         {
-          "$ref": "#/definitions/ipv6_prefixType"
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
         }
       ],
-      "title": "IP Prefix"
-    },
-    "filenameType": {
-      "type": "string",
-      "description": "Filesystem path",
-      "format": "uri-reference",
-      "title": "File Path",
+      "title": "IPv6 MTU (Bytes)",
       "examples": [
-        "/etc/issue"
-      ]
-    },
-    "secondsType": {
-      "type": "string",
-      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
-      "format": "duration",
-      "description": "Time duration (e.g. 5s, 1min, 500ms)",
-      "title": "Duration",
-      "examples": [
-        "5s",
-        "100ms",
-        "1min"
+        "1280",
+        "1500"
       ]
     },
     "bytesType": {
@@ -112,49 +60,19 @@
         "1G",
         "512M",
         "1024"
-      ],
-      "format": "bytes"
+      ]
     },
-    "MTUBytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 68,
-          "maximum": 65535
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$",
-          "format": "bytes"
-        }
-      ],
-      "title": "MTU (Bytes)",
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
       "examples": [
-        "1500",
-        "9000"
-      ],
-      "format": "bytes"
-    },
-    "MTUv6BytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 1280,
-          "maximum": 65535
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
-        }
-      ],
-      "title": "IPv6 MTU (Bytes)",
-      "examples": [
-        "1280",
-        "1500"
-      ],
-      "format": "bytes"
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
+      ]
     },
     "hostType": {
       "description": "IP Address or Hostname",
@@ -175,22 +93,57 @@
         "example.com"
       ]
     },
-    "rateType": {
-      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
+    "ip_addressType": {
+      "description": "IPv4 or IPv6 Address",
       "oneOf": [
         {
-          "type": "integer",
-          "minimum": 0
+          "type": "string",
+          "format": "ipv4"
         },
         {
           "type": "string",
-          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
+          "format": "ipv6"
         }
       ],
-      "title": "Data Rate",
+      "title": "IP Address"
+    },
+    "ip_prefixType": {
+      "description": "IPv4 or IPv6 Prefix (CIDR)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_prefixType"
+        },
+        {
+          "$ref": "#/definitions/ipv6_prefixType"
+        }
+      ],
+      "title": "IP Prefix"
+    },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
       "examples": [
-        "1G",
-        "100M"
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6_prefixType": {
+      "type": "string",
+      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
+      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
+      "title": "IPv6 CIDR",
+      "examples": [
+        "2001:db8::/64"
+      ]
+    },
+    "mac_addressType": {
+      "type": "string",
+      "description": "MAC Address (Hex separated by colons or hyphens)",
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "title": "MAC Address",
+      "examples": [
+        "00:11:22:33:44:55"
       ]
     },
     "percentageType": {
@@ -201,20 +154,17 @@
       "examples": [
         "10%",
         "0.5%"
-      ],
-      "format": "percent"
-    },
-    "vlan_idType": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 4094,
-      "description": "The VLAN ID. An integer in the range 0...4094.",
-      "title": "VLAN ID",
-      "examples": [
-        1,
-        100,
-        4094
       ]
+    },
+    "property_comments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Comments associated with properties in this section"
     },
     "qdisc_handleType": {
       "type": "string",
@@ -252,53 +202,79 @@
         "1:1"
       ]
     },
-    "uint8Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 255,
-      "description": "Unsigned 8-bit integer (0...255).",
-      "title": "Integer (8-bit)",
+    "rateType": {
+      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "Data Rate",
       "examples": [
-        128
+        "1G",
+        "100M"
       ]
+    },
+    "secondsType": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
+      "description": "Time duration (e.g. 5s, 1min, 500ms)",
+      "title": "Duration",
+      "examples": [
+        "5s",
+        "100ms",
+        "1min"
+      ]
+    },
+    "section_comments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Comments associated with this section"
     },
     "uint16Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 65535,
       "description": "Unsigned 16-bit integer (0...65535).",
-      "title": "Integer (16-bit)",
-      "examples": [
-        1024
-      ]
+      "title": "Integer (16-bit)"
     },
     "uint32Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4294967294,
       "description": "Unsigned 32-bit integer (0...4294967294).",
-      "title": "Integer (32-bit)",
-      "examples": [
-        65535
-      ]
+      "title": "Integer (32-bit)"
     },
-    "globsType": {
-      "type": "string",
-      "description": "A whitespace-separated list of shell-style globs.",
-      "title": "Shell Globs",
-      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+    "uint8Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Unsigned 8-bit integer (0...255).",
+      "title": "Integer (8-bit)"
+    },
+    "vlan_idType": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4094,
+      "description": "The VLAN ID. An integer in the range 0...4094.",
+      "title": "VLAN ID",
       "examples": [
-        "eth*",
-        "en* wlan*",
-        "!virbr*",
-        "!eth0 eth1"
+        1,
+        100,
+        4094
       ]
     }
   },
   "properties": {
     "Match": {
       "type": "object",
-      "description": "[Match] section configuration",
       "properties": {
         "MACAddress": {
           "allOf": [
@@ -322,7 +298,8 @@
         "Path": {
           "allOf": [
             {
-              "$ref": "#/definitions/filenameType"
+              "type": "string",
+              "format": "uri-reference"
             }
           ],
           "description": "The path to the device.",
@@ -424,20 +401,25 @@
           "type": "string",
           "title": "Firmware"
         },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
+        },
         "Version": {
           "type": "string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "Type"
       ],
       "title": "Match",
-      "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Match"
+      "description": "[Match] section configuration",
+      "additionalProperties": false
     },
     "Link": {
       "type": "object",
-      "description": "[Link] section configuration",
       "properties": {
         "MACAddress": {
           "allOf": [
@@ -583,15 +565,20 @@
             "any"
           ],
           "version_added": "249"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
         }
       },
-      "additionalProperties": false,
       "title": "Link",
-      "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Link"
+      "description": "[Link] section configuration",
+      "additionalProperties": false
     },
     "Network": {
       "type": "object",
-      "description": "[Network] section configuration",
       "properties": {
         "Description": {
           "type": "string",
@@ -762,7 +749,8 @@
         "IPv6StableSecretAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/ipv6_addressType"
+              "type": "string",
+              "format": "ipv6"
             }
           ],
           "description": "Takes an IPv6 address. The specified address will be used as a stable secret for generating IPv6 link-local address. If this setting is specified, and IPv6LinkLocalAddressGenerationMode= is unset, then IPv6LinkLocalAddressGenerationMode=stable-privacy is implied. If this setting is not specified, and 'stable-privacy' is set to IPv6LinkLocalAddressGenerationMode=, then a stable secret address will be generated from the local machine ID and the interface name.",
@@ -772,7 +760,8 @@
         "IPv4LLStartAddress": {
           "allOf": [
             {
-              "$ref": "#/definitions/ipv4_addressType"
+              "type": "string",
+              "format": "ipv4"
             }
           ],
           "description": "Specifies the first IPv4 link-local address to try. Takes an IPv4 address for example 169.254.1.2, from the link-local address range: 169.254.0.0/16 except for 169.254.0.0/24 and 169.254.255.0/24. This setting may be useful if the device should always have the same address as long as there is no address conflict. When unset, a random address will be automatically selected. Defaults to unset.",
@@ -1258,15 +1247,21 @@
           "type": "boolean",
           "title": "DHC Pv6 Prefix Delegation"
         },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
+        },
         "MPLSRouting": {
           "type": "boolean",
           "description": "Control whether Multi-protocol Label Switching (MPLS) routing is enabled on this interface. This configures '/proc/sys/net/mpls/conf/INTERFACE/input'. Takes a boolean. Defaults to unset, and the kernel's default will be used. Note, systemd-networkd does not load any required kernel modules for MPLS. To enable the feature, 'mpls_router' kernel module must be loaded before 'systemd-networkd.service' is started. Consider adding the kernel module to modules-load.d5.",
           "version_added": "258"
         }
       },
-      "additionalProperties": false,
       "title": "Network",
-      "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Network"
+      "description": "[Network] section configuration",
+      "additionalProperties": false
     },
     "Address": {
       "oneOf": [
@@ -1274,7 +1269,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Address] section configuration",
             "properties": {
               "Address": {
                 "allOf": [
@@ -1300,7 +1294,8 @@
               "Broadcast": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ipv4_addressType"
+                    "type": "string",
+                    "format": "ipv4"
                   },
                   {
                     "type": "boolean"
@@ -1426,18 +1421,23 @@
                 "description": "This setting provides a method for integrating network configuration into firewall rules with NFT sets. The benefit of using the setting is that static network configuration (or dynamically obtained network addresses, see similar directives in other sections) can be used in firewall rules with the indirection of NFT set types. For example, access could be granted for hosts in the local subnetwork only. Firewall rules using IP address of an interface are also instantly updated when the network configuration changes, for example via DHCP. This option expects a whitespace separated list of NFT set definitions. Each definition consists of a colon-separated tuple of source type (one of 'address', 'prefix' or 'ifindex'), NFT address family (one of 'arp', 'bridge', 'inet', 'ip', 'ip6', or 'netdev'), table name and set name. The names of tables and sets must conform to lexical restrictions of NFT table names. The type of the element used in the NFT filter must match the type implied by the directive ('address', 'prefix' or 'ifindex') and address type (IPv4 or IPv6) as shown in the table below. When an interface is configured with IP addresses, the addresses, subnetwork masks or interface index will be appended to the NFT sets. The information will be removed when the interface is deconfigured. systemd-networkd only inserts elements to (or removes from) the sets, so the related NFT rules, tables and sets must be prepared elsewhere in advance. Failures to manage the sets will be ignored. Example: [Address] NFTSet=prefix:netdev:filter:eth_ipv4_prefix Corresponding NFT rules: table netdev filter { set eth_ipv4_prefix { type ipv4_addr flags interval } chain eth_ingress { type filter hook ingress device \"eth0\" priority filter; policy drop; ip daddr != @eth_ipv4_prefix drop accept } }",
                 "version_added": "255",
                 "title": "NFT Set"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Address",
             "required": [
               "Address"
-            ]
+            ],
+            "description": "[Address] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Address] section configuration",
           "properties": {
             "Address": {
               "allOf": [
@@ -1463,7 +1463,8 @@
             "Broadcast": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ipv4_addressType"
+                  "type": "string",
+                  "format": "ipv4"
                 },
                 {
                   "type": "boolean"
@@ -1574,9 +1575,7 @@
               ]
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
               "version_added": "246",
               "title": "Route Metric"
@@ -1592,13 +1591,19 @@
               "description": "This setting provides a method for integrating network configuration into firewall rules with NFT sets. The benefit of using the setting is that static network configuration (or dynamically obtained network addresses, see similar directives in other sections) can be used in firewall rules with the indirection of NFT set types. For example, access could be granted for hosts in the local subnetwork only. Firewall rules using IP address of an interface are also instantly updated when the network configuration changes, for example via DHCP. This option expects a whitespace separated list of NFT set definitions. Each definition consists of a colon-separated tuple of source type (one of 'address', 'prefix' or 'ifindex'), NFT address family (one of 'arp', 'bridge', 'inet', 'ip', 'ip6', or 'netdev'), table name and set name. The names of tables and sets must conform to lexical restrictions of NFT table names. The type of the element used in the NFT filter must match the type implied by the directive ('address', 'prefix' or 'ifindex') and address type (IPv4 or IPv6) as shown in the table below. When an interface is configured with IP addresses, the addresses, subnetwork masks or interface index will be appended to the NFT sets. The information will be removed when the interface is deconfigured. systemd-networkd only inserts elements to (or removes from) the sets, so the related NFT rules, tables and sets must be prepared elsewhere in advance. Failures to manage the sets will be ignored. Example: [Address] NFTSet=prefix:netdev:filter:eth_ipv4_prefix Corresponding NFT rules: table netdev filter { set eth_ipv4_prefix { type ipv4_addr flags interval } chain eth_ingress { type filter hook ingress device \"eth0\" priority filter; policy drop; ip daddr != @eth_ipv4_prefix drop accept } }",
               "version_added": "255",
               "title": "NFT Set"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Address",
           "required": [
             "Address"
-          ]
+          ],
+          "description": "[Address] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Address] configuration (Can be repeated)",
@@ -1610,7 +1615,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6AddressLabel] section configuration",
             "properties": {
               "Prefix": {
                 "allOf": [
@@ -1632,19 +1636,24 @@
                 "description": "The label for the prefix. Takes an unsigned integer in the range 0...4294967294 (0xfffffffe). 4294967295 (0xffffffff) is reserved. This setting is mandatory.",
                 "version_added": "234",
                 "title": "Label"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Label",
               "Prefix"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6AddressLabel"
+            "description": "[IPv6AddressLabel] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6AddressLabel] section configuration",
           "properties": {
             "Prefix": {
               "allOf": [
@@ -1666,14 +1675,20 @@
               "description": "The label for the prefix. Takes an unsigned integer in the range 0...4294967294 (0xfffffffe). 4294967295 (0xffffffff) is reserved. This setting is mandatory.",
               "version_added": "234",
               "title": "Label"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Label",
             "Prefix"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6AddressLabel"
+          "description": "[IPv6AddressLabel] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6AddressLabel] configuration (Can be repeated)",
@@ -1685,7 +1700,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Neighbor] section configuration",
             "properties": {
               "Address": {
                 "allOf": [
@@ -1719,15 +1733,20 @@
                 "description": "The hardware address to set for the device.",
                 "version_added": "218",
                 "title": "MAC Address"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Neighbor"
+            "description": "[Neighbor] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Neighbor] section configuration",
           "properties": {
             "Address": {
               "allOf": [
@@ -1761,10 +1780,16 @@
               "description": "The hardware address to set for the device.",
               "version_added": "218",
               "title": "MAC Address"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Neighbor"
+          "description": "[Neighbor] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Neighbor] configuration (Can be repeated)",
@@ -1776,7 +1801,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[RoutingPolicyRule] section configuration",
             "properties": {
               "TypeOfService": {
                 "type": "string",
@@ -1985,19 +2009,24 @@
                   "link",
                   "host"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "GoTo",
               "Type"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-RoutingPolicyRule"
+            "description": "[RoutingPolicyRule] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[RoutingPolicyRule] section configuration",
           "properties": {
             "TypeOfService": {
               "allOf": [
@@ -2010,9 +2039,7 @@
               "title": "Type Of Service"
             },
             "Priority": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "Specifies the priority of this rule. Priority= is an integer in the range 0...4294967295. Higher number means lower priority, and rules get processed in order of increasing number. Defaults to unset, and the kernel will pick a value dynamically.",
               "version_added": "235",
               "title": "Priority",
@@ -2198,14 +2225,20 @@
                 "link",
                 "host"
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "GoTo",
             "Type"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-RoutingPolicyRule"
+          "description": "[RoutingPolicyRule] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[RoutingPolicyRule] configuration (Can be repeated)",
@@ -2217,7 +2250,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Route] section configuration",
             "properties": {
               "Gateway": {
                 "oneOf": [
@@ -2272,9 +2304,7 @@
                 ]
               },
               "Metric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the route. Takes an unsigned integer in the range 0...4294967295. Defaults to unset, and the kernel's default will be used.",
                 "version_added": "216",
                 "title": "Metric"
@@ -2523,15 +2553,20 @@
               "TTLPropagate": {
                 "type": "string",
                 "title": "TTL Propagate"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Route"
+            "description": "[Route] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Route] section configuration",
           "properties": {
             "Gateway": {
               "oneOf": [
@@ -2592,9 +2627,7 @@
               ]
             },
             "Metric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the route. Takes an unsigned integer in the range 0...4294967295. Defaults to unset, and the kernel's default will be used.",
               "version_added": "216",
               "title": "Metric"
@@ -2835,10 +2868,16 @@
             "TTLPropagate": {
               "type": "string",
               "title": "TTL Propagate"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Route"
+          "description": "[Route] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Route] configuration (Can be repeated)",
@@ -2850,7 +2889,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[NextHop] section configuration",
             "properties": {
               "Id": {
                 "type": "integer",
@@ -2907,18 +2945,23 @@
                 "description": "Takes a whitespace separated list of nexthop IDs. Optionally, each nexthop ID can take a weight after a colon ('id:weight'). The weight must be in the range 1...255. If the weight is not specified, then it is assumed that the weight is 1. This setting cannot be specified with Gateway=, Family=, Blackhole=. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. Defaults to unset.",
                 "version_added": "249",
                 "title": "Group"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Id"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-NextHop"
+            "description": "[NextHop] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[NextHop] section configuration",
           "properties": {
             "Id": {
               "type": "integer",
@@ -2975,13 +3018,19 @@
               "description": "Takes a whitespace separated list of nexthop IDs. Optionally, each nexthop ID can take a weight after a colon ('id:weight'). The weight must be in the range 1...255. If the weight is not specified, then it is assumed that the weight is 1. This setting cannot be specified with Gateway=, Family=, Blackhole=. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. Defaults to unset.",
               "version_added": "249",
               "title": "Group"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Id"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-NextHop"
+          "description": "[NextHop] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[NextHop] configuration (Can be repeated)",
@@ -2993,7 +3042,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPv4] section configuration",
             "properties": {
               "RequestAddress": {
                 "allOf": [
@@ -3182,9 +3230,7 @@
                 "title": "DUID Raw Data"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "default": 1024,
                 "description": "Set the routing metric for routes specified by the DHCP server (including the prefix route added for the specified prefix). Takes an unsigned integer in the range 0...4294967295. Defaults to 1024.",
                 "version_added": "217",
@@ -3393,6 +3439,12 @@
                 "type": "boolean",
                 "title": "Critical Connection"
               },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
+              },
               "BOOTP": {
                 "type": "boolean",
                 "default": false,
@@ -3400,13 +3452,12 @@
                 "version_added": "258"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv4"
+            "description": "[DHCPv4] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPv4] section configuration",
           "properties": {
             "RequestAddress": {
               "allOf": [
@@ -3608,9 +3659,7 @@
               "title": "DUID Raw Data"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "default": 1024,
               "description": "Set the routing metric for routes specified by the DHCP server (including the prefix route added for the specified prefix). Takes an unsigned integer in the range 0...4294967295. Defaults to 1024.",
               "version_added": "217",
@@ -3818,10 +3867,16 @@
             "CriticalConnection": {
               "type": "boolean",
               "title": "Critical Connection"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv4"
+          "description": "[DHCPv4] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DHCPv4] configuration (Can be repeated)",
@@ -3833,7 +3888,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPv6] section configuration",
             "properties": {
               "UseAddress": {
                 "type": "boolean",
@@ -4018,9 +4072,7 @@
                 "title": "NFT Set"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
                 "version_added": "246",
                 "title": "Route Metric"
@@ -4029,19 +4081,24 @@
                 "type": "boolean",
                 "title": "Force DHC Pv6 PD Other Information"
               },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
+              },
               "UseSIP": {
                 "type": "boolean",
                 "description": "When true (the default), the SIP servers received from the DHCP server will be collected and made available to client programs.",
                 "version_added": "244"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv6"
+            "description": "[DHCPv6] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPv6] section configuration",
           "properties": {
             "UseAddress": {
               "type": "boolean",
@@ -4226,9 +4283,7 @@
               "title": "NFT Set"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
               "version_added": "246",
               "title": "Route Metric"
@@ -4236,10 +4291,16 @@
             "ForceDHCPv6PDOtherInformation": {
               "type": "boolean",
               "title": "Force DHC Pv6 PD Other Information"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv6"
+          "description": "[DHCPv6] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DHCPv6] configuration (Can be repeated)",
@@ -4251,7 +4312,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6AcceptRA] section configuration",
             "properties": {
               "UseRedirect": {
                 "type": "boolean",
@@ -4444,18 +4504,23 @@
               "UseICMP6RateLimit": {
                 "type": "string",
                 "title": "Use ICMP6 Rate Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Token"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6AcceptRA"
+            "description": "[IPv6AcceptRA] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6AcceptRA] section configuration",
           "properties": {
             "UseRedirect": {
               "type": "boolean",
@@ -4579,9 +4644,7 @@
             "RouteMetric": {
               "oneOf": [
                 {
-                  "type": "integer",
-                  "minimum": 0,
-                  "maximum": 4294967295
+                  "$ref": "#/definitions/uint32Type"
                 },
                 {
                   "type": "string",
@@ -4672,13 +4735,19 @@
             "UseICMP6RateLimit": {
               "type": "string",
               "title": "Use ICMP6 Rate Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Token"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6AcceptRA"
+          "description": "[IPv6AcceptRA] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6AcceptRA] configuration (Can be repeated)",
@@ -4694,7 +4763,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPServer] section configuration",
             "properties": {
               "ServerAddress": {
                 "allOf": [
@@ -4921,7 +4989,8 @@
               "BootFilename": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/filenameType"
+                    "type": "string",
+                    "format": "uri-reference"
                   }
                 ],
                 "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -4941,15 +5010,20 @@
                 "description": "When true, the DHCP server will load and save leases in the persistent storage. When false, the DHCP server will neither load nor save leases in the persistent storage. Hence, bound leases will be lost when the interface is reconfigured e.g. by networkctl reconfigure, or systemd-networkd.service8 is restarted. That may cause address conflict on the network. So, please take an extra care when disable this setting. When unspecified, the value specified in the same setting in networkd.conf5, which defaults to 'yes', will be used.",
                 "version_added": "256",
                 "title": "Persist Leases"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPServer"
+            "description": "[DHCPServer] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPServer] section configuration",
           "properties": {
             "ServerAddress": {
               "allOf": [
@@ -5177,7 +5251,8 @@
             "BootFilename": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/filenameType"
+                  "type": "string",
+                  "format": "uri-reference"
                 }
               ],
               "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -5197,10 +5272,16 @@
               "description": "When true, the DHCP server will load and save leases in the persistent storage. When false, the DHCP server will neither load nor save leases in the persistent storage. Hence, bound leases will be lost when the interface is reconfigured e.g. by networkctl reconfigure, or systemd-networkd.service8 is restarted. That may cause address conflict on the network. So, please take an extra care when disable this setting. When unspecified, the value specified in the same setting in networkd.conf5, which defaults to 'yes', will be used.",
               "version_added": "256",
               "title": "Persist Leases"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPServer"
+          "description": "[DHCPServer] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DHCPServer] configuration (Can be repeated)",
@@ -5216,7 +5297,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPServerStaticLease] section configuration",
             "properties": {
               "Address": {
                 "allOf": [
@@ -5239,15 +5319,20 @@
                 "_mandatory": true,
                 "version_added": "249",
                 "title": "MAC Address"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPServerStaticLease"
+            "description": "[DHCPServerStaticLease] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPServerStaticLease] section configuration",
           "properties": {
             "Address": {
               "allOf": [
@@ -5270,10 +5355,16 @@
               "_mandatory": true,
               "version_added": "249",
               "title": "MAC Address"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPServerStaticLease"
+          "description": "[DHCPServerStaticLease] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DHCPServerStaticLease] configuration (Can be repeated)",
@@ -5285,7 +5376,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Bridge] section configuration",
             "properties": {
               "Cost": {
                 "type": "integer",
@@ -5394,6 +5484,12 @@
                   "no"
                 ]
               },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
+              },
               "Locked": {
                 "type": "boolean",
                 "description": "Configures whether the port is \"locked\" and does not allow traffic forwarded until fully authenticated, e.g. via 802.1x. When unset, the kernel's default will be used.",
@@ -5408,13 +5504,12 @@
                 "version_added": "258"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Bridge"
+            "description": "[Bridge] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Bridge] section configuration",
           "properties": {
             "Cost": {
               "type": "integer",
@@ -5522,10 +5617,16 @@
               "examples": [
                 "no"
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-Bridge"
+          "description": "[Bridge] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Bridge] configuration (Can be repeated)",
@@ -5537,7 +5638,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BridgeFDB] section configuration",
             "properties": {
               "MACAddress": {
                 "allOf": [
@@ -5616,18 +5716,23 @@
                 "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset.",
                 "version_added": "249",
                 "title": "Outgoing Interface"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeFDB",
             "required": [
               "MACAddress"
-            ]
+            ],
+            "description": "[BridgeFDB] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BridgeFDB] section configuration",
           "properties": {
             "MACAddress": {
               "allOf": [
@@ -5706,13 +5811,19 @@
               "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset.",
               "version_added": "249",
               "title": "Outgoing Interface"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeFDB",
           "required": [
             "MACAddress"
-          ]
+          ],
+          "description": "[BridgeFDB] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[BridgeFDB] configuration (Can be repeated)",
@@ -5724,7 +5835,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BridgeMDB] section configuration",
             "properties": {
               "MulticastGroupAddress": {
                 "allOf": [
@@ -5752,18 +5862,23 @@
                   100,
                   4094
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeMDB",
             "required": [
               "MulticastGroupAddress"
-            ]
+            ],
+            "description": "[BridgeMDB] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BridgeMDB] section configuration",
           "properties": {
             "MulticastGroupAddress": {
               "allOf": [
@@ -5791,13 +5906,19 @@
                 100,
                 4094
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeMDB",
           "required": [
             "MulticastGroupAddress"
-          ]
+          ],
+          "description": "[BridgeMDB] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[BridgeMDB] configuration (Can be repeated)",
@@ -5809,7 +5930,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BridgeVLAN] section configuration",
             "properties": {
               "PVID": {
                 "oneOf": [
@@ -5872,15 +5992,20 @@
                 "description": "The VLAN ID specified here will be used to untag frames on egress. Configuring EgressUntagged= implicates the use of VLAN= above and will enable the VLAN ID for ingress as well. This can be either a single ID or a range M-N. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
                 "version_added": "231",
                 "title": "Egress Untagged"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeVLAN"
+            "description": "[BridgeVLAN] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BridgeVLAN] section configuration",
           "properties": {
             "PVID": {
               "oneOf": [
@@ -5943,10 +6068,16 @@
               "description": "The VLAN ID specified here will be used to untag frames on egress. Configuring EgressUntagged= implicates the use of VLAN= above and will enable the VLAN ID for ingress as well. This can be either a single ID or a range M-N. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
               "version_added": "231",
               "title": "Egress Untagged"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BridgeVLAN"
+          "description": "[BridgeVLAN] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[BridgeVLAN] configuration (Can be repeated)",
@@ -5958,7 +6089,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPPrefixDelegation] section configuration",
             "properties": {
               "UplinkInterface": {
                 "type": "string",
@@ -6000,9 +6130,7 @@
                 "title": "Token"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "default": 256,
                 "description": "The metric of the route to the delegated prefix subnet. Takes an unsigned integer in the range 0...4294967295. When set to 0, the kernel's default value is used. Defaults to 256.",
                 "version_added": "249",
@@ -6019,15 +6147,20 @@
                 "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPPrefixDelegation"
+            "description": "[DHCPPrefixDelegation] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPPrefixDelegation] section configuration",
           "properties": {
             "UplinkInterface": {
               "type": "string",
@@ -6069,9 +6202,7 @@
               "title": "Token"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "default": 256,
               "description": "The metric of the route to the delegated prefix subnet. Takes an unsigned integer in the range 0...4294967295. When set to 0, the kernel's default value is used. Defaults to 256.",
               "version_added": "249",
@@ -6088,10 +6219,16 @@
               "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
               "version_added": "255",
               "title": "NFT Set"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPPrefixDelegation"
+          "description": "[DHCPPrefixDelegation] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DHCPPrefixDelegation] configuration (Can be repeated)",
@@ -6103,7 +6240,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6SendRA] section configuration",
             "properties": {
               "RouterLifetimeSec": {
                 "allOf": [
@@ -6260,15 +6396,20 @@
                 "description": "Configures IPv6 Home Agent preference. Defaults to 0.",
                 "version_added": "255",
                 "title": "Home Agent Preference"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6SendRA"
+            "description": "[IPv6SendRA] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6SendRA] section configuration",
           "properties": {
             "RouterLifetimeSec": {
               "allOf": [
@@ -6425,10 +6566,16 @@
               "description": "Configures IPv6 Home Agent preference. Defaults to 0.",
               "version_added": "255",
               "title": "Home Agent Preference"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6SendRA"
+          "description": "[IPv6SendRA] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6SendRA] configuration (Can be repeated)",
@@ -6444,7 +6591,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6Prefix] section configuration",
             "properties": {
               "Prefix": {
                 "type": "string",
@@ -6493,9 +6639,7 @@
                 "title": "Assign"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the prefix route. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting is ignored when Assign= is false.",
                 "version_added": "249",
                 "title": "Route Metric"
@@ -6505,18 +6649,23 @@
                 "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
                 "version_added": "250",
                 "title": "Token"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6Prefix",
             "required": [
               "Prefix"
-            ]
+            ],
+            "description": "[IPv6Prefix] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6Prefix] section configuration",
           "properties": {
             "Prefix": {
               "type": "string",
@@ -6561,9 +6710,7 @@
               "title": "Assign"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting is ignored when Assign= is false.",
               "version_added": "249",
               "title": "Route Metric"
@@ -6573,13 +6720,19 @@
               "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
               "version_added": "250",
               "title": "Token"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6Prefix",
           "required": [
             "Prefix"
-          ]
+          ],
+          "description": "[IPv6Prefix] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6Prefix] configuration (Can be repeated)",
@@ -6591,7 +6744,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6RoutePrefix] section configuration",
             "properties": {
               "Route": {
                 "type": "string",
@@ -6610,6 +6762,12 @@
                 "version_added": "244",
                 "title": "Lifetime Sec"
               },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
+              },
               "Preference": {
                 "type": "string",
                 "enum": [
@@ -6622,13 +6780,12 @@
                 "version_added": "258"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6RoutePrefix"
+            "description": "[IPv6RoutePrefix] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6RoutePrefix] section configuration",
           "properties": {
             "Route": {
               "type": "string",
@@ -6646,10 +6803,16 @@
               "default": "3600",
               "version_added": "244",
               "title": "Lifetime Sec"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6RoutePrefix"
+          "description": "[IPv6RoutePrefix] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6RoutePrefix] configuration (Can be repeated)",
@@ -6661,7 +6824,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6PREF64Prefix] section configuration",
             "properties": {
               "Prefix": {
                 "type": "string",
@@ -6679,15 +6841,20 @@
                 "default": "1800",
                 "version_added": "255",
                 "title": "Lifetime Sec"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6PREF64Prefix"
+            "description": "[IPv6PREF64Prefix] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6PREF64Prefix] section configuration",
           "properties": {
             "Prefix": {
               "type": "string",
@@ -6705,10 +6872,16 @@
               "default": "1800",
               "version_added": "255",
               "title": "Lifetime Sec"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6PREF64Prefix"
+          "description": "[IPv6PREF64Prefix] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6PREF64Prefix] configuration (Can be repeated)",
@@ -6720,32 +6893,42 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[LLDP] section configuration",
             "properties": {
               "MUDURL": {
                 "type": "string",
                 "description": "When configured, the specified Manufacturer Usage Descriptions (MUD) URL will be sent in LLDP packets. The syntax and semantics are the same as for MUDURL= in the [DHCPv4] section described above. The MUD URLs received via LLDP packets are saved and can be read using the sd_lldp_neighbor_get_mud_url() function.",
                 "version_added": "246",
                 "title": "MUDURL"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-LLDP"
+            "description": "[LLDP] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[LLDP] section configuration",
           "properties": {
             "MUDURL": {
               "type": "string",
               "description": "When configured, the specified Manufacturer Usage Descriptions (MUD) URL will be sent in LLDP packets. The syntax and semantics are the same as for MUDURL= in the [DHCPv4] section described above. The MUD URLs received via LLDP packets are saved and can be read using the sd_lldp_neighbor_get_mud_url() function.",
               "version_added": "246",
               "title": "MUDURL"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-LLDP"
+          "description": "[LLDP] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[LLDP] configuration (Can be repeated)",
@@ -6757,7 +6940,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[CAN] section configuration",
             "properties": {
               "BitRate": {
                 "type": "integer",
@@ -6792,9 +6974,7 @@
                 "title": "Phase Buffer Segment2"
               },
               "SyncJumpWidth": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "title": "Sync Jump Width"
               },
               "DataBitRate": {
@@ -6905,15 +7085,20 @@
                 "description": "or a termination resistor value in ohm in the range 0...65535. When 'yes', the termination resistor is set to 120 ohm. When 'no' or '0' is set, the termination resistor is disabled. When unset, the kernel's default will be used.",
                 "version_added": "246",
                 "title": "Termination"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-CAN"
+            "description": "[CAN] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[CAN] section configuration",
           "properties": {
             "BitRate": {
               "type": "integer",
@@ -6948,9 +7133,7 @@
               "title": "Phase Buffer Segment2"
             },
             "SyncJumpWidth": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "title": "Sync Jump Width"
             },
             "DataBitRate": {
@@ -7067,10 +7250,16 @@
               "description": "When 'yes', the interface will ignore missing CAN ACKs. When unset, the kernel's default will be used.",
               "version_added": "250",
               "title": "Presume Ack"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-CAN"
+          "description": "[CAN] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[CAN] configuration (Can be repeated)",
@@ -7082,7 +7271,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPoIB] section configuration",
             "properties": {
               "Mode": {
                 "type": "string",
@@ -7098,15 +7286,20 @@
               "IgnoreUserspaceMulticastGroups": {
                 "type": "boolean",
                 "title": "Ignore Userspace Multicast Groups"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPoIB"
+            "description": "[IPoIB] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPoIB] section configuration",
           "properties": {
             "Mode": {
               "type": "string",
@@ -7122,10 +7315,16 @@
             "IgnoreUserspaceMulticastGroups": {
               "type": "boolean",
               "title": "Ignore Userspace Multicast Groups"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPoIB"
+          "description": "[IPoIB] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPoIB] configuration (Can be repeated)",
@@ -7137,7 +7336,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[QDisc] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -7147,18 +7345,23 @@
               "Handle": {
                 "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QDisc"
+            "description": "[QDisc] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[QDisc] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -7168,13 +7371,19 @@
             "Handle": {
               "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QDisc"
+          "description": "[QDisc] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[QDisc] configuration (Can be repeated)",
@@ -7186,7 +7395,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BFIFO] section configuration",
             "properties": {
               "Parent": {
                 "type": "string",
@@ -7214,18 +7422,23 @@
                 "description": "Specifies the hard limit in bytes on the FIFO buffer size. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel default is used.",
                 "version_added": "246",
                 "title": "Limit Bytes"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BFIFO"
+            "description": "[BFIFO] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BFIFO] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -7245,13 +7458,19 @@
               "description": "Specifies the hard limit in bytes on the FIFO buffer size. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to unset and kernel default is used.",
               "version_added": "246",
               "title": "Limit Bytes"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BFIFO"
+          "description": "[BFIFO] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[BFIFO] configuration (Can be repeated)",
@@ -7263,7 +7482,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[CAKE] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -7394,18 +7612,23 @@
                 "description": ", or special value 'aggressive'. If enabled, ACKs in each flow are queued and redundant ACKs to the upstream are dropped. If yes, the filter will always keep at least two redundant ACKs in the queue, while in 'aggressive' mode, it will filter down to a single ACK. This may improve download throughput on links with very asymmetrical rate limits. Defaults to unset, and the kernel's default will be used.",
                 "version_added": "253",
                 "title": "Ack Filter"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-CAKE"
+            "description": "[CAKE] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[CAKE] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -7536,13 +7759,19 @@
               "description": ", or special value 'aggressive'. If enabled, ACKs in each flow are queued and redundant ACKs to the upstream are dropped. If yes, the filter will always keep at least two redundant ACKs in the queue, while in 'aggressive' mode, it will filter down to a single ACK. This may improve download throughput on links with very asymmetrical rate limits. Defaults to unset, and the kernel's default will be used.",
               "version_added": "253",
               "title": "Ack Filter"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-CAKE"
+          "description": "[CAKE] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[CAKE] configuration (Can be repeated)",
@@ -7554,7 +7783,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[ControlledDelay] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -7606,18 +7834,23 @@
                 "description": "This can be used to mark packets instead of dropping them. Defaults to unset and kernel's default is used.",
                 "version_added": "245",
                 "title": "ECN"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-ControlledDelay"
+            "description": "[ControlledDelay] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[ControlledDelay] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -7673,13 +7906,19 @@
               "description": "This can be used to mark packets instead of dropping them. Defaults to unset and kernel's default is used.",
               "version_added": "245",
               "title": "ECN"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-ControlledDelay"
+          "description": "[ControlledDelay] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[ControlledDelay] configuration (Can be repeated)",
@@ -7691,7 +7930,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DeficitRoundRobinScheduler] section configuration",
             "properties": {
               "Parent": {
                 "type": "string",
@@ -7709,18 +7947,23 @@
               "Handle": {
                 "type": "string",
                 "title": "Handle"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DeficitRoundRobinScheduler"
+            "description": "[DeficitRoundRobinScheduler] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DeficitRoundRobinScheduler] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -7730,13 +7973,19 @@
             "Handle": {
               "type": "string",
               "title": "Handle"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DeficitRoundRobinScheduler"
+          "description": "[DeficitRoundRobinScheduler] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DeficitRoundRobinScheduler] configuration (Can be repeated)",
@@ -7748,7 +7997,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DeficitRoundRobinSchedulerClass] section configuration",
             "properties": {
               "Parent": {
                 "type": "string",
@@ -7773,18 +8021,23 @@
                 "description": "Specifies the amount of bytes a flow is allowed to dequeue before the scheduler moves to the next class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to the MTU of the interface.",
                 "version_added": "246",
                 "title": "Quantum Bytes"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DeficitRoundRobinSchedulerClass"
+            "description": "[DeficitRoundRobinSchedulerClass] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DeficitRoundRobinSchedulerClass] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -7801,13 +8054,19 @@
               "description": "Specifies the amount of bytes a flow is allowed to dequeue before the scheduler moves to the next class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to the MTU of the interface.",
               "version_added": "246",
               "title": "Quantum Bytes"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DeficitRoundRobinSchedulerClass"
+          "description": "[DeficitRoundRobinSchedulerClass] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DeficitRoundRobinSchedulerClass] configuration (Can be repeated)",
@@ -7819,7 +8078,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[EnhancedTransmissionSelection] section configuration",
             "properties": {
               "Parent": {
                 "type": "string",
@@ -7865,18 +8123,23 @@
                 "description": "The priority map maps the priority of a packet to a band. The argument is a whitespace separated list of numbers. The first number indicates which band the packets with priority 0 should be put to, the second is for priority 1, and so on. There can be up to 16 numbers in the list. If there are fewer, the default band that traffic with one of the unmentioned priorities goes to is the last one. Each band number This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
                 "version_added": "246",
                 "title": "Priority Map"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-EnhancedTransmissionSelection"
+            "description": "[EnhancedTransmissionSelection] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[EnhancedTransmissionSelection] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -7914,13 +8177,19 @@
               "description": "The priority map maps the priority of a packet to a band. The argument is a whitespace separated list of numbers. The first number indicates which band the packets with priority 0 should be put to, the second is for priority 1, and so on. There can be up to 16 numbers in the list. If there are fewer, the default band that traffic with one of the unmentioned priorities goes to is the last one. Each band number This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
               "version_added": "246",
               "title": "Priority Map"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-EnhancedTransmissionSelection"
+          "description": "[EnhancedTransmissionSelection] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[EnhancedTransmissionSelection] configuration (Can be repeated)",
@@ -7932,7 +8201,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[PFIFO] section configuration",
             "properties": {
               "Parent": {
                 "type": "string",
@@ -7956,18 +8224,23 @@
                 "description": "Specifies the hard limit on the number of packets in the FIFO queue. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. An unsigned integer in the range 0...4294967294. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Packet Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFO"
+            "description": "[PFIFO] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[PFIFO] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -7983,13 +8256,19 @@
               "description": "Specifies the hard limit on the number of packets in the FIFO queue. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. An unsigned integer in the range 0...4294967294. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Packet Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFO"
+          "description": "[PFIFO] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[PFIFO] configuration (Can be repeated)",
@@ -8001,7 +8280,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[PFIFOFast] section configuration",
             "properties": {
               "Parent": {
                 "type": "string",
@@ -8019,18 +8297,23 @@
               "Handle": {
                 "type": "string",
                 "title": "Handle"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFOFast"
+            "description": "[PFIFOFast] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[PFIFOFast] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8040,13 +8323,19 @@
             "Handle": {
               "type": "string",
               "title": "Handle"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFOFast"
+          "description": "[PFIFOFast] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[PFIFOFast] configuration (Can be repeated)",
@@ -8058,7 +8347,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[PFIFOHeadDrop] section configuration",
             "properties": {
               "Parent": {
                 "type": "string",
@@ -8082,18 +8370,23 @@
                 "description": "As in [PFIFO] section.",
                 "version_added": "246",
                 "title": "Packet Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFOHeadDrop"
+            "description": "[PFIFOHeadDrop] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[PFIFOHeadDrop] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8109,13 +8402,19 @@
               "description": "As in [PFIFO] section.",
               "version_added": "246",
               "title": "Packet Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PFIFOHeadDrop"
+          "description": "[PFIFOHeadDrop] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[PFIFOHeadDrop] configuration (Can be repeated)",
@@ -8127,7 +8426,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[QuickFairQueueing] section configuration",
             "properties": {
               "Parent": {
                 "type": "string",
@@ -8145,18 +8443,23 @@
               "Handle": {
                 "type": "string",
                 "title": "Handle"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QuickFairQueueing"
+            "description": "[QuickFairQueueing] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[QuickFairQueueing] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8166,13 +8469,19 @@
             "Handle": {
               "type": "string",
               "title": "Handle"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QuickFairQueueing"
+          "description": "[QuickFairQueueing] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[QuickFairQueueing] configuration (Can be repeated)",
@@ -8184,7 +8493,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[QuickFairQueueingClass] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -8215,18 +8523,23 @@
                 "description": "Specifies the maximum packet size in bytes for the class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. When unset, the kernel default is used.",
                 "version_added": "246",
                 "title": "Max Packet Bytes"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QuickFairQueueingClass"
+            "description": "[QuickFairQueueingClass] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[QuickFairQueueingClass] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8257,13 +8570,19 @@
               "description": "Specifies the maximum packet size in bytes for the class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. When unset, the kernel default is used.",
               "version_added": "246",
               "title": "Max Packet Bytes"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-QuickFairQueueingClass"
+          "description": "[QuickFairQueueingClass] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[QuickFairQueueingClass] configuration (Can be repeated)",
@@ -8275,7 +8594,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[FairQueueing] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -8373,18 +8691,23 @@
               "InitialQuantum": {
                 "type": "string",
                 "title": "Initial Quantum"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FairQueueing"
+            "description": "[FairQueueing] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[FairQueueing] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8482,13 +8805,19 @@
             "InitialQuantum": {
               "type": "string",
               "title": "Initial Quantum"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FairQueueing"
+          "description": "[FairQueueing] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[FairQueueing] configuration (Can be repeated)",
@@ -8500,7 +8829,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[FairQueueingControlledDelay] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -8592,18 +8920,23 @@
               "Quantum": {
                 "type": "string",
                 "title": "Quantum"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FairQueueingControlledDelay"
+            "description": "[FairQueueingControlledDelay] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[FairQueueingControlledDelay] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8695,13 +9028,19 @@
             "Quantum": {
               "type": "string",
               "title": "Quantum"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FairQueueingControlledDelay"
+          "description": "[FairQueueingControlledDelay] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[FairQueueingControlledDelay] configuration (Can be repeated)",
@@ -8713,7 +9052,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[FlowQueuePIE] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -8729,18 +9067,23 @@
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. An unsigned integer ranges 1 to 4294967294. Defaults to unset and kernel's default is used.",
                 "version_added": "247",
                 "title": "Packet Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FlowQueuePIE"
+            "description": "[FlowQueuePIE] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[FlowQueuePIE] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8756,13 +9099,19 @@
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. An unsigned integer ranges 1 to 4294967294. Defaults to unset and kernel's default is used.",
               "version_added": "247",
               "title": "Packet Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-FlowQueuePIE"
+          "description": "[FlowQueuePIE] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[FlowQueuePIE] configuration (Can be repeated)",
@@ -8774,7 +9123,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[GenericRandomEarlyDetection] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -8806,18 +9154,23 @@
                 "description": "It turns on the RIO-like buffering scheme. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Generic RIO"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-GenericRandomEarlyDetection"
+            "description": "[GenericRandomEarlyDetection] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[GenericRandomEarlyDetection] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8849,13 +9202,19 @@
               "description": "It turns on the RIO-like buffering scheme. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Generic RIO"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-GenericRandomEarlyDetection"
+          "description": "[GenericRandomEarlyDetection] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[GenericRandomEarlyDetection] configuration (Can be repeated)",
@@ -8867,7 +9226,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[HeavyHitterFilter] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -8887,18 +9245,23 @@
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Packet Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HeavyHitterFilter"
+            "description": "[HeavyHitterFilter] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[HeavyHitterFilter] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -8918,13 +9281,19 @@
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Packet Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HeavyHitterFilter"
+          "description": "[HeavyHitterFilter] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[HeavyHitterFilter] configuration (Can be repeated)",
@@ -8936,7 +9305,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[HierarchyTokenBucket] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -8963,18 +9331,23 @@
                 "description": "Takes an unsigned integer. The DRR quantums are calculated by dividing the value configured in Rate= by RateToQuantum=.",
                 "version_added": "246",
                 "title": "Rate To Quantum"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HierarchyTokenBucket"
+            "description": "[HierarchyTokenBucket] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[HierarchyTokenBucket] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9001,13 +9374,19 @@
               "description": "Takes an unsigned integer. The DRR quantums are calculated by dividing the value configured in Rate= by RateToQuantum=.",
               "version_added": "246",
               "title": "Rate To Quantum"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HierarchyTokenBucket"
+          "description": "[HierarchyTokenBucket] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[HierarchyTokenBucket] configuration (Can be repeated)",
@@ -9019,7 +9398,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[HierarchyTokenBucketClass] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9114,19 +9492,24 @@
                 "description": "Specifies the maximum bytes burst for ceil which can be accumulated during idle period. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
                 "version_added": "246",
                 "title": "Ceil Buffer Bytes"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent",
               "Rate"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HierarchyTokenBucketClass"
+            "description": "[HierarchyTokenBucketClass] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[HierarchyTokenBucketClass] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9213,14 +9596,20 @@
               "description": "Specifies the maximum bytes burst for ceil which can be accumulated during idle period. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
               "version_added": "246",
               "title": "Ceil Buffer Bytes"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent",
             "Rate"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-HierarchyTokenBucketClass"
+          "description": "[HierarchyTokenBucketClass] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[HierarchyTokenBucketClass] configuration (Can be repeated)",
@@ -9232,7 +9621,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[ClassfulMultiQueueing] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9242,18 +9630,23 @@
               "Handle": {
                 "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-ClassfulMultiQueueing"
+            "description": "[ClassfulMultiQueueing] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[ClassfulMultiQueueing] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9263,13 +9656,19 @@
             "Handle": {
               "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-ClassfulMultiQueueing"
+          "description": "[ClassfulMultiQueueing] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[ClassfulMultiQueueing] configuration (Can be repeated)",
@@ -9281,7 +9680,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BandMultiQueueing] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9291,18 +9689,23 @@
               "Handle": {
                 "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BandMultiQueueing"
+            "description": "[BandMultiQueueing] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BandMultiQueueing] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9312,13 +9715,19 @@
             "Handle": {
               "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-BandMultiQueueing"
+          "description": "[BandMultiQueueing] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[BandMultiQueueing] configuration (Can be repeated)",
@@ -9330,7 +9739,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[NetworkEmulator] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9391,18 +9799,23 @@
                 "description": "Specifies the maximum number of packets the qdisc may hold queued at a time. Defaults to 1000.",
                 "version_added": "245",
                 "title": "Packet Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-NetworkEmulator"
+            "description": "[NetworkEmulator] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[NetworkEmulator] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9463,13 +9876,19 @@
               "description": "Specifies the maximum number of packets the qdisc may hold queued at a time. Defaults to 1000.",
               "version_added": "245",
               "title": "Packet Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-NetworkEmulator"
+          "description": "[NetworkEmulator] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[NetworkEmulator] configuration (Can be repeated)",
@@ -9481,7 +9900,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[PIE] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9501,18 +9919,23 @@
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Packet Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PIE"
+            "description": "[PIE] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[PIE] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9532,13 +9955,19 @@
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Packet Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-PIE"
+          "description": "[PIE] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[PIE] configuration (Can be repeated)",
@@ -9550,7 +9979,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[StochasticFairBlue] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9570,18 +9998,23 @@
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Packet Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-StochasticFairBlue"
+            "description": "[StochasticFairBlue] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[StochasticFairBlue] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9601,13 +10034,19 @@
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Packet Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-StochasticFairBlue"
+          "description": "[StochasticFairBlue] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[StochasticFairBlue] configuration (Can be repeated)",
@@ -9619,7 +10058,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[StochasticFairnessQueueing] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9639,18 +10077,23 @@
                 "description": "Specifies the interval in seconds for queue algorithm perturbation. Defaults to unset.",
                 "version_added": "245",
                 "title": "Perturb Period Sec"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-StochasticFairnessQueueing"
+            "description": "[StochasticFairnessQueueing] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[StochasticFairnessQueueing] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9670,13 +10113,19 @@
               "description": "Specifies the interval in seconds for queue algorithm perturbation. Defaults to unset.",
               "version_added": "245",
               "title": "Perturb Period Sec"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-StochasticFairnessQueueing"
+          "description": "[StochasticFairnessQueueing] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[StochasticFairnessQueueing] configuration (Can be repeated)",
@@ -9688,7 +10137,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[TokenBucketFilter] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9782,18 +10230,23 @@
               "LimitSize": {
                 "type": "string",
                 "title": "Limit Size"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TokenBucketFilter"
+            "description": "[TokenBucketFilter] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[TokenBucketFilter] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9887,13 +10340,19 @@
             "LimitSize": {
               "type": "string",
               "title": "Limit Size"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TokenBucketFilter"
+          "description": "[TokenBucketFilter] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[TokenBucketFilter] configuration (Can be repeated)",
@@ -9905,7 +10364,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[TrivialLinkEqualizer] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -9922,18 +10380,23 @@
                 "description": "Specifies the interface ID 'N' of teql. Defaults to '0'. Note that when teql is used, currently, the module 'sch_teql' with 'max_equalizers=N+1' option must be loaded before systemd-networkd is started.",
                 "version_added": "245",
                 "title": "Id"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TrivialLinkEqualizer"
+            "description": "[TrivialLinkEqualizer] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[TrivialLinkEqualizer] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -9950,13 +10413,19 @@
               "description": "Specifies the interface ID 'N' of teql. Defaults to '0'. Note that when teql is used, currently, the module 'sch_teql' with 'max_equalizers=N+1' option must be loaded before systemd-networkd is started.",
               "version_added": "245",
               "title": "Id"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TrivialLinkEqualizer"
+          "description": "[TrivialLinkEqualizer] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[TrivialLinkEqualizer] configuration (Can be repeated)",
@@ -9968,7 +10437,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6PrefixDelegation] section configuration",
             "properties": {
               "RouterLifetimeSec": {
                 "allOf": [
@@ -10057,15 +10525,20 @@
                 "default": "3600",
                 "version_added": "235",
                 "title": "DNS Lifetime Sec"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6PrefixDelegation"
+            "description": "[IPv6PrefixDelegation] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6PrefixDelegation] section configuration",
           "properties": {
             "RouterLifetimeSec": {
               "allOf": [
@@ -10154,10 +10627,16 @@
               "default": "3600",
               "version_added": "235",
               "title": "DNS Lifetime Sec"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-IPv6PrefixDelegation"
+          "description": "[IPv6PrefixDelegation] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6PrefixDelegation] configuration (Can be repeated)",
@@ -10169,7 +10648,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCP] section configuration",
             "properties": {
               "ClientIdentifier": {
                 "type": "string",
@@ -10281,9 +10759,7 @@
                 "title": "User Class"
               },
               "IAID": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
                 "version_added": "230",
                 "title": "IAID"
@@ -10301,9 +10777,7 @@
                 "title": "DUID Raw Data"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
                 "version_added": "246",
                 "title": "Route Metric"
@@ -10358,15 +10832,20 @@
                 "default": false,
                 "description": "When true, the 'Other Configuration' flag in the DHCPv6 Request is set. Defaults to false.",
                 "title": "Force DHC Pv6 PD Other Information"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCP"
+            "description": "[DHCP] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCP] section configuration",
           "properties": {
             "ClientIdentifier": {
               "type": "string",
@@ -10465,9 +10944,7 @@
               "title": "User Class"
             },
             "IAID": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
               "version_added": "230",
               "title": "IAID"
@@ -10485,9 +10962,7 @@
               "title": "DUID Raw Data"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
               "version_added": "246",
               "title": "Route Metric"
@@ -10542,10 +11017,16 @@
               "default": false,
               "description": "When true, the 'Other Configuration' flag in the DHCPv6 Request is set. Defaults to false.",
               "title": "Force DHC Pv6 PD Other Information"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCP"
+          "description": "[DHCP] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DHCP] configuration (Can be repeated)",
@@ -10563,7 +11044,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPv6PrefixDelegation] section configuration",
             "properties": {
               "SubnetId": {
                 "oneOf": [
@@ -10616,21 +11096,24 @@
                 "title": "Token"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
                 "version_added": "246",
                 "title": "Route Metric"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv6PrefixDelegation"
+            "description": "[DHCPv6PrefixDelegation] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPv6PrefixDelegation] section configuration",
           "properties": {
             "SubnetId": {
               "type": "string",
@@ -10665,16 +11148,20 @@
               "title": "Token"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
               "version_added": "246",
               "title": "Route Metric"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-DHCPv6PrefixDelegation"
+          "description": "[DHCPv6PrefixDelegation] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[DHCPv6PrefixDelegation] configuration (Can be repeated)",
@@ -10686,7 +11173,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[TrafficControlQueueingDiscipline] section configuration",
             "properties": {
               "Parent": {
                 "$ref": "#/definitions/qdisc_parentType",
@@ -10732,18 +11218,23 @@
                   }
                 ],
                 "title": "Network Emulator Packet Limit"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Parent"
             ],
-            "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TrafficControlQueueingDiscipline"
+            "description": "[TrafficControlQueueingDiscipline] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[TrafficControlQueueingDiscipline] section configuration",
           "properties": {
             "Parent": {
               "$ref": "#/definitions/qdisc_parentType",
@@ -10789,13 +11280,19 @@
                 }
               ],
               "title": "Network Emulator Packet Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Parent"
           ],
-          "documentation": "https://remcovanmook.github.io/networkd-schema/v258/systemd.network.html#section-TrafficControlQueueingDiscipline"
+          "description": "[TrafficControlQueueingDiscipline] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[TrafficControlQueueingDiscipline] configuration (Can be repeated)",
@@ -10815,84 +11312,6 @@
     "Route": [
       "Match"
     ],
-    "DHCPv4": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "DHCP"
-          ]
-        }
-      }
-    },
-    "DHCPv6": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "DHCP"
-          ]
-        }
-      }
-    },
-    "IPv6AcceptRA": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "IPv6AcceptRA"
-          ]
-        }
-      }
-    },
-    "DHCPServer": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "DHCPServer"
-          ]
-        }
-      }
-    },
-    "IPv6SendRA": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "IPv6SendRA"
-          ]
-        }
-      }
-    },
-    "IPoIB": {
-      "required": [
-        "NetDev"
-      ],
-      "properties": {
-        "NetDev": {
-          "not": {
-            "properties": {
-              "Kind": {
-                "not": {
-                  "const": "ipoib"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "BridgeFDB": [
       "Network"
     ],
@@ -10992,6 +11411,84 @@
     "RoutingPolicyRule": [
       "Network"
     ],
+    "DHCPv4": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "DHCP"
+          ]
+        }
+      }
+    },
+    "DHCPv6": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "DHCP"
+          ]
+        }
+      }
+    },
+    "IPv6AcceptRA": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "IPv6AcceptRA"
+          ]
+        }
+      }
+    },
+    "DHCPServer": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "DHCPServer"
+          ]
+        }
+      }
+    },
+    "IPv6SendRA": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "IPv6SendRA"
+          ]
+        }
+      }
+    },
+    "IPoIB": {
+      "required": [
+        "NetDev"
+      ],
+      "properties": {
+        "NetDev": {
+          "not": {
+            "properties": {
+              "Kind": {
+                "not": {
+                  "const": "ipoib"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "Bridge": {
       "required": [
         "NetDev"

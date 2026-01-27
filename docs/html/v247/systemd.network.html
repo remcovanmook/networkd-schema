@@ -403,7 +403,7 @@ MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#filenameType" class="badge badge-type-prominent badge-type-complex">File Path</a>
+                         <a href="types.html#uri-reference" class="badge badge-type-prominent badge-type-string">string</a>
                          
                     </div>
                     <div class="option-desc">
@@ -413,7 +413,7 @@ MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
           <code class="varname">ID_PATH</code>.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=/etc/issue
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=SomeString
 </code></pre></div></div>
                 <div id="Match-Driver" class="option-block">
                     <div class="option-header">
@@ -2947,7 +2947,7 @@ LinkLocalAddressing=ipv6
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#IPv4 Address | boolean" class="badge badge-type-prominent badge-type-complex">IPv4 Address | boolean</a>
+                         <a href="types.html#boolean | string" class="badge badge-type-prominent badge-type-string">boolean | string</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3357,7 +3357,7 @@ Scope=link
             0xffffffff is reserved. This setting is mandatory.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Label=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Label=SomeString
 </code></pre></div></div>
                 <div id="IPv6AddressLabel-Prefix" class="option-block">
                     <div class="option-header">
@@ -3424,7 +3424,7 @@ Scope=link
             <p>Takes a number between 0 and 255 that specifies the type of service to match.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TypeOfService=128
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TypeOfService=SomeString
 </code></pre></div></div>
                 <div id="RoutingPolicyRule-From" class="option-block">
                     <div class="option-header">
@@ -3586,7 +3586,7 @@ Table=local
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -4141,7 +4141,7 @@ Destination=192.168.1.0/24
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -4149,7 +4149,7 @@ Destination=192.168.1.0/24
             <p>The metric of the route (an unsigned integer).</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Metric=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Metric=SomeString
 </code></pre></div></div>
                 <div id="Route-IPv6Preference" class="option-block">
                     <div class="option-header">
@@ -5472,7 +5472,7 @@ MTUBytes=9000
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -5933,7 +5933,7 @@ FallbackLeaseLifetimeSec=infinity
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -5941,7 +5941,7 @@ FallbackLeaseLifetimeSec=infinity
             <p>Set the routing metric for routes specified by the DHCP server. Defaults to 1024.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteMetric=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteMetric=SomeString
 </code></pre></div></div>
                 <div id="DHCPv6-RapidCommit" class="option-block">
                     <div class="option-header">
@@ -8692,7 +8692,7 @@ DelayJitterSec=100ms
           An unsigned integer in the range 0–4294967294. Defaults to 1000.</p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>1000</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=65535
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>1000</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=1000
 </code></pre></div></div>
                 <div id="NetworkEmulator-LossRate" class="option-block">
                     <div class="option-header">
@@ -9048,7 +9048,7 @@ MTUBytes=9000
           dropped. An unsigned integer in the range 1–4294967294. Defaults to unset and kernel&#x27;s default is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=SomeString
 </code></pre></div></div></div><div id="section-FlowQueuePIE" class="section-block"><h2>FlowQueuePIE Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="FlowQueuePIE-PacketLimit" class="option-block">
                     <div class="option-header">
@@ -9117,7 +9117,7 @@ MTUBytes=9000
           kernel&#x27;s default is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=SomeString
 </code></pre></div></div></div><div id="section-StochasticFairnessQueueing" class="section-block"><h2>StochasticFairnessQueueing Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="StochasticFairnessQueueing-PerturbPeriodSec" class="option-block">
                     <div class="option-header">
@@ -9361,7 +9361,7 @@ LimitBytes=512M
           kernel&#x27;s default is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=SomeString
 </code></pre></div></div>
                 <div id="ControlledDelay-TargetSec" class="option-block">
                     <div class="option-header">
@@ -9679,7 +9679,7 @@ CEThresholdSec=100ms
           times. If an empty string is assigned, then the all previous assignments are cleared.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PriorityMap=128
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PriorityMap=SomeString
 </code></pre></div></div></div><div id="section-GenericRandomEarlyDetection" class="section-block"><h2>GenericRandomEarlyDetection Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="GenericRandomEarlyDetection-VirtualQueues" class="option-block">
                     <div class="option-header">
@@ -9814,7 +9814,7 @@ CEThresholdSec=100ms
           dropped. Defaults to unset and kernel&#x27;s default is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=SomeString
 </code></pre></div></div>
                 <div id="FairQueueingControlledDelay-MemoryLimitBytes" class="option-block">
                     <div class="option-header">
@@ -10093,7 +10093,7 @@ CEThresholdSec=100ms
           dropped. Defaults to unset and kernel&#x27;s default is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=SomeString
 </code></pre></div></div>
                 <div id="FairQueueing-FlowLimit" class="option-block">
                     <div class="option-header">
@@ -10127,7 +10127,7 @@ CEThresholdSec=100ms
           unset and kernel&#x27;s default is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FlowLimit=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FlowLimit=SomeString
 </code></pre></div></div>
                 <div id="FairQueueing-QuantumBytes" class="option-block">
                     <div class="option-header">
@@ -10305,7 +10305,7 @@ InitialQuantumBytes=512M
           kernel&#x27;s default is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OrphanMask=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OrphanMask=SomeString
 </code></pre></div></div>
                 <div id="FairQueueing-Pacing" class="option-block">
                     <div class="option-header">
@@ -10478,7 +10478,7 @@ CEThresholdSec=100ms
           configured in <code class="varname">Rate=</code> by <code class="varname">RateToQuantum=</code>.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RateToQuantum=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RateToQuantum=SomeString
 </code></pre></div></div></div><div id="section-HierarchyTokenBucketClass" class="section-block"><h2>HierarchyTokenBucketClass Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div><h3 class="subcategory-header">Required</h3>
                 <div id="HierarchyTokenBucketClass-Rate" class="option-block">
                     <div class="option-header">
@@ -10797,7 +10797,7 @@ BufferBytes=512M
           kernel&#x27;s default is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=SomeString
 </code></pre></div></div></div><div id="section-QuickFairQueueing" class="section-block"><h2>QuickFairQueueing Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div></div><div id="section-QuickFairQueueingClass" class="section-block"><h2>QuickFairQueueingClass Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="QuickFairQueueingClass-Weight" class="option-block">
                     <div class="option-header">

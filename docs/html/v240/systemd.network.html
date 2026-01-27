@@ -287,7 +287,7 @@ MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#filenameType" class="badge badge-type-prominent badge-type-complex">File Path</a>
+                         <a href="types.html#uri-reference" class="badge badge-type-prominent badge-type-string">string</a>
                          
                     </div>
                     <div class="option-desc">
@@ -300,7 +300,7 @@ MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
             item in the list.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=/etc/issue
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=SomeString
 </code></pre></div></div>
                 <div id="Match-Driver" class="option-block">
                     <div class="option-header">
@@ -2376,7 +2376,7 @@ LinkLocalAddressing=ipv6
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#IPv4 Address | boolean" class="badge badge-type-prominent badge-type-complex">IPv4 Address | boolean</a>
+                         <a href="types.html#boolean | string" class="badge badge-type-prominent badge-type-string">boolean | string</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2784,7 +2784,7 @@ Scope=link
             0xffffffff is reserved. This key is mandatory.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Label=65535
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Label=SomeString
 </code></pre></div></div>
                 <div id="IPv6AddressLabel-Prefix" class="option-block">
                     <div class="option-header">
@@ -2851,7 +2851,7 @@ Scope=link
             <p>Specifies the type of service to match a number between 0 to 255.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TypeOfService=128
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TypeOfService=SomeString
 </code></pre></div></div>
                 <div id="RoutingPolicyRule-From" class="option-block">
                     <div class="option-header">
@@ -3010,7 +3010,7 @@ Table=local
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3353,7 +3353,7 @@ Destination=192.168.1.0/24
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3361,7 +3361,7 @@ Destination=192.168.1.0/24
             <p>The metric of the route (an unsigned integer).</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Metric=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Metric=SomeString
 </code></pre></div></div>
                 <div id="Route-IPv6Preference" class="option-block">
                     <div class="option-header">
@@ -4345,7 +4345,7 @@ MTUBytes=9000
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -4353,7 +4353,7 @@ MTUBytes=9000
             <p>The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IAID=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IAID=SomeString
 </code></pre></div></div>
                 <div id="DHCP-RequestBroadcast" class="option-block">
                     <div class="option-header">
@@ -4416,7 +4416,7 @@ MTUBytes=9000
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -4425,7 +4425,7 @@ MTUBytes=9000
             DHCP server.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteMetric=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteMetric=SomeString
 </code></pre></div></div>
                 <div id="DHCP-RouteTable" class="option-block">
                     <div class="option-header">

@@ -1809,7 +1809,7 @@ FDBAgeingSec=100ms
         destination port is assigned the empty string the default port of 4789 is used.</p>
       
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DestinationPort=1024
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DestinationPort=SomeString
 </code></pre></div></div></div><div id="section-GENEVE" class="section-block"><h2>GENEVE Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-NetDev" class="dependency-link">[NetDev]</a></div><h3 class="subcategory-header">Required</h3>
                 <div id="GENEVE-Id" class="option-block">
                     <div class="option-header">
@@ -1941,7 +1941,7 @@ FDBAgeingSec=100ms
           <p>Specifies the TTL value to use in outgoing packets. Ranges [1-255].</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TTL=128
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TTL=SomeString
 </code></pre></div></div>
                 <div id="GENEVE-UDPChecksum" class="option-block">
                     <div class="option-header">
@@ -2074,7 +2074,7 @@ FDBAgeingSec=100ms
         port of 6081 is used.</p>
       
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>6081</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DestinationPort=1024
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>6081</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DestinationPort=6081
 </code></pre></div></div>
                 <div id="GENEVE-FlowLabel" class="option-block">
                     <div class="option-header">
@@ -2282,7 +2282,7 @@ FDBAgeingSec=100ms
           64.</p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>0</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TTL=128
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>0</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TTL=0
 </code></pre></div></div>
                 <div id="Tunnel-DiscoverPathMTU" class="option-block">
                     <div class="option-header">
@@ -2435,7 +2435,7 @@ FDBAgeingSec=100ms
         </p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>4</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EncapsulationLimit=128
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>4</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EncapsulationLimit=4
 </code></pre></div></div>
                 <div id="Tunnel-Key" class="option-block">
                     <div class="option-header">
@@ -2720,7 +2720,7 @@ FDBAgeingSec=100ms
           — that is, the source port for packets is left to the network stack to decide.</p>
         
                     </div>
-                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>0</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FOUSourcePort=1024
+                <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>0</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FOUSourcePort=0
 </code></pre></div></div>
                 <div id="Tunnel-Encapsulation" class="option-block">
                     <div class="option-header">
@@ -2962,7 +2962,7 @@ Protocol=boot
           for delivery to the real destination. This option is mandatory.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=1024
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=SomeString
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="FooOverUDP-Encapsulation" class="option-block">
                     <div class="option-header">

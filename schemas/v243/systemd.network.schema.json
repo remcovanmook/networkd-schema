@@ -5,94 +5,42 @@
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "mac_addressType": {
-      "type": "string",
-      "description": "MAC Address (Hex separated by colons or hyphens)",
-      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
-      "title": "MAC Address",
-      "examples": [
-        "00:11:22:33:44:55"
-      ]
-    },
-    "ipv4_addressType": {
-      "type": "string",
-      "description": "IPv4 Address",
-      "format": "ipv4",
-      "title": "IPv4 Address",
-      "examples": [
-        "192.168.1.1"
-      ]
-    },
-    "ipv6_addressType": {
-      "type": "string",
-      "description": "IPv6 Address",
-      "format": "ipv6",
-      "title": "IPv6 Address",
-      "examples": [
-        "2001:db8::1"
-      ]
-    },
-    "ip_addressType": {
-      "description": "IPv4 or IPv6 Address",
+    "MTUBytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_addressType"
+          "type": "integer",
+          "minimum": 68,
+          "maximum": 65535
         },
         {
-          "$ref": "#/definitions/ipv6_addressType"
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
         }
       ],
-      "title": "IP Address"
-    },
-    "ipv4_prefixType": {
-      "type": "string",
-      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
-      "title": "IPv4 CIDR",
+      "title": "MTU (Bytes)",
       "examples": [
-        "192.168.1.0/24"
+        "1500",
+        "9000"
       ]
     },
-    "ipv6_prefixType": {
-      "type": "string",
-      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
-      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
-      "title": "IPv6 CIDR",
-      "examples": [
-        "2001:db8::/64"
-      ]
-    },
-    "ip_prefixType": {
-      "description": "IPv4 or IPv6 Prefix (CIDR)",
+    "MTUv6BytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
       "oneOf": [
         {
-          "$ref": "#/definitions/ipv4_prefixType"
+          "type": "integer",
+          "minimum": 1280,
+          "maximum": 65535
         },
         {
-          "$ref": "#/definitions/ipv6_prefixType"
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
         }
       ],
-      "title": "IP Prefix"
-    },
-    "filenameType": {
-      "type": "string",
-      "description": "Filesystem path",
-      "format": "uri-reference",
-      "title": "File Path",
+      "title": "IPv6 MTU (Bytes)",
       "examples": [
-        "/etc/issue"
-      ]
-    },
-    "secondsType": {
-      "type": "string",
-      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
-      "format": "duration",
-      "description": "Time duration (e.g. 5s, 1min, 500ms)",
-      "title": "Duration",
-      "examples": [
-        "5s",
-        "100ms",
-        "1min"
+        "1280",
+        "1500"
       ]
     },
     "bytesType": {
@@ -112,49 +60,19 @@
         "1G",
         "512M",
         "1024"
-      ],
-      "format": "bytes"
+      ]
     },
-    "MTUBytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 68,
-          "maximum": 65535
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$",
-          "format": "bytes"
-        }
-      ],
-      "title": "MTU (Bytes)",
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
       "examples": [
-        "1500",
-        "9000"
-      ],
-      "format": "bytes"
-    },
-    "MTUv6BytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 1280,
-          "maximum": 65535
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
-        }
-      ],
-      "title": "IPv6 MTU (Bytes)",
-      "examples": [
-        "1280",
-        "1500"
-      ],
-      "format": "bytes"
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
+      ]
     },
     "hostType": {
       "description": "IP Address or Hostname",
@@ -175,22 +93,57 @@
         "example.com"
       ]
     },
-    "rateType": {
-      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
+    "ip_addressType": {
+      "description": "IPv4 or IPv6 Address",
       "oneOf": [
         {
-          "type": "integer",
-          "minimum": 0
+          "type": "string",
+          "format": "ipv4"
         },
         {
           "type": "string",
-          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
+          "format": "ipv6"
         }
       ],
-      "title": "Data Rate",
+      "title": "IP Address"
+    },
+    "ip_prefixType": {
+      "description": "IPv4 or IPv6 Prefix (CIDR)",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ipv4_prefixType"
+        },
+        {
+          "$ref": "#/definitions/ipv6_prefixType"
+        }
+      ],
+      "title": "IP Prefix"
+    },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
       "examples": [
-        "1G",
-        "100M"
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6_prefixType": {
+      "type": "string",
+      "description": "IPv6 Address with Prefix Length (CIDR), e.g., 2001:db8::1/64",
+      "pattern": "^([0-9a-fA-F]{1,4}:){1,7}:?([0-9a-fA-F]{1,4}:?)*\\/(12[0-8]|1[0-1][0-9]|[1-9]?[0-9]|[0-9])$",
+      "title": "IPv6 CIDR",
+      "examples": [
+        "2001:db8::/64"
+      ]
+    },
+    "mac_addressType": {
+      "type": "string",
+      "description": "MAC Address (Hex separated by colons or hyphens)",
+      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "title": "MAC Address",
+      "examples": [
+        "00:11:22:33:44:55"
       ]
     },
     "percentageType": {
@@ -201,20 +154,17 @@
       "examples": [
         "10%",
         "0.5%"
-      ],
-      "format": "percent"
-    },
-    "vlan_idType": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 4094,
-      "description": "The VLAN ID. An integer in the range 0...4094.",
-      "title": "VLAN ID",
-      "examples": [
-        1,
-        100,
-        4094
       ]
+    },
+    "property_comments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": "Comments associated with properties in this section"
     },
     "qdisc_handleType": {
       "type": "string",
@@ -252,53 +202,79 @@
         "1:1"
       ]
     },
-    "uint8Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 255,
-      "description": "Unsigned 8-bit integer (0...255).",
-      "title": "Integer (8-bit)",
+    "rateType": {
+      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "Data Rate",
       "examples": [
-        128
+        "1G",
+        "100M"
       ]
+    },
+    "secondsType": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
+      "description": "Time duration (e.g. 5s, 1min, 500ms)",
+      "title": "Duration",
+      "examples": [
+        "5s",
+        "100ms",
+        "1min"
+      ]
+    },
+    "section_comments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Comments associated with this section"
     },
     "uint16Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 65535,
       "description": "Unsigned 16-bit integer (0...65535).",
-      "title": "Integer (16-bit)",
-      "examples": [
-        1024
-      ]
+      "title": "Integer (16-bit)"
     },
     "uint32Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4294967294,
       "description": "Unsigned 32-bit integer (0...4294967294).",
-      "title": "Integer (32-bit)",
-      "examples": [
-        65535
-      ]
+      "title": "Integer (32-bit)"
     },
-    "globsType": {
-      "type": "string",
-      "description": "A whitespace-separated list of shell-style globs.",
-      "title": "Shell Globs",
-      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+    "uint8Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Unsigned 8-bit integer (0...255).",
+      "title": "Integer (8-bit)"
+    },
+    "vlan_idType": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4094,
+      "description": "The VLAN ID. An integer in the range 0...4094.",
+      "title": "VLAN ID",
       "examples": [
-        "eth*",
-        "en* wlan*",
-        "!virbr*",
-        "!eth0 eth1"
+        1,
+        100,
+        4094
       ]
     }
   },
   "properties": {
     "Match": {
       "type": "object",
-      "description": "[Match] section configuration",
       "properties": {
         "MACAddress": {
           "allOf": [
@@ -318,7 +294,8 @@
         "Path": {
           "allOf": [
             {
-              "$ref": "#/definitions/filenameType"
+              "type": "string",
+              "format": "uri-reference"
             }
           ],
           "description": "The path to the device.",
@@ -378,17 +355,23 @@
         "Architecture": {
           "type": "string",
           "title": "Architecture"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
         }
       },
-      "additionalProperties": false,
       "required": [
         "Type"
       ],
-      "title": "Match"
+      "title": "Match",
+      "description": "[Match] section configuration",
+      "additionalProperties": false
     },
     "Link": {
       "type": "object",
-      "description": "[Link] section configuration",
       "properties": {
         "MACAddress": {
           "allOf": [
@@ -474,14 +457,20 @@
             "degraded:routable"
           ],
           "version_added": "256"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
         }
       },
-      "additionalProperties": false,
-      "title": "Link"
+      "title": "Link",
+      "description": "[Link] section configuration",
+      "additionalProperties": false
     },
     "Network": {
       "type": "object",
-      "description": "[Network] section configuration",
       "properties": {
         "Description": {
           "type": "string",
@@ -989,10 +978,17 @@
         "IPv6PrefixDelegation": {
           "type": "string",
           "title": "IPv6 Prefix Delegation"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
         }
       },
-      "additionalProperties": false,
-      "title": "Network"
+      "title": "Network",
+      "description": "[Network] section configuration",
+      "additionalProperties": false
     },
     "Address": {
       "oneOf": [
@@ -1000,7 +996,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Address] section configuration",
             "properties": {
               "Address": {
                 "allOf": [
@@ -1026,7 +1021,8 @@
               "Broadcast": {
                 "oneOf": [
                   {
-                    "$ref": "#/definitions/ipv4_addressType"
+                    "type": "string",
+                    "format": "ipv4"
                   },
                   {
                     "type": "boolean"
@@ -1127,17 +1123,23 @@
                   "link",
                   "host"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Address"
-            ]
+            ],
+            "description": "[Address] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Address] section configuration",
           "properties": {
             "Address": {
               "allOf": [
@@ -1163,7 +1165,8 @@
             "Broadcast": {
               "oneOf": [
                 {
-                  "$ref": "#/definitions/ipv4_addressType"
+                  "type": "string",
+                  "format": "ipv4"
                 },
                 {
                   "type": "boolean"
@@ -1274,9 +1277,7 @@
               ]
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
               "version_added": "246",
               "title": "Route Metric"
@@ -1292,12 +1293,19 @@
               "description": "This setting provides a method for integrating network configuration into firewall rules with NFT sets. The benefit of using the setting is that static network configuration (or dynamically obtained network addresses, see similar directives in other sections) can be used in firewall rules with the indirection of NFT set types. For example, access could be granted for hosts in the local subnetwork only. Firewall rules using IP address of an interface are also instantly updated when the network configuration changes, for example via DHCP. This option expects a whitespace separated list of NFT set definitions. Each definition consists of a colon-separated tuple of source type (one of 'address', 'prefix' or 'ifindex'), NFT address family (one of 'arp', 'bridge', 'inet', 'ip', 'ip6', or 'netdev'), table name and set name. The names of tables and sets must conform to lexical restrictions of NFT table names. The type of the element used in the NFT filter must match the type implied by the directive ('address', 'prefix' or 'ifindex') and address type (IPv4 or IPv6) as shown in the table below. When an interface is configured with IP addresses, the addresses, subnetwork masks or interface index will be appended to the NFT sets. The information will be removed when the interface is deconfigured. systemd-networkd only inserts elements to (or removes from) the sets, so the related NFT rules, tables and sets must be prepared elsewhere in advance. Failures to manage the sets will be ignored. Example: [Address] NFTSet=prefix:netdev:filter:eth_ipv4_prefix Corresponding NFT rules: table netdev filter { set eth_ipv4_prefix { type ipv4_addr flags interval } chain eth_ingress { type filter hook ingress device \"eth0\" priority filter; policy drop; ip daddr != @eth_ipv4_prefix drop accept } }",
               "version_added": "255",
               "title": "NFT Set"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Address"
-          ]
+          ],
+          "description": "[Address] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[Address] configuration (Can be repeated)",
@@ -1309,7 +1317,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6AddressLabel] section configuration",
             "properties": {
               "Prefix": {
                 "allOf": [
@@ -1331,18 +1338,24 @@
                 "description": "The label for the prefix. Takes an unsigned integer in the range 0...4294967294 (0xfffffffe). 4294967295 (0xffffffff) is reserved. This setting is mandatory.",
                 "version_added": "234",
                 "title": "Label"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Label",
               "Prefix"
-            ]
+            ],
+            "description": "[IPv6AddressLabel] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6AddressLabel] section configuration",
           "properties": {
             "Prefix": {
               "allOf": [
@@ -1364,13 +1377,20 @@
               "description": "The label for the prefix. Takes an unsigned integer in the range 0...4294967294 (0xfffffffe). 4294967295 (0xffffffff) is reserved. This setting is mandatory.",
               "version_added": "234",
               "title": "Label"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Label",
             "Prefix"
-          ]
+          ],
+          "description": "[IPv6AddressLabel] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6AddressLabel] configuration (Can be repeated)",
@@ -1382,7 +1402,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Neighbor] section configuration",
             "properties": {
               "Address": {
                 "allOf": [
@@ -1416,14 +1435,20 @@
                 "description": "The hardware address to set for the device.",
                 "version_added": "218",
                 "title": "MAC Address"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[Neighbor] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Neighbor] section configuration",
           "properties": {
             "Address": {
               "allOf": [
@@ -1457,8 +1482,15 @@
               "description": "The hardware address to set for the device.",
               "version_added": "218",
               "title": "MAC Address"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[Neighbor] section configuration",
           "additionalProperties": false
         }
       ],
@@ -1471,7 +1503,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[RoutingPolicyRule] section configuration",
             "properties": {
               "TypeOfService": {
                 "type": "string",
@@ -1623,18 +1654,24 @@
                 "examples": [
                   "ipv4"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "GoTo",
               "Type"
-            ]
+            ],
+            "description": "[RoutingPolicyRule] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[RoutingPolicyRule] section configuration",
           "properties": {
             "TypeOfService": {
               "allOf": [
@@ -1647,9 +1684,7 @@
               "title": "Type Of Service"
             },
             "Priority": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "Specifies the priority of this rule. Priority= is an integer in the range 0...4294967295. Higher number means lower priority, and rules get processed in order of increasing number. Defaults to unset, and the kernel will pick a value dynamically.",
               "version_added": "235",
               "title": "Priority",
@@ -1835,13 +1870,20 @@
                 "link",
                 "host"
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "GoTo",
             "Type"
-          ]
+          ],
+          "description": "[RoutingPolicyRule] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[RoutingPolicyRule] configuration (Can be repeated)",
@@ -1853,7 +1895,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Route] section configuration",
             "properties": {
               "Gateway": {
                 "oneOf": [
@@ -1908,9 +1949,7 @@
                 ]
               },
               "Metric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the route. Takes an unsigned integer in the range 0...4294967295. Defaults to unset, and the kernel's default will be used.",
                 "version_added": "216",
                 "title": "Metric"
@@ -2111,14 +2150,20 @@
               "TTLPropagate": {
                 "type": "string",
                 "title": "TTL Propagate"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[Route] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Route] section configuration",
           "properties": {
             "Gateway": {
               "oneOf": [
@@ -2179,9 +2224,7 @@
               ]
             },
             "Metric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the route. Takes an unsigned integer in the range 0...4294967295. Defaults to unset, and the kernel's default will be used.",
               "version_added": "216",
               "title": "Metric"
@@ -2422,8 +2465,15 @@
             "TTLPropagate": {
               "type": "string",
               "title": "TTL Propagate"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[Route] section configuration",
           "additionalProperties": false
         }
       ],
@@ -2436,7 +2486,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPv4] section configuration",
             "properties": {
               "ClientIdentifier": {
                 "type": "string",
@@ -2560,9 +2609,7 @@
                 "title": "DUID Raw Data"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "default": 1024,
                 "description": "Set the routing metric for routes specified by the DHCP server (including the prefix route added for the specified prefix). Takes an unsigned integer in the range 0...4294967295. Defaults to 1024.",
                 "version_added": "217",
@@ -2624,14 +2671,20 @@
               "CriticalConnection": {
                 "type": "boolean",
                 "title": "Critical Connection"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[DHCPv4] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPv4] section configuration",
           "properties": {
             "RequestAddress": {
               "allOf": [
@@ -2833,9 +2886,7 @@
               "title": "DUID Raw Data"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "default": 1024,
               "description": "Set the routing metric for routes specified by the DHCP server (including the prefix route added for the specified prefix). Takes an unsigned integer in the range 0...4294967295. Defaults to 1024.",
               "version_added": "217",
@@ -3043,8 +3094,15 @@
             "CriticalConnection": {
               "type": "boolean",
               "title": "Critical Connection"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[DHCPv4] section configuration",
           "additionalProperties": false
         }
       ],
@@ -3057,7 +3115,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPv6] section configuration",
             "properties": {
               "UseDNS": {
                 "type": "boolean",
@@ -3081,14 +3138,20 @@
               "ForceDHCPv6PDOtherInformation": {
                 "type": "boolean",
                 "title": "Force DHC Pv6 PD Other Information"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[DHCPv6] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPv6] section configuration",
           "properties": {
             "UseAddress": {
               "type": "boolean",
@@ -3273,9 +3336,7 @@
               "title": "NFT Set"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
               "version_added": "246",
               "title": "Route Metric"
@@ -3283,8 +3344,15 @@
             "ForceDHCPv6PDOtherInformation": {
               "type": "boolean",
               "title": "Force DHC Pv6 PD Other Information"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[DHCPv6] section configuration",
           "additionalProperties": false
         }
       ],
@@ -3297,7 +3365,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6AcceptRA] section configuration",
             "properties": {
               "UseAutonomousPrefix": {
                 "type": "boolean",
@@ -3341,17 +3408,23 @@
               "BlackList": {
                 "type": "string",
                 "title": "Black List"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Token"
-            ]
+            ],
+            "description": "[IPv6AcceptRA] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6AcceptRA] section configuration",
           "properties": {
             "UseRedirect": {
               "type": "boolean",
@@ -3475,9 +3548,7 @@
             "RouteMetric": {
               "oneOf": [
                 {
-                  "type": "integer",
-                  "minimum": 0,
-                  "maximum": 4294967295
+                  "$ref": "#/definitions/uint32Type"
                 },
                 {
                   "type": "string",
@@ -3568,12 +3639,19 @@
             "UseICMP6RateLimit": {
               "type": "string",
               "title": "Use ICMP6 Rate Limit"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Token"
-          ]
+          ],
+          "description": "[IPv6AcceptRA] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6AcceptRA] configuration (Can be repeated)",
@@ -3589,7 +3667,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCPServer] section configuration",
             "properties": {
               "MaxLeaseTimeSec": {
                 "$ref": "#/definitions/secondsType",
@@ -3675,14 +3752,20 @@
                 "type": "integer",
                 "minimum": 0,
                 "title": "Pool Size"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[DHCPServer] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCPServer] section configuration",
           "properties": {
             "ServerAddress": {
               "allOf": [
@@ -3910,7 +3993,8 @@
             "BootFilename": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/filenameType"
+                  "type": "string",
+                  "format": "uri-reference"
                 }
               ],
               "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -3930,8 +4014,15 @@
               "description": "When true, the DHCP server will load and save leases in the persistent storage. When false, the DHCP server will neither load nor save leases in the persistent storage. Hence, bound leases will be lost when the interface is reconfigured e.g. by networkctl reconfigure, or systemd-networkd.service8 is restarted. That may cause address conflict on the network. So, please take an extra care when disable this setting. When unspecified, the value specified in the same setting in networkd.conf5, which defaults to 'yes', will be used.",
               "version_added": "256",
               "title": "Persist Leases"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[DHCPServer] section configuration",
           "additionalProperties": false
         }
       ],
@@ -3948,7 +4039,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[Bridge] section configuration",
             "properties": {
               "Cost": {
                 "type": "integer",
@@ -4050,14 +4140,20 @@
                 "examples": [
                   "no"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[Bridge] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[Bridge] section configuration",
           "properties": {
             "Cost": {
               "type": "integer",
@@ -4165,8 +4261,15 @@
               "examples": [
                 "no"
               ]
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[Bridge] section configuration",
           "additionalProperties": false
         }
       ],
@@ -4179,7 +4282,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BridgeFDB] section configuration",
             "properties": {
               "MACAddress": {
                 "allOf": [
@@ -4245,17 +4347,23 @@
                 "examples": [
                   "master"
                 ]
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "MACAddress"
-            ]
+            ],
+            "description": "[BridgeFDB] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BridgeFDB] section configuration",
           "properties": {
             "MACAddress": {
               "allOf": [
@@ -4334,12 +4442,19 @@
               "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset.",
               "version_added": "249",
               "title": "Outgoing Interface"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "MACAddress"
-          ]
+          ],
+          "description": "[BridgeFDB] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[BridgeFDB] configuration (Can be repeated)",
@@ -4351,7 +4466,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[BridgeVLAN] section configuration",
             "properties": {
               "PVID": {
                 "oneOf": [
@@ -4414,14 +4528,20 @@
                 "description": "The VLAN ID specified here will be used to untag frames on egress. Configuring EgressUntagged= implicates the use of VLAN= above and will enable the VLAN ID for ingress as well. This can be either a single ID or a range M-N. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
                 "version_added": "231",
                 "title": "Egress Untagged"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[BridgeVLAN] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[BridgeVLAN] section configuration",
           "properties": {
             "PVID": {
               "oneOf": [
@@ -4484,8 +4604,15 @@
               "description": "The VLAN ID specified here will be used to untag frames on egress. Configuring EgressUntagged= implicates the use of VLAN= above and will enable the VLAN ID for ingress as well. This can be either a single ID or a range M-N. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
               "version_added": "231",
               "title": "Egress Untagged"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[BridgeVLAN] section configuration",
           "additionalProperties": false
         }
       ],
@@ -4498,7 +4625,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6Prefix] section configuration",
             "properties": {
               "Prefix": {
                 "type": "string",
@@ -4538,17 +4664,23 @@
                 "default": "1800",
                 "version_added": "235",
                 "title": "Preferred Lifetime Sec"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
-            "additionalProperties": false,
             "required": [
               "Prefix"
-            ]
+            ],
+            "description": "[IPv6Prefix] section configuration",
+            "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6Prefix] section configuration",
           "properties": {
             "Prefix": {
               "type": "string",
@@ -4593,9 +4725,7 @@
               "title": "Assign"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting is ignored when Assign= is false.",
               "version_added": "249",
               "title": "Route Metric"
@@ -4605,12 +4735,19 @@
               "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
               "version_added": "250",
               "title": "Token"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
-          "additionalProperties": false,
           "required": [
             "Prefix"
-          ]
+          ],
+          "description": "[IPv6Prefix] section configuration",
+          "additionalProperties": false
         }
       ],
       "description": "[IPv6Prefix] configuration (Can be repeated)",
@@ -4622,7 +4759,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[CAN] section configuration",
             "properties": {
               "BitRate": {
                 "type": "integer",
@@ -4653,14 +4789,20 @@
                 "description": "When 'yes', three samples (instead of one) are used to determine the value of a received bit by majority rule. When unset, the kernel's default will be used.",
                 "version_added": "242",
                 "title": "Triple Sampling"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[CAN] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[CAN] section configuration",
           "properties": {
             "BitRate": {
               "type": "integer",
@@ -4695,9 +4837,7 @@
               "title": "Phase Buffer Segment2"
             },
             "SyncJumpWidth": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "title": "Sync Jump Width"
             },
             "DataBitRate": {
@@ -4814,8 +4954,15 @@
               "description": "When 'yes', the interface will ignore missing CAN ACKs. When unset, the kernel's default will be used.",
               "version_added": "250",
               "title": "Presume Ack"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[CAN] section configuration",
           "additionalProperties": false
         }
       ],
@@ -4828,7 +4975,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[IPv6PrefixDelegation] section configuration",
             "properties": {
               "RouterLifetimeSec": {
                 "allOf": [
@@ -4917,14 +5063,20 @@
                 "default": "3600",
                 "version_added": "235",
                 "title": "DNS Lifetime Sec"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[IPv6PrefixDelegation] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[IPv6PrefixDelegation] section configuration",
           "properties": {
             "RouterLifetimeSec": {
               "allOf": [
@@ -5013,8 +5165,15 @@
               "default": "3600",
               "version_added": "235",
               "title": "DNS Lifetime Sec"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[IPv6PrefixDelegation] section configuration",
           "additionalProperties": false
         }
       ],
@@ -5027,7 +5186,6 @@
           "type": "array",
           "items": {
             "type": "object",
-            "description": "[DHCP] section configuration",
             "properties": {
               "ClientIdentifier": {
                 "type": "string",
@@ -5139,9 +5297,7 @@
                 "title": "User Class"
               },
               "IAID": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
                 "version_added": "230",
                 "title": "IAID"
@@ -5159,9 +5315,7 @@
                 "title": "DUID Raw Data"
               },
               "RouteMetric": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 4294967295,
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
                 "version_added": "246",
                 "title": "Route Metric"
@@ -5216,14 +5370,20 @@
                 "default": false,
                 "description": "When true, the 'Other Configuration' flag in the DHCPv6 Request is set. Defaults to false.",
                 "title": "Force DHC Pv6 PD Other Information"
+              },
+              "_comments": {
+                "$ref": "#/definitions/section_comments"
+              },
+              "_property_comments": {
+                "$ref": "#/definitions/property_comments"
               }
             },
+            "description": "[DHCP] section configuration",
             "additionalProperties": false
           }
         },
         {
           "type": "object",
-          "description": "[DHCP] section configuration",
           "properties": {
             "ClientIdentifier": {
               "type": "string",
@@ -5322,9 +5482,7 @@
               "title": "User Class"
             },
             "IAID": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
               "version_added": "230",
               "title": "IAID"
@@ -5342,9 +5500,7 @@
               "title": "DUID Raw Data"
             },
             "RouteMetric": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 4294967295,
+              "$ref": "#/definitions/uint32Type",
               "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
               "version_added": "246",
               "title": "Route Metric"
@@ -5399,8 +5555,15 @@
               "default": false,
               "description": "When true, the 'Other Configuration' flag in the DHCPv6 Request is set. Defaults to false.",
               "title": "Force DHC Pv6 PD Other Information"
+            },
+            "_comments": {
+              "$ref": "#/definitions/section_comments"
+            },
+            "_property_comments": {
+              "$ref": "#/definitions/property_comments"
             }
           },
+          "description": "[DHCP] section configuration",
           "additionalProperties": false
         }
       ],
@@ -5427,84 +5590,6 @@
     "Route": [
       "Match"
     ],
-    "DHCPv4": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "DHCP"
-          ]
-        }
-      }
-    },
-    "DHCPv6": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "DHCP"
-          ]
-        }
-      }
-    },
-    "IPv6AcceptRA": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "IPv6AcceptRA"
-          ]
-        }
-      }
-    },
-    "DHCPServer": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "DHCPServer"
-          ]
-        }
-      }
-    },
-    "IPv6SendRA": {
-      "required": [
-        "Network"
-      ],
-      "properties": {
-        "Network": {
-          "required": [
-            "IPv6SendRA"
-          ]
-        }
-      }
-    },
-    "IPoIB": {
-      "required": [
-        "NetDev"
-      ],
-      "properties": {
-        "NetDev": {
-          "not": {
-            "properties": {
-              "Kind": {
-                "not": {
-                  "const": "ipoib"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "BridgeFDB": [
       "Network"
     ],
@@ -5604,6 +5689,84 @@
     "RoutingPolicyRule": [
       "Network"
     ],
+    "DHCPv4": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "DHCP"
+          ]
+        }
+      }
+    },
+    "DHCPv6": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "DHCP"
+          ]
+        }
+      }
+    },
+    "IPv6AcceptRA": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "IPv6AcceptRA"
+          ]
+        }
+      }
+    },
+    "DHCPServer": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "DHCPServer"
+          ]
+        }
+      }
+    },
+    "IPv6SendRA": {
+      "required": [
+        "Network"
+      ],
+      "properties": {
+        "Network": {
+          "required": [
+            "IPv6SendRA"
+          ]
+        }
+      }
+    },
+    "IPoIB": {
+      "required": [
+        "NetDev"
+      ],
+      "properties": {
+        "NetDev": {
+          "not": {
+            "properties": {
+              "Kind": {
+                "not": {
+                  "const": "ipoib"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "Bridge": {
       "required": [
         "NetDev"
