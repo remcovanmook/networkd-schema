@@ -254,11 +254,170 @@ footer {
     background: #d29922;
 }
 
-/* Sidebar (for documentation pages) */
-/* Override flex layout for doc pages if needed, but here we keep it simple for now */
-/* generate_html.py adds specific sidebar layout styles usually. */
-/* We will rely on generate_html.py keeping its specific structural css if needed, or merging here. */
-/* For now, this style.css is focused on Landing Pages and basic elements */
+/* Sidebar */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: #0d1117;
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    z-index: 100;
+
+    /* Native CSS Resizing */
+    resize: horizontal;
+    direction: ltr;
+    /* Ensure grab handle is on the right */
+    min-width: 200px;
+    max-width: 600px;
+}
+
+/* Hide native resizer scrollbar styling issues if any? */
+#sidebar::-webkit-resizer {
+    /* Optional: style the grabber if needed, but default is usually fine */
+}
+
+#sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+.sidebar-header {
+    position: sticky;
+    top: 0;
+    background: #0d1117;
+    z-index: 10;
+    padding: 20px 20px 10px 20px;
+    /* Reduced bottom padding */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+
+/* Specific nav tweaks */
+.sidebar-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-content li {
+    margin-bottom: 8px;
+}
+
+/* Sidebar Toggle/Summary Layout Fix */
+.sidebar-content details>summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 5px;
+    list-style: none;
+    /* Hide default marker */
+    display: flex;
+    /* Flexbox for alignment */
+    align-items: center;
+}
+
+.sidebar-content details>summary::-webkit-details-marker {
+    display: none;
+}
+
+.sidebar-content details>summary::before {
+    content: "▶";
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 8px;
+    transition: transform 0.2s;
+    color: var(--meta-color);
+    /* Prevent shrinking */
+    flex-shrink: 0;
+}
+
+.sidebar-content details[open]>summary::before {
+    transform: rotate(90deg);
+}
+
+/* Fix: Ensure the link inside summary is inline/block but respects flex */
+.sidebar-content details>summary>a {
+    display: inline-block;
+    /* Do not allow it to be block to prevent breaking to new line */
+    color: var(--heading-color);
+}
+
+
+.sidebar-content ul.sub-menu {
+    border-left: 2px solid #21262d;
+    margin-left: 7px;
+    padding-left: 15px;
+}
+
+.sidebar-content a {
+    color: var(--text-color);
+    display: block;
+    padding: 2px 0;
+    transition: color 0.1s;
+}
+
+/* Override block display for links inside summary if caught by general rule */
+.sidebar-content details>summary a {
+    display: inline;
+}
+
+.sidebar-content a:hover,
+.sidebar-content a.active {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.nav-subcat {
+    color: var(--meta-color);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+/* Resizer Handle */
+
+
+/* Content Area */
+#content {
+    /* With CSS resize, we can't easily bind content margin to sidebar width without JS.
+       However, the user asked for "Normal HTML/CSS approach". 
+       The drawback of position:fixed + resize is that content doesn't reflow.
+       
+       Alternative: Flexbox Layout?
+       If we use a flex container for body, and sidebar is relative/static with overflow, it will push content.
+       But we want the sidebar to be scrollable INDEPENDENTLY of window.
+       
+       Let's try Flexbox approach for the whole page structure.
+    */
+    /* Reverting to margin-left for now as a safe bet, or standard flex */
+    margin-left: 320px;
+    /* Base width + padding */
+    padding: 40px 40px 40px 40px;
+    max-width: 900px;
+    /* Limit content width for readability */
+    transition: margin-left 0.3s ease;
+}
+
+#content.expanded {
+    margin-left: 0;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+
+/* Toggle Button */
+
+
 /* Search UI */
 #search-container {
     padding: 15px 20px 0 20px;
@@ -350,6 +509,7 @@ footer {
     text-align: center;
     color: var(--meta-color);
 }
+
 /* Type Prominence (User Request) */
 .option-type-line {
     margin-bottom: 20px;
@@ -366,7 +526,8 @@ footer {
 }
 
 .badge-type-prominent {
-    background: #17a2b8; /* Vibrant Teal */
+    background: #17a2b8;
+    /* Vibrant Teal */
     color: white;
     padding: 6px 14px;
     border-radius: 4px;
@@ -376,7 +537,7 @@ footer {
     letter-spacing: 0.5px;
     text-decoration: none;
     transition: background 0.2s, transform 0.1s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .badge-type-prominent:hover {
@@ -388,23 +549,28 @@ footer {
 
 /* Type Color Coding (User Request) */
 .badge-type-boolean {
-    background: #6f42c1; /* Purple */
+    background: #6f42c1;
+    /* Purple */
 }
 
 .badge-type-integer {
-    background: #0366d6; /* Blue */
+    background: #0366d6;
+    /* Blue */
 }
 
 .badge-type-string {
-    background: #17a2b8; /* Teal */
+    background: #17a2b8;
+    /* Teal */
 }
 
 .badge-type-enum {
-    background: #d29922; /* Orange */
+    background: #d29922;
+    /* Orange */
 }
 
 .badge-type-complex {
-    background: #545d68; /* Gray */
+    background: #545d68;
+    /* Gray */
 }
 
 /* Multiple Occurrence Indicator (User Request) */
@@ -430,4 +596,27 @@ footer {
     line-height: 1;
     font-weight: bold;
     color: #58a6ff;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    #sidebar {
+        transform: translateX(-100%);
+        width: 80%;
+    }
+
+    #sidebar.mobile-open {
+        transform: translateX(0);
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    }
+
+    #content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    #sidebar-toggle {
+        display: flex;
+        /* Always show toggle */
+    }
 }

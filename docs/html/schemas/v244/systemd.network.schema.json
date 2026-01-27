@@ -239,6 +239,9 @@
             "clsact",
             "ingress",
             "egress"
+          ],
+          "examples": [
+            "root"
           ]
         }
       ],
@@ -613,6 +616,9 @@
               "enum": [
                 "ipv4",
                 "ipv6"
+              ],
+              "examples": [
+                "ipv4"
               ]
             }
           ],
@@ -651,6 +657,9 @@
               "type": "string",
               "enum": [
                 "routers-only"
+              ],
+              "examples": [
+                "routers-only"
               ]
             }
           ],
@@ -670,6 +679,9 @@
                 "nearest-bridge",
                 "non-tpmr-bridge",
                 "customer-bridge"
+              ],
+              "examples": [
+                "nearest-bridge"
               ]
             }
           ],
@@ -752,6 +764,9 @@
               "type": "string",
               "enum": [
                 "resolve"
+              ],
+              "examples": [
+                "resolve"
               ]
             }
           ],
@@ -769,6 +784,9 @@
               "type": "string",
               "enum": [
                 "opportunistic"
+              ],
+              "examples": [
+                "opportunistic"
               ]
             }
           ],
@@ -784,6 +802,9 @@
             {
               "type": "string",
               "enum": [
+                "allow-downgrade"
+              ],
+              "examples": [
                 "allow-downgrade"
               ]
             }
@@ -827,7 +848,10 @@
           "description": "Configures IP masquerading for the network interface. If enabled, packets forwarded from the network interface will be appear as coming from the local host. Typically, this should be enabled on the downstream interface of routers. Defaults to 'no'. Note that any positive boolean values such as 'yes' or 'true' are now deprecated. Please use one of the values above. Specifying 'ipv4' or 'both' implies IPv4Forwarding= settings in both.network file for this interface and the global networkd.conf5 unless they are explicitly specified. Similarly for IPv6Forwarding= when 'ipv6' or 'both' is specified. See IPv4Forwarding=/IPv6Forwarding= in the above for the per-link settings, and networkd.conf5 for the global settings.",
           "title": "IP Masquerade",
           "version_added": "219",
-          "x-subcategory": "Routing"
+          "x-subcategory": "Routing",
+          "examples": [
+            "both"
+          ]
         },
         "IPv6PrivacyExtensions": {
           "oneOf": [
@@ -839,6 +863,9 @@
               "enum": [
                 "prefer-public",
                 "kernel"
+              ],
+              "examples": [
+                "prefer-public"
               ]
             }
           ],
@@ -968,7 +995,10 @@
           "default": "dynamic-on-stop",
           "description": "When 'static', systemd-networkd will not drop statically configured addresses and routes on starting up process. When 'dynamic-on-stop', the dynamically configurad addresses and routes, such as DHCPv4, DHCPv6, SLAAC, and IPv4 link-local address, will not be dropped when systemd-networkd is being stopped. When 'dynamic', the dynamically configured addresses and routes will never be dropped, and the lifetime of DHCPv4 leases will be ignored. This is contrary to the DHCP specification, but may be the best choice if, e.g., the root filesystem relies on this connection. The setting 'dynamic' implies 'dynamic-on-stop', and 'yes' implies 'dynamic' and 'static'. Defaults to 'dynamic-on-stop' when systemd-networkd is running in initrd, 'yes' when the root filesystem is a network filesystem, and 'no' otherwise.",
           "title": "Keep Configuration",
-          "version_added": "257"
+          "version_added": "257",
+          "examples": [
+            "dynamic"
+          ]
         },
         "IPv4LL": {
           "type": "string",
@@ -1046,7 +1076,10 @@
                 ],
                 "description": "Allows the default \"preferred lifetime\" of the address to be overridden. Only three settings are accepted: 'forever', 'infinity', which is the default and means that the address never expires, and '0', which means that the address is considered immediately \"expired\" and will not be used, unless explicitly requested. A setting of 'PreferredLifetime=0' is useful for addresses which are added to be used only by a specific application, which is then configured to use them explicitly.",
                 "version_added": "230",
-                "title": "Preferred Lifetime"
+                "title": "Preferred Lifetime",
+                "examples": [
+                  "forever"
+                ]
               },
               "HomeAddress": {
                 "type": "boolean",
@@ -1084,7 +1117,10 @@
                 "default": "ipv4",
                 "description": "When 'ipv4', performs IPv4 Address Conflict Detection. See RFC 5227. When 'ipv6', performs IPv6 Duplicate Address Detection. See RFC 4862. Defaults to 'ipv4' for IPv4 link-local addresses (169.254.0.0/16), 'ipv6' for IPv6 addresses, and 'none' otherwise.",
                 "version_added": "232",
-                "title": "Duplicate Address Detection"
+                "title": "Duplicate Address Detection",
+                "examples": [
+                  "both"
+                ]
               },
               "Scope": {
                 "oneOf ": [
@@ -1175,7 +1211,10 @@
               ],
               "description": "Allows the default \"preferred lifetime\" of the address to be overridden. Only three settings are accepted: 'forever', 'infinity', which is the default and means that the address never expires, and '0', which means that the address is considered immediately \"expired\" and will not be used, unless explicitly requested. A setting of 'PreferredLifetime=0' is useful for addresses which are added to be used only by a specific application, which is then configured to use them explicitly.",
               "version_added": "230",
-              "title": "Preferred Lifetime"
+              "title": "Preferred Lifetime",
+              "examples": [
+                "forever"
+              ]
             },
             "HomeAddress": {
               "type": "boolean",
@@ -1220,7 +1259,10 @@
               "default": "ipv4",
               "description": "When 'ipv4', performs IPv4 Address Conflict Detection. See RFC 5227. When 'ipv6', performs IPv6 Duplicate Address Detection. See RFC 4862. Defaults to 'ipv4' for IPv4 link-local addresses (169.254.0.0/16), 'ipv6' for IPv6 addresses, and 'none' otherwise.",
               "version_added": "232",
-              "title": "Duplicate Address Detection"
+              "title": "Duplicate Address Detection",
+              "examples": [
+                "both"
+              ]
             },
             "Scope": {
               "oneOf": [
@@ -1230,6 +1272,9 @@
                     "global",
                     "link",
                     "host"
+                  ],
+                  "examples": [
+                    "global"
                   ]
                 },
                 {
@@ -1596,7 +1641,10 @@
                 "default": "ipv4",
                 "description": "Takes a special value 'ipv4', 'ipv6', or 'both'. By default, the address family is determined by the address specified in To= or From=. If neither To= nor From= are specified, then defaults to 'ipv4'.",
                 "version_added": "243",
-                "title": "Family"
+                "title": "Family",
+                "examples": [
+                  "ipv4"
+                ]
               }
             },
             "additionalProperties": false,
@@ -1648,6 +1696,9 @@
                     "default",
                     "local",
                     "main"
+                  ],
+                  "examples": [
+                    "default"
                   ]
                 },
                 {
@@ -1762,7 +1813,10 @@
               "default": "ipv4",
               "description": "Takes a special value 'ipv4', 'ipv6', or 'both'. By default, the address family is determined by the address specified in To= or From=. If neither To= nor From= are specified, then defaults to 'ipv4'.",
               "version_added": "243",
-              "title": "Family"
+              "title": "Family",
+              "examples": [
+                "ipv4"
+              ]
             },
             "User": {
               "type": "string",
@@ -1833,6 +1887,9 @@
                     "enum": [
                       "_dhcp4",
                       "_ipv6ra"
+                    ],
+                    "examples": [
+                      "_dhcp4"
                     ]
                   }
                 ],
@@ -1919,6 +1976,9 @@
                       "default",
                       "local",
                       "main"
+                    ],
+                    "examples": [
+                      "default"
                     ]
                   },
                   {
@@ -1958,7 +2018,10 @@
                 ],
                 "description": "Specifies the route preference as defined in RFC 4191 for Router Discovery messages. Which can be one of 'low' the route has a lowest priority, 'medium' the route has a default priority or 'high' the route has a highest priority.",
                 "version_added": "234",
-                "title": "IPv6 Preference"
+                "title": "IPv6 Preference",
+                "examples": [
+                  "low"
+                ]
               },
               "Protocol": {
                 "oneOf": [
@@ -1977,6 +2040,9 @@
                       "static",
                       "ra",
                       "dhcp"
+                    ],
+                    "examples": [
+                      "kernel"
                     ]
                   }
                 ],
@@ -2091,6 +2157,9 @@
                   "enum": [
                     "_dhcp4",
                     "_ipv6ra"
+                  ],
+                  "examples": [
+                    "_dhcp4"
                   ]
                 }
               ],
@@ -2184,6 +2253,9 @@
                     "default",
                     "local",
                     "main"
+                  ],
+                  "examples": [
+                    "default"
                   ]
                 },
                 {
@@ -2219,7 +2291,10 @@
               ],
               "description": "Specifies the route preference as defined in RFC 4191 for Router Discovery messages. Which can be one of 'low' the route has a lowest priority, 'medium' the route has a default priority or 'high' the route has a highest priority.",
               "version_added": "234",
-              "title": "IPv6 Preference"
+              "title": "IPv6 Preference",
+              "examples": [
+                "low"
+              ]
             },
             "Protocol": {
               "oneOf": [
@@ -2238,6 +2313,9 @@
                     "static",
                     "ra",
                     "dhcp"
+                  ],
+                  "examples": [
+                    "kernel"
                   ]
                 }
               ],
@@ -2451,7 +2529,10 @@
               "default": "ipv4",
               "description": "By default, the family is determined by the address specified in Gateway=. If Gateway= is not specified, then defaults to 'ipv4'.",
               "version_added": "248",
-              "title": "Family"
+              "title": "Family",
+              "examples": [
+                "ipv4"
+              ]
             },
             "OnLink": {
               "type": "boolean",
@@ -2500,7 +2581,10 @@
                 "default": "duid",
                 "description": "The DHCPv4 client identifier to use. If set to 'mac', the MAC address of the link is used. If set to 'duid', an RFC4361-compliant Client ID, which is the combination of IAID and DUID, is used. IAID can be configured by IAID=. DUID can be configured by DUIDType= and DUIDRawData=. Defaults to 'duid'.",
                 "version_added": "220",
-                "title": "Client Identifier"
+                "title": "Client Identifier",
+                "examples": [
+                  "duid"
+                ]
               },
               "UseDNS": {
                 "type": "boolean",
@@ -2638,6 +2722,9 @@
                       "default",
                       "local",
                       "main"
+                    ],
+                    "examples": [
+                      "default"
                     ]
                   },
                   {
@@ -2682,7 +2769,10 @@
                 "default": "CS6",
                 "description": "When 'none' no IP service type is set to the packet sent from the DHCPv4 client. When 'CS6' (network control) or 'CS4' (realtime), the corresponding service type will be set. Defaults to 'CS6'.",
                 "version_added": "244",
-                "title": "IP Service Type"
+                "title": "IP Service Type",
+                "examples": [
+                  "CS4"
+                ]
               },
               "SendOption": {
                 "type": "string",
@@ -2729,7 +2819,10 @@
               "default": "duid",
               "description": "The DHCPv4 client identifier to use. If set to 'mac', the MAC address of the link is used. If set to 'duid', an RFC4361-compliant Client ID, which is the combination of IAID and DUID, is used. IAID can be configured by IAID=. DUID can be configured by DUIDType= and DUIDRawData=. Defaults to 'duid'.",
               "version_added": "220",
-              "title": "Client Identifier"
+              "title": "Client Identifier",
+              "examples": [
+                "duid"
+              ]
             },
             "UseDNS": {
               "type": "boolean",
@@ -2868,6 +2961,9 @@
                   "type": "string",
                   "enum": [
                     "infinity"
+                  ],
+                  "examples": [
+                    "infinity"
                   ]
                 },
                 {
@@ -2920,6 +3016,9 @@
                     "default",
                     "local",
                     "main"
+                  ],
+                  "examples": [
+                    "default"
                   ]
                 },
                 {
@@ -2991,7 +3090,10 @@
               "default": "CS6",
               "description": "When 'none' no IP service type is set to the packet sent from the DHCPv4 client. When 'CS6' (network control) or 'CS4' (realtime), the corresponding service type will be set. Defaults to 'CS6'.",
               "version_added": "244",
-              "title": "IP Service Type"
+              "title": "IP Service Type",
+              "examples": [
+                "CS4"
+              ]
             },
             "SocketPriority": {
               "type": "string",
@@ -3043,6 +3145,9 @@
                   "enum": [
                     "forever",
                     "infinity"
+                  ],
+                  "examples": [
+                    "forever"
                   ]
                 },
                 {
@@ -3274,7 +3379,10 @@
               "default": "unreachable",
               "description": "Takes 'none' or one of the reject types: 'unreachable', 'prohibit', 'blackhole', or 'throw'. If a reject type is specified, the reject route corresponding to the delegated prefix will be configured. For example, when 'unreachable', unreachable 2001:db8::/56 dev lo proto dhcp metric 1024 pref medium will be configured. See RFC 7084. If 'none' is specified, such route will not be configured. This may be useful when custom firewall rules that handle packets for unassigned subnets will be configured. Defaults to 'unreachable'.",
               "version_added": "257",
-              "title": "Unassigned Subnet Policy"
+              "title": "Unassigned Subnet Policy",
+              "examples": [
+                "none"
+              ]
             },
             "WithoutRA": {
               "type": "string",
@@ -3286,7 +3394,10 @@
               "default": "no",
               "description": "Allows DHCPv6 client to start without router advertisements's 'managed' or 'other configuration' flag. If this is not specified, 'solicit' is used when DHCPPrefixDelegation= is enabled and UplinkInterface=:self is specified in the [DHCPPrefixDelegation] section. Otherwise, defaults to 'no', and the DHCPv6 client will be started when an RA is received. See also the DHCPv6Client= setting in the [IPv6AcceptRA] section.",
               "version_added": "246",
-              "title": "Without RA"
+              "title": "Without RA",
+              "examples": [
+                "information-request"
+              ]
             },
             "SendOption": {
               "type": "string",
@@ -3399,7 +3510,10 @@
                 ],
                 "description": "The table identifier for the routes received in the Router Advertisement. conf5, or a number between 1...4294967295. When used in combination with VRF=, the VRF's routing table is used when this parameter is not specified.",
                 "version_added": "232",
-                "title": "Route Table"
+                "title": "Route Table",
+                "examples": [
+                  "default"
+                ]
               },
               "BlackList": {
                 "type": "string",
@@ -3473,6 +3587,9 @@
                 {
                   "type": "string",
                   "enum": [
+                    "route"
+                  ],
+                  "examples": [
                     "route"
                   ]
                 }
@@ -3756,7 +3873,10 @@
                 ],
                 "description": "Send a raw option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "244",
-                "title": "Send Option"
+                "title": "Send Option",
+                "examples": [
+                  "ipv4address"
+                ]
               }
             },
             "additionalProperties": false
@@ -3944,7 +4064,10 @@
               ],
               "description": "Send a vendor option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "246",
-              "title": "Send Vendor Option"
+              "title": "Send Vendor Option",
+              "examples": [
+                "ipv4address"
+              ]
             },
             "SendOption": {
               "type": "string",
@@ -3958,7 +4081,10 @@
               ],
               "description": "Send a raw option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "244",
-              "title": "Send Option"
+              "title": "Send Option",
+              "examples": [
+                "ipv4address"
+              ]
             },
             "BindToInterface": {
               "type": "boolean",
@@ -4122,7 +4248,10 @@
                 ],
                 "description": "Configures this port for having multicast routers attached. A port with a multicast router will receive all multicast traffic. When unset, the kernel's default will be used.",
                 "version_added": "243",
-                "title": "Multicast Router"
+                "title": "Multicast Router",
+                "examples": [
+                  "no"
+                ]
               }
             },
             "additionalProperties": false
@@ -4234,7 +4363,10 @@
               ],
               "description": "Configures this port for having multicast routers attached. A port with a multicast router will receive all multicast traffic. When unset, the kernel's default will be used.",
               "version_added": "243",
-              "title": "Multicast Router"
+              "title": "Multicast Router",
+              "examples": [
+                "no"
+              ]
             }
           },
           "additionalProperties": false
@@ -4311,7 +4443,10 @@
                 "default": "self",
                 "description": "Specifies where the address is associated with. 'use' means the address is in use. User space can use this option to indicate to the kernel that the fdb entry is in use. 'self' means the address is associated with the port drivers fdb. Usually hardware. 'master' means the address is associated with master devices fdb. 'router' means the destination address is associated with a router. Note that it's valid if the referenced device is a VXLAN type device and has route shortcircuit enabled. Defaults to 'self'.",
                 "version_added": "243",
-                "title": "Associated With"
+                "title": "Associated With",
+                "examples": [
+                  "master"
+                ]
               }
             },
             "additionalProperties": false,
@@ -4384,7 +4519,10 @@
               "default": "self",
               "description": "Specifies where the address is associated with. 'use' means the address is in use. User space can use this option to indicate to the kernel that the fdb entry is in use. 'self' means the address is associated with the port drivers fdb. Usually hardware. 'master' means the address is associated with master devices fdb. 'router' means the destination address is associated with a router. Note that it's valid if the referenced device is a VXLAN type device and has route shortcircuit enabled. Defaults to 'self'.",
               "version_added": "243",
-              "title": "Associated With"
+              "title": "Associated With",
+              "examples": [
+                "master"
+              ]
             },
             "OutgoingInterface": {
               "oneOf": [
@@ -4430,6 +4568,9 @@
                   {
                     "type": "boolean",
                     "enum": [
+                      false
+                    ],
+                    "examples": [
                       false
                     ]
                   }
@@ -4497,6 +4638,9 @@
                 {
                   "type": "boolean",
                   "enum": [
+                    false
+                  ],
+                  "examples": [
                     false
                   ]
                 }
@@ -4979,7 +5123,10 @@
                 "default": "medium",
                 "description": "Configures IPv6 router preference if RouterLifetimeSec= is non-zero. Valid See RFC 4191 for details. Defaults to 'medium'.",
                 "version_added": "235",
-                "title": "Router Preference"
+                "title": "Router Preference",
+                "examples": [
+                  "default"
+                ]
               },
               "EmitDNS": {
                 "type": "boolean",
@@ -5072,7 +5219,10 @@
               "default": "medium",
               "description": "Configures IPv6 router preference if RouterLifetimeSec= is non-zero. Valid See RFC 4191 for details. Defaults to 'medium'.",
               "version_added": "235",
-              "title": "Router Preference"
+              "title": "Router Preference",
+              "examples": [
+                "default"
+              ]
             },
             "EmitDNS": {
               "type": "boolean",
@@ -5147,7 +5297,10 @@
                 "default": "duid",
                 "description": "The DHCPv4 client identifier to use. If set to 'mac', the MAC address of the link is used. If set to 'duid', an RFC4361-compliant Client ID, which is the combination of IAID and DUID, is used. IAID can be configured by IAID=. DUID can be configured by DUIDType= and DUIDRawData=. Defaults to 'duid'.",
                 "version_added": "220",
-                "title": "Client Identifier"
+                "title": "Client Identifier",
+                "examples": [
+                  "duid"
+                ]
               },
               "UseDNS": {
                 "type": "boolean",
@@ -5182,6 +5335,9 @@
                   {
                     "type": "string",
                     "enum": [
+                      "route"
+                    ],
+                    "examples": [
                       "route"
                     ]
                   }
@@ -5277,6 +5433,9 @@
                       "default",
                       "local",
                       "main"
+                    ],
+                    "examples": [
+                      "default"
                     ]
                   },
                   {
@@ -5334,7 +5493,10 @@
               "default": "duid",
               "description": "The DHCPv4 client identifier to use. If set to 'mac', the MAC address of the link is used. If set to 'duid', an RFC4361-compliant Client ID, which is the combination of IAID and DUID, is used. IAID can be configured by IAID=. DUID can be configured by DUIDType= and DUIDRawData=. Defaults to 'duid'.",
               "version_added": "220",
-              "title": "Client Identifier"
+              "title": "Client Identifier",
+              "examples": [
+                "duid"
+              ]
             },
             "UseDNS": {
               "type": "boolean",
@@ -5454,6 +5616,9 @@
                     "default",
                     "local",
                     "main"
+                  ],
+                  "examples": [
+                    "default"
                   ]
                 },
                 {

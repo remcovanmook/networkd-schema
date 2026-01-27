@@ -5,11 +5,8 @@ import glob
 
 def load_schema(version_dir, schema_name):
     """Loads a specific schema file from a version directory."""
-    # Pattern: schemas/v259/systemd.network.schema.json
-    # Or just schemas/v259/*.schema.json and map by name
     path = os.path.join(version_dir, f"{schema_name}.schema.json")
     if not os.path.exists(path):
-         # Try fallback if name differs slightly or just return empty
          return {}
     
     with open(path, 'r') as f:
@@ -57,18 +54,13 @@ def compare_versions(prev_dir, curr_dir):
     Returns dict of changes: { 'systemd.network': { 'added': [], 'removed': [], 'deprecated': [] } }
     """
     files = ["systemd.network", "systemd.netdev", "systemd.link", "systemd.networkd.conf"]
-    # adjustments for naming conventions if needed
     
     changes = {}
     
     for fname in files:
         # Schema name mapping
         sname = fname
-        if fname == "systemd.networkd.conf": sname = "systemd.networkd.conf" # matches file
-        
-        # In schemas dir, filenames are like systemd.network.schema.json
-        # But wait, earlier I saw they might just be systemd.network.schema.json
-        # Let's try to load
+        if fname == "systemd.networkd.conf": sname = "systemd.networkd.conf"
         
         prev_schema = load_schema(prev_dir, sname)
         curr_schema = load_schema(curr_dir, sname)
@@ -98,10 +90,39 @@ def compare_versions(prev_dir, curr_dir):
                      
     return changes
 
-def generate_html_fragment(changes, current_ver, prev_ver):
-    html = []
-    html.append(f'<div class="changes-block">')
-    html.append(f'<h3>Changes from {prev_ver} to {current_ver}</h3>')
+def generate_html_page(changes, current_ver, prev_ver):
+    # Sidebar generation
+    sidebar_html = f"""
+    <div id="sidebar">
+        <div class="sidebar-header">
+             <h3><a href="index.html" style="color:var(--heading-color);">Documentation</a></h3>
+             <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
+                 <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
+                 &middot; <span style="color:var(--heading-color); font-weight:bold;">Changes</span>
+             </div>
+             <p style="color:var(--meta-color); font-size:0.8em; margin-bottom:20px;">Version {current_ver}</p>
+             <h2>Changes</h2>
+        </div>
+        <div class="sidebar-content">
+            <ul>
+                <li><a href="#summary">Summary</a></li>
+    """
+    
+    doc_links = []
+    for doc in changes.keys():
+        if any(changes[doc].values()):
+            doc_links.append(f'<li><a href="#{doc}">{doc}</a></li>')
+            
+    sidebar_html += "".join(doc_links)
+    sidebar_html += """
+            </ul>
+        </div>
+    </div>
+    """
+
+    content_html = []
+    content_html.append(f'<div class="changes-block">')
+    content_html.append(f'<h2 id="summary">Changes from {prev_ver} to {current_ver}</h2>')
     
     has_changes = False
     
@@ -110,34 +131,73 @@ def generate_html_fragment(changes, current_ver, prev_ver):
             continue
             
         has_changes = True
-        html.append(f'<div class="doc-changes">')
-        html.append(f'<h4>{doc}</h4>')
+        content_html.append(f'<div id="{doc}" class="doc-changes" style="margin-bottom: 40px;">')
+        content_html.append(f'<h3 style="border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">{doc}</h3>')
         
         if doc_changes['added']:
-            html.append(f'<h5 class="added">Added</h5><ul>')
+            content_html.append(f'<h4 class="added" style="color:var(--accent-color);">Added</h4><ul style="list-style-type: none; padding-left: 0;">')
+            
+            # Map doc name to HTML filename
+            html_map = {
+                "systemd.network": "systemd.network.html",
+                "systemd.netdev": "systemd.netdev.html",
+                "systemd.link": "systemd.link.html",
+                "systemd.networkd.conf": "networkd.conf.html"
+            }
+            target_file = html_map.get(doc, f"{doc}.html")
+            
             for item in doc_changes['added']:
-                 html.append(f'<li><code>{item}</code></li>')
-            html.append('</ul>')
+                 # Item is Section.Option
+                 # Display as [Section] - Option
+                 parts = item.split('.', 1)
+                 if len(parts) == 2:
+                     anchor = f"{parts[0]}-{parts[1]}"
+                     link = f"{target_file}#{anchor}"
+                     display_name = f"<code>[{parts[0]}] - {parts[1]}</code>"
+                     content_html.append(f'<li style="margin-bottom: 5px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-color);">+</span> <a href="{link}">{display_name}</a></li>')
+                 else:
+                     content_html.append(f'<li style="margin-bottom: 5px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent-color);">+</span> <code>{item}</code></li>')
+                     
+            content_html.append('</ul>')
             
         if doc_changes['deprecated']:
-            html.append(f'<h5 class="deprecated">Deprecated</h5><ul>')
+            content_html.append(f'<h4 class="deprecated" style="color:var(--warning-color);">Deprecated</h4><ul style="list-style-type: none; padding-left: 0;">')
             for item in doc_changes['deprecated']:
-                 html.append(f'<li><code>{item}</code></li>')
-            html.append('</ul>')
+                 content_html.append(f'<li style="margin-bottom: 5px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--warning-color);">!</span> <code>{item}</code></li>')
+            content_html.append('</ul>')
             
         if doc_changes['removed']:
-            html.append(f'<h5 class="removed">Removed</h5><ul>')
+            content_html.append(f'<h4 class="removed" style="color:#da3633;">Removed</h4><ul style="list-style-type: none; padding-left: 0;">')
             for item in doc_changes['removed']:
-                 html.append(f'<li><code>{item}</code></li>')
-            html.append('</ul>')
+                 content_html.append(f'<li style="margin-bottom: 5px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: #da3633;">-</span> <code>{item}</code></li>')
+            content_html.append('</ul>')
             
-        html.append('</div>')
+        content_html.append('</div>')
         
     if not has_changes:
-        html.append('<p>No schema changes detected.</p>')
+        content_html.append('<p>No schema changes detected.</p>')
         
-    html.append('</div>')
-    return "\n".join(html)
+    content_html.append('</div>')
+
+    full_html = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changes {current_ver} vs {prev_ver}</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    {sidebar_html}
+    <div id="content">
+        <h1>Changelog <small style="color: var(--meta-color)">{prev_ver} &rarr; {current_ver}</small></h1>
+        { "".join(content_html) }
+    </div>
+</body>
+</html>
+"""
+    return full_html
 
 def main():
     parser = argparse.ArgumentParser()
@@ -156,7 +216,7 @@ def main():
         return
 
     changes = compare_versions(prev_dir, curr_dir)
-    html = generate_html_fragment(changes, args.current, args.prev)
+    html = generate_html_page(changes, args.current, args.prev)
     
     write = True
     if not args.force and os.path.exists(args.output):

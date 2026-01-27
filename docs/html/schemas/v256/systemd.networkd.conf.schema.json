@@ -150,6 +150,9 @@
               "enum": [
                 "prefer-public",
                 "kernel"
+              ],
+              "examples": [
+                "prefer-public"
               ]
             }
           ],
@@ -165,6 +168,9 @@
             {
               "type": "string",
               "enum": [
+                "route"
+              ],
+              "examples": [
                 "route"
               ]
             }
@@ -193,6 +199,9 @@
                     "type": "string",
                     "enum": [
                       "route"
+                    ],
+                    "examples": [
+                      "route"
                     ]
                   }
                 ],
@@ -216,6 +225,9 @@
                 {
                   "type": "string",
                   "enum": [
+                    "route"
+                  ],
+                  "examples": [
                     "route"
                   ]
                 }
@@ -246,6 +258,9 @@
                   {
                     "type": "string",
                     "enum": [
+                      "route"
+                    ],
+                    "examples": [
                       "route"
                     ]
                   }
@@ -289,6 +304,9 @@
                 {
                   "type": "string",
                   "enum": [
+                    "route"
+                  ],
+                  "examples": [
                     "route"
                   ]
                 }
@@ -339,6 +357,9 @@
                     "type": "string",
                     "enum": [
                       "route"
+                    ],
+                    "examples": [
+                      "route"
                     ]
                   }
                 ],
@@ -381,6 +402,9 @@
                 {
                   "type": "string",
                   "enum": [
+                    "route"
+                  ],
+                  "examples": [
                     "route"
                   ]
                 }
@@ -434,6 +458,9 @@
                     "type": "string",
                     "enum": [
                       "route"
+                    ],
+                    "examples": [
+                      "route"
                     ]
                   }
                 ],
@@ -460,6 +487,9 @@
                 {
                   "type": "string",
                   "enum": [
+                    "route"
+                  ],
+                  "examples": [
                     "route"
                   ]
                 }

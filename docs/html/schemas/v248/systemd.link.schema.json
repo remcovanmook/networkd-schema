@@ -399,7 +399,10 @@
           ],
           "description": "A space-separated list of policies by which the interface's alternative names should be set. Each of the policies may fail, and all successful policies are used. The available policies are 'database', 'onboard', 'slot', 'path', and 'mac'. If the kernel does not support the alternative names, then this setting will be ignored.",
           "title": "Alternative Names Policy",
-          "version_added": "245"
+          "version_added": "245",
+          "examples": [
+            "database"
+          ]
         },
         "Alias": {
           "type": "string",
@@ -465,7 +468,10 @@
           ],
           "description": "The duplex mode to set for the device. The accepted values are 'full' and 'half'.",
           "title": "Duplex",
-          "version_added": "211"
+          "version_added": "211",
+          "examples": [
+            "full"
+          ]
         },
         "AutoNegotiation": {
           "type": "boolean",
@@ -487,7 +493,10 @@
           ],
           "description": "The Wake-on-LAN policy to set for the device. Takes the special value 'off' which disables Wake-on-LAN, or space separated list of the following words: Wake on PHY activity. Wake on unicast messages. Wake on multicast messages. Wake on broadcast messages. Wake on ARP. Wake on receipt of a magic packet. Enable SecureOn password for MagicPacket. Implied when WakeOnLanPassword= is specified. If specified without WakeOnLanPassword= option, then the password is read from the credential 'LINK.link.wol.password' (e.g., '60-foo.link.wol.password'), and if the credential not found, then read from 'wol.password'. See ImportCredential=/LoadCredential=/SetCredential= in systemd.exec5 for details. The password in the credential, must be 6 bytes in hex format with each byte separated by a colon (':') like an Ethernet MAC address, e.g., 'aa:bb:cc:dd:ee:ff'. Defaults to unset, and the device's default will be used. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
           "title": "Wake On Lan",
-          "version_added": "211"
+          "version_added": "211",
+          "examples": [
+            "off"
+          ]
         },
         "Port": {
           "type": "string",
@@ -580,6 +589,9 @@
               "type": "string",
               "enum": [
                 "max"
+              ],
+              "examples": [
+                "max"
               ]
             }
           ],
@@ -598,6 +610,9 @@
               "type": "string",
               "enum": [
                 "max"
+              ],
+              "examples": [
+                "max"
               ]
             }
           ],
@@ -615,6 +630,9 @@
               "type": "string",
               "enum": [
                 "max"
+              ],
+              "examples": [
+                "max"
               ]
             }
           ],
@@ -631,6 +649,9 @@
             {
               "type": "string",
               "enum": [
+                "max"
+              ],
+              "examples": [
                 "max"
               ]
             }

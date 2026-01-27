@@ -482,7 +482,10 @@
                 ],
                 "description": "The MACVLAN mode to use.",
                 "version_added": "211",
-                "title": "Mode"
+                "title": "Mode",
+                "examples": [
+                  "bridge"
+                ]
               },
               "SourceMACAddress": {
                 "allOf": [
@@ -524,7 +527,10 @@
               ],
               "description": "The MACVLAN mode to use.",
               "version_added": "211",
-              "title": "Mode"
+              "title": "Mode",
+              "examples": [
+                "bridge"
+              ]
             },
             "SourceMACAddress": {
               "allOf": [
@@ -581,7 +587,10 @@
                 ],
                 "description": "The MACVTAP mode to use.",
                 "version_added": "211",
-                "title": "Mode"
+                "title": "Mode",
+                "examples": [
+                  "bridge"
+                ]
               },
               "SourceMACAddress": {
                 "allOf": [
@@ -613,7 +622,10 @@
               ],
               "description": "The MACVTAP mode to use.",
               "version_added": "211",
-              "title": "Mode"
+              "title": "Mode",
+              "examples": [
+                "bridge"
+              ]
             },
             "SourceMACAddress": {
               "allOf": [
@@ -650,7 +662,10 @@
                 ],
                 "description": "The IPVLAN mode to use.",
                 "version_added": "219",
-                "title": "Mode"
+                "title": "Mode",
+                "examples": [
+                  "L2"
+                ]
               },
               "Flags": {
                 "type": "string",
@@ -661,7 +676,10 @@
                 ],
                 "description": "The IPVLAN flags to use.",
                 "version_added": "237",
-                "title": "Flags"
+                "title": "Flags",
+                "examples": [
+                  "bridge"
+                ]
               }
             },
             "additionalProperties": false,
@@ -681,7 +699,10 @@
               ],
               "description": "The IPVLAN mode to use.",
               "version_added": "219",
-              "title": "Mode"
+              "title": "Mode",
+              "examples": [
+                "L2"
+              ]
             },
             "Flags": {
               "type": "string",
@@ -692,7 +713,10 @@
               ],
               "description": "The IPVLAN flags to use.",
               "version_added": "237",
-              "title": "Flags"
+              "title": "Flags",
+              "examples": [
+                "bridge"
+              ]
             }
           },
           "additionalProperties": false,
@@ -721,7 +745,10 @@
                 ],
                 "description": "The IPVTAP mode to use.",
                 "version_added": "211",
-                "title": "Mode"
+                "title": "Mode",
+                "examples": [
+                  "bridge"
+                ]
               },
               "Flags": {
                 "type": "string",
@@ -732,7 +759,10 @@
                 ],
                 "description": "The IPVTAP flags to use.",
                 "version_added": "237",
-                "title": "Flags"
+                "title": "Flags",
+                "examples": [
+                  "bridge"
+                ]
               }
             },
             "additionalProperties": false,
@@ -754,7 +784,10 @@
               ],
               "description": "The IPVTAP mode to use.",
               "version_added": "211",
-              "title": "Mode"
+              "title": "Mode",
+              "examples": [
+                "bridge"
+              ]
             },
             "Flags": {
               "type": "string",
@@ -765,7 +798,10 @@
               ],
               "description": "The IPVTAP flags to use.",
               "version_added": "237",
-              "title": "Flags"
+              "title": "Flags",
+              "examples": [
+                "bridge"
+              ]
             }
           },
           "additionalProperties": false,
@@ -797,6 +833,9 @@
                       "dhcp4",
                       "dhcp6",
                       "slaac"
+                    ],
+                    "examples": [
+                      "any"
                     ]
                   }
                 ],
@@ -813,6 +852,9 @@
                   {
                     "type": "string",
                     "enum": [
+                      "any"
+                    ],
+                    "examples": [
                       "any"
                     ]
                   }
@@ -877,7 +919,10 @@
                 ],
                 "description": "An 'ip6tnl' tunnel can be in one of three modes 'ip6ip6' for IPv6 over IPv6, 'ipip6' for IPv4 over IPv6 or 'any' for either.",
                 "version_added": "219",
-                "title": "Mode"
+                "title": "Mode",
+                "examples": [
+                  "ip6ip6"
+                ]
               },
               "IPv6FlowLabel": {
                 "type": "string",
@@ -985,7 +1030,10 @@
                 "default": "ingress",
                 "description": "Specifies the ERSPAN v2 mirrored traffic's direction. Takes 'ingress' or 'egress'. Only used when ERSPANVersion=2. Defaults to 'ingress'.",
                 "version_added": "252",
-                "title": "ERSPAN Direction"
+                "title": "ERSPAN Direction",
+                "examples": [
+                  "ingress"
+                ]
               },
               "ERSPANHardwareId": {
                 "type": "integer",
@@ -1103,7 +1151,10 @@
               ],
               "description": "An 'ip6tnl' tunnel can be in one of three modes 'ip6ip6' for IPv6 over IPv6, 'ipip6' for IPv4 over IPv6 or 'any' for either.",
               "version_added": "219",
-              "title": "Mode"
+              "title": "Mode",
+              "examples": [
+                "ip6ip6"
+              ]
             },
             "IPv6FlowLabel": {
               "type": "string",
@@ -1213,7 +1264,10 @@
               "default": "ingress",
               "description": "Specifies the ERSPAN v2 mirrored traffic's direction. Takes 'ingress' or 'egress'. Only used when ERSPANVersion=2. Defaults to 'ingress'.",
               "version_added": "252",
-              "title": "ERSPAN Direction"
+              "title": "ERSPAN Direction",
+              "examples": [
+                "ingress"
+              ]
             },
             "ERSPANHardwareId": {
               "type": "integer",
@@ -1458,6 +1512,9 @@
                       "auto",
                       "static",
                       "dynamic"
+                    ],
+                    "examples": [
+                      "auto"
                     ]
                   }
                 ],
@@ -1483,7 +1540,10 @@
                 ],
                 "description": "Specifies the encapsulation type of the tunnel.",
                 "version_added": "242",
-                "title": "Encapsulation Type"
+                "title": "Encapsulation Type",
+                "examples": [
+                  "ip"
+                ]
               },
               "UDPCheckSum": {
                 "type": "boolean",
@@ -1577,6 +1637,9 @@
                     "auto",
                     "static",
                     "dynamic"
+                  ],
+                  "examples": [
+                    "auto"
                   ]
                 }
               ],
@@ -1602,7 +1665,10 @@
               ],
               "description": "Specifies the encapsulation type of the tunnel.",
               "version_added": "242",
-              "title": "Encapsulation Type"
+              "title": "Encapsulation Type",
+              "examples": [
+                "ip"
+              ]
             },
             "UDPCheckSum": {
               "type": "boolean",
@@ -1942,6 +2008,9 @@
                     "type": "string",
                     "enum": [
                       "inherit"
+                    ],
+                    "examples": [
+                      "inherit"
                     ]
                   }
                 ],
@@ -2179,6 +2248,9 @@
                 {
                   "type": "string",
                   "enum": [
+                    "inherit"
+                  ],
+                  "examples": [
                     "inherit"
                   ]
                 }
@@ -3147,7 +3219,10 @@
                 "default": "balance-rr",
                 "description": "Specifies one of the bonding policies. The default is 'balance-rr' (round robin). Possible 3ad', 'balance-tlb', and 'balance-alb'.",
                 "version_added": "216",
-                "title": "Mode"
+                "title": "Mode",
+                "examples": [
+                  "active-backup"
+                ]
               },
               "TransmitHashPolicy": {
                 "type": "string",
@@ -3160,7 +3235,10 @@
                 ],
                 "description": "Selects the transmit hash policy to use for slave selection in balance-xor, 802.3ad, and tlb modes. Possible",
                 "version_added": "216",
-                "title": "Transmit Hash Policy"
+                "title": "Transmit Hash Policy",
+                "examples": [
+                  "encap2+3"
+                ]
               },
               "LACPTransmitRate": {
                 "type": "string",
@@ -3170,7 +3248,10 @@
                 ],
                 "description": "Specifies the rate with which link partner transmits Link Aggregation Control Protocol Data Unit packets in 802.3ad mode. Possible The default value is 'slow'.",
                 "version_added": "216",
-                "title": "LACP Transmit Rate"
+                "title": "LACP Transmit Rate",
+                "examples": [
+                  "fast"
+                ]
               },
               "AdSelect": {
                 "type": "string",
@@ -3181,7 +3262,10 @@
                 ],
                 "description": "Specifies the 802.3ad aggregation selection logic to use. Possible",
                 "version_added": "220",
-                "title": "Ad Select"
+                "title": "Ad Select",
+                "examples": [
+                  "bandwidth"
+                ]
               },
               "FailOverMACPolicy": {
                 "type": "string",
@@ -3192,7 +3276,10 @@
                 ],
                 "description": "Specifies whether the active-backup mode should set all slaves to the same MAC address at the time of enslavement or, when enabled, to perform special handling of the bond's MAC address in accordance with the selected policy. The default policy is none. Possible",
                 "version_added": "220",
-                "title": "Fail Over MAC Policy"
+                "title": "Fail Over MAC Policy",
+                "examples": [
+                  "active"
+                ]
               },
               "ARPIPTargets": {
                 "type": "string",
@@ -3210,7 +3297,10 @@
                 ],
                 "description": "Specifies whether or not ARP probes and replies should be validated in any mode that supports ARP monitoring, or whether non-ARP traffic should be filtered (disregarded) for link monitoring purposes. Possible",
                 "version_added": "220",
-                "title": "ARP Validate"
+                "title": "ARP Validate",
+                "examples": [
+                  "active"
+                ]
               },
               "ARPAllTargets": {
                 "type": "string",
@@ -3220,7 +3310,10 @@
                 ],
                 "description": "Specifies the quantity of ARPIPTargets= that must be reachable in order for the ARP monitor to consider a slave as being up. This option affects only active-backup mode for slaves with ARPValidate enabled. Possible",
                 "version_added": "220",
-                "title": "ARP All Targets"
+                "title": "ARP All Targets",
+                "examples": [
+                  "all"
+                ]
               },
               "PrimaryReselectPolicy": {
                 "type": "string",
@@ -3231,7 +3324,10 @@
                 ],
                 "description": "Specifies the reselection policy for the primary slave. This affects how the primary slave is chosen to become the active slave when failure of the active slave or recovery of the primary slave occurs. This option is designed to prevent flip-flopping between the primary slave and other slaves. Possible",
                 "version_added": "220",
-                "title": "Primary Reselect Policy"
+                "title": "Primary Reselect Policy",
+                "examples": [
+                  "always"
+                ]
               },
               "ResendIGMP": {
                 "type": "integer",
@@ -3367,7 +3463,10 @@
               "default": "balance-rr",
               "description": "Specifies one of the bonding policies. The default is 'balance-rr' (round robin). Possible 3ad', 'balance-tlb', and 'balance-alb'.",
               "version_added": "216",
-              "title": "Mode"
+              "title": "Mode",
+              "examples": [
+                "active-backup"
+              ]
             },
             "TransmitHashPolicy": {
               "type": "string",
@@ -3380,7 +3479,10 @@
               ],
               "description": "Selects the transmit hash policy to use for slave selection in balance-xor, 802.3ad, and tlb modes. Possible",
               "version_added": "216",
-              "title": "Transmit Hash Policy"
+              "title": "Transmit Hash Policy",
+              "examples": [
+                "encap2+3"
+              ]
             },
             "LACPTransmitRate": {
               "type": "string",
@@ -3390,7 +3492,10 @@
               ],
               "description": "Specifies the rate with which link partner transmits Link Aggregation Control Protocol Data Unit packets in 802.3ad mode. Possible The default value is 'slow'.",
               "version_added": "216",
-              "title": "LACP Transmit Rate"
+              "title": "LACP Transmit Rate",
+              "examples": [
+                "fast"
+              ]
             },
             "AdSelect": {
               "type": "string",
@@ -3401,7 +3506,10 @@
               ],
               "description": "Specifies the 802.3ad aggregation selection logic to use. Possible",
               "version_added": "220",
-              "title": "Ad Select"
+              "title": "Ad Select",
+              "examples": [
+                "bandwidth"
+              ]
             },
             "FailOverMACPolicy": {
               "type": "string",
@@ -3412,7 +3520,10 @@
               ],
               "description": "Specifies whether the active-backup mode should set all slaves to the same MAC address at the time of enslavement or, when enabled, to perform special handling of the bond's MAC address in accordance with the selected policy. The default policy is none. Possible",
               "version_added": "220",
-              "title": "Fail Over MAC Policy"
+              "title": "Fail Over MAC Policy",
+              "examples": [
+                "active"
+              ]
             },
             "ARPIPTargets": {
               "type": "string",
@@ -3430,7 +3541,10 @@
               ],
               "description": "Specifies whether or not ARP probes and replies should be validated in any mode that supports ARP monitoring, or whether non-ARP traffic should be filtered (disregarded) for link monitoring purposes. Possible",
               "version_added": "220",
-              "title": "ARP Validate"
+              "title": "ARP Validate",
+              "examples": [
+                "active"
+              ]
             },
             "ARPAllTargets": {
               "type": "string",
@@ -3440,7 +3554,10 @@
               ],
               "description": "Specifies the quantity of ARPIPTargets= that must be reachable in order for the ARP monitor to consider a slave as being up. This option affects only active-backup mode for slaves with ARPValidate enabled. Possible",
               "version_added": "220",
-              "title": "ARP All Targets"
+              "title": "ARP All Targets",
+              "examples": [
+                "all"
+              ]
             },
             "PrimaryReselectPolicy": {
               "type": "string",
@@ -3451,7 +3568,10 @@
               ],
               "description": "Specifies the reselection policy for the primary slave. This affects how the primary slave is chosen to become the active slave when failure of the active slave or recovery of the primary slave occurs. This option is designed to prevent flip-flopping between the primary slave and other slaves. Possible",
               "version_added": "220",
-              "title": "Primary Reselect Policy"
+              "title": "Primary Reselect Policy",
+              "examples": [
+                "always"
+              ]
             },
             "ResendIGMP": {
               "type": "integer",
@@ -3927,7 +4047,10 @@
                 ],
                 "description": "Specifies the L3 protocol. This is mandatory.",
                 "version_added": "247",
-                "title": "Ether Type"
+                "title": "Ether Type",
+                "examples": [
+                  "ipv4"
+                ]
               }
             },
             "additionalProperties": false,
@@ -3972,7 +4095,10 @@
               ],
               "description": "Specifies the L3 protocol. This is mandatory.",
               "version_added": "247",
-              "title": "Ether Type"
+              "title": "Ether Type",
+              "examples": [
+                "ipv4"
+              ]
             }
           },
           "additionalProperties": false,
@@ -4416,7 +4542,10 @@
                 ],
                 "description": "A batman-adv node can either run in server mode (sharing its internet connection with the mesh) or in client mode (searching for the most suitable internet connection in the mesh) or having the gateway support turned off entirely (which is the default setting).",
                 "version_added": "248",
-                "title": "Gateway Mode"
+                "title": "Gateway Mode",
+                "examples": [
+                  "client"
+                ]
               },
               "GatewayBandwithDown": {
                 "type": "string",
@@ -4507,7 +4636,10 @@
               ],
               "description": "A batman-adv node can either run in server mode (sharing its internet connection with the mesh) or in client mode (searching for the most suitable internet connection in the mesh) or having the gateway support turned off entirely (which is the default setting).",
               "version_added": "248",
-              "title": "Gateway Mode"
+              "title": "Gateway Mode",
+              "examples": [
+                "client"
+              ]
             },
             "GatewayBandwithDown": {
               "type": "string",
@@ -4584,7 +4716,10 @@
                 ],
                 "description": "Defaults to unset, and the kernel's default is used. When 'datagram', the Infiniband unreliable datagram (UD) transport is used, and so the interface MTU is equal to the IB L2 MTU minus the IPoIB encapsulation header (4 bytes). For example, in a typical IB fabric with a 2K MTU, the IPoIB MTU will be 2048 - 4 = 2044 bytes. When 'connected', the Infiniband reliable connected (RC) transport is used. Connected mode takes advantage of the connected nature of the IB transport and allows an MTU up to the maximal IP packet size of 64K, which reduces the number of IP packets needed for handling large UDP datagrams, TCP segments, etc and increases the performance for large messages.",
                 "version_added": "250",
-                "title": "Mode"
+                "title": "Mode",
+                "examples": [
+                  "connected"
+                ]
               },
               "IgnoreUserspaceMulticastGroups": {
                 "type": "boolean",
@@ -4621,7 +4756,10 @@
               ],
               "description": "Defaults to unset, and the kernel's default is used. When 'datagram', the Infiniband unreliable datagram (UD) transport is used, and so the interface MTU is equal to the IB L2 MTU minus the IPoIB encapsulation header (4 bytes). For example, in a typical IB fabric with a 2K MTU, the IPoIB MTU will be 2048 - 4 = 2044 bytes. When 'connected', the Infiniband reliable connected (RC) transport is used. Connected mode takes advantage of the connected nature of the IB transport and allows an MTU up to the maximal IP packet size of 64K, which reduces the number of IP packets needed for handling large UDP datagrams, TCP segments, etc and increases the performance for large messages.",
               "version_added": "250",
-              "title": "Mode"
+              "title": "Mode",
+              "examples": [
+                "connected"
+              ]
             },
             "IgnoreUserspaceMulticastGroups": {
               "type": "boolean",

@@ -173,6 +173,9 @@
                   "type": "string",
                   "enum": [
                     "route"
+                  ],
+                  "examples": [
+                    "route"
                   ]
                 }
               ],
@@ -249,6 +252,9 @@
                 {
                   "type": "string",
                   "enum": [
+                    "route"
+                  ],
+                  "examples": [
                     "route"
                   ]
                 }

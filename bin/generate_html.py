@@ -327,10 +327,10 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
              continue # Skip sections not in schema (e.g. legacy/internal?)
         
         section_id = f"section-{section_name}"
-        nav_items.append(f'<li><details><summary><a href="#{section_id}">[{section_name}]</a></summary><ul class="sub-menu">')
+        nav_items.append(f'<li><details><summary><a href="#{section_id}">{section_name}</a></summary><ul class="sub-menu">')
         
         html_content.append(f'<div id="{section_id}" class="section-block">')
-        html_content.append(f'<h2>[{section_name}] Section</h2>')
+        html_content.append(f'<h2>{section_name} Section</h2>')
         
         # Dependency Info
         deps = schema.get('dependencies', {}).get(section_name)
@@ -850,7 +850,7 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
             </select>''' if available_versions else f'<p style="color:var(--meta-color); font-size:0.8em; margin-bottom:20px;">Version {version}</p>'}
              <h2>{doc_name}</h2>
         </div>
-        <div class="sidebar-content">
+         <div class="sidebar-content">
             <ul>
                 {"".join(nav_items)}
             </ul>
@@ -912,20 +912,19 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                                 if (parent.tagName === 'DETAILS') {
                                     parent.open = true;
                                 }
+                                if (parent.tagName === 'SUMMARY') {
+                                     // Should not happen as summary is sibling
+                                } else if (parent.tagName === 'LI') {
+                                     // Check if it has details child?
+                                     // The structure is li > details > summary
+                                }
                                 parent = parent.parentElement;
-                            }
-                            
-                            // Scroll sidebar to keep active link in view
-                            const rect = link.getBoundingClientRect();
-                            const sidebarRect = sidebar.getBoundingClientRect();
-                            if (rect.top < sidebarRect.top || rect.bottom > sidebarRect.bottom) {
-                                link.scrollIntoView({ block: 'center', behavior: 'smooth' });
                             }
                         }
                     }
                 });
             }, {
-                root: document.getElementById('content'),
+                root: null, // Use viewport
                 threshold: 0.1,
                 rootMargin: "-40% 0px -40% 0px" // Trigger when element is in middle of screen
             });

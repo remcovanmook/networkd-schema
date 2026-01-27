@@ -28,16 +28,16 @@
             </select>
              <h2>networkd.conf</h2>
         </div>
-        <div class="sidebar-content">
+         <div class="sidebar-content">
             <ul>
-                <li><details><summary><a href="#section-DHCP">[DHCP]</a></summary><ul class="sub-menu"><li><a href="#DHCP-DUIDType" style="font-size: 0.9em; margin-left: 20px;">DUIDType</a></li><li><a href="#DHCP-DUIDRawData" style="font-size: 0.9em; margin-left: 20px;">DUIDRawData</a></li></ul></details></li>
+                <li><details><summary><a href="#section-DHCP">DHCP</a></summary><ul class="sub-menu"><li><a href="#DHCP-DUIDType" style="font-size: 0.9em; margin-left: 20px;">DUIDType</a></li><li><a href="#DHCP-DUIDRawData" style="font-size: 0.9em; margin-left: 20px;">DUIDRawData</a></li></ul></details></li>
             </ul>
         </div>
     </div>
     
     <div id="content">
         <h1>networkd.conf <span style="font-size:0.5em; color:var(--meta-color); font-weight:normal;">/ v237</span></h1>
-        <div id="section-DHCP" class="section-block"><h2>[DHCP] Section</h2>
+        <div id="section-DHCP" class="section-block"><h2>DHCP Section</h2>
                 <div id="DHCP-DUIDType" class="option-block">
                     <div class="option-header">
                         <div class="option-title">
@@ -176,20 +176,19 @@ DUIDRawData=00:00:ab:11:f9:2a:c2:77:29:f9:5c:00</code></pre>
                                 if (parent.tagName === 'DETAILS') {
                                     parent.open = true;
                                 }
+                                if (parent.tagName === 'SUMMARY') {
+                                     // Should not happen as summary is sibling
+                                } else if (parent.tagName === 'LI') {
+                                     // Check if it has details child?
+                                     // The structure is li > details > summary
+                                }
                                 parent = parent.parentElement;
-                            }
-                            
-                            // Scroll sidebar to keep active link in view
-                            const rect = link.getBoundingClientRect();
-                            const sidebarRect = sidebar.getBoundingClientRect();
-                            if (rect.top < sidebarRect.top || rect.bottom > sidebarRect.bottom) {
-                                link.scrollIntoView({ block: 'center', behavior: 'smooth' });
                             }
                         }
                     }
                 });
             }, {
-                root: document.getElementById('content'),
+                root: null, // Use viewport
                 threshold: 0.1,
                 rootMargin: "-40% 0px -40% 0px" // Trigger when element is in middle of screen
             });
