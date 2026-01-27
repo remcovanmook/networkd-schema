@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v255/systemd.netdev.schema.json",
+  "$comment": "Documentation: https://remcovanmook.github.io/networkd-schema/v257/systemd.netdev.html",
   "title": "Systemd netdev Configuration (v255)",
   "type": "object",
   "additionalProperties": false,

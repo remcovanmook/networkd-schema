@@ -10,7 +10,10 @@ This repository provides enhanced documentation and strictly typed JSON schemas 
 ## Why JSON Schema?
 Systemd configuration files use a custom INI-style format that lacks a standardized machine-readable schema definition. This makes building external tooling, validators, or IDE integrations challenging.
 
-We chose **JSON Schema** to strictly define the structure and types of these files (Sections, Keys, Value Types, Enums). While systemd does not natively read JSON, these schemas act as the **definitive intermediate representation (IR)** for the configuration logic. They power our conversion tools (`ini2json`/`json2ini`) and enriched documentation, enabling validation and tooling that wasn't possible before.
+We chose **JSON Schema** to strictly define the structure and types of these files (Sections, Keys, Value Types, Enums). While systemd does not natively read JSON, these schemas act as the **definitive intermediate representation (IR)** for the configuration logic. They power our conversion tools (`ini2json`/`json2ini`) and enriched documentation, enabling validation and tooling that wasn't possible before. 
+
+### Why Draft-07?
+All schemas target **JSON Schema Draft-07**. We explicitly chose this version over newer drafts (2019-09, 2020-12) to ensure **maximum compatibility** with the widest range of tools, IDEs, and validators in the ecosystem. While newer drafts offer cleaner inheritance features, Draft-07 remains the "gold standard" for broad support.
 
 ## Architecture: Curated vs. Derived
 Maintaining schemas for 20+ versions manually is impossible, but generating them purely from source lacks semantic richness. We use a **Hybrid Approach**:

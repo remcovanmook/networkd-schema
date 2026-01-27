@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v259/systemd.networkd.conf.schema.json",
+  "$comment": "Documentation: https://remcovanmook.github.io/networkd-schema/v257/networkd.conf.html",
   "title": "Systemd networkd.conf Configuration (v259)",
   "type": "object",
   "additionalProperties": false,
