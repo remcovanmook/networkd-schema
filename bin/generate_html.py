@@ -82,6 +82,10 @@ def render_docbook_content(elem, context_version):
 
         elif tag == 'ulink':
             url = child.get('url', '#')
+            # Security: Prevent javascript: links
+            if url.lower().strip().startswith('javascript:'):
+                print(f"Security Warning: Blocked potentially unsafe URL: {url}")
+                url = '#'
             out.append(f'<a href="{url}" target="_blank">{content}</a>')
         elif tag == 'citerefentry':
             # Cross reference
@@ -129,6 +133,18 @@ def resolve_xincludes(element, base_path, known_xml_files):
             
             if href in known_xml_files:
                 target_path = os.path.join(base_path, href)
+                
+                # Security: Prevent Path Traversal
+                # Ensure the resolved path is inside the base_path
+                try:
+                    abs_target = os.path.abspath(target_path)
+                    abs_base = os.path.abspath(base_path)
+                    if not abs_target.startswith(abs_base):
+                        print(f"Security Warning: Skipped include {href} (Path Traversal detected)")
+                        continue
+                except Exception:
+                    continue
+
                 if os.path.exists(target_path):
                     try:
                         # Parse the included file
