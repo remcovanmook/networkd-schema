@@ -315,7 +315,8 @@ def setup_sparse_repo(tag, temp_dir):
             f.write(f"{d}/\n")
 
     try:
-        subprocess.run(["git", "fetch", "--depth", "1", "origin", "tag", tag], cwd=temp_dir, check=True, capture_output=True, text=True)
+        # Use -- to prevent argument injection if tag starts with -
+        subprocess.run(["git", "fetch", "--depth", "1", "origin", "tag", "--", tag], cwd=temp_dir, check=True, capture_output=True, text=True)
         subprocess.run(["git", "checkout", "FETCH_HEAD"], cwd=temp_dir, check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
         print(f"Git Error: {e.stderr}")
@@ -624,6 +625,11 @@ def main():
     parser.add_argument("--out", default=".", help="Output dir")
     parser.add_argument("--force", action="store_true", help="Force overwrite")
     args = parser.parse_args()
+
+    # Security: Validate version format to prevent injection or invalid tags
+    if not re.match(r'^v?\d+(\.\d+)*$', args.version):
+        print(f"Error: Invalid version format '{args.version}'. Expected format like 'v257'.")
+        return
 
     targets = [
         {"name": "network", "gperf_names": ["networkd-network-gperf.gperf"], "xml": "man/systemd.network.xml"},
