@@ -1,0 +1,14 @@
+# /etc/systemd/network/25-wireless.network
+# Minimum Version: systemd v242
+# BASIC SIMPLE CLIENT: WIRELESS
+#
+# Note: systemd-networkd does not handle WPA2/WiFi authentication itself.
+# You must run wpa_supplicant separately (e.g., via systemd unit wpa_supplicant@wlan0.service).
+# Once the link is associated, networkd takes over for IP configuration.
+
+[Match]
+Name=wlan0
+
+[Network]
+DHCP=yes
+IgnoreCarrierLoss=3s

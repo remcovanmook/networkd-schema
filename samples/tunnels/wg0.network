@@ -1,0 +1,11 @@
+# /etc/systemd/network/wg0.network
+# Minimum Version: systemd v211
+# TUNNELS: WIREGUARD NETWORK
+#
+# Configures the IP address for the WireGuard interface.
+
+[Match]
+Name=wg0
+
+[Network]
+Address=10.200.0.2/32

@@ -1,0 +1,13 @@
+# /etc/systemd/network/failover-bond.netdev
+# Minimum Version: systemd v216
+# BRIDGING: ACTIVE-BACKUP BOND (DEVICE)
+#
+# Defines a bond interface using active-backup for failover.
+
+[NetDev]
+Name=bond1
+Kind=bond
+
+[Bond]
+Mode=active-backup
+MIIMonitorSec=1s

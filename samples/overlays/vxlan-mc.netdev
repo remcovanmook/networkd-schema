@@ -1,0 +1,14 @@
+# /etc/systemd/network/vxlan-mc.netdev
+# Minimum Version: systemd v243
+# OVERLAYS: VXLAN (MULTICAST)
+#
+# Defines a VXLAN interface using multicast group membership.
+
+[NetDev]
+Name=vxlan20
+Kind=vxlan
+
+[VXLAN]
+VNI=20
+Group=239.0.0.10
+DestinationPort=4789

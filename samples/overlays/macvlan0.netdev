@@ -1,0 +1,12 @@
+# /etc/systemd/network/macvlan0.netdev
+# Minimum Version: systemd v211
+# OVERLAYS: MACVLAN
+#
+# Defines a MACVLAN interface, useful for containers/VMs to appear on physical LAN.
+
+[NetDev]
+Name=macvlan0
+Kind=macvlan
+
+[MACVLAN]
+Mode=bridge

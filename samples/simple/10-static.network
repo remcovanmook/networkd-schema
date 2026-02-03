@@ -1,0 +1,18 @@
+# /etc/systemd/network/10-static.network
+# Minimum Version: systemd v211
+# BASIC SIMPLE CLIENT: STATIC IP
+#
+# Configures a static IPv4 and IPv6 address on eth0, along with
+# a gateway and DNS servers.
+
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.1.10/24
+Gateway=192.168.1.1
+DNS=8.8.8.8
+DNS=8.8.4.4
+
+Address=2001:db8::10/64
+Gateway=2001:db8::1

@@ -1,0 +1,17 @@
+# /etc/systemd/network/cake.network
+# Minimum Version: systemd v244
+# ADVANCED: QoS (CAKE)
+#
+# Applies the CAKE (Common Applications Kept Enhanced) QDisc for bufferbloat control.
+
+[Match]
+Name=wan0
+
+[Network]
+Address=192.0.2.2/24
+
+[QDisc]
+Parent=root
+Handle=10:
+Kind=cake
+Bandwidth=100M

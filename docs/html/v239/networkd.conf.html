@@ -78,12 +78,12 @@
             </p></dd>
 
           <dt><span class="docbook-option">link-layer-time</span> </dt><dd><p>Those values are parsed and can be used to set the DUID type
-            field, but DUID contents must be provided using <code class="varname">DUIDRawData=</code>.
+            field, but DUID contents must be provided using <a href="#DHCP-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a>.
             </p></dd>
         </dl>
         </p>
 
-        <p>In all cases, <code class="varname">DUIDRawData=</code> can be used to override the
+        <p>In all cases, <a href="#DHCP-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> can be used to override the
         actual DUID value that is used.</p>
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDType=SomeString
@@ -117,7 +117,7 @@
                     <div class="option-desc">
                         <p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
         byte separated by <code>:</code>. The DUID that is sent is composed of the DUID type specified by
-        <code class="varname">DUIDType=</code> and the value configured here.</p>
+        <a href="#DHCP-DUIDType" class="attribute-ref"><code class="varname">DUIDType=</code></a> and the value configured here.</p>
 
         <p>The DUID value specified here overrides the DUID that systemd-networkd generates using the machine-id
         from the <code>/etc/machine-id</code> file. To configure DUID per-network, see

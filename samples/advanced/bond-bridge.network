@@ -1,0 +1,12 @@
+# /etc/systemd/network/bond-bridge.network
+# Minimum Version: systemd v211
+# ADVANCED: BRIDGE OVER BOND
+#
+# Configures a bridge that has a bond interface as a port.
+# (See bridging/samples for bond definition)
+
+[Match]
+Name=bond0
+
+[Network]
+Bridge=br0

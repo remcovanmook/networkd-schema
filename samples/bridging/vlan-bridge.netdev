@@ -1,0 +1,12 @@
+# /etc/systemd/network/vlan-bridge.netdev
+# Minimum Version: systemd v231
+# BRIDGING: VLAN-AWARE BRIDGE (DEVICE)
+#
+# Defines a bridge that supports VLAN filtering.
+
+[NetDev]
+Name=br0-vlan
+Kind=bridge
+
+[Bridge]
+VLANFiltering=yes

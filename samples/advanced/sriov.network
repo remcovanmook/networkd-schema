@@ -1,0 +1,17 @@
+# /etc/systemd/network/sriov.network
+# Minimum Version: systemd v211
+# ADVANCED: SR-IOV
+#
+# Configures Virtual Functions (VFs) on a supported physical interface.
+
+[Match]
+Name=ens1
+
+[Network]
+SRIOV=4
+
+[SRIOV]
+VirtualFunction=0
+VLANId=10
+Trust=yes
+MACSpoofCheck=no

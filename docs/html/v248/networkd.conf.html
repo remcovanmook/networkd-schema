@@ -100,10 +100,11 @@
                     </div>
                     <div class="option-desc">
                         <p>Specifies the time interval to calculate the traffic speed of each interface.
-        If <code class="varname">SpeedMeter=no</code>, the value is ignored. Defaults to 10sec.</p>
+        If <a href="#Network-SpeedMeter" class="attribute-ref"><code class="varname">SpeedMeter=no</code></a>, the value is ignored. Defaults to 10sec.</p>
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>10sec</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeterIntervalSec=5s
 SpeedMeterIntervalSec=100ms
+SpeedMeterIntervalSec=1min
 </code></pre></div></div>
                 <div id="Network-ManageForeignRoutes" class="option-block">
                     <div class="option-header">
@@ -216,7 +217,7 @@ SpeedMeterIntervalSec=100ms
             This is the default if <code class="varname">DUIDType=</code> is not specified.
             </p></dd>
 
-          <dt><span class="docbook-option">uuid</span></dt><dd><p>If <code>DUIDType=uuid</code>, and <code class="varname">DUIDRawData=</code> is not set,
+          <dt><span class="docbook-option">uuid</span></dt><dd><p>If <code>DUIDType=uuid</code>, and <a href="#DHCP-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> is not set,
             then the product UUID is used as a DUID value. If a system does not have valid product UUID, then
             an application-specific
             <a href="https://www.freedesktop.org/software/systemd/man/latest/machine-id.html" target="_blank" class="external-link">machine-id</a>
@@ -232,7 +233,7 @@ SpeedMeterIntervalSec=100ms
         </dl>
         </p>
 
-        <p>In all cases, <code class="varname">DUIDRawData=</code> can be used to override the
+        <p>In all cases, <a href="#DHCP-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> can be used to override the
         actual DUID value that is used.</p>
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDType=SomeString
@@ -266,7 +267,7 @@ SpeedMeterIntervalSec=100ms
                     <div class="option-desc">
                         <p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
         byte separated by <code>:</code>. The DUID that is sent is composed of the DUID type specified by
-        <code class="varname">DUIDType=</code> and the value configured here.</p>
+        <a href="#DHCP-DUIDType" class="attribute-ref"><code class="varname">DUIDType=</code></a> and the value configured here.</p>
 
         <p>The DUID value specified here overrides the DUID that
         <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-networkd.service.html" target="_blank" class="external-link">systemd-networkd.service</a>

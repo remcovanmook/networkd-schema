@@ -1,0 +1,12 @@
+# /etc/systemd/network/vrf-member.network
+# Minimum Version: systemd v211
+# ADVANCED: VRF MEMBER
+#
+# Binds an interface to a VRF.
+
+[Match]
+Name=eth3
+
+[Network]
+VRF=vrf0
+Address=10.50.0.1/24

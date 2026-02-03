@@ -1,0 +1,15 @@
+# /etc/systemd/network/vxlan10.netdev
+# Minimum Version: systemd v243
+# OVERLAYS: VXLAN (UNICAST)
+#
+# Defines a VXLAN interface using unicast with a specified remote endpoint.
+
+[NetDev]
+Name=vxlan10
+Kind=vxlan
+
+[VXLAN]
+VNI=10
+Remote=203.0.113.1
+Local=198.51.100.2
+DestinationPort=4789

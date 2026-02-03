@@ -1,0 +1,11 @@
+# /etc/systemd/network/vlan-parent.network
+# Minimum Version: systemd v231
+# BRIDGING: VLAN PARENT
+#
+# Attaches the VLAN vlan10 to the physical interface eth0.
+
+[Match]
+Name=eth0
+
+[Network]
+VLAN=vlan10

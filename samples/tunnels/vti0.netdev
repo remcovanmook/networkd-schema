@@ -1,0 +1,14 @@
+# /etc/systemd/network/vti0.netdev
+# Minimum Version: systemd v231
+# TUNNELS: VTI (IPSec)
+#
+# Defines a Virtual Tunnel Interface, often used with IPSec.
+
+[NetDev]
+Name=vti0
+Kind=vti
+
+[Tunnel]
+Remote=203.0.113.20
+Local=198.51.100.2
+Key=12345

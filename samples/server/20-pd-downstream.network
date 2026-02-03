@@ -1,0 +1,20 @@
+# /etc/systemd/network/20-pd-downstream.network
+# Minimum Version: systemd v250
+# SERVER / GATEWAY: PREFIX DELEGATION (DOWNSTREAM)
+#
+# Configures the LAN interface to pick a /64 prefix from the pool delegated
+# to the WAN interface (configured in 20-pd-upstream.network) and advertise it.
+
+[Match]
+Name=lan0
+
+[Network]
+# Enable IPv6 Prefix Delegation from the upstream interface
+IPv6PrefixDelegation=yes
+IPv6SendRA=yes
+DHCPPrefixDelegation=yes
+
+[IPv6PrefixDelegation]
+# Automatically pick a subnet from the delegated prefix
+Managed=yes
+SubnetId=1

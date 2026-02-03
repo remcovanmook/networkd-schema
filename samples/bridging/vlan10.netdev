@@ -1,0 +1,12 @@
+# /etc/systemd/network/vlan10.netdev
+# Minimum Version: systemd v211
+# BRIDGING: VLAN INTERFACE (DEVICE)
+#
+# Defines a VLAN interface named vlan10 with ID 10.
+
+[NetDev]
+Name=vlan10
+Kind=vlan
+
+[VLAN]
+Id=10

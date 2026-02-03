@@ -1204,6 +1204,236 @@ def generate_types_page(output_dir, version, schema_dir):
         f.write(html)
     print(" -> Generated types.html")
 
+def generate_samples_page(output_dir, version, samples_dir):
+    print(f"Processing samples from {samples_dir}...")
+    
+    # 1. Scan Samples
+    # Structure: category -> list of {filename, content, desc}
+    categories = {}
+    
+    # Map folder names to Display Titles
+    category_titles = {
+        'simple': 'Simple Client',
+        'server': 'Server / Gateway',
+        'bridging': 'Bridging & Switching',
+        'tunnels': 'Tunnels & VPNs',
+        'overlays': 'Overlays & Virtualization',
+        'advanced': 'Advanced Networking'
+    }
+    
+    # Priority order for sidebar
+    cat_order = ['simple', 'server', 'bridging', 'tunnels', 'overlays', 'advanced']
+    
+    for root, dirs, files in os.walk(samples_dir):
+        rel_path = os.path.relpath(root, samples_dir)
+        if rel_path == '.': continue
+        
+        category_slug = rel_path.split(os.sep)[0] # Top level folder
+        if category_slug not in categories:
+            categories[category_slug] = []
+            
+        for f in sorted(files):
+            if not f.endswith(('.network', '.netdev', '.link', '.conf', '.sh')):
+                continue
+                
+            full_path = os.path.join(root, f)
+            with open(full_path, 'r') as fh:
+                content = fh.read()
+                
+            # Extract description from first few lines if available
+            desc = f
+            lines = content.splitlines()
+            # Look for line starting with "# [CATEGORY]: [TITLE]" or just usage
+            # In my samples I used: "# [CATEGORY]: [TITLE]" style or similar
+            # e.g. "# BASIC SIMPLE CLIENT: DHCP"
+            title = f
+            usage = ""
+            
+            for line in lines[:5]:
+                if line.startswith('#'):
+                    clean = line.lstrip('#').strip()
+                    if ':' in clean:
+                        # Heuristic for title
+                        parts = clean.split(':', 1)
+                        # Ensure it's a CATEGORY: TITLE line by checking if CATEGORY is uppercase
+                        if len(parts) > 1 and parts[0].strip().isupper():
+                            raw_title = parts[1].strip()
+                            # Check if it looks like a title (uppercase or specific keyword?)
+                            # In our samples, all titles are prefixed with CATEGORY:. 
+                            # We just take it, but format it to be less shouty.
+                            
+                            def format_title(t):
+                                # List of acronyms to keep uppercase
+                                acronyms = {
+                                    "DHCP", "DNS", "IP", "IPv4", "IPv6", "VLAN", "LACP", "VRF",
+                                    "VXLAN", "GRE", "SIT", "VTI", "GRETAP", "GENEVE", "MACVLAN",
+                                    "IPVLAN", "TAP", "VETH", "QOS", "CAKE", "SR-IOV", "VPN", "SSID",
+                                    "RA", "PD", "WPA2", "WIFI"
+                                }
+                                
+                                words = t.split()
+                                new_words = []
+                                for w in words:
+                                    # Remove parens for checking
+                                    clean_w = w.strip("()")
+                                    upper_w = clean_w.upper()
+                                    
+                                    if upper_w in acronyms:
+                                        # Keep/Force Acronym
+                                        # Restore parens if needed
+                                        new_words.append(w.replace(clean_w, upper_w))
+                                    else:
+                                        # Title Case
+                                        new_words.append(w.title())
+                                        
+                                return " ".join(new_words)
+
+                            title = format_title(raw_title)
+                            
+                    elif not usage and clean and not clean.isupper() and not clean.startswith('Minimum Version:'):
+                         usage = clean
+            
+            # Formatting
+            categories[category_slug].append({
+                'filename': f,
+                'path': full_path,
+                'content': content,
+                'title': title,
+                'usage': usage
+            })
+
+    # 2. Build Sidebar Navigation
+    nav_items = []
+    
+    # Sort categories by order if present, else alpha
+    sorted_cats = sorted(categories.keys(), key=lambda x: cat_order.index(x) if x in cat_order else 999)
+    
+    html_content = []
+    
+    for cat_slug in sorted_cats:
+        cat_title = category_titles.get(cat_slug, cat_slug.title())
+        samples = categories[cat_slug]
+        if not samples: continue
+        
+        section_id = f"cat-{cat_slug}"
+        
+        nav_items.append(f'<li><details open><summary><a href="#{section_id}">{cat_title}</a></summary><ul class="sub-menu">')
+        
+        html_content.append(f'<div id="{section_id}" class="section-block">')
+        html_content.append(f'<h2 style="border-bottom: 1px solid #30363d; padding-bottom: 10px; margin-bottom: 20px;">{cat_title}</h2>')
+        
+        for sample in samples:
+            sample_id = f"sample-{sample['filename']}"
+            nav_items.append(f'<li><a href="#{sample_id}" style="font-size: 0.9em; margin-left: 20px;">{sample["title"]}</a></li>')
+            
+            html_content.append(f'''
+            <div id="{sample_id}" class="option-block" style="margin-bottom: 40px;">
+                <div class="option-header">
+                    <div class="option-title">
+                        <a href="#{sample_id}" class="anchor-link">#</a>{sample['title']} <span style="font-weight:normal; font-size:0.8em; color:#8b949e">({sample['filename']})</span>
+                    </div>
+                </div>
+                <div class="option-desc">
+                    <p>{sample['usage']}</p>
+                    <pre><code>{html.escape(sample['content'])}</code></pre>
+                </div>
+            </div>
+            ''')
+            
+        html_content.append('</div>')
+        nav_items.append('</ul></details></li>')
+
+    # 3. Assemble Page
+    # Reuse Sidebar structure from generate_page
+    
+    sidebar_html = f"""
+    <div id="sidebar">
+        <div class="sidebar-header">
+             <!-- No specific version link back for global page, or use relative to specific version if we want (e.g. {version}/index.html) 
+                  But since it is global, we might just drop the deep navigation or link to the 'latest' concept if it existed.
+                  For now, let's keep it simple: No versioned links in sidebar, just the samples navigation. -->
+             <h3>Use Cases</h3>
+        </div>
+         <div class="sidebar-content">
+            <ul>
+                {"".join(nav_items)}
+            </ul>
+        </div>
+    </div>
+    """
+
+    html_header = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systemd Networkd Examples</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .option-block {{ background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 16px; }}
+        .option-title {{ font-size: 1.1em; font-weight: bold; margin-bottom: 10px; }}
+        pre {{ background: #161b22; padding: 16px; border-radius: 6px; overflow: auto; border: 1px solid #30363d; }}
+    </style>
+</head>
+<body>
+    {sidebar_html}
+    <div id="content">
+        <h1>Configuration Examples</h1>
+        <p>A collection of common configuration scenarios ranging from simple client setups to complex overlay networks.</p>
+        <hr style="border-color: #30363d; margin-bottom: 30px;">
+        { "".join(html_content) }
+    </div>
+"""
+    # Reuse scripts from generate_page for active sidebar highlighting
+    html_scripts = """
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarLinks = document.querySelectorAll('#sidebar a');
+            const sections = document.querySelectorAll('.section-block, .option-block');
+            
+            // Map IDs to sidebar links
+            const linkMap = new Map();
+            sidebarLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    linkMap.set(href.substring(1), link);
+                }
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        const link = linkMap.get(id);
+                        if (link) {
+                            sidebarLinks.forEach(l => l.classList.remove('active'));
+                            link.classList.add('active');
+                            
+                            let parent = link.parentElement;
+                            while (parent) {
+                                if (parent.tagName === 'DETAILS') parent.open = true;
+                                parent = parent.parentElement;
+                            }
+                        }
+                    }
+                });
+            }, { root: null, threshold: 0.1, rootMargin: "-40% 0px -40% 0px" });
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
+    """
+
+    # Output to parent directory (docs/html/) instead of versioned dir
+    parent_dir = os.path.dirname(output_dir)
+    out_path = os.path.join(parent_dir, "samples.html")
+    with open(out_path, 'w') as f:
+        f.write(html_header + html_scripts)
+    print(" -> Generated samples.html (Global)")
+
 def generate_index(output_dir, version):
     html = f"""
 <!DOCTYPE html>
@@ -1237,8 +1467,12 @@ def generate_index(output_dir, version):
     </div>
     
     <div class="card">
-        <h2><a href="networkd.conf.html">networkd.conf</a></h2>
         <p>Global system-wide network configuration.</p>
+    </div>
+    
+    <div class="card" style="border-color: #58a6ff;">
+        <h2 style="color: #58a6ff;"><a href="../samples.html" style="color: #58a6ff;">Use Cases / Examples</a></h2>
+        <p>Common network configuration scenarios (DHCP, Bridges, VLANs, WireGuard, VXLAN, etc).</p>
     </div>
     
     <hr style="border-color: #30363d; margin: 40px 0;">
@@ -1297,6 +1531,14 @@ def main():
     print(f"Generated search_index.json with {len(search_index)} entries.")
 
     generate_types_page(output_dir, args.version, schema_dir)
+    
+    # Generate Samples
+    samples_dir = os.path.join(base_dir, "samples")
+    if os.path.exists(samples_dir):
+        generate_samples_page(output_dir, args.version, samples_dir)
+    else:
+        print(f"Warning: Samples directory not found at {samples_dir}")
+
     generate_index(output_dir, args.version)
     print("\nDocumentation Generation Complete.")
 

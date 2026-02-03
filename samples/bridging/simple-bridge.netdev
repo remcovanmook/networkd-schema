@@ -1,0 +1,9 @@
+# /etc/systemd/network/simple-bridge.netdev
+# Minimum Version: systemd v211
+# BRIDGING: SIMPLE BRIDGE (DEVICE)
+#
+# Defines a bridge interface named br0.
+
+[NetDev]
+Name=br0
+Kind=bridge

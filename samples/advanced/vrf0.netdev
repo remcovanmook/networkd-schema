@@ -1,0 +1,12 @@
+# /etc/systemd/network/vrf0.netdev
+# Minimum Version: systemd v243
+# ADVANCED: VRF
+#
+# Defines a Virtual Routing and Forwarding instance (L3 domain).
+
+[NetDev]
+Name=vrf0
+Kind=vrf
+
+[VRF]
+Table=100

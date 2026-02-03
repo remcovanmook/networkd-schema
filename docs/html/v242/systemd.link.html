@@ -76,6 +76,8 @@
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OriginalName=eth*
 OriginalName=en* wlan*
+OriginalName=!virbr*
+OriginalName=!eth0 eth1
 </code></pre></div></div>
                 <div id="Match-Host" class="option-block">
                     <div class="option-header">
@@ -302,6 +304,8 @@ MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=eth*
 Path=en* wlan*
+Path=!virbr*
+Path=!eth0 eth1
 </code></pre></div></div>
                 <div id="Match-Driver" class="option-block">
                     <div class="option-header">
@@ -338,6 +342,8 @@ Path=en* wlan*
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Driver=eth*
 Driver=en* wlan*
+Driver=!virbr*
+Driver=!eth0 eth1
 </code></pre></div></div>
                 <div id="Match-Type" class="option-block">
                     <div class="option-header">
@@ -374,6 +380,7 @@ Driver=en* wlan*
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Type=global
 Type=link
+Type=host
 </code></pre></div></div><h3 class="subcategory-header">Virtualization</h3>
                 <div id="Match-Virtualization" class="option-block">
                     <div class="option-header">
@@ -649,7 +656,7 @@ Description=Uplink to ISP
                     <div class="option-desc">
                         
           <p>The interface name to use. This option has lower precedence than
-          <code class="varname">NamePolicy=</code>, so for this setting to take effect, <code class="varname">NamePolicy=</code>
+          <a href="#Link-NamePolicy" class="attribute-ref"><code class="varname">NamePolicy=</code></a>, so for this setting to take effect, <a href="#Link-NamePolicy" class="attribute-ref"><code class="varname">NamePolicy=</code></a>
           must either be unset, empty, disabled, or all policies configured there must fail. Also see the
           example below with <code>Name=dmz0</code>.</p>
 
@@ -1187,7 +1194,7 @@ BitsPerSecond=100M
                     <div class="option-desc">
                         
           <p>The MAC address to use, if no
-          <code class="varname">MACAddressPolicy=</code>
+          <a href="#Link-MACAddressPolicy" class="attribute-ref"><code class="varname">MACAddressPolicy=</code></a>
           is specified.</p>
         
                     </div>
@@ -1229,6 +1236,7 @@ MACAddress=none
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
 MTUBytes=9000
+MTUBytes=auto
 </code></pre></div></div><h3 class="subcategory-header">Offload</h3>
                 <div id="Link-TCPSegmentationOffload" class="option-block">
                     <div class="option-header">

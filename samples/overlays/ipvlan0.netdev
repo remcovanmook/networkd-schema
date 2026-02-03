@@ -1,0 +1,12 @@
+# /etc/systemd/network/ipvlan0.netdev
+# Minimum Version: systemd v219
+# OVERLAYS: IPVLAN
+#
+# Defines an IPVLAN interface in L3 mode.
+
+[NetDev]
+Name=ipvlan0
+Kind=ipvlan
+
+[IPVLAN]
+Mode=l3

@@ -1,0 +1,13 @@
+# /etc/systemd/network/tap0.netdev
+# Minimum Version: systemd v243
+# OVERLAYS: TAP DEVICE
+#
+# Defines a persistent TAP interface (L2 virtual device).
+
+[NetDev]
+Name=tap0
+Kind=tap
+
+[Tap]
+User=root
+Group=kvm

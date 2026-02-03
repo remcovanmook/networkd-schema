@@ -1,0 +1,19 @@
+# /etc/systemd/network/vlan-bridge-slave.network
+# Minimum Version: systemd v231
+# BRIDGING: VLAN-AWARE BRIDGE (SLAVE)
+#
+# Binds eth1 to the VLAN-aware bridge and configures VLAN IDs.
+
+[Match]
+Name=eth1
+
+[Network]
+Bridge=br0-vlan
+
+[BridgeVLAN]
+VLAN=10
+PVID=10
+EgressUntagged=10
+
+[BridgeVLAN]
+VLAN=20

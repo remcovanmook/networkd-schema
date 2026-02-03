@@ -1,0 +1,12 @@
+# /etc/systemd/network/10-dhcp.network
+# Minimum Version: systemd v211
+# BASIC SIMPLE CLIENT: DHCP
+#
+# A very basic configuration that matches any interface starting with "en*"
+# and enables DHCP for both IPv4 and IPv6.
+
+[Match]
+Name=en*
+
+[Network]
+DHCP=yes

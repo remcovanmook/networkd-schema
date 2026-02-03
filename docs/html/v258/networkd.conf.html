@@ -102,12 +102,13 @@
                     </div>
                     <div class="option-desc">
                         <p>Specifies the time interval to calculate the traffic speed of each interface.
-        If <code class="varname">SpeedMeter=no</code>, the value is ignored. Defaults to 10sec.</p>
+        If <a href="#Network-SpeedMeter" class="attribute-ref"><code class="varname">SpeedMeter=no</code></a>, the value is ignored. Defaults to 10sec.</p>
 
         
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>10sec</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeterIntervalSec=5s
 SpeedMeterIntervalSec=100ms
+SpeedMeterIntervalSec=1min
 </code></pre></div></div>
                 <div id="Network-ManageForeignRoutingPolicyRules" class="option-block">
                     <div class="option-header">
@@ -424,7 +425,7 @@ IPv6PrivacyExtensions=kernel
                     <div class="option-desc">
                         
           <p>Specifies the network- and protocol-independent default value for the same settings in
-          [IPv6AcceptRA], [DHCPv4], and [DHCPv6] sections below. Takes a boolean, or the special value
+          <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a>, <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a>, and <a href="#section-DHCPv6" class="section-ref">[DHCPv6]</a> sections below. Takes a boolean, or the special value
           <span class="docbook-option">route</span>. See the same setting in
           <a href="systemd.network.html">systemd.network</a>.
           Defaults to <code>no</code>.</p>
@@ -463,11 +464,11 @@ UseDomains=route
                     </div>
                     <div class="option-desc">
                         
-          <p>Specifies the network-independent default value for the same setting in the [IPv6AcceptRA]
+          <p>Specifies the network-independent default value for the same setting in the <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a>
           section in
           <a href="systemd.network.html">systemd.network</a>.
           Takes a boolean, or the special value <span class="docbook-option">route</span>. When unspecified, the value specified
-          in the [Network] section in
+          in the <a href="#section-Network" class="section-ref">[Network]</a> section in
           <a href="networkd.conf.html">networkd.conf</a>,
           which defaults to <code>no</code>, will be used.</p>
 
@@ -590,7 +591,7 @@ UseDomains=route
 
             </dd>
 
-          <dt><span class="docbook-option">uuid</span></dt><dd><p>If <code>DUIDType=uuid</code>, and <code class="varname">DUIDRawData=</code> is not set,
+          <dt><span class="docbook-option">uuid</span></dt><dd><p>If <code>DUIDType=uuid</code>, and <a href="#DHCPv4-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> is not set,
             then the product UUID is used as a DUID value. If a system does not have valid product UUID, then
             an application-specific
             <a href="https://www.freedesktop.org/software/systemd/man/latest/machine-id.html" target="_blank" class="external-link">machine-id</a>
@@ -610,7 +611,7 @@ UseDomains=route
         </dl>
         </p>
 
-        <p>In all cases, <code class="varname">DUIDRawData=</code> can be used to override the
+        <p>In all cases, <a href="#DHCPv4-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> can be used to override the
         actual DUID value that is used.</p>
 
         
@@ -646,7 +647,7 @@ UseDomains=route
                     <div class="option-desc">
                         <p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
         byte separated by <code>:</code>. The DUID that is sent is composed of the DUID type specified by
-        <code class="varname">DUIDType=</code> and the value configured here.</p>
+        <a href="#DHCPv6-DUIDType" class="attribute-ref"><code class="varname">DUIDType=</code></a> and the value configured here.</p>
 
         <p>The DUID value specified here overrides the DUID that
         <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-networkd.service.html" target="_blank" class="external-link">systemd-networkd.service</a>
@@ -701,7 +702,7 @@ DUIDRawData=00:00:ab:11:f9:2a:c2:77:29:f9:5c:00</code></pre>
                     </div>
                     <div class="option-desc">
                         
-          <p>Same as the one in the [IPv6AcceptRA] section, but applied for DHCPv4 protocol.</p>
+          <p>Same as the one in the <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a> section, but applied for DHCPv4 protocol.</p>
 
           
         
@@ -736,7 +737,7 @@ UseDomains=route
                          
                     </div>
                     <div class="option-desc">
-                        <p>As in the [DHCPv4] section.</p>
+                        <p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section.</p>
 
         
                     </div>
@@ -769,7 +770,7 @@ UseDomains=route
                          
                     </div>
                     <div class="option-desc">
-                        <p>As in the [DHCPv4] section.</p>
+                        <p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section.</p>
 
         
                     </div>

@@ -1,0 +1,16 @@
+# /etc/systemd/network/20-pd-upstream.network
+# Minimum Version: systemd v244
+# SERVER / GATEWAY: PREFIX DELEGATION (UPSTREAM)
+#
+# Configures the WAN interface to request an IPv6 Prefix Delegation (PD)
+# from the ISP via DHCPv6.
+
+[Match]
+Name=wan0
+
+[Network]
+DHCP=ipv6
+IPv6AcceptRA=yes
+
+[DHCPv6]
+PrefixDelegationHint=::/48

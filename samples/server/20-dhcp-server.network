@@ -1,0 +1,20 @@
+# /etc/systemd/network/20-dhcp-server.network
+# Minimum Version: systemd v226
+# SERVER / GATEWAY: DHCP SERVER
+#
+# Configures a static IP on eth1 (LAN side) and enables a DHCP server
+# to hand out addresses to clients.
+
+[Match]
+Name=eth1
+
+[Network]
+Address=192.168.100.1/24
+DHCPServer=yes
+IPMasquerade=ipv4
+
+[DHCPServer]
+PoolOffset=10
+PoolSize=100
+EmitDNS=yes
+DNS=8.8.8.8

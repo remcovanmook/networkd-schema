@@ -73,6 +73,8 @@
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Type=ether
 Type=wlan
+Type=loopback
+Type=vlan
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="Match-PermanentMACAddress" class="option-block">
                     <div class="option-header">
@@ -103,7 +105,7 @@ Type=wlan
                     <div class="option-desc">
                         
           <p>A whitespace-separated list of hardware&#x27;s permanent addresses. While
-          <code class="varname">MACAddress=</code> matches the device&#x27;s current MAC address, this matches the
+          <a href="#BridgeFDB-MACAddress" class="attribute-ref"><code class="varname">MACAddress=</code></a> matches the device&#x27;s current MAC address, this matches the
           device&#x27;s permanent MAC address, which may be different from the current one. Use full
           colon-, hyphen- or dot-delimited hexadecimal. This option may appear more than once, in
           which case the lists are merged. If the empty string is assigned to this option, the list
@@ -184,7 +186,7 @@ Type=wlan
                         
             <p>A whitespace-separated list of hardware address of the currently connected wireless
             LAN. Use full colon-, hyphen- or dot-delimited hexadecimal. See the example in
-            <code class="varname">MACAddress=</code>. This option may appear more than once, in which case the
+            <a href="#BridgeFDB-MACAddress" class="attribute-ref"><code class="varname">MACAddress=</code></a>. This option may appear more than once, in which case the
             lists are merged. If the empty string is assigned to this option, the list is reset.</p>
           
                     </div>
@@ -561,6 +563,8 @@ Name=br0
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SSID=eth*
 SSID=en* wlan*
+SSID=!virbr*
+SSID=!eth0 eth1
 </code></pre></div></div><h3 class="subcategory-header">Virtualization</h3>
                 <div id="Match-Virtualization" class="option-block">
                     <div class="option-header">
@@ -827,6 +831,8 @@ SSID=en* wlan*
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RequiredForOnline=yes
 RequiredForOnline=no
+RequiredForOnline=carrier
+RequiredForOnline=degraded:routable
 </code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
                 <div id="Link-MACAddress" class="option-block">
                     <div class="option-header">
@@ -899,6 +905,7 @@ MACAddress=none
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
 MTUBytes=9000
+MTUBytes=auto
 </code></pre></div></div></div><div id="section-Network" class="section-block"><h2>Network Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Match" class="dependency-link">[Match]</a></div><h3 class="subcategory-header">General</h3>
                 <div id="Network-Description" class="option-block">
                     <div class="option-header">
@@ -972,6 +979,8 @@ Description=Uplink to ISP
                     </div>
                 <div class="option-values"><strong>Allowed:</strong> <code>eui64</code>, <code>none</code>, <code>random</code>, <code>stable-privacy</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6LinkLocalAddressGenerationMode=eui64
 IPv6LinkLocalAddressGenerationMode=none
+IPv6LinkLocalAddressGenerationMode=stable-privacy
+IPv6LinkLocalAddressGenerationMode=random
 </code></pre></div></div>
                 <div id="Network-IPv4LLRoute" class="option-block">
                     <div class="option-header">
@@ -1352,7 +1361,7 @@ DNSSEC=false
             is collected and LLDP data about other types of devices ignored (such as stations, telephones and
             others). If false, LLDP reception is disabled. Defaults to <code>routers-only</code>. Use
             <a href="https://www.freedesktop.org/software/systemd/man/latest/networkctl.html" target="_blank" class="external-link">networkctl</a> to query the
-            collected neighbor data. LLDP is only available on Ethernet links. See <code class="varname">EmitLLDP=</code> below
+            collected neighbor data. LLDP is only available on Ethernet links. See <a href="#Network-EmitLLDP" class="attribute-ref"><code class="varname">EmitLLDP=</code></a> below
             for enabling LLDP packet emission from the local system.
             </p>
           
@@ -1405,7 +1414,7 @@ LLDP=false
             not any other bridges, and <code>customer-bridge</code> permits propagation until a customer bridge
             is reached. For details about these concepts, see <a href="https://standards.ieee.org/findstds/standard/802.1AB-2016.html" target="_blank">IEEE 802.1AB-2016</a>. Note that
             configuring this setting to true is equivalent to <code>nearest-bridge</code>, the recommended and
-            most restricted level of propagation. See <code class="varname">LLDP=</code> above for an option to enable LLDP
+            most restricted level of propagation. See <a href="#Network-LLDP" class="attribute-ref"><code class="varname">LLDP=</code></a> above for an option to enable LLDP
             reception.</p>
           
                     </div>
@@ -1477,7 +1486,7 @@ EmitLLDP=customer-bridge
                     <div class="option-desc">
                         
             <p>If true, this link&#x27;s configured DNS servers are used for resolving domain
-            names that do not match any link&#x27;s configured <code class="varname">Domains=</code> setting. If false, this link&#x27;s
+            names that do not match any link&#x27;s configured <a href="#Network-Domains" class="attribute-ref"><code class="varname">Domains=</code></a> setting. If false, this link&#x27;s
             configured DNS servers are never used for such domains, and are exclusively used for resolving names that
             match at least one of the domains configured on this link. If not specified defaults to an automatic mode:
             queries not matching any link&#x27;s configured domains will be routed to this link if it has no routing-only
@@ -1732,7 +1741,7 @@ IPv6PrivacyExtensions=kernel
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#ip_addressType" class="badge badge-type-prominent badge-type-complex">IP Address</a>
+                         <a href="types.html#ipv6_addressType" class="badge badge-type-prominent badge-type-complex">IPv6 Address</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1743,7 +1752,8 @@ IPv6PrivacyExtensions=kernel
           <span class="docbook-option">IPv6ProxyNDP</span> has been set to false. When unset, the kernel&#x27;s default will be used.
         </p>
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6ProxyNDPAddress=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6ProxyNDPAddress=2001:db8::1
+IPv6ProxyNDPAddress=fe80::1
 </code></pre></div></div>
                 <div id="Network-IPv6PrefixDelegation" class="option-block">
                     <div class="option-header">
@@ -1774,12 +1784,12 @@ IPv6PrivacyExtensions=kernel
                     <div class="option-desc">
                         <p>Whether to enable or disable Router Advertisement sending on a link.  Allowed
           values are <code>static</code> which distributes prefixes as defined in the
-          [IPv6PrefixDelegation] and any [IPv6Prefix] sections, <code>dhcpv6</code> which requests
+          <a href="#section-IPv6PrefixDelegation" class="section-ref">[IPv6PrefixDelegation]</a> and any <a href="#section-IPv6Prefix" class="section-ref">[IPv6Prefix]</a> sections, <code>dhcpv6</code> which requests
           prefixes using a DHCPv6 client configured for another link and any values configured in the
-          [IPv6PrefixDelegation] section while ignoring all static prefix configuration sections,
+          <a href="#section-IPv6PrefixDelegation" class="section-ref">[IPv6PrefixDelegation]</a> section while ignoring all static prefix configuration sections,
           <code>yes</code> which uses both static configuration and DHCPv6, and
           <code>false</code> which turns off IPv6 prefix delegation altogether. Defaults to
-          <code>false</code>. See the [IPv6PrefixDelegation] and the [IPv6Prefix] sections for more
+          <code>false</code>. See the <a href="#section-IPv6PrefixDelegation" class="section-ref">[IPv6PrefixDelegation]</a> and the <a href="#section-IPv6Prefix" class="section-ref">[IPv6Prefix]</a> sections for more
           configuration options.</p>
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6PrefixDelegation=SomeString
@@ -1958,6 +1968,7 @@ IPv6MTUBytes=1500
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>VLAN=1
 VLAN=100
+VLAN=4094
 </code></pre></div></div>
                 <div id="Network-IPVLAN" class="option-block">
                     <div class="option-header">
@@ -2398,7 +2409,7 @@ IgnoreCarrierLoss=true
             this key more than once to configure several addresses.
             The format of the address must be as described in
             <a href="https://www.freedesktop.org/software/systemd/man/latest/inet_pton.html" target="_blank" class="external-link">inet_pton</a>.
-            This is a short-hand for an [Address] section only
+            This is a short-hand for an <a href="#section-Address" class="section-ref">[Address]</a> section only
             containing an Address key (see below). This option may be
             specified more than once.
             </p>
@@ -2414,7 +2425,10 @@ IgnoreCarrierLoss=true
 
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Address=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Address=192.168.1.0/24
+Address=10.0.0.0/8
+Address=2001:db8::/32
+Address=fe80::/10
 </code></pre></div></div>
                 <div id="Network-Gateway" class="option-block">
                     <div class="option-header">
@@ -2447,7 +2461,7 @@ IgnoreCarrierLoss=true
             <p>The gateway address, which must be in the format
             described in
             <a href="https://www.freedesktop.org/software/systemd/man/latest/inet_pton.html" target="_blank" class="external-link">inet_pton</a>.
-            This is a short-hand for a [Route] section only containing
+            This is a short-hand for a <a href="#section-Route" class="section-ref">[Route]</a> section only containing
             a Gateway key. This option may be specified more than
             once.</p>
           
@@ -2638,12 +2652,14 @@ Domains=~.
             specified through DHCP is not used for name resolution.
             See option <span class="docbook-option">UseDomains=</span> below.</p>
 
-            <p>See the [DHCPv4] or [DHCPv6] sections below for further configuration options for the DHCP
+            <p>See the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> or <a href="#section-DHCPv6" class="section-ref">[DHCPv6]</a> sections below for further configuration options for the DHCP
             client support.</p>
           
                     </div>
                 <div class="option-values"><strong>Allowed:</strong> <code>no</code>, <code>yes</code>, <code>ipv4</code>, <code>ipv6</code></div><div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DHCP=yes
 DHCP=no
+DHCP=ipv4
+DHCP=ipv6
 </code></pre></div></div>
                 <div id="Network-DHCPServer" class="option-block">
                     <div class="option-header">
@@ -2674,7 +2690,7 @@ DHCP=no
                     <div class="option-desc">
                         
             <p>If set to <code>yes</code>, DHCPv4 server will be started. Defaults
-            to <code>no</code>. Further settings for the DHCP server may be set in the [DHCPServer]
+            to <code>no</code>. Further settings for the DHCP server may be set in the <a href="#section-DHCPServer" class="section-ref">[DHCPServer]</a>
             section described below.</p>
           
                     </div>
@@ -2714,7 +2730,7 @@ DHCP=no
           forwarding is enabled, and to enable it otherwise. Cannot be enabled on bond devices and when link
           local addressing is disabled.</p>
 
-          <p>Further settings for the IPv6 RA support may be configured in the [IPv6AcceptRA] section, see
+          <p>Further settings for the IPv6 RA support may be configured in the <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a> section, see
           below.</p>
 
           <p>Also see <a href="https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt" target="_blank">ip-sysctl.txt</a> in the kernel
@@ -2766,7 +2782,7 @@ DHCP=no
             an IPv6 link-local address is always configured, and if <code>ipv4-fallback</code>,
             the address is not configured. Note that, the fallback mechanism works only when DHCPv4
             client is enabled, that is, it requires <code>DHCP=yes</code> or
-            <code>DHCP=ipv4</code>. If <code class="varname">Bridge=</code> is set, defaults to
+            <code>DHCP=ipv4</code>. If <a href="#Network-Bridge" class="attribute-ref"><code class="varname">Bridge=</code></a> is set, defaults to
             <code>no</code>, and if not, defaults to <code>ipv6</code>.
             </p>
           
@@ -2838,11 +2854,14 @@ LinkLocalAddressing=ipv6
                     </div>
                     <div class="option-desc">
                         
-            <p>As in the [Network] section. This key is mandatory. Each [Address] section can contain one
+            <p>As in the <a href="#section-Network" class="section-ref">[Network]</a> section. This key is mandatory. Each <a href="#section-Address" class="section-ref">[Address]</a> section can contain one
             <code class="varname">Address=</code> setting.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Address=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Address=192.168.1.1
+Address=10.0.0.1
+Address=2001:db8::1
+Address=fe80::1
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="Address-Peer" class="option-block">
                     <div class="option-header">
@@ -2873,11 +2892,14 @@ LinkLocalAddressing=ipv6
                     <div class="option-desc">
                         
             <p>The peer address in a point-to-point connection.
-            Accepts the same format as the <code class="varname">Address=</code>
+            Accepts the same format as the <a href="#Neighbor-Address" class="attribute-ref"><code class="varname">Address=</code></a>
             key.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Peer=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Peer=192.168.1.1
+Peer=10.0.0.1
+Peer=2001:db8::1
+Peer=fe80::1
 </code></pre></div></div>
                 <div id="Address-Broadcast" class="option-block">
                     <div class="option-header">
@@ -2902,7 +2924,7 @@ LinkLocalAddressing=ipv6
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#boolean | string" class="badge badge-type-prominent badge-type-string">boolean | string</a>
+                         <a href="types.html#IPv4 Address | boolean" class="badge badge-type-prominent badge-type-complex">IPv4 Address | boolean</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2911,7 +2933,7 @@ LinkLocalAddressing=ipv6
             described in
             <a href="https://www.freedesktop.org/software/systemd/man/latest/inet_pton.html" target="_blank" class="external-link">inet_pton</a>.
             This key only applies to IPv4 addresses. If it is not
-            given, it is derived from the <code class="varname">Address=</code>
+            given, it is derived from the <a href="#Neighbor-Address" class="attribute-ref"><code class="varname">Address=</code></a>
             key.</p>
           
                     </div>
@@ -3025,6 +3047,7 @@ Broadcast=false
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>global</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Scope=global
 Scope=link
+Scope=host
 </code></pre></div></div>
                 <div id="Address-HomeAddress" class="option-block">
                     <div class="option-header">
@@ -3245,7 +3268,10 @@ Scope=link
             <p>The IP address of the neighbor.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Address=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Address=192.168.1.1
+Address=10.0.0.1
+Address=2001:db8::1
+Address=fe80::1
 </code></pre></div></div>
                 <div id="Neighbor-LinkLayerAddress" class="option-block">
                     <div class="option-header">
@@ -3515,6 +3541,7 @@ Scope=link
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>main</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Table=main
 Table=local
+Table=default
 </code></pre></div></div>
                 <div id="RoutingPolicyRule-Priority" class="option-block">
                     <div class="option-header">
@@ -3784,8 +3811,8 @@ Priority=20
                         
             <p>Takes a special value <code>ipv4</code>, <code>ipv6</code>, or
             <code>both</code>. By default, the address family is determined by the address
-            specified in <code class="varname">To=</code> or <code class="varname">From=</code>. If neither
-            <code class="varname">To=</code> nor <code class="varname">From=</code> are specified, then defaults to
+            specified in <a href="#RoutingPolicyRule-To" class="attribute-ref"><code class="varname">To=</code></a> or <a href="#RoutingPolicyRule-From" class="attribute-ref"><code class="varname">From=</code></a>. If neither
+            <a href="#RoutingPolicyRule-To" class="attribute-ref"><code class="varname">To=</code></a> nor <a href="#RoutingPolicyRule-From" class="attribute-ref"><code class="varname">From=</code></a> are specified, then defaults to
             <code>ipv4</code>.</p>
           
                     </div>
@@ -3921,7 +3948,7 @@ Priority=20
                     </div>
                     <div class="option-desc">
                         
-            <p>As in the [Network] section. This is mandatory.</p>
+            <p>As in the <a href="#section-Network" class="section-ref">[Network]</a> section. This is mandatory.</p>
           
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Gateway=192.168.1.1
@@ -4035,6 +4062,7 @@ Gateway=_ipv6ra
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Destination=0.0.0.0/0
 Destination=192.168.1.0/24
+Destination=::/0
 </code></pre></div></div>
                 <div id="Route-Source" class="option-block">
                     <div class="option-header">
@@ -4170,14 +4198,15 @@ Destination=192.168.1.0/24
                         
             <p>The scope of the route, which can be <code>global</code>, <code>site</code>,
             <code>link</code>, <code>host</code>, or <code>nowhere</code>. For IPv4 route,
-            defaults to <code>host</code> if <code class="varname">Type=</code> is <code>local</code>
-            or <code>nat</code>, and <code>link</code> if <code class="varname">Type=</code> is
+            defaults to <code>host</code> if <a href="#Route-Type" class="attribute-ref"><code class="varname">Type=</code></a> is <code>local</code>
+            or <code>nat</code>, and <code>link</code> if <a href="#Route-Type" class="attribute-ref"><code class="varname">Type=</code></a> is
             <code>broadcast</code>, <code>multicast</code>, or <code>anycast</code>.
             In other cases, defaults to <code>global</code>.</p>
           
                     </div>
                 <div class="option-values"><strong>Allowed:</strong> <code>global</code>, <code>site</code>, <code>link</code>, <code>host</code>, <code>nowhere</code></div><div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>host</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Scope=global
 Scope=link
+Scope=host
 </code></pre></div></div>
                 <div id="Route-PreferredSource" class="option-block">
                     <div class="option-header">
@@ -4245,7 +4274,7 @@ Scope=link
             <p>The table identifier for the route. Takes <code>default</code>,
             <code>main</code>, <code>local</code> or a number between 1 and 4294967295.
             The table can be retrieved using <code class="command">ip route show table <span class="docbook-replaceable">num</span></code>.
-            If unset and <code class="varname">Type=</code> is <code>local</code>, <code>broadcast</code>,
+            If unset and <a href="#Route-Type" class="attribute-ref"><code class="varname">Type=</code></a> is <code>local</code>, <code>broadcast</code>,
             <code>anycast</code>, or <code>nat</code>, then <code>local</code> is used.
             In other cases, defaults to <code>main</code>.
           </p>
@@ -4253,6 +4282,7 @@ Scope=link
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>main</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Table=main
 Table=local
+Table=default
 </code></pre></div></div>
                 <div id="Route-Protocol" class="option-block">
                     <div class="option-header">
@@ -4290,6 +4320,7 @@ Table=local
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Protocol=kernel
 Protocol=boot
+Protocol=static
 </code></pre></div></div>
                 <div id="Route-Type" class="option-block">
                     <div class="option-header">
@@ -4410,6 +4441,7 @@ Type=anycast
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>InitialAdvertisedReceiveWindow=1G
 InitialAdvertisedReceiveWindow=512M
+InitialAdvertisedReceiveWindow=1024
 </code></pre></div></div>
                 <div id="Route-QuickAck" class="option-block">
                     <div class="option-header">
@@ -4552,6 +4584,7 @@ InitialAdvertisedReceiveWindow=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
 MTUBytes=9000
+MTUBytes=auto
 </code></pre></div></div>
                 <div id="Route-MultiPathRoute" class="option-block">
                     <div class="option-header">
@@ -4657,7 +4690,7 @@ MTUBytes=9000
                     <div class="option-desc">
                         
             <p>When true, the routes to the DNS servers received from the DHCP server will be
-            configured. When <code class="varname">UseDNS=</code> is disabled, this setting is ignored.
+            configured. When <a href="#IPv6AcceptRA-UseDNS" class="attribute-ref"><code class="varname">UseDNS=</code></a> is disabled, this setting is ignored.
             Defaults to false.</p>
           
                     </div>
@@ -4762,7 +4795,7 @@ MTUBytes=9000
                         
             <p>When true, the interface maximum transmission unit
             from the DHCP server will be used on the current link.
-            If <code class="varname">MTUBytes=</code> is set, then this setting is ignored.
+            If <a href="#HierarchyTokenBucketClass-MTUBytes" class="attribute-ref"><code class="varname">MTUBytes=</code></a> is set, then this setting is ignored.
             Defaults to false.</p>
           
                     </div>
@@ -4807,9 +4840,9 @@ MTUBytes=9000
 
             <p>Note that this configuration will overwrite others.
             In concrete, the following variables will be ignored:
-            <code class="varname">SendHostname=</code>, <code class="varname">ClientIdentifier=</code>,
-            <code class="varname">UseRoutes=</code>, <code class="varname">UseMTU=</code>,
-            <code class="varname">VendorClassIdentifier=</code>, <code class="varname">UseTimezone=</code>.</p>
+            <a href="#DHCPv4-SendHostname" class="attribute-ref"><code class="varname">SendHostname=</code></a>, <a href="#DHCPv4-ClientIdentifier" class="attribute-ref"><code class="varname">ClientIdentifier=</code></a>,
+            <a href="#DHCPv4-UseRoutes" class="attribute-ref"><code class="varname">UseRoutes=</code></a>, <a href="#DHCPv4-UseMTU" class="attribute-ref"><code class="varname">UseMTU=</code></a>,
+            <a href="#DHCPv4-VendorClassIdentifier" class="attribute-ref"><code class="varname">VendorClassIdentifier=</code></a>, <a href="#DHCPv4-UseTimezone" class="attribute-ref"><code class="varname">UseTimezone=</code></a>.</p>
 
             <p>With this option enabled DHCP requests will mimic those generated by Microsoft Windows, in
             order to reduce the ability to fingerprint and recognize installations. This means DHCP request
@@ -5460,7 +5493,7 @@ MTUBytes=9000
             <p>The table identifier for DHCP routes (a number between 1 and 4294967295, or 0 to unset).
             The table can be retrieved using <code class="command">ip route show table <span class="docbook-replaceable">num</span></code>.
             </p>
-            <p>When used in combination with <code class="varname">VRF=</code>, the
+            <p>When used in combination with <a href="#Network-VRF" class="attribute-ref"><code class="varname">VRF=</code></a>, the
             VRF&#x27;s routing table is used when this parameter is not specified.
             </p>
           
@@ -5496,7 +5529,7 @@ RouteTable=local
                     </div>
                     <div class="option-desc">
                         
-            <p>Specifies the MTU for the DHCP routes. Please see the [Route] section for further details.</p>
+            <p>Specifies the MTU for the DHCP routes. Please see the <a href="#section-Route" class="section-ref">[Route]</a> section for further details.</p>
           
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteMTUBytes=0
@@ -5670,7 +5703,7 @@ FallbackLeaseLifetimeSec=infinity
                     <div class="option-desc">
                         
           <p>A whitespace-separated list of IPv4 addresses. DHCP offers from servers in the list are rejected. Note that
-          if <code class="varname">AllowList=</code> is configured then <code class="varname">DenyList=</code> is ignored.</p>
+          if <a href="#DHCPv4-AllowList" class="attribute-ref"><code class="varname">AllowList=</code></a> is configured then <code class="varname">DenyList=</code> is ignored.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DenyList=SomeString
@@ -5852,7 +5885,7 @@ FallbackLeaseLifetimeSec=infinity
                     </div>
                     <div class="option-desc">
                         
-            <p>As in the [DHCPv4] section.</p>
+            <p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section.</p>
           
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDNS=yes
@@ -6112,7 +6145,7 @@ FallbackLeaseLifetimeSec=infinity
                     <div class="option-desc">
                         
             <p>Takes an IPv6 address with prefix length in the same format as the
-            <code class="varname">Address=</code> in the [Network] section. The DHCPv6 client will include a prefix
+            <a href="#Neighbor-Address" class="attribute-ref"><code class="varname">Address=</code></a> in the <a href="#section-Network" class="section-ref">[Network]</a> section. The DHCPv6 client will include a prefix
             hint in the DHCPv6 solicitation sent to the server. The prefix length must be in the range
             1–128. Defaults to unset.</p>
           
@@ -6182,7 +6215,7 @@ FallbackLeaseLifetimeSec=infinity
                     </div>
                     <div class="option-desc">
                         
-            <p>As in the [DHCPv4] section, however because DHCPv6 uses 16-bit fields to store
+            <p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section, however because DHCPv6 uses 16-bit fields to store
             option numbers, the option number is an integer in the range 1..65536.</p>
           
                     </div>
@@ -6298,7 +6331,7 @@ FallbackLeaseLifetimeSec=infinity
           <a href="https://tools.ietf.org/html/rfc4291#section-2.5.4" target="_blank">RFC 4291</a>, section
           2.5.4), in which case the allowed value is hexadecimal, from 0 to 0x7fffffffffffffff
           inclusive. This option is only effective when used together with
-          <code class="varname">IPv6PrefixDelegation=</code> and the corresponding configuration on the upstream
+          <a href="#Network-IPv6PrefixDelegation" class="attribute-ref"><code class="varname">IPv6PrefixDelegation=</code></a> and the corresponding configuration on the upstream
           interface.</p>
         
                     </div>
@@ -6333,7 +6366,7 @@ FallbackLeaseLifetimeSec=infinity
                     <div class="option-desc">
                         
           <p>Specifies whether to add an address from the delegated prefixes which
-          are received from the WAN interface by the <code class="varname">IPv6PrefixDelegation=</code>. When
+          are received from the WAN interface by the <a href="#Network-IPv6PrefixDelegation" class="attribute-ref"><code class="varname">IPv6PrefixDelegation=</code></a>. When
           true (on LAN interfce), the EUI-64 algorithm will be used to form an interface identifier
           from the delegated prefixes. Defaults to true.</p>
         
@@ -6368,10 +6401,10 @@ FallbackLeaseLifetimeSec=infinity
                     </div>
                     <div class="option-desc">
                         
-          <p>Specifies an optional address generation mode for <code class="varname">Assign=</code>. Takes an
+          <p>Specifies an optional address generation mode for <a href="#IPv6Prefix-Assign" class="attribute-ref"><code class="varname">Assign=</code></a>. Takes an
           IPv6 address. When set, the lower bits of the supplied address are combined with the upper
           bits of a delegatad prefix received from the WAN interface by the
-          <code class="varname">IPv6PrefixDelegation=</code> prefixes to form a complete address.</p>
+          <a href="#Network-IPv6PrefixDelegation" class="attribute-ref"><code class="varname">IPv6PrefixDelegation=</code></a> prefixes to form a complete address.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Token=SomeString
@@ -6713,6 +6746,7 @@ UseDomains=route
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>1h</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DefaultLeaseTimeSec=5s
 DefaultLeaseTimeSec=100ms
+DefaultLeaseTimeSec=1min
 </code></pre></div></div>
                 <div id="DHCPServer-EmitDNS" class="option-block">
                     <div class="option-header">
@@ -6743,7 +6777,7 @@ DefaultLeaseTimeSec=100ms
                     <div class="option-desc">
                         <p><code class="varname">EmitDNS=</code> Configures whether the DHCP leases
         handed out to clients shall contain DNS server information. Defaults to <code>yes</code>.  The
-        DNS servers to pass to clients may be configured with the <code class="varname">DNS=</code> option, which takes
+        DNS servers to pass to clients may be configured with the <a href="#Network-DNS" class="attribute-ref"><code class="varname">DNS=</code></a> option, which takes
         a list of IPv4 addresses. If the <code class="varname">EmitDNS=</code> option is enabled but no servers
         configured, the servers are automatically propagated from an &quot;uplink&quot; interface that has appropriate
         servers set. The &quot;uplink&quot; interface is determined by the default route of the system with the highest
@@ -6784,10 +6818,10 @@ DefaultLeaseTimeSec=100ms
                          
                     </div>
                     <div class="option-desc">
-                        <p>Similar to the <code class="varname">EmitDNS=</code> and <code class="varname">DNS=</code> settings
+                        <p>Similar to the <a href="#IPv6PrefixDelegation-EmitDNS" class="attribute-ref"><code class="varname">EmitDNS=</code></a> and <a href="#Network-DNS" class="attribute-ref"><code class="varname">DNS=</code></a> settings
         described above, these settings configure whether and what server information for the indicate
         protocol shall be emitted as part of the DHCP lease. The same syntax, propagation semantics and
-        defaults apply as for <code class="varname">EmitDNS=</code> and <code class="varname">DNS=</code>.</p>
+        defaults apply as for <a href="#IPv6PrefixDelegation-EmitDNS" class="attribute-ref"><code class="varname">EmitDNS=</code></a> and <a href="#Network-DNS" class="attribute-ref"><code class="varname">DNS=</code></a>.</p>
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitNTP=yes
 </code></pre></div></div>
@@ -6818,11 +6852,11 @@ DefaultLeaseTimeSec=100ms
                          
                     </div>
                     <div class="option-desc">
-                        <p>Similar to the <code class="varname">EmitDNS=</code>
+                        <p>Similar to the <a href="#IPv6PrefixDelegation-EmitDNS" class="attribute-ref"><code class="varname">EmitDNS=</code></a>
         setting described above, this setting configures whether the
         DHCP lease should contain the router option. The same syntax,
         propagation semantics and defaults apply as for
-        <code class="varname">EmitDNS=</code>.</p>
+        <a href="#IPv6PrefixDelegation-EmitDNS" class="attribute-ref"><code class="varname">EmitDNS=</code></a>.</p>
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>EmitRouter=yes
 </code></pre></div></div>
@@ -7016,6 +7050,7 @@ DefaultLeaseTimeSec=100ms
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>1800</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouterLifetimeSec=5s
 RouterLifetimeSec=100ms
+RouterLifetimeSec=1min
 </code></pre></div></div>
                 <div id="IPv6PrefixDelegation-RouterPreference" class="option-block">
                     <div class="option-header">
@@ -7045,7 +7080,7 @@ RouterLifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         <p>Configures IPv6 router preference if
-        <code class="varname">RouterLifetimeSec=</code> is non-zero. Valid values are
+        <a href="#IPv6PrefixDelegation-RouterLifetimeSec" class="attribute-ref"><code class="varname">RouterLifetimeSec=</code></a> is non-zero. Valid values are
         <code>high</code>, <code>medium</code> and
         <code>low</code>, with <code>normal</code> and
         <code>default</code> added as synonyms for
@@ -7082,11 +7117,11 @@ RouterLifetimeSec=100ms
                          
                     </div>
                     <div class="option-desc">
-                        <p><code class="varname">DNS=</code> specifies a list of recursive DNS server IPv6 addresses that
+                        <p><a href="#Network-DNS" class="attribute-ref"><code class="varname">DNS=</code></a> specifies a list of recursive DNS server IPv6 addresses that
         are distributed via Router Advertisement messages when <code class="varname">EmitDNS=</code> is
-        true. <code class="varname">DNS=</code> also takes special value <code>_link_local</code>; in that case
-        the IPv6 link local address is distributed. If <code class="varname">DNS=</code> is empty, DNS servers are read
-        from the [Network] section. If the [Network] section does not contain any DNS servers either, DNS
+        true. <a href="#Network-DNS" class="attribute-ref"><code class="varname">DNS=</code></a> also takes special value <code>_link_local</code>; in that case
+        the IPv6 link local address is distributed. If <a href="#Network-DNS" class="attribute-ref"><code class="varname">DNS=</code></a> is empty, DNS servers are read
+        from the <a href="#section-Network" class="section-ref">[Network]</a> section. If the <a href="#section-Network" class="section-ref">[Network]</a> section does not contain any DNS servers either, DNS
         servers from the uplink with the highest priority default route are used. When
         <code class="varname">EmitDNS=</code> is false, no DNS server information is sent in Router Advertisement
         messages. <code class="varname">EmitDNS=</code> defaults to true.</p>
@@ -7121,8 +7156,8 @@ RouterLifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         <p>A list of DNS search domains distributed via Router Advertisement messages when
-        <code class="varname">EmitDomains=</code> is true. If <code class="varname">Domains=</code> is empty, DNS search domains
-        are read from the [Network] section. If the [Network] section does not contain any DNS search domains
+        <code class="varname">EmitDomains=</code> is true. If <a href="#Network-Domains" class="attribute-ref"><code class="varname">Domains=</code></a> is empty, DNS search domains
+        are read from the <a href="#section-Network" class="section-ref">[Network]</a> section. If the <a href="#section-Network" class="section-ref">[Network]</a> section does not contain any DNS search domains
         either, DNS search domains from the uplink with the highest priority default route are used. When
         <code class="varname">EmitDomains=</code> is false, no DNS search domain information is sent in Router
         Advertisement messages. <code class="varname">EmitDomains=</code> defaults to true.</p>
@@ -7157,11 +7192,12 @@ RouterLifetimeSec=100ms
                     </div>
                     <div class="option-desc">
                         <p>Lifetime in seconds for the DNS server addresses listed
-        in <code class="varname">DNS=</code> and search domains listed in
-        <code class="varname">Domains=</code>.</p>
+        in <a href="#Network-DNS" class="attribute-ref"><code class="varname">DNS=</code></a> and search domains listed in
+        <a href="#Network-Domains" class="attribute-ref"><code class="varname">Domains=</code></a>.</p>
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>3600</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DNSLifetimeSec=5s
 DNSLifetimeSec=100ms
+DNSLifetimeSec=1min
 </code></pre></div></div></div><div id="section-IPv6Prefix" class="section-block"><h2>IPv6Prefix Section</h2><h3 class="subcategory-header">Required</h3>
                 <div id="IPv6Prefix-Prefix" class="option-block">
                     <div class="option-header">
@@ -7192,7 +7228,7 @@ DNSLifetimeSec=100ms
                     <div class="option-desc">
                         <p>The IPv6 prefix that is to be distributed to hosts.  Similarly to configuring static
         IPv6 addresses, the setting is configured as an IPv6 prefix and its prefix length, separated by a
-        <code>/</code> character. Use multiple [IPv6Prefix] sections to configure multiple IPv6
+        <code>/</code> character. Use multiple <a href="#section-IPv6Prefix" class="section-ref">[IPv6Prefix]</a> sections to configure multiple IPv6
         prefixes since prefix lifetimes, address autoconfiguration and onlink status may differ from one
         prefix to another.</p>
                     </div>
@@ -7267,6 +7303,7 @@ DNSLifetimeSec=100ms
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>1800</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PreferredLifetimeSec=5s
 PreferredLifetimeSec=100ms
+PreferredLifetimeSec=1min
 </code></pre></div></div>
                 <div id="IPv6Prefix-Assign" class="option-block">
                     <div class="option-header">
@@ -7329,7 +7366,7 @@ PreferredLifetimeSec=100ms
                     <div class="option-desc">
                         <p>The IPv6 route that is to be distributed to hosts.  Similarly to configuring static
         IPv6 routes, the setting is configured as an IPv6 prefix routes and its prefix route length,
-        separated by a <code>/</code> character. Use multiple [IPv6PrefixRoutes] sections to configure
+        separated by a <code>/</code> character. Use multiple <a href="#section-IPv6PrefixRoutes" class="section-ref">[IPv6PrefixRoutes]</a> sections to configure
         multiple IPv6 prefix routes.</p>
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Route=SomeString
@@ -7367,6 +7404,7 @@ PreferredLifetimeSec=100ms
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>3600</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LifetimeSec=5s
 LifetimeSec=100ms
+LifetimeSec=1min
 </code></pre></div></div></div><div id="section-Bridge" class="section-block"><h2>Bridge Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-NetDev" class="dependency-link">[NetDev]</a></div>
                 <div id="Bridge-UnicastFlood" class="option-block">
                     <div class="option-header">
@@ -7895,7 +7933,7 @@ Priority=20
                     </div>
                     <div class="option-desc">
                         
-            <p>As in the [Network] section. This key is mandatory.</p>
+            <p>As in the <a href="#section-Network" class="section-ref">[Network]</a> section. This key is mandatory.</p>
           
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddress=00:11:22:33:44:55
@@ -7933,6 +7971,7 @@ Priority=20
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Destination=0.0.0.0/0
 Destination=192.168.1.0/24
+Destination=::/0
 </code></pre></div></div>
                 <div id="BridgeFDB-VLANId" class="option-block">
                     <div class="option-header">
@@ -7969,6 +8008,7 @@ Destination=192.168.1.0/24
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>VLANId=1
 VLANId=100
+VLANId=4094
 </code></pre></div></div>
                 <div id="BridgeFDB-VNI" class="option-block">
                     <div class="option-header">
@@ -8183,7 +8223,7 @@ VLANId=100
                     <div class="option-desc">
                         
             <p>The bitrate and sample point for the data phase, if CAN-FD is used. These settings are
-            analogous to the <code class="varname">BitRate=</code> and <code class="varname">SamplePoint=</code> keys.</p>
+            analogous to the <a href="#CAN-BitRate" class="attribute-ref"><code class="varname">BitRate=</code></a> and <a href="#CAN-SamplePoint" class="attribute-ref"><code class="varname">SamplePoint=</code></a> keys.</p>
           
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DataBitRate=0
@@ -8218,7 +8258,7 @@ VLANId=100
                         
             <p>When <code>yes</code>, CAN-FD mode is enabled for the interface.
             Note, that a bitrate and optional sample point should also be set for the CAN-FD data phase using
-            the <code class="varname">DataBitRate=</code> and <code class="varname">DataSamplePoint=</code> keys.</p>
+            the <a href="#CAN-DataBitRate" class="attribute-ref"><code class="varname">DataBitRate=</code></a> and <code class="varname">DataSamplePoint=</code> keys.</p>
           
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FDMode=yes
@@ -8294,6 +8334,7 @@ VLANId=100
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RestartSec=5s
 RestartSec=100ms
+RestartSec=1min
 </code></pre></div></div>
                 <div id="CAN-Termination" class="option-block">
                     <div class="option-header">
@@ -8470,6 +8511,7 @@ Parent=ingress
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DelaySec=5s
 DelaySec=100ms
+DelaySec=1min
 </code></pre></div></div>
                 <div id="NetworkEmulator-DelayJitterSec" class="option-block">
                     <div class="option-header">
@@ -8505,6 +8547,7 @@ DelaySec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DelayJitterSec=5s
 DelayJitterSec=100ms
+DelayJitterSec=1min
 </code></pre></div></div>
                 <div id="NetworkEmulator-PacketLimit" class="option-block">
                     <div class="option-header">
@@ -8644,6 +8687,7 @@ DuplicateRate=0.5%
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LatencySec=5s
 LatencySec=100ms
+LatencySec=1min
 </code></pre></div></div>
                 <div id="TokenBucketFilter-LimitBytes" class="option-block">
                     <div class="option-header">
@@ -8680,6 +8724,7 @@ LatencySec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LimitBytes=1G
 LimitBytes=512M
+LimitBytes=1024
 </code></pre></div></div>
                 <div id="TokenBucketFilter-BurstBytes" class="option-block">
                     <div class="option-header">
@@ -8717,6 +8762,7 @@ LimitBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BurstBytes=1G
 BurstBytes=512M
+BurstBytes=1024
 </code></pre></div></div>
                 <div id="TokenBucketFilter-Rate" class="option-block">
                     <div class="option-header">
@@ -8789,6 +8835,7 @@ Rate=100M
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>zero</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MPUBytes=1G
 MPUBytes=512M
+MPUBytes=1024
 </code></pre></div></div>
                 <div id="TokenBucketFilter-PeakRate" class="option-block">
                     <div class="option-header">
@@ -8861,6 +8908,7 @@ PeakRate=100M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
 MTUBytes=9000
+MTUBytes=auto
 </code></pre></div></div></div><div id="section-PIE" class="section-block"><h2>PIE Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="PIE-PacketLimit" class="option-block">
                     <div class="option-header">
@@ -8964,6 +9012,7 @@ MTUBytes=9000
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PerturbPeriodSec=5s
 PerturbPeriodSec=100ms
+PerturbPeriodSec=1min
 </code></pre></div></div></div><div id="section-BFIFO" class="section-block"><h2>BFIFO Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="BFIFO-LimitBytes" class="option-block">
                     <div class="option-header">
@@ -9002,6 +9051,7 @@ PerturbPeriodSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LimitBytes=1G
 LimitBytes=512M
+LimitBytes=1024
 </code></pre></div></div></div><div id="section-PFIFO" class="section-block"><h2>PFIFO Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="PFIFO-PacketLimit" class="option-block">
                     <div class="option-header">
@@ -9067,7 +9117,7 @@ LimitBytes=512M
                     </div>
                     <div class="option-desc">
                         
-          <p>As in [PFIFO] section.</p>
+          <p>As in <a href="#section-PFIFO" class="section-ref">[PFIFO]</a> section.</p>
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketLimit=SomeString
 </code></pre></div></div></div><div id="section-PFIFOFast" class="section-block"><h2>PFIFOFast Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div></div><div id="section-CAKE" class="section-block"><h2>CAKE Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
@@ -9209,6 +9259,7 @@ LimitBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TargetSec=5s
 TargetSec=100ms
+TargetSec=1min
 </code></pre></div></div>
                 <div id="ControlledDelay-IntervalSec" class="option-block">
                     <div class="option-header">
@@ -9244,6 +9295,7 @@ TargetSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IntervalSec=5s
 IntervalSec=100ms
+IntervalSec=1min
 </code></pre></div></div>
                 <div id="ControlledDelay-ECN" class="option-block">
                     <div class="option-header">
@@ -9313,6 +9365,7 @@ IntervalSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CEThresholdSec=5s
 CEThresholdSec=100ms
+CEThresholdSec=1min
 </code></pre></div></div></div><div id="section-DeficitRoundRobinScheduler" class="section-block"><h2>DeficitRoundRobinScheduler Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div></div><div id="section-DeficitRoundRobinSchedulerClass" class="section-block"><h2>DeficitRoundRobinSchedulerClass Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="DeficitRoundRobinSchedulerClass-QuantumBytes" class="option-block">
                     <div class="option-header">
@@ -9379,8 +9432,8 @@ CEThresholdSec=100ms
                     <div class="option-desc">
                         
           <p>Specifies the number of bands. An unsigned integer in the range 1–16. This value has to be at
-          least large enough to cover the strict bands specified through the <code class="varname">StrictBands=</code>
-          and bandwidth-sharing bands specified in <code class="varname">QuantumBytes=</code>.</p>
+          least large enough to cover the strict bands specified through the <a href="#EnhancedTransmissionSelection-StrictBands" class="attribute-ref"><code class="varname">StrictBands=</code></a>
+          and bandwidth-sharing bands specified in <a href="#HierarchyTokenBucketClass-QuantumBytes" class="attribute-ref"><code class="varname">QuantumBytes=</code></a>.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Bands=SomeString
@@ -9664,6 +9717,7 @@ CEThresholdSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MemoryLimitBytes=1G
 MemoryLimitBytes=512M
+MemoryLimitBytes=1024
 </code></pre></div></div>
                 <div id="FairQueueingControlledDelay-Flows" class="option-block">
                     <div class="option-header">
@@ -9733,6 +9787,7 @@ MemoryLimitBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TargetSec=5s
 TargetSec=100ms
+TargetSec=1min
 </code></pre></div></div>
                 <div id="FairQueueingControlledDelay-IntervalSec" class="option-block">
                     <div class="option-header">
@@ -9768,6 +9823,7 @@ TargetSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IntervalSec=5s
 IntervalSec=100ms
+IntervalSec=1min
 </code></pre></div></div>
                 <div id="FairQueueingControlledDelay-QuantumBytes" class="option-block">
                     <div class="option-header">
@@ -9804,6 +9860,7 @@ IntervalSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuantumBytes=1G
 QuantumBytes=512M
+QuantumBytes=1024
 </code></pre></div></div>
                 <div id="FairQueueingControlledDelay-ECN" class="option-block">
                     <div class="option-header">
@@ -9873,6 +9930,7 @@ QuantumBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CEThresholdSec=5s
 CEThresholdSec=100ms
+CEThresholdSec=1min
 </code></pre></div></div></div><div id="section-FairQueueing" class="section-block"><h2>FairQueueing Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="FairQueueing-PacketLimit" class="option-block">
                     <div class="option-header">
@@ -9978,6 +10036,7 @@ CEThresholdSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuantumBytes=1G
 QuantumBytes=512M
+QuantumBytes=1024
 </code></pre></div></div>
                 <div id="FairQueueing-InitialQuantumBytes" class="option-block">
                     <div class="option-header">
@@ -10015,6 +10074,7 @@ QuantumBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>InitialQuantumBytes=1G
 InitialQuantumBytes=512M
+InitialQuantumBytes=1024
 </code></pre></div></div>
                 <div id="FairQueueing-MaximumRate" class="option-block">
                     <div class="option-header">
@@ -10188,6 +10248,7 @@ InitialQuantumBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CEThresholdSec=5s
 CEThresholdSec=100ms
+CEThresholdSec=1min
 </code></pre></div></div></div><div id="section-TrivialLinkEqualizer" class="section-block"><h2>TrivialLinkEqualizer Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="TrivialLinkEqualizer-Id" class="option-block">
                     <div class="option-header">
@@ -10288,7 +10349,7 @@ CEThresholdSec=100ms
                     <div class="option-desc">
                         
           <p>Takes an unsigned integer. The DRR quantums are calculated by dividing the value
-          configured in <code class="varname">Rate=</code> by <code class="varname">RateToQuantum=</code>.</p>
+          configured in <a href="#HierarchyTokenBucketClass-Rate" class="attribute-ref"><code class="varname">Rate=</code></a> by <code class="varname">RateToQuantum=</code>.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RateToQuantum=SomeString
@@ -10398,6 +10459,7 @@ Priority=20
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>QuantumBytes=1G
 QuantumBytes=512M
+QuantumBytes=1024
 </code></pre></div></div>
                 <div id="HierarchyTokenBucketClass-MTUBytes" class="option-block">
                     <div class="option-header">
@@ -10433,6 +10495,7 @@ QuantumBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
 MTUBytes=9000
+MTUBytes=auto
 </code></pre></div></div>
                 <div id="HierarchyTokenBucketClass-OverheadBytes" class="option-block">
                     <div class="option-header">
@@ -10469,6 +10532,7 @@ MTUBytes=9000
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OverheadBytes=1G
 OverheadBytes=512M
+OverheadBytes=1024
 </code></pre></div></div>
                 <div id="HierarchyTokenBucketClass-CeilRate" class="option-block">
                     <div class="option-header">
@@ -10500,7 +10564,7 @@ OverheadBytes=512M
                         
           <p>Specifies the maximum rate at which a class can send, if its parent has bandwidth to spare.
           When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits,
-          respectively, to the base of 1000. When unset, the value specified with <code class="varname">Rate=</code>
+          respectively, to the base of 1000. When unset, the value specified with <a href="#HierarchyTokenBucketClass-Rate" class="attribute-ref"><code class="varname">Rate=</code></a>
           is used.</p>
         
                     </div>
@@ -10541,6 +10605,7 @@ OverheadBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BufferBytes=1G
 BufferBytes=512M
+BufferBytes=1024
 </code></pre></div></div>
                 <div id="HierarchyTokenBucketClass-CeilBufferBytes" class="option-block">
                     <div class="option-header">
@@ -10681,6 +10746,7 @@ BufferBytes=512M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MaxPacketBytes=1G
 MaxPacketBytes=512M
+MaxPacketBytes=1024
 </code></pre></div></div></div><div id="section-BridgeVLAN" class="section-block"><h2>BridgeVLAN Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Network" class="dependency-link">[Network]</a></div>
                 <div id="BridgeVLAN-VLAN" class="option-block">
                     <div class="option-header">
@@ -10745,7 +10811,7 @@ MaxPacketBytes=512M
                     <div class="option-desc">
                         
             <p>The VLAN ID specified here will be used to untag frames on egress. Configuring
-            <code class="varname">EgressUntagged=</code> implicates the use of <code class="varname">VLAN=</code> above and will enable the
+            <code class="varname">EgressUntagged=</code> implicates the use of <a href="#BridgeVLAN-VLAN" class="attribute-ref"><code class="varname">VLAN=</code></a> above and will enable the
             VLAN ID for ingress as well. This can be either a single ID or a range M-N.</p>
           
                     </div>
@@ -10781,7 +10847,7 @@ MaxPacketBytes=512M
                         
             <p>The Port VLAN ID specified here is assigned to all untagged frames at ingress.
             <code class="varname">PVID=</code> can be used only once. Configuring <code class="varname">PVID=</code> implicates the use of
-            <code class="varname">VLAN=</code> above and will enable the VLAN ID for ingress as well.</p>
+            <a href="#BridgeVLAN-VLAN" class="attribute-ref"><code class="varname">VLAN=</code></a> above and will enable the VLAN ID for ingress as well.</p>
           
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PVID=False

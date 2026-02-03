@@ -1,0 +1,12 @@
+# /etc/systemd/network/veth.netdev
+# Minimum Version: systemd v215
+# OVERLAYS: VETH PAIR
+#
+# Defines a Virtual Ethernet pair (useful for connecting namespaces).
+
+[NetDev]
+Name=veth0
+Kind=veth
+
+[Peer]
+Name=veth1

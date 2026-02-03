@@ -1,0 +1,15 @@
+# /etc/systemd/network/lacp-bond.netdev
+# Minimum Version: systemd v216
+# BRIDGING: LACP BOND (DEVICE)
+#
+# Defines a bond interface using 802.3ad LACP.
+
+[NetDev]
+Name=bond0
+Kind=bond
+
+[Bond]
+Mode=802.3ad
+TransmitHashPolicy=layer3+4
+MIIMonitorSec=1s
+LACPTransmitRate=fast

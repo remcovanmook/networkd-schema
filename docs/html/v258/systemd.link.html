@@ -67,7 +67,7 @@
                     <div class="option-desc">
                         
           <p>A whitespace-separated list of hardware&#x27;s permanent addresses. While
-          <code class="varname">MACAddress=</code> matches the device&#x27;s current MAC address, this matches the
+          <a href="#Link-MACAddress" class="attribute-ref"><code class="varname">MACAddress=</code></a> matches the device&#x27;s current MAC address, this matches the
           device&#x27;s permanent MAC address, which may be different from the current one. Use full
           colon-, hyphen- or dot-delimited hexadecimal, or IPv4 or IPv6 address format. This option may
           appear more than once, in which case the lists are merged. If the empty string is assigned to
@@ -161,6 +161,8 @@
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OriginalName=eth*
 OriginalName=en* wlan*
+OriginalName=!virbr*
+OriginalName=!eth0 eth1
 </code></pre></div></div>
                 <div id="Match-Host" class="option-block">
                     <div class="option-header">
@@ -548,6 +550,8 @@ MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=eth*
 Path=en* wlan*
+Path=!virbr*
+Path=!eth0 eth1
 </code></pre></div></div>
                 <div id="Match-Driver" class="option-block">
                     <div class="option-header">
@@ -587,6 +591,8 @@ Path=en* wlan*
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Driver=eth*
 Driver=en* wlan*
+Driver=!virbr*
+Driver=!eth0 eth1
 </code></pre></div></div>
                 <div id="Match-Type" class="option-block">
                     <div class="option-header">
@@ -628,6 +634,7 @@ Driver=en* wlan*
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Type=global
 Type=link
+Type=host
 </code></pre></div></div><h3 class="subcategory-header">Virtualization</h3>
                 <div id="Match-Kind" class="option-block">
                     <div class="option-header">
@@ -671,6 +678,8 @@ Type=link
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Kind=bridge
 Kind=bond
+Kind=vlan
+Kind=veth
 </code></pre></div></div>
                 <div id="Match-Virtualization" class="option-block">
                     <div class="option-header">
@@ -831,8 +840,8 @@ Description=Uplink to ISP
           This option supports simple specifier expansion, see the Specifiers section below.
           This option can be specified multiple times. If an empty string is assigned, then the all previous
           assignments are cleared.</p>
-          <p>If the same property is also set in <code class="varname">Property=</code> in the above, then the
-          imported property value will be overridden by the value specified in <code class="varname">Property=</code>.
+          <p>If the same property is also set in <a href="#Link-Property" class="attribute-ref"><code class="varname">Property=</code></a> in the above, then the
+          imported property value will be overridden by the value specified in <a href="#Link-Property" class="attribute-ref"><code class="varname">Property=</code></a>.
           </p>
 
           
@@ -873,9 +882,9 @@ Description=Uplink to ISP
           This option supports simple specifier expansion, see the Specifiers section below.
           This option can be specified multiple times. If an empty string is assigned, then the all previous
           assignments are cleared.</p>
-          <p>This setting is applied after <code class="varname">ImportProperty=</code> and
-          <code class="varname">Property=</code> are applied. Hence, if the same property is specified in
-          <code class="varname">ImportProperty=</code> or <code class="varname">Property=</code>, then the imported or specified
+          <p>This setting is applied after <a href="#Link-ImportProperty" class="attribute-ref"><code class="varname">ImportProperty=</code></a> and
+          <a href="#Link-Property" class="attribute-ref"><code class="varname">Property=</code></a> are applied. Hence, if the same property is specified in
+          <a href="#Link-ImportProperty" class="attribute-ref"><code class="varname">ImportProperty=</code></a> or <a href="#Link-Property" class="attribute-ref"><code class="varname">Property=</code></a>, then the imported or specified
           property value will be ignored, and the property will be unset.</p>
 
           
@@ -976,7 +985,7 @@ Description=Uplink to ISP
               </dd>
             <dt><span class="docbook-option">none</span></dt><dd>
                 <p>Keeps the MAC address assigned by the kernel. Or use the MAC address specified in
-                <code class="varname">MACAddress=</code>.</p>
+                <a href="#Link-MACAddress" class="attribute-ref"><code class="varname">MACAddress=</code></a>.</p>
 
                 
               </dd>
@@ -1120,7 +1129,7 @@ Description=Uplink to ISP
                     <div class="option-desc">
                         
           <p>The interface name to use. This option has lower precedence than
-          <code class="varname">NamePolicy=</code>, so for this setting to take effect, <code class="varname">NamePolicy=</code>
+          <a href="#Link-NamePolicy" class="attribute-ref"><code class="varname">NamePolicy=</code></a>, so for this setting to take effect, <a href="#Link-NamePolicy" class="attribute-ref"><code class="varname">NamePolicy=</code></a>
           must either be unset, empty, disabled, or all policies configured there must fail. Also see the
           example below with <code>Name=dmz0</code>.</p>
 
@@ -1221,7 +1230,7 @@ Name=br0
           be ignored.</p>
 
           <p>Alternative interface names may be used to identify interfaces in various tools. In contrast
-          to the primary name (as configured with <code class="varname">Name=</code> above) there may be multiple
+          to the primary name (as configured with <a href="#Link-Name" class="attribute-ref"><code class="varname">Name=</code></a> above) there may be multiple
           alternative names referring to the same interface. Alternative names may have a maximum length of
           127 characters, in contrast to the 15 allowed for the primary interface name, but otherwise are
           subject to the same naming constraints.</p>
@@ -1521,8 +1530,8 @@ BitsPerSecond=100M
               </dd>
             <dt><span class="docbook-option">secureon</span></dt><dd>
                 <p>Enable SecureOn password for MagicPacket. Implied when
-                <code class="varname">WakeOnLanPassword=</code> is specified. If specified without
-                <code class="varname">WakeOnLanPassword=</code> option, then the password is read from the
+                <a href="#Link-WakeOnLanPassword" class="attribute-ref"><code class="varname">WakeOnLanPassword=</code></a> is specified. If specified without
+                <a href="#Link-WakeOnLanPassword" class="attribute-ref"><code class="varname">WakeOnLanPassword=</code></a> option, then the password is read from the
                 credential <code><span class="docbook-replaceable">LINK</span>.link.wol.password</code> (e.g.,
                 <code>60-foo.link.wol.password</code>), and if the credential not found, then
                 read from <code>wol.password</code>. See
@@ -1579,7 +1588,7 @@ BitsPerSecond=100M
           <code class="constant">AF_UNIX</code> stream socket is specified, a connection is made to it and the
           password is read from it. The password must be 6 bytes in hex format with each byte separated
           by a colon (<code>:</code>) like an Ethernet MAC address, e.g.,
-          <code>aa:bb:cc:dd:ee:ff</code>. This implies <code class="varname">WakeOnLan=secureon</code>.
+          <code>aa:bb:cc:dd:ee:ff</code>. This implies <a href="#Link-WakeOnLan" class="attribute-ref"><code class="varname">WakeOnLan=secureon</code></a>.
           Defaults to unset, and the current value will not be changed.</p>
 
           
@@ -2413,6 +2422,7 @@ BitsPerSecond=100M
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentOffloadMaxBytes=1G
 GenericSegmentOffloadMaxBytes=512M
+GenericSegmentOffloadMaxBytes=1024
 </code></pre></div></div>
                 <div id="Link-GenericSegmentOffloadMaxSegments" class="option-block">
                     <div class="option-header">
@@ -2788,7 +2798,7 @@ GenericSegmentOffloadMaxBytes=512M
                     <div class="option-desc">
                         
           <p>The interface MAC address to use. For this setting to take effect,
-          <code class="varname">MACAddressPolicy=</code> must either be unset, empty, or <code>none</code>.
+          <a href="#Link-MACAddressPolicy" class="attribute-ref"><code class="varname">MACAddressPolicy=</code></a> must either be unset, empty, or <code>none</code>.
           </p>
 
           
@@ -2834,6 +2844,7 @@ MACAddress=none
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
 MTUBytes=9000
+MTUBytes=auto
 </code></pre></div></div><h3 class="subcategory-header">Offload</h3>
                 <div id="Link-TCPSegmentationOffload" class="option-block">
                     <div class="option-header">
@@ -3118,7 +3129,7 @@ MTUBytes=9000
                     <div class="option-desc">
                         
           <p>Takes a list of link modes, e.g. <code>1000baset-full</code>. See the table for
-          <code class="varname">Advertise=</code> setting in [Link] section in the above for possible values. This
+          <a href="#Link-Advertise" class="attribute-ref"><code class="varname">Advertise=</code></a> setting in <a href="#section-Link" class="section-ref">[Link]</a> section in the above for possible values. This
           configures the Energy Efficient Ethernet capable connection modes to be advertised. Defaults to
           unset, and the advertised modes will be unchanged.</p>
 

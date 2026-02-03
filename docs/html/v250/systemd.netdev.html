@@ -335,6 +335,8 @@ Name=br0
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Kind=bridge
 Kind=bond
+Kind=vlan
+Kind=veth
 </code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
                 <div id="NetDev-MTUBytes" class="option-block">
                     <div class="option-header">
@@ -367,7 +369,7 @@ Kind=bond
           <p>The maximum transmission unit in bytes to set for the device. The usual suffixes K, M, G
           are supported and are understood to the base of 1024. For <code>tun</code> or
           <code>tap</code> devices, <code class="varname">MTUBytes=</code> setting is not currently supported in
-          [NetDev] section. Please specify it in [Link] section of
+          <a href="#section-NetDev" class="section-ref">[NetDev]</a> section. Please specify it in <a href="#section-Link" class="section-ref">[Link]</a> section of
           corresponding
           <a href="systemd.network.html">systemd.network</a>
           files.</p>
@@ -375,6 +377,7 @@ Kind=bond
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
 MTUBytes=9000
+MTUBytes=auto
 </code></pre></div></div>
                 <div id="NetDev-MACAddress" class="option-block">
                     <div class="option-header">
@@ -408,8 +411,8 @@ MTUBytes=9000
           <code>none</code>. When <code>none</code>, <code class="command">systemd-networkd</code>
           does not request the MAC address for the device, and the kernel will assign a random MAC
           address. For <code>tun</code>, <code>tap</code>, or <code>l2tp</code>
-          devices, the <code class="varname">MACAddress=</code> setting in the [NetDev] section is not
-          supported and will be ignored. Please specify it in the [Link] section of the corresponding
+          devices, the <code class="varname">MACAddress=</code> setting in the <a href="#section-NetDev" class="section-ref">[NetDev]</a> section is not
+          supported and will be ignored. Please specify it in the <a href="#section-Link" class="section-ref">[Link]</a> section of the corresponding
           <a href="systemd.network.html">systemd.network</a>
           file. If this option is not set, <code>vlan</code> device inherits the MAC address of
           the master interface. For other kind of netdevs, if this option is not set, then the MAC
@@ -495,6 +498,7 @@ Description=Uplink to ISP
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>HelloTimeSec=5s
 HelloTimeSec=100ms
+HelloTimeSec=1min
 </code></pre></div></div>
                 <div id="Bridge-MaxAgeSec" class="option-block">
                     <div class="option-header">
@@ -532,6 +536,7 @@ HelloTimeSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MaxAgeSec=5s
 MaxAgeSec=100ms
+MaxAgeSec=1min
 </code></pre></div></div>
                 <div id="Bridge-ForwardDelaySec" class="option-block">
                     <div class="option-header">
@@ -567,6 +572,7 @@ MaxAgeSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ForwardDelaySec=5s
 ForwardDelaySec=100ms
+ForwardDelaySec=1min
 </code></pre></div></div>
                 <div id="Bridge-AgeingTimeSec" class="option-block">
                     <div class="option-header">
@@ -602,6 +608,7 @@ ForwardDelaySec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AgeingTimeSec=5s
 AgeingTimeSec=100ms
+AgeingTimeSec=1min
 </code></pre></div></div>
                 <div id="Bridge-Priority" class="option-block">
                     <div class="option-header">
@@ -958,6 +965,7 @@ Priority=20
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Id=1
 Id=100
+Id=4094
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="VLAN-Protocol" class="option-block">
                     <div class="option-header">
@@ -1524,6 +1532,7 @@ Protocol=802.1q
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FDBAgeingSec=5s
 FDBAgeingSec=100ms
+FDBAgeingSec=1min
 </code></pre></div></div>
                 <div id="VXLAN-MaximumFDBEntries" class="option-block">
                     <div class="option-header">
@@ -2106,7 +2115,10 @@ FDBAgeingSec=100ms
           <p>Configures destination IP address.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=192.168.1.1
+Remote=10.0.0.1
+Remote=2001:db8::1
+Remote=fe80::1
 </code></pre></div></div>
                 <div id="VXLAN-Local" class="option-block">
                     <div class="option-header">
@@ -2139,7 +2151,10 @@ FDBAgeingSec=100ms
           <p>Configures local IP address.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Local=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Local=192.168.1.1
+Local=10.0.0.1
+Local=2001:db8::1
+Local=fe80::1
 </code></pre></div></div>
                 <div id="VXLAN-Group" class="option-block">
                     <div class="option-header">
@@ -2173,7 +2188,10 @@ FDBAgeingSec=100ms
           multicast group address.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Group=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Group=192.168.1.1
+Group=10.0.0.1
+Group=2001:db8::1
+Group=fe80::1
 </code></pre></div></div>
                 <div id="VXLAN-DestinationPort" class="option-block">
                     <div class="option-header">
@@ -2274,7 +2292,10 @@ FDBAgeingSec=100ms
           <p>Specifies the unicast destination IP address to use in outgoing packets.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=192.168.1.1
+Remote=10.0.0.1
+Remote=2001:db8::1
+Remote=fe80::1
 </code></pre></div></div>
                 <div id="GENEVE-TOS" class="option-block">
                     <div class="option-header">
@@ -2337,7 +2358,7 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same values as in the [VXLAN] section, except that when unset
+          <p>Accepts the same values as in the <a href="#section-VXLAN" class="section-ref">[VXLAN]</a> section, except that when unset
           or set to 0, the kernel&#x27;s default will be used, meaning that packet TTL will be set from
           <code>/proc/sys/net/ipv4/ip_default_ttl</code>.</p>
         
@@ -2539,7 +2560,7 @@ FDBAgeingSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in [VXLAN] section.</p>
+          <p>Accepts the same key as in <a href="#section-VXLAN" class="section-ref">[VXLAN]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPDoNotFragment=SomeString
@@ -2712,7 +2733,10 @@ FDBAgeingSec=100ms
           <p>Specifies the IP address of the remote peer. This setting is compulsory.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=192.168.1.1
+Remote=10.0.0.1
+Remote=2001:db8::1
+Remote=fe80::1
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="L2TP-Local" class="option-block">
                     <div class="option-header">
@@ -3329,7 +3353,7 @@ Name=br0
                     <div class="option-desc">
                         
           <p>Specifies the packet number to be used for replay protection and the construction of
-          the initialization vector (along with the secure channel identifier [SCI]). Takes a value
+          the initialization vector (along with the secure channel identifier <a href="#section-SCI" class="section-ref">[SCI]</a>). Takes a value
           between 1-4,294,967,295. Defaults to unset.
           </p>
         
@@ -3366,7 +3390,7 @@ Name=br0
                         
           <p>Takes an absolute path to a file which contains a 128-bit key encoded in a hexadecimal string,
           which will be used in the transmission channel. When this option is specified,
-          <code class="varname">Key=</code> is ignored. Note that the file must be readable by the user
+          <a href="#Tunnel-Key" class="attribute-ref"><code class="varname">Key=</code></a> is ignored. Note that the file must be readable by the user
           <code>systemd-network</code>, so it should be, e.g., owned by
           <code>root:systemd-network</code> with a <code>0640</code> file mode. If the path
           refers to an <code class="constant">AF_UNIX</code> stream socket in the file system a connection is made to
@@ -3438,8 +3462,8 @@ Name=br0
                     <div class="option-desc">
                         
           <p>If enabled, then the security association is used for encoding. Only
-          one [MACsecTransmitAssociation] section can enable this option. When enabled,
-          <code class="varname">Activate=yes</code> is implied. Defaults to unset.</p>
+          one <a href="#section-MACsecTransmitAssociation" class="section-ref">[MACsecTransmitAssociation]</a> section can enable this option. When enabled,
+          <a href="#MACsecReceiveAssociation-Activate" class="attribute-ref"><code class="varname">Activate=yes</code></a> is implied. Defaults to unset.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseForEncoding=yes
@@ -3472,7 +3496,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in [MACsecReceiveChannel] section.</p>
+          <p>Accepts the same key as in <a href="#section-MACsecReceiveChannel" class="section-ref">[MACsecReceiveChannel]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=SomeString
@@ -3505,7 +3529,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in [MACsecReceiveChannel] section.</p>
+          <p>Accepts the same key as in <a href="#section-MACsecReceiveChannel" class="section-ref">[MACsecReceiveChannel]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddress=00:11:22:33:44:55
@@ -3538,7 +3562,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in [MACsecTransmitAssociation] section.</p>
+          <p>Accepts the same key as in <a href="#section-MACsecTransmitAssociation" class="section-ref">[MACsecTransmitAssociation]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PacketNumber=SomeString
@@ -3571,7 +3595,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in [MACsecTransmitAssociation] section.</p>
+          <p>Accepts the same key as in <a href="#section-MACsecTransmitAssociation" class="section-ref">[MACsecTransmitAssociation]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KeyId=SomeString
@@ -3604,7 +3628,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in [MACsecTransmitAssociation] section.</p>
+          <p>Accepts the same key as in <a href="#section-MACsecTransmitAssociation" class="section-ref">[MACsecTransmitAssociation]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Key=SomeString
@@ -3637,7 +3661,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in [MACsecTransmitAssociation] section.</p>
+          <p>Accepts the same key as in <a href="#section-MACsecTransmitAssociation" class="section-ref">[MACsecTransmitAssociation]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KeyFile=SomeString
@@ -3670,7 +3694,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in [MACsecTransmitAssociation] section.</p>
+          <p>Accepts the same key as in <a href="#section-MACsecTransmitAssociation" class="section-ref">[MACsecTransmitAssociation]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Activate=SomeString
@@ -3704,7 +3728,7 @@ Name=br0
                     <div class="option-desc">
                         
           <p>This setting specifies the UDP destination port for encapsulation.
-          This field is mandatory when <code class="varname">FooOverUDP=yes</code>, and is not set by default.</p>
+          This field is mandatory when <a href="#Tunnel-FooOverUDP" class="attribute-ref"><code class="varname">FooOverUDP=yes</code></a>, and is not set by default.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FOUDestinationPort=0
@@ -3775,7 +3799,10 @@ Name=br0
           <code>any</code>.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=192.168.1.1
+Remote=10.0.0.1
+Remote=2001:db8::1
+Remote=fe80::1
 </code></pre></div></div>
                 <div id="Tunnel-TOS" class="option-block">
                     <div class="option-header">
@@ -4033,7 +4060,7 @@ Name=br0
                     <div class="option-desc">
                         
           <p>The <code class="varname">Key=</code> parameter specifies the same key to use in
-          both directions (<code class="varname">InputKey=</code> and <code class="varname">OutputKey=</code>).
+          both directions (<a href="#Tunnel-InputKey" class="attribute-ref"><code class="varname">InputKey=</code></a> and <a href="#Tunnel-OutputKey" class="attribute-ref"><code class="varname">OutputKey=</code></a>).
           The <code class="varname">Key=</code> is either a number or an IPv4 address-like dotted quad.
           It is used as mark-configured SAD/SPD entry as part of the lookup key (both in data
           and control path) in IP XFRM (framework used to implement IPsec protocol).
@@ -4073,7 +4100,7 @@ Name=br0
                     <div class="option-desc">
                         
           <p>The <code class="varname">InputKey=</code> parameter specifies the key to use for input.
-          The format is same as <code class="varname">Key=</code>. It is only used for VTI/VTI6, GRE, GRETAP,
+          The format is same as <a href="#Tunnel-Key" class="attribute-ref"><code class="varname">Key=</code></a>. It is only used for VTI/VTI6, GRE, GRETAP,
           and ERSPAN tunnels.</p>
         
                     </div>
@@ -4108,7 +4135,7 @@ Name=br0
                     <div class="option-desc">
                         
           <p>The <code class="varname">OutputKey=</code> parameter specifies the key to use for output.
-          The format is same as <code class="varname">Key=</code>. It is only used for VTI/VTI6, GRE, GRETAP,
+          The format is same as <a href="#Tunnel-Key" class="attribute-ref"><code class="varname">Key=</code></a>. It is only used for VTI/VTI6, GRE, GRETAP,
           and ERSPAN tunnels.</p>
         
                     </div>
@@ -4355,7 +4382,7 @@ Name=br0
                     </div>
                     <div class="option-desc">
                         
-          <p>Accepts the same key as in the [FooOverUDP] section.</p>
+          <p>Accepts the same key as in the <a href="#section-FooOverUDP" class="section-ref">[FooOverUDP]</a> section.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Encapsulation=SomeString
@@ -4597,14 +4624,15 @@ Name=br0
                     <div class="option-desc">
                         
           <p>The <code class="varname">Protocol=</code> specifies the protocol number of the packets arriving
-          at the UDP port. When <code class="varname">Encapsulation=FooOverUDP</code>, this field is mandatory
+          at the UDP port. When <a href="#FooOverUDP-Encapsulation" class="attribute-ref"><code class="varname">Encapsulation=FooOverUDP</code></a>, this field is mandatory
           and is not set by default. Takes an IP protocol name such as <code>gre</code> or
           <code>ipip</code>, or an integer within the range 1…255. When
-          <code class="varname">Encapsulation=GenericUDPEncapsulation</code>, this must not be specified.</p>
+          <a href="#FooOverUDP-Encapsulation" class="attribute-ref"><code class="varname">Encapsulation=GenericUDPEncapsulation</code></a>, this must not be specified.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Protocol=kernel
 Protocol=boot
+Protocol=static
 </code></pre></div></div>
                 <div id="FooOverUDP-Peer" class="option-block">
                     <div class="option-header">
@@ -4638,7 +4666,10 @@ Protocol=boot
           is mandatory.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Peer=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Peer=192.168.1.1
+Peer=10.0.0.1
+Peer=2001:db8::1
+Peer=fe80::1
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="FooOverUDP-Encapsulation" class="option-block">
                     <div class="option-header">
@@ -4712,7 +4743,10 @@ Protocol=boot
           <p>Configures local IP address.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Local=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Local=192.168.1.1
+Local=10.0.0.1
+Local=2001:db8::1
+Local=fe80::1
 </code></pre></div></div></div><div id="section-Peer" class="section-block"><h2>Peer Section</h2><h3 class="subcategory-header">Required</h3>
                 <div id="Peer-Name" class="option-block">
                     <div class="option-header">
@@ -5023,7 +5057,7 @@ Name=br0
           <p>The Base64 encoded private key for the interface. It can be
           generated using the <code class="command">wg genkey</code> command
           (see <a href="https://www.freedesktop.org/software/systemd/man/latest/wg.html" target="_blank" class="external-link">wg</a>).
-          This option or <code class="varname">PrivateKeyFile=</code> is mandatory to use WireGuard.
+          This option or <a href="#WireGuard-PrivateKeyFile" class="attribute-ref"><code class="varname">PrivateKeyFile=</code></a> is mandatory to use WireGuard.
           Note that because this information is secret, you may want to set
           the permissions of the .netdev file to be owned by <code>root:systemd-network</code>
           with a <code>0640</code> file mode.</p>
@@ -5060,14 +5094,14 @@ Name=br0
                     <div class="option-desc">
                         
           <p>The table identifier for the routes to the addresses specified in the
-          <code class="varname">AllowedIPs=</code>. Takes the special value <code>off</code>, one of the
+          <a href="#WireGuardPeer-AllowedIPs" class="attribute-ref"><code class="varname">AllowedIPs=</code></a>. Takes the special value <code>off</code>, one of the
           predefined names <code>default</code>, <code>main</code>, and
           <code>local</code>, names defined in <code class="varname">RouteTable=</code> in
           <a href="networkd.conf.html">networkd.conf</a>,
           or a number in the range 1…4294967295. When <code>off</code> the routes to the
-          addresses specified in the <code class="varname">AllowedIPs=</code> setting will not be configured.
+          addresses specified in the <a href="#WireGuardPeer-AllowedIPs" class="attribute-ref"><code class="varname">AllowedIPs=</code></a> setting will not be configured.
           Defaults to <code>main</code>. This setting will be ignored when the same setting is
-          specified in the [WireGuardPeer] section.</p>
+          specified in the <a href="#section-WireGuardPeer" class="section-ref">[WireGuardPeer]</a> section.</p>
         
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>false</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteTable=false
@@ -5102,9 +5136,9 @@ RouteTable=true
                     <div class="option-desc">
                         
           <p>The priority of the routes to the addresses specified in the
-          <code class="varname">AllowedIPs=</code>. Takes an integer in the range 0…4294967295. Defaults to 0
+          <a href="#WireGuardPeer-AllowedIPs" class="attribute-ref"><code class="varname">AllowedIPs=</code></a>. Takes an integer in the range 0…4294967295. Defaults to 0
           for IPv4 addresses, and 1024 for IPv6 addresses. This setting will be ignored when the same
-          setting is specified in the [WireGuardPeer] section.</p>
+          setting is specified in the <a href="#section-WireGuardPeer" class="section-ref">[WireGuardPeer]</a> section.</p>
         
                     </div>
                 <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>0</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteMetric=0
@@ -5138,7 +5172,7 @@ RouteTable=true
                     <div class="option-desc">
                         
           <p>Takes an absolute path to a file which contains the Base64 encoded private key for the
-          interface.  When this option is specified, then <code class="varname">PrivateKey=</code> is ignored.  Note
+          interface.  When this option is specified, then <a href="#WireGuard-PrivateKey" class="attribute-ref"><code class="varname">PrivateKey=</code></a> is ignored.  Note
           that the file must be readable by the user <code>systemd-network</code>, so it should be,
           e.g., owned by <code>root:systemd-network</code> with a <code>0640</code> file mode. If
           the path refers to an <code class="constant">AF_UNIX</code> stream socket in the file system a connection is
@@ -5323,12 +5357,12 @@ RouteTable=true
                     <div class="option-desc">
                         
           <p>The table identifier for the routes to the addresses specified in the
-          <code class="varname">AllowedIPs=</code>. Takes the special value <code>off</code>, one of the
+          <a href="#WireGuardPeer-AllowedIPs" class="attribute-ref"><code class="varname">AllowedIPs=</code></a>. Takes the special value <code>off</code>, one of the
           predefined names <code>default</code>, <code>main</code>, and
           <code>local</code>, names defined in <code class="varname">RouteTable=</code> in
           <a href="networkd.conf.html">networkd.conf</a>,
           or a number in the range 1…4294967295. Defaults to unset, and the value specified in the
-          same setting in the [WireGuard] section will be used.</p>
+          same setting in the <a href="#section-WireGuard" class="section-ref">[WireGuard]</a> section will be used.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteTable=false
@@ -5363,8 +5397,8 @@ RouteTable=true
                     <div class="option-desc">
                         
           <p>The priority of the routes to the addresses specified in the
-          <code class="varname">AllowedIPs=</code>. Takes an integer in the range 0…4294967295. Defaults to
-          unset, and the value specified in the same setting in the [WireGuard] section will be used.
+          <a href="#WireGuardPeer-AllowedIPs" class="attribute-ref"><code class="varname">AllowedIPs=</code></a>. Takes an integer in the range 0…4294967295. Defaults to
+          unset, and the value specified in the same setting in the <a href="#section-WireGuard" class="section-ref">[WireGuard]</a> section will be used.
           </p>
         
                     </div>
@@ -5439,7 +5473,7 @@ RouteTable=true
                     <div class="option-desc">
                         
           <p>Takes an absolute path to a file which contains the Base64 encoded preshared key for the
-          peer. When this option is specified, then <code class="varname">PresharedKey=</code> is ignored.  Note that
+          peer. When this option is specified, then <a href="#WireGuardPeer-PresharedKey" class="attribute-ref"><code class="varname">PresharedKey=</code></a> is ignored.  Note that
           the file must be readable by the user <code>systemd-network</code>, so it should be, e.g.,
           owned by <code>root:systemd-network</code> with a <code>0640</code> file mode. If the
           path refers to an <code class="constant">AF_UNIX</code> stream socket in the file system a connection is
@@ -5686,6 +5720,7 @@ RouteTable=true
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MIIMonitorSec=5s
 MIIMonitorSec=100ms
+MIIMonitorSec=1min
 </code></pre></div></div>
                 <div id="Bond-UpDelaySec" class="option-block">
                     <div class="option-header">
@@ -5717,12 +5752,13 @@ MIIMonitorSec=100ms
                         
           <p>Specifies the delay before a link is enabled after a
           link up status has been detected. This value is rounded down
-          to a multiple of <code class="varname">MIIMonitorSec=</code>. The default value is
+          to a multiple of <a href="#Bond-MIIMonitorSec" class="attribute-ref"><code class="varname">MIIMonitorSec=</code></a>. The default value is
           0.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UpDelaySec=5s
 UpDelaySec=100ms
+UpDelaySec=1min
 </code></pre></div></div>
                 <div id="Bond-DownDelaySec" class="option-block">
                     <div class="option-header">
@@ -5754,12 +5790,13 @@ UpDelaySec=100ms
                         
           <p>Specifies the delay before a link is disabled after a
           link down status has been detected. This value is rounded
-          down to a multiple of <code class="varname">MIIMonitorSec=</code>. The default value is
+          down to a multiple of <a href="#Bond-MIIMonitorSec" class="attribute-ref"><code class="varname">MIIMonitorSec=</code></a>. The default value is
           0.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DownDelaySec=5s
 DownDelaySec=100ms
+DownDelaySec=1min
 </code></pre></div></div>
                 <div id="Bond-LearnPacketIntervalSec" class="option-block">
                     <div class="option-header">
@@ -5797,6 +5834,7 @@ DownDelaySec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LearnPacketIntervalSec=5s
 LearnPacketIntervalSec=100ms
+LearnPacketIntervalSec=1min
 </code></pre></div></div>
                 <div id="Bond-AdSelect" class="option-block">
                     <div class="option-header">
@@ -6052,6 +6090,7 @@ LearnPacketIntervalSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ARPIntervalSec=5s
 ARPIntervalSec=100ms
+ARPIntervalSec=1min
 </code></pre></div></div>
                 <div id="Bond-ARPIPTargets" class="option-block">
                     <div class="option-header">
@@ -6082,7 +6121,7 @@ ARPIntervalSec=100ms
                     <div class="option-desc">
                         
           <p>Specifies the IP addresses to use as ARP monitoring peers when
-          <code class="varname">ARPIntervalSec=</code> is greater than 0. These are the targets of the ARP
+          <a href="#Bond-ARPIntervalSec" class="attribute-ref"><code class="varname">ARPIntervalSec=</code></a> is greater than 0. These are the targets of the ARP
           request sent to determine the health of the link to the targets.
           Specify these values in IPv4 dotted decimal format. At least one IP
           address must be given for ARP monitoring to function. The
@@ -6121,7 +6160,7 @@ ARPIntervalSec=100ms
                     </div>
                     <div class="option-desc">
                         
-          <p>Specifies the quantity of <code class="varname">ARPIPTargets=</code> that must be reachable
+          <p>Specifies the quantity of <a href="#Bond-ARPIPTargets" class="attribute-ref"><code class="varname">ARPIPTargets=</code></a> that must be reachable
           in order for the ARP monitor to consider a slave as being up.
           This option affects only active-backup mode for slaves with
           ARPValidate enabled. Possible values are
@@ -6500,6 +6539,8 @@ ARPIntervalSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Table=main
 Table=local
+Table=default
+Table=100
 </code></pre></div></div></div><div id="section-BatmanAdvanced" class="section-block"><h2>BatmanAdvanced Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-NetDev" class="dependency-link">[NetDev]</a></div>
                 <div id="BatmanAdvanced-GatewayMode" class="option-block">
                     <div class="option-header">
@@ -6752,6 +6793,7 @@ Table=local
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OriginatorIntervalSec=5s
 OriginatorIntervalSec=100ms
+OriginatorIntervalSec=1min
 </code></pre></div></div>
                 <div id="BatmanAdvanced-GatewayBandwidthDown" class="option-block">
                     <div class="option-header">

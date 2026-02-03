@@ -296,6 +296,8 @@ Name=br0
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Kind=bridge
 Kind=bond
+Kind=vlan
+Kind=veth
 </code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
                 <div id="NetDev-MTUBytes" class="option-block">
                     <div class="option-header">
@@ -336,6 +338,7 @@ Kind=bond
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
 MTUBytes=9000
+MTUBytes=auto
 </code></pre></div></div>
                 <div id="NetDev-MACAddress" class="option-block">
                     <div class="option-header">
@@ -449,6 +452,7 @@ Description=Uplink to ISP
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>HelloTimeSec=5s
 HelloTimeSec=100ms
+HelloTimeSec=1min
 </code></pre></div></div>
                 <div id="Bridge-MaxAgeSec" class="option-block">
                     <div class="option-header">
@@ -486,6 +490,7 @@ HelloTimeSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MaxAgeSec=5s
 MaxAgeSec=100ms
+MaxAgeSec=1min
 </code></pre></div></div>
                 <div id="Bridge-ForwardDelaySec" class="option-block">
                     <div class="option-header">
@@ -521,6 +526,7 @@ MaxAgeSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ForwardDelaySec=5s
 ForwardDelaySec=100ms
+ForwardDelaySec=1min
 </code></pre></div></div>
                 <div id="Bridge-AgeingTimeSec" class="option-block">
                     <div class="option-header">
@@ -556,6 +562,7 @@ ForwardDelaySec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AgeingTimeSec=5s
 AgeingTimeSec=100ms
+AgeingTimeSec=1min
 </code></pre></div></div>
                 <div id="Bridge-Priority" class="option-block">
                     <div class="option-header">
@@ -841,6 +848,7 @@ Priority=20
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Id=1
 Id=100
+Id=4094
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="VLAN-GVRP" class="option-block">
                     <div class="option-header">
@@ -1125,6 +1133,7 @@ Id=100
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Id=1
 Id=100
+Id=4094
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="VXLAN-TOS" class="option-block">
                     <div class="option-header">
@@ -1263,6 +1272,7 @@ Id=100
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FDBAgeingSec=5s
 FDBAgeingSec=100ms
+FDBAgeingSec=1min
 </code></pre></div></div>
                 <div id="VXLAN-MaximumFDBEntries" class="option-block">
                     <div class="option-header">
@@ -1740,7 +1750,10 @@ FDBAgeingSec=100ms
           <p>Configures destination IP address.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=192.168.1.1
+Remote=10.0.0.1
+Remote=2001:db8::1
+Remote=fe80::1
 </code></pre></div></div>
                 <div id="VXLAN-Local" class="option-block">
                     <div class="option-header">
@@ -1773,7 +1786,10 @@ FDBAgeingSec=100ms
           <p>Configures local IP address.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Local=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Local=192.168.1.1
+Local=10.0.0.1
+Local=2001:db8::1
+Local=fe80::1
 </code></pre></div></div>
                 <div id="VXLAN-DestinationPort" class="option-block">
                     <div class="option-header">
@@ -1875,7 +1891,10 @@ FDBAgeingSec=100ms
           <p>Specifies the unicast destination IP address to use in outgoing packets.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=192.168.1.1
+Remote=10.0.0.1
+Remote=2001:db8::1
+Remote=fe80::1
 </code></pre></div></div>
                 <div id="GENEVE-TOS" class="option-block">
                     <div class="option-header">
@@ -2208,7 +2227,10 @@ FDBAgeingSec=100ms
           <p>The remote endpoint of the tunnel.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Remote=192.168.1.1
+Remote=10.0.0.1
+Remote=2001:db8::1
+Remote=fe80::1
 </code></pre></div></div>
                 <div id="Tunnel-TOS" class="option-block">
                     <div class="option-header">
@@ -2466,7 +2488,7 @@ FDBAgeingSec=100ms
                     <div class="option-desc">
                         
           <p>The <code class="varname">Key=</code> parameter specifies the same key to use in
-          both directions (<code class="varname">InputKey=</code> and <code class="varname">OutputKey=</code>).
+          both directions (<a href="#Tunnel-InputKey" class="attribute-ref"><code class="varname">InputKey=</code></a> and <a href="#Tunnel-OutputKey" class="attribute-ref"><code class="varname">OutputKey=</code></a>).
           The <code class="varname">Key=</code> is either a number or an IPv4 address-like dotted quad.
           It is used as mark-configured SAD/SPD entry as part of the lookup key (both in data
           and control path) in ip xfrm (framework used to implement IPsec protocol).
@@ -2506,7 +2528,7 @@ FDBAgeingSec=100ms
                     <div class="option-desc">
                         
           <p>The <code class="varname">InputKey=</code> parameter specifies the key to use for input.
-          The format is same as <code class="varname">Key=</code>. It is only used for VTI/VTI6 tunnels.</p>
+          The format is same as <a href="#Tunnel-Key" class="attribute-ref"><code class="varname">Key=</code></a>. It is only used for VTI/VTI6 tunnels.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>InputKey=SomeString
@@ -2540,7 +2562,7 @@ FDBAgeingSec=100ms
                     <div class="option-desc">
                         
           <p>The <code class="varname">OutputKey=</code> parameter specifies the key to use for output.
-          The format is same as <code class="varname">Key=</code>. It is only used for VTI/VTI6 tunnels.</p>
+          The format is same as <a href="#Tunnel-Key" class="attribute-ref"><code class="varname">Key=</code></a>. It is only used for VTI/VTI6 tunnels.</p>
         
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OutputKey=SomeString
@@ -2928,6 +2950,7 @@ FDBAgeingSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Protocol=kernel
 Protocol=boot
+Protocol=static
 </code></pre></div></div>
                 <div id="FooOverUDP-Port" class="option-block">
                     <div class="option-header">
@@ -3776,6 +3799,7 @@ Name=br0
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MIIMonitorSec=5s
 MIIMonitorSec=100ms
+MIIMonitorSec=1min
 </code></pre></div></div>
                 <div id="Bond-UpDelaySec" class="option-block">
                     <div class="option-header">
@@ -3813,6 +3837,7 @@ MIIMonitorSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UpDelaySec=5s
 UpDelaySec=100ms
+UpDelaySec=1min
 </code></pre></div></div>
                 <div id="Bond-DownDelaySec" class="option-block">
                     <div class="option-header">
@@ -3850,6 +3875,7 @@ UpDelaySec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DownDelaySec=5s
 DownDelaySec=100ms
+DownDelaySec=1min
 </code></pre></div></div>
                 <div id="Bond-LearnPacketIntervalSec" class="option-block">
                     <div class="option-header">
@@ -3887,6 +3913,7 @@ DownDelaySec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LearnPacketIntervalSec=5s
 LearnPacketIntervalSec=100ms
+LearnPacketIntervalSec=1min
 </code></pre></div></div>
                 <div id="Bond-AdSelect" class="option-block">
                     <div class="option-header">
@@ -4140,6 +4167,7 @@ LearnPacketIntervalSec=100ms
                     </div>
                 <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ARPIntervalSec=5s
 ARPIntervalSec=100ms
+ARPIntervalSec=1min
 </code></pre></div></div>
                 <div id="Bond-ARPIPTargets" class="option-block">
                     <div class="option-header">

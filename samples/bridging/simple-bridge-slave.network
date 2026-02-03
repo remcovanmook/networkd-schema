@@ -1,0 +1,11 @@
+# /etc/systemd/network/simple-bridge-slave.network
+# Minimum Version: systemd v211
+# BRIDGING: SIMPLE BRIDGE (SLAVE)
+#
+# Binds eth0 to the bridge br0.
+
+[Match]
+Name=eth0
+
+[Network]
+Bridge=br0

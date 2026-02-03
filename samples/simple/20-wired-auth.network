@@ -1,0 +1,14 @@
+# /etc/systemd/network/20-wired-auth.network
+# Minimum Version: systemd v211
+# BASIC SIMPLE CLIENT: 802.1X WIRED AUTH
+#
+# Matches a wired interface and ensures it waits for 802.1x authentication
+# (often handled by wpa_supplicant or hostapd) before considering the link up.
+
+[Match]
+Name=eth0
+
+[Network]
+DHCP=yes
+# Ensure we don't timeout while waiting for 802.1x
+AuthEAPOL=yes

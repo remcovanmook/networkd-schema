@@ -1,0 +1,22 @@
+# /etc/systemd/network/policy.network
+# Minimum Version: systemd v235
+# ADVANCED: POLICY ROUTING
+#
+# Configures source-based policy routing rules.
+
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.1.10/24
+Gateway=192.168.1.1
+
+[RoutingPolicyRule]
+From=192.168.1.10
+Table=100
+Priority=10
+
+[Route]
+Destination=0.0.0.0/0
+Gateway=192.168.1.254
+Table=100

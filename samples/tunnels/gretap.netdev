@@ -1,0 +1,13 @@
+# /etc/systemd/network/gretap.netdev
+# Minimum Version: systemd v215
+# TUNNELS: GRETAP (Ethernet over GRE)
+#
+# Defines a Layer 2 GRE tunnel, which can be bridged.
+
+[NetDev]
+Name=gretap0
+Kind=gretap
+
+[Tunnel]
+Remote=203.0.113.30
+Local=198.51.100.2

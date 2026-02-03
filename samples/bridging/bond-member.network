@@ -1,0 +1,11 @@
+# /etc/systemd/network/bond-member.network
+# Minimum Version: systemd v211
+# BRIDGING: BOND MEMBER
+#
+# Adds an interface to a bond. (Adjust Name match as needed)
+
+[Match]
+Name=eth2
+
+[Network]
+Bond=bond0

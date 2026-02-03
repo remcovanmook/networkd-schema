@@ -1,0 +1,14 @@
+# /etc/systemd/network/sit0.netdev
+# Minimum Version: systemd v215
+# TUNNELS: SIT (IPv6 over IPv4)
+#
+# Defines a SIT tunnel for connecting to an IPv6 network over IPv4.
+
+[NetDev]
+Name=sit1
+Kind=sit
+
+[Tunnel]
+Remote=203.0.113.10
+Local=198.51.100.2
+TTL=64

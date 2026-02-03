@@ -1,0 +1,12 @@
+# /etc/systemd/network/vrf0.network
+# Minimum Version: systemd v211
+# ADVANCED: VRF NETWORK
+#
+# Configures the VRF interface itself.
+# IMPORTANT: VRF interfaces must be up for routing to work.
+
+[Match]
+Name=vrf0
+
+[Network]
+IPForwarding=yes

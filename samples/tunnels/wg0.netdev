@@ -1,0 +1,20 @@
+# /etc/systemd/network/wg0.netdev
+# Minimum Version: systemd v237
+# TUNNELS: WIREGUARD PEER
+#
+# Defines a WireGuard interface with a private key and a peer.
+
+[NetDev]
+Name=wg0
+Kind=wireguard
+
+[WireGuard]
+PrivateKey=BASE64_PRIVATE_KEY
+# ListenPort is optional for clients, but good for stability
+ListenPort=51820
+
+[WireGuardPeer]
+PublicKey=BASE64_PEER_PUBLIC_KEY
+Endpoint=203.0.113.1:51820
+AllowedIPs=10.200.0.0/24
+AllowedIPs=::/0

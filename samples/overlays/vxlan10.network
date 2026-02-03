@@ -1,0 +1,11 @@
+# /etc/systemd/network/vxlan10.network
+# Minimum Version: systemd v211
+# OVERLAYS: VXLAN (NETWORK)
+#
+# Configures IP on the VXLAN interface.
+
+[Match]
+Name=vxlan10
+
+[Network]
+Address=10.100.0.2/24

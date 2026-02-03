@@ -1,0 +1,14 @@
+# /etc/systemd/network/gre0.netdev
+# Minimum Version: systemd v215
+# TUNNELS: GRE
+#
+# Defines a GRE (Generic Routing Encapsulation) tunnel.
+
+[NetDev]
+Name=gre0
+Kind=gre
+
+[Tunnel]
+Remote=203.0.113.5
+Local=198.51.100.2
+TTL=64

@@ -1,0 +1,13 @@
+# /etc/systemd/network/geneve0.netdev
+# Minimum Version: systemd v234
+# OVERLAYS: GENEVE
+#
+# Defines a GENEVE tunnel interface.
+
+[NetDev]
+Name=geneve0
+Kind=geneve
+
+[GENEVE]
+Id=100
+Remote=203.0.113.5

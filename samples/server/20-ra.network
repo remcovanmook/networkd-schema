@@ -1,0 +1,20 @@
+# /etc/systemd/network/20-ra.network
+# Minimum Version: systemd v247
+# SERVER / GATEWAY: ROUTER ADVERTISEMENT
+#
+# Configures the interface to act as an IPv6 router, sending Router Advertisements
+# (RA) to clients so they can configure themselves via SLAAC.
+
+[Match]
+Name=eth0
+
+[Network]
+Address=2001:db8:cafe::1/64
+IPv6SendRA=yes
+
+[IPv6SendRA]
+# Advertise this router as a default gateway
+RouterPreference=medium
+# Advertise DNS servers via RA (RDNSS)
+EmitDNS=yes
+DNS=2001:4860:4860::8888
