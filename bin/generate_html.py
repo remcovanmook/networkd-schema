@@ -94,8 +94,9 @@ def render_docbook_content(elem, context_version, in_code_block=False, attribute
             out.append(f'<code>{content}</code>')
         elif tag == 'varname':
             # Check if this is a reference to another attribute we can link to
-            # Extract attribute name (strip trailing = if present)
-            attr_name = content.rstrip('=')
+            # Extract attribute name: handle "Name=", "Name=value", "Name=val1/val2"
+            # Split on '=' and take the first part as the attribute name
+            attr_name = content.split('=')[0]
 
             if (not in_code_block and
                 attribute_map and
