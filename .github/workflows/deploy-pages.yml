@@ -3,6 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+    paths:
+      # Build scripts
+      - 'build.py'
+      - 'bin/*.py'
+      # Curated schemas (source of truth)
+      - 'curated/**'
+      # Workflow itself
+      - '.github/workflows/deploy-pages.yml'
+      # Documentation assets
+      - 'docs/css/**'
+      - 'docs/js/**'
   workflow_dispatch:
 
 permissions:
