@@ -304,10 +304,11 @@ def setup_sparse_repo(tag, temp_dir):
     print(f"--- Fetching systemd {tag} (Sparse Checkout) ---")
     required_dirs = ["man", "src/network", "src/basic", "src/shared", "src/fundamental", "src/libsystemd", "src/udev/net"]
 
-    subprocess.run(["git", "init"], cwd=temp_dir, check=True, stdout=subprocess.DEVNULL)
+    # Use -b main to avoid "warning: using master branch by default" in GitHub Actions
+    subprocess.run(["git", "init", "-b", "main"], cwd=temp_dir, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run(["git", "remote", "add", "origin", "https://github.com/systemd/systemd.git"], cwd=temp_dir, check=True, stdout=subprocess.DEVNULL)
     subprocess.run(["git", "config", "core.sparseCheckout", "true"], cwd=temp_dir, check=True, stdout=subprocess.DEVNULL)
-    
+
     sparse_file = os.path.join(temp_dir, ".git", "info", "sparse-checkout")
     os.makedirs(os.path.dirname(sparse_file), exist_ok=True)
     with open(sparse_file, "w") as f:
