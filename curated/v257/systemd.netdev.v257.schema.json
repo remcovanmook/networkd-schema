@@ -311,32 +311,64 @@
       "properties": {
         "Host": {
           "type": "string",
-          "title": "Host"
+          "title": "Host",
+          "examples": [
+            "myserver",
+            "web*",
+            "!testhost"
+          ]
         },
         "Virtualization": {
           "type": "string",
           "title": "Virtualization",
+          "examples": [
+            "vm",
+            "container",
+            "qemu",
+            "!kvm"
+          ],
           "x-subcategory": "Virtualization"
         },
         "KernelCommandLine": {
           "type": "string",
-          "title": "Kernel Command Line"
+          "title": "Kernel Command Line",
+          "examples": [
+            "systemd.network=1",
+            "!quiet"
+          ]
         },
         "KernelVersion": {
           "type": "string",
-          "title": "Kernel Version"
+          "title": "Kernel Version",
+          "examples": [
+            "5.15.*",
+            "6.*"
+          ]
         },
         "Credential": {
           "type": "string",
-          "title": "Credential"
+          "title": "Credential",
+          "examples": [
+            "network.conf",
+            "my-network-config"
+          ]
         },
         "Architecture": {
           "type": "string",
-          "title": "Architecture"
+          "title": "Architecture",
+          "examples": [
+            "x86-64",
+            "arm64",
+            "!arm"
+          ]
         },
         "Firmware": {
           "type": "string",
-          "title": "Firmware"
+          "title": "Firmware",
+          "examples": [
+            "uefi",
+            "!bios"
+          ]
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"

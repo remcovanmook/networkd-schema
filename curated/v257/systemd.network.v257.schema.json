@@ -326,7 +326,8 @@
         },
         "PermanentMACAddress": {
           "$ref": "#/definitions/mac_addressType",
-          "title": "Permanent MAC Address"
+          "title": "Permanent MAC Address",
+          "x-subcategory": "Hardware"
         },
         "Path": {
           "allOf": [
@@ -337,11 +338,20 @@
           ],
           "description": "The path to the device.",
           "title": "Path",
+          "examples": [
+            "pci-0000:00:1f.6",
+            "pci-0000:02:00.0-usb-0:1:1.0"
+          ],
           "x-subcategory": "Hardware"
         },
         "Driver": {
           "type": "string",
           "title": "Driver",
+          "examples": [
+            "e1000e",
+            "virtio_net",
+            "r8169"
+          ],
           "x-subcategory": "Hardware"
         },
         "Type": {
@@ -373,12 +383,22 @@
           "pattern": "^!?\\s*(ad-hoc|ap|ap-vlan|mesh-point|monitor|nan|ocb|p2p-client|p2p-device|p2p-go|station|wds)(\\s+(ad-hoc|ap|ap-vlan|mesh-point|monitor|nan|ocb|p2p-client|p2p-device|p2p-go|station|wds))*\\s*$",
           "description": "A whitespace-separated list of wireless network type. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "WLAN Interface Type",
+          "examples": [
+            "station",
+            "ap",
+            "!monitor"
+          ],
           "version_added": "244",
           "x-subcategory": "Network"
         },
         "SSID": {
           "description": "A whitespace-separated list of shell-style globs matching the SSID of the currently connected wireless LAN. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "SSID",
+          "examples": [
+            "MyNetwork",
+            "Corp-* Guest-*",
+            "!OpenWifi"
+          ],
           "version_added": "244",
           "x-subcategory": "Network",
           "$ref": "#/definitions/globsType"
@@ -388,7 +408,12 @@
           "pattern": "^!?\\s*([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})(\\s+([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2}))*\\s*$",
           "description": "A whitespace-separated list of hardware address of the currently connected wireless LAN. Use full colon-, hyphen- or dot-delimited hexadecimal. See the example in MACAddress=. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list is reset.",
           "title": "BSSID",
-          "version_added": "244"
+          "examples": [
+            "00:11:22:33:44:55",
+            "!aa:bb:cc:dd:ee:ff"
+          ],
+          "version_added": "244",
+          "x-subcategory": "Network"
         },
         "Name": {
           "description": "A whitespace-separated list of shell-style globs matching the device name, as exposed by the udev property 'INTERFACE', or device's alternative names. If the list is prefixed with a \"!\", the test is inverted.",
@@ -403,36 +428,72 @@
         },
         "Property": {
           "type": "string",
-          "title": "Property"
+          "title": "Property",
+          "examples": [
+            "ID_NET_DRIVER=virtio_net",
+            "ID_PATH=pci-0000:00:03.0"
+          ]
         },
         "Host": {
           "type": "string",
-          "title": "Host"
+          "title": "Host",
+          "examples": [
+            "myserver",
+            "web*",
+            "!testhost"
+          ]
         },
         "Virtualization": {
           "type": "string",
           "title": "Virtualization",
+          "examples": [
+            "vm",
+            "container",
+            "qemu",
+            "!kvm"
+          ],
           "x-subcategory": "Virtualization"
         },
         "KernelCommandLine": {
           "type": "string",
-          "title": "Kernel Command Line"
+          "title": "Kernel Command Line",
+          "examples": [
+            "systemd.network=1",
+            "!quiet"
+          ]
         },
         "KernelVersion": {
           "type": "string",
-          "title": "Kernel Version"
+          "title": "Kernel Version",
+          "examples": [
+            "5.15.*",
+            "6.*"
+          ]
         },
         "Credential": {
           "type": "string",
-          "title": "Credential"
+          "title": "Credential",
+          "examples": [
+            "network.conf",
+            "my-network-config"
+          ]
         },
         "Architecture": {
           "type": "string",
-          "title": "Architecture"
+          "title": "Architecture",
+          "examples": [
+            "x86-64",
+            "arm64",
+            "!arm"
+          ]
         },
         "Firmware": {
           "type": "string",
-          "title": "Firmware"
+          "title": "Firmware",
+          "examples": [
+            "uefi",
+            "!bios"
+          ]
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -441,9 +502,6 @@
           "$ref": "#/definitions/property_comments"
         }
       },
-      "required": [
-        "Type"
-      ],
       "title": "Match",
       "description": "[Match] section configuration",
       "additionalProperties": false
