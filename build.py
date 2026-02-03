@@ -4,7 +4,9 @@ import shutil
 
 # Top 10 most commonly used/LTS systemd versions (recent 5 roughly)
 # + v257 (current)
+# Special value "main" fetches from the main branch for development/latest
 VERSIONS = [
+    "main",  # Development/latest from main branch
     "v259",
     "v258",
     "v257",

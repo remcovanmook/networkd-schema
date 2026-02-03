@@ -300,14 +300,21 @@ KEY_NAME_HEURISTICS = {
 }
 
 # --- 5. Git Helper ---
-def setup_sparse_repo(tag, temp_dir):
-    print(f"--- Fetching systemd {tag} (Sparse Checkout) ---")
+def setup_sparse_repo(version, temp_dir):
+    """Fetch systemd source with sparse checkout.
+
+    Args:
+        version: Either a tag like 'v257' or 'main' for the main branch
+        temp_dir: Directory to clone into
+    """
+    is_main_branch = (version == "main")
+    print(f"--- Fetching systemd {version} ({'main branch' if is_main_branch else 'tag'}) (Sparse Checkout) ---")
     required_dirs = ["man", "src/network", "src/basic", "src/shared", "src/fundamental", "src/libsystemd", "src/udev/net"]
 
     subprocess.run(["git", "init"], cwd=temp_dir, check=True, stdout=subprocess.DEVNULL)
     subprocess.run(["git", "remote", "add", "origin", "https://github.com/systemd/systemd.git"], cwd=temp_dir, check=True, stdout=subprocess.DEVNULL)
     subprocess.run(["git", "config", "core.sparseCheckout", "true"], cwd=temp_dir, check=True, stdout=subprocess.DEVNULL)
-    
+
     sparse_file = os.path.join(temp_dir, ".git", "info", "sparse-checkout")
     os.makedirs(os.path.dirname(sparse_file), exist_ok=True)
     with open(sparse_file, "w") as f:
@@ -315,12 +322,18 @@ def setup_sparse_repo(tag, temp_dir):
             f.write(f"{d}/\n")
 
     try:
-        # Use -- to prevent argument injection if tag starts with -
-        subprocess.run(["git", "fetch", "--depth", "1", "origin", "tag", "--", tag], cwd=temp_dir, check=True, capture_output=True, text=True)
-        subprocess.run(["git", "checkout", "FETCH_HEAD"], cwd=temp_dir, check=True, capture_output=True, text=True)
+        if is_main_branch:
+            # Fetch the main branch directly
+            subprocess.run(["git", "fetch", "--depth", "1", "origin", "main"], cwd=temp_dir, check=True, capture_output=True, text=True)
+            subprocess.run(["git", "checkout", "FETCH_HEAD"], cwd=temp_dir, check=True, capture_output=True, text=True)
+        else:
+            # Fetch a specific tag (use -- to prevent argument injection if version starts with -)
+            subprocess.run(["git", "fetch", "--depth", "1", "origin", "tag", "--", version], cwd=temp_dir, check=True, capture_output=True, text=True)
+            subprocess.run(["git", "checkout", "FETCH_HEAD"], cwd=temp_dir, check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
         print(f"Git Error: {e.stderr}")
-        raise RuntimeError(f"Failed to fetch tag {tag}.")
+        ref_type = "main branch" if is_main_branch else f"tag {version}"
+        raise RuntimeError(f"Failed to fetch {ref_type}.")
 
 # --- 6. Parsing Logic (Section Aware) ---
 
@@ -627,8 +640,9 @@ def main():
     args = parser.parse_args()
 
     # Security: Validate version format to prevent injection or invalid tags
-    if not re.match(r'^v?\d+(\.\d+)*$', args.version):
-        print(f"Error: Invalid version format '{args.version}'. Expected format like 'v257'.")
+    # Allow "main" for the main branch, or versioned tags like "v257"
+    if args.version != "main" and not re.match(r'^v?\d+(\.\d+)*$', args.version):
+        print(f"Error: Invalid version format '{args.version}'. Expected 'main' or format like 'v257'.")
         return
 
     targets = [
