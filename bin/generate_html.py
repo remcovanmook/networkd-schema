@@ -573,9 +573,13 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                 version_added = get_version_added(entry, src_dir)
                 
             # Extract examples (prefer property level, fallback to resolved schema)
+            # For arrays, also check items ref for examples
             examples = prop_schema.get('examples')
             if not examples:
                 examples = res_schema.get('examples', [])
+            if not examples and res_schema.get('type') == 'array' and 'items' in res_schema:
+                items_schema = resolve(res_schema['items'])
+                examples = items_schema.get('examples', [])
                 
             # Collect Allowed Values for validation and synthetic generation
             allowed_values = set()
@@ -674,15 +678,10 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                         else:
                              examples.append("SomeString")
             
-            # Enforce Limits
-            # Refined limit logic:
-            is_simple_bool = value_type == 'boolean'
-            
-            if is_simple_bool:
+            # Limit boolean examples to 1 (yes or no is sufficient)
+            if value_type == 'boolean':
                 examples = examples[:1]
-            else:
-                examples = examples[:2]
-                
+
             desc_html = get_description(entry, version, attribute_map=attribute_map, current_option=name)
 
             # User Request: Remove redundant boolean text
