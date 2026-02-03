@@ -32,24 +32,60 @@ def get_text(elem):
         pass
     return text
 
-def render_docbook_content(elem, context_version):
+def linkify_section_references(text, in_code_block=False):
+    """
+    Convert bracketed section references like [DHCPServer] to clickable links.
+    Only converts references outside of code blocks.
+
+    References can point to:
+    - Sections in the same document: [DHCPServer] -> #section-DHCPServer
+    - We assume all references are to sections in the same document.
+    """
+    if in_code_block or not text:
+        return text
+
+    # Pattern: [SectionName] where SectionName starts with uppercase letter
+    # and contains only alphanumeric characters
+    # Negative lookbehind for = to avoid matching things like "Address=[Address]" in examples
+    pattern = r'(?<!=)\[([A-Z][a-zA-Z0-9]+)\]'
+
+    def replace_ref(match):
+        section_name = match.group(1)
+        return f'<a href="#section-{section_name}" class="section-ref">[{section_name}]</a>'
+
+    return re.sub(pattern, replace_ref, text)
+
+
+def render_docbook_content(elem, context_version, in_code_block=False, attribute_map=None, current_option=None):
     """
     Recursively renders DocBook XML elements into HTML.
+
+    Args:
+        elem: The XML element to render
+        context_version: The systemd version context
+        in_code_block: Whether we're inside a code block (no linking)
+        attribute_map: Dict mapping attribute names to their anchor IDs (e.g. {'IPv6SendRA': 'Network-IPv6SendRA'})
+        current_option: The current option being documented (to avoid self-links)
     """
     if elem is None:
         return ""
-    
+
     out = []
-    
+
     # Text before children
     if elem.text:
-        out.append(html.escape(elem.text))
-        
+        escaped_text = html.escape(elem.text)
+        out.append(linkify_section_references(escaped_text, in_code_block))
+
     for child in elem:
         tag = child.tag.split('}')[-1] # Strip namespace
-        
-        content = render_docbook_content(child, context_version)
-        
+
+        # Determine if this tag creates a code block context
+        is_code_tag = tag in ('programlisting', 'literal', 'filename', 'command', 'constant')
+        child_in_code = in_code_block or is_code_tag
+
+        content = render_docbook_content(child, context_version, child_in_code, attribute_map, current_option)
+
         if tag == 'para':
             out.append(f'<p>{content}</p>')
         elif tag == 'filename':
@@ -57,7 +93,19 @@ def render_docbook_content(elem, context_version):
         elif tag == 'literal':
             out.append(f'<code>{content}</code>')
         elif tag == 'varname':
-            out.append(f'<code class="varname">{content}</code>')
+            # Check if this is a reference to another attribute we can link to
+            # Extract attribute name (strip trailing = if present)
+            attr_name = content.rstrip('=')
+
+            if (not in_code_block and
+                attribute_map and
+                attr_name in attribute_map and
+                attr_name != current_option):
+                # Create a link to the attribute
+                anchor_id = attribute_map[attr_name]
+                out.append(f'<a href="#{anchor_id}" class="attribute-ref"><code class="varname">{content}</code></a>')
+            else:
+                out.append(f'<code class="varname">{content}</code>')
         elif tag == 'command':
             out.append(f'<code class="command">{content}</code>')
         elif tag == 'constant':
@@ -77,8 +125,8 @@ def render_docbook_content(elem, context_version):
             term = child.find(".//term") # Basic find, namespaces might break
             listitem = child.find(".//listitem")
             # This logic is weak for general docbook, but sufficient for snippets
-            out.append(f'<dt>{render_docbook_content(term, context_version)}</dt>')
-            out.append(f'<dd>{render_docbook_content(listitem, context_version)}</dd>')
+            out.append(f'<dt>{render_docbook_content(term, context_version, in_code_block, attribute_map, current_option)}</dt>')
+            out.append(f'<dd>{render_docbook_content(listitem, context_version, in_code_block, attribute_map, current_option)}</dd>')
 
         elif tag == 'ulink':
             url = child.get('url', '#')
@@ -93,9 +141,9 @@ def render_docbook_content(elem, context_version):
             if title_elem is None:
                 # Try with namespace
                 title_elem = child.find(f".//{{*}}refentrytitle")
-            
+
             ref_title = title_elem.text if title_elem is not None else "Unknown"
-            
+
             if ref_title in FILES:
                 out.append(f'<a href="{ref_title}.html">{ref_title}</a>')
             else:
@@ -104,14 +152,15 @@ def render_docbook_content(elem, context_version):
         elif tag == 'include':
             # Recursively resolving XInclude if we encounter it in content
             pass # We handle main includes at higher level, but sometimes they are inline
-        
+
         else:
             # Default pass-through for unknown tags, just content
             out.append(f'<span class="docbook-{tag}">{content}</span>')
 
-        # Text after child (tail)
+        # Text after child (tail) - apply linkification based on current context, not child context
         if child.tail:
-            out.append(html.escape(child.tail))
+            escaped_tail = html.escape(child.tail)
+            out.append(linkify_section_references(escaped_tail, in_code_block))
             
     return "".join(out)
 
@@ -264,10 +313,10 @@ def get_option_name(varlistentry):
     raw = "".join(term.itertext()).strip()
     return raw.split('=')[0].strip()
 
-def get_description(varlistentry, version_context):
+def get_description(varlistentry, version_context, attribute_map=None, current_option=None):
     listitem = varlistentry.find(".//{*}listitem")
     if listitem is None: return ""
-    return render_docbook_content(listitem, version_context)
+    return render_docbook_content(listitem, version_context, in_code_block=False, attribute_map=attribute_map, current_option=current_option)
 
 def get_version_added(varlistentry, base_path):
     # Look for xi:include href="version-info.xml" xpointer="vXXX"
@@ -331,13 +380,32 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
     
     # Flatten Content
     sections_xml = flatten_sections(root, src_dir)
-    
+
+    # Build attribute map for cross-referencing
+    # Maps attribute name -> anchor ID (e.g. 'IPv6SendRA' -> 'Network-IPv6SendRA')
+    attribute_map = {}
+    for section_name, entries in sections_xml.items():
+        if section_name not in schema['properties']:
+            continue
+        section_schema = schema['properties'][section_name]
+        # Handle oneOf wrapper
+        if 'oneOf' in section_schema:
+            for v in section_schema['oneOf']:
+                if v.get('type') == 'object':
+                    section_schema = v
+                    break
+        props = section_schema.get('properties', {})
+        for entry in entries:
+            name = get_option_name(entry)
+            if name and name in props:
+                attribute_map[name] = f"{section_name}-{name}"
+
     # Build HTML Content
     html_content = []
-    
+
     # Sidebar Navigation
     nav_items = []
-    
+
     for section_name, entries in sections_xml.items():
         if section_name not in schema['properties']:
              continue # Skip sections not in schema (e.g. legacy/internal?)
@@ -614,8 +682,8 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
             else:
                 examples = examples[:2]
                 
-            desc_html = get_description(entry, version)
-            
+            desc_html = get_description(entry, version, attribute_map=attribute_map, current_option=name)
+
             # User Request: Remove redundant boolean text
             # Ensure we don't match complex types (like oneOf where one option is boolean)
             # Only filter if it's a simple boolean without variants.
