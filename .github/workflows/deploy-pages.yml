@@ -29,12 +29,20 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install dependencies
+        run: pip install jsonschema
+
       - name: Validate Schemas
         run: |
           python3 bin/validate_schema.py schemas/v*/*.json
 
+      - name: Fetch XML sources and build schemas
+        run: |
+          # build.py fetches XML from systemd repo and generates schemas
+          python3 build.py --force
+
       - name: Build Documentation
-        run: python3 bin/rebuild_docs.py
+        run: python3 bin/rebuild_docs.py --force
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
