@@ -396,18 +396,33 @@
           "type": "string",
           "description": "A whitespace-separated list of udev property names with their values after equals sign ('='). If multiple properties are specified, the test results are ANDed. If the list is prefixed with a \"!\", the test is inverted. If a value contains white spaces, then please quote whole key and value pair. If a value contains quotation, then please escape the quotation with '\\'. Example: if a.link file has the following: Property=ID_MODEL_ID=9999 \"ID_VENDOR_FROM_DATABASE=vendor name\" \"KEY=with \\\"quotation\\\"\" then, the.link file matches only when an interface has all the above three properties.",
           "title": "Property",
+          "examples": [
+            "ID_NET_DRIVER=virtio_net",
+            "ID_PATH=pci-0000:00:03.0"
+          ],
           "version_added": "243"
         },
         "Host": {
           "type": "string",
           "description": "Matches against the hostname or machine ID of the host. See ConditionHost= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Host",
+          "examples": [
+            "myserver",
+            "web*",
+            "!testhost"
+          ],
           "version_added": "211"
         },
         "Virtualization": {
           "type": "string",
           "description": "Checks whether the system is executed in a virtualized environment and optionally test whether it is a specific implementation. See ConditionVirtualization= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Virtualization",
+          "examples": [
+            "vm",
+            "container",
+            "qemu",
+            "!kvm"
+          ],
           "version_added": "211",
           "x-subcategory": "Virtualization"
         },
@@ -415,30 +430,51 @@
           "type": "string",
           "description": "Checks whether a specific kernel command line option is set. See ConditionKernelCommandLine= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Kernel Command Line",
+          "examples": [
+            "systemd.network=1",
+            "!quiet"
+          ],
           "version_added": "211"
         },
         "KernelVersion": {
           "type": "string",
           "description": "Checks whether the kernel version (as reported by uname -r) matches a certain expression. See ConditionKernelVersion= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Kernel Version",
+          "examples": [
+            "5.15.*",
+            "6.*"
+          ],
           "version_added": "237"
         },
         "Credential": {
           "type": "string",
           "description": "Checks whether the specified credential was passed to the 'systemd-udevd.service' service. See System and Service Credentials for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Credential",
+          "examples": [
+            "network.conf",
+            "my-network-config"
+          ],
           "version_added": "252"
         },
         "Architecture": {
           "type": "string",
           "description": "Checks whether the system is running on a specific architecture. See ConditionArchitecture= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Architecture",
+          "examples": [
+            "x86-64",
+            "arm64",
+            "!arm"
+          ],
           "version_added": "211"
         },
         "Firmware": {
           "type": "string",
           "description": "Checks whether the system is running on a machine with the specified firmware. See ConditionFirmware= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Firmware",
+          "examples": [
+            "uefi",
+            "!bios"
+          ],
           "version_added": "249"
         },
         "_comments": {
