@@ -441,9 +441,6 @@
           "$ref": "#/definitions/property_comments"
         }
       },
-      "required": [
-        "Type"
-      ],
       "title": "Match",
       "description": "[Match] section configuration",
       "additionalProperties": false
