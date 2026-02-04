@@ -1424,7 +1424,7 @@
                 "title": "Encapsulation"
               },
               "IPv6RapidDeploymentPrefix": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6_prefixType",
                 "description": "Reconfigure the tunnel for IPv6 Rapid Deployment, also known as 6rd. The value is an ISP-specific IPv6 prefix with a non-zero length. Only applicable to SIT tunnels.",
                 "version_added": "240",
                 "title": "IPv6 Rapid Deployment Prefix"
@@ -1661,7 +1661,7 @@
               "title": "Encapsulation"
             },
             "IPv6RapidDeploymentPrefix": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6_prefixType",
               "description": "Reconfigure the tunnel for IPv6 Rapid Deployment, also known as 6rd. The value is an ISP-specific IPv6 prefix with a non-zero length. Only applicable to SIT tunnels.",
               "version_added": "240",
               "title": "IPv6 Rapid Deployment Prefix"
@@ -3990,9 +3990,7 @@
                 "title": "Ad Actor System Priority"
               },
               "AdUserPortKey": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 1023,
+                "$ref": "#/definitions/uint16Type",
                 "description": "Specifies the 802.3ad user defined portion of the port key.",
                 "version_added": "240",
                 "title": "Ad User Port Key"
@@ -4255,9 +4253,7 @@
               "title": "Ad Actor System Priority"
             },
             "AdUserPortKey": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1023,
+              "$ref": "#/definitions/uint16Type",
               "description": "Specifies the 802.3ad user defined portion of the port key.",
               "version_added": "240",
               "title": "Ad User Port Key"
@@ -5361,9 +5357,7 @@
             "type": "object",
             "properties": {
               "PartitionKey": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 0,
+                "$ref": "#/definitions/uint16Type",
                 "description": "xffff, except for 0x8000. Defaults to unset, and the kernel's default is used.",
                 "version_added": "250",
                 "title": "Partition Key"
@@ -5406,9 +5400,7 @@
           "type": "object",
           "properties": {
             "PartitionKey": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 0,
+              "$ref": "#/definitions/uint16Type",
               "description": "xffff, except for 0x8000. Defaults to unset, and the kernel's default is used.",
               "version_added": "250",
               "title": "Partition Key"

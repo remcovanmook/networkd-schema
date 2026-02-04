@@ -929,7 +929,7 @@
           "title": "VRF"
         },
         "IPoIB": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The name of an IPoIB, IPVLAN, IPVTAP, MACsec, MACVLAN, MACVTAP, tunnel, VLAN, VXLAN, or Xfrm to be created on the link. See systemd.netdev5. This option may be specified more than once.",
           "title": "IPoIB",
           "version_added": "211"
@@ -943,7 +943,7 @@
           "title": "IPVTAP"
         },
         "L2TP": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "L2TP"
         },
         "MACsec": {
@@ -959,7 +959,7 @@
           "title": "MACVTAP"
         },
         "Tunnel": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "Tunnel"
         },
         "VLAN": {
@@ -974,11 +974,11 @@
           "version_added": "231"
         },
         "VXLAN": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "VXLAN"
         },
         "Xfrm": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "Xfrm"
         },
         "DHCP": {
@@ -5253,8 +5253,7 @@
               "BootFilename": {
                 "allOf": [
                   {
-                    "type": "string",
-                    "format": "uri-reference"
+                    "$ref": "#/definitions/absolutePathType"
                   }
                 ],
                 "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -5500,8 +5499,7 @@
             "BootFilename": {
               "allOf": [
                 {
-                  "type": "string",
-                  "format": "uri-reference"
+                  "$ref": "#/definitions/absolutePathType"
                 }
               ],
               "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -6829,7 +6827,7 @@
             "type": "object",
             "properties": {
               "Prefix": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6_prefixType",
                 "description": "The IPv6 prefix that is to be distributed to hosts. Similarly to configuring static IPv6 addresses, the setting is configured as an IPv6 prefix and its prefix length, separated by a '/' character. Use multiple [IPv6Prefix] sections to configure multiple IPv6 prefixes since prefix lifetimes, address autoconfiguration and onlink status may differ from one prefix to another.",
                 "version_added": "235",
                 "title": "Prefix"
@@ -6904,7 +6902,7 @@
           "type": "object",
           "properties": {
             "Prefix": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6_prefixType",
               "description": "The IPv6 prefix that is to be distributed to hosts. Similarly to configuring static IPv6 addresses, the setting is configured as an IPv6 prefix and its prefix length, separated by a '/' character. Use multiple [IPv6Prefix] sections to configure multiple IPv6 prefixes since prefix lifetimes, address autoconfiguration and onlink status may differ from one prefix to another.",
               "version_added": "235",
               "title": "Prefix"
@@ -6982,7 +6980,7 @@
             "type": "object",
             "properties": {
               "Route": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6_prefixType",
                 "description": "The IPv6 route that is to be distributed to hosts. Similarly to configuring static IPv6 routes, the setting is configured as an IPv6 prefix routes and its prefix route length, separated by a '/' character. Use multiple [IPv6RoutePrefix] sections to configure multiple IPv6 prefix routes.",
                 "version_added": "244",
                 "title": "Route"
@@ -7013,7 +7011,7 @@
           "type": "object",
           "properties": {
             "Route": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6_prefixType",
               "description": "The IPv6 route that is to be distributed to hosts. Similarly to configuring static IPv6 routes, the setting is configured as an IPv6 prefix routes and its prefix route length, separated by a '/' character. Use multiple [IPv6RoutePrefix] sections to configure multiple IPv6 prefix routes.",
               "version_added": "244",
               "title": "Route"

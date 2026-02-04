@@ -786,7 +786,7 @@
           "version_added": "211"
         },
         "AlternativeName": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The alternative interface name to use. This option can be specified multiple times. If the empty string is assigned to this option, the list is reset, and all prior assignments have no effect. If the kernel does not support the alternative names, then this setting will be ignored. Alternative interface names may be used to identify interfaces in various tools. In contrast to the primary name (as configured with Name= above) there may be multiple alternative names referring to the same interface. Alternative names may have a maximum length of 127 characters, in contrast to the 15 allowed for the primary interface name, but otherwise are subject to the same naming constraints.",
           "title": "Alternative Name",
           "version_added": "245"
