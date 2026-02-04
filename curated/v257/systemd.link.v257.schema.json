@@ -734,18 +734,30 @@
           "type": "string",
           "description": "Set specified udev properties. This takes space separated list of key-value pairs concatenated with equal sign ('='). Example: Property=HOGE=foo BAR=baz This option supports simple specifier expansion, see the Specifiers section below. This option can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. This setting is useful to configure the 'ID_NET_MANAGED_BY=' property which declares which network management service shall manage the interface, which is respected by systemd-networkd and others. Use Property=ID_NET_MANAGED_BY=io.systemd.Network to declare explicitly that systemd-networkd shall manage the interface, or set the property to something else to declare explicitly it shall not do so. See systemd.network5 for details how this property is used to match interface names.",
           "title": "Property",
+          "examples": [
+            "ID_NET_MANAGED_BY=io.systemd.Network",
+            "MY_CUSTOM_PROP=value"
+          ],
           "version_added": "256"
         },
         "ImportProperty": {
           "type": "string",
           "description": "Import specified udev properties from the saved database. This takes space separated list of property names. Example: ImportProperty=HOGE BAR This option supports simple specifier expansion, see the Specifiers section below. This option can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. If the same property is also set in Property= in the above, then the imported property value will be overridden by the value specified in Property=.",
           "title": "Import Property",
+          "examples": [
+            "ID_NET_NAME_PATH",
+            "ID_NET_DRIVER ID_VENDOR"
+          ],
           "version_added": "256"
         },
         "UnsetProperty": {
           "type": "string",
           "description": "Unset specified udev properties. This takes space separated list of property names. Example: ImportProperty=HOGE BAR This option supports simple specifier expansion, see the Specifiers section below. This option can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. This setting is applied after ImportProperty= and Property= are applied. Hence, if the same property is specified in ImportProperty= or Property=, then the imported or specified property value will be ignored, and the property will be unset.",
           "title": "Unset Property",
+          "examples": [
+            "ID_NET_NAME_MAC",
+            "ID_NET_NAME_SLOT ID_NET_NAME_PATH"
+          ],
           "version_added": "256"
         },
         "MACAddressPolicy": {
@@ -773,6 +785,10 @@
           "type": "string",
           "description": "An ordered, space-separated list of policies by which the interface name should be set. NamePolicy= may be disabled by specifying 'net.ifnames=0' on the kernel command line. Each of the policies may fail, and the first successful one is used. The name is not set directly, but is exported to udev as the property 'ID_NET_NAME', which is, by default, used by a udev7, rule to set NAME. The available policies are: If the kernel claims that the name it has set for a device is predictable, then no renaming is performed. The name is set based on entries in the udev's Hardware Database with the key ID_NET_NAME_FROM_DATABASE. The name is set based on information given by the firmware for on-board devices, as exported by the udev property ID_NET_NAME_ONBOARD. See systemd.net-naming-scheme7. The name is set based on information given by the firmware for hot-plug devices, as exported by the udev property ID_NET_NAME_SLOT. See systemd.net-naming-scheme7. The name is set based on the device's physical location, as exported by the udev property ID_NET_NAME_PATH. See systemd.net-naming-scheme7. The name is set based on the device's persistent MAC address, as exported by the udev property ID_NET_NAME_MAC. See systemd.net-naming-scheme7. If the device already had a name given by userspace (as part of creation of the device or a rename), keep it.",
           "title": "Name Policy",
+          "examples": [
+            "kernel database onboard slot path",
+            "keep kernel database onboard slot path mac"
+          ],
           "version_added": "216"
         },
         "Name": {
@@ -811,6 +827,10 @@
           "type": "string",
           "description": "The ifalias interface property is set to this value.",
           "title": "Alias",
+          "examples": [
+            "my-interface",
+            "uplink-to-isp"
+          ],
           "version_added": "211"
         },
         "TransmitQueues": {
@@ -819,6 +839,10 @@
           "maximum": 4096,
           "description": "Specifies the device's number of transmit queues. An integer in the range 1...4096. When unset, the kernel's default will be used.",
           "title": "Transmit Queues",
+          "examples": [
+            4,
+            8
+          ],
           "version_added": "248"
         },
         "ReceiveQueues": {
@@ -827,6 +851,10 @@
           "maximum": 4096,
           "description": "Specifies the device's number of receive queues. An integer in the range 1...4096. When unset, the kernel's default will be used.",
           "title": "Receive Queues",
+          "examples": [
+            4,
+            8
+          ],
           "version_added": "248"
         },
         "TransmitQueueLength": {
@@ -835,6 +863,10 @@
           "maximum": 4294967294,
           "description": "Specifies the transmit queue length of the device in number of packets. An unsigned integer in the range 0...4294967294. When unset, the kernel's default will be used.",
           "title": "Transmit Queue Length",
+          "examples": [
+            1000,
+            5000
+          ],
           "version_added": "248"
         },
         "MTUBytes": {
@@ -911,6 +943,11 @@
           "type": "string",
           "description": "The port option is used to select the device port. The supported values are: An Ethernet interface using Twisted-Pair cable as the medium. Attachment Unit Interface (AUI). Normally used with hubs. An Ethernet interface using BNC connectors and co-axial cable. An Ethernet interface using a Media Independent Interface (MII). An Ethernet interface using Optical Fibre as the medium.",
           "title": "Port",
+          "examples": [
+            "tp",
+            "mii",
+            "fibre"
+          ],
           "version_added": "234"
         },
         "ReceiveChecksumOffload": {
@@ -946,7 +983,8 @@
           "version_added": "235"
         },
         "UDPSegmentationOffload": {
-          "type": "string",
+          "type": "boolean",
+          "description": "If set to true, UDP Segmentation Offload (USO) is enabled. When unset, the kernel's default will be used.",
           "title": "UDP Segmentation Offload"
         },
         "GenericReceiveOffload": {
@@ -1003,24 +1041,47 @@
           "type": "string",
           "description": "Specifies the number of receive, transmit, other, or combined channels, respectively. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
           "title": "Rx Channels",
+          "examples": [
+            "4",
+            "max"
+          ],
           "version_added": "239"
         },
         "TxChannels": {
           "type": "string",
-          "title": "Tx Channels"
+          "description": "Specifies the number of transmit channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
+          "title": "Tx Channels",
+          "examples": [
+            "4",
+            "max"
+          ]
         },
         "OtherChannels": {
           "type": "string",
-          "title": "Other Channels"
+          "description": "Specifies the number of other channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
+          "title": "Other Channels",
+          "examples": [
+            "1",
+            "max"
+          ]
         },
         "CombinedChannels": {
           "type": "string",
-          "title": "Combined Channels"
+          "description": "Specifies the number of combined channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
+          "title": "Combined Channels",
+          "examples": [
+            "4",
+            "max"
+          ]
         },
         "Advertise": {
           "type": "string",
           "description": "This sets what speeds and duplex modes of operation are advertised for auto-negotiation. This implies 'AutoNegotiation=yes'. The supported values are: Supported advertise values Advertise Speed (Mbps) Duplex Mode By default this is unset, i.e. all possible modes will be advertised. This option may be specified more than once, in which case all specified speeds and modes are advertised. If the empty string is assigned to this option, the list is reset, and all prior assignments have no effect.",
           "title": "Advertise",
+          "examples": [
+            "10baset-half 10baset-full",
+            "100baset-full 1000baset-full"
+          ],
           "version_added": "240"
         },
         "RxBufferSize": {
@@ -1138,6 +1199,10 @@
           "maximum": 65535,
           "description": "Specifies the maximum number of Generic Segment Offload (GSO) segments the device should accept. An unsigned integer in the range 1...65535. Defaults to unset.",
           "title": "Generic Segment Offload Max Segments",
+          "examples": [
+            64,
+            256
+          ],
           "version_added": "248"
         },
         "RxCoalesceSec": {
@@ -1150,37 +1215,74 @@
           "type": "integer",
           "description": "These properties configure the maximum number of frames that are sent/received before a Rx/Tx interrupt is generated. The 'Irq' properties come into effect when the host is servicing an IRQ. The 'Low' and 'High' properties come into effect when the packet rate drops below the low packet rate threshold or exceeds the high packet rate threshold respectively if adaptive Rx/Tx coalescing is enabled. When unset, the kernel's defaults will be used.",
           "title": "Rx Max Coalesced Frames",
+          "examples": [
+            64,
+            256
+          ],
           "version_added": "250"
         },
         "RxCoalesceIrqSec": {
           "type": "integer",
           "description": "These properties configure the delay before Rx/Tx interrupts are generated after a packet is sent/received. The 'Irq' properties come into effect when the host is servicing an IRQ. The 'Low' and 'High' properties come into effect when the packet rate drops below the low packet rate threshold or exceeds the high packet rate threshold respectively if adaptive Rx/Tx coalescing is enabled. When unset, the kernel's defaults will be used.",
-          "title": "Rx Coalesce Irq Sec"
+          "title": "Rx Coalesce Irq Sec",
+          "examples": [
+            0,
+            1
+          ]
         },
         "RxMaxCoalescedIrqFrames": {
           "type": "integer",
-          "title": "Rx Max Coalesced Irq Frames"
+          "description": "Maximum number of frames received before generating an interrupt while servicing an IRQ. When unset, the kernel's defaults will be used.",
+          "title": "Rx Max Coalesced Irq Frames",
+          "examples": [
+            64,
+            256
+          ]
         },
         "TxCoalesceSec": {
           "type": "integer",
-          "title": "Tx Coalesce Sec"
+          "description": "Delay before Tx interrupts are generated after a packet is sent. When unset, the kernel's defaults will be used.",
+          "title": "Tx Coalesce Sec",
+          "examples": [
+            0,
+            100
+          ]
         },
         "TxMaxCoalescedFrames": {
           "type": "integer",
-          "title": "Tx Max Coalesced Frames"
+          "description": "Maximum number of frames transmitted before generating an interrupt. When unset, the kernel's defaults will be used.",
+          "title": "Tx Max Coalesced Frames",
+          "examples": [
+            64,
+            256
+          ]
         },
         "TxCoalesceIrqSec": {
           "type": "integer",
-          "title": "Tx Coalesce Irq Sec"
+          "description": "Delay before Tx interrupts are generated after a packet is sent while servicing an IRQ. When unset, the kernel's defaults will be used.",
+          "title": "Tx Coalesce Irq Sec",
+          "examples": [
+            0,
+            1
+          ]
         },
         "TxMaxCoalescedIrqFrames": {
           "type": "integer",
-          "title": "Tx Max Coalesced Irq Frames"
+          "description": "Maximum number of frames transmitted before generating an interrupt while servicing an IRQ. When unset, the kernel's defaults will be used.",
+          "title": "Tx Max Coalesced Irq Frames",
+          "examples": [
+            64,
+            256
+          ]
         },
         "StatisticsBlockCoalesceSec": {
           "type": "integer",
           "description": "How long to delay driver in-memory statistics block updates. If the driver does not have an in-memory statistic block, this property is ignored. This property cannot be zero. If unset, the kernel's default will be used.",
           "title": "Statistics Block Coalesce Sec",
+          "examples": [
+            1000000,
+            10000000
+          ],
           "version_added": "250"
         },
         "UseAdaptiveRxCoalesce": {
@@ -1197,55 +1299,113 @@
           "type": "integer",
           "description": "These properties configure the low and high packet rate (expressed in packets per second) threshold respectively and are used to determine when the corresponding coalescing settings for low and high packet rates come into effect if adaptive Rx/Tx coalescing is enabled. If unset, the kernel's defaults will be used.",
           "title": "Coalesce Packet Rate Low",
+          "examples": [
+            10000,
+            100000
+          ],
           "version_added": "250"
         },
         "RxCoalesceLowSec": {
           "type": "integer",
-          "title": "Rx Coalesce Low Sec"
+          "description": "Delay before Rx interrupts when packet rate is below low threshold. When unset, the kernel's defaults will be used.",
+          "title": "Rx Coalesce Low Sec",
+          "examples": [
+            0,
+            100
+          ]
         },
         "RxMaxCoalescedLowFrames": {
           "type": "integer",
-          "title": "Rx Max Coalesced Low Frames"
+          "description": "Maximum frames received before interrupt when packet rate is below low threshold. When unset, the kernel's defaults will be used.",
+          "title": "Rx Max Coalesced Low Frames",
+          "examples": [
+            64,
+            256
+          ]
         },
         "TxCoalesceLowSec": {
           "type": "integer",
-          "title": "Tx Coalesce Low Sec"
+          "description": "Delay before Tx interrupts when packet rate is below low threshold. When unset, the kernel's defaults will be used.",
+          "title": "Tx Coalesce Low Sec",
+          "examples": [
+            0,
+            100
+          ]
         },
         "TxMaxCoalescedLowFrames": {
           "type": "integer",
-          "title": "Tx Max Coalesced Low Frames"
+          "description": "Maximum frames transmitted before interrupt when packet rate is below low threshold. When unset, the kernel's defaults will be used.",
+          "title": "Tx Max Coalesced Low Frames",
+          "examples": [
+            64,
+            256
+          ]
         },
         "CoalescePacketRateHigh": {
           "type": "integer",
-          "title": "Coalesce Packet Rate High"
+          "description": "High packet rate threshold (packets per second) for adaptive coalescing. When unset, the kernel's defaults will be used.",
+          "title": "Coalesce Packet Rate High",
+          "examples": [
+            100000,
+            1000000
+          ]
         },
         "RxCoalesceHighSec": {
           "type": "integer",
-          "title": "Rx Coalesce High Sec"
+          "description": "Delay before Rx interrupts when packet rate exceeds high threshold. When unset, the kernel's defaults will be used.",
+          "title": "Rx Coalesce High Sec",
+          "examples": [
+            0,
+            50
+          ]
         },
         "RxMaxCoalescedHighFrames": {
           "type": "integer",
-          "title": "Rx Max Coalesced High Frames"
+          "description": "Maximum frames received before interrupt when packet rate exceeds high threshold. When unset, the kernel's defaults will be used.",
+          "title": "Rx Max Coalesced High Frames",
+          "examples": [
+            128,
+            512
+          ]
         },
         "TxCoalesceHighSec": {
           "type": "integer",
-          "title": "Tx Coalesce High Sec"
+          "description": "Delay before Tx interrupts when packet rate exceeds high threshold. When unset, the kernel's defaults will be used.",
+          "title": "Tx Coalesce High Sec",
+          "examples": [
+            0,
+            50
+          ]
         },
         "TxMaxCoalescedHighFrames": {
           "type": "integer",
-          "title": "Tx Max Coalesced High Frames"
+          "description": "Maximum frames transmitted before interrupt when packet rate exceeds high threshold. When unset, the kernel's defaults will be used.",
+          "title": "Tx Max Coalesced High Frames",
+          "examples": [
+            128,
+            512
+          ]
         },
         "CoalescePacketRateSampleIntervalSec": {
           "type": "integer",
           "minimum": 1,
           "description": "Configures how often to sample the packet rate used for adaptive Rx/Tx coalescing. This property cannot be zero. This lowest time granularity supported by this property is seconds. Partial seconds will be rounded up before being passed to the kernel. If unset, the kernel's default will be used.",
           "title": "Coalesce Packet Rate Sample Interval Sec",
+          "examples": [
+            1,
+            5
+          ],
           "version_added": "250"
         },
         "ReceivePacketSteeringCPUMask": {
           "type": "string",
           "description": "Configures Receive Packet Steering (RPS) list of CPUs to which RPS may forward traffic. Takes a list of CPU indices or ranges separated by either whitespace or commas. Alternatively, takes the special value 'all', which will include all available CPUs in the mask. CPU ranges are specified by the lower and upper CPU indices separated by a dash (e.g. '2-6'). This option may be specified more than once, in which case the specified list of CPU ranges are merged. If an empty string is assigned, the list is reset, all assignments prior to this will have no effect. Defaults to unset and RPS CPU list is unchanged. To disable RPS when it was previously enabled, use the special value 'disable'.",
           "title": "Receive Packet Steering CPU Mask",
+          "examples": [
+            "0-3",
+            "all",
+            "0,2,4,6"
+          ],
           "version_added": "256"
         },
         "MDI": {
@@ -1267,12 +1427,21 @@
         },
         "SR-IOVVirtualFunctions": {
           "type": "string",
-          "title": "SR-IOV Virtual Functions"
+          "description": "Specifies the number of SR-IOV virtual functions as a string. Defaults to unset.",
+          "title": "SR-IOV Virtual Functions",
+          "examples": [
+            "8",
+            "16"
+          ]
         },
         "IOVVirtualFunctions": {
           "type": "integer",
           "description": "Specifies the number of SR-IOV virtual functions. Defaults to unset, and automatically determined from the values specified in the VirtualFunction= settings in the [SR-IOV] sections.",
           "title": "IOV Virtual Functions",
+          "examples": [
+            8,
+            16
+          ],
           "version_added": "251"
         },
         "_comments": {
