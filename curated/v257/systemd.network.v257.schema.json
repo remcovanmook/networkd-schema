@@ -44,6 +44,38 @@
         "1500"
       ]
     },
+    "absolutePathType": {
+      "type": "string",
+      "description": "Absolute filesystem path.",
+      "pattern": "^/[^\\0]*$",
+      "title": "Absolute Path",
+      "examples": [
+        "/etc/systemd/network/key.pem",
+        "/run/credentials/wireguard.key"
+      ]
+    },
+    "addressLabelType": {
+      "type": "string",
+      "description": "IPv4 address label (7-bit ASCII, prefixed with interface name).",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9:.]*$",
+      "minLength": 1,
+      "maxLength": 15,
+      "title": "Address Label",
+      "examples": [
+        "eth0:0",
+        "lan:primary"
+      ]
+    },
+    "base64KeyType": {
+      "type": "string",
+      "description": "Base64-encoded cryptographic key (e.g. WireGuard keys).",
+      "pattern": "^[A-Za-z0-9+/]{42,44}={0,2}$",
+      "title": "Base64 Key",
+      "examples": [
+        "yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=",
+        "xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14="
+      ]
+    },
     "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
@@ -63,6 +95,69 @@
         "1024"
       ]
     },
+    "dhcpOptionType": {
+      "type": "string",
+      "description": "DHCP option in 'number:type:value' format (type: uint8, uint16, uint32, ipv4address, ipv6address, string, hex).",
+      "pattern": "^[0-9]+:(uint8|uint16|uint32|ipv4address|ipv6address|string|hex):.+$",
+      "title": "DHCP Option",
+      "examples": [
+        "224:string:openwrt",
+        "43:hex:0102030405"
+      ]
+    },
+    "domainnameType": {
+      "type": "string",
+      "title": "Domain Name",
+      "description": "A DNS domain name (no host label).",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+      "examples": [
+        "example.com",
+        "sub.example.org"
+      ]
+    },
+    "duidRawDataType": {
+      "type": "string",
+      "description": "DHCP DUID as hexadecimal string with colon separators.",
+      "pattern": "^([0-9a-fA-F]{2}:)*[0-9a-fA-F]{2}$",
+      "title": "DUID Raw Data",
+      "examples": [
+        "00:01:00:01:2a:3b:4c:5d:6e:7f:80:91",
+        "00:02:00:00:ab:cd:ef:01:23:45"
+      ]
+    },
+    "endpointType": {
+      "type": "string",
+      "description": "Network endpoint as host:port (IPv4, IPv6 in brackets, or hostname).",
+      "pattern": "^(\\[([0-9a-fA-F:]+)\\]|([0-9]{1,3}\\.){3}[0-9]{1,3}|([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)*[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?):[0-9]{1,5}$",
+      "title": "Endpoint",
+      "examples": [
+        "vpn.example.com:51820",
+        "192.0.2.1:51820",
+        "[2001:db8::1]:51820"
+      ]
+    },
+    "flowLabelType": {
+      "description": "IPv6 flow label (0-0xFFFFF) or 'inherit'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048575
+        },
+        {
+          "type": "string",
+          "enum": [
+            "inherit"
+          ]
+        }
+      ],
+      "title": "Flow Label",
+      "examples": [
+        "0",
+        "12345",
+        "inherit"
+      ]
+    },
     "globsType": {
       "type": "string",
       "description": "A whitespace-separated list of shell-style globs.",
@@ -73,6 +168,26 @@
         "en* wlan*",
         "!virbr*",
         "!eth0 eth1"
+      ]
+    },
+    "groupnameOrGidType": {
+      "type": "string",
+      "description": "Unix group name or numeric GID.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+)$",
+      "title": "Group",
+      "examples": [
+        "nogroup",
+        "1000"
+      ]
+    },
+    "hexKeyType": {
+      "type": "string",
+      "description": "Hexadecimal-encoded cryptographic key (e.g. MACsec 128-bit keys).",
+      "pattern": "^[0-9a-fA-F]{32}$",
+      "title": "Hex Key",
+      "examples": [
+        "0011223344556677889900aabbccddeeff",
+        "deadbeefcafebabedeadbeefcafebabe"
       ]
     },
     "hostType": {
@@ -92,16 +207,6 @@
       "examples": [
         "192.168.1.1",
         "example.com"
-      ]
-    },
-    "domainnameType": {
-      "type": "string",
-      "title": "Domain Name",
-      "description": "A DNS domain name (no host label).",
-      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
-      "examples": [
-        "example.com",
-        "sub.example.org"
       ]
     },
     "interfacenameType": {
@@ -165,6 +270,27 @@
         "10.0.0.1"
       ]
     },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
+      "examples": [
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6TokenType": {
+      "type": "string",
+      "description": "IPv6 SLAAC token mode or static address suffix.",
+      "pattern": "^(eui64|prefixstable(:[a-zA-Z0-9_-]+)?|static:[0-9a-fA-F:]+)$",
+      "title": "IPv6 Token",
+      "examples": [
+        "eui64",
+        "prefixstable",
+        "prefixstable:secret",
+        "static:::1"
+      ]
+    },
     "ipv6_addressType": {
       "type": "string",
       "format": "ipv6",
@@ -173,15 +299,6 @@
       "examples": [
         "2001:db8::1",
         "fe80::1"
-      ]
-    },
-    "ipv4_prefixType": {
-      "type": "string",
-      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
-      "title": "IPv4 CIDR",
-      "examples": [
-        "192.168.1.0/24"
       ]
     },
     "ipv6_prefixType": {
@@ -202,6 +319,26 @@
         "00:11:22:33:44:55"
       ]
     },
+    "netLabelType": {
+      "type": "string",
+      "description": "Linux NetLabel for security labeling (SELinux/SMACK).",
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_:.-]*$",
+      "title": "NetLabel",
+      "examples": [
+        "system_u:object_r:netlabel_peer_t:s0",
+        "web_traffic"
+      ]
+    },
+    "nftSetType": {
+      "type": "string",
+      "description": "nftables set specification in family:table:set format.",
+      "pattern": "^(ip|ip6|inet|arp|bridge|netdev):[a-zA-Z_][a-zA-Z0-9_]*:[a-zA-Z_][a-zA-Z0-9_]*$",
+      "title": "NFT Set",
+      "examples": [
+        "inet:filter:allowed_addrs",
+        "ip:nat:masq_addrs"
+      ]
+    },
     "percentageType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?%$",
@@ -210,6 +347,38 @@
       "examples": [
         "10%",
         "0.5%"
+      ]
+    },
+    "portRangeType": {
+      "type": "string",
+      "description": "TCP/UDP port or port range (low-high).",
+      "pattern": "^[0-9]{1,5}(-[0-9]{1,5})?$",
+      "title": "Port Range",
+      "examples": [
+        "8080",
+        "1024-65535",
+        "49152-65535"
+      ]
+    },
+    "portType": {
+      "description": "TCP/UDP port number or 'auto'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "enum": [
+            "auto"
+          ]
+        }
+      ],
+      "title": "Port",
+      "examples": [
+        "51820",
+        "auto"
       ]
     },
     "property_comments": {
@@ -276,6 +445,18 @@
         "100M"
       ]
     },
+    "routeTableNameType": {
+      "type": "string",
+      "description": "Routing table name or numeric ID.",
+      "pattern": "^([a-zA-Z_][a-zA-Z0-9_]*|[0-9]+)$",
+      "title": "Route Table",
+      "examples": [
+        "main",
+        "local",
+        "custom_table",
+        "200"
+      ]
+    },
     "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
@@ -293,6 +474,16 @@
         "type": "string"
       },
       "description": "Comments associated with this section"
+    },
+    "tunnelKeyType": {
+      "type": "string",
+      "description": "GRE/VTI tunnel key (decimal or dotted-decimal format).",
+      "pattern": "^([0-9]+|([0-9]{1,3}\\.){3}[0-9]{1,3})$",
+      "title": "Tunnel Key",
+      "examples": [
+        "1234",
+        "192.168.1.1"
+      ]
     },
     "uint16Type": {
       "type": "integer",
@@ -314,6 +505,17 @@
       "maximum": 255,
       "description": "Unsigned 8-bit integer (0...255).",
       "title": "Integer (8-bit)"
+    },
+    "usernameOrUidType": {
+      "type": "string",
+      "description": "Unix username, numeric UID, or UID range.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+(-[0-9]+)?)$",
+      "title": "User",
+      "examples": [
+        "nobody",
+        "1000",
+        "1000-2000"
+      ]
     },
     "vlan_idType": {
       "type": "integer",
@@ -1345,7 +1547,7 @@
           "title": "IPv4 LL"
         },
         "IPv6Token": {
-          "type": "string",
+          "$ref": "#/definitions/ipv6TokenType",
           "title": "IPv6 Token"
         },
         "IPv6PrefixDelegation": {
@@ -1410,9 +1612,7 @@
                 "title": "Broadcast"
               },
               "Label": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 15,
+                "$ref": "#/definitions/addressLabelType",
                 "description": "Specifies the label for the IPv4 address. The label must be a 7-bit ASCII string with a length of 1...15 characters. Defaults to unset.",
                 "version_added": "211",
                 "title": "Label"
@@ -1514,13 +1714,13 @@
                 "title": "Route Metric"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'.",
                 "version_added": "252",
                 "title": "Net Label"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This setting provides a method for integrating network configuration into firewall rules with NFT sets. The benefit of using the setting is that static network configuration (or dynamically obtained network addresses, see similar directives in other sections) can be used in firewall rules with the indirection of NFT set types. For example, access could be granted for hosts in the local subnetwork only. Firewall rules using IP address of an interface are also instantly updated when the network configuration changes, for example via DHCP. This option expects a whitespace separated list of NFT set definitions. Each definition consists of a colon-separated tuple of source type (one of 'address', 'prefix' or 'ifindex'), NFT address family (one of 'arp', 'bridge', 'inet', 'ip', 'ip6', or 'netdev'), table name and set name. The names of tables and sets must conform to lexical restrictions of NFT table names. The type of the element used in the NFT filter must match the type implied by the directive ('address', 'prefix' or 'ifindex') and address type (IPv4 or IPv6) as shown in the table below. When an interface is configured with IP addresses, the addresses, subnetwork masks or interface index will be appended to the NFT sets. The information will be removed when the interface is deconfigured. systemd-networkd only inserts elements to (or removes from) the sets, so the related NFT rules, tables and sets must be prepared elsewhere in advance. Failures to manage the sets will be ignored. Example: [Address] NFTSet=prefix:netdev:filter:eth_ipv4_prefix Corresponding NFT rules: table netdev filter { set eth_ipv4_prefix { type ipv4_addr flags interval } chain eth_ingress { type filter hook ingress device \"eth0\" priority filter; policy drop; ip daddr != @eth_ipv4_prefix drop accept } }",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -1578,7 +1778,7 @@
               "title": "Broadcast"
             },
             "Label": {
-              "type": "string",
+              "$ref": "#/definitions/addressLabelType",
               "description": "Specifies the label for the IPv4 address. The label must be a 7-bit ASCII string with a length of 1...15 characters. Defaults to unset.",
               "version_added": "211",
               "title": "Label"
@@ -1683,13 +1883,13 @@
               "title": "Route Metric"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'.",
               "version_added": "252",
               "title": "Net Label"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This setting provides a method for integrating network configuration into firewall rules with NFT sets. The benefit of using the setting is that static network configuration (or dynamically obtained network addresses, see similar directives in other sections) can be used in firewall rules with the indirection of NFT set types. For example, access could be granted for hosts in the local subnetwork only. Firewall rules using IP address of an interface are also instantly updated when the network configuration changes, for example via DHCP. This option expects a whitespace separated list of NFT set definitions. Each definition consists of a colon-separated tuple of source type (one of 'address', 'prefix' or 'ifindex'), NFT address family (one of 'arp', 'bridge', 'inet', 'ip', 'ip6', or 'netdev'), table name and set name. The names of tables and sets must conform to lexical restrictions of NFT table names. The type of the element used in the NFT filter must match the type implied by the directive ('address', 'prefix' or 'ifindex') and address type (IPv4 or IPv6) as shown in the table below. When an interface is configured with IP addresses, the addresses, subnetwork masks or interface index will be appended to the NFT sets. The information will be removed when the interface is deconfigured. systemd-networkd only inserts elements to (or removes from) the sets, so the related NFT rules, tables and sets must be prepared elsewhere in advance. Failures to manage the sets will be ignored. Example: [Address] NFTSet=prefix:netdev:filter:eth_ipv4_prefix Corresponding NFT rules: table netdev filter { set eth_ipv4_prefix { type ipv4_addr flags interval } chain eth_ingress { type filter hook ingress device \"eth0\" priority filter; policy drop; ip daddr != @eth_ipv4_prefix drop accept } }",
               "version_added": "255",
               "title": "NFT Set"
@@ -2012,7 +2212,7 @@
               "SourcePort": {
                 "oneOf": [
                   {
-                    "type": "string",
+                    "$ref": "#/definitions/portRangeType",
                     "regex": "^[0-9]+?-[0-9]+$"
                   },
                   {
@@ -2028,7 +2228,7 @@
               "DestinationPort": {
                 "oneOf": [
                   {
-                    "type": "string",
+                    "$ref": "#/definitions/portRangeType",
                     "regex": "^[0-9]+?-[0-9]+$"
                   },
                   {
@@ -2071,7 +2271,7 @@
                 ]
               },
               "User": {
-                "type": "string",
+                "$ref": "#/definitions/usernameOrUidType",
                 "description": "Takes a username, a user ID, or a range of user IDs separated by a dash. Defaults to unset.",
                 "version_added": "245",
                 "title": "User"
@@ -2248,13 +2448,13 @@
               "title": "IP Protocol"
             },
             "SourcePort": {
-              "type": "string",
+              "$ref": "#/definitions/portRangeType",
               "description": "Specifies the source IP port or IP port range match in forwarding information base (FIB) rules. A port range is specified by the lower and upper port separated by a dash. Defaults to unset.",
               "version_added": "240",
               "title": "Source Port"
             },
             "DestinationPort": {
-              "type": "string",
+              "$ref": "#/definitions/portRangeType",
               "description": "Specifies the destination IP port or IP port range match in forwarding information base (FIB) rules. A port range is specified by the lower and upper port separated by a dash. Defaults to unset.",
               "version_added": "240",
               "title": "Destination Port"
@@ -2289,7 +2489,7 @@
               ]
             },
             "User": {
-              "type": "string",
+              "$ref": "#/definitions/usernameOrUidType",
               "description": "Takes a username, a user ID, or a range of user IDs separated by a dash. Defaults to unset.",
               "version_added": "245",
               "title": "User"
@@ -3277,7 +3477,7 @@
                 "title": "Hostname"
               },
               "Label": {
-                "type": "string",
+                "$ref": "#/definitions/addressLabelType",
                 "description": "Specifies the label for the IPv4 address received from the DHCP server. The label must be a 7-bit ASCII string with a length of 1...15 characters. Defaults to unset.",
                 "version_added": "250",
                 "title": "Label"
@@ -3326,7 +3526,7 @@
                 "title": "DUID Type"
               },
               "DUIDRawData": {
-                "type": "string",
+                "$ref": "#/definitions/duidRawDataType",
                 "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
                 "version_added": "230",
                 "title": "DUID Raw Data"
@@ -3432,13 +3632,13 @@
                 "title": "Socket Priority"
               },
               "SendOption": {
-                "type": "string",
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send an arbitrary raw option in the DHCPv4 request. Takes a DHCP option number, data type and data separated with a colon ('option:type:value'). The option number The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "244",
                 "title": "Send Option"
               },
               "SendVendorOption": {
-                "type": "string",
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send an arbitrary vendor option in the DHCPv4 request. Takes a DHCP option number, data type and data separated with a colon ('option:type:value'). The option number The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "246",
                 "title": "Send Vendor Option"
@@ -3511,13 +3711,13 @@
                 "title": "IPv6 Only Mode"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
                 "version_added": "252",
                 "title": "Net Label"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv4_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -3687,7 +3887,7 @@
               "title": "Hostname"
             },
             "Label": {
-              "type": "string",
+              "$ref": "#/definitions/addressLabelType",
               "description": "Specifies the label for the IPv4 address received from the DHCP server. The label must be a 7-bit ASCII string with a length of 1...15 characters. Defaults to unset.",
               "version_added": "250",
               "title": "Label"
@@ -3749,7 +3949,7 @@
               "title": "DUID Type"
             },
             "DUIDRawData": {
-              "type": "string",
+              "$ref": "#/definitions/duidRawDataType",
               "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
               "version_added": "230",
               "title": "DUID Raw Data"
@@ -3855,13 +4055,13 @@
               "title": "Socket Priority"
             },
             "SendOption": {
-              "type": "string",
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send an arbitrary raw option in the DHCPv4 request. Takes a DHCP option number, data type and data separated with a colon ('option:type:value'). The option number The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "244",
               "title": "Send Option"
             },
             "SendVendorOption": {
-              "type": "string",
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send an arbitrary vendor option in the DHCPv4 request. Takes a DHCP option number, data type and data separated with a colon ('option:type:value'). The option number The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "246",
               "title": "Send Vendor Option"
@@ -3934,13 +4134,13 @@
               "title": "IPv6 Only Mode"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
               "version_added": "252",
               "title": "Net Label"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv4_addr'.",
               "version_added": "255",
               "title": "NFT Set"
@@ -4070,7 +4270,7 @@
                 "title": "Vendor Class"
               },
               "SendVendorOption": {
-                "type": "string",
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send an arbitrary vendor option in the DHCPv6 request. Takes an enterprise identifier, DHCP option number, data type, and data separated with a colon ('enterprise identifier:option:type:value'). Enterprise identifier is an unsigned integer in the range 1...4294967294. The option number Data type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "246",
                 "title": "Send Vendor Option"
@@ -4118,7 +4318,7 @@
                 ]
               },
               "SendOption": {
-                "type": "string",
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "As in the [DHCPv4] section, however because DHCPv6 uses 16-bit fields to store option numbers, the option number is an integer in the range 1...65536.",
                 "version_added": "246",
                 "title": "Send Option"
@@ -4136,7 +4336,7 @@
                 "title": "DUID Type"
               },
               "DUIDRawData": {
-                "type": "string",
+                "$ref": "#/definitions/duidRawDataType",
                 "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
                 "version_added": "230",
                 "title": "DUID Raw Data"
@@ -4149,7 +4349,7 @@
                 "title": "Rapid Commit"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'.",
                 "version_added": "252",
                 "title": "Net Label"
@@ -4162,7 +4362,7 @@
                 "title": "Send Release"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -4276,7 +4476,7 @@
               "title": "Vendor Class"
             },
             "SendVendorOption": {
-              "type": "string",
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send an arbitrary vendor option in the DHCPv6 request. Takes an enterprise identifier, DHCP option number, data type, and data separated with a colon ('enterprise identifier:option:type:value'). Enterprise identifier is an unsigned integer in the range 1...4294967294. The option number Data type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "246",
               "title": "Send Vendor Option"
@@ -4324,7 +4524,7 @@
               ]
             },
             "SendOption": {
-              "type": "string",
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "As in the [DHCPv4] section, however because DHCPv6 uses 16-bit fields to store option numbers, the option number is an integer in the range 1...65536.",
               "version_added": "246",
               "title": "Send Option"
@@ -4342,7 +4542,7 @@
               "title": "DUID Type"
             },
             "DUIDRawData": {
-              "type": "string",
+              "$ref": "#/definitions/duidRawDataType",
               "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
               "version_added": "230",
               "title": "DUID Raw Data"
@@ -4355,7 +4555,7 @@
               "title": "Rapid Commit"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'.",
               "version_added": "252",
               "title": "Net Label"
@@ -4368,7 +4568,7 @@
               "title": "Send Release"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
               "version_added": "255",
               "title": "NFT Set"
@@ -4565,19 +4765,19 @@
                 "title": "Route Deny List"
               },
               "Token": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6TokenType",
                 "description": "Specifies an optional address generation mode for the Stateless Address Autoconfiguration (SLAAC). The following values are supported: The EUI-64 algorithm will be used to generate an address for that prefix. Only supported by Ethernet or InfiniBand interfaces. An IPv6 address must be specified after a colon (':'), and the lower bits of the supplied address are combined with the upper bits of a prefix received in a Router Advertisement (RA) message to form a complete address. Note that if multiple prefixes are received in an RA message, or in multiple RA messages, addresses will be formed from each of them using the supplied address. This mode implements SLAAC but uses a static interface identifier instead of an identifier generated by using the EUI-64 algorithm. Because the interface identifier is static, if Duplicate Address Detection detects that the computed address is a duplicate (in use by another node on the link), then this mode will fail to provide an address for that prefix. If an IPv6 address without mode is specified, then 'static' mode is assumed. The algorithm specified in RFC 7217 will be used to generate interface identifiers. This mode can optionally take an IPv6 address separated with a colon (':'). If an IPv6 address is specified, then an interface identifier is generated only when a prefix received in an RA message matches the supplied address. This mode can also optionally take a non-null UUID in the format which sd_id128_from_string() accepts, e.g. '86b123b969ba4b7eb8b3d8605123525a' or '86b123b9-69ba-4b7e-b8b3-d8605123525a'. If a UUID is specified, the value is used as the secret key to generate interface identifiers. If not specified, then an application specific ID generated with the system's machine-ID will be used as the secret key. See sd-id1283, sd_id128_from_string3, and sd_id128_get_machine3. Note that the 'prefixstable' algorithm uses both the interface name and MAC address as input to the hash to compute the interface identifier, so if either of those are changed the resulting interface identifier (and address) will be changed, even if the prefix received in the RA message has not been changed. If no address generation mode is specified (which is the default), or a received prefix does not match any of the addresses provided in 'prefixstable' mode, then the EUI-64 algorithm will be used for Ethernet or InfiniBand interfaces, otherwise 'prefixstable' will be used to form an interface identifier for that prefix. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. Examples: Token=eui64 Token=::1a:2b:3c:4d Token=static:::1a:2b:3c:4d Token=prefixstable Token=prefixstable:2002:da8:1::",
                 "version_added": "250",
                 "title": "Token"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This applies the NetLabel for the addresses received with RA, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
                 "version_added": "252",
                 "title": "Net Label"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This applies the NFT set for the network configuration received with RA, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -4796,19 +4996,19 @@
               "title": "Route Deny List"
             },
             "Token": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6TokenType",
               "description": "Specifies an optional address generation mode for the Stateless Address Autoconfiguration (SLAAC). The following values are supported: The EUI-64 algorithm will be used to generate an address for that prefix. Only supported by Ethernet or InfiniBand interfaces. An IPv6 address must be specified after a colon (':'), and the lower bits of the supplied address are combined with the upper bits of a prefix received in a Router Advertisement (RA) message to form a complete address. Note that if multiple prefixes are received in an RA message, or in multiple RA messages, addresses will be formed from each of them using the supplied address. This mode implements SLAAC but uses a static interface identifier instead of an identifier generated by using the EUI-64 algorithm. Because the interface identifier is static, if Duplicate Address Detection detects that the computed address is a duplicate (in use by another node on the link), then this mode will fail to provide an address for that prefix. If an IPv6 address without mode is specified, then 'static' mode is assumed. The algorithm specified in RFC 7217 will be used to generate interface identifiers. This mode can optionally take an IPv6 address separated with a colon (':'). If an IPv6 address is specified, then an interface identifier is generated only when a prefix received in an RA message matches the supplied address. This mode can also optionally take a non-null UUID in the format which sd_id128_from_string() accepts, e.g. '86b123b969ba4b7eb8b3d8605123525a' or '86b123b9-69ba-4b7e-b8b3-d8605123525a'. If a UUID is specified, the value is used as the secret key to generate interface identifiers. If not specified, then an application specific ID generated with the system's machine-ID will be used as the secret key. See sd-id1283, sd_id128_from_string3, and sd_id128_get_machine3. Note that the 'prefixstable' algorithm uses both the interface name and MAC address as input to the hash to compute the interface identifier, so if either of those are changed the resulting interface identifier (and address) will be changed, even if the prefix received in the RA message has not been changed. If no address generation mode is specified (which is the default), or a received prefix does not match any of the addresses provided in 'prefixstable' mode, then the EUI-64 algorithm will be used for Ethernet or InfiniBand interfaces, otherwise 'prefixstable' will be used to form an interface identifier for that prefix. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. Examples: Token=eui64 Token=::1a:2b:3c:4d Token=static:::1a:2b:3c:4d Token=prefixstable Token=prefixstable:2002:da8:1::",
               "version_added": "250",
               "title": "Token"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This applies the NetLabel for the addresses received with RA, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
               "version_added": "252",
               "title": "Net Label"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This applies the NFT set for the network configuration received with RA, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
               "version_added": "255",
               "title": "NFT Set"
@@ -5022,14 +5222,7 @@
                 "title": "Pool Size"
               },
               "SendVendorOption": {
-                "type": "string",
-                "enum": [
-                  "ipv4address",
-                  "string",
-                  "uint16",
-                  "uint32",
-                  "uint8"
-                ],
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send a vendor option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "246",
                 "title": "Send Vendor Option",
@@ -5038,15 +5231,7 @@
                 ]
               },
               "SendOption": {
-                "type": "string",
-                "enum": [
-                  "ipv4address",
-                  "ipv6address",
-                  "string",
-                  "uint16",
-                  "uint32",
-                  "uint8"
-                ],
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send a raw option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "244",
                 "title": "Send Option",
@@ -5284,14 +5469,7 @@
               "title": "Pool Size"
             },
             "SendVendorOption": {
-              "type": "string",
-              "enum": [
-                "ipv4address",
-                "string",
-                "uint16",
-                "uint32",
-                "uint8"
-              ],
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send a vendor option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "246",
               "title": "Send Vendor Option",
@@ -5300,15 +5478,7 @@
               ]
             },
             "SendOption": {
-              "type": "string",
-              "enum": [
-                "ipv4address",
-                "ipv6address",
-                "string",
-                "uint16",
-                "uint32",
-                "uint8"
-              ],
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send a raw option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "244",
               "title": "Send Option",
@@ -6202,7 +6372,7 @@
                 "title": "Manage Temporary Address"
               },
               "Token": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6TokenType",
                 "description": "Specifies an optional address generation mode for assigning an address in each delegated prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
                 "version_added": "246",
                 "title": "Token"
@@ -6215,13 +6385,13 @@
                 "title": "Route Metric"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
                 "version_added": "252",
                 "title": "Net Label"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -6274,7 +6444,7 @@
               "title": "Manage Temporary Address"
             },
             "Token": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6TokenType",
               "description": "Specifies an optional address generation mode for assigning an address in each delegated prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
               "version_added": "246",
               "title": "Token"
@@ -6287,13 +6457,13 @@
               "title": "Route Metric"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
               "version_added": "252",
               "title": "Net Label"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
               "version_added": "255",
               "title": "NFT Set"
@@ -6723,7 +6893,7 @@
                 "title": "Route Metric"
               },
               "Token": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6TokenType",
                 "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
                 "version_added": "250",
                 "title": "Token"
@@ -6794,7 +6964,7 @@
               "title": "Route Metric"
             },
             "Token": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6TokenType",
               "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
               "version_added": "250",
               "title": "Token"
@@ -10844,7 +11014,7 @@
                 "title": "DUID Type"
               },
               "DUIDRawData": {
-                "type": "string",
+                "$ref": "#/definitions/duidRawDataType",
                 "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
                 "version_added": "230",
                 "title": "DUID Raw Data"
@@ -11029,7 +11199,7 @@
               "title": "DUID Type"
             },
             "DUIDRawData": {
-              "type": "string",
+              "$ref": "#/definitions/duidRawDataType",
               "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
               "version_added": "230",
               "title": "DUID Raw Data"
@@ -11163,7 +11333,7 @@
                 "title": "Manage Temporary Address"
               },
               "Token": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6TokenType",
                 "description": "Specifies an optional address generation mode for assigning an address in each delegated prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
                 "version_added": "246",
                 "title": "Token"
@@ -11215,7 +11385,7 @@
               "title": "Manage Temporary Address"
             },
             "Token": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6TokenType",
               "description": "Specifies an optional address generation mode for assigning an address in each delegated prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
               "version_added": "246",
               "title": "Token"
