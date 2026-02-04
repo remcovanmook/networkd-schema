@@ -94,6 +94,29 @@
         "example.com"
       ]
     },
+    "domainnameType": {
+      "type": "string",
+      "title": "Domain Name",
+      "description": "A DNS domain name (no host label).",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+      "examples": [
+        "example.com",
+        "sub.example.org"
+      ]
+    },
+    "interfacenameType": {
+      "type": "string",
+      "title": "Interface Name",
+      "description": "Network interface device name (kernel interface name).",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[-a-z0-9:._/]+$",
+      "examples": [
+        "eth0",
+        "enp0s3",
+        "br0"
+      ]
+    },
     "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
       "oneOf": [
@@ -686,27 +709,27 @@
           "version_added": "250"
         },
         "BatmanAdvanced": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The name of the B.A.T.M.A.N. Advanced, bond, bridge, or VRF interface to add the link to. See systemd.netdev5.",
           "title": "Batman Advanced",
           "version_added": "211"
         },
         "Bond": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "Bond"
         },
         "Bridge": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "Bridge"
         },
         "VRF": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "VRF"
         },
         "IPoIB": {
           "type": "string",
           "description": "The name of an IPoIB, IPVLAN, IPVTAP, MACsec, MACVLAN, MACVTAP, tunnel, VLAN, VXLAN, or Xfrm to be created on the link. See systemd.netdev5. This option may be specified more than once.",
-          "title": "I Po IB",
+          "title": "IPoIB",
           "version_added": "211"
         },
         "IPVLAN": {
@@ -719,11 +742,11 @@
         },
         "L2TP": {
           "type": "string",
-          "title": "L2 TP"
+          "title": "L2TP"
         },
         "MACsec": {
           "type": "string",
-          "title": "MA Csec"
+          "title": "MACsec"
         },
         "MACVLAN": {
           "type": "string",

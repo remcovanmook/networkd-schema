@@ -94,6 +94,29 @@
         "example.com"
       ]
     },
+    "domainnameType": {
+      "type": "string",
+      "title": "Domain Name",
+      "description": "A DNS domain name (no host label).",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+      "examples": [
+        "example.com",
+        "sub.example.org"
+      ]
+    },
+    "interfacenameType": {
+      "type": "string",
+      "title": "Interface Name",
+      "description": "Network interface device name (kernel interface name).",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[-a-z0-9:._/]+$",
+      "examples": [
+        "eth0",
+        "enp0s3",
+        "br0"
+      ]
+    },
     "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
       "oneOf": [
@@ -551,7 +574,7 @@
           "version_added": "216"
         },
         "Name": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The interface name to use. This option has lower precedence than NamePolicy=, so for this setting to take effect, NamePolicy= must either be unset, empty, disabled, or all policies configured there must fail. Also see the example below with 'Name=dmz0'. Note that specifying a name that the kernel might use for another interface (for example 'eth0') is dangerous because the name assignment done by udev will race with the assignment done by the kernel, and only one interface may use the name. Depending on the order of operations, either udev or the kernel will win, making the naming unpredictable. It is best to use some different prefix, for example 'internal0'/'external0' or 'lan0'/'lan1'/'lan3'. Interface names must have a minimum length of 1 character and a maximum length of 15 characters, and may contain any 7bit ASCII character, with the exception of control characters, ':', '/' and '%'. While '.' is an allowed character, it's recommended to avoid it when naming interfaces as various tools (such as resolvconf1) use it as separator character. Also, fully numeric interface names are not allowed (in order to avoid ambiguity with interface specification by numeric indexes), nor are the special strings '.', '..', 'all' and 'default'.",
           "title": "Name",
           "examples": [

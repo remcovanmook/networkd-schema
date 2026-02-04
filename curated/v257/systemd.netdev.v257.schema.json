@@ -94,6 +94,29 @@
         "example.com"
       ]
     },
+    "domainnameType": {
+      "type": "string",
+      "title": "Domain Name",
+      "description": "A DNS domain name (no host label).",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+      "examples": [
+        "example.com",
+        "sub.example.org"
+      ]
+    },
+    "interfacenameType": {
+      "type": "string",
+      "title": "Interface Name",
+      "description": "Network interface device name (kernel interface name).",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[-a-z0-9:._/]+$",
+      "examples": [
+        "eth0",
+        "enp0s3",
+        "br0"
+      ]
+    },
     "ip_addressType": {
       "description": "IPv4 or IPv6 Address",
       "oneOf": [
@@ -396,7 +419,7 @@
           "x-subcategory": "Identity"
         },
         "Name": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The interface name used when creating the netdev. This setting is compulsory.",
           "title": "Name",
           "examples": [
@@ -1978,7 +2001,7 @@
                 "title": "Layer2 Specific Header"
               },
               "Name": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "description": "Specifies the name of the session. This setting is compulsory.",
                 "version_added": "242",
                 "title": "Interface Name",
@@ -2147,7 +2170,7 @@
             "type": "object",
             "properties": {
               "Peer": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "description": "The peer interface name used when creating the netdev. This setting is compulsory.",
                 "version_added": "236",
                 "title": "Peer"
