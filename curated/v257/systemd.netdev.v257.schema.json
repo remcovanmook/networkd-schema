@@ -1401,9 +1401,7 @@
                 "title": "Foo Over UDP"
               },
               "FOUDestinationPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "This setting specifies the UDP destination port for encapsulation. This field is mandatory when FooOverUDP=yes, and is not set by default.",
                 "version_added": "240",
                 "title": "FOU Destination Port"
@@ -1640,9 +1638,7 @@
               "title": "Foo Over UDP"
             },
             "FOUDestinationPort": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "This setting specifies the UDP destination port for encapsulation. This field is mandatory when FooOverUDP=yes, and is not set by default.",
               "version_added": "240",
               "title": "FOU Destination Port"
@@ -1773,17 +1769,13 @@
                 "title": "Encapsulation"
               },
               "Port": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Specifies the port number where the encapsulated packets will arrive. Those packets will be removed and manually fed back into the network stack with the encapsulation removed to be sent to the real destination. This option is mandatory.",
                 "version_added": "240",
                 "title": "Port"
               },
               "PeerPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Specifies the peer port number. Defaults to unset. Note that when peer port is set 'Peer=' address is mandatory.",
                 "version_added": "243",
                 "title": "Peer Port"
@@ -2395,7 +2387,7 @@
           "type": "object",
           "properties": {
             "Peer": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "description": "The peer interface name used when creating the netdev. This setting is compulsory.",
               "version_added": "236",
               "title": "Peer"
@@ -2986,9 +2978,7 @@
                 "title": "UDP6 Zero Checksum Tx"
               },
               "DestinationPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "default": 6081,
                 "description": "Specifies destination port. Defaults to 6081. If not set or assigned the empty string, the default port of 6081 is used.",
                 "version_added": "234",
@@ -3147,9 +3137,7 @@
             "type": "object",
             "properties": {
               "Port": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Specifies the port to be used for the MACsec transmit channel. The port is used to make secure channel identifier (SCI). Defaults to unset.",
                 "version_added": "243",
                 "title": "Port"
@@ -3175,9 +3163,7 @@
           "type": "object",
           "properties": {
             "Port": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Specifies the port to be used for the MACsec transmit channel. The port is used to make secure channel identifier (SCI). Defaults to unset.",
               "version_added": "243",
               "title": "Port"
@@ -3210,9 +3196,7 @@
             "type": "object",
             "properties": {
               "Port": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Specifies the port to be used for the MACsec receive channel. The port is used to make secure channel identifier (SCI). This option is compulsory, and is not set by default.",
                 "version_added": "243",
                 "title": "Port"
@@ -3246,9 +3230,7 @@
           "type": "object",
           "properties": {
             "Port": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Specifies the port to be used for the MACsec receive channel. The port is used to make secure channel identifier (SCI). This option is compulsory, and is not set by default.",
               "version_added": "243",
               "title": "Port"
@@ -3850,7 +3832,7 @@
                 ]
               },
               "ARPIPTargets": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specifies the IP addresses to use as ARP monitoring peers when ARPIntervalSec= is greater than 0. These are the targets of the ARP request sent to determine the health of the link to the targets. Specify these values in IPv4 dotted decimal format. At least one IP address must be given for ARP monitoring to function. The maximum number of targets that can be specified is 16. The default value is no IP addresses.",
                 "version_added": "220",
                 "title": "ARPIP Targets"
@@ -4022,7 +4004,7 @@
                 "title": "Ad Actor System"
               },
               "ARPMissedMax": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specify the maximum number of arp interval monitor cycle for missed ARP replies. If this number is exceeded, link is reported as down. Defaults to unset.",
                 "version_added": "256",
                 "title": "ARP Missed Max"
@@ -4115,7 +4097,7 @@
               ]
             },
             "ARPIPTargets": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specifies the IP addresses to use as ARP monitoring peers when ARPIntervalSec= is greater than 0. These are the targets of the ARP request sent to determine the health of the link to the targets. Specify these values in IPv4 dotted decimal format. At least one IP address must be given for ARP monitoring to function. The maximum number of targets that can be specified is 16. The default value is no IP addresses.",
               "version_added": "220",
               "title": "ARPIP Targets"
@@ -4287,7 +4269,7 @@
               "title": "Ad Actor System"
             },
             "ARPMissedMax": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specify the maximum number of arp interval monitor cycle for missed ARP replies. If this number is exceeded, link is reported as down. Defaults to unset.",
               "version_added": "256",
               "title": "ARP Missed Max"
@@ -4967,7 +4949,7 @@
                 "x-subcategory": "Configuration"
               },
               "PersistentKeepalive": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Sets a seconds interval, between 1 and 65535 inclusive, of how often to send an authenticated empty packet to the peer for the purpose of keeping a stateful firewall or NAT mapping valid persistently. For example, if the interface very rarely sends traffic, but it might at anytime receive traffic from a peer, and it is behind NAT, the interface might benefit from having a persistent keepalive interval of 25 seconds. If set to 0 or \"off\", this option is disabled. By default or when unspecified, this option is off. Most users will not need this.",
                 "version_added": "237",
                 "title": "Persistent Keepalive"
@@ -5055,7 +5037,7 @@
               "x-subcategory": "Configuration"
             },
             "PersistentKeepalive": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Sets a seconds interval, between 1 and 65535 inclusive, of how often to send an authenticated empty packet to the peer for the purpose of keeping a stateful firewall or NAT mapping valid persistently. For example, if the interface very rarely sends traffic, but it might at anytime receive traffic from a peer, and it is behind NAT, the interface might benefit from having a persistent keepalive interval of 25 seconds. If set to 0 or \"off\", this option is disabled. By default or when unspecified, this option is off. Most users will not need this.",
               "version_added": "237",
               "title": "Persistent Keepalive"
@@ -5224,13 +5206,13 @@
                 "title": "Gateway Bandwith Up"
               },
               "GatewayBandwidthDown": {
-                "type": "string",
+                "$ref": "#/definitions/rateType",
                 "description": "If the node is a server, this parameter is used to inform other nodes in the network about this node's internet connection download bandwidth in bits per second. Just enter any number suffixed with K, M, G or T (base 1000) and the batman-adv module will propagate the entered value in the mesh.",
                 "version_added": "248",
                 "title": "Gateway Bandwidth Down"
               },
               "GatewayBandwidthUp": {
-                "type": "string",
+                "$ref": "#/definitions/rateType",
                 "description": "If the node is a server, this parameter is used to inform other nodes in the network about this node's internet connection upload bandwidth in bits per second. Just enter any number suffixed with K, M, G or T (base 1000) and the batman-adv module will propagate the entered value in the mesh.",
                 "version_added": "248",
                 "title": "Gateway Bandwidth Up"
@@ -5323,13 +5305,13 @@
               "title": "Gateway Bandwith Up"
             },
             "GatewayBandwidthDown": {
-              "type": "string",
+              "$ref": "#/definitions/rateType",
               "description": "If the node is a server, this parameter is used to inform other nodes in the network about this node's internet connection download bandwidth in bits per second. Just enter any number suffixed with K, M, G or T (base 1000) and the batman-adv module will propagate the entered value in the mesh.",
               "version_added": "248",
               "title": "Gateway Bandwidth Down"
             },
             "GatewayBandwidthUp": {
-              "type": "string",
+              "$ref": "#/definitions/rateType",
               "description": "If the node is a server, this parameter is used to inform other nodes in the network about this node's internet connection upload bandwidth in bits per second. Just enter any number suffixed with K, M, G or T (base 1000) and the batman-adv module will propagate the entered value in the mesh.",
               "version_added": "248",
               "title": "Gateway Bandwidth Up"

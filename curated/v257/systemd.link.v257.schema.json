@@ -749,7 +749,7 @@
           "version_added": "256"
         },
         "MACAddressPolicy": {
-          "type": "string",
+          "$ref": "#/definitions/rateType",
           "description": "The policy by which the MAC address should be set. The available policies are: If the hardware has a persistent MAC address, as most hardware should, and if it is used by the kernel, nothing is done. Otherwise, a new MAC address is generated which is guaranteed to be the same on every boot for the given machine and the given device, but which is otherwise random. This feature depends on ID_NET_NAME_* properties to exist for the link. On hardware where these properties are not set, the generation of a persistent MAC address will fail. If the kernel is using a random MAC address, nothing is done. Otherwise, a new address is randomly generated each time the device appears, typically at boot. Either way, the random address will have the 'unicast' and 'locally administered' bits set. Keeps the MAC address assigned by the kernel. Or use the MAC address specified in MACAddress=. An empty string assignment is equivalent to setting 'none'.",
           "title": "MAC Address Policy",
           "version_added": "211"
@@ -902,7 +902,7 @@
           ]
         },
         "WakeOnLanPassword": {
-          "type": "string",
+          "$ref": "#/definitions/bytesType",
           "description": "Specifies the SecureOn password for MagicPacket. Takes an absolute path to a regular file or an 'AF_UNIX' stream socket, or the plain password. When a path to a regular file is specified, the password is read from it. When an 'AF_UNIX' stream socket is specified, a connection is made to it and the password is read from it. The password must be 6 bytes in hex format with each byte separated by a colon (':') like an Ethernet MAC address, e.g., 'aa:bb:cc:dd:ee:ff'. This implies WakeOnLan=secureon. Defaults to unset, and the current value will not be changed.",
           "title": "Wake On Lan Password",
           "version_added": "250"
@@ -1141,7 +1141,7 @@
           "version_added": "248"
         },
         "RxCoalesceSec": {
-          "type": "string",
+          "$ref": "#/definitions/secondsType",
           "description": "These properties configure the delay before Rx/Tx interrupts are generated after a packet is sent/received. The 'Irq' properties come into effect when the host is servicing an IRQ. The 'Low' and 'High' properties come into effect when the packet rate drops below the low packet rate threshold or exceeds the high packet rate threshold respectively if adaptive Rx/Tx coalescing is enabled. When unset, the kernel's defaults will be used.",
           "title": "Rx Coalesce Sec",
           "version_added": "250"

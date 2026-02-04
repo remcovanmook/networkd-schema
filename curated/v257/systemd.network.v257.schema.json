@@ -947,7 +947,7 @@
           "title": "L2TP"
         },
         "MACsec": {
-          "type": "string",
+          "$ref": "#/definitions/secondsType",
           "title": "MACsec"
         },
         "MACVLAN": {
@@ -2192,13 +2192,13 @@
                 "title": "To"
               },
               "IncomingInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "description": "Specifies incoming device to match. If the interface is loopback, the rule only matches packets originating from this host.",
                 "version_added": "236",
                 "title": "Incoming Interface"
               },
               "OutgoingInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "description": "Specifies the outgoing device to match. The outgoing interface is only available for packets originating from local sockets that are bound to a device.",
                 "version_added": "236",
                 "title": "Outgoing Interface"
@@ -2216,9 +2216,7 @@
                     "regex": "^[0-9]+?-[0-9]+$"
                   },
                   {
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 65535
+                    "$ref": "#/definitions/portType"
                   }
                 ],
                 "description": "Specifies the source IP port or IP port range match in forwarding information base (FIB) rules. A port range is specified by the lower and upper port separated by a dash. Defaults to unset.",
@@ -2232,9 +2230,7 @@
                     "regex": "^[0-9]+?-[0-9]+$"
                   },
                   {
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 65535
+                    "$ref": "#/definitions/portType"
                   }
                 ],
                 "description": "Specifies the destination IP port or IP port range match in forwarding information base (FIB) rules. A port range is specified by the lower and upper port separated by a dash. Defaults to unset.",
@@ -2430,13 +2426,13 @@
               "title": "To"
             },
             "IncomingInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "description": "Specifies incoming device to match. If the interface is loopback, the rule only matches packets originating from this host.",
               "version_added": "236",
               "title": "Incoming Interface"
             },
             "OutgoingInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "description": "Specifies the outgoing device to match. The outgoing interface is only available for packets originating from local sockets that are bound to a device.",
               "version_added": "236",
               "title": "Outgoing Interface"
@@ -3569,17 +3565,13 @@
                 "title": "Use Timezone"
               },
               "ListenPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Set the port from which the DHCP client packets originate.",
                 "version_added": "233",
                 "title": "Listen Port"
               },
               "ServerPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Set the port on which the DHCP server is listening.",
                 "version_added": "256",
                 "title": "Server Port"
@@ -3992,17 +3984,13 @@
               "title": "Use Timezone"
             },
             "ListenPort": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Set the port from which the DHCP client packets originate.",
               "version_added": "233",
               "title": "Listen Port"
             },
             "ServerPort": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Set the port on which the DHCP server is listening.",
               "version_added": "256",
               "title": "Server Port"
@@ -4258,7 +4246,7 @@
                 "title": "Request Options"
               },
               "UserClass": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "A DHCPv6 client can use User Class option to identify the type or category of user or applications it represents. The information contained in this option is a string that represents the user class of which the client is a member. Each class sets an identifying string of information to be used by the DHCP service to classify clients. Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Takes a whitespace-separated list of strings. Note that currently 'NUL' bytes are not allowed.",
                 "version_added": "246",
                 "title": "User Class"
@@ -4464,7 +4452,7 @@
               "title": "Request Options"
             },
             "UserClass": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "A DHCPv6 client can use User Class option to identify the type or category of user or applications it represents. The information contained in this option is a string that represents the user class of which the client is a member. Each class sets an identifying string of information to be used by the DHCP service to classify clients. Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Takes a whitespace-separated list of strings. Note that currently 'NUL' bytes are not allowed.",
               "version_added": "246",
               "title": "User Class"
@@ -4793,7 +4781,7 @@
                 "title": "Black List"
               },
               "UseICMP6RateLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Use ICMP6 Rate Limit"
               },
               "_comments": {
@@ -5024,7 +5012,7 @@
               "title": "Black List"
             },
             "UseICMP6RateLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Use ICMP6 Rate Limit"
             },
             "_comments": {
@@ -5066,7 +5054,7 @@
                 "title": "Server Address"
               },
               "UplinkInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "default": ":auto",
                 "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS, NTP, or SIP servers is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'.",
                 "version_added": "249",
@@ -5110,7 +5098,7 @@
                 "title": "Default Lease Time Sec"
               },
               "IPv6OnlyPreferredSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Takes a timespan. Controls the RFC 8925 IPv6-Only Preferred option. Specifies the DHCPv4 option to indicate that a host supports an IPv6-only mode and is willing to forgo obtaining an IPv4 address if the network provides IPv6 connectivity. Defaults to unset, and not send the option. The minimum allowed value is 300 seconds.",
                 "version_added": "255",
                 "title": "IPv6 Only Preferred Sec"
@@ -5312,7 +5300,7 @@
               "title": "Server Address"
             },
             "UplinkInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "default": ":auto",
               "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS, NTP, or SIP servers is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'.",
               "version_added": "249",
@@ -5356,7 +5344,7 @@
               "title": "Default Lease Time Sec"
             },
             "IPv6OnlyPreferredSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Takes a timespan. Controls the RFC 8925 IPv6-Only Preferred option. Specifies the DHCPv4 option to indicate that a host supports an IPv6-only mode and is willing to forgo obtaining an IPv4 address if the network provides IPv6 connectivity. Defaults to unset, and not send the option. The minimum allowed value is 300 seconds.",
               "version_added": "255",
               "title": "IPv6 Only Preferred Sec"
@@ -5459,13 +5447,13 @@
               "title": "Timezone"
             },
             "PoolOffset": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Configures the pool of addresses to hand out. The pool is a contiguous sequence of IP addresses in the subnet configured for the server address, which does not include the subnet nor the broadcast address. PoolOffset= takes the offset of the pool from the start of subnet, or zero to use the default value. PoolSize= takes the number of IP addresses in the pool or zero to use the default value. By default, the pool starts at the first address after the subnet address and takes up the rest of the subnet, excluding the broadcast address. If the pool includes the server address (the default), this is reserved and not handed out to clients.",
               "version_added": "226",
               "title": "Pool Offset"
             },
             "PoolSize": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Pool Size"
             },
             "SendVendorOption": {
@@ -5958,7 +5946,7 @@
                     "type": "integer"
                   },
                   {
-                    "type": "string"
+                    "$ref": "#/definitions/interfacenameType"
                   }
                 ],
                 "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset.",
@@ -6053,7 +6041,7 @@
                   "type": "integer"
                 },
                 {
-                  "type": "string"
+                  "$ref": "#/definitions/interfacenameType"
                 }
               ],
               "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset.",
@@ -6339,7 +6327,7 @@
             "type": "object",
             "properties": {
               "UplinkInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "default": ":auto",
                 "description": "Specifies the name or the index of the uplink interface, or one of the special values ':self' and ':auto'. When ':self', the interface itself is considered the uplink interface, and WithoutRA=solicit is implied if the setting is not explicitly specified. When ':auto', the first link which acquired prefixes to be delegated from the DHCPv6 or DHCPv4 server is selected. Defaults to ':auto'.",
                 "version_added": "250",
@@ -6411,7 +6399,7 @@
           "type": "object",
           "properties": {
             "UplinkInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "default": ":auto",
               "description": "Specifies the name or the index of the uplink interface, or one of the special values ':self' and ':auto'. When ':self', the interface itself is considered the uplink interface, and WithoutRA=solicit is implied if the setting is not explicitly specified. When ':auto', the first link which acquired prefixes to be delegated from the DHCPv6 or DHCPv4 server is selected. Defaults to ':auto'.",
               "version_added": "250",
@@ -6610,7 +6598,7 @@
                 "title": "DNS Lifetime Sec"
               },
               "UplinkInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "default": ":auto",
                 "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS servers or search domains is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the value specified to the same setting in the [DHCPPrefixDelegation] section will be used if DHCPPrefixDelegation= is enabled, otherwise the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'.",
                 "version_added": "250",
@@ -6780,7 +6768,7 @@
               "title": "DNS Lifetime Sec"
             },
             "UplinkInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "default": ":auto",
               "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS servers or search domains is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the value specified to the same setting in the [DHCPPrefixDelegation] section will be used if DHCPPrefixDelegation= is enabled, otherwise the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'.",
               "version_added": "250",
@@ -6936,7 +6924,7 @@
               "title": "Address Autoconfiguration"
             },
             "ValidLifetimeSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "title": "Valid Lifetime Sec"
             },
             "PreferredLifetimeSec": {
@@ -7063,7 +7051,7 @@
             "type": "object",
             "properties": {
               "Prefix": {
-                "type": "string",
+                "$ref": "#/definitions/rateType",
                 "description": "The IPv6 PREF64 (or NAT64) prefix that is to be distributed to hosts. The setting holds an IPv6 prefix that should be set up for NAT64 translation (PLAT) to allow 464XLAT on the network segment. Use multiple [IPv6PREF64Prefix] sections to configure multiple IPv6 prefixes since prefix lifetime may differ from one prefix to another. The prefix is an address with a prefix length, separated by a slash '/' character. Valid NAT64 prefix length are 96, 64, 56, 48, 40, and 32 bits.",
                 "version_added": "255",
                 "title": "Prefix"
@@ -7094,7 +7082,7 @@
           "type": "object",
           "properties": {
             "Prefix": {
-              "type": "string",
+              "$ref": "#/definitions/rateType",
               "description": "The IPv6 PREF64 (or NAT64) prefix that is to be distributed to hosts. The setting holds an IPv6 prefix that should be set up for NAT64 translation (PLAT) to allow 464XLAT on the network segment. Use multiple [IPv6PREF64Prefix] sections to configure multiple IPv6 prefixes since prefix lifetime may differ from one prefix to another. The prefix is an address with a prefix length, separated by a slash '/' character. Valid NAT64 prefix length are 96, 64, 56, 48, 40, and 32 bits.",
               "version_added": "255",
               "title": "Prefix"
@@ -7187,13 +7175,13 @@
                 "title": "Bit Rate"
               },
               "SamplePoint": {
-                "type": "string",
+                "$ref": "#/definitions/percentageType",
                 "description": "Optional sample point in percent with one decimal (e.g. '75%', '87.5%') or permille (e.g. '875'). This will be ignored when BitRate= is unspecified.",
                 "version_added": "239",
                 "title": "Sample Point"
               },
               "TimeQuantaNSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specifies the time quanta, propagation segment, phase buffer segment 1 and 2, and the synchronization jump width, which allow one to define the CAN bit-timing in a hardware independent format as proposed by the Bosch CAN 2.0 Specification. TimeQuantaNSec= takes a timespan in nanoseconds. PropagationSegment=, PhaseBufferSegment1=, PhaseBufferSegment2=, and SyncJumpWidth= take number of time quantum specified in TimeQuantaNSec= and must be an unsigned integer in the range 0...4294967295. These settings except for SyncJumpWidth= will be ignored when BitRate= is specified.",
                 "version_added": "250",
                 "title": "Time Quanta N Sec"
@@ -7223,11 +7211,11 @@
                 "title": "Data Bit Rate"
               },
               "DataSamplePoint": {
-                "type": "string",
+                "$ref": "#/definitions/percentageType",
                 "title": "Data Sample Point"
               },
               "DataTimeQuantaNSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specifies the time quanta, propagation segment, phase buffer segment 1 and 2, and the synchronization jump width for the data phase, if CAN-FD is used. These settings are analogous to the TimeQuantaNSec= or related settings.",
                 "version_added": "250",
                 "title": "Data Time Quanta N Sec"
@@ -7352,13 +7340,13 @@
               "title": "Bit Rate"
             },
             "SamplePoint": {
-              "type": "string",
+              "$ref": "#/definitions/percentageType",
               "description": "Optional sample point in percent with one decimal (e.g. '75%', '87.5%') or permille (e.g. '875'). This will be ignored when BitRate= is unspecified.",
               "version_added": "239",
               "title": "Sample Point"
             },
             "TimeQuantaNSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specifies the time quanta, propagation segment, phase buffer segment 1 and 2, and the synchronization jump width, which allow one to define the CAN bit-timing in a hardware independent format as proposed by the Bosch CAN 2.0 Specification. TimeQuantaNSec= takes a timespan in nanoseconds. PropagationSegment=, PhaseBufferSegment1=, PhaseBufferSegment2=, and SyncJumpWidth= take number of time quantum specified in TimeQuantaNSec= and must be an unsigned integer in the range 0...4294967295. These settings except for SyncJumpWidth= will be ignored when BitRate= is specified.",
               "version_added": "250",
               "title": "Time Quanta N Sec"
@@ -7388,11 +7376,11 @@
               "title": "Data Bit Rate"
             },
             "DataSamplePoint": {
-              "type": "string",
+              "$ref": "#/definitions/percentageType",
               "title": "Data Sample Point"
             },
             "DataTimeQuantaNSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specifies the time quanta, propagation segment, phase buffer segment 1 and 2, and the synchronization jump width for the data phase, if CAN-FD is used. These settings are analogous to the TimeQuantaNSec= or related settings.",
               "version_added": "250",
               "title": "Data Time Quanta N Sec"
@@ -7736,7 +7724,7 @@
                 "title": "Handle"
               },
               "Bandwidth": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the shaper bandwidth. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Bandwidth"
@@ -7845,7 +7833,7 @@
                 "title": "Split GSO"
               },
               "RTTSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specifies the RTT for the filter. Takes a timespan. Typical g. 100us for extremely high-performance 10GigE+ networks like datacentre, 1ms for non-WiFi LAN connections, 100ms for typical internet connections. Defaults to unset, and the kernel's default will be used.",
                 "version_added": "253",
                 "title": "RTT Sec"
@@ -7883,7 +7871,7 @@
               "title": "Handle"
             },
             "Bandwidth": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the shaper bandwidth. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Bandwidth"
@@ -7992,7 +7980,7 @@
               "title": "Split GSO"
             },
             "RTTSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specifies the RTT for the filter. Takes a timespan. Typical g. 100us for extremely high-performance 10GigE+ networks like datacentre, 1ms for non-WiFi LAN connections, 100ms for typical internet connections. Defaults to unset, and the kernel's default will be used.",
               "version_added": "253",
               "title": "RTT Sec"
@@ -8047,7 +8035,7 @@
                 "title": "Packet Limit"
               },
               "TargetSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Takes a timespan. Specifies the acceptable minimum standing/persistent queue delay. Defaults to unset and kernel's default is used.",
                 "version_added": "245",
                 "title": "Target Sec"
@@ -8259,7 +8247,7 @@
                 "title": "Class Id"
               },
               "QuantumBytes": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "default": "MTU",
                 "description": "Specifies the amount of bytes a flow is allowed to dequeue before the scheduler moves to the next class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to the MTU of the interface.",
                 "version_added": "246",
@@ -8292,7 +8280,7 @@
               "title": "Class Id"
             },
             "QuantumBytes": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "default": "MTU",
               "description": "Specifies the amount of bytes a flow is allowed to dequeue before the scheduler moves to the next class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to the MTU of the interface.",
               "version_added": "246",
@@ -8340,7 +8328,7 @@
                 "title": "Handle"
               },
               "Bands": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the number of bands. An unsigned integer in the range 1...16. This value has to be at least large enough to cover the strict bands specified through the StrictBands= and bandwidth-sharing bands specified in QuantumBytes=.",
                 "version_added": "246",
                 "title": "Bands"
@@ -8352,7 +8340,7 @@
                 "title": "Strict Bands"
               },
               "QuantumBytes": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the white-space separated list of quantum used in band-sharing bands. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
                 "version_added": "246",
                 "title": "Quantum Bytes"
@@ -8394,7 +8382,7 @@
               "title": "Handle"
             },
             "Bands": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the number of bands. An unsigned integer in the range 1...16. This value has to be at least large enough to cover the strict bands specified through the StrictBands= and bandwidth-sharing bands specified in QuantumBytes=.",
               "version_added": "246",
               "title": "Bands"
@@ -8406,7 +8394,7 @@
               "title": "Strict Bands"
             },
             "QuantumBytes": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the white-space separated list of quantum used in band-sharing bands. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
               "version_added": "246",
               "title": "Quantum Bytes"
@@ -8463,7 +8451,7 @@
                 "title": "Handle"
               },
               "PacketLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the hard limit on the number of packets in the FIFO queue. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. An unsigned integer in the range 0...4294967294. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Packet Limit"
@@ -8495,7 +8483,7 @@
               "title": "Handle"
             },
             "PacketLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the hard limit on the number of packets in the FIFO queue. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. An unsigned integer in the range 0...4294967294. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Packet Limit"
@@ -8609,7 +8597,7 @@
                 "title": "Handle"
               },
               "PacketLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "As in [PFIFO] section.",
                 "version_added": "246",
                 "title": "Packet Limit"
@@ -8641,7 +8629,7 @@
               "title": "Handle"
             },
             "PacketLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "As in [PFIFO] section.",
               "version_added": "246",
               "title": "Packet Limit"
@@ -8888,7 +8876,7 @@
                 "title": "Initial Quantum Bytes"
               },
               "MaximumRate": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the maximum sending rate of a flow. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset and kernel's default is used.",
                 "version_added": "245",
                 "title": "Maximum Rate"
@@ -8928,11 +8916,11 @@
                 "title": "CE Threshold Sec"
               },
               "Quantum": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Quantum"
               },
               "InitialQuantum": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Initial Quantum"
               },
               "_comments": {
@@ -9002,7 +8990,7 @@
               "title": "Initial Quantum Bytes"
             },
             "MaximumRate": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the maximum sending rate of a flow. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset and kernel's default is used.",
               "version_added": "245",
               "title": "Maximum Rate"
@@ -9042,11 +9030,11 @@
               "title": "CE Threshold Sec"
             },
             "Quantum": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Quantum"
             },
             "InitialQuantum": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Initial Quantum"
             },
             "_comments": {
@@ -9157,11 +9145,11 @@
                 "title": "ECN"
               },
               "MemoryLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Memory Limit"
               },
               "Quantum": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Quantum"
               },
               "_comments": {
@@ -9265,11 +9253,11 @@
               "title": "ECN"
             },
             "MemoryLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Memory Limit"
             },
             "Quantum": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Quantum"
             },
             "_comments": {
@@ -9306,7 +9294,7 @@
                 "title": "Handle"
               },
               "PacketLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. An unsigned integer ranges 1 to 4294967294. Defaults to unset and kernel's default is used.",
                 "version_added": "247",
                 "title": "Packet Limit"
@@ -9338,7 +9326,7 @@
               "title": "Handle"
             },
             "PacketLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. An unsigned integer ranges 1 to 4294967294. Defaults to unset and kernel's default is used.",
               "version_added": "247",
               "title": "Packet Limit"
@@ -9731,7 +9719,7 @@
                 "title": "Buffer Bytes"
               },
               "CeilBufferBytes": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the maximum bytes burst for ceil which can be accumulated during idle period. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
                 "version_added": "246",
                 "title": "Ceil Buffer Bytes"
@@ -9813,13 +9801,13 @@
               "title": "Overhead Bytes"
             },
             "Rate": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the maximum rate this class and all its children are guaranteed. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. This setting is mandatory.",
               "version_added": "246",
               "title": "Rate"
             },
             "CeilRate": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the maximum rate at which a class can send, if its parent has bandwidth to spare. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. When unset, the value specified with Rate= is used.",
               "version_added": "246",
               "title": "Ceil Rate"
@@ -9835,7 +9823,7 @@
               "title": "Buffer Bytes"
             },
             "CeilBufferBytes": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the maximum bytes burst for ceil which can be accumulated during idle period. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
               "version_added": "246",
               "title": "Ceil Buffer Bytes"
@@ -10467,7 +10455,7 @@
                 "title": "Latency Sec"
               },
               "Burst": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Burst"
               },
               "LimitSize": {
@@ -10577,7 +10565,7 @@
               "title": "Latency Sec"
             },
             "Burst": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Burst"
             },
             "LimitSize": {
@@ -11056,9 +11044,7 @@
                 "title": "Use Timezone"
               },
               "ListenPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Set the port from which the DHCP client packets originate.",
                 "version_added": "233",
                 "title": "Listen Port"
@@ -11241,9 +11227,7 @@
               "title": "Use Timezone"
             },
             "ListenPort": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Set the port from which the DHCP client packets originate.",
               "version_added": "233",
               "title": "Listen Port"
