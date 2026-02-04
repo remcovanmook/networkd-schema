@@ -44,6 +44,38 @@
         "1500"
       ]
     },
+    "absolutePathType": {
+      "type": "string",
+      "description": "Absolute filesystem path.",
+      "pattern": "^/[^\\0]*$",
+      "title": "Absolute Path",
+      "examples": [
+        "/etc/systemd/network/key.pem",
+        "/run/credentials/wireguard.key"
+      ]
+    },
+    "addressLabelType": {
+      "type": "string",
+      "description": "IPv4 address label (7-bit ASCII, prefixed with interface name).",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9:.]*$",
+      "minLength": 1,
+      "maxLength": 15,
+      "title": "Address Label",
+      "examples": [
+        "eth0:0",
+        "lan:primary"
+      ]
+    },
+    "base64KeyType": {
+      "type": "string",
+      "description": "Base64-encoded cryptographic key (e.g. WireGuard keys).",
+      "pattern": "^[A-Za-z0-9+/]{42,44}={0,2}$",
+      "title": "Base64 Key",
+      "examples": [
+        "yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=",
+        "xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14="
+      ]
+    },
     "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
@@ -63,6 +95,69 @@
         "1024"
       ]
     },
+    "dhcpOptionType": {
+      "type": "string",
+      "description": "DHCP option in 'number:type:value' format (type: uint8, uint16, uint32, ipv4address, ipv6address, string, hex).",
+      "pattern": "^[0-9]+:(uint8|uint16|uint32|ipv4address|ipv6address|string|hex):.+$",
+      "title": "DHCP Option",
+      "examples": [
+        "224:string:openwrt",
+        "43:hex:0102030405"
+      ]
+    },
+    "domainnameType": {
+      "type": "string",
+      "title": "Domain Name",
+      "description": "A DNS domain name (no host label).",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+      "examples": [
+        "example.com",
+        "sub.example.org"
+      ]
+    },
+    "duidRawDataType": {
+      "type": "string",
+      "description": "DHCP DUID as hexadecimal string with colon separators.",
+      "pattern": "^([0-9a-fA-F]{2}:)*[0-9a-fA-F]{2}$",
+      "title": "DUID Raw Data",
+      "examples": [
+        "00:01:00:01:2a:3b:4c:5d:6e:7f:80:91",
+        "00:02:00:00:ab:cd:ef:01:23:45"
+      ]
+    },
+    "endpointType": {
+      "type": "string",
+      "description": "Network endpoint as host:port (IPv4, IPv6 in brackets, or hostname).",
+      "pattern": "^(\\[([0-9a-fA-F:]+)\\]|([0-9]{1,3}\\.){3}[0-9]{1,3}|([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)*[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?):[0-9]{1,5}$",
+      "title": "Endpoint",
+      "examples": [
+        "vpn.example.com:51820",
+        "192.0.2.1:51820",
+        "[2001:db8::1]:51820"
+      ]
+    },
+    "flowLabelType": {
+      "description": "IPv6 flow label (0-0xFFFFF) or 'inherit'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048575
+        },
+        {
+          "type": "string",
+          "enum": [
+            "inherit"
+          ]
+        }
+      ],
+      "title": "Flow Label",
+      "examples": [
+        "0",
+        "12345",
+        "inherit"
+      ]
+    },
     "globsType": {
       "type": "string",
       "description": "A whitespace-separated list of shell-style globs.",
@@ -73,6 +168,26 @@
         "en* wlan*",
         "!virbr*",
         "!eth0 eth1"
+      ]
+    },
+    "groupnameOrGidType": {
+      "type": "string",
+      "description": "Unix group name or numeric GID.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+)$",
+      "title": "Group",
+      "examples": [
+        "nogroup",
+        "1000"
+      ]
+    },
+    "hexKeyType": {
+      "type": "string",
+      "description": "Hexadecimal-encoded cryptographic key (e.g. MACsec 128-bit keys).",
+      "pattern": "^[0-9a-fA-F]{32}$",
+      "title": "Hex Key",
+      "examples": [
+        "0011223344556677889900aabbccddeeff",
+        "deadbeefcafebabedeadbeefcafebabe"
       ]
     },
     "hostType": {
@@ -92,16 +207,6 @@
       "examples": [
         "192.168.1.1",
         "example.com"
-      ]
-    },
-    "domainnameType": {
-      "type": "string",
-      "title": "Domain Name",
-      "description": "A DNS domain name (no host label).",
-      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
-      "examples": [
-        "example.com",
-        "sub.example.org"
       ]
     },
     "interfacenameType": {
@@ -165,6 +270,27 @@
         "10.0.0.1"
       ]
     },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
+      "examples": [
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6TokenType": {
+      "type": "string",
+      "description": "IPv6 SLAAC token mode or static address suffix.",
+      "pattern": "^(eui64|prefixstable(:[a-zA-Z0-9_-]+)?|static:[0-9a-fA-F:]+)$",
+      "title": "IPv6 Token",
+      "examples": [
+        "eui64",
+        "prefixstable",
+        "prefixstable:secret",
+        "static:::1"
+      ]
+    },
     "ipv6_addressType": {
       "type": "string",
       "format": "ipv6",
@@ -173,15 +299,6 @@
       "examples": [
         "2001:db8::1",
         "fe80::1"
-      ]
-    },
-    "ipv4_prefixType": {
-      "type": "string",
-      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
-      "title": "IPv4 CIDR",
-      "examples": [
-        "192.168.1.0/24"
       ]
     },
     "ipv6_prefixType": {
@@ -202,6 +319,26 @@
         "00:11:22:33:44:55"
       ]
     },
+    "netLabelType": {
+      "type": "string",
+      "description": "Linux NetLabel for security labeling (SELinux/SMACK).",
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_:.-]*$",
+      "title": "NetLabel",
+      "examples": [
+        "system_u:object_r:netlabel_peer_t:s0",
+        "web_traffic"
+      ]
+    },
+    "nftSetType": {
+      "type": "string",
+      "description": "nftables set specification in family:table:set format.",
+      "pattern": "^(ip|ip6|inet|arp|bridge|netdev):[a-zA-Z_][a-zA-Z0-9_]*:[a-zA-Z_][a-zA-Z0-9_]*$",
+      "title": "NFT Set",
+      "examples": [
+        "inet:filter:allowed_addrs",
+        "ip:nat:masq_addrs"
+      ]
+    },
     "percentageType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?%$",
@@ -210,6 +347,38 @@
       "examples": [
         "10%",
         "0.5%"
+      ]
+    },
+    "portRangeType": {
+      "type": "string",
+      "description": "TCP/UDP port or port range (low-high).",
+      "pattern": "^[0-9]{1,5}(-[0-9]{1,5})?$",
+      "title": "Port Range",
+      "examples": [
+        "8080",
+        "1024-65535",
+        "49152-65535"
+      ]
+    },
+    "portType": {
+      "description": "TCP/UDP port number or 'auto'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "enum": [
+            "auto"
+          ]
+        }
+      ],
+      "title": "Port",
+      "examples": [
+        "51820",
+        "auto"
       ]
     },
     "property_comments": {
@@ -276,6 +445,18 @@
         "100M"
       ]
     },
+    "routeTableNameType": {
+      "type": "string",
+      "description": "Routing table name or numeric ID.",
+      "pattern": "^([a-zA-Z_][a-zA-Z0-9_]*|[0-9]+)$",
+      "title": "Route Table",
+      "examples": [
+        "main",
+        "local",
+        "custom_table",
+        "200"
+      ]
+    },
     "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
@@ -293,6 +474,16 @@
         "type": "string"
       },
       "description": "Comments associated with this section"
+    },
+    "tunnelKeyType": {
+      "type": "string",
+      "description": "GRE/VTI tunnel key (decimal or dotted-decimal format).",
+      "pattern": "^([0-9]+|([0-9]{1,3}\\.){3}[0-9]{1,3})$",
+      "title": "Tunnel Key",
+      "examples": [
+        "1234",
+        "192.168.1.1"
+      ]
     },
     "uint16Type": {
       "type": "integer",
@@ -314,6 +505,17 @@
       "maximum": 255,
       "description": "Unsigned 8-bit integer (0...255).",
       "title": "Integer (8-bit)"
+    },
+    "usernameOrUidType": {
+      "type": "string",
+      "description": "Unix username, numeric UID, or UID range.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+(-[0-9]+)?)$",
+      "title": "User",
+      "examples": [
+        "nobody",
+        "1000",
+        "1000-2000"
+      ]
     },
     "vlan_idType": {
       "type": "integer",
@@ -1107,19 +1309,19 @@
                 "title": "TTL"
               },
               "Key": {
-                "type": "string",
+                "$ref": "#/definitions/tunnelKeyType",
                 "description": "The Key= parameter specifies the same key to use in both directions (InputKey= and OutputKey=). The Key= is either a number or an IPv4 address-like dotted quad. It is used as mark-configured SAD/SPD entry as part of the lookup key (both in data and control path) in IP XFRM (framework used to implement IPsec protocol). See ip-xfrm -- transform configuration for details. It is only used for VTI/VTI6, GRE, GRETAP, and ERSPAN tunnels.",
                 "version_added": "231",
                 "title": "Key"
               },
               "InputKey": {
-                "type": "string",
+                "$ref": "#/definitions/tunnelKeyType",
                 "description": "The InputKey= parameter specifies the key to use for input. The format is same as Key=. It is only used for VTI/VTI6, GRE, GRETAP, and ERSPAN tunnels.",
                 "version_added": "231",
                 "title": "Input Key"
               },
               "OutputKey": {
-                "type": "string",
+                "$ref": "#/definitions/tunnelKeyType",
                 "description": "The OutputKey= parameter specifies the key to use for output. The format is same as Key=. It is only used for VTI/VTI6, GRE, GRETAP, and ERSPAN tunnels.",
                 "version_added": "231",
                 "title": "Output Key"
@@ -1153,7 +1355,7 @@
                 ]
               },
               "IPv6FlowLabel": {
-                "type": "string",
+                "$ref": "#/definitions/flowLabelType",
                 "description": "Configures the 20-bit flow label (see RFC 6437) field in the IPv6 header (see RFC 2460), which is used by a node to label packets of a flow. It is only used for IPv6 tunnels. A flow label of zero is used to indicate packets that have not been labeled. It can be configured to a value in the range 0...0xFFFFF, or be set to 'inherit', in which case the original flowlabel is used.",
                 "version_added": "223",
                 "title": "IPv6 Flow Label"
@@ -1199,9 +1401,7 @@
                 "title": "Foo Over UDP"
               },
               "FOUDestinationPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "This setting specifies the UDP destination port for encapsulation. This field is mandatory when FooOverUDP=yes, and is not set by default.",
                 "version_added": "240",
                 "title": "FOU Destination Port"
@@ -1224,7 +1424,7 @@
                 "title": "Encapsulation"
               },
               "IPv6RapidDeploymentPrefix": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6_prefixType",
                 "description": "Reconfigure the tunnel for IPv6 Rapid Deployment, also known as 6rd. The value is an ISP-specific IPv6 prefix with a non-zero length. Only applicable to SIT tunnels.",
                 "version_added": "240",
                 "title": "IPv6 Rapid Deployment Prefix"
@@ -1342,19 +1542,19 @@
               "title": "TTL"
             },
             "Key": {
-              "type": "string",
+              "$ref": "#/definitions/tunnelKeyType",
               "description": "The Key= parameter specifies the same key to use in both directions (InputKey= and OutputKey=). The Key= is either a number or an IPv4 address-like dotted quad. It is used as mark-configured SAD/SPD entry as part of the lookup key (both in data and control path) in IP XFRM (framework used to implement IPsec protocol). See ip-xfrm -- transform configuration for details. It is only used for VTI/VTI6, GRE, GRETAP, and ERSPAN tunnels.",
               "version_added": "231",
               "title": "Key"
             },
             "InputKey": {
-              "type": "string",
+              "$ref": "#/definitions/tunnelKeyType",
               "description": "The InputKey= parameter specifies the key to use for input. The format is same as Key=. It is only used for VTI/VTI6, GRE, GRETAP, and ERSPAN tunnels.",
               "version_added": "231",
               "title": "Input Key"
             },
             "OutputKey": {
-              "type": "string",
+              "$ref": "#/definitions/tunnelKeyType",
               "description": "The OutputKey= parameter specifies the key to use for output. The format is same as Key=. It is only used for VTI/VTI6, GRE, GRETAP, and ERSPAN tunnels.",
               "version_added": "231",
               "title": "Output Key"
@@ -1388,7 +1588,7 @@
               ]
             },
             "IPv6FlowLabel": {
-              "type": "string",
+              "$ref": "#/definitions/flowLabelType",
               "description": "Configures the 20-bit flow label (see RFC 6437) field in the IPv6 header (see RFC 2460), which is used by a node to label packets of a flow. It is only used for IPv6 tunnels. A flow label of zero is used to indicate packets that have not been labeled. It can be configured to a value in the range 0...0xFFFFF, or be set to 'inherit', in which case the original flowlabel is used.",
               "version_added": "223",
               "title": "IPv6 Flow Label"
@@ -1438,9 +1638,7 @@
               "title": "Foo Over UDP"
             },
             "FOUDestinationPort": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "This setting specifies the UDP destination port for encapsulation. This field is mandatory when FooOverUDP=yes, and is not set by default.",
               "version_added": "240",
               "title": "FOU Destination Port"
@@ -1463,7 +1661,7 @@
               "title": "Encapsulation"
             },
             "IPv6RapidDeploymentPrefix": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6_prefixType",
               "description": "Reconfigure the tunnel for IPv6 Rapid Deployment, also known as 6rd. The value is an ISP-specific IPv6 prefix with a non-zero length. Only applicable to SIT tunnels.",
               "version_added": "240",
               "title": "IPv6 Rapid Deployment Prefix"
@@ -1571,17 +1769,13 @@
                 "title": "Encapsulation"
               },
               "Port": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Specifies the port number where the encapsulated packets will arrive. Those packets will be removed and manually fed back into the network stack with the encapsulation removed to be sent to the real destination. This option is mandatory.",
                 "version_added": "240",
                 "title": "Port"
               },
               "PeerPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Specifies the peer port number. Defaults to unset. Note that when peer port is set 'Peer=' address is mandatory.",
                 "version_added": "243",
                 "title": "Peer Port"
@@ -2193,7 +2387,7 @@
           "type": "object",
           "properties": {
             "Peer": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "description": "The peer interface name used when creating the netdev. This setting is compulsory.",
               "version_added": "236",
               "title": "Peer"
@@ -2413,7 +2607,7 @@
                 "title": "Maximum FDB Entries"
               },
               "PortRange": {
-                "type": "string",
+                "$ref": "#/definitions/portRangeType",
                 "description": "Configures the source port range for the VXLAN. The kernel assigns the source UDP port based on the flow to help the receiver to do load balancing. When this option is not set, the normal range of local UDP ports is used.",
                 "version_added": "229",
                 "title": "Port Range"
@@ -2659,7 +2853,7 @@
               "title": "Maximum FDB Entries"
             },
             "PortRange": {
-              "type": "string",
+              "$ref": "#/definitions/portRangeType",
               "description": "Configures the source port range for the VXLAN. The kernel assigns the source UDP port based on the flow to help the receiver to do load balancing. When this option is not set, the normal range of local UDP ports is used.",
               "version_added": "229",
               "title": "Port Range"
@@ -2784,9 +2978,7 @@
                 "title": "UDP6 Zero Checksum Tx"
               },
               "DestinationPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "default": 6081,
                 "description": "Specifies destination port. Defaults to 6081. If not set or assigned the empty string, the default port of 6081 is used.",
                 "version_added": "234",
@@ -2799,7 +2991,7 @@
                 "title": "IP Do Not Fragment"
               },
               "FlowLabel": {
-                "type": "string",
+                "$ref": "#/definitions/flowLabelType",
                 "description": "Specifies the flow label to use in outgoing packets.",
                 "version_added": "234",
                 "title": "Flow Label"
@@ -2908,7 +3100,7 @@
               "title": "IP Do Not Fragment"
             },
             "FlowLabel": {
-              "type": "string",
+              "$ref": "#/definitions/flowLabelType",
               "description": "Specifies the flow label to use in outgoing packets.",
               "version_added": "234",
               "title": "Flow Label"
@@ -2945,9 +3137,7 @@
             "type": "object",
             "properties": {
               "Port": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Specifies the port to be used for the MACsec transmit channel. The port is used to make secure channel identifier (SCI). Defaults to unset.",
                 "version_added": "243",
                 "title": "Port"
@@ -2973,9 +3163,7 @@
           "type": "object",
           "properties": {
             "Port": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Specifies the port to be used for the MACsec transmit channel. The port is used to make secure channel identifier (SCI). Defaults to unset.",
               "version_added": "243",
               "title": "Port"
@@ -3008,9 +3196,7 @@
             "type": "object",
             "properties": {
               "Port": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Specifies the port to be used for the MACsec receive channel. The port is used to make secure channel identifier (SCI). This option is compulsory, and is not set by default.",
                 "version_added": "243",
                 "title": "Port"
@@ -3044,9 +3230,7 @@
           "type": "object",
           "properties": {
             "Port": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Specifies the port to be used for the MACsec receive channel. The port is used to make secure channel identifier (SCI). This option is compulsory, and is not set by default.",
               "version_added": "243",
               "title": "Port"
@@ -3099,13 +3283,13 @@
                 "title": "Key Id"
               },
               "Key": {
-                "type": "string",
+                "$ref": "#/definitions/hexKeyType",
                 "description": "Specifies the encryption key used in the transmission channel. The same key must be configured on the peer's matching receive channel. This setting is compulsory, and is not set by default. Takes a 128-bit key encoded in a hexadecimal string, for example 'dffafc8d7b9a43d5b9a3dfbbf6a30c16'.",
                 "version_added": "243",
                 "title": "Key"
               },
               "KeyFile": {
-                "type": "string",
+                "$ref": "#/definitions/absolutePathType",
                 "description": "Takes an absolute path to a file which contains a 128-bit key encoded in a hexadecimal string, which will be used in the transmission channel. When this option is specified, Key= is ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
                 "version_added": "243",
                 "title": "Key File"
@@ -3153,13 +3337,13 @@
               "title": "Key Id"
             },
             "Key": {
-              "type": "string",
+              "$ref": "#/definitions/hexKeyType",
               "description": "Specifies the encryption key used in the transmission channel. The same key must be configured on the peer's matching receive channel. This setting is compulsory, and is not set by default. Takes a 128-bit key encoded in a hexadecimal string, for example 'dffafc8d7b9a43d5b9a3dfbbf6a30c16'.",
               "version_added": "243",
               "title": "Key"
             },
             "KeyFile": {
-              "type": "string",
+              "$ref": "#/definitions/absolutePathType",
               "description": "Takes an absolute path to a file which contains a 128-bit key encoded in a hexadecimal string, which will be used in the transmission channel. When this option is specified, Key= is ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
               "version_added": "243",
               "title": "Key File"
@@ -3230,13 +3414,13 @@
                 "title": "Key Id"
               },
               "Key": {
-                "type": "string",
+                "$ref": "#/definitions/hexKeyType",
                 "description": "Accepts the same key as in [MACsecTransmitAssociation] section.",
                 "version_added": "243",
                 "title": "Key"
               },
               "KeyFile": {
-                "type": "string",
+                "$ref": "#/definitions/absolutePathType",
                 "description": "Accepts the same key as in [MACsecTransmitAssociation] section.",
                 "version_added": "243",
                 "title": "Key File"
@@ -3290,13 +3474,13 @@
               "title": "Key Id"
             },
             "Key": {
-              "type": "string",
+              "$ref": "#/definitions/hexKeyType",
               "description": "Accepts the same key as in [MACsecTransmitAssociation] section.",
               "version_added": "243",
               "title": "Key"
             },
             "KeyFile": {
-              "type": "string",
+              "$ref": "#/definitions/absolutePathType",
               "description": "Accepts the same key as in [MACsecTransmitAssociation] section.",
               "version_added": "243",
               "title": "Key File"
@@ -3354,13 +3538,13 @@
                 "title": "V Net Header"
               },
               "User": {
-                "type": "string",
+                "$ref": "#/definitions/usernameOrUidType",
                 "description": "User to grant access to the '/dev/net/tun' device.",
                 "version_added": "215",
                 "title": "User"
               },
               "Group": {
-                "type": "string",
+                "$ref": "#/definitions/groupnameOrGidType",
                 "description": "Group to grant access to the '/dev/net/tun' device.",
                 "version_added": "215",
                 "title": "Group"
@@ -3412,13 +3596,13 @@
               "title": "V Net Header"
             },
             "User": {
-              "type": "string",
+              "$ref": "#/definitions/usernameOrUidType",
               "description": "User to grant access to the '/dev/net/tun' device.",
               "version_added": "215",
               "title": "User"
             },
             "Group": {
-              "type": "string",
+              "$ref": "#/definitions/groupnameOrGidType",
               "description": "Group to grant access to the '/dev/net/tun' device.",
               "version_added": "215",
               "title": "Group"
@@ -3477,13 +3661,13 @@
                 "title": "V Net Header"
               },
               "User": {
-                "type": "string",
+                "$ref": "#/definitions/usernameOrUidType",
                 "description": "User to grant access to the '/dev/net/tun' device.",
                 "version_added": "215",
                 "title": "User"
               },
               "Group": {
-                "type": "string",
+                "$ref": "#/definitions/groupnameOrGidType",
                 "description": "Configures VXLAN multicast group IP address. All members of a VXLAN must use the same multicast group address.",
                 "version_added": "243",
                 "title": "Group"
@@ -3535,13 +3719,13 @@
               "title": "V Net Header"
             },
             "User": {
-              "type": "string",
+              "$ref": "#/definitions/usernameOrUidType",
               "description": "User to grant access to the '/dev/net/tun' device.",
               "version_added": "215",
               "title": "User"
             },
             "Group": {
-              "type": "string",
+              "$ref": "#/definitions/groupnameOrGidType",
               "description": "Configures VXLAN multicast group IP address. All members of a VXLAN must use the same multicast group address.",
               "version_added": "243",
               "title": "Group"
@@ -3648,7 +3832,7 @@
                 ]
               },
               "ARPIPTargets": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specifies the IP addresses to use as ARP monitoring peers when ARPIntervalSec= is greater than 0. These are the targets of the ARP request sent to determine the health of the link to the targets. Specify these values in IPv4 dotted decimal format. At least one IP address must be given for ARP monitoring to function. The maximum number of targets that can be specified is 16. The default value is no IP addresses.",
                 "version_added": "220",
                 "title": "ARPIP Targets"
@@ -3806,9 +3990,7 @@
                 "title": "Ad Actor System Priority"
               },
               "AdUserPortKey": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 1023,
+                "$ref": "#/definitions/uint16Type",
                 "description": "Specifies the 802.3ad user defined portion of the port key.",
                 "version_added": "240",
                 "title": "Ad User Port Key"
@@ -3820,7 +4002,7 @@
                 "title": "Ad Actor System"
               },
               "ARPMissedMax": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specify the maximum number of arp interval monitor cycle for missed ARP replies. If this number is exceeded, link is reported as down. Defaults to unset.",
                 "version_added": "256",
                 "title": "ARP Missed Max"
@@ -3913,7 +4095,7 @@
               ]
             },
             "ARPIPTargets": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specifies the IP addresses to use as ARP monitoring peers when ARPIntervalSec= is greater than 0. These are the targets of the ARP request sent to determine the health of the link to the targets. Specify these values in IPv4 dotted decimal format. At least one IP address must be given for ARP monitoring to function. The maximum number of targets that can be specified is 16. The default value is no IP addresses.",
               "version_added": "220",
               "title": "ARPIP Targets"
@@ -4071,9 +4253,7 @@
               "title": "Ad Actor System Priority"
             },
             "AdUserPortKey": {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 1023,
+              "$ref": "#/definitions/uint16Type",
               "description": "Specifies the 802.3ad user defined portion of the port key.",
               "version_added": "240",
               "title": "Ad User Port Key"
@@ -4085,7 +4265,7 @@
               "title": "Ad Actor System"
             },
             "ARPMissedMax": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specify the maximum number of arp interval monitor cycle for missed ARP replies. If this number is exceeded, link is reported as down. Defaults to unset.",
               "version_added": "256",
               "title": "ARP Missed Max"
@@ -4573,7 +4753,7 @@
                 "title": "Fw Mark"
               },
               "ListenPort": {
-                "type": "string",
+                "$ref": "#/definitions/portType",
                 "default": "auto",
                 "description": "Sets UDP port for listening. Takes either value between 1 and 65535 or 'auto'. If 'auto' is specified, the port is automatically generated based on interface name. Defaults to 'auto'.",
                 "version_added": "237",
@@ -4581,14 +4761,14 @@
                 "x-subcategory": "Configuration"
               },
               "PrivateKey": {
-                "type": "string",
+                "$ref": "#/definitions/base64KeyType",
                 "description": "The Base64 encoded private key for the interface. It can be generated using the wg genkey command (see wg8). Specially, if the specified key is prefixed with '@', it is interpreted as the name of the credential from which the actual key shall be read. systemd-networkd.service8 automatically imports credentials matching 'network.wireguard.*'. For more details on credentials, refer to systemd.exec5. A private key is mandatory to use WireGuard. If not set, the credential 'network.wireguard.private.netdev' is used if exists. I.e. for '50-foobar.netdev', 'network.wireguard.private.50-foobar' is tried. Note that because this information is secret, it's strongly recommended to use an (encrypted) credential. Alternatively, you may want to set the permissions of the.netdev file to be owned by 'root:systemd-network' with a '0640' file mode.",
                 "version_added": "237",
                 "title": "Private Key",
                 "x-subcategory": "Configuration"
               },
               "PrivateKeyFile": {
-                "type": "string",
+                "$ref": "#/definitions/absolutePathType",
                 "description": "Takes an absolute path to a file which contains the Base64 encoded private key for the interface. When this option is specified, then PrivateKey= is ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
                 "version_added": "242",
                 "title": "Private Key File",
@@ -4652,7 +4832,7 @@
               "title": "Fw Mark"
             },
             "ListenPort": {
-              "type": "string",
+              "$ref": "#/definitions/portType",
               "default": "auto",
               "description": "Sets UDP port for listening. Takes either value between 1 and 65535 or 'auto'. If 'auto' is specified, the port is automatically generated based on interface name. Defaults to 'auto'.",
               "version_added": "237",
@@ -4660,14 +4840,14 @@
               "x-subcategory": "Configuration"
             },
             "PrivateKey": {
-              "type": "string",
+              "$ref": "#/definitions/base64KeyType",
               "description": "The Base64 encoded private key for the interface. It can be generated using the wg genkey command (see wg8). Specially, if the specified key is prefixed with '@', it is interpreted as the name of the credential from which the actual key shall be read. systemd-networkd.service8 automatically imports credentials matching 'network.wireguard.*'. For more details on credentials, refer to systemd.exec5. A private key is mandatory to use WireGuard. If not set, the credential 'network.wireguard.private.netdev' is used if exists. I.e. for '50-foobar.netdev', 'network.wireguard.private.50-foobar' is tried. Note that because this information is secret, it's strongly recommended to use an (encrypted) credential. Alternatively, you may want to set the permissions of the.netdev file to be owned by 'root:systemd-network' with a '0640' file mode.",
               "version_added": "237",
               "title": "Private Key",
               "x-subcategory": "Configuration"
             },
             "PrivateKeyFile": {
-              "type": "string",
+              "$ref": "#/definitions/absolutePathType",
               "description": "Takes an absolute path to a file which contains the Base64 encoded private key for the interface. When this option is specified, then PrivateKey= is ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
               "version_added": "242",
               "title": "Private Key File",
@@ -4731,41 +4911,41 @@
                 "x-subcategory": "Configuration"
               },
               "Endpoint": {
-                "type": "string",
+                "$ref": "#/definitions/endpointType",
                 "description": "Sets an endpoint IP address or hostname, followed by a colon, and then a port number. IPv6 address must be in the square brackets. For example, '111.222.333.444:51820' for IPv4 and '[1111:2222::3333]:51820' for IPv6 address. This endpoint will be updated automatically once to the most recent source IP address and port of correctly authenticated packets from the peer at configuration time. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section.",
                 "version_added": "237",
                 "title": "Endpoint",
                 "x-subcategory": "Configuration"
               },
               "PublicKey": {
-                "type": "string",
+                "$ref": "#/definitions/base64KeyType",
                 "description": "Sets a Base64 encoded public key calculated by wg pubkey (see wg8) from a private key, and usually transmitted out of band to the author of the configuration file. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section. This option is mandatory for this section.",
                 "version_added": "237",
                 "title": "Public Key",
                 "x-subcategory": "Configuration"
               },
               "PublicKeyFile": {
-                "type": "string",
+                "$ref": "#/definitions/absolutePathType",
                 "description": "Takes an absolute path to a file which contains the Base64 encoded public key for the peer. When this option is specified, then PublicKey= will be ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
                 "version_added": "257",
                 "title": "Public Key File"
               },
               "PresharedKey": {
-                "type": "string",
+                "$ref": "#/definitions/base64KeyType",
                 "description": "Optional preshared key for the interface. It can be generated by the wg genpsk command. This option adds an additional layer of symmetric-key cryptography to be mixed into the already existing public-key cryptography, for post-quantum resistance. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section. Note that because this information is secret, it's strongly recommended to use an (encrypted) credential. Alternatively, you may want to set the permissions of the.netdev file to be owned by 'root:systemd-network' with a '0640' file mode.",
                 "version_added": "237",
                 "title": "Preshared Key",
                 "x-subcategory": "Configuration"
               },
               "PresharedKeyFile": {
-                "type": "string",
+                "$ref": "#/definitions/absolutePathType",
                 "description": "Takes an absolute path to a file which contains the Base64 encoded preshared key for the peer. When this option is specified, then PresharedKey= is ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
                 "version_added": "242",
                 "title": "Preshared Key File",
                 "x-subcategory": "Configuration"
               },
               "PersistentKeepalive": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Sets a seconds interval, between 1 and 65535 inclusive, of how often to send an authenticated empty packet to the peer for the purpose of keeping a stateful firewall or NAT mapping valid persistently. For example, if the interface very rarely sends traffic, but it might at anytime receive traffic from a peer, and it is behind NAT, the interface might benefit from having a persistent keepalive interval of 25 seconds. If set to 0 or \"off\", this option is disabled. By default or when unspecified, this option is off. Most users will not need this.",
                 "version_added": "237",
                 "title": "Persistent Keepalive"
@@ -4819,41 +4999,41 @@
               "x-subcategory": "Configuration"
             },
             "Endpoint": {
-              "type": "string",
+              "$ref": "#/definitions/endpointType",
               "description": "Sets an endpoint IP address or hostname, followed by a colon, and then a port number. IPv6 address must be in the square brackets. For example, '111.222.333.444:51820' for IPv4 and '[1111:2222::3333]:51820' for IPv6 address. This endpoint will be updated automatically once to the most recent source IP address and port of correctly authenticated packets from the peer at configuration time. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section.",
               "version_added": "237",
               "title": "Endpoint",
               "x-subcategory": "Configuration"
             },
             "PublicKey": {
-              "type": "string",
+              "$ref": "#/definitions/base64KeyType",
               "description": "Sets a Base64 encoded public key calculated by wg pubkey (see wg8) from a private key, and usually transmitted out of band to the author of the configuration file. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section. This option is mandatory for this section.",
               "version_added": "237",
               "title": "Public Key",
               "x-subcategory": "Configuration"
             },
             "PublicKeyFile": {
-              "type": "string",
+              "$ref": "#/definitions/absolutePathType",
               "description": "Takes an absolute path to a file which contains the Base64 encoded public key for the peer. When this option is specified, then PublicKey= will be ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
               "version_added": "257",
               "title": "Public Key File"
             },
             "PresharedKey": {
-              "type": "string",
+              "$ref": "#/definitions/base64KeyType",
               "description": "Optional preshared key for the interface. It can be generated by the wg genpsk command. This option adds an additional layer of symmetric-key cryptography to be mixed into the already existing public-key cryptography, for post-quantum resistance. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section. Note that because this information is secret, it's strongly recommended to use an (encrypted) credential. Alternatively, you may want to set the permissions of the.netdev file to be owned by 'root:systemd-network' with a '0640' file mode.",
               "version_added": "237",
               "title": "Preshared Key",
               "x-subcategory": "Configuration"
             },
             "PresharedKeyFile": {
-              "type": "string",
+              "$ref": "#/definitions/absolutePathType",
               "description": "Takes an absolute path to a file which contains the Base64 encoded preshared key for the peer. When this option is specified, then PresharedKey= is ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
               "version_added": "242",
               "title": "Preshared Key File",
               "x-subcategory": "Configuration"
             },
             "PersistentKeepalive": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Sets a seconds interval, between 1 and 65535 inclusive, of how often to send an authenticated empty packet to the peer for the purpose of keeping a stateful firewall or NAT mapping valid persistently. For example, if the interface very rarely sends traffic, but it might at anytime receive traffic from a peer, and it is behind NAT, the interface might benefit from having a persistent keepalive interval of 25 seconds. If set to 0 or \"off\", this option is disabled. By default or when unspecified, this option is off. Most users will not need this.",
               "version_added": "237",
               "title": "Persistent Keepalive"
@@ -5022,13 +5202,13 @@
                 "title": "Gateway Bandwith Up"
               },
               "GatewayBandwidthDown": {
-                "type": "string",
+                "$ref": "#/definitions/rateType",
                 "description": "If the node is a server, this parameter is used to inform other nodes in the network about this node's internet connection download bandwidth in bits per second. Just enter any number suffixed with K, M, G or T (base 1000) and the batman-adv module will propagate the entered value in the mesh.",
                 "version_added": "248",
                 "title": "Gateway Bandwidth Down"
               },
               "GatewayBandwidthUp": {
-                "type": "string",
+                "$ref": "#/definitions/rateType",
                 "description": "If the node is a server, this parameter is used to inform other nodes in the network about this node's internet connection upload bandwidth in bits per second. Just enter any number suffixed with K, M, G or T (base 1000) and the batman-adv module will propagate the entered value in the mesh.",
                 "version_added": "248",
                 "title": "Gateway Bandwidth Up"
@@ -5121,13 +5301,13 @@
               "title": "Gateway Bandwith Up"
             },
             "GatewayBandwidthDown": {
-              "type": "string",
+              "$ref": "#/definitions/rateType",
               "description": "If the node is a server, this parameter is used to inform other nodes in the network about this node's internet connection download bandwidth in bits per second. Just enter any number suffixed with K, M, G or T (base 1000) and the batman-adv module will propagate the entered value in the mesh.",
               "version_added": "248",
               "title": "Gateway Bandwidth Down"
             },
             "GatewayBandwidthUp": {
-              "type": "string",
+              "$ref": "#/definitions/rateType",
               "description": "If the node is a server, this parameter is used to inform other nodes in the network about this node's internet connection upload bandwidth in bits per second. Just enter any number suffixed with K, M, G or T (base 1000) and the batman-adv module will propagate the entered value in the mesh.",
               "version_added": "248",
               "title": "Gateway Bandwidth Up"
@@ -5177,9 +5357,7 @@
             "type": "object",
             "properties": {
               "PartitionKey": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 0,
+                "$ref": "#/definitions/uint16Type",
                 "description": "xffff, except for 0x8000. Defaults to unset, and the kernel's default is used.",
                 "version_added": "250",
                 "title": "Partition Key"
@@ -5222,9 +5400,7 @@
           "type": "object",
           "properties": {
             "PartitionKey": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 0,
+              "$ref": "#/definitions/uint16Type",
               "description": "xffff, except for 0x8000. Defaults to unset, and the kernel's default is used.",
               "version_added": "250",
               "title": "Partition Key"
