@@ -21,9 +21,11 @@
              </div>
              <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
                  <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
-                 
+                 &middot; <a href="changes.html">Changes</a>
              </div>
-             <p style="color:var(--meta-color); font-size:0.8em; margin-bottom:20px;">Version v257</p>
+             <select class="version-selector" onchange="window.location.href=this.value;">
+                <option value="../latest/systemd.link.html" >latest</option><option value="../v259/systemd.link.html" >v259</option><option value="../v258/systemd.link.html" >v258</option><option value="../v257/systemd.link.html" selected>v257</option><option value="../v256/systemd.link.html" >v256</option><option value="../v255/systemd.link.html" >v255</option><option value="../v254/systemd.link.html" >v254</option><option value="../v253/systemd.link.html" >v253</option><option value="../v252/systemd.link.html" >v252</option><option value="../v251/systemd.link.html" >v251</option><option value="../v250/systemd.link.html" >v250</option><option value="../v249/systemd.link.html" >v249</option><option value="../v248/systemd.link.html" >v248</option><option value="../v247/systemd.link.html" >v247</option><option value="../v246/systemd.link.html" >v246</option><option value="../v245/systemd.link.html" >v245</option><option value="../v244/systemd.link.html" >v244</option><option value="../v243/systemd.link.html" >v243</option><option value="../v242/systemd.link.html" >v242</option><option value="../v241/systemd.link.html" >v241</option><option value="../v240/systemd.link.html" >v240</option><option value="../v239/systemd.link.html" >v239</option><option value="../v238/systemd.link.html" >v238</option><option value="../v237/systemd.link.html" >v237</option>
+            </select>
              <h2>systemd.link</h2>
         </div>
          <div class="sidebar-content">
@@ -42,7 +44,7 @@
                             <a href="#Match-PermanentMACAddress" class="anchor-link">#</a>PermanentMACAddress
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22PermanentMACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22PermanentMACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v245+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -83,7 +85,7 @@
                             <a href="#Match-Property" class="anchor-link">#</a>Property
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Property%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Property%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v243+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -119,7 +121,8 @@
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=ID_NET_DRIVER=virtio_net
+Property=ID_PATH=pci-0000:00:03.0
 </code></pre></div></div>
                 <div id="Match-OriginalName" class="option-block">
                     <div class="option-header">
@@ -127,7 +130,7 @@
                             <a href="#Match-OriginalName" class="anchor-link">#</a>OriginalName
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22OriginalName%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22OriginalName%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v218+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -168,7 +171,7 @@ OriginalName=!eth0 eth1
                             <a href="#Match-Host" class="anchor-link">#</a>Host
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Host%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Host%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -199,7 +202,9 @@ OriginalName=!eth0 eth1
         
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=myserver
+Host=web*
+Host=!testhost
 </code></pre></div></div>
                 <div id="Match-KernelCommandLine" class="option-block">
                     <div class="option-header">
@@ -207,7 +212,7 @@ OriginalName=!eth0 eth1
                             <a href="#Match-KernelCommandLine" class="anchor-link">#</a>KernelCommandLine
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22KernelCommandLine%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22KernelCommandLine%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -239,7 +244,8 @@ OriginalName=!eth0 eth1
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=systemd.network=1
+KernelCommandLine=!quiet
 </code></pre></div></div>
                 <div id="Match-KernelVersion" class="option-block">
                     <div class="option-header">
@@ -247,7 +253,7 @@ OriginalName=!eth0 eth1
                             <a href="#Match-KernelVersion" class="anchor-link">#</a>KernelVersion
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22KernelVersion%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22KernelVersion%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v237+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -279,7 +285,8 @@ OriginalName=!eth0 eth1
         
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=5.15.*
+KernelVersion=6.*
 </code></pre></div></div>
                 <div id="Match-Credential" class="option-block">
                     <div class="option-header">
@@ -287,7 +294,7 @@ OriginalName=!eth0 eth1
                             <a href="#Match-Credential" class="anchor-link">#</a>Credential
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Credential%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Credential%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v252+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -318,7 +325,8 @@ OriginalName=!eth0 eth1
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Credential=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Credential=network.conf
+Credential=my-network-config
 </code></pre></div></div>
                 <div id="Match-Architecture" class="option-block">
                     <div class="option-header">
@@ -326,7 +334,7 @@ OriginalName=!eth0 eth1
                             <a href="#Match-Architecture" class="anchor-link">#</a>Architecture
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Architecture%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Architecture%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -358,7 +366,9 @@ OriginalName=!eth0 eth1
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=x86-64
+Architecture=arm64
+Architecture=!arm
 </code></pre></div></div>
                 <div id="Match-Firmware" class="option-block">
                     <div class="option-header">
@@ -366,7 +376,7 @@ OriginalName=!eth0 eth1
                             <a href="#Match-Firmware" class="anchor-link">#</a>Firmware
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Firmware%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Firmware%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v249+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -398,7 +408,8 @@ OriginalName=!eth0 eth1
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Firmware=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Firmware=uefi
+Firmware=!bios
 </code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
                 <div id="Match-MACAddress" class="option-block">
                     <div class="option-header">
@@ -406,7 +417,7 @@ OriginalName=!eth0 eth1
                             <a href="#Match-MACAddress" class="anchor-link">#</a>MACAddress
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22MACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22MACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -478,7 +489,7 @@ MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
                             <a href="#Match-Path" class="anchor-link">#</a>Path
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Path%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Path%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -518,7 +529,7 @@ Path=!eth0 eth1
                             <a href="#Match-Driver" class="anchor-link">#</a>Driver
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Driver%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Driver%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -559,7 +570,7 @@ Driver=!eth0 eth1
                             <a href="#Match-Type" class="anchor-link">#</a>Type
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Type%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Type%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -601,7 +612,7 @@ Type=host
                             <a href="#Match-Kind" class="anchor-link">#</a>Kind
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Kind%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Kind%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v251+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -646,7 +657,7 @@ Kind=veth
                             <a href="#Match-Virtualization" class="anchor-link">#</a>Virtualization
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Virtualization%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Virtualization%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -678,7 +689,10 @@ Kind=veth
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=vm
+Virtualization=container
+Virtualization=qemu
+Virtualization=!kvm
 </code></pre></div></div></div><div id="section-Link" class="section-block"><h2>Link Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Match" class="dependency-link">[Match]</a></div><h3 class="subcategory-header">General</h3>
                 <div id="Link-Description" class="option-block">
                     <div class="option-header">
@@ -686,7 +700,7 @@ Kind=veth
                             <a href="#Link-Description" class="anchor-link">#</a>Description
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Description%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Description%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -722,7 +736,7 @@ Description=Uplink to ISP
                             <a href="#Link-Property" class="anchor-link">#</a>Property
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Property%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Property%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -763,7 +777,8 @@ Description=Uplink to ISP
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=ID_NET_MANAGED_BY=io.systemd.Network
+Property=MY_CUSTOM_PROP=value
 </code></pre></div></div>
                 <div id="Link-ImportProperty" class="option-block">
                     <div class="option-header">
@@ -771,7 +786,7 @@ Description=Uplink to ISP
                             <a href="#Link-ImportProperty" class="anchor-link">#</a>ImportProperty
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22ImportProperty%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22ImportProperty%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -805,7 +820,8 @@ Description=Uplink to ISP
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ImportProperty=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ImportProperty=ID_NET_NAME_PATH
+ImportProperty=ID_NET_DRIVER ID_VENDOR
 </code></pre></div></div>
                 <div id="Link-UnsetProperty" class="option-block">
                     <div class="option-header">
@@ -813,7 +829,7 @@ Description=Uplink to ISP
                             <a href="#Link-UnsetProperty" class="anchor-link">#</a>UnsetProperty
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22UnsetProperty%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22UnsetProperty%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -848,7 +864,8 @@ Description=Uplink to ISP
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UnsetProperty=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UnsetProperty=ID_NET_NAME_MAC
+UnsetProperty=ID_NET_NAME_SLOT ID_NET_NAME_PATH
 </code></pre></div></div>
                 <div id="Link-Alias" class="option-block">
                     <div class="option-header">
@@ -856,7 +873,7 @@ Description=Uplink to ISP
                             <a href="#Link-Alias" class="anchor-link">#</a>Alias
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Alias%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Alias%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -883,7 +900,8 @@ Description=Uplink to ISP
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=my-interface
+Alias=uplink-to-isp
 </code></pre></div></div>
                 <div id="Link-MACAddressPolicy" class="option-block">
                     <div class="option-header">
@@ -891,7 +909,7 @@ Description=Uplink to ISP
                             <a href="#Link-MACAddressPolicy" class="anchor-link">#</a>MACAddressPolicy
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22MACAddressPolicy%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22MACAddressPolicy%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -908,7 +926,7 @@ Description=Uplink to ISP
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#rateType" class="badge badge-type-prominent badge-type-complex">Data Rate</a>
                          
                     </div>
                     <div class="option-desc">
@@ -954,7 +972,8 @@ Description=Uplink to ISP
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=1G
+MACAddressPolicy=100M
 </code></pre></div></div>
                 <div id="Link-NamePolicy" class="option-block">
                     <div class="option-header">
@@ -962,7 +981,7 @@ Description=Uplink to ISP
                             <a href="#Link-NamePolicy" class="anchor-link">#</a>NamePolicy
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22NamePolicy%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22NamePolicy%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v216+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1056,7 +1075,8 @@ Description=Uplink to ISP
             
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=kernel database onboard slot path
+NamePolicy=keep kernel database onboard slot path mac
 </code></pre></div></div>
                 <div id="Link-Name" class="option-block">
                     <div class="option-header">
@@ -1064,7 +1084,7 @@ Description=Uplink to ISP
                             <a href="#Link-Name" class="anchor-link">#</a>Name
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Name%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Name%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1081,7 +1101,7 @@ Description=Uplink to ISP
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1120,7 +1140,7 @@ Name=br0
                             <a href="#Link-AlternativeNamesPolicy" class="anchor-link">#</a>AlternativeNamesPolicy
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22AlternativeNamesPolicy%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22AlternativeNamesPolicy%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v245+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1160,7 +1180,7 @@ Name=br0
                             <a href="#Link-AlternativeName" class="anchor-link">#</a>AlternativeName
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22AlternativeName%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22AlternativeName%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v245+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1177,7 +1197,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1196,7 +1216,9 @@ Name=br0
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AlternativeName=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AlternativeName=eth0
+AlternativeName=enp0s3
+AlternativeName=br0
 </code></pre></div></div>
                 <div id="Link-TransmitQueues" class="option-block">
                     <div class="option-header">
@@ -1204,7 +1226,7 @@ Name=br0
                             <a href="#Link-TransmitQueues" class="anchor-link">#</a>TransmitQueues
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22TransmitQueues%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22TransmitQueues%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v248+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1232,7 +1254,8 @@ Name=br0
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitQueues=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitQueues=4
+TransmitQueues=8
 </code></pre></div></div>
                 <div id="Link-ReceiveQueues" class="option-block">
                     <div class="option-header">
@@ -1240,7 +1263,7 @@ Name=br0
                             <a href="#Link-ReceiveQueues" class="anchor-link">#</a>ReceiveQueues
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22ReceiveQueues%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22ReceiveQueues%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v248+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1268,7 +1291,8 @@ Name=br0
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveQueues=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveQueues=4
+ReceiveQueues=8
 </code></pre></div></div>
                 <div id="Link-TransmitQueueLength" class="option-block">
                     <div class="option-header">
@@ -1276,7 +1300,7 @@ Name=br0
                             <a href="#Link-TransmitQueueLength" class="anchor-link">#</a>TransmitQueueLength
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22TransmitQueueLength%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22TransmitQueueLength%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v248+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1304,7 +1328,8 @@ Name=br0
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitQueueLength=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitQueueLength=1000
+TransmitQueueLength=5000
 </code></pre></div></div>
                 <div id="Link-BitsPerSecond" class="option-block">
                     <div class="option-header">
@@ -1312,7 +1337,7 @@ Name=br0
                             <a href="#Link-BitsPerSecond" class="anchor-link">#</a>BitsPerSecond
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22BitsPerSecond%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22BitsPerSecond%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1350,7 +1375,7 @@ BitsPerSecond=100M
                             <a href="#Link-Duplex" class="anchor-link">#</a>Duplex
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Duplex%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Duplex%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1386,7 +1411,7 @@ BitsPerSecond=100M
                             <a href="#Link-AutoNegotiation" class="anchor-link">#</a>AutoNegotiation
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22AutoNegotiation%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22AutoNegotiation%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v233+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1428,7 +1453,7 @@ BitsPerSecond=100M
                             <a href="#Link-WakeOnLan" class="anchor-link">#</a>WakeOnLan
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22WakeOnLan%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22WakeOnLan%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1518,7 +1543,7 @@ BitsPerSecond=100M
                             <a href="#Link-WakeOnLanPassword" class="anchor-link">#</a>WakeOnLanPassword
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22WakeOnLanPassword%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22WakeOnLanPassword%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1535,7 +1560,7 @@ BitsPerSecond=100M
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#bytesType" class="badge badge-type-prominent badge-type-complex">Size in Bytes</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1552,7 +1577,9 @@ BitsPerSecond=100M
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>WakeOnLanPassword=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>WakeOnLanPassword=1G
+WakeOnLanPassword=512M
+WakeOnLanPassword=1024
 </code></pre></div></div>
                 <div id="Link-Port" class="option-block">
                     <div class="option-header">
@@ -1560,7 +1587,7 @@ BitsPerSecond=100M
                             <a href="#Link-Port" class="anchor-link">#</a>Port
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Port%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Port%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v234+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1617,7 +1644,9 @@ BitsPerSecond=100M
             
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=tp
+Port=mii
+Port=fibre
 </code></pre></div></div>
                 <div id="Link-Advertise" class="option-block">
                     <div class="option-header">
@@ -1625,7 +1654,7 @@ BitsPerSecond=100M
                             <a href="#Link-Advertise" class="anchor-link">#</a>Advertise
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22Advertise%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22Advertise%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v240+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1674,7 +1703,8 @@ BitsPerSecond=100M
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Advertise=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Advertise=10baset-half 10baset-full
+Advertise=100baset-full 1000baset-full
 </code></pre></div></div>
                 <div id="Link-ReceiveChecksumOffload" class="option-block">
                     <div class="option-header">
@@ -1682,7 +1712,7 @@ BitsPerSecond=100M
                             <a href="#Link-ReceiveChecksumOffload" class="anchor-link">#</a>ReceiveChecksumOffload
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22ReceiveChecksumOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22ReceiveChecksumOffload%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v245+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1718,7 +1748,7 @@ BitsPerSecond=100M
                             <a href="#Link-TransmitChecksumOffload" class="anchor-link">#</a>TransmitChecksumOffload
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22TransmitChecksumOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22TransmitChecksumOffload%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v245+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1754,7 +1784,7 @@ BitsPerSecond=100M
                             <a href="#Link-TCP6SegmentationOffload" class="anchor-link">#</a>TCP6SegmentationOffload
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22TCP6SegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22TCP6SegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v235+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1790,7 +1820,7 @@ BitsPerSecond=100M
                             <a href="#Link-GenericReceiveOffloadHardware" class="anchor-link">#</a>GenericReceiveOffloadHardware
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22GenericReceiveOffloadHardware%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22GenericReceiveOffloadHardware%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1826,7 +1856,7 @@ BitsPerSecond=100M
                             <a href="#Link-ReceivePacketSteeringCPUMask" class="anchor-link">#</a>ReceivePacketSteeringCPUMask
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22ReceivePacketSteeringCPUMask%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22ReceivePacketSteeringCPUMask%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v256+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1860,7 +1890,9 @@ BitsPerSecond=100M
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceivePacketSteeringCPUMask=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceivePacketSteeringCPUMask=0-3
+ReceivePacketSteeringCPUMask=all
+ReceivePacketSteeringCPUMask=0,2,4,6
 </code></pre></div></div>
                 <div id="Link-ReceiveVLANCTAGHardwareAcceleration" class="option-block">
                     <div class="option-header">
@@ -1868,7 +1900,7 @@ BitsPerSecond=100M
                             <a href="#Link-ReceiveVLANCTAGHardwareAcceleration" class="anchor-link">#</a>ReceiveVLANCTAGHardwareAcceleration
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22ReceiveVLANCTAGHardwareAcceleration%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22ReceiveVLANCTAGHardwareAcceleration%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1904,7 +1936,7 @@ BitsPerSecond=100M
                             <a href="#Link-TransmitVLANCTAGHardwareAcceleration" class="anchor-link">#</a>TransmitVLANCTAGHardwareAcceleration
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22TransmitVLANCTAGHardwareAcceleration%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22TransmitVLANCTAGHardwareAcceleration%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1940,7 +1972,7 @@ BitsPerSecond=100M
                             <a href="#Link-ReceiveVLANCTAGFilter" class="anchor-link">#</a>ReceiveVLANCTAGFilter
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22ReceiveVLANCTAGFilter%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22ReceiveVLANCTAGFilter%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -1976,7 +2008,7 @@ BitsPerSecond=100M
                             <a href="#Link-TransmitVLANSTAGHardwareAcceleration" class="anchor-link">#</a>TransmitVLANSTAGHardwareAcceleration
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22TransmitVLANSTAGHardwareAcceleration%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22TransmitVLANSTAGHardwareAcceleration%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2012,7 +2044,7 @@ BitsPerSecond=100M
                             <a href="#Link-NTupleFilter" class="anchor-link">#</a>NTupleFilter
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22NTupleFilter%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22NTupleFilter%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2048,7 +2080,7 @@ BitsPerSecond=100M
                             <a href="#Link-RxChannels" class="anchor-link">#</a>RxChannels
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22RxChannels%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22RxChannels%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v239+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2065,7 +2097,7 @@ BitsPerSecond=100M
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#enum | integer" class="badge badge-type-prominent badge-type-complex">enum | integer</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2078,7 +2110,7 @@ BitsPerSecond=100M
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxChannels=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxChannels=max
 </code></pre></div></div>
                 <div id="Link-RxBufferSize" class="option-block">
                     <div class="option-header">
@@ -2086,7 +2118,7 @@ BitsPerSecond=100M
                             <a href="#Link-RxBufferSize" class="anchor-link">#</a>RxBufferSize
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22RxBufferSize%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22RxBufferSize%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v244+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2125,7 +2157,7 @@ BitsPerSecond=100M
                             <a href="#Link-RxFlowControl" class="anchor-link">#</a>RxFlowControl
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22RxFlowControl%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22RxFlowControl%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v246+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2162,7 +2194,7 @@ BitsPerSecond=100M
                             <a href="#Link-TxFlowControl" class="anchor-link">#</a>TxFlowControl
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22TxFlowControl%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22TxFlowControl%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v246+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2199,7 +2231,7 @@ BitsPerSecond=100M
                             <a href="#Link-AutoNegotiationFlowControl" class="anchor-link">#</a>AutoNegotiationFlowControl
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22AutoNegotiationFlowControl%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22AutoNegotiationFlowControl%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v246+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2236,7 +2268,7 @@ BitsPerSecond=100M
                             <a href="#Link-GenericSegmentOffloadMaxBytes" class="anchor-link">#</a>GenericSegmentOffloadMaxBytes
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22GenericSegmentOffloadMaxBytes%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22GenericSegmentOffloadMaxBytes%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v248+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2276,7 +2308,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-GenericSegmentOffloadMaxSegments" class="anchor-link">#</a>GenericSegmentOffloadMaxSegments
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22GenericSegmentOffloadMaxSegments%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22GenericSegmentOffloadMaxSegments%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v248+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2304,7 +2336,8 @@ GenericSegmentOffloadMaxBytes=1024
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentOffloadMaxSegments=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentOffloadMaxSegments=64
+GenericSegmentOffloadMaxSegments=256
 </code></pre></div></div>
                 <div id="Link-UseAdaptiveRxCoalesce" class="option-block">
                     <div class="option-header">
@@ -2312,7 +2345,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-UseAdaptiveRxCoalesce" class="anchor-link">#</a>UseAdaptiveRxCoalesce
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22UseAdaptiveRxCoalesce%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22UseAdaptiveRxCoalesce%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2348,7 +2381,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-RxCoalesceSec" class="anchor-link">#</a>RxCoalesceSec
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22RxCoalesceSec%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22RxCoalesceSec%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2365,7 +2398,7 @@ GenericSegmentOffloadMaxBytes=1024
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#secondsType" class="badge badge-type-prominent badge-type-complex">Duration</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2380,7 +2413,9 @@ GenericSegmentOffloadMaxBytes=1024
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxCoalesceSec=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxCoalesceSec=5s
+RxCoalesceSec=100ms
+RxCoalesceSec=1min
 </code></pre></div></div>
                 <div id="Link-RxMaxCoalescedFrames" class="option-block">
                     <div class="option-header">
@@ -2388,7 +2423,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-RxMaxCoalescedFrames" class="anchor-link">#</a>RxMaxCoalescedFrames
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22RxMaxCoalescedFrames%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22RxMaxCoalescedFrames%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2405,7 +2440,7 @@ GenericSegmentOffloadMaxBytes=1024
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2420,7 +2455,8 @@ GenericSegmentOffloadMaxBytes=1024
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxMaxCoalescedFrames=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxMaxCoalescedFrames=64
+RxMaxCoalescedFrames=256
 </code></pre></div></div>
                 <div id="Link-CoalescePacketRateLow" class="option-block">
                     <div class="option-header">
@@ -2428,7 +2464,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-CoalescePacketRateLow" class="anchor-link">#</a>CoalescePacketRateLow
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22CoalescePacketRateLow%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22CoalescePacketRateLow%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2445,7 +2481,7 @@ GenericSegmentOffloadMaxBytes=1024
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2458,7 +2494,8 @@ GenericSegmentOffloadMaxBytes=1024
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CoalescePacketRateLow=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CoalescePacketRateLow=10000
+CoalescePacketRateLow=100000
 </code></pre></div></div>
                 <div id="Link-CoalescePacketRateSampleIntervalSec" class="option-block">
                     <div class="option-header">
@@ -2466,7 +2503,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-CoalescePacketRateSampleIntervalSec" class="anchor-link">#</a>CoalescePacketRateSampleIntervalSec
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22CoalescePacketRateSampleIntervalSec%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22CoalescePacketRateSampleIntervalSec%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2496,7 +2533,8 @@ GenericSegmentOffloadMaxBytes=1024
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CoalescePacketRateSampleIntervalSec=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CoalescePacketRateSampleIntervalSec=1
+CoalescePacketRateSampleIntervalSec=5
 </code></pre></div></div>
                 <div id="Link-StatisticsBlockCoalesceSec" class="option-block">
                     <div class="option-header">
@@ -2504,7 +2542,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-StatisticsBlockCoalesceSec" class="anchor-link">#</a>StatisticsBlockCoalesceSec
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22StatisticsBlockCoalesceSec%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22StatisticsBlockCoalesceSec%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v250+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2533,7 +2571,8 @@ GenericSegmentOffloadMaxBytes=1024
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>StatisticsBlockCoalesceSec=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>StatisticsBlockCoalesceSec=1000000
+StatisticsBlockCoalesceSec=10000000
 </code></pre></div></div>
                 <div id="Link-MDI" class="option-block">
                     <div class="option-header">
@@ -2541,7 +2580,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-MDI" class="anchor-link">#</a>MDI
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22MDI%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22MDI%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v251+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2584,7 +2623,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-SR-IOVVirtualFunctions" class="anchor-link">#</a>SR-IOVVirtualFunctions
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22SR-IOVVirtualFunctions%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22SR-IOVVirtualFunctions%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v251+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2601,7 +2640,7 @@ GenericSegmentOffloadMaxBytes=1024
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2613,7 +2652,8 @@ GenericSegmentOffloadMaxBytes=1024
           
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SR-IOVVirtualFunctions=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SR-IOVVirtualFunctions=8
+SR-IOVVirtualFunctions=16
 </code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
                 <div id="Link-MACAddress" class="option-block">
                     <div class="option-header">
@@ -2621,7 +2661,7 @@ GenericSegmentOffloadMaxBytes=1024
                             <a href="#Link-MACAddress" class="anchor-link">#</a>MACAddress
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22MACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22MACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2659,7 +2699,7 @@ MACAddress=none
                             <a href="#Link-MTUBytes" class="anchor-link">#</a>MTUBytes
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22MTUBytes%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22MTUBytes%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v211+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2698,7 +2738,7 @@ MTUBytes=auto
                             <a href="#Link-TCPSegmentationOffload" class="anchor-link">#</a>TCPSegmentationOffload
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22TCPSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22TCPSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v232+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2734,7 +2774,7 @@ MTUBytes=auto
                             <a href="#Link-GenericSegmentationOffload" class="anchor-link">#</a>GenericSegmentationOffload
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22GenericSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22GenericSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v232+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2770,7 +2810,7 @@ MTUBytes=auto
                             <a href="#Link-GenericReceiveOffload" class="anchor-link">#</a>GenericReceiveOffload
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22GenericReceiveOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22GenericReceiveOffload%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v232+</span>
                             <span class="badge badge-default">Optional</span>
                             
@@ -2806,7 +2846,7 @@ MTUBytes=auto
                             <a href="#Link-LargeReceiveOffload" class="anchor-link">#</a>LargeReceiveOffload
                         </div>
                         <div class="option-meta">
-                            <a href="https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v257/systemd.link.schema.json#:~:text=%22LargeReceiveOffload%22" target="_blank" class="badge badge-schema">Schema</a>
+                            <a href="../schemas/v257/systemd.link.schema.json#:~:text=%22LargeReceiveOffload%22" target="_blank" class="badge badge-schema">Schema</a>
                             <span class="badge badge-version">v232+</span>
                             <span class="badge badge-default">Optional</span>
                             

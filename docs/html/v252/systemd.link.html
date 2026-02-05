@@ -117,7 +117,8 @@
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=ID_NET_DRIVER=virtio_net
+Property=ID_PATH=pci-0000:00:03.0
 </code></pre></div></div>
                 <div id="Match-OriginalName" class="option-block">
                     <div class="option-header">
@@ -193,7 +194,9 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=myserver
+Host=web*
+Host=!testhost
 </code></pre></div></div>
                 <div id="Match-KernelCommandLine" class="option-block">
                     <div class="option-header">
@@ -231,7 +234,8 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=systemd.network=1
+KernelCommandLine=!quiet
 </code></pre></div></div>
                 <div id="Match-KernelVersion" class="option-block">
                     <div class="option-header">
@@ -269,7 +273,8 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=5.15.*
+KernelVersion=6.*
 </code></pre></div></div>
                 <div id="Match-Credential" class="option-block">
                     <div class="option-header">
@@ -306,7 +311,8 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Credential=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Credential=network.conf
+Credential=my-network-config
 </code></pre></div></div>
                 <div id="Match-Architecture" class="option-block">
                     <div class="option-header">
@@ -344,7 +350,9 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=x86-64
+Architecture=arm64
+Architecture=!arm
 </code></pre></div></div>
                 <div id="Match-Firmware" class="option-block">
                     <div class="option-header">
@@ -382,7 +390,8 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Firmware=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Firmware=uefi
+Firmware=!bios
 </code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
                 <div id="Match-MACAddress" class="option-block">
                     <div class="option-header">
@@ -640,7 +649,10 @@ Kind=veth
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=vm
+Virtualization=container
+Virtualization=qemu
+Virtualization=!kvm
 </code></pre></div></div></div><div id="section-Link" class="section-block"><h2>Link Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Match" class="dependency-link">[Match]</a></div><h3 class="subcategory-header">General</h3>
                 <div id="Link-Description" class="option-block">
                     <div class="option-header">
@@ -707,7 +719,8 @@ Description=Uplink to ISP
           <p>The <code class="varname">ifalias</code> interface property is set to this value.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=my-interface
+Alias=uplink-to-isp
 </code></pre></div></div>
                 <div id="Link-MACAddressPolicy" class="option-block">
                     <div class="option-header">
@@ -732,7 +745,7 @@ Description=Uplink to ISP
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#rateType" class="badge badge-type-prominent badge-type-complex">Data Rate</a>
                          
                     </div>
                     <div class="option-desc">
@@ -770,7 +783,8 @@ Description=Uplink to ISP
           <p>An empty string assignment is equivalent to setting <code>none</code>.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=1G
+MACAddressPolicy=100M
 </code></pre></div></div>
                 <div id="Link-NamePolicy" class="option-block">
                     <div class="option-header">
@@ -856,7 +870,8 @@ Description=Uplink to ISP
           </dl>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=kernel database onboard slot path
+NamePolicy=keep kernel database onboard slot path mac
 </code></pre></div></div>
                 <div id="Link-Name" class="option-block">
                     <div class="option-header">
@@ -881,7 +896,7 @@ Description=Uplink to ISP
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a>
                          
                     </div>
                     <div class="option-desc">
@@ -973,7 +988,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a>
                          
                     </div>
                     <div class="option-desc">
@@ -990,7 +1005,9 @@ Name=br0
           subject to the same naming constraints.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AlternativeName=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AlternativeName=eth0
+AlternativeName=enp0s3
+AlternativeName=br0
 </code></pre></div></div>
                 <div id="Link-TransmitQueues" class="option-block">
                     <div class="option-header">
@@ -1024,7 +1041,8 @@ Name=br0
           When unset, the kernel&#x27;s default will be used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitQueues=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitQueues=4
+TransmitQueues=8
 </code></pre></div></div>
                 <div id="Link-ReceiveQueues" class="option-block">
                     <div class="option-header">
@@ -1058,7 +1076,8 @@ Name=br0
           When unset, the kernel&#x27;s default will be used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveQueues=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ReceiveQueues=4
+ReceiveQueues=8
 </code></pre></div></div>
                 <div id="Link-TransmitQueueLength" class="option-block">
                     <div class="option-header">
@@ -1092,7 +1111,8 @@ Name=br0
           in the range 0…4294967294. When unset, the kernel&#x27;s default will be used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitQueueLength=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TransmitQueueLength=1000
+TransmitQueueLength=5000
 </code></pre></div></div>
                 <div id="Link-BitsPerSecond" class="option-block">
                     <div class="option-header">
@@ -1301,7 +1321,7 @@ BitsPerSecond=100M
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#bytesType" class="badge badge-type-prominent badge-type-complex">Size in Bytes</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1316,7 +1336,9 @@ BitsPerSecond=100M
           Defaults to unset, and the current value will not be changed.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>WakeOnLanPassword=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>WakeOnLanPassword=1G
+WakeOnLanPassword=512M
+WakeOnLanPassword=1024
 </code></pre></div></div>
                 <div id="Link-Port" class="option-block">
                     <div class="option-header">
@@ -1369,7 +1391,9 @@ BitsPerSecond=100M
           </dl>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=tp
+Port=mii
+Port=fibre
 </code></pre></div></div>
                 <div id="Link-Advertise" class="option-block">
                     <div class="option-header">
@@ -1466,7 +1490,8 @@ BitsPerSecond=100M
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Advertise=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Advertise=10baset-half 10baset-full
+Advertise=100baset-full 1000baset-full
 </code></pre></div></div>
                 <div id="Link-ReceiveChecksumOffload" class="option-block">
                     <div class="option-header">
@@ -1797,7 +1822,7 @@ BitsPerSecond=100M
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#enum | integer" class="badge badge-type-prominent badge-type-complex">enum | integer</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1808,7 +1833,7 @@ BitsPerSecond=100M
           unset, the number will not be changed. Defaults to unset.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxChannels=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxChannels=max
 </code></pre></div></div>
                 <div id="Link-RxBufferSize" class="option-block">
                     <div class="option-header">
@@ -2022,7 +2047,8 @@ GenericSegmentOffloadMaxBytes=1024
           accept. An unsigned integer in the range 1…65535. Defaults to unset.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentOffloadMaxSegments=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentOffloadMaxSegments=64
+GenericSegmentOffloadMaxSegments=256
 </code></pre></div></div>
                 <div id="Link-UseAdaptiveRxCoalesce" class="option-block">
                     <div class="option-header">
@@ -2081,7 +2107,7 @@ GenericSegmentOffloadMaxBytes=1024
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#secondsType" class="badge badge-type-prominent badge-type-complex">Duration</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2094,7 +2120,9 @@ GenericSegmentOffloadMaxBytes=1024
           used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxCoalesceSec=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxCoalesceSec=5s
+RxCoalesceSec=100ms
+RxCoalesceSec=1min
 </code></pre></div></div>
                 <div id="Link-RxMaxCoalescedFrames" class="option-block">
                     <div class="option-header">
@@ -2119,7 +2147,7 @@ GenericSegmentOffloadMaxBytes=1024
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2132,7 +2160,8 @@ GenericSegmentOffloadMaxBytes=1024
           defaults will be used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxMaxCoalescedFrames=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxMaxCoalescedFrames=64
+RxMaxCoalescedFrames=256
 </code></pre></div></div>
                 <div id="Link-CoalescePacketRateLow" class="option-block">
                     <div class="option-header">
@@ -2157,7 +2186,7 @@ GenericSegmentOffloadMaxBytes=1024
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
+                         <a href="types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2168,7 +2197,8 @@ GenericSegmentOffloadMaxBytes=1024
           kernel&#x27;s defaults will be used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CoalescePacketRateLow=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CoalescePacketRateLow=10000
+CoalescePacketRateLow=100000
 </code></pre></div></div>
                 <div id="Link-CoalescePacketRateSampleIntervalSec" class="option-block">
                     <div class="option-header">
@@ -2204,7 +2234,8 @@ GenericSegmentOffloadMaxBytes=1024
           default will be used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CoalescePacketRateSampleIntervalSec=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CoalescePacketRateSampleIntervalSec=1
+CoalescePacketRateSampleIntervalSec=5
 </code></pre></div></div>
                 <div id="Link-StatisticsBlockCoalesceSec" class="option-block">
                     <div class="option-header">
@@ -2239,7 +2270,8 @@ GenericSegmentOffloadMaxBytes=1024
           kernel&#x27;s default will be used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>StatisticsBlockCoalesceSec=0
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>StatisticsBlockCoalesceSec=1000000
+StatisticsBlockCoalesceSec=10000000
 </code></pre></div></div>
                 <div id="Link-MDI" class="option-block">
                     <div class="option-header">
@@ -2305,7 +2337,7 @@ GenericSegmentOffloadMaxBytes=1024
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#integer" class="badge badge-type-prominent badge-type-integer">integer</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2315,7 +2347,8 @@ GenericSegmentOffloadMaxBytes=1024
           the <code class="varname">VirtualFunction=</code> settings in the [SR-IOV] sections.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SR-IOVVirtualFunctions=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SR-IOVVirtualFunctions=8
+SR-IOVVirtualFunctions=16
 </code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
                 <div id="Link-MACAddress" class="option-block">
                     <div class="option-header">

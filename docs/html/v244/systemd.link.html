@@ -119,7 +119,8 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Property=ID_NET_DRIVER=virtio_net
+Property=ID_PATH=pci-0000:00:03.0
 </code></pre></div></div>
                 <div id="Match-Host" class="option-block">
                     <div class="option-header">
@@ -156,7 +157,9 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=myserver
+Host=web*
+Host=!testhost
 </code></pre></div></div>
                 <div id="Match-KernelCommandLine" class="option-block">
                     <div class="option-header">
@@ -194,7 +197,8 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=systemd.network=1
+KernelCommandLine=!quiet
 </code></pre></div></div>
                 <div id="Match-KernelVersion" class="option-block">
                     <div class="option-header">
@@ -232,7 +236,8 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=5.15.*
+KernelVersion=6.*
 </code></pre></div></div>
                 <div id="Match-Architecture" class="option-block">
                     <div class="option-header">
@@ -270,7 +275,9 @@ OriginalName=!eth0 eth1
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=x86-64
+Architecture=arm64
+Architecture=!arm
 </code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
                 <div id="Match-MACAddress" class="option-block">
                     <div class="option-header">
@@ -460,7 +467,10 @@ Type=host
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=vm
+Virtualization=container
+Virtualization=qemu
+Virtualization=!kvm
 </code></pre></div></div></div><div id="section-Link" class="section-block"><h2>Link Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Match" class="dependency-link">[Match]</a></div><h3 class="subcategory-header">General</h3>
                 <div id="Link-Description" class="option-block">
                     <div class="option-header">
@@ -527,7 +537,8 @@ Description=Uplink to ISP
           <p>The <code class="varname">ifalias</code> interface property is set to this value.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=my-interface
+Alias=uplink-to-isp
 </code></pre></div></div>
                 <div id="Link-MACAddressPolicy" class="option-block">
                     <div class="option-header">
@@ -552,7 +563,7 @@ Description=Uplink to ISP
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#rateType" class="badge badge-type-prominent badge-type-complex">Data Rate</a>
                          
                     </div>
                     <div class="option-desc">
@@ -587,7 +598,8 @@ Description=Uplink to ISP
           </dl>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=1G
+MACAddressPolicy=100M
 </code></pre></div></div>
                 <div id="Link-NamePolicy" class="option-block">
                     <div class="option-header">
@@ -673,7 +685,8 @@ Description=Uplink to ISP
           </dl>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=kernel database onboard slot path
+NamePolicy=keep kernel database onboard slot path mac
 </code></pre></div></div>
                 <div id="Link-Name" class="option-block">
                     <div class="option-header">
@@ -698,7 +711,7 @@ Description=Uplink to ISP
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a>
                          
                     </div>
                     <div class="option-desc">
@@ -948,7 +961,9 @@ BitsPerSecond=100M
           </dl>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=tp
+Port=mii
+Port=fibre
 </code></pre></div></div>
                 <div id="Link-Advertise" class="option-block">
                     <div class="option-header">
@@ -1045,7 +1060,8 @@ BitsPerSecond=100M
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Advertise=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Advertise=10baset-half 10baset-full
+Advertise=100baset-full 1000baset-full
 </code></pre></div></div>
                 <div id="Link-TCP6SegmentationOffload" class="option-block">
                     <div class="option-header">
@@ -1104,7 +1120,7 @@ BitsPerSecond=100M
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#enum | integer" class="badge badge-type-prominent badge-type-complex">enum | integer</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1112,7 +1128,7 @@ BitsPerSecond=100M
           <p>Sets the number of receive channels (a number between 1 and 4294967295) .</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxChannels=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RxChannels=max
 </code></pre></div></div>
                 <div id="Link-TxChannels" class="option-block">
                     <div class="option-header">
@@ -1137,7 +1153,7 @@ BitsPerSecond=100M
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#enum | integer" class="badge badge-type-prominent badge-type-complex">enum | integer</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1145,7 +1161,7 @@ BitsPerSecond=100M
           <p>Sets the number of transmit channels (a number between 1 and 4294967295).</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TxChannels=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TxChannels=max
 </code></pre></div></div>
                 <div id="Link-OtherChannels" class="option-block">
                     <div class="option-header">
@@ -1170,7 +1186,7 @@ BitsPerSecond=100M
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#enum | integer" class="badge badge-type-prominent badge-type-complex">enum | integer</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1178,7 +1194,7 @@ BitsPerSecond=100M
           <p>Sets the number of other channels (a number between 1 and 4294967295).</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OtherChannels=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OtherChannels=max
 </code></pre></div></div>
                 <div id="Link-CombinedChannels" class="option-block">
                     <div class="option-header">
@@ -1203,7 +1219,7 @@ BitsPerSecond=100M
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#enum | integer" class="badge badge-type-prominent badge-type-complex">enum | integer</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1211,7 +1227,7 @@ BitsPerSecond=100M
           <p>Sets the number of combined set channels (a number between 1 and 4294967295).</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CombinedChannels=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>CombinedChannels=max
 </code></pre></div></div>
                 <div id="Link-RxBufferSize" class="option-block">
                     <div class="option-header">

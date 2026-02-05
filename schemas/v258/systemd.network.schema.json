@@ -44,6 +44,38 @@
         "1500"
       ]
     },
+    "absolutePathType": {
+      "type": "string",
+      "description": "Absolute filesystem path.",
+      "pattern": "^/[^\\0]*$",
+      "title": "Absolute Path",
+      "examples": [
+        "/etc/systemd/network/key.pem",
+        "/run/credentials/wireguard.key"
+      ]
+    },
+    "addressLabelType": {
+      "type": "string",
+      "description": "IPv4 address label (7-bit ASCII, prefixed with interface name).",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9:.]*$",
+      "minLength": 1,
+      "maxLength": 15,
+      "title": "Address Label",
+      "examples": [
+        "eth0:0",
+        "lan:primary"
+      ]
+    },
+    "base64KeyType": {
+      "type": "string",
+      "description": "Base64-encoded cryptographic key (e.g. WireGuard keys).",
+      "pattern": "^[A-Za-z0-9+/]{42,44}={0,2}$",
+      "title": "Base64 Key",
+      "examples": [
+        "yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=",
+        "xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14="
+      ]
+    },
     "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
@@ -63,6 +95,69 @@
         "1024"
       ]
     },
+    "dhcpOptionType": {
+      "type": "string",
+      "description": "DHCP option in 'number:type:value' format (type: uint8, uint16, uint32, ipv4address, ipv6address, string, hex).",
+      "pattern": "^[0-9]+:(uint8|uint16|uint32|ipv4address|ipv6address|string|hex):.+$",
+      "title": "DHCP Option",
+      "examples": [
+        "224:string:openwrt",
+        "43:hex:0102030405"
+      ]
+    },
+    "domainnameType": {
+      "type": "string",
+      "title": "Domain Name",
+      "description": "A DNS domain name (no host label).",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+      "examples": [
+        "example.com",
+        "sub.example.org"
+      ]
+    },
+    "duidRawDataType": {
+      "type": "string",
+      "description": "DHCP DUID as hexadecimal string with colon separators.",
+      "pattern": "^([0-9a-fA-F]{2}:)*[0-9a-fA-F]{2}$",
+      "title": "DUID Raw Data",
+      "examples": [
+        "00:01:00:01:2a:3b:4c:5d:6e:7f:80:91",
+        "00:02:00:00:ab:cd:ef:01:23:45"
+      ]
+    },
+    "endpointType": {
+      "type": "string",
+      "description": "Network endpoint as host:port (IPv4, IPv6 in brackets, or hostname).",
+      "pattern": "^(\\[([0-9a-fA-F:]+)\\]|([0-9]{1,3}\\.){3}[0-9]{1,3}|([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)*[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?):[0-9]{1,5}$",
+      "title": "Endpoint",
+      "examples": [
+        "vpn.example.com:51820",
+        "192.0.2.1:51820",
+        "[2001:db8::1]:51820"
+      ]
+    },
+    "flowLabelType": {
+      "description": "IPv6 flow label (0-0xFFFFF) or 'inherit'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048575
+        },
+        {
+          "type": "string",
+          "enum": [
+            "inherit"
+          ]
+        }
+      ],
+      "title": "Flow Label",
+      "examples": [
+        "0",
+        "12345",
+        "inherit"
+      ]
+    },
     "globsType": {
       "type": "string",
       "description": "A whitespace-separated list of shell-style globs.",
@@ -73,6 +168,26 @@
         "en* wlan*",
         "!virbr*",
         "!eth0 eth1"
+      ]
+    },
+    "groupnameOrGidType": {
+      "type": "string",
+      "description": "Unix group name or numeric GID.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+)$",
+      "title": "Group",
+      "examples": [
+        "nogroup",
+        "1000"
+      ]
+    },
+    "hexKeyType": {
+      "type": "string",
+      "description": "Hexadecimal-encoded cryptographic key (e.g. MACsec 128-bit keys).",
+      "pattern": "^[0-9a-fA-F]{32}$",
+      "title": "Hex Key",
+      "examples": [
+        "0011223344556677889900aabbccddeeff",
+        "deadbeefcafebabedeadbeefcafebabe"
       ]
     },
     "hostType": {
@@ -92,6 +207,19 @@
       "examples": [
         "192.168.1.1",
         "example.com"
+      ]
+    },
+    "interfacenameType": {
+      "type": "string",
+      "title": "Interface Name",
+      "description": "Network interface device name (kernel interface name).",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[-a-z0-9:._/]+$",
+      "examples": [
+        "eth0",
+        "enp0s3",
+        "br0"
       ]
     },
     "ip_addressType": {
@@ -142,6 +270,27 @@
         "10.0.0.1"
       ]
     },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
+      "examples": [
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6TokenType": {
+      "type": "string",
+      "description": "IPv6 SLAAC token mode or static address suffix.",
+      "pattern": "^(eui64|prefixstable(:[a-zA-Z0-9_-]+)?|static:[0-9a-fA-F:]+)$",
+      "title": "IPv6 Token",
+      "examples": [
+        "eui64",
+        "prefixstable",
+        "prefixstable:secret",
+        "static:::1"
+      ]
+    },
     "ipv6_addressType": {
       "type": "string",
       "format": "ipv6",
@@ -150,15 +299,6 @@
       "examples": [
         "2001:db8::1",
         "fe80::1"
-      ]
-    },
-    "ipv4_prefixType": {
-      "type": "string",
-      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
-      "title": "IPv4 CIDR",
-      "examples": [
-        "192.168.1.0/24"
       ]
     },
     "ipv6_prefixType": {
@@ -179,6 +319,26 @@
         "00:11:22:33:44:55"
       ]
     },
+    "netLabelType": {
+      "type": "string",
+      "description": "Linux NetLabel for security labeling (SELinux/SMACK).",
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_:.-]*$",
+      "title": "NetLabel",
+      "examples": [
+        "system_u:object_r:netlabel_peer_t:s0",
+        "web_traffic"
+      ]
+    },
+    "nftSetType": {
+      "type": "string",
+      "description": "nftables set specification in family:table:set format.",
+      "pattern": "^(ip|ip6|inet|arp|bridge|netdev):[a-zA-Z_][a-zA-Z0-9_]*:[a-zA-Z_][a-zA-Z0-9_]*$",
+      "title": "NFT Set",
+      "examples": [
+        "inet:filter:allowed_addrs",
+        "ip:nat:masq_addrs"
+      ]
+    },
     "percentageType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?%$",
@@ -187,6 +347,38 @@
       "examples": [
         "10%",
         "0.5%"
+      ]
+    },
+    "portRangeType": {
+      "type": "string",
+      "description": "TCP/UDP port or port range (low-high).",
+      "pattern": "^[0-9]{1,5}(-[0-9]{1,5})?$",
+      "title": "Port Range",
+      "examples": [
+        "8080",
+        "1024-65535",
+        "49152-65535"
+      ]
+    },
+    "portType": {
+      "description": "TCP/UDP port number or 'auto'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "enum": [
+            "auto"
+          ]
+        }
+      ],
+      "title": "Port",
+      "examples": [
+        "51820",
+        "auto"
       ]
     },
     "property_comments": {
@@ -253,6 +445,18 @@
         "100M"
       ]
     },
+    "routeTableNameType": {
+      "type": "string",
+      "description": "Routing table name or numeric ID.",
+      "pattern": "^([a-zA-Z_][a-zA-Z0-9_]*|[0-9]+)$",
+      "title": "Route Table",
+      "examples": [
+        "main",
+        "local",
+        "custom_table",
+        "200"
+      ]
+    },
     "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
@@ -270,6 +474,16 @@
         "type": "string"
       },
       "description": "Comments associated with this section"
+    },
+    "tunnelKeyType": {
+      "type": "string",
+      "description": "GRE/VTI tunnel key (decimal or dotted-decimal format).",
+      "pattern": "^([0-9]+|([0-9]{1,3}\\.){3}[0-9]{1,3})$",
+      "title": "Tunnel Key",
+      "examples": [
+        "1234",
+        "192.168.1.1"
+      ]
     },
     "uint16Type": {
       "type": "integer",
@@ -291,6 +505,17 @@
       "maximum": 255,
       "description": "Unsigned 8-bit integer (0...255).",
       "title": "Integer (8-bit)"
+    },
+    "usernameOrUidType": {
+      "type": "string",
+      "description": "Unix username, numeric UID, or UID range.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+(-[0-9]+)?)$",
+      "title": "User",
+      "examples": [
+        "nobody",
+        "1000",
+        "1000-2000"
+      ]
     },
     "vlan_idType": {
       "type": "integer",
@@ -326,7 +551,8 @@
         },
         "PermanentMACAddress": {
           "$ref": "#/definitions/mac_addressType",
-          "title": "Permanent MAC Address"
+          "title": "Permanent MAC Address",
+          "x-subcategory": "Hardware"
         },
         "Path": {
           "allOf": [
@@ -337,11 +563,20 @@
           ],
           "description": "The path to the device.",
           "title": "Path",
+          "examples": [
+            "pci-0000:00:1f.6",
+            "pci-0000:02:00.0-usb-0:1:1.0"
+          ],
           "x-subcategory": "Hardware"
         },
         "Driver": {
           "type": "string",
           "title": "Driver",
+          "examples": [
+            "e1000e",
+            "virtio_net",
+            "r8169"
+          ],
           "x-subcategory": "Hardware"
         },
         "Type": {
@@ -373,12 +608,22 @@
           "pattern": "^!?\\s*(ad-hoc|ap|ap-vlan|mesh-point|monitor|nan|ocb|p2p-client|p2p-device|p2p-go|station|wds)(\\s+(ad-hoc|ap|ap-vlan|mesh-point|monitor|nan|ocb|p2p-client|p2p-device|p2p-go|station|wds))*\\s*$",
           "description": "A whitespace-separated list of wireless network type. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "WLAN Interface Type",
+          "examples": [
+            "station",
+            "ap",
+            "!monitor"
+          ],
           "version_added": "244",
           "x-subcategory": "Network"
         },
         "SSID": {
           "description": "A whitespace-separated list of shell-style globs matching the SSID of the currently connected wireless LAN. If the list is prefixed with a \"!\", the test is inverted.",
           "title": "SSID",
+          "examples": [
+            "MyNetwork",
+            "Corp-* Guest-*",
+            "!OpenWifi"
+          ],
           "version_added": "244",
           "x-subcategory": "Network",
           "$ref": "#/definitions/globsType"
@@ -388,7 +633,12 @@
           "pattern": "^!?\\s*([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})(\\s+([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2}))*\\s*$",
           "description": "A whitespace-separated list of hardware address of the currently connected wireless LAN. Use full colon-, hyphen- or dot-delimited hexadecimal. See the example in MACAddress=. This option may appear more than once, in which case the lists are merged. If the empty string is assigned to this option, the list is reset.",
           "title": "BSSID",
-          "version_added": "244"
+          "examples": [
+            "00:11:22:33:44:55",
+            "!aa:bb:cc:dd:ee:ff"
+          ],
+          "version_added": "244",
+          "x-subcategory": "Network"
         },
         "Name": {
           "description": "A whitespace-separated list of shell-style globs matching the device name, as exposed by the udev property 'INTERFACE', or device's alternative names. If the list is prefixed with a \"!\", the test is inverted.",
@@ -403,36 +653,72 @@
         },
         "Property": {
           "type": "string",
-          "title": "Property"
+          "title": "Property",
+          "examples": [
+            "ID_NET_DRIVER=virtio_net",
+            "ID_PATH=pci-0000:00:03.0"
+          ]
         },
         "Host": {
           "type": "string",
-          "title": "Host"
+          "title": "Host",
+          "examples": [
+            "myserver",
+            "web*",
+            "!testhost"
+          ]
         },
         "Virtualization": {
           "type": "string",
           "title": "Virtualization",
+          "examples": [
+            "vm",
+            "container",
+            "qemu",
+            "!kvm"
+          ],
           "x-subcategory": "Virtualization"
         },
         "KernelCommandLine": {
           "type": "string",
-          "title": "Kernel Command Line"
+          "title": "Kernel Command Line",
+          "examples": [
+            "systemd.network=1",
+            "!quiet"
+          ]
         },
         "KernelVersion": {
           "type": "string",
-          "title": "Kernel Version"
+          "title": "Kernel Version",
+          "examples": [
+            "5.15.*",
+            "6.*"
+          ]
         },
         "Credential": {
           "type": "string",
-          "title": "Credential"
+          "title": "Credential",
+          "examples": [
+            "network.conf",
+            "my-network-config"
+          ]
         },
         "Architecture": {
           "type": "string",
-          "title": "Architecture"
+          "title": "Architecture",
+          "examples": [
+            "x86-64",
+            "arm64",
+            "!arm"
+          ]
         },
         "Firmware": {
           "type": "string",
-          "title": "Firmware"
+          "title": "Firmware",
+          "examples": [
+            "uefi",
+            "!bios"
+          ]
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -444,9 +730,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "Type"
-      ],
       "title": "Match",
       "description": "[Match] section configuration",
       "additionalProperties": false
@@ -486,7 +769,7 @@
           "x-subcategory": "Hardware"
         },
         "Group": {
-          "type": "string",
+          "$ref": "#/definitions/uint32Type",
           "description": "Link groups are similar to port ranges found in managed switches. When network interfaces are added to a numbered group, operations on all the interfaces from that group can be performed at once. Takes an unsigned integer in the range 0...2147483647. Defaults to unset.",
           "title": "Group",
           "version_added": "246"
@@ -631,27 +914,27 @@
           "version_added": "250"
         },
         "BatmanAdvanced": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The name of the B.A.T.M.A.N. Advanced, bond, bridge, or VRF interface to add the link to. See systemd.netdev5.",
           "title": "Batman Advanced",
           "version_added": "211"
         },
         "Bond": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "Bond"
         },
         "Bridge": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "Bridge"
         },
         "VRF": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "VRF"
         },
         "IPoIB": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The name of an IPoIB, IPVLAN, IPVTAP, MACsec, MACVLAN, MACVTAP, tunnel, VLAN, VXLAN, or Xfrm to be created on the link. See systemd.netdev5. This option may be specified more than once.",
-          "title": "I Po IB",
+          "title": "IPoIB",
           "version_added": "211"
         },
         "IPVLAN": {
@@ -663,12 +946,12 @@
           "title": "IPVTAP"
         },
         "L2TP": {
-          "type": "string",
-          "title": "L2 TP"
+          "$ref": "#/definitions/interfacenameType",
+          "title": "L2TP"
         },
         "MACsec": {
-          "type": "string",
-          "title": "MA Csec"
+          "$ref": "#/definitions/secondsType",
+          "title": "MACsec"
         },
         "MACVLAN": {
           "type": "string",
@@ -679,7 +962,7 @@
           "title": "MACVTAP"
         },
         "Tunnel": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "Tunnel"
         },
         "VLAN": {
@@ -694,11 +977,11 @@
           "version_added": "231"
         },
         "VXLAN": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "VXLAN"
         },
         "Xfrm": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "title": "Xfrm"
         },
         "DHCP": {
@@ -1267,7 +1550,7 @@
           "title": "IPv4 LL"
         },
         "IPv6Token": {
-          "type": "string",
+          "$ref": "#/definitions/ipv6TokenType",
           "title": "IPv6 Token"
         },
         "IPv6PrefixDelegation": {
@@ -1337,9 +1620,7 @@
                 "title": "Broadcast"
               },
               "Label": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 15,
+                "$ref": "#/definitions/addressLabelType",
                 "description": "Specifies the label for the IPv4 address. The label must be a 7-bit ASCII string with a length of 1...15 characters. Defaults to unset.",
                 "version_added": "211",
                 "title": "Label"
@@ -1435,19 +1716,19 @@
                 ]
               },
               "RouteMetric": {
-                "type": "string",
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
                 "version_added": "246",
                 "title": "Route Metric"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'.",
                 "version_added": "252",
                 "title": "Net Label"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This setting provides a method for integrating network configuration into firewall rules with NFT sets. The benefit of using the setting is that static network configuration (or dynamically obtained network addresses, see similar directives in other sections) can be used in firewall rules with the indirection of NFT set types. For example, access could be granted for hosts in the local subnetwork only. Firewall rules using IP address of an interface are also instantly updated when the network configuration changes, for example via DHCP. This option expects a whitespace separated list of NFT set definitions. Each definition consists of a colon-separated tuple of source type (one of 'address', 'prefix' or 'ifindex'), NFT address family (one of 'arp', 'bridge', 'inet', 'ip', 'ip6', or 'netdev'), table name and set name. The names of tables and sets must conform to lexical restrictions of NFT table names. The type of the element used in the NFT filter must match the type implied by the directive ('address', 'prefix' or 'ifindex') and address type (IPv4 or IPv6) as shown in the table below. When an interface is configured with IP addresses, the addresses, subnetwork masks or interface index will be appended to the NFT sets. The information will be removed when the interface is deconfigured. systemd-networkd only inserts elements to (or removes from) the sets, so the related NFT rules, tables and sets must be prepared elsewhere in advance. Failures to manage the sets will be ignored. Example: [Address] NFTSet=prefix:netdev:filter:eth_ipv4_prefix Corresponding NFT rules: table netdev filter { set eth_ipv4_prefix { type ipv4_addr flags interval } chain eth_ingress { type filter hook ingress device \"eth0\" priority filter; policy drop; ip daddr != @eth_ipv4_prefix drop accept } }",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -1505,7 +1786,7 @@
               "title": "Broadcast"
             },
             "Label": {
-              "type": "string",
+              "$ref": "#/definitions/addressLabelType",
               "description": "Specifies the label for the IPv4 address. The label must be a 7-bit ASCII string with a length of 1...15 characters. Defaults to unset.",
               "version_added": "211",
               "title": "Label"
@@ -1610,13 +1891,13 @@
               "title": "Route Metric"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'.",
               "version_added": "252",
               "title": "Net Label"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This setting provides a method for integrating network configuration into firewall rules with NFT sets. The benefit of using the setting is that static network configuration (or dynamically obtained network addresses, see similar directives in other sections) can be used in firewall rules with the indirection of NFT set types. For example, access could be granted for hosts in the local subnetwork only. Firewall rules using IP address of an interface are also instantly updated when the network configuration changes, for example via DHCP. This option expects a whitespace separated list of NFT set definitions. Each definition consists of a colon-separated tuple of source type (one of 'address', 'prefix' or 'ifindex'), NFT address family (one of 'arp', 'bridge', 'inet', 'ip', 'ip6', or 'netdev'), table name and set name. The names of tables and sets must conform to lexical restrictions of NFT table names. The type of the element used in the NFT filter must match the type implied by the directive ('address', 'prefix' or 'ifindex') and address type (IPv4 or IPv6) as shown in the table below. When an interface is configured with IP addresses, the addresses, subnetwork masks or interface index will be appended to the NFT sets. The information will be removed when the interface is deconfigured. systemd-networkd only inserts elements to (or removes from) the sets, so the related NFT rules, tables and sets must be prepared elsewhere in advance. Failures to manage the sets will be ignored. Example: [Address] NFTSet=prefix:netdev:filter:eth_ipv4_prefix Corresponding NFT rules: table netdev filter { set eth_ipv4_prefix { type ipv4_addr flags interval } chain eth_ingress { type filter hook ingress device \"eth0\" priority filter; policy drop; ip daddr != @eth_ipv4_prefix drop accept } }",
               "version_added": "255",
               "title": "NFT Set"
@@ -1832,13 +2113,13 @@
             "type": "object",
             "properties": {
               "TypeOfService": {
-                "type": "string",
+                "$ref": "#/definitions/uint8Type",
                 "description": "This specifies the Type of Service (ToS) field of packets to match; it takes an unsigned integer in the range 0...255. The field can be used to specify precedence (the first 3 bits) and ToS (the next 3 bits). The field can be also used to specify Differentiated Services Code Point (DSCP) (the first 6 bits) and Explicit Congestion Notification (ECN) (the last 2 bits). See Type of Service and Differentiated services for more details.",
                 "version_added": "235",
                 "title": "Type Of Service"
               },
               "Priority": {
-                "type": "string",
+                "$ref": "#/definitions/uint32Type",
                 "description": "Specifies the priority of this rule. Priority= is an integer in the range 0...4294967295. Higher number means lower priority, and rules get processed in order of increasing number. Defaults to unset, and the kernel will pick a value dynamically.",
                 "version_added": "235",
                 "title": "Priority",
@@ -1919,13 +2200,13 @@
                 "title": "To"
               },
               "IncomingInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "description": "Specifies incoming device to match. If the interface is loopback, the rule only matches packets originating from this host.",
                 "version_added": "236",
                 "title": "Incoming Interface"
               },
               "OutgoingInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "description": "Specifies the outgoing device to match. The outgoing interface is only available for packets originating from local sockets that are bound to a device.",
                 "version_added": "236",
                 "title": "Outgoing Interface"
@@ -1939,13 +2220,11 @@
               "SourcePort": {
                 "oneOf": [
                   {
-                    "type": "string",
+                    "$ref": "#/definitions/portRangeType",
                     "regex": "^[0-9]+?-[0-9]+$"
                   },
                   {
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 65535
+                    "$ref": "#/definitions/portType"
                   }
                 ],
                 "description": "Specifies the source IP port or IP port range match in forwarding information base (FIB) rules. A port range is specified by the lower and upper port separated by a dash. Defaults to unset.",
@@ -1955,13 +2234,11 @@
               "DestinationPort": {
                 "oneOf": [
                   {
-                    "type": "string",
+                    "$ref": "#/definitions/portRangeType",
                     "regex": "^[0-9]+?-[0-9]+$"
                   },
                   {
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 65535
+                    "$ref": "#/definitions/portType"
                   }
                 ],
                 "description": "Specifies the destination IP port or IP port range match in forwarding information base (FIB) rules. A port range is specified by the lower and upper port separated by a dash. Defaults to unset.",
@@ -1998,7 +2275,7 @@
                 ]
               },
               "User": {
-                "type": "string",
+                "$ref": "#/definitions/usernameOrUidType",
                 "description": "Takes a username, a user ID, or a range of user IDs separated by a dash. Defaults to unset.",
                 "version_added": "245",
                 "title": "User"
@@ -2157,13 +2434,13 @@
               "title": "To"
             },
             "IncomingInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "description": "Specifies incoming device to match. If the interface is loopback, the rule only matches packets originating from this host.",
               "version_added": "236",
               "title": "Incoming Interface"
             },
             "OutgoingInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "description": "Specifies the outgoing device to match. The outgoing interface is only available for packets originating from local sockets that are bound to a device.",
               "version_added": "236",
               "title": "Outgoing Interface"
@@ -2175,13 +2452,13 @@
               "title": "IP Protocol"
             },
             "SourcePort": {
-              "type": "string",
+              "$ref": "#/definitions/portRangeType",
               "description": "Specifies the source IP port or IP port range match in forwarding information base (FIB) rules. A port range is specified by the lower and upper port separated by a dash. Defaults to unset.",
               "version_added": "240",
               "title": "Source Port"
             },
             "DestinationPort": {
-              "type": "string",
+              "$ref": "#/definitions/portRangeType",
               "description": "Specifies the destination IP port or IP port range match in forwarding information base (FIB) rules. A port range is specified by the lower and upper port separated by a dash. Defaults to unset.",
               "version_added": "240",
               "title": "Destination Port"
@@ -2216,7 +2493,7 @@
               ]
             },
             "User": {
-              "type": "string",
+              "$ref": "#/definitions/usernameOrUidType",
               "description": "Takes a username, a user ID, or a range of user IDs separated by a dash. Defaults to unset.",
               "version_added": "245",
               "title": "User"
@@ -2230,7 +2507,9 @@
               "title": "Suppress Interface Group"
             },
             "SuppressPrefixLength": {
-              "type": "string",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 128,
               "description": "Takes a number N in the range 0...128 and rejects routing decisions that have a prefix length of N or less. Defaults to unset.",
               "version_added": "245",
               "title": "Suppress Prefix Length"
@@ -3204,7 +3483,7 @@
                 "title": "Hostname"
               },
               "Label": {
-                "type": "string",
+                "$ref": "#/definitions/addressLabelType",
                 "description": "Specifies the label for the IPv4 address received from the DHCP server. The label must be a 7-bit ASCII string with a length of 1...15 characters. Defaults to unset.",
                 "version_added": "250",
                 "title": "Label"
@@ -3241,7 +3520,7 @@
                 "title": "User Class"
               },
               "IAID": {
-                "type": "string",
+                "$ref": "#/definitions/uint32Type",
                 "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
                 "version_added": "230",
                 "title": "IAID"
@@ -3253,7 +3532,7 @@
                 "title": "DUID Type"
               },
               "DUIDRawData": {
-                "type": "string",
+                "$ref": "#/definitions/duidRawDataType",
                 "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
                 "version_added": "230",
                 "title": "DUID Raw Data"
@@ -3296,17 +3575,13 @@
                 "title": "Use Timezone"
               },
               "ListenPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Set the port from which the DHCP client packets originate.",
                 "version_added": "233",
                 "title": "Listen Port"
               },
               "ServerPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Set the port on which the DHCP server is listening.",
                 "version_added": "256",
                 "title": "Server Port"
@@ -3353,19 +3628,19 @@
                 ]
               },
               "SocketPriority": {
-                "type": "string",
+                "$ref": "#/definitions/uint8Type",
                 "description": "The Linux socket option 'SO_PRIORITY' applied to the raw IP socket used for initial DHCPv4 messages. Unset by default. Usual values range from 0 to 6. More details about 'SO_PRIORITY' socket option in socket7. Can be used in conjunction with [VLAN] section EgressQOSMaps= setting of.netdev file to set the 802.1Q VLAN ethernet tagged header priority, see systemd.netdev5.",
                 "version_added": "253",
                 "title": "Socket Priority"
               },
               "SendOption": {
-                "type": "string",
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send an arbitrary raw option in the DHCPv4 request. Takes a DHCP option number, data type and data separated with a colon ('option:type:value'). The option number The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "244",
                 "title": "Send Option"
               },
               "SendVendorOption": {
-                "type": "string",
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send an arbitrary vendor option in the DHCPv4 request. Takes a DHCP option number, data type and data separated with a colon ('option:type:value'). The option number The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "246",
                 "title": "Send Vendor Option"
@@ -3438,13 +3713,13 @@
                 "title": "IPv6 Only Mode"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
                 "version_added": "252",
                 "title": "Net Label"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv4_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -3620,7 +3895,7 @@
               "title": "Hostname"
             },
             "Label": {
-              "type": "string",
+              "$ref": "#/definitions/addressLabelType",
               "description": "Specifies the label for the IPv4 address received from the DHCP server. The label must be a 7-bit ASCII string with a length of 1...15 characters. Defaults to unset.",
               "version_added": "250",
               "title": "Label"
@@ -3670,7 +3945,7 @@
               "title": "User Class"
             },
             "IAID": {
-              "type": "string",
+              "$ref": "#/definitions/uint32Type",
               "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
               "version_added": "230",
               "title": "IAID"
@@ -3682,7 +3957,7 @@
               "title": "DUID Type"
             },
             "DUIDRawData": {
-              "type": "string",
+              "$ref": "#/definitions/duidRawDataType",
               "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
               "version_added": "230",
               "title": "DUID Raw Data"
@@ -3725,17 +4000,13 @@
               "title": "Use Timezone"
             },
             "ListenPort": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Set the port from which the DHCP client packets originate.",
               "version_added": "233",
               "title": "Listen Port"
             },
             "ServerPort": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Set the port on which the DHCP server is listening.",
               "version_added": "256",
               "title": "Server Port"
@@ -3782,19 +4053,19 @@
               ]
             },
             "SocketPriority": {
-              "type": "string",
+              "$ref": "#/definitions/uint8Type",
               "description": "The Linux socket option 'SO_PRIORITY' applied to the raw IP socket used for initial DHCPv4 messages. Unset by default. Usual values range from 0 to 6. More details about 'SO_PRIORITY' socket option in socket7. Can be used in conjunction with [VLAN] section EgressQOSMaps= setting of.netdev file to set the 802.1Q VLAN ethernet tagged header priority, see systemd.netdev5.",
               "version_added": "253",
               "title": "Socket Priority"
             },
             "SendOption": {
-              "type": "string",
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send an arbitrary raw option in the DHCPv4 request. Takes a DHCP option number, data type and data separated with a colon ('option:type:value'). The option number The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "244",
               "title": "Send Option"
             },
             "SendVendorOption": {
-              "type": "string",
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send an arbitrary vendor option in the DHCPv4 request. Takes a DHCP option number, data type and data separated with a colon ('option:type:value'). The option number The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "246",
               "title": "Send Vendor Option"
@@ -3867,13 +4138,13 @@
               "title": "IPv6 Only Mode"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
               "version_added": "252",
               "title": "Net Label"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv4_addr'.",
               "version_added": "255",
               "title": "NFT Set"
@@ -3991,7 +4262,7 @@
                 "title": "Request Options"
               },
               "UserClass": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "A DHCPv6 client can use User Class option to identify the type or category of user or applications it represents. The information contained in this option is a string that represents the user class of which the client is a member. Each class sets an identifying string of information to be used by the DHCP service to classify clients. Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Takes a whitespace-separated list of strings. Note that currently 'NUL' bytes are not allowed.",
                 "version_added": "246",
                 "title": "User Class"
@@ -4003,7 +4274,7 @@
                 "title": "Vendor Class"
               },
               "SendVendorOption": {
-                "type": "string",
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send an arbitrary vendor option in the DHCPv6 request. Takes an enterprise identifier, DHCP option number, data type, and data separated with a colon ('enterprise identifier:option:type:value'). Enterprise identifier is an unsigned integer in the range 1...4294967294. The option number Data type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "246",
                 "title": "Send Vendor Option"
@@ -4051,13 +4322,13 @@
                 ]
               },
               "SendOption": {
-                "type": "string",
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "As in the [DHCPv4] section, however because DHCPv6 uses 16-bit fields to store option numbers, the option number is an integer in the range 1...65536.",
                 "version_added": "246",
                 "title": "Send Option"
               },
               "IAID": {
-                "type": "string",
+                "$ref": "#/definitions/uint32Type",
                 "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
                 "version_added": "230",
                 "title": "IAID"
@@ -4069,7 +4340,7 @@
                 "title": "DUID Type"
               },
               "DUIDRawData": {
-                "type": "string",
+                "$ref": "#/definitions/duidRawDataType",
                 "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
                 "version_added": "230",
                 "title": "DUID Raw Data"
@@ -4082,7 +4353,7 @@
                 "title": "Rapid Commit"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'.",
                 "version_added": "252",
                 "title": "Net Label"
@@ -4095,7 +4366,7 @@
                 "title": "Send Release"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -4202,7 +4473,7 @@
               "title": "Request Options"
             },
             "UserClass": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "A DHCPv6 client can use User Class option to identify the type or category of user or applications it represents. The information contained in this option is a string that represents the user class of which the client is a member. Each class sets an identifying string of information to be used by the DHCP service to classify clients. Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Takes a whitespace-separated list of strings. Note that currently 'NUL' bytes are not allowed.",
               "version_added": "246",
               "title": "User Class"
@@ -4214,7 +4485,7 @@
               "title": "Vendor Class"
             },
             "SendVendorOption": {
-              "type": "string",
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send an arbitrary vendor option in the DHCPv6 request. Takes an enterprise identifier, DHCP option number, data type, and data separated with a colon ('enterprise identifier:option:type:value'). Enterprise identifier is an unsigned integer in the range 1...4294967294. The option number Data type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "246",
               "title": "Send Vendor Option"
@@ -4262,13 +4533,13 @@
               ]
             },
             "SendOption": {
-              "type": "string",
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "As in the [DHCPv4] section, however because DHCPv6 uses 16-bit fields to store option numbers, the option number is an integer in the range 1...65536.",
               "version_added": "246",
               "title": "Send Option"
             },
             "IAID": {
-              "type": "string",
+              "$ref": "#/definitions/uint32Type",
               "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
               "version_added": "230",
               "title": "IAID"
@@ -4280,7 +4551,7 @@
               "title": "DUID Type"
             },
             "DUIDRawData": {
-              "type": "string",
+              "$ref": "#/definitions/duidRawDataType",
               "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
               "version_added": "230",
               "title": "DUID Raw Data"
@@ -4293,7 +4564,7 @@
               "title": "Rapid Commit"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This setting provides a method for integrating static and dynamic network configuration into Linux NetLabel subsystem rules, used by Linux Security Modules (LSMs) for network access control. The label, with suitable LSM rules, can be used to control connectivity of (for example) a service with peers in the local network. At least with SELinux, only the ingress can be controlled but not egress. The benefit of using this setting is that it may be possible to apply interface independent part of NetLabel configuration at very early stage of system boot sequence, at the time when the network interfaces are not available yet, with netlabelctl8, and the per-interface configuration with systemd-networkd once the interfaces appear later. Currently this feature is only implemented for SELinux. The option expects a single NetLabel label. The label must conform to lexical restrictions of LSM labels. When an interface is configured with IP addresses, the addresses and subnetwork masks will be appended to the NetLabel Fallback Peer Labeling rules. They will be removed when the interface is deconfigured. Failures to manage the labels will be ignored. Once labeling is enabled for network traffic, a lot of LSM access control points in Linux networking stack go from dormant to active. Care should be taken to avoid getting into a situation where for example remote connectivity is broken, when the security policy hasn't been updated to consider LSM per-packet access controls and no rules would allow any network traffic. Also note that additional configuration with netlabelctl8 is needed. Example: [Address] NetLabel=system_u:object_r:localnet_peer_t:s0 With the example rules applying for interface 'eth0', when the interface is configured with an IPv4 address of 10.0.0.123/8, systemd-networkd performs the equivalent of netlabelctl operation netlabelctl unlbl add interface eth0 address:10.0.0.0/8 label:system_u:object_r:localnet_peer_t:s0 and the reverse operation when the IPv4 address is deconfigured. The configuration can be used with LSM rules; in case of SELinux to allow a SELinux domain to receive data from objects of SELinux 'peer' class. For example: type localnet_peer_t; allow my_server_t localnet_peer_t:peer recv; The effect of the above configuration and rules (in absence of other rules as may be the case) is to only allow 'my_server_t' (and nothing else) to receive data from local subnet 10.0.0.0/8 of interface 'eth0'.",
               "version_added": "252",
               "title": "Net Label"
@@ -4306,7 +4577,7 @@
               "title": "Send Release"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
               "version_added": "255",
               "title": "NFT Set"
@@ -4448,7 +4719,15 @@
                 ]
               },
               "RouteMetric": {
-                "type": "string",
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/uint32Type"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^[0-9]+:[0-9]+:[0-9]+$"
+                  }
+                ],
                 "default": "512:1024:2048",
                 "description": "Set the routing metric for the routes received in the Router Advertisement. Takes an unsigned integer in the range 0...4294967295, or three unsigned integer separated with ':', in that case the first one is used when the router preference is high, the second is for medium preference, and the last is for low preference ('high:medium:low'). Defaults to '512:1024:2048'.",
                 "version_added": "249",
@@ -4503,19 +4782,19 @@
                 "title": "Route Deny List"
               },
               "Token": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6TokenType",
                 "description": "Specifies an optional address generation mode for the Stateless Address Autoconfiguration (SLAAC). The following values are supported: The EUI-64 algorithm will be used to generate an address for that prefix. Only supported by Ethernet or InfiniBand interfaces. An IPv6 address must be specified after a colon (':'), and the lower bits of the supplied address are combined with the upper bits of a prefix received in a Router Advertisement (RA) message to form a complete address. Note that if multiple prefixes are received in an RA message, or in multiple RA messages, addresses will be formed from each of them using the supplied address. This mode implements SLAAC but uses a static interface identifier instead of an identifier generated by using the EUI-64 algorithm. Because the interface identifier is static, if Duplicate Address Detection detects that the computed address is a duplicate (in use by another node on the link), then this mode will fail to provide an address for that prefix. If an IPv6 address without mode is specified, then 'static' mode is assumed. The algorithm specified in RFC 7217 will be used to generate interface identifiers. This mode can optionally take an IPv6 address separated with a colon (':'). If an IPv6 address is specified, then an interface identifier is generated only when a prefix received in an RA message matches the supplied address. This mode can also optionally take a non-null UUID in the format which sd_id128_from_string() accepts, e.g. '86b123b969ba4b7eb8b3d8605123525a' or '86b123b9-69ba-4b7e-b8b3-d8605123525a'. If a UUID is specified, the value is used as the secret key to generate interface identifiers. If not specified, then an application specific ID generated with the system's machine-ID will be used as the secret key. See sd-id1283, sd_id128_from_string3, and sd_id128_get_machine3. Note that the 'prefixstable' algorithm uses both the interface name and MAC address as input to the hash to compute the interface identifier, so if either of those are changed the resulting interface identifier (and address) will be changed, even if the prefix received in the RA message has not been changed. If no address generation mode is specified (which is the default), or a received prefix does not match any of the addresses provided in 'prefixstable' mode, then the EUI-64 algorithm will be used for Ethernet or InfiniBand interfaces, otherwise 'prefixstable' will be used to form an interface identifier for that prefix. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. Examples: Token=eui64 Token=::1a:2b:3c:4d Token=static:::1a:2b:3c:4d Token=prefixstable Token=prefixstable:2002:da8:1::",
                 "version_added": "250",
                 "title": "Token"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This applies the NetLabel for the addresses received with RA, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
                 "version_added": "252",
                 "title": "Net Label"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This applies the NFT set for the network configuration received with RA, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -4531,7 +4810,7 @@
                 "title": "Black List"
               },
               "UseICMP6RateLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Use ICMP6 Rate Limit"
               },
               "_comments": {
@@ -4734,19 +5013,19 @@
               "title": "Route Deny List"
             },
             "Token": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6TokenType",
               "description": "Specifies an optional address generation mode for the Stateless Address Autoconfiguration (SLAAC). The following values are supported: The EUI-64 algorithm will be used to generate an address for that prefix. Only supported by Ethernet or InfiniBand interfaces. An IPv6 address must be specified after a colon (':'), and the lower bits of the supplied address are combined with the upper bits of a prefix received in a Router Advertisement (RA) message to form a complete address. Note that if multiple prefixes are received in an RA message, or in multiple RA messages, addresses will be formed from each of them using the supplied address. This mode implements SLAAC but uses a static interface identifier instead of an identifier generated by using the EUI-64 algorithm. Because the interface identifier is static, if Duplicate Address Detection detects that the computed address is a duplicate (in use by another node on the link), then this mode will fail to provide an address for that prefix. If an IPv6 address without mode is specified, then 'static' mode is assumed. The algorithm specified in RFC 7217 will be used to generate interface identifiers. This mode can optionally take an IPv6 address separated with a colon (':'). If an IPv6 address is specified, then an interface identifier is generated only when a prefix received in an RA message matches the supplied address. This mode can also optionally take a non-null UUID in the format which sd_id128_from_string() accepts, e.g. '86b123b969ba4b7eb8b3d8605123525a' or '86b123b9-69ba-4b7e-b8b3-d8605123525a'. If a UUID is specified, the value is used as the secret key to generate interface identifiers. If not specified, then an application specific ID generated with the system's machine-ID will be used as the secret key. See sd-id1283, sd_id128_from_string3, and sd_id128_get_machine3. Note that the 'prefixstable' algorithm uses both the interface name and MAC address as input to the hash to compute the interface identifier, so if either of those are changed the resulting interface identifier (and address) will be changed, even if the prefix received in the RA message has not been changed. If no address generation mode is specified (which is the default), or a received prefix does not match any of the addresses provided in 'prefixstable' mode, then the EUI-64 algorithm will be used for Ethernet or InfiniBand interfaces, otherwise 'prefixstable' will be used to form an interface identifier for that prefix. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. Examples: Token=eui64 Token=::1a:2b:3c:4d Token=static:::1a:2b:3c:4d Token=prefixstable Token=prefixstable:2002:da8:1::",
               "version_added": "250",
               "title": "Token"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This applies the NetLabel for the addresses received with RA, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
               "version_added": "252",
               "title": "Net Label"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This applies the NFT set for the network configuration received with RA, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
               "version_added": "255",
               "title": "NFT Set"
@@ -4762,7 +5041,7 @@
               "title": "Black List"
             },
             "UseICMP6RateLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Use ICMP6 Rate Limit"
             },
             "_comments": {
@@ -4804,7 +5083,7 @@
                 "title": "Server Address"
               },
               "UplinkInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "default": ":auto",
                 "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS, NTP, or SIP servers is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'.",
                 "version_added": "249",
@@ -4848,7 +5127,7 @@
                 "title": "Default Lease Time Sec"
               },
               "IPv6OnlyPreferredSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Takes a timespan. Controls the RFC 8925 IPv6-Only Preferred option. Specifies the DHCPv4 option to indicate that a host supports an IPv6-only mode and is willing to forgo obtaining an IPv4 address if the network provides IPv6 connectivity. Defaults to unset, and not send the option. The minimum allowed value is 300 seconds.",
                 "version_added": "255",
                 "title": "IPv6 Only Preferred Sec"
@@ -4960,14 +5239,7 @@
                 "title": "Pool Size"
               },
               "SendVendorOption": {
-                "type": "string",
-                "enum": [
-                  "ipv4address",
-                  "string",
-                  "uint16",
-                  "uint32",
-                  "uint8"
-                ],
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send a vendor option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "246",
                 "title": "Send Vendor Option",
@@ -4976,15 +5248,7 @@
                 ]
               },
               "SendOption": {
-                "type": "string",
-                "enum": [
-                  "ipv4address",
-                  "ipv6address",
-                  "string",
-                  "uint16",
-                  "uint32",
-                  "uint8"
-                ],
+                "$ref": "#/definitions/dhcpOptionType",
                 "description": "Send a raw option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
                 "version_added": "244",
                 "title": "Send Option",
@@ -5018,8 +5282,7 @@
               "BootFilename": {
                 "allOf": [
                   {
-                    "type": "string",
-                    "format": "uri-reference"
+                    "$ref": "#/definitions/absolutePathType"
                   }
                 ],
                 "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -5065,7 +5328,7 @@
               "title": "Server Address"
             },
             "UplinkInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "default": ":auto",
               "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS, NTP, or SIP servers is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'.",
               "version_added": "249",
@@ -5109,7 +5372,7 @@
               "title": "Default Lease Time Sec"
             },
             "IPv6OnlyPreferredSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Takes a timespan. Controls the RFC 8925 IPv6-Only Preferred option. Specifies the DHCPv4 option to indicate that a host supports an IPv6-only mode and is willing to forgo obtaining an IPv4 address if the network provides IPv6 connectivity. Defaults to unset, and not send the option. The minimum allowed value is 300 seconds.",
               "version_added": "255",
               "title": "IPv6 Only Preferred Sec"
@@ -5212,24 +5475,17 @@
               "title": "Timezone"
             },
             "PoolOffset": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Configures the pool of addresses to hand out. The pool is a contiguous sequence of IP addresses in the subnet configured for the server address, which does not include the subnet nor the broadcast address. PoolOffset= takes the offset of the pool from the start of subnet, or zero to use the default value. PoolSize= takes the number of IP addresses in the pool or zero to use the default value. By default, the pool starts at the first address after the subnet address and takes up the rest of the subnet, excluding the broadcast address. If the pool includes the server address (the default), this is reserved and not handed out to clients.",
               "version_added": "226",
               "title": "Pool Offset"
             },
             "PoolSize": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Pool Size"
             },
             "SendVendorOption": {
-              "type": "string",
-              "enum": [
-                "ipv4address",
-                "string",
-                "uint16",
-                "uint32",
-                "uint8"
-              ],
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send a vendor option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "246",
               "title": "Send Vendor Option",
@@ -5238,15 +5494,7 @@
               ]
             },
             "SendOption": {
-              "type": "string",
-              "enum": [
-                "ipv4address",
-                "ipv6address",
-                "string",
-                "uint16",
-                "uint32",
-                "uint8"
-              ],
+              "$ref": "#/definitions/dhcpOptionType",
               "description": "Send a raw option with value via DHCPv4 server. Takes a DHCP option number, data type and data ('option:type:value'). The option number is an integer in the range 1...254. The type Special characters in the data string may be escaped using C-style escapes. This setting can be specified multiple times. If an empty string is specified, then all options specified earlier are cleared. Defaults to unset.",
               "version_added": "244",
               "title": "Send Option",
@@ -5280,8 +5528,7 @@
             "BootFilename": {
               "allOf": [
                 {
-                  "type": "string",
-                  "format": "uri-reference"
+                  "$ref": "#/definitions/absolutePathType"
                 }
               ],
               "description": "or URL to a file loaded by e.g. a PXE boot loader. When specified, this path is sent in the DHCP option 67 (\"Bootfile name\"). See RFC 2132 for more details. Defaults to unset.",
@@ -5739,7 +5986,7 @@
                     "type": "integer"
                   },
                   {
-                    "type": "string"
+                    "$ref": "#/definitions/interfacenameType"
                   }
                 ],
                 "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset.",
@@ -5834,7 +6081,7 @@
                   "type": "integer"
                 },
                 {
-                  "type": "string"
+                  "$ref": "#/definitions/interfacenameType"
                 }
               ],
               "description": "Specifies the name or index of the outgoing interface for the VXLAN device driver to reach the remote VXLAN tunnel endpoint. Defaults to unset.",
@@ -6120,7 +6367,7 @@
             "type": "object",
             "properties": {
               "UplinkInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "default": ":auto",
                 "description": "Specifies the name or the index of the uplink interface, or one of the special values ':self' and ':auto'. When ':self', the interface itself is considered the uplink interface, and WithoutRA=solicit is implied if the setting is not explicitly specified. When ':auto', the first link which acquired prefixes to be delegated from the DHCPv6 or DHCPv4 server is selected. Defaults to ':auto'.",
                 "version_added": "250",
@@ -6153,7 +6400,7 @@
                 "title": "Manage Temporary Address"
               },
               "Token": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6TokenType",
                 "description": "Specifies an optional address generation mode for assigning an address in each delegated prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
                 "version_added": "246",
                 "title": "Token"
@@ -6166,13 +6413,13 @@
                 "title": "Route Metric"
               },
               "NetLabel": {
-                "type": "string",
+                "$ref": "#/definitions/netLabelType",
                 "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
                 "version_added": "252",
                 "title": "Net Label"
               },
               "NFTSet": {
-                "type": "string",
+                "$ref": "#/definitions/nftSetType",
                 "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
                 "version_added": "255",
                 "title": "NFT Set"
@@ -6192,7 +6439,7 @@
           "type": "object",
           "properties": {
             "UplinkInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "default": ":auto",
               "description": "Specifies the name or the index of the uplink interface, or one of the special values ':self' and ':auto'. When ':self', the interface itself is considered the uplink interface, and WithoutRA=solicit is implied if the setting is not explicitly specified. When ':auto', the first link which acquired prefixes to be delegated from the DHCPv6 or DHCPv4 server is selected. Defaults to ':auto'.",
               "version_added": "250",
@@ -6225,7 +6472,7 @@
               "title": "Manage Temporary Address"
             },
             "Token": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6TokenType",
               "description": "Specifies an optional address generation mode for assigning an address in each delegated prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
               "version_added": "246",
               "title": "Token"
@@ -6238,13 +6485,13 @@
               "title": "Route Metric"
             },
             "NetLabel": {
-              "type": "string",
+              "$ref": "#/definitions/netLabelType",
               "description": "This applies the NetLabel for the addresses received with DHCP, like NetLabel= in [Address] section applies it to statically configured addresses. See NetLabel= in [Address] section for more details.",
               "version_added": "252",
               "title": "Net Label"
             },
             "NFTSet": {
-              "type": "string",
+              "$ref": "#/definitions/nftSetType",
               "description": "This applies the NFT set for the network configuration received with DHCP, like NFTSet= in [Address] section applies it to static configuration. See NFTSet= in [Address] section for more details. For 'address' or 'prefix' source types, the type of the element used in the NFT filter must be 'ipv6_addr'.",
               "version_added": "255",
               "title": "NFT Set"
@@ -6391,7 +6638,7 @@
                 "title": "DNS Lifetime Sec"
               },
               "UplinkInterface": {
-                "type": "string",
+                "$ref": "#/definitions/interfacenameType",
                 "default": ":auto",
                 "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS servers or search domains is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the value specified to the same setting in the [DHCPPrefixDelegation] section will be used if DHCPPrefixDelegation= is enabled, otherwise the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'.",
                 "version_added": "250",
@@ -6561,7 +6808,7 @@
               "title": "DNS Lifetime Sec"
             },
             "UplinkInterface": {
-              "type": "string",
+              "$ref": "#/definitions/interfacenameType",
               "default": ":auto",
               "description": "Specifies the name or the index of the uplink interface, or one of the special values ':none' and ':auto'. When emitting DNS servers or search domains is enabled but no servers are specified, the servers configured in the uplink interface will be emitted. When ':auto', the value specified to the same setting in the [DHCPPrefixDelegation] section will be used if DHCPPrefixDelegation= is enabled, otherwise the link which has a default gateway with the highest priority will be automatically selected. When ':none', no uplink interface will be selected. Defaults to ':auto'.",
               "version_added": "250",
@@ -6622,7 +6869,7 @@
             "type": "object",
             "properties": {
               "Prefix": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6_prefixType",
                 "description": "The IPv6 prefix that is to be distributed to hosts. Similarly to configuring static IPv6 addresses, the setting is configured as an IPv6 prefix and its prefix length, separated by a '/' character. Use multiple [IPv6Prefix] sections to configure multiple IPv6 prefixes since prefix lifetimes, address autoconfiguration and onlink status may differ from one prefix to another.",
                 "version_added": "235",
                 "title": "Prefix"
@@ -6674,7 +6921,7 @@
                 "title": "Route Metric"
               },
               "Token": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6TokenType",
                 "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
                 "version_added": "250",
                 "title": "Token"
@@ -6697,7 +6944,7 @@
           "type": "object",
           "properties": {
             "Prefix": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6_prefixType",
               "description": "The IPv6 prefix that is to be distributed to hosts. Similarly to configuring static IPv6 addresses, the setting is configured as an IPv6 prefix and its prefix length, separated by a '/' character. Use multiple [IPv6Prefix] sections to configure multiple IPv6 prefixes since prefix lifetimes, address autoconfiguration and onlink status may differ from one prefix to another.",
               "version_added": "235",
               "title": "Prefix"
@@ -6717,7 +6964,7 @@
               "title": "Address Autoconfiguration"
             },
             "ValidLifetimeSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "title": "Valid Lifetime Sec"
             },
             "PreferredLifetimeSec": {
@@ -6745,7 +6992,7 @@
               "title": "Route Metric"
             },
             "Token": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6TokenType",
               "description": "Specifies an optional address generation mode for assigning an address in each prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
               "version_added": "250",
               "title": "Token"
@@ -6775,7 +7022,7 @@
             "type": "object",
             "properties": {
               "Route": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6_prefixType",
                 "description": "The IPv6 route that is to be distributed to hosts. Similarly to configuring static IPv6 routes, the setting is configured as an IPv6 prefix routes and its prefix route length, separated by a '/' character. Use multiple [IPv6RoutePrefix] sections to configure multiple IPv6 prefix routes.",
                 "version_added": "244",
                 "title": "Route"
@@ -6817,7 +7064,7 @@
           "type": "object",
           "properties": {
             "Route": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6_prefixType",
               "description": "The IPv6 route that is to be distributed to hosts. Similarly to configuring static IPv6 routes, the setting is configured as an IPv6 prefix routes and its prefix route length, separated by a '/' character. Use multiple [IPv6RoutePrefix] sections to configure multiple IPv6 prefix routes.",
               "version_added": "244",
               "title": "Route"
@@ -6855,7 +7102,7 @@
             "type": "object",
             "properties": {
               "Prefix": {
-                "type": "string",
+                "$ref": "#/definitions/rateType",
                 "description": "The IPv6 PREF64 (or NAT64) prefix that is to be distributed to hosts. The setting holds an IPv6 prefix that should be set up for NAT64 translation (PLAT) to allow 464XLAT on the network segment. Use multiple [IPv6PREF64Prefix] sections to configure multiple IPv6 prefixes since prefix lifetime may differ from one prefix to another. The prefix is an address with a prefix length, separated by a slash '/' character. Valid NAT64 prefix length are 96, 64, 56, 48, 40, and 32 bits.",
                 "version_added": "255",
                 "title": "Prefix"
@@ -6886,7 +7133,7 @@
           "type": "object",
           "properties": {
             "Prefix": {
-              "type": "string",
+              "$ref": "#/definitions/rateType",
               "description": "The IPv6 PREF64 (or NAT64) prefix that is to be distributed to hosts. The setting holds an IPv6 prefix that should be set up for NAT64 translation (PLAT) to allow 464XLAT on the network segment. Use multiple [IPv6PREF64Prefix] sections to configure multiple IPv6 prefixes since prefix lifetime may differ from one prefix to another. The prefix is an address with a prefix length, separated by a slash '/' character. Valid NAT64 prefix length are 96, 64, 56, 48, 40, and 32 bits.",
               "version_added": "255",
               "title": "Prefix"
@@ -6979,13 +7226,13 @@
                 "title": "Bit Rate"
               },
               "SamplePoint": {
-                "type": "string",
+                "$ref": "#/definitions/percentageType",
                 "description": "Optional sample point in percent with one decimal (e.g. '75%', '87.5%') or permille (e.g. '875'). This will be ignored when BitRate= is unspecified.",
                 "version_added": "239",
                 "title": "Sample Point"
               },
               "TimeQuantaNSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specifies the time quanta, propagation segment, phase buffer segment 1 and 2, and the synchronization jump width, which allow one to define the CAN bit-timing in a hardware independent format as proposed by the Bosch CAN 2.0 Specification. TimeQuantaNSec= takes a timespan in nanoseconds. PropagationSegment=, PhaseBufferSegment1=, PhaseBufferSegment2=, and SyncJumpWidth= take number of time quantum specified in TimeQuantaNSec= and must be an unsigned integer in the range 0...4294967295. These settings except for SyncJumpWidth= will be ignored when BitRate= is specified.",
                 "version_added": "250",
                 "title": "Time Quanta N Sec"
@@ -7015,11 +7262,11 @@
                 "title": "Data Bit Rate"
               },
               "DataSamplePoint": {
-                "type": "string",
+                "$ref": "#/definitions/percentageType",
                 "title": "Data Sample Point"
               },
               "DataTimeQuantaNSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specifies the time quanta, propagation segment, phase buffer segment 1 and 2, and the synchronization jump width for the data phase, if CAN-FD is used. These settings are analogous to the TimeQuantaNSec= or related settings.",
                 "version_added": "250",
                 "title": "Data Time Quanta N Sec"
@@ -7138,13 +7385,13 @@
               "title": "Bit Rate"
             },
             "SamplePoint": {
-              "type": "string",
+              "$ref": "#/definitions/percentageType",
               "description": "Optional sample point in percent with one decimal (e.g. '75%', '87.5%') or permille (e.g. '875'). This will be ignored when BitRate= is unspecified.",
               "version_added": "239",
               "title": "Sample Point"
             },
             "TimeQuantaNSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specifies the time quanta, propagation segment, phase buffer segment 1 and 2, and the synchronization jump width, which allow one to define the CAN bit-timing in a hardware independent format as proposed by the Bosch CAN 2.0 Specification. TimeQuantaNSec= takes a timespan in nanoseconds. PropagationSegment=, PhaseBufferSegment1=, PhaseBufferSegment2=, and SyncJumpWidth= take number of time quantum specified in TimeQuantaNSec= and must be an unsigned integer in the range 0...4294967295. These settings except for SyncJumpWidth= will be ignored when BitRate= is specified.",
               "version_added": "250",
               "title": "Time Quanta N Sec"
@@ -7174,11 +7421,11 @@
               "title": "Data Bit Rate"
             },
             "DataSamplePoint": {
-              "type": "string",
+              "$ref": "#/definitions/percentageType",
               "title": "Data Sample Point"
             },
             "DataTimeQuantaNSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specifies the time quanta, propagation segment, phase buffer segment 1 and 2, and the synchronization jump width for the data phase, if CAN-FD is used. These settings are analogous to the TimeQuantaNSec= or related settings.",
               "version_added": "250",
               "title": "Data Time Quanta N Sec"
@@ -7439,7 +7686,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "LimitBytes": {
@@ -7475,7 +7722,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "LimitBytes": {
@@ -7522,7 +7769,7 @@
                 "title": "Handle"
               },
               "Bandwidth": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the shaper bandwidth. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Bandwidth"
@@ -7631,7 +7878,7 @@
                 "title": "Split GSO"
               },
               "RTTSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Specifies the RTT for the filter. Takes a timespan. Typical g. 100us for extremely high-performance 10GigE+ networks like datacentre, 1ms for non-WiFi LAN connections, 100ms for typical internet connections. Defaults to unset, and the kernel's default will be used.",
                 "version_added": "253",
                 "title": "RTT Sec"
@@ -7669,7 +7916,7 @@
               "title": "Handle"
             },
             "Bandwidth": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the shaper bandwidth. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Bandwidth"
@@ -7778,7 +8025,7 @@
               "title": "Split GSO"
             },
             "RTTSec": {
-              "type": "string",
+              "$ref": "#/definitions/secondsType",
               "description": "Specifies the RTT for the filter. Takes a timespan. Typical g. 100us for extremely high-performance 10GigE+ networks like datacentre, 1ms for non-WiFi LAN connections, 100ms for typical internet connections. Defaults to unset, and the kernel's default will be used.",
               "version_added": "253",
               "title": "RTT Sec"
@@ -7833,7 +8080,7 @@
                 "title": "Packet Limit"
               },
               "TargetSec": {
-                "type": "string",
+                "$ref": "#/definitions/secondsType",
                 "description": "Takes a timespan. Specifies the acceptable minimum standing/persistent queue delay. Defaults to unset and kernel's default is used.",
                 "version_added": "245",
                 "title": "Target Sec"
@@ -7974,7 +8221,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "_comments": {
@@ -8000,7 +8247,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "_comments": {
@@ -8045,7 +8292,7 @@
                 "title": "Class Id"
               },
               "QuantumBytes": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "default": "MTU",
                 "description": "Specifies the amount of bytes a flow is allowed to dequeue before the scheduler moves to the next class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to the MTU of the interface.",
                 "version_added": "246",
@@ -8078,7 +8325,7 @@
               "title": "Class Id"
             },
             "QuantumBytes": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "default": "MTU",
               "description": "Specifies the amount of bytes a flow is allowed to dequeue before the scheduler moves to the next class. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. Defaults to the MTU of the interface.",
               "version_added": "246",
@@ -8122,23 +8369,25 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "Bands": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the number of bands. An unsigned integer in the range 1...16. This value has to be at least large enough to cover the strict bands specified through the StrictBands= and bandwidth-sharing bands specified in QuantumBytes=.",
                 "version_added": "246",
                 "title": "Bands"
               },
               "StrictBands": {
-                "type": "string",
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 16,
                 "description": "Specifies the number of bands that should be created in strict mode. An unsigned integer in the range 1...16.",
                 "version_added": "246",
                 "title": "Strict Bands"
               },
               "QuantumBytes": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the white-space separated list of quantum used in band-sharing bands. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
                 "version_added": "246",
                 "title": "Quantum Bytes"
@@ -8176,23 +8425,25 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "Bands": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the number of bands. An unsigned integer in the range 1...16. This value has to be at least large enough to cover the strict bands specified through the StrictBands= and bandwidth-sharing bands specified in QuantumBytes=.",
               "version_added": "246",
               "title": "Bands"
             },
             "StrictBands": {
-              "type": "string",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 16,
               "description": "Specifies the number of bands that should be created in strict mode. An unsigned integer in the range 1...16.",
               "version_added": "246",
               "title": "Strict Bands"
             },
             "QuantumBytes": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the white-space separated list of quantum used in band-sharing bands. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
               "version_added": "246",
               "title": "Quantum Bytes"
@@ -8245,11 +8496,11 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the hard limit on the number of packets in the FIFO queue. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. An unsigned integer in the range 0...4294967294. Defaults to unset and kernel's default is used.",
                 "version_added": "246",
                 "title": "Packet Limit"
@@ -8277,11 +8528,11 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the hard limit on the number of packets in the FIFO queue. The size limit prevents overflow in case the kernel is unable to dequeue packets as quickly as it receives them. When this limit is reached, incoming packets are dropped. An unsigned integer in the range 0...4294967294. Defaults to unset and kernel's default is used.",
               "version_added": "246",
               "title": "Packet Limit"
@@ -8324,7 +8575,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "_comments": {
@@ -8350,7 +8601,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "_comments": {
@@ -8391,11 +8642,11 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "As in [PFIFO] section.",
                 "version_added": "246",
                 "title": "Packet Limit"
@@ -8423,11 +8674,11 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "As in [PFIFO] section.",
               "version_added": "246",
               "title": "Packet Limit"
@@ -8470,7 +8721,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "_comments": {
@@ -8496,7 +8747,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "_comments": {
@@ -8674,7 +8925,7 @@
                 "title": "Initial Quantum Bytes"
               },
               "MaximumRate": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the maximum sending rate of a flow. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset and kernel's default is used.",
                 "version_added": "245",
                 "title": "Maximum Rate"
@@ -8714,11 +8965,11 @@
                 "title": "CE Threshold Sec"
               },
               "Quantum": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Quantum"
               },
               "InitialQuantum": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Initial Quantum"
               },
               "_comments": {
@@ -8788,7 +9039,7 @@
               "title": "Initial Quantum Bytes"
             },
             "MaximumRate": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the maximum sending rate of a flow. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. Defaults to unset and kernel's default is used.",
               "version_added": "245",
               "title": "Maximum Rate"
@@ -8828,11 +9079,11 @@
               "title": "CE Threshold Sec"
             },
             "Quantum": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Quantum"
             },
             "InitialQuantum": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Initial Quantum"
             },
             "_comments": {
@@ -8943,11 +9194,11 @@
                 "title": "ECN"
               },
               "MemoryLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Memory Limit"
               },
               "Quantum": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Quantum"
               },
               "_comments": {
@@ -9051,11 +9302,11 @@
               "title": "ECN"
             },
             "MemoryLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Memory Limit"
             },
             "Quantum": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Quantum"
             },
             "_comments": {
@@ -9092,7 +9343,7 @@
                 "title": "Handle"
               },
               "PacketLimit": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. An unsigned integer ranges 1 to 4294967294. Defaults to unset and kernel's default is used.",
                 "version_added": "247",
                 "title": "Packet Limit"
@@ -9124,7 +9375,7 @@
               "title": "Handle"
             },
             "PacketLimit": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. An unsigned integer ranges 1 to 4294967294. Defaults to unset and kernel's default is used.",
               "version_added": "247",
               "title": "Packet Limit"
@@ -9517,7 +9768,7 @@
                 "title": "Buffer Bytes"
               },
               "CeilBufferBytes": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "description": "Specifies the maximum bytes burst for ceil which can be accumulated during idle period. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
                 "version_added": "246",
                 "title": "Ceil Buffer Bytes"
@@ -9599,13 +9850,13 @@
               "title": "Overhead Bytes"
             },
             "Rate": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the maximum rate this class and all its children are guaranteed. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. This setting is mandatory.",
               "version_added": "246",
               "title": "Rate"
             },
             "CeilRate": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the maximum rate at which a class can send, if its parent has bandwidth to spare. When suffixed with K, M, or G, the specified size is parsed as Kilobits, Megabits, or Gigabits, respectively, to the base of 1000. When unset, the value specified with Rate= is used.",
               "version_added": "246",
               "title": "Ceil Rate"
@@ -9621,7 +9872,7 @@
               "title": "Buffer Bytes"
             },
             "CeilBufferBytes": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "description": "Specifies the maximum bytes burst for ceil which can be accumulated during idle period. When suffixed with K, M, or G, the specified size is parsed as Kilobytes, Megabytes, or Gigabytes, respectively, to the base of 1024.",
               "version_added": "246",
               "title": "Ceil Buffer Bytes"
@@ -10253,7 +10504,7 @@
                 "title": "Latency Sec"
               },
               "Burst": {
-                "type": "string",
+                "$ref": "#/definitions/bytesType",
                 "title": "Burst"
               },
               "LimitSize": {
@@ -10283,7 +10534,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "Rate": {
@@ -10363,7 +10614,7 @@
               "title": "Latency Sec"
             },
             "Burst": {
-              "type": "string",
+              "$ref": "#/definitions/bytesType",
               "title": "Burst"
             },
             "LimitSize": {
@@ -10800,7 +11051,7 @@
                 "title": "DUID Type"
               },
               "DUIDRawData": {
-                "type": "string",
+                "$ref": "#/definitions/duidRawDataType",
                 "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
                 "version_added": "230",
                 "title": "DUID Raw Data"
@@ -10842,9 +11093,7 @@
                 "title": "Use Timezone"
               },
               "ListenPort": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 65535,
+                "$ref": "#/definitions/portType",
                 "description": "Set the port from which the DHCP client packets originate.",
                 "version_added": "233",
                 "title": "Listen Port"
@@ -10985,7 +11234,7 @@
               "title": "DUID Type"
             },
             "DUIDRawData": {
-              "type": "string",
+              "$ref": "#/definitions/duidRawDataType",
               "description": "Override the global DUIDRawData= setting for this network. See networkd.conf5 for a description of possible values.",
               "version_added": "230",
               "title": "DUID Raw Data"
@@ -11027,9 +11276,7 @@
               "title": "Use Timezone"
             },
             "ListenPort": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 65535,
+              "$ref": "#/definitions/portType",
               "description": "Set the port from which the DHCP client packets originate.",
               "version_added": "233",
               "title": "Listen Port"
@@ -11119,7 +11366,7 @@
                 "title": "Manage Temporary Address"
               },
               "Token": {
-                "type": "string",
+                "$ref": "#/definitions/ipv6TokenType",
                 "description": "Specifies an optional address generation mode for assigning an address in each delegated prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
                 "version_added": "246",
                 "title": "Token"
@@ -11171,7 +11418,7 @@
               "title": "Manage Temporary Address"
             },
             "Token": {
-              "type": "string",
+              "$ref": "#/definitions/ipv6TokenType",
               "description": "Specifies an optional address generation mode for assigning an address in each delegated prefix. This accepts the same syntax as Token= in the [IPv6AcceptRA] section. If Assign= is set to false, then this setting will be ignored. Defaults to unset, which means the EUI-64 algorithm will be used.",
               "version_added": "246",
               "title": "Token"

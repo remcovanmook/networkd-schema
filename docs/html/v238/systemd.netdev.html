@@ -73,7 +73,9 @@
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=myserver
+Host=web*
+Host=!testhost
 </code></pre></div></div>
                 <div id="Match-KernelCommandLine" class="option-block">
                     <div class="option-header">
@@ -111,7 +113,8 @@
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=systemd.network=1
+KernelCommandLine=!quiet
 </code></pre></div></div>
                 <div id="Match-KernelVersion" class="option-block">
                     <div class="option-header">
@@ -148,7 +151,8 @@
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=5.15.*
+KernelVersion=6.*
 </code></pre></div></div>
                 <div id="Match-Architecture" class="option-block">
                     <div class="option-header">
@@ -185,7 +189,9 @@
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=x86-64
+Architecture=arm64
+Architecture=!arm
 </code></pre></div></div><h3 class="subcategory-header">Virtualization</h3>
                 <div id="Match-Virtualization" class="option-block">
                     <div class="option-header">
@@ -224,7 +230,10 @@
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=vm
+Virtualization=container
+Virtualization=qemu
+Virtualization=!kvm
 </code></pre></div></div></div><div id="section-NetDev" class="section-block"><h2>NetDev Section</h2><h3 class="subcategory-header">Required</h3>
                 <div id="NetDev-Name" class="option-block">
                     <div class="option-header">
@@ -249,7 +258,7 @@
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a>
                          
                     </div>
                     <div class="option-desc">
@@ -584,7 +593,7 @@ AgeingTimeSec=1min
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#uint16Type" class="badge badge-type-prominent badge-type-complex">Integer (16-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -619,7 +628,7 @@ Priority=20
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#uint16Type" class="badge badge-type-prominent badge-type-complex">Integer (16-bit)</a>
                          
                     </div>
                     <div class="option-desc">
@@ -656,7 +665,7 @@ Priority=20
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#VLAN ID | enum" class="badge badge-type-prominent badge-type-complex">VLAN ID | enum</a>
                          
                     </div>
                     <div class="option-desc">
@@ -665,7 +674,7 @@ Priority=20
             Set this to an integer in the range 1–4094 or <code>none</code> to disable the PVID.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DefaultPVID=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DefaultPVID=none
 </code></pre></div></div>
                 <div id="Bridge-MulticastQuerier" class="option-block">
                     <div class="option-header">
@@ -1667,7 +1676,7 @@ FDBAgeingSec=1min
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#portRangeType" class="badge badge-type-prominent badge-type-complex">Port Range</a>
                          
                     </div>
                     <div class="option-desc">
@@ -1679,7 +1688,9 @@ FDBAgeingSec=1min
           ports, and allows overriding via configuration.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PortRange=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PortRange=8080
+PortRange=1024-65535
+PortRange=49152-65535
 </code></pre></div></div>
                 <div id="VXLAN-FlowLabel" class="option-block">
                     <div class="option-header">
@@ -2115,7 +2126,7 @@ Remote=fe80::1
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#flowLabelType" class="badge badge-type-prominent badge-type-complex">Flow Label</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2123,7 +2134,7 @@ Remote=fe80::1
           <p>Specifies the flow label to use in outgoing packets.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FlowLabel=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>FlowLabel=inherit
 </code></pre></div></div></div><div id="section-Tunnel" class="section-block"><h2>Tunnel Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-NetDev" class="dependency-link">[NetDev]</a></div>
                 <div id="Tunnel-Local" class="option-block">
                     <div class="option-header">
@@ -2326,7 +2337,7 @@ Remote=fe80::1
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#flowLabelType" class="badge badge-type-prominent badge-type-complex">Flow Label</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2341,7 +2352,7 @@ Remote=fe80::1
           set to <code>inherit</code>, in which case the original flowlabel is used.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6FlowLabel=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6FlowLabel=inherit
 </code></pre></div></div>
                 <div id="Tunnel-CopyDSCP" class="option-block">
                     <div class="option-header">
@@ -2445,7 +2456,7 @@ Remote=fe80::1
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#tunnelKeyType" class="badge badge-type-prominent badge-type-complex">Tunnel Key</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2460,7 +2471,8 @@ Remote=fe80::1
           tunnels.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Key=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Key=1234
+Key=192.168.1.1
 </code></pre></div></div>
                 <div id="Tunnel-InputKey" class="option-block">
                     <div class="option-header">
@@ -2485,7 +2497,7 @@ Remote=fe80::1
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#tunnelKeyType" class="badge badge-type-prominent badge-type-complex">Tunnel Key</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2494,7 +2506,8 @@ Remote=fe80::1
           The format is same as <a href="#Tunnel-Key" class="attribute-ref"><code class="varname">Key=</code></a>. It is only used for VTI/VTI6 tunnels.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>InputKey=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>InputKey=1234
+InputKey=192.168.1.1
 </code></pre></div></div>
                 <div id="Tunnel-OutputKey" class="option-block">
                     <div class="option-header">
@@ -2519,7 +2532,7 @@ Remote=fe80::1
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#tunnelKeyType" class="badge badge-type-prominent badge-type-complex">Tunnel Key</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2528,7 +2541,8 @@ Remote=fe80::1
           The format is same as <a href="#Tunnel-Key" class="attribute-ref"><code class="varname">Key=</code></a>. It is only used for VTI/VTI6 tunnels.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OutputKey=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OutputKey=1234
+OutputKey=192.168.1.1
 </code></pre></div></div>
                 <div id="Tunnel-Mode" class="option-block">
                     <div class="option-header">
@@ -2731,7 +2745,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2740,7 +2754,9 @@ Name=br0
             This option is compulsory.</p>
           
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Peer=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Peer=eth0
+Peer=enp0s3
+Peer=br0
 </code></pre></div></div></div><div id="section-Tun" class="section-block"><h2>Tun Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-NetDev" class="dependency-link">[NetDev]</a></div>
                 <div id="Tun-OneQueue" class="option-block">
                     <div class="option-header">
@@ -2909,7 +2925,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#usernameOrUidType" class="badge badge-type-prominent badge-type-complex">User</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2917,7 +2933,9 @@ Name=br0
         <code>/dev/net/tun</code> device.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>User=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>User=nobody
+User=1000
+User=1000-2000
 </code></pre></div></div>
                 <div id="Tun-Group" class="option-block">
                     <div class="option-header">
@@ -2942,7 +2960,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#groupnameOrGidType" class="badge badge-type-prominent badge-type-complex">Group</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2950,7 +2968,8 @@ Name=br0
         <code>/dev/net/tun</code> device.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Group=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Group=nogroup
+Group=1000
 </code></pre></div></div></div><div id="section-Tap" class="section-block"><h2>Tap Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-NetDev" class="dependency-link">[NetDev]</a></div></div><div id="section-WireGuard" class="section-block"><h2>WireGuard Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-NetDev" class="dependency-link">[NetDev]</a></div><h3 class="subcategory-header">Required</h3>
                 <div id="WireGuard-PrivateKey" class="option-block">
                     <div class="option-header">
@@ -2975,7 +2994,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#base64KeyType" class="badge badge-type-prominent badge-type-complex">Base64 Key</a>
                          
                     </div>
                     <div class="option-desc">
@@ -2989,7 +3008,8 @@ Name=br0
             with a <code>0640</code> file mode.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PrivateKey=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PrivateKey=yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=
+PrivateKey=xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14=
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="WireGuard-FwMark" class="option-block">
                     <div class="option-header">
@@ -3047,7 +3067,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#portType" class="badge badge-type-prominent badge-type-complex">Port</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3083,7 +3103,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#base64KeyType" class="badge badge-type-prominent badge-type-complex">Base64 Key</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3095,7 +3115,8 @@ Name=br0
             section.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PublicKey=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PublicKey=yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=
+PublicKey=xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14=
 </code></pre></div></div><h3 class="subcategory-header">General</h3>
                 <div id="WireGuardPeer-PersistentKeepalive" class="option-block">
                     <div class="option-header">
@@ -3120,7 +3141,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#secondsType" class="badge badge-type-prominent badge-type-complex">Duration</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3136,7 +3157,9 @@ Name=br0
             Most users will not need this.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PersistentKeepalive=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PersistentKeepalive=5s
+PersistentKeepalive=100ms
+PersistentKeepalive=1min
 </code></pre></div></div><h3 class="subcategory-header">Configuration</h3>
                 <div id="WireGuardPeer-PresharedKey" class="option-block">
                     <div class="option-header">
@@ -3161,7 +3184,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#base64KeyType" class="badge badge-type-prominent badge-type-complex">Base64 Key</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3176,7 +3199,8 @@ Name=br0
             with a <code>0640</code> file mode.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PresharedKey=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>PresharedKey=yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=
+PresharedKey=xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14=
 </code></pre></div></div>
                 <div id="WireGuardPeer-AllowedIPs" class="option-block">
                     <div class="option-header">
@@ -3238,7 +3262,7 @@ Name=br0
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#endpointType" class="badge badge-type-prominent badge-type-complex">Endpoint</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3249,7 +3273,9 @@ Name=br0
             authenticated packets from the peer at configuration time.</p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Endpoint=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Endpoint=vpn.example.com:51820
+Endpoint=192.0.2.1:51820
+Endpoint=[2001:db8::1]:51820
 </code></pre></div></div></div><div id="section-Bond" class="section-block"><h2>Bond Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-NetDev" class="dependency-link">[NetDev]</a></div>
                 <div id="Bond-Mode" class="option-block">
                     <div class="option-header">
@@ -3703,7 +3729,7 @@ ARPIntervalSec=1min
                          <!-- If type is 'string' or similar -> badge-type-string -->
                          <!-- Fallback -> badge-type-complex -->
                          
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                         <a href="types.html#secondsType" class="badge badge-type-prominent badge-type-complex">Duration</a>
                          
                     </div>
                     <div class="option-desc">
@@ -3718,7 +3744,9 @@ ARPIntervalSec=1min
           </p>
         
                     </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ARPIPTargets=SomeString
+                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ARPIPTargets=5s
+ARPIPTargets=100ms
+ARPIPTargets=1min
 </code></pre></div></div>
                 <div id="Bond-ARPAllTargets" class="option-block">
                     <div class="option-header">

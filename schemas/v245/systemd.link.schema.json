@@ -44,6 +44,38 @@
         "1500"
       ]
     },
+    "absolutePathType": {
+      "type": "string",
+      "description": "Absolute filesystem path.",
+      "pattern": "^/[^\\0]*$",
+      "title": "Absolute Path",
+      "examples": [
+        "/etc/systemd/network/key.pem",
+        "/run/credentials/wireguard.key"
+      ]
+    },
+    "addressLabelType": {
+      "type": "string",
+      "description": "IPv4 address label (7-bit ASCII, prefixed with interface name).",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9:.]*$",
+      "minLength": 1,
+      "maxLength": 15,
+      "title": "Address Label",
+      "examples": [
+        "eth0:0",
+        "lan:primary"
+      ]
+    },
+    "base64KeyType": {
+      "type": "string",
+      "description": "Base64-encoded cryptographic key (e.g. WireGuard keys).",
+      "pattern": "^[A-Za-z0-9+/]{42,44}={0,2}$",
+      "title": "Base64 Key",
+      "examples": [
+        "yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=",
+        "xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14="
+      ]
+    },
     "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
@@ -63,6 +95,69 @@
         "1024"
       ]
     },
+    "dhcpOptionType": {
+      "type": "string",
+      "description": "DHCP option in 'number:type:value' format (type: uint8, uint16, uint32, ipv4address, ipv6address, string, hex).",
+      "pattern": "^[0-9]+:(uint8|uint16|uint32|ipv4address|ipv6address|string|hex):.+$",
+      "title": "DHCP Option",
+      "examples": [
+        "224:string:openwrt",
+        "43:hex:0102030405"
+      ]
+    },
+    "domainnameType": {
+      "type": "string",
+      "title": "Domain Name",
+      "description": "A DNS domain name (no host label).",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+      "examples": [
+        "example.com",
+        "sub.example.org"
+      ]
+    },
+    "duidRawDataType": {
+      "type": "string",
+      "description": "DHCP DUID as hexadecimal string with colon separators.",
+      "pattern": "^([0-9a-fA-F]{2}:)*[0-9a-fA-F]{2}$",
+      "title": "DUID Raw Data",
+      "examples": [
+        "00:01:00:01:2a:3b:4c:5d:6e:7f:80:91",
+        "00:02:00:00:ab:cd:ef:01:23:45"
+      ]
+    },
+    "endpointType": {
+      "type": "string",
+      "description": "Network endpoint as host:port (IPv4, IPv6 in brackets, or hostname).",
+      "pattern": "^(\\[([0-9a-fA-F:]+)\\]|([0-9]{1,3}\\.){3}[0-9]{1,3}|([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)*[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?):[0-9]{1,5}$",
+      "title": "Endpoint",
+      "examples": [
+        "vpn.example.com:51820",
+        "192.0.2.1:51820",
+        "[2001:db8::1]:51820"
+      ]
+    },
+    "flowLabelType": {
+      "description": "IPv6 flow label (0-0xFFFFF) or 'inherit'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048575
+        },
+        {
+          "type": "string",
+          "enum": [
+            "inherit"
+          ]
+        }
+      ],
+      "title": "Flow Label",
+      "examples": [
+        "0",
+        "12345",
+        "inherit"
+      ]
+    },
     "globsType": {
       "type": "string",
       "description": "A whitespace-separated list of shell-style globs.",
@@ -73,6 +168,26 @@
         "en* wlan*",
         "!virbr*",
         "!eth0 eth1"
+      ]
+    },
+    "groupnameOrGidType": {
+      "type": "string",
+      "description": "Unix group name or numeric GID.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+)$",
+      "title": "Group",
+      "examples": [
+        "nogroup",
+        "1000"
+      ]
+    },
+    "hexKeyType": {
+      "type": "string",
+      "description": "Hexadecimal-encoded cryptographic key (e.g. MACsec 128-bit keys).",
+      "pattern": "^[0-9a-fA-F]{32}$",
+      "title": "Hex Key",
+      "examples": [
+        "0011223344556677889900aabbccddeeff",
+        "deadbeefcafebabedeadbeefcafebabe"
       ]
     },
     "hostType": {
@@ -92,6 +207,19 @@
       "examples": [
         "192.168.1.1",
         "example.com"
+      ]
+    },
+    "interfacenameType": {
+      "type": "string",
+      "title": "Interface Name",
+      "description": "Network interface device name (kernel interface name).",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[-a-z0-9:._/]+$",
+      "examples": [
+        "eth0",
+        "enp0s3",
+        "br0"
       ]
     },
     "ip_addressType": {
@@ -142,6 +270,27 @@
         "10.0.0.1"
       ]
     },
+    "ipv4_prefixType": {
+      "type": "string",
+      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
+      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
+      "title": "IPv4 CIDR",
+      "examples": [
+        "192.168.1.0/24"
+      ]
+    },
+    "ipv6TokenType": {
+      "type": "string",
+      "description": "IPv6 SLAAC token mode or static address suffix.",
+      "pattern": "^(eui64|prefixstable(:[a-zA-Z0-9_-]+)?|static:[0-9a-fA-F:]+)$",
+      "title": "IPv6 Token",
+      "examples": [
+        "eui64",
+        "prefixstable",
+        "prefixstable:secret",
+        "static:::1"
+      ]
+    },
     "ipv6_addressType": {
       "type": "string",
       "format": "ipv6",
@@ -150,15 +299,6 @@
       "examples": [
         "2001:db8::1",
         "fe80::1"
-      ]
-    },
-    "ipv4_prefixType": {
-      "type": "string",
-      "description": "IPv4 Address with Prefix Length (CIDR), e.g., 192.168.1.1/24",
-      "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\/(3[0-2]|[1-2]?[0-9]|[0-9])$",
-      "title": "IPv4 CIDR",
-      "examples": [
-        "192.168.1.0/24"
       ]
     },
     "ipv6_prefixType": {
@@ -179,6 +319,26 @@
         "00:11:22:33:44:55"
       ]
     },
+    "netLabelType": {
+      "type": "string",
+      "description": "Linux NetLabel for security labeling (SELinux/SMACK).",
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_:.-]*$",
+      "title": "NetLabel",
+      "examples": [
+        "system_u:object_r:netlabel_peer_t:s0",
+        "web_traffic"
+      ]
+    },
+    "nftSetType": {
+      "type": "string",
+      "description": "nftables set specification in family:table:set format.",
+      "pattern": "^(ip|ip6|inet|arp|bridge|netdev):[a-zA-Z_][a-zA-Z0-9_]*:[a-zA-Z_][a-zA-Z0-9_]*$",
+      "title": "NFT Set",
+      "examples": [
+        "inet:filter:allowed_addrs",
+        "ip:nat:masq_addrs"
+      ]
+    },
     "percentageType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?%$",
@@ -187,6 +347,38 @@
       "examples": [
         "10%",
         "0.5%"
+      ]
+    },
+    "portRangeType": {
+      "type": "string",
+      "description": "TCP/UDP port or port range (low-high).",
+      "pattern": "^[0-9]{1,5}(-[0-9]{1,5})?$",
+      "title": "Port Range",
+      "examples": [
+        "8080",
+        "1024-65535",
+        "49152-65535"
+      ]
+    },
+    "portType": {
+      "description": "TCP/UDP port number or 'auto'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "enum": [
+            "auto"
+          ]
+        }
+      ],
+      "title": "Port",
+      "examples": [
+        "51820",
+        "auto"
       ]
     },
     "property_comments": {
@@ -253,6 +445,18 @@
         "100M"
       ]
     },
+    "routeTableNameType": {
+      "type": "string",
+      "description": "Routing table name or numeric ID.",
+      "pattern": "^([a-zA-Z_][a-zA-Z0-9_]*|[0-9]+)$",
+      "title": "Route Table",
+      "examples": [
+        "main",
+        "local",
+        "custom_table",
+        "200"
+      ]
+    },
     "secondsType": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
@@ -270,6 +474,16 @@
         "type": "string"
       },
       "description": "Comments associated with this section"
+    },
+    "tunnelKeyType": {
+      "type": "string",
+      "description": "GRE/VTI tunnel key (decimal or dotted-decimal format).",
+      "pattern": "^([0-9]+|([0-9]{1,3}\\.){3}[0-9]{1,3})$",
+      "title": "Tunnel Key",
+      "examples": [
+        "1234",
+        "192.168.1.1"
+      ]
     },
     "uint16Type": {
       "type": "integer",
@@ -291,6 +505,17 @@
       "maximum": 255,
       "description": "Unsigned 8-bit integer (0...255).",
       "title": "Integer (8-bit)"
+    },
+    "usernameOrUidType": {
+      "type": "string",
+      "description": "Unix username, numeric UID, or UID range.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+(-[0-9]+)?)$",
+      "title": "User",
+      "examples": [
+        "nobody",
+        "1000",
+        "1000-2000"
+      ]
     },
     "vlan_idType": {
       "type": "integer",
@@ -376,18 +601,33 @@
           "type": "string",
           "description": "A whitespace-separated list of udev property names with their values after equals sign ('='). If multiple properties are specified, the test results are ANDed. If the list is prefixed with a \"!\", the test is inverted. If a value contains white spaces, then please quote whole key and value pair. If a value contains quotation, then please escape the quotation with '\\'. Example: if a.link file has the following: Property=ID_MODEL_ID=9999 \"ID_VENDOR_FROM_DATABASE=vendor name\" \"KEY=with \\\"quotation\\\"\" then, the.link file matches only when an interface has all the above three properties.",
           "title": "Property",
+          "examples": [
+            "ID_NET_DRIVER=virtio_net",
+            "ID_PATH=pci-0000:00:03.0"
+          ],
           "version_added": "243"
         },
         "Host": {
           "type": "string",
           "description": "Matches against the hostname or machine ID of the host. See ConditionHost= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Host",
+          "examples": [
+            "myserver",
+            "web*",
+            "!testhost"
+          ],
           "version_added": "211"
         },
         "Virtualization": {
           "type": "string",
           "description": "Checks whether the system is executed in a virtualized environment and optionally test whether it is a specific implementation. See ConditionVirtualization= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Virtualization",
+          "examples": [
+            "vm",
+            "container",
+            "qemu",
+            "!kvm"
+          ],
           "version_added": "211",
           "x-subcategory": "Virtualization"
         },
@@ -395,18 +635,31 @@
           "type": "string",
           "description": "Checks whether a specific kernel command line option is set. See ConditionKernelCommandLine= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Kernel Command Line",
+          "examples": [
+            "systemd.network=1",
+            "!quiet"
+          ],
           "version_added": "211"
         },
         "KernelVersion": {
           "type": "string",
           "description": "Checks whether the kernel version (as reported by uname -r) matches a certain expression. See ConditionKernelVersion= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Kernel Version",
+          "examples": [
+            "5.15.*",
+            "6.*"
+          ],
           "version_added": "237"
         },
         "Architecture": {
           "type": "string",
           "description": "Checks whether the system is running on a specific architecture. See ConditionArchitecture= in systemd.unit5 for details. When prefixed with an exclamation mark ('!'), the result is negated. If an empty string is assigned, the previously assigned value is cleared.",
           "title": "Architecture",
+          "examples": [
+            "x86-64",
+            "arm64",
+            "!arm"
+          ],
           "version_added": "211"
         },
         "_comments": {
@@ -438,7 +691,7 @@
           "version_added": "211"
         },
         "MACAddressPolicy": {
-          "type": "string",
+          "$ref": "#/definitions/rateType",
           "description": "The policy by which the MAC address should be set. The available policies are: If the hardware has a persistent MAC address, as most hardware should, and if it is used by the kernel, nothing is done. Otherwise, a new MAC address is generated which is guaranteed to be the same on every boot for the given machine and the given device, but which is otherwise random. This feature depends on ID_NET_NAME_* properties to exist for the link. On hardware where these properties are not set, the generation of a persistent MAC address will fail. If the kernel is using a random MAC address, nothing is done. Otherwise, a new address is randomly generated each time the device appears, typically at boot. Either way, the random address will have the 'unicast' and 'locally administered' bits set. Keeps the MAC address assigned by the kernel. Or use the MAC address specified in MACAddress=. An empty string assignment is equivalent to setting 'none'.",
           "title": "MAC Address Policy",
           "version_added": "211"
@@ -462,10 +715,14 @@
           "type": "string",
           "description": "An ordered, space-separated list of policies by which the interface name should be set. NamePolicy= may be disabled by specifying 'net.ifnames=0' on the kernel command line. Each of the policies may fail, and the first successful one is used. The name is not set directly, but is exported to udev as the property 'ID_NET_NAME', which is, by default, used by a udev7, rule to set NAME. The available policies are: If the kernel claims that the name it has set for a device is predictable, then no renaming is performed. The name is set based on entries in the udev's Hardware Database with the key ID_NET_NAME_FROM_DATABASE. The name is set based on information given by the firmware for on-board devices, as exported by the udev property ID_NET_NAME_ONBOARD. See systemd.net-naming-scheme7. The name is set based on information given by the firmware for hot-plug devices, as exported by the udev property ID_NET_NAME_SLOT. See systemd.net-naming-scheme7. The name is set based on the device's physical location, as exported by the udev property ID_NET_NAME_PATH. See systemd.net-naming-scheme7. The name is set based on the device's persistent MAC address, as exported by the udev property ID_NET_NAME_MAC. See systemd.net-naming-scheme7. If the device already had a name given by userspace (as part of creation of the device or a rename), keep it.",
           "title": "Name Policy",
+          "examples": [
+            "kernel database onboard slot path",
+            "keep kernel database onboard slot path mac"
+          ],
           "version_added": "216"
         },
         "Name": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The interface name to use. This option has lower precedence than NamePolicy=, so for this setting to take effect, NamePolicy= must either be unset, empty, disabled, or all policies configured there must fail. Also see the example below with 'Name=dmz0'. Note that specifying a name that the kernel might use for another interface (for example 'eth0') is dangerous because the name assignment done by udev will race with the assignment done by the kernel, and only one interface may use the name. Depending on the order of operations, either udev or the kernel will win, making the naming unpredictable. It is best to use some different prefix, for example 'internal0'/'external0' or 'lan0'/'lan1'/'lan3'. Interface names must have a minimum length of 1 character and a maximum length of 15 characters, and may contain any 7bit ASCII character, with the exception of control characters, ':', '/' and '%'. While '.' is an allowed character, it's recommended to avoid it when naming interfaces as various tools (such as resolvconf1) use it as separator character. Also, fully numeric interface names are not allowed (in order to avoid ambiguity with interface specification by numeric indexes), nor are the special strings '.', '..', 'all' and 'default'.",
           "title": "Name",
           "examples": [
@@ -475,7 +732,7 @@
           "version_added": "211"
         },
         "AlternativeName": {
-          "type": "string",
+          "$ref": "#/definitions/interfacenameType",
           "description": "The alternative interface name to use. This option can be specified multiple times. If the empty string is assigned to this option, the list is reset, and all prior assignments have no effect. If the kernel does not support the alternative names, then this setting will be ignored. Alternative interface names may be used to identify interfaces in various tools. In contrast to the primary name (as configured with Name= above) there may be multiple alternative names referring to the same interface. Alternative names may have a maximum length of 127 characters, in contrast to the 15 allowed for the primary interface name, but otherwise are subject to the same naming constraints.",
           "title": "Alternative Name",
           "version_added": "245"
@@ -500,6 +757,10 @@
           "type": "string",
           "description": "The ifalias interface property is set to this value.",
           "title": "Alias",
+          "examples": [
+            "my-interface",
+            "uplink-to-isp"
+          ],
           "version_added": "211"
         },
         "MTUBytes": {
@@ -570,6 +831,11 @@
           "type": "string",
           "description": "The port option is used to select the device port. The supported values are: An Ethernet interface using Twisted-Pair cable as the medium. Attachment Unit Interface (AUI). Normally used with hubs. An Ethernet interface using BNC connectors and co-axial cable. An Ethernet interface using a Media Independent Interface (MII). An Ethernet interface using Optical Fibre as the medium.",
           "title": "Port",
+          "examples": [
+            "tp",
+            "mii",
+            "fibre"
+          ],
           "version_added": "234"
         },
         "ReceiveChecksumOffload": {
@@ -605,7 +871,8 @@
           "version_added": "235"
         },
         "UDPSegmentationOffload": {
-          "type": "string",
+          "type": "boolean",
+          "description": "If set to true, UDP Segmentation Offload (USO) is enabled. When unset, the kernel's default will be used.",
           "title": "UDP Segmentation Offload"
         },
         "GenericReceiveOffload": {
@@ -623,27 +890,98 @@
           "x-subcategory": "Offload"
         },
         "RxChannels": {
-          "type": "string",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "string",
+              "enum": [
+                "max"
+              ]
+            }
+          ],
           "description": "Specifies the number of receive, transmit, other, or combined channels, respectively. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
           "title": "Rx Channels",
+          "examples": [
+            4,
+            "max"
+          ],
           "version_added": "239"
         },
         "TxChannels": {
-          "type": "string",
-          "title": "Tx Channels"
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "string",
+              "enum": [
+                "max"
+              ]
+            }
+          ],
+          "description": "Specifies the number of transmit channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
+          "title": "Tx Channels",
+          "examples": [
+            4,
+            "max"
+          ]
         },
         "OtherChannels": {
-          "type": "string",
-          "title": "Other Channels"
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "string",
+              "enum": [
+                "max"
+              ]
+            }
+          ],
+          "description": "Specifies the number of other channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
+          "title": "Other Channels",
+          "examples": [
+            1,
+            "max"
+          ]
         },
         "CombinedChannels": {
-          "type": "string",
-          "title": "Combined Channels"
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "string",
+              "enum": [
+                "max"
+              ]
+            }
+          ],
+          "description": "Specifies the number of combined channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
+          "title": "Combined Channels",
+          "examples": [
+            4,
+            "max"
+          ]
         },
         "Advertise": {
           "type": "string",
           "description": "This sets what speeds and duplex modes of operation are advertised for auto-negotiation. This implies 'AutoNegotiation=yes'. The supported values are: Supported advertise values Advertise Speed (Mbps) Duplex Mode By default this is unset, i.e. all possible modes will be advertised. This option may be specified more than once, in which case all specified speeds and modes are advertised. If the empty string is assigned to this option, the list is reset, and all prior assignments have no effect.",
           "title": "Advertise",
+          "examples": [
+            "10baset-half 10baset-full",
+            "100baset-full 1000baset-full"
+          ],
           "version_added": "240"
         },
         "RxBufferSize": {
