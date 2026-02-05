@@ -312,11 +312,13 @@
     },
     "mac_addressType": {
       "type": "string",
-      "description": "MAC Address (Hex separated by colons or hyphens)",
-      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "description": "MAC Address (Hex separated by colons or hyphens, or dot-delimited groups of 4 hex digits)",
+      "pattern": "^(([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})|[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4})$",
       "title": "MAC Address",
       "examples": [
-        "00:11:22:33:44:55"
+        "00:11:22:33:44:55",
+        "00-11-22-33-44-55",
+        "aabb.ccdd.eeff"
       ]
     },
     "netLabelType": {
@@ -490,21 +492,33 @@
       "minimum": 0,
       "maximum": 65535,
       "description": "Unsigned 16-bit integer (0...65535).",
-      "title": "Integer (16-bit)"
+      "title": "Integer (16-bit)",
+      "examples": [
+        100,
+        200
+      ]
     },
     "uint32Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 4294967294,
       "description": "Unsigned 32-bit integer (0...4294967294).",
-      "title": "Integer (32-bit)"
+      "title": "Integer (32-bit)",
+      "examples": [
+        100,
+        200
+      ]
     },
     "uint8Type": {
       "type": "integer",
       "minimum": 0,
       "maximum": 255,
       "description": "Unsigned 8-bit integer (0...255).",
-      "title": "Integer (8-bit)"
+      "title": "Integer (8-bit)",
+      "examples": [
+        10,
+        20
+      ]
     },
     "usernameOrUidType": {
       "type": "string",
@@ -563,8 +577,24 @@
           "version_added": "246"
         },
         "RouteTable": {
-          "type": "string",
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^((?!default|main|local)[a-zA-Z0-9_]+:[0-9]+(\\s+(?!default|main|local)[a-zA-Z0-9_]+:[0-9]+)*)?$"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^((?!default|main|local)[a-zA-Z0-9_]+:[0-9]+(\\s+(?!default|main|local)[a-zA-Z0-9_]+:[0-9]+)*)?$"
+              }
+            }
+          ],
           "description": "Defines the route table name. Takes a whitespace-separated list of the pairs of route table name and number. The route table name and number in each pair are separated with a colon, i.e., 'name:number'. The route table name must not be 'default', 'main', or 'local', as these route table names are predefined with route table number 253, 254, and 255, respectively. The route table number , except for predefined numbers 253, 254, and 255. This setting can be specified multiple times. If an empty string is specified, then the list specified earlier are cleared. Defaults to unset.",
+          "examples": [
+            "custom:200",
+            "private:100 special:101"
+          ],
           "version_added": "248"
         },
         "IPv6PrivacyExtensions": {

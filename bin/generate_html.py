@@ -16,6 +16,52 @@ FILES = [
     "networkd.conf"
 ]
 
+EXTERNAL_MAN_PAGES = {
+    "socket": "https://man7.org/linux/man-pages/man7/socket.7.html",
+    "resolv.conf": "https://man7.org/linux/man-pages/man5/resolv.conf.5.html",
+    "ip": "https://man7.org/linux/man-pages/man8/ip.8.html",
+    "hosts": "https://man7.org/linux/man-pages/man5/hosts.5.html",
+    "fstab": "https://man7.org/linux/man-pages/man5/fstab.5.html",
+    "crypttab": "https://man7.org/linux/man-pages/man5/crypttab.5.html",
+    "modules-load.d": "https://man7.org/linux/man-pages/man5/modules-load.d.5.html",
+    "sysctl.d": "https://man7.org/linux/man-pages/man5/sysctl.d.5.html",
+    "tmpfiles.d": "https://man7.org/linux/man-pages/man5/tmpfiles.d.5.html",
+    "systemd.unit": "https://man7.org/linux/man-pages/man5/systemd.unit.5.html",
+    "systemd.service": "https://man7.org/linux/man-pages/man5/systemd.service.5.html",
+    "systemd.socket": "https://man7.org/linux/man-pages/man5/systemd.socket.5.html",
+    "systemd.device": "https://man7.org/linux/man-pages/man5/systemd.device.5.html",
+    "systemd.mount": "https://man7.org/linux/man-pages/man5/systemd.mount.5.html",
+    "systemd.automount": "https://man7.org/linux/man-pages/man5/systemd.automount.5.html",
+    "systemd.swap": "https://man7.org/linux/man-pages/man5/systemd.swap.5.html",
+    "systemd.target": "https://man7.org/linux/man-pages/man5/systemd.target.5.html",
+    "systemd.path": "https://man7.org/linux/man-pages/man5/systemd.path.5.html",
+    "systemd.timer": "https://man7.org/linux/man-pages/man5/systemd.timer.5.html",
+    "systemd.slice": "https://man7.org/linux/man-pages/man5/systemd.slice.5.html",
+    "systemd.scope": "https://man7.org/linux/man-pages/man5/systemd.scope.5.html",
+    "systemd.nspawn": "https://man7.org/linux/man-pages/man5/systemd.nspawn.5.html",
+    "systemd.exec": "https://man7.org/linux/man-pages/man5/systemd.exec.5.html",
+    "systemd.kill": "https://man7.org/linux/man-pages/man5/systemd.kill.5.html",
+    "systemd.resource-control": "https://man7.org/linux/man-pages/man5/systemd.resource-control.5.html",
+    "systemd.time": "https://man7.org/linux/man-pages/man7/systemd.time.7.html",
+    "locale.conf": "https://man7.org/linux/man-pages/man5/locale.conf.5.html",
+    "localtime": "https://man7.org/linux/man-pages/man5/localtime.5.html",
+    "machine-id": "https://man7.org/linux/man-pages/man5/machine-id.5.html",
+    "machine-info": "https://man7.org/linux/man-pages/man5/machine-info.5.html",
+    "os-release": "https://man7.org/linux/man-pages/man5/os-release.5.html",
+    "systemd-system.conf": "https://man7.org/linux/man-pages/man5/systemd-system.conf.5.html",
+    "systemd-user.conf": "https://man7.org/linux/man-pages/man5/systemd-user.conf.5.html",
+    "user.conf.d": "https://man7.org/linux/man-pages/man5/user.conf.d.5.html",
+    "journald.conf": "https://man7.org/linux/man-pages/man5/journald.conf.5.html",
+    "logind.conf": "https://man7.org/linux/man-pages/man5/logind.conf.5.html",
+    "coredump.conf": "https://man7.org/linux/man-pages/man5/coredump.conf.5.html",
+    "timesyncd.conf": "https://man7.org/linux/man-pages/man5/timesyncd.conf.5.html",
+    "resolved.conf": "https://man7.org/linux/man-pages/man5/resolved.conf.5.html",
+    "batctl": "https://man.archlinux.org/man/batctl.8",
+    "wg": "https://man7.org/linux/man-pages/man8/wg.8.html",
+    "resolvconf": "https://man7.org/linux/man-pages/man8/resolvconf.8.html",
+    "udev": "https://man7.org/linux/man-pages/man7/udev.7.html"
+}
+
 NAMESPACE = {'xi': 'http://www.w3.org/2001/XInclude'}
 
 
@@ -147,6 +193,8 @@ def render_docbook_content(elem, context_version, in_code_block=False, attribute
 
             if ref_title in FILES:
                 out.append(f'<a href="{ref_title}.html">{ref_title}</a>')
+            elif ref_title in EXTERNAL_MAN_PAGES:
+                out.append(f'<a href="{EXTERNAL_MAN_PAGES[ref_title]}" target="_blank" class="external-link">{ref_title}</a>')
             else:
                 out.append(f'<a href="https://www.freedesktop.org/software/systemd/man/latest/{ref_title}.html" target="_blank" class="external-link">{ref_title}</a>')
 
@@ -359,19 +407,14 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
     with open(schema_file, 'r') as f:
         schema = json.load(f)
         
-    # ... (rest of function until schema_url usage)
-    
-    # (Checking where schema_url is used, I will update that usage in a separate chunk to be safe or verify line numbers)
-    # The traceback said line 644 for schema_url.
-    # The function start is around 426? No, the diff block showed 426.
-    
-    # I will replace the START of the function here.
+    # Helper to resolve schema references
+    def resolve_ref(s):
+        if '$ref' in s:
+            ref_name = s['$ref'].split('/')[-1]
+            if ref_name in schema.get('definitions', {}):
+                return resolve_ref(schema['definitions'][ref_name])
+        return s
 
-    
-    # Load Schema
-    with open(schema_file, 'r') as f:
-        schema = json.load(f)
-    
     # Load XML
     tree = ET.parse(xml_file)
     root = tree.getroot()
@@ -388,18 +431,26 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
     for section_name, entries in sections_xml.items():
         if section_name not in schema['properties']:
             continue
+            
         section_schema = schema['properties'][section_name]
-        # Handle oneOf wrapper
+        
+        # Handle oneOf wrapper (which may contain refs)
         if 'oneOf' in section_schema:
             for v in section_schema['oneOf']:
-                if v.get('type') == 'object':
-                    section_schema = v
+                resolved_v = resolve_ref(v)
+                if resolved_v.get('type') == 'object' or 'properties' in resolved_v:
+                    section_schema = resolved_v
                     break
+        elif '$ref' in section_schema:
+             section_schema = resolve_ref(section_schema)
+             
         props = section_schema.get('properties', {})
+        
         for entry in entries:
             name = get_option_name(entry)
             if name and name in props:
                 attribute_map[name] = f"{section_name}-{name}"
+
 
     # Build HTML Content
     html_content = []
@@ -438,9 +489,12 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
         if 'oneOf' in section_schema:
              # Find the object variant
              for v in section_schema['oneOf']:
-                 if v.get('type') == 'object':
-                     section_schema = v
+                 resolved_v = resolve_ref(v)
+                 if resolved_v.get('type') == 'object' or 'properties' in resolved_v:
+                     section_schema = resolved_v
                      break
+        elif '$ref' in section_schema:
+             section_schema = resolve_ref(section_schema)
                      
         # Order by Subcategory -> Required -> Name
         
@@ -704,6 +758,13 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                 for pat in patterns:
                     desc_html = re.sub(pat, '', desc_html, flags=re.IGNORECASE)
             
+            # Mark this property as processed
+            processed_options.add(name)
+
+            # --- Existing Property Rendering Logic Here ---
+            # (We keep it as is, just ensuring we tracked the name)
+            # ... <existing logic> ...
+
             # Map type to linkable name
             type_slug = value_type
             
@@ -731,7 +792,6 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                  type_slug = res_schema['format']
                  
             # Schema Link
-            # Schema Link
             # Base logic: https://github.com/remcovanmook/networkd-schema/blob/main/schemas/{version}/{schema_name}.schema.json
             # Refined: point to curated raw with text fragment
             
@@ -744,143 +804,223 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                  base_url = f"../schemas/{version}/{schema_name}.schema.json"
             else:
                  # Fallback to GitHub Raw? User requested schemas in /schemas/.
-                 # We assume main branch schemas structure
+                 # Let's link to the deployed schemas if possible or github
+                 base_url = f"schemas/{version}/{schema_name}.schema.json" # Relative from where?
+                 # Actually, let's just stick to the GitHub RAW URL for now for simplicity if not web_schemas
                  base_url = f"https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/{version}/{schema_name}.schema.json"
 
-            schema_url = f"{base_url}#:~:text=%22{name}%22"
-                 
+            schema_link = f'{base_url}#:~:text="{name}"'
+
             options_data.append({
                 'name': name,
-                'section_name': section_name, # Stored for link generation
-                'subcategory': subcategory,
+                'section_name': section_name,
                 'type': value_type,
                 'type_slug': type_slug,
+                'desc_html': desc_html,
                 'required': is_mandatory,
                 'default': default_val,
-                'version_added': version_added,
                 'examples': examples,
-                'desc_html': desc_html,
-                'schema': res_schema,
-                'full_schema': prop_schema,
-                'schema_url': schema_url,
-                'is_multiple': is_multiple # Added
+                'subcategory': subcategory,
+                'version_added': version_added,
+                'multiple': is_multiple,
+                'schema_link': schema_link,
+                'is_undocumented': False
             })
+
+        # --- PROCESS SCHEMA-ONLY PROPERTIES ---
+        # Identify properties in the schema that were NOT in the XML
+        for name, prop_schema in props_schema_map.items():
+            if name in processed_options:
+                continue
             
-        # 2. Group and Sort
-        # Group by subcategory
-        from collections import defaultdict
-        grouped = defaultdict(list)
+            # Skip internal properties starting with _
+            if name.startswith('_'):
+                continue
+                
+            processed_options.add(name)
+            
+            # Resolve Refs for metadata (Similar logic to above, ideally refactored but inline for now)
+            def resolve(s):
+                if 'allOf' in s: return resolve(s['allOf'][0])
+                if '$ref' in s:
+                    ref = s['$ref'].split('/')[-1]
+                    if ref in schema['definitions']:
+                        return resolve(schema['definitions'][ref])
+                return s
+
+            res_schema = resolve(prop_schema)
+            
+            # Reuse helper functions defined in the loop above? Closures capture them.
+            # calculate_type_label, check_is_multiple, get_deep_prop are available.
+            
+            value_type = calculate_type_label(prop_schema)
+            is_multiple = check_is_multiple(prop_schema)
+            is_mandatory = name in section_schema.get('required', [])
+            
+            default_val = res_schema.get('default')
+            if default_val is None:
+                default_val = get_deep_prop(prop_schema, 'default')
+                
+            subcategory = get_deep_prop(prop_schema, 'x-subcategory') or "General"
+            if is_mandatory:
+                subcategory = "Required"
+                
+            version_added = prop_schema.get('version_added')
+            
+            examples = prop_schema.get('examples')
+            if not examples:
+                examples = res_schema.get('examples', [])
+                
+            # No XML description, use schema description
+            desc_text = prop_schema.get('description') or res_schema.get('description') or "This property exists within the code but has no published documentation."
+            desc_html = html.escape(desc_text)
+            
+            # Try to linkify types in description? Maybe later.
+            
+            # Map type to linkable name
+            type_slug = value_type
+            
+            def find_ref(s):
+                if '$ref' in s: return s['$ref']
+                if 'allOf' in s and len(s['allOf']) > 0:
+                     return find_ref(s['allOf'][0])
+                return None
+                
+            ref_str = find_ref(prop_schema)
+            
+            if ref_str:
+                 ref_name = ref_str.split('/')[-1]
+                 if ref_name in schema.get('definitions', {}):
+                     type_slug = ref_name
+                     def_schema = schema['definitions'][ref_name]
+                     value_type = def_schema.get('title', ref_name)
+                     if value_type == ref_name and value_type.endswith('Type'):
+                         value_type = value_type[:-4]
+            elif 'format' in res_schema:
+                 type_slug = res_schema['format']
+                 
+            if web_schemas:
+                 base_url = f"../schemas/{version}/{schema_name}.schema.json"
+            else:
+                 base_url = f"https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/{version}/{schema_name}.schema.json"
+
+            schema_link = f'{base_url}#:~:text="{name}"'
+            
+            options_data.append({
+                'name': name,
+                'section_name': section_name,
+                'type': value_type,
+                'type_slug': type_slug,
+                'desc_html': desc_html,
+                'required': is_mandatory,
+                'default': default_val,
+                'examples': examples,
+                'subcategory': subcategory,
+                'version_added': version_added,
+                'multiple': is_multiple,
+                'schema_link': schema_link,
+                'is_undocumented': True # Flag for UI
+            })
+
+        # Sort options_data by Subcategory then Name (Required first is handled by subcategory naming)
+        # Custom Sort Key
+        def sort_key(item):
+            # Order: Required -> Hardware -> Network ... -> General
+            # We want specific order?
+            # 1. Required
+            # 2. General (or last?) 
+            # Alphabetical subcategories otherwise
+            
+            sc = item['subcategory']
+            if sc == "Required": return (0, item['name'])
+            if sc == "General": return (2, item['name'])
+            return (1, sc, item['name'])
+            
+        options_data.sort(key=sort_key)
+        
+        # Render HTML for Options
         for opt in options_data:
-            grouped[opt['subcategory']].append(opt)
+            name = opt['name']
             
-        # Sort keys: Required first, then General, then alphabetical
-        sorted_subcategories = sorted(grouped.keys())
-        
-        priority_order = ["Required", "General"]
-        final_order = []
-        
-        for p in priority_order:
-            if p in sorted_subcategories:
-                final_order.append(p)
-                sorted_subcategories.remove(p)
-        
-        final_order.extend(sorted_subcategories)
-        sorted_subcategories = final_order
+            # Anchor
+            anchor_id = f"{section_name}-{name}"
             
-        for subcat in sorted_subcategories:
-            group_opts = grouped[subcat]
-            if not group_opts: continue
+            # Sidebar Link
+            nav_items.append(f'<li><a href="#{anchor_id}" style="font-size: 0.9em; margin-left: 20px;">{name}</a></li>')
             
-            # Sort: Alphabetical Name (Required already handled by group)
-            # group_opts.sort(key=lambda x: x['name'])
-            # User Request: Use XML order (which is preserved by default as we iterate entries)
-            pass
+            # Block
+            html_content.append(f'<div id="{anchor_id}" class="option-block">')
             
-            # Render Subcategory Header if meaningful?
-            # Or just visual separator?
-            if len(sorted_subcategories) > 1:
-                # For Sidebar (now inside a UL inside details)
-                # We want to insert subheaders into the nav items list?
-                # The current structure append directly to nav_items
-                nav_items.append(f'<li class="nav-subcat"><span>{subcat}</span></li>')
-                
-                # For Content
-                html_content.append(f'<h3 class="subcategory-header">{subcat}</h3>')
+            # Header
+            html_content.append(f'<div class="option-header">')
+            html_content.append(f'<div class="option-title">')
+            html_content.append(f'<a href="#{anchor_id}" class="anchor-link">#</a>{name}')
+            html_content.append(f'</div>')
+            
+            # Meta Badges
+            html_content.append(f'<div class="option-meta">')
+            
+            # Schema Link Badge
+            if opt.get('schema_link'):
+                html_content.append(f'<a href="{opt["schema_link"]}" target="_blank" class="badge badge-schema">Schema</a>')
+            
+            # Version Added Badge
+            if opt.get('version_added'):
+                 html_content.append(f'<span class="badge badge-version">v{opt["version_added"]}+</span>')
+                 
+            # Required / Subcategory Badge
+            if opt['required']:
+                html_content.append(f'<span class="badge badge-required">Required</span>')
+            else:
+                html_content.append(f'<span class="badge badge-default">Optional</span>')
+            
+            html_content.append(f'</div>') # End Meta
+            html_content.append(f'</div>') # End Header
+            
+            # Type Prominence (User Request)
+            html_content.append(f'<div class="option-type-line">')
+            
+            # Helper for badges
+            def get_type_badge(t_raw, t_disp):
+                t = t_raw.lower()
+                href = f'../types.html#{opt["type_slug"]}'
+                cls = "badge-type-complex"
+                if t == "boolean": cls = "badge-type-boolean"
+                elif t == "integer": cls = "badge-type-integer"
+                elif t == "enum": cls = "badge-type-enum"
+                elif "string" in t or t in ["filename", "path"]: cls = "badge-type-string"
+                return f'<a href="{href}" class="badge badge-type-prominent {cls}">{t_disp}</a>'
 
-            for opt in group_opts:
-                name = opt['name']
+            html_content.append(get_type_badge(opt['type'], opt['type']))
+            
+            if opt.get('is_multiple'):
+                 html_content.append(f'<span class="badge badge-multiple" title="Can be specified multiple times">Multiple</span>')
+            
+            html_content.append(f'</div>')
+            
+            # Description
+            # Add Schema Only badge if needed
+            undoc_badge = ""
+            if opt.get('is_undocumented'):
+                 undoc_badge = '<span style="display:inline-block; margin-bottom:5px; padding: 2px 6px; font-size: 0.75em; font-weight: 600; line-height: 1; color: #856404; background-color: #fff3cd; border-radius: 0.25rem; border: 1px solid #ffeeba;">Schema Only</span><br>'
+            
+            html_content.append(f'<div class="option-description">{undoc_badge}{opt["desc_html"]}</div>')
+            
+            # Constraints Info (Type, Default)
+            if opt['default'] is not None:
+                d_val = opt['default']
+                if isinstance(d_val, bool):
+                    d_val = "yes" if d_val else "no"
+                html_content.append(f'<div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>{d_val}</code></div>')
                 
-                # Render Option Block
-                html_content.append(f'''
-                <div id="{section_name}-{name}" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#{section_name}-{name}" class="anchor-link">#</a>{name}
-                        </div>
-                        <div class="option-meta">
-                            <a href="{opt['schema_url']}" target="_blank" class="badge badge-schema">Schema</a>
-                            {f'<span class="badge badge-version">v{opt["version_added"]}+</span>' if opt["version_added"] else ''}
-                            {f'<span class="badge badge-mandatory">Required</span>' if opt['required'] else '<span class="badge badge-default">Optional</span>'}
-                            {f'<span class="badge badge-warning">Deprecated</span>' if 'deprecated' in str(opt['full_schema']).lower() else ''}
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         { 
-                             (lambda t, disp: 
-                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-boolean">{disp}</a>' if t == "boolean" else
-                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-integer">{disp}</a>' if t == "integer" else
-                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-enum">{disp}</a>' if t == "enum" else
-                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-string">{disp}</a>' if "string" in t or t == "filename" or t == "path" else
-                                f'<a href="types.html#{opt["type_slug"]}" class="badge badge-type-prominent badge-type-complex">{disp}</a>'
-                             )(opt['type'].lower(), opt['type'])
-                         }
-                         {
-                             f'<span class="badge badge-multiple" title="Can be specified multiple times">Multiple</span>' if opt.get('is_multiple') else ''
-                         }
-                    </div>
-                    <div class="option-desc">
-                        {opt['desc_html']}
-                    </div>
-                ''')
-                
-                # Show allowed values (Enum)
-                if 'enum' in opt['schema']:
-                    html_content.append('<div class="option-values"><strong>Allowed:</strong> ')
-                    html_content.append(", ".join([f'<code>{e}</code>' for e in opt['schema']['enum']]))
-                    html_content.append('</div>')
-                    
-                # Show Default
-                if opt['default'] is not None:
-                     default_disp = opt['default']
-                     if opt['type'] == 'boolean':
-                         d_str = str(default_disp).lower()
-                         if d_str in ['true', '1', 'yes']: default_disp = "yes"
-                         elif d_str in ['false', '0', 'no']: default_disp = "no"
-                     
-                     html_content.append(f'<div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>{default_disp}</code></div>')
-                     
-                # Show Examples
-                if opt['examples']:
-                    html_content.append('<div class="option-examples" style="margin-top:10px;">')
-                    html_content.append('<strong>Examples:</strong>')
-                    html_content.append('<pre><code>')
-                    for ex in opt['examples']:
-                        html_content.append(f'{name}={ex}\n')
-                    html_content.append('</code></pre></div>')
-
-                html_content.append('</div>')
-                
-                nav_items.append(f'<li><a href="#{section_name}-{name}" style="font-size: 0.9em; margin-left: 20px;">{name}</a></li>')
+            # Examples (if any)
+            if opt['examples']:
+                html_content.append(f'<div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>')
+                for ex in opt['examples']:
+                     html_content.append(f'{name}={ex}\n')
+                html_content.append(f'</code></pre></div>')
+            
+            html_content.append(f'</div>') # End Option Block
 
         html_content.append('</div>') 
         nav_items.append('</ul></details></li>')
@@ -926,7 +1066,7 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
                  <div id="search-results"></div>
              </div>
              <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
-                 <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
+                 <a href="index.html">Index</a> &middot; <a href="../types.html">Types</a> 
                  {f'&middot; <a href="changes.html">Changes</a>' if available_versions and version != sorted(available_versions)[0] and version != 'latest' else ''}
              </div>
              {f'''<select class="version-selector" onchange="window.location.href=this.value;">
@@ -1045,7 +1185,6 @@ def generate_page(doc_name, version, src_dir, schema_dir, output_dir, web_schema
 
 def generate_types_page(output_dir, version, schema_dir):
     # Load schema for definitions
-    # UPDATED: schemas filename format
     schema_file = os.path.join(schema_dir, "systemd.network.schema.json")
     if not os.path.exists(schema_file):
         print(f"Warning: Schema file not found for types generation: {schema_file}")
@@ -1056,146 +1195,309 @@ def generate_types_page(output_dir, version, schema_dir):
         
     definitions = schema.get('definitions', {})
     
+    # Filter definitions to only those ending in 'Type'
+    definitions = {k: v for k, v in definitions.items() if k.endswith('Type')}
+    
     # Common types manually added if not in definitions
     common_types = {
-        'string': {'description': 'A sequence of characters.', 'type': 'string'},
-        'boolean': {'description': 'A boolean value (true or false).', 'type': 'boolean'},
-        'integer': {'description': 'A whole number.', 'type': 'integer'},
-        'enum': {'description': 'A value chosen from a specific set of allowed strings.', 'enum': []} # Pseudo-enum
+        'string': {'description': 'A sequence of characters.', 'type': 'string', 'title': 'String'},
+        'boolean': {'description': 'A boolean value (true or false).', 'type': 'boolean', 'title': 'Boolean'},
+        'integer': {'description': 'A whole number.', 'type': 'integer', 'title': 'Integer'},
+        'enum': {'description': 'A value chosen from a specific set of allowed strings.', 'enum': [], 'title': 'Enumeration'} 
     }
-    
-    html_content = []
     
     # Merge
     all_types = {}
     all_types.update(common_types)
     all_types.update(definitions)
+
+    # Helper to categorize types
+    def categorize_type(key, title_lower):
+        if key in common_types: return "Common Types"
+        
+        # Base Data Types
+        if any(x in title_lower for x in ['integer', 'duration', 'percent', 'bytes', 'rate', 'size', 'time']): return "Base Data Types"
+        if key.startswith('uint') or 'uint' in title_lower: return "Base Data Types"
+        
+        # Networking
+        if any(x in title_lower for x in ['ip', 'address', 'prefix', 'port', 'mac', 'endpoint', 'host', 'interface', 'vlan', 'mtu', 'duid', 'tunnel', 'multicast', 'label']): return "Networking"
+        
+        # Traffic Control
+        if any(x in title_lower for x in ['qdisc', 'flow', 'nft', 'route', 'queue']): return "Traffic Control"
+        
+        # System & Identifiers
+        if any(x in title_lower for x in ['key', 'path', 'user', 'group', 'domain', 'glob', 'name', 'id']): return "System & Identifiers"
+
+        return "Other"
+
+    # Grouping
+    groups = {
+        "Common Types": [],
+        "Base Data Types": [],
+        "Networking": [],
+        "Traffic Control": [],
+        "System & Identifiers": [],
+        "Other": []
+    }
     
-    for type_name, type_def in sorted(all_types.items()):
-        
-        desc = type_def.get('description', 'No description available.')
-        title = type_def.get('title', type_name)
-        
-        html_content.append(f'<div id="{type_name}" class="type-block" style="margin-bottom:30px; border-bottom:1px solid #30363d; padding-bottom:20px;">')
-        html_content.append(f'<h3 style="margin-top:0;">{title} <code style="font-size:0.7em; color:#8b949e">{type_name}</code></h3>')
-        html_content.append(f'<p>{desc}</p>')
-        
-        # Helper to generate natural language description of type constraints
-        def describe_type(s):
-            constraints = []
-            
-            # Resolve Ref
-            if '$ref' in s:
-                ref_name = s['$ref'].split('/')[-1]
-                if ref_name in definitions:
-                    target = definitions[ref_name]
-                    # If the target has a Title, use it (e.g. "IPv4 Address")
-                    # Unless it's just a generic type wrapper?
-                    # Generally titles are good.
-                    if 'title' in target:
-                        return target['title']
-                    return describe_type(target)
-                return ref_name # Fallback
-            
-            # recursive combinators
-            if 'oneOf' in s:
-                sub_descs = [describe_type(sub) for sub in s['oneOf']]
-                # Unique filtering
-                sub_descs = sorted(list(set([d for d in sub_descs if d])))
-                return " OR ".join(sub_descs)
-            
-            if 'allOf' in s:
-                sub_descs = [describe_type(sub) for sub in s['allOf']]
-                return " AND ".join([d for d in sub_descs if d])
-            
-            # Base Types
-            t = s.get('type')
-            
-            # Enum
-            if 'enum' in s:
-                if not s['enum']:
-                    return "Enum"
-                vals = ", ".join([f"<code>{v}</code>" for v in s['enum']])
-                return f"Enum: {vals}"
-            
-            # String Pattern
-            if 'pattern' in s:
-                 # If type is missing but pattern exists, implies string
-                 constraints.append(f"matching regular expression <code>{s['pattern']}</code>")
-            
-            if t == 'integer':
-                mn = s.get('minimum')
-                mx = s.get('maximum')
-                range_str = ""
-                if mn is not None and mx is not None:
-                    range_str = f" ({mn}...{mx})"
-                elif mn is not None:
-                    range_str = f" (min: {mn})"
-                elif mx is not None:
-                    range_str = f" (max: {mx})"
-                
-                return f"Integer{range_str}"
-            
-            elif t == 'string':
-                # length constraints?
-                min_l = s.get('minLength')
-                max_l = s.get('maxLength')
-                if min_l or max_l:
-                     constraints.append(f"length {min_l or '0'}...{max_l or 'inf'}")
-                
-                if 'format' in s:
-                     constraints.append(f"format <code>{s['format']}</code>")
-                
-                base = "String"
-                if constraints:
-                    return f"{base} {' '.join(constraints)}"
-                return base
+    # Sort types by title first
+    sorted_items = sorted(all_types.items(), key=lambda item: item[1].get('title', item[0]).lower())
+    
+    for key, val in sorted_items:
+        title = val.get('title', key)
+        cat = categorize_type(key, title.lower())
+        if cat not in groups: cat = "Other"
+        groups[cat].append((key, val))
 
-            elif t == 'boolean':
-                return "Boolean"
-            
-            elif t == 'array':
-                return "Array"
-                
-            # If no type but we have pattern (caught above?)
-            if 'pattern' in s and not t:
-                 return f"String matching <code>{s['pattern']}</code>"
-            
-            # Fallback
-            return "Unknown Type"
+    # Remove empty groups
+    groups = {k: v for k, v in groups.items() if v}
+    
+    html_content = []
+    nav_items = []
 
-        type_desc_str = describe_type(type_def)
+    # Helper to get range from type definition
+    def get_range(s):
+        # Direct integer
+        if s.get('type') == 'integer':
+            return s.get('minimum'), s.get('maximum')
         
-        # Check if description offers more than just the basics? 
-        # For now, always append it as the "Structure" info
-        if type_desc_str:
-            html_content.append(f'<p style="font-size: 0.9em; color: #8b949e; border-left: 2px solid #30363d; padding-left: 10px;"><em>Structure:</em> {type_desc_str}</p>')
+        # oneOf with integer
+        if 'oneOf' in s:
+            for sub in s['oneOf']:
+                if sub.get('type') == 'integer':
+                    return sub.get('minimum'), sub.get('maximum')
+        return None, None
 
-        if 'examples' in type_def:
-             html_content.append('<strong>Examples:</strong>')
-             html_content.append('<ul>')
-             for ex in type_def['examples']:
-                 html_content.append(f'<li><code>{ex}</code></li>')
-             html_content.append('</ul>')
-             
-        html_content.append('</div>')
+    # Render Groups
+    # Define order
+    group_order = ["Common Types", "Base Data Types", "Networking", "System & Identifiers", "Traffic Control", "Other"]
+    
+    for cat in group_order:
+        if cat not in groups: continue
+        items = groups[cat]
+        
+        # Sidebar Header
+        nav_items.append(f'<li class="nav-subcat"><span>{cat}</span></li>')
+        
+        # Content Group Header
+        html_content.append(f'<h2 class="category-header" style="margin-top: 40px; border-bottom: 2px solid #30363d; padding-bottom: 10px;">{cat}</h2>')
+        
+        for type_name, type_def in items:
+            title = type_def.get('title', type_name)
+            
+            # Sidebar Item
+            nav_items.append(f'<li><a href="#{type_name}">{title}</a></li>')
+
+            desc = type_def.get('description', 'No description available.')
+            
+            # Check for range and append if not in description
+            mn, mx = get_range(type_def)
+            if mn is not None and mx is not None:
+                # Naive check to see if numbers are already in description
+                # Avoid "Unsigned 16-bit integer (0...65535) (Range: 0...65535)"
+                if str(mn) not in desc or str(mx) not in desc:
+                    desc += f" (Range: {mn}...{mx})"
+            
+            # Style as option-block for consistency
+            html_content.append(f'''
+            <div id="{type_name}" class="option-block" style="margin-bottom: 20px;">
+                <div class="option-header">
+                    <div class="option-title">
+                         <a href="#{type_name}" class="anchor-link">#</a>{title} <span style="font-weight:normal; font-size:0.8em; color:#8b949e">({type_name})</span>
+                    </div>
+                </div>
+                <div class="option-desc">
+                    <p>{desc}</p>
+            ''')
+            
+            # Helper to generate natural language description of type constraints
+            def describe_type(s):
+                constraints = []
+                
+                # Resolve Ref
+                if '$ref' in s:
+                    ref_name = s['$ref'].split('/')[-1]
+                    if ref_name in definitions:
+                        target = definitions[ref_name]
+                        if 'title' in target:
+                            return target['title']
+                        return describe_type(target)
+                    return ref_name # Fallback
+                
+                # recursive combinators
+                if 'oneOf' in s:
+                    sub_descs = [describe_type(sub) for sub in s['oneOf']]
+                    # Unique filtering
+                    sub_descs = sorted(list(set([d for d in sub_descs if d])))
+                    return " OR ".join(sub_descs)
+                
+                if 'anyOf' in s:
+                    sub_descs = [describe_type(sub) for sub in s['anyOf']]
+                    sub_descs = sorted(list(set([d for d in sub_descs if d])))
+                    return " OR ".join(sub_descs) # anyOf is technically OR logic for description
+                
+                if 'allOf' in s:
+                    sub_descs = [describe_type(sub) for sub in s['allOf']]
+                    return " AND ".join([d for d in sub_descs if d])
+                
+                # Const
+                if 'const' in s:
+                    return f"Constant: <code>{s['const']}</code>"
+    
+                # Base Types
+                t = s.get('type')
+                
+                # Type List (e.g. ["string", "null"])
+                if isinstance(t, list):
+                    # Filter out null for description usually
+                    types = [tt for tt in t if tt != 'null']
+                    if not types: return "Null"
+                    if len(types) == 1:
+                        t = types[0] # Handle as single type
+                    else:
+                        return " OR ".join([tt.title() for tt in types]) # Simple join
+                
+                # Enum
+                if 'enum' in s:
+                    if not s['enum']:
+                        return "Enum"
+                    vals = ", ".join([f"<code>{v}</code>" for v in s['enum']])
+                    return f"Enum: {vals}"
+                
+                # String Pattern
+                if 'pattern' in s:
+                     # If type is missing but pattern exists, implies string
+                     constraints.append(f"matching regular expression <code>{s['pattern']}</code>")
+                
+                if t == 'integer':
+                    mn = s.get('minimum')
+                    mx = s.get('maximum')
+                    range_str = ""
+                    if mn is not None and mx is not None:
+                        range_str = f" ({mn}...{mx})"
+                    elif mn is not None:
+                        range_str = f" (min: {mn})"
+                    elif mx is not None:
+                        range_str = f" (max: {mx})"
+                    
+                    return f"Integer{range_str}"
+                
+                elif t == 'string':
+                    # length constraints?
+                    min_l = s.get('minLength')
+                    max_l = s.get('maxLength')
+                    if min_l or max_l:
+                         constraints.append(f"length {min_l or '0'}...{max_l or 'inf'}")
+                    
+                    if 'format' in s:
+                         constraints.append(f"format <code>{s['format']}</code>")
+                    
+                    base = "String"
+                    if constraints:
+                        return f"{base} {' '.join(constraints)}"
+                    return base
+    
+                elif t == 'boolean':
+                    return "Boolean"
+                
+                elif t == 'array':
+                    return "Array"
+                
+                elif t == 'object' or 'properties' in s or 'additionalProperties' in s:
+                    return "Object (Dictionary)"
+                
+                elif t == 'null':
+                    return "Null"
+                    
+                # If no type but we have pattern (caught above?)
+                if 'pattern' in s and not t:
+                     return f"String matching <code>{s['pattern']}</code>"
+                
+                # Fallback
+                return "Complex Type"
+    
+            type_desc_str = describe_type(type_def)
+            
+            if type_desc_str:
+                html_content.append(f'<p style="font-size: 0.9em; color: #8b949e; border-left: 2px solid #30363d; padding-left: 10px; margin-top: 10px;"><em>Structure:</em> {type_desc_str}</p>')
+    
+            if 'examples' in type_def:
+                 html_content.append('<div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong>')
+                 html_content.append('<ul style="margin-top:5px;">')
+                 for ex in type_def['examples']:
+                     html_content.append(f'<li><code>{ex}</code></li>')
+                 html_content.append('</ul></div>')
+                 
+            html_content.append('</div></div>')
+
+    sidebar_html = f"""
+    <div id="sidebar">
+        <div class="sidebar-header">
+             <h3>Reference</h3>
+             <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
+                 <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
+             </div>
+             <h2>Data Types</h2>
+        </div>
+         <div class="sidebar-content">
+            <ul>
+                {"".join(nav_items)}
+            </ul>
+        </div>
+    </div>
+    """
 
     html = f"""
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Systemd Configuration Types {version}</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        body {{ display: block; max-width: 800px; margin: 0 auto; padding: 50px; overflow: auto; }}
-        h1 {{ border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }}
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Configuration Types <small style="color: #8b949e">{version}</small></h1>
-    <p><a href="index.html">Back to Documentation Index</a></p>
+    {sidebar_html}
+    <div id="content">
+        <h1>Configuration Types <small style="color: #8b949e">{version}</small></h1>
+        <p><small style="color: #8b949e">Global Reference for Systemd Network Configuration Types</small></p>
+        
+        { "".join(html_content) }
+    </div>
     
-    { "".join(html_content) }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {{
+            const sidebarLinks = document.querySelectorAll('#sidebar a');
+            const sections = document.querySelectorAll('.option-block');
+            
+            // Map IDs to sidebar links
+            const linkMap = new Map();
+            sidebarLinks.forEach(link => {{
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {{
+                    linkMap.set(href.substring(1), link);
+                }}
+            }});
+
+            const observer = new IntersectionObserver((entries) => {{
+                entries.forEach(entry => {{
+                    if (entry.isIntersecting) {{
+                        const id = entry.target.id;
+                        const link = linkMap.get(id);
+                        if (link) {{
+                            sidebarLinks.forEach(l => l.classList.remove('active'));
+                            link.classList.add('active');
+                            
+                            // Scroll sidebar if needed
+                            link.scrollIntoView({{ block: 'nearest', inline: 'nearest' }});
+                        }}
+                    }}
+                }});
+            }}, {{ root: null, threshold: 0.1, rootMargin: "-40% 0px -40% 0px" }});
+
+            sections.forEach(section => observer.observe(section));
+        }});
+    </script>
 </body>
 </html>
     """
@@ -1427,9 +1729,8 @@ def generate_samples_page(output_dir, version, samples_dir):
 </html>
     """
 
-    # Output to parent directory (docs/html/) instead of versioned dir
-    parent_dir = os.path.dirname(output_dir)
-    out_path = os.path.join(parent_dir, "samples.html")
+    # Output directly to output_dir (global doc root)
+    out_path = os.path.join(output_dir, "samples.html")
     with open(out_path, 'w') as f:
         f.write(html_header + html_scripts)
     print(" -> Generated samples.html (Global)")
@@ -1467,16 +1768,19 @@ def generate_index(output_dir, version):
     </div>
     
     <div class="card">
+        <h2><a href="networkd.conf.html">networkd.conf</a></h2>
         <p>Global system-wide network configuration.</p>
     </div>
     
-    <div class="card" style="border-color: #58a6ff;">
-        <h2 style="color: #58a6ff;"><a href="../samples.html" style="color: #58a6ff;">Use Cases / Examples</a></h2>
-        <p>Common network configuration scenarios (DHCP, Bridges, VLANs, WireGuard, VXLAN, etc).</p>
+    <div class="card">
+        <h2><a href="../types.html">Data Types</a></h2>
+        <p>Reference for all available configuration types (ranges, enums, formats).</p>
     </div>
     
-    <hr style="border-color: #30363d; margin: 40px 0;">
-    <p><a href="types.html">See all Data Types</a></p>
+    <div class="card">
+        <h2><a href="../samples.html">Use Cases / Examples</a></h2>
+        <p>Common network configuration scenarios (DHCP, Bridges, VLANs, WireGuard, VXLAN, etc).</p>
+    </div>
 </body>
 </html>
     """
@@ -1490,6 +1794,7 @@ def main():
     parser.add_argument("--available-versions", nargs="*", help="List of other available versions for the switcher")
     parser.add_argument("--out", help="Output directory")
     parser.add_argument("--force", action="store_true", help="Force overwrite")
+    parser.add_argument("--mode", choices=['pages', 'types', 'samples'], default='pages', help="Build mode: pages (versioned), types (global), or samples (global)")
     args = parser.parse_args()
     
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -1513,33 +1818,39 @@ def main():
     # with open(os.path.join(output_dir, "style.css"), "w") as f:
     #     f.write(CSS_STYLES)
         
-    search_index = []
-    
-    for doc in FILES:
-        try:
-            page_options = generate_page(doc, args.version, src_dir, schema_dir, output_dir, web_schemas=args.web_schemas, available_versions=args.available_versions, force=args.force)
-            if page_options:
-                search_index.extend(page_options)
-        except Exception as e:
-            print(f"Error processing {doc}: {e}")
-            import traceback
-            traceback.print_exc()
-            
-    # Write Search Index
-    with open(os.path.join(output_dir, "search_index.json"), "w") as f:
-        json.dump(search_index, f, indent=None)
-    print(f"Generated search_index.json with {len(search_index)} entries.")
+    if args.mode == 'pages':
+        search_index = []
+        
+        for doc in FILES:
+            try:
+                page_options = generate_page(doc, args.version, src_dir, schema_dir, output_dir, web_schemas=args.web_schemas, available_versions=args.available_versions, force=args.force)
+                if page_options:
+                    search_index.extend(page_options)
+            except Exception as e:
+                print(f"Error processing {doc}: {e}")
+                import traceback
+                traceback.print_exc()
+                
+        # Write Search Index
+        with open(os.path.join(output_dir, "search_index.json"), "w") as f:
+            json.dump(search_index, f, indent=None)
+        print(f"Generated search_index.json with {len(search_index)} entries.")
 
-    generate_types_page(output_dir, args.version, schema_dir)
-    
-    # Generate Samples
-    samples_dir = os.path.join(base_dir, "samples")
-    if os.path.exists(samples_dir):
-        generate_samples_page(output_dir, args.version, samples_dir)
-    else:
-        print(f"Warning: Samples directory not found at {samples_dir}")
+        generate_index(output_dir, args.version)
 
-    generate_index(output_dir, args.version)
+    elif args.mode == 'types':
+        print("Generating Global Types Page...")
+        generate_types_page(output_dir, args.version, schema_dir)
+
+    elif args.mode == 'samples':
+        print("Generating Global Samples Page...")
+        # Generate Samples
+        samples_dir = os.path.join(base_dir, "samples")
+        if os.path.exists(samples_dir):
+            generate_samples_page(output_dir, args.version, samples_dir)
+        else:
+            print(f"Warning: Samples directory not found at {samples_dir}")
+
     print("\nDocumentation Generation Complete.")
 
  

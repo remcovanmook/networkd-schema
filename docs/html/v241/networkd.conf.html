@@ -20,7 +20,7 @@
                  <div id="search-results"></div>
              </div>
              <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
-                 <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
+                 <a href="index.html">Index</a> &middot; <a href="../types.html">Types</a> 
                  &middot; <a href="changes.html">Changes</a>
              </div>
              <select class="version-selector" onchange="window.location.href=this.value;">
@@ -30,102 +30,14 @@
         </div>
          <div class="sidebar-content">
             <ul>
-                <li><details><summary><a href="#section-DHCP">DHCP</a></summary><ul class="sub-menu"><li><a href="#DHCP-DUIDType" style="font-size: 0.9em; margin-left: 20px;">DUIDType</a></li><li><a href="#DHCP-DUIDRawData" style="font-size: 0.9em; margin-left: 20px;">DUIDRawData</a></li></ul></details></li>
+                <li><details><summary><a href="#section-DHCP">DHCP</a></summary><ul class="sub-menu"><li><a href="#DHCP-DUIDRawData" style="font-size: 0.9em; margin-left: 20px;">DUIDRawData</a></li><li><a href="#DHCP-DUIDType" style="font-size: 0.9em; margin-left: 20px;">DUIDType</a></li></ul></details></li>
             </ul>
         </div>
     </div>
     
     <div id="content">
         <h1>networkd.conf <span style="font-size:0.5em; color:var(--meta-color); font-weight:normal;">/ v241</span></h1>
-        <div id="section-DHCP" class="section-block"><h2>DHCP Section</h2>
-                <div id="DHCP-DUIDType" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#DHCP-DUIDType" class="anchor-link">#</a>DUIDType
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v241/systemd.networkd.conf.schema.json#:~:text=%22DUIDType%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v230+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#Integer (16-bit) | string" class="badge badge-type-prominent badge-type-string">Integer (16-bit) | string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        <p>Specifies how the DUID should be generated. See
-        <a href="https://tools.ietf.org/html/rfc3315#section-9" target="_blank">RFC 3315</a>
-        for a description of all the options.</p>
-
-        <p>The following values are understood:
-        <dl>
-          <dt><span class="docbook-option">vendor</span></dt><dd><p>If <code>DUIDType=vendor</code>, then the DUID value will be generated using
-            <code>43793</code> as the vendor identifier (systemd) and hashed contents of
-            <a href="https://www.freedesktop.org/software/systemd/man/latest/machine-id.html" target="_blank" class="external-link">machine-id</a>.
-            This is the default if <code class="varname">DUIDType=</code> is not specified.
-            </p></dd>
-
-          <dt><span class="docbook-option">uuid</span></dt><dd><p>If <code>DUIDType=uuid</code>, and <a href="#DHCP-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> is not set,
-            then the product UUID is used as a DUID value. If a system does not have valid product UUID, then
-            an application-specific
-            <a href="https://www.freedesktop.org/software/systemd/man/latest/machine-id.html" target="_blank" class="external-link">machine-id</a>
-            is used as a DUID value. About the application-specific machine ID, see
-            <a href="https://www.freedesktop.org/software/systemd/man/latest/sd_id128_get_machine_app_specific.html" target="_blank" class="external-link">sd_id128_get_machine_app_specific</a>.
-            </p></dd>
-
-          <dt><span class="docbook-option">link-layer-time[:<span class="docbook-replaceable">TIME</span>]</span></dt><dd><p>If <code>link-layer-time</code> or <code>link-layer</code> is specified,
-            then the MAC address of the interface is used as a DUID value. The value <code>link-layer-time</code>
-            can take additional time value after a colon, e.g. <code>link-layer-time:2018-01-23 12:34:56 UTC</code>.
-            The default time value is <code>2000-01-01 00:00:00 UTC</code>.
-            </p></dd>
-        </dl>
-        </p>
-
-        <p>In all cases, <a href="#DHCP-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> can be used to override the
-        actual DUID value that is used.</p>
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDType=SomeString
-</code></pre></div></div>
-                <div id="DHCP-DUIDRawData" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#DHCP-DUIDRawData" class="anchor-link">#</a>DUIDRawData
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v241/systemd.networkd.conf.schema.json#:~:text=%22DUIDRawData%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v230+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#duidRawDataType" class="badge badge-type-prominent badge-type-complex">DUID Raw Data</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        <p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
+        <div id="section-DHCP" class="section-block"><h2>DHCP Section</h2><div id="DHCP-DUIDRawData" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCP-DUIDRawData" class="anchor-link">#</a>DUIDRawData</div><div class="option-meta"><a href="../schemas/v241/systemd.networkd.conf.schema.json#:~:text="DUIDRawData"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v230+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#duidRawDataType" class="badge badge-type-prominent badge-type-complex">DUID Raw Data</a></div><div class="option-description"><p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
         byte separated by <code>:</code>. The DUID that is sent is composed of the DUID type specified by
         <a href="#DHCP-DUIDType" class="attribute-ref"><code class="varname">DUIDType=</code></a> and the value configured here.</p>
 
@@ -148,10 +60,38 @@ DUIDRawData=00:00:ab:11:f9:2a:c2:77:29:f9:5c:00</code></pre>
           43793 (<code>00:00:ab:11</code>), and identifier value <code>f9:2a:c2:77:29:f9:5c:00</code>.
           </p>
         </span>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDRawData=00:01:00:01:2a:3b:4c:5d:6e:7f:80:91
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDRawData=00:01:00:01:2a:3b:4c:5d:6e:7f:80:91
 DUIDRawData=00:02:00:00:ab:cd:ef:01:23:45
+</code></pre></div></div><div id="DHCP-DUIDType" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCP-DUIDType" class="anchor-link">#</a>DUIDType</div><div class="option-meta"><a href="../schemas/v241/systemd.networkd.conf.schema.json#:~:text="DUIDType"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v230+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#Integer (16-bit) | string" class="badge badge-type-prominent badge-type-string">Integer (16-bit) | string</a></div><div class="option-description"><p>Specifies how the DUID should be generated. See
+        <a href="https://tools.ietf.org/html/rfc3315#section-9" target="_blank">RFC 3315</a>
+        for a description of all the options.</p>
+
+        <p>The following values are understood:
+        <dl>
+          <dt><span class="docbook-option">vendor</span></dt><dd><p>If <code>DUIDType=vendor</code>, then the DUID value will be generated using
+            <code>43793</code> as the vendor identifier (systemd) and hashed contents of
+            <a href="https://man7.org/linux/man-pages/man5/machine-id.5.html" target="_blank" class="external-link">machine-id</a>.
+            This is the default if <code class="varname">DUIDType=</code> is not specified.
+            </p></dd>
+
+          <dt><span class="docbook-option">uuid</span></dt><dd><p>If <code>DUIDType=uuid</code>, and <a href="#DHCP-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> is not set,
+            then the product UUID is used as a DUID value. If a system does not have valid product UUID, then
+            an application-specific
+            <a href="https://man7.org/linux/man-pages/man5/machine-id.5.html" target="_blank" class="external-link">machine-id</a>
+            is used as a DUID value. About the application-specific machine ID, see
+            <a href="https://www.freedesktop.org/software/systemd/man/latest/sd_id128_get_machine_app_specific.html" target="_blank" class="external-link">sd_id128_get_machine_app_specific</a>.
+            </p></dd>
+
+          <dt><span class="docbook-option">link-layer-time[:<span class="docbook-replaceable">TIME</span>]</span></dt><dd><p>If <code>link-layer-time</code> or <code>link-layer</code> is specified,
+            then the MAC address of the interface is used as a DUID value. The value <code>link-layer-time</code>
+            can take additional time value after a colon, e.g. <code>link-layer-time:2018-01-23 12:34:56 UTC</code>.
+            The default time value is <code>2000-01-01 00:00:00 UTC</code>.
+            </p></dd>
+        </dl>
+        </p>
+
+        <p>In all cases, <a href="#DHCP-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> can be used to override the
+        actual DUID value that is used.</p></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDType=SomeString
 </code></pre></div></div></div>
     </div>
 

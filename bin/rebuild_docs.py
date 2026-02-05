@@ -53,7 +53,27 @@ def main():
     print(f"Found versions: {versions}")
     print(f"Latest version: {latest_version}")
     
-    # 4. Build HTML for each version
+    # 4. Build Global Pages (Types, Samples) using Latest Version
+    if latest_version:
+        print(f"Building Global Pages using {latest_version}...")
+        
+        # Types
+        run_command([
+            "python3", "bin/generate_html.py",
+            "--version", latest_version,
+            "--mode", "types",
+            "--out", "docs/html"
+        ])
+        
+        # Samples
+        run_command([
+            "python3", "bin/generate_html.py",
+            "--version", latest_version,
+            "--mode", "samples",
+            "--out", "docs/html"
+        ])
+        
+    # 5. Build Versioned Pages
     all_versions_arg = versions + ["latest"]
     
     for ver in versions:
@@ -67,6 +87,7 @@ def main():
             "python3", "bin/generate_html.py",
             "--version", ver,
             "--web-schemas",
+            "--mode", "pages",
             "--out", ver_out_dir,
             "--available-versions"
         ] + all_versions_arg

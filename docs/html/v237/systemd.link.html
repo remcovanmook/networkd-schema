@@ -20,7 +20,7 @@
                  <div id="search-results"></div>
              </div>
              <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
-                 <a href="index.html">Index</a> &middot; <a href="types.html">Types</a> 
+                 <a href="index.html">Index</a> &middot; <a href="../types.html">Types</a> 
                  &middot; <a href="changes.html">Changes</a>
              </div>
              <select class="version-selector" onchange="window.location.href=this.value;">
@@ -30,497 +30,160 @@
         </div>
          <div class="sidebar-content">
             <ul>
-                <li><details><summary><a href="#section-Match">Match</a></summary><ul class="sub-menu"><li class="nav-subcat"><span>General</span></li><li><a href="#Match-OriginalName" style="font-size: 0.9em; margin-left: 20px;">OriginalName</a></li><li><a href="#Match-Host" style="font-size: 0.9em; margin-left: 20px;">Host</a></li><li><a href="#Match-KernelCommandLine" style="font-size: 0.9em; margin-left: 20px;">KernelCommandLine</a></li><li><a href="#Match-KernelVersion" style="font-size: 0.9em; margin-left: 20px;">KernelVersion</a></li><li><a href="#Match-Architecture" style="font-size: 0.9em; margin-left: 20px;">Architecture</a></li><li class="nav-subcat"><span>Hardware</span></li><li><a href="#Match-MACAddress" style="font-size: 0.9em; margin-left: 20px;">MACAddress</a></li><li><a href="#Match-Path" style="font-size: 0.9em; margin-left: 20px;">Path</a></li><li><a href="#Match-Driver" style="font-size: 0.9em; margin-left: 20px;">Driver</a></li><li><a href="#Match-Type" style="font-size: 0.9em; margin-left: 20px;">Type</a></li><li class="nav-subcat"><span>Virtualization</span></li><li><a href="#Match-Virtualization" style="font-size: 0.9em; margin-left: 20px;">Virtualization</a></li></ul></details></li><li><details><summary><a href="#section-Link">Link</a></summary><ul class="sub-menu"><li class="nav-subcat"><span>General</span></li><li><a href="#Link-Description" style="font-size: 0.9em; margin-left: 20px;">Description</a></li><li><a href="#Link-Alias" style="font-size: 0.9em; margin-left: 20px;">Alias</a></li><li><a href="#Link-MACAddressPolicy" style="font-size: 0.9em; margin-left: 20px;">MACAddressPolicy</a></li><li><a href="#Link-NamePolicy" style="font-size: 0.9em; margin-left: 20px;">NamePolicy</a></li><li><a href="#Link-Name" style="font-size: 0.9em; margin-left: 20px;">Name</a></li><li><a href="#Link-BitsPerSecond" style="font-size: 0.9em; margin-left: 20px;">BitsPerSecond</a></li><li><a href="#Link-Duplex" style="font-size: 0.9em; margin-left: 20px;">Duplex</a></li><li><a href="#Link-AutoNegotiation" style="font-size: 0.9em; margin-left: 20px;">AutoNegotiation</a></li><li><a href="#Link-WakeOnLan" style="font-size: 0.9em; margin-left: 20px;">WakeOnLan</a></li><li><a href="#Link-Port" style="font-size: 0.9em; margin-left: 20px;">Port</a></li><li><a href="#Link-TCP6SegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">TCP6SegmentationOffload</a></li><li><a href="#Link-UDPSegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">UDPSegmentationOffload</a></li><li class="nav-subcat"><span>Hardware</span></li><li><a href="#Link-MACAddress" style="font-size: 0.9em; margin-left: 20px;">MACAddress</a></li><li><a href="#Link-MTUBytes" style="font-size: 0.9em; margin-left: 20px;">MTUBytes</a></li><li class="nav-subcat"><span>Offload</span></li><li><a href="#Link-TCPSegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">TCPSegmentationOffload</a></li><li><a href="#Link-GenericSegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">GenericSegmentationOffload</a></li><li><a href="#Link-GenericReceiveOffload" style="font-size: 0.9em; margin-left: 20px;">GenericReceiveOffload</a></li><li><a href="#Link-LargeReceiveOffload" style="font-size: 0.9em; margin-left: 20px;">LargeReceiveOffload</a></li></ul></details></li>
+                <li><details><summary><a href="#section-Match">Match</a></summary><ul class="sub-menu"><li><a href="#Match-Driver" style="font-size: 0.9em; margin-left: 20px;">Driver</a></li><li><a href="#Match-MACAddress" style="font-size: 0.9em; margin-left: 20px;">MACAddress</a></li><li><a href="#Match-Path" style="font-size: 0.9em; margin-left: 20px;">Path</a></li><li><a href="#Match-Type" style="font-size: 0.9em; margin-left: 20px;">Type</a></li><li><a href="#Match-Virtualization" style="font-size: 0.9em; margin-left: 20px;">Virtualization</a></li><li><a href="#Match-Architecture" style="font-size: 0.9em; margin-left: 20px;">Architecture</a></li><li><a href="#Match-Host" style="font-size: 0.9em; margin-left: 20px;">Host</a></li><li><a href="#Match-KernelCommandLine" style="font-size: 0.9em; margin-left: 20px;">KernelCommandLine</a></li><li><a href="#Match-KernelVersion" style="font-size: 0.9em; margin-left: 20px;">KernelVersion</a></li><li><a href="#Match-OriginalName" style="font-size: 0.9em; margin-left: 20px;">OriginalName</a></li></ul></details></li><li><details><summary><a href="#section-Link">Link</a></summary><ul class="sub-menu"><li><a href="#Link-MACAddress" style="font-size: 0.9em; margin-left: 20px;">MACAddress</a></li><li><a href="#Link-MTUBytes" style="font-size: 0.9em; margin-left: 20px;">MTUBytes</a></li><li><a href="#Link-GenericReceiveOffload" style="font-size: 0.9em; margin-left: 20px;">GenericReceiveOffload</a></li><li><a href="#Link-GenericSegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">GenericSegmentationOffload</a></li><li><a href="#Link-LargeReceiveOffload" style="font-size: 0.9em; margin-left: 20px;">LargeReceiveOffload</a></li><li><a href="#Link-TCPSegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">TCPSegmentationOffload</a></li><li><a href="#Link-Alias" style="font-size: 0.9em; margin-left: 20px;">Alias</a></li><li><a href="#Link-AutoNegotiation" style="font-size: 0.9em; margin-left: 20px;">AutoNegotiation</a></li><li><a href="#Link-BitsPerSecond" style="font-size: 0.9em; margin-left: 20px;">BitsPerSecond</a></li><li><a href="#Link-Description" style="font-size: 0.9em; margin-left: 20px;">Description</a></li><li><a href="#Link-Duplex" style="font-size: 0.9em; margin-left: 20px;">Duplex</a></li><li><a href="#Link-MACAddressPolicy" style="font-size: 0.9em; margin-left: 20px;">MACAddressPolicy</a></li><li><a href="#Link-Name" style="font-size: 0.9em; margin-left: 20px;">Name</a></li><li><a href="#Link-NamePolicy" style="font-size: 0.9em; margin-left: 20px;">NamePolicy</a></li><li><a href="#Link-Port" style="font-size: 0.9em; margin-left: 20px;">Port</a></li><li><a href="#Link-TCP6SegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">TCP6SegmentationOffload</a></li><li><a href="#Link-UDPSegmentationOffload" style="font-size: 0.9em; margin-left: 20px;">UDPSegmentationOffload</a></li><li><a href="#Link-WakeOnLan" style="font-size: 0.9em; margin-left: 20px;">WakeOnLan</a></li></ul></details></li>
             </ul>
         </div>
     </div>
     
     <div id="content">
         <h1>systemd.link <span style="font-size:0.5em; color:var(--meta-color); font-weight:normal;">/ v237</span></h1>
-        <div id="section-Match" class="section-block"><h2>Match Section</h2><h3 class="subcategory-header">General</h3>
-                <div id="Match-OriginalName" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-OriginalName" class="anchor-link">#</a>OriginalName
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22OriginalName%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v218+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#globsType" class="badge badge-type-prominent badge-type-complex">Shell Globs</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>A whitespace-separated list of shell-style globs matching
-          the device name, as exposed by the udev property
-          &quot;INTERFACE&quot;. This cannot be used to match on names that have
-          already been changed from userspace. Caution is advised when matching on
-          kernel-assigned names, as they are known to be unstable
-          between reboots.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OriginalName=eth*
-OriginalName=en* wlan*
-OriginalName=!virbr*
-OriginalName=!eth0 eth1
-</code></pre></div></div>
-                <div id="Match-Host" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-Host" class="anchor-link">#</a>Host
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Host%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>Matches against the hostname or machine
-          ID of the host. See <code>ConditionHost=</code> in
-          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a>
-          for details.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=myserver
-Host=web*
-Host=!testhost
-</code></pre></div></div>
-                <div id="Match-KernelCommandLine" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-KernelCommandLine" class="anchor-link">#</a>KernelCommandLine
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22KernelCommandLine%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>Checks whether a specific kernel command line option
-          is set (or if prefixed with the exclamation mark unset). See
-          <code>ConditionKernelCommandLine=</code> in
-          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a>
-          for details.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=systemd.network=1
-KernelCommandLine=!quiet
-</code></pre></div></div>
-                <div id="Match-KernelVersion" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-KernelVersion" class="anchor-link">#</a>KernelVersion
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22KernelVersion%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v237+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-            <p>Checks whether the kernel version (as reported by <code class="command">uname -r</code>) matches a certain
-            expression (or if prefixed with the exclamation mark does not match it). See
-            <code>ConditionKernelVersion=</code> in
-            <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a> for
-            details.
-            </p>
-          
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=5.15.*
-KernelVersion=6.*
-</code></pre></div></div>
-                <div id="Match-Architecture" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-Architecture" class="anchor-link">#</a>Architecture
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Architecture%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>Checks whether the system is running on a specific
-          architecture. See <code>ConditionArchitecture=</code>
-          in
-          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a>
-          for details.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=x86-64
-Architecture=arm64
-Architecture=!arm
-</code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
-                <div id="Match-MACAddress" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-MACAddress" class="anchor-link">#</a>MACAddress
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22MACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v250+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#mac_addressType" class="badge badge-type-prominent badge-type-complex">MAC Address</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The hardware address.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddress=12:34:56:78:9a:bc
-MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
-</code></pre></div></div>
-                <div id="Match-Path" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-Path" class="anchor-link">#</a>Path
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Path%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#globsType" class="badge badge-type-prominent badge-type-complex">Shell Globs</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>A whitespace-separated list of shell-style globs matching
-          the persistent path, as exposed by the udev property
-          <code>ID_PATH</code>.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=eth*
-Path=en* wlan*
-Path=!virbr*
-Path=!eth0 eth1
-</code></pre></div></div>
-                <div id="Match-Driver" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-Driver" class="anchor-link">#</a>Driver
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Driver%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#globsType" class="badge badge-type-prominent badge-type-complex">Shell Globs</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
+        <div id="section-Match" class="section-block"><h2>Match Section</h2><div id="Match-Driver" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-Driver" class="anchor-link">#</a>Driver</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Driver"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#globsType" class="badge badge-type-prominent badge-type-complex">Shell Globs</a></div><div class="option-description">
           <p>A whitespace-separated list of shell-style globs matching
           the driver currently bound to the device,
           as exposed by the udev property <code>DRIVER</code>
           of its parent device, or if that is not set, the
           driver as exposed by <code>ethtool -i</code>
           of the device itself.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Driver=eth*
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Driver=eth*
 Driver=en* wlan*
 Driver=!virbr*
 Driver=!eth0 eth1
-</code></pre></div></div>
-                <div id="Match-Type" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-Type" class="anchor-link">#</a>Type
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Type%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#globsType" class="badge badge-type-prominent badge-type-complex">Shell Globs</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
+</code></pre></div></div><div id="Match-MACAddress" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-MACAddress" class="anchor-link">#</a>MACAddress</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="MACAddress"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v250+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#mac_addressType" class="badge badge-type-prominent badge-type-complex">MAC Address</a></div><div class="option-description">
+          <p>The hardware address.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddress=12:34:56:78:9a:bc
+MACAddress=00:11:22:33:44:55 66:77:88:99:aa:bb
+</code></pre></div></div><div id="Match-Path" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-Path" class="anchor-link">#</a>Path</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Path"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#globsType" class="badge badge-type-prominent badge-type-complex">Shell Globs</a></div><div class="option-description">
+          <p>A whitespace-separated list of shell-style globs matching
+          the persistent path, as exposed by the udev property
+          <code>ID_PATH</code>.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Path=eth*
+Path=en* wlan*
+Path=!virbr*
+Path=!eth0 eth1
+</code></pre></div></div><div id="Match-Type" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-Type" class="anchor-link">#</a>Type</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Type"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#globsType" class="badge badge-type-prominent badge-type-complex">Shell Globs</a></div><div class="option-description">
           <p>A whitespace-separated list of shell-style globs matching
           the device type, as exposed by the udev
           property <code>DEVTYPE</code>.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Type=global
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Type=global
 Type=link
 Type=host
-</code></pre></div></div><h3 class="subcategory-header">Virtualization</h3>
-                <div id="Match-Virtualization" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Match-Virtualization" class="anchor-link">#</a>Virtualization
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Virtualization%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
+</code></pre></div></div><div id="Match-Virtualization" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-Virtualization" class="anchor-link">#</a>Virtualization</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Virtualization"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
           <p>Checks whether the system is executed in
           a virtualized environment and optionally test
           whether it is a specific implementation. See
           <code>ConditionVirtualization=</code> in
-          <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html" target="_blank" class="external-link">systemd.unit</a>
+          <a href="https://man7.org/linux/man-pages/man5/systemd.unit.5.html" target="_blank" class="external-link">systemd.unit</a>
           for details.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=vm
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Virtualization=vm
 Virtualization=container
 Virtualization=qemu
 Virtualization=!kvm
-</code></pre></div></div></div><div id="section-Link" class="section-block"><h2>Link Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Match" class="dependency-link">[Match]</a></div><h3 class="subcategory-header">General</h3>
-                <div id="Link-Description" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-Description" class="anchor-link">#</a>Description
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Description%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>A description of the device.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Description=My Interface
-Description=Uplink to ISP
-</code></pre></div></div>
-                <div id="Link-Alias" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-Alias" class="anchor-link">#</a>Alias
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Alias%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
+</code></pre></div></div><div id="Match-Architecture" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-Architecture" class="anchor-link">#</a>Architecture</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Architecture"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
+          <p>Checks whether the system is running on a specific
+          architecture. See <code>ConditionArchitecture=</code>
+          in
+          <a href="https://man7.org/linux/man-pages/man5/systemd.unit.5.html" target="_blank" class="external-link">systemd.unit</a>
+          for details.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Architecture=x86-64
+Architecture=arm64
+Architecture=!arm
+</code></pre></div></div><div id="Match-Host" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-Host" class="anchor-link">#</a>Host</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Host"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
+          <p>Matches against the hostname or machine
+          ID of the host. See <code>ConditionHost=</code> in
+          <a href="https://man7.org/linux/man-pages/man5/systemd.unit.5.html" target="_blank" class="external-link">systemd.unit</a>
+          for details.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Host=myserver
+Host=web*
+Host=!testhost
+</code></pre></div></div><div id="Match-KernelCommandLine" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-KernelCommandLine" class="anchor-link">#</a>KernelCommandLine</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="KernelCommandLine"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
+          <p>Checks whether a specific kernel command line option
+          is set (or if prefixed with the exclamation mark unset). See
+          <code>ConditionKernelCommandLine=</code> in
+          <a href="https://man7.org/linux/man-pages/man5/systemd.unit.5.html" target="_blank" class="external-link">systemd.unit</a>
+          for details.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelCommandLine=systemd.network=1
+KernelCommandLine=!quiet
+</code></pre></div></div><div id="Match-KernelVersion" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-KernelVersion" class="anchor-link">#</a>KernelVersion</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="KernelVersion"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v237+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
+            <p>Checks whether the kernel version (as reported by <code class="command">uname -r</code>) matches a certain
+            expression (or if prefixed with the exclamation mark does not match it). See
+            <code>ConditionKernelVersion=</code> in
+            <a href="https://man7.org/linux/man-pages/man5/systemd.unit.5.html" target="_blank" class="external-link">systemd.unit</a> for
+            details.
+            </p>
+          </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>KernelVersion=5.15.*
+KernelVersion=6.*
+</code></pre></div></div><div id="Match-OriginalName" class="option-block"><div class="option-header"><div class="option-title"><a href="#Match-OriginalName" class="anchor-link">#</a>OriginalName</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="OriginalName"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v218+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#globsType" class="badge badge-type-prominent badge-type-complex">Shell Globs</a></div><div class="option-description">
+          <p>A whitespace-separated list of shell-style globs matching
+          the device name, as exposed by the udev property
+          &quot;INTERFACE&quot;. This cannot be used to match on names that have
+          already been changed from userspace. Caution is advised when matching on
+          kernel-assigned names, as they are known to be unstable
+          between reboots.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>OriginalName=eth*
+OriginalName=en* wlan*
+OriginalName=!virbr*
+OriginalName=!eth0 eth1
+</code></pre></div></div></div><div id="section-Link" class="section-block"><h2>Link Section</h2><div class="section-dependency" style="margin-bottom: 20px; padding: 10px; background: rgba(56, 139, 253, 0.15); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 6px; color: #c9d1d9;"><strong>Depends on:</strong> <a href="#section-Match" class="dependency-link">[Match]</a></div><div id="Link-MACAddress" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-MACAddress" class="anchor-link">#</a>MACAddress</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="MACAddress"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#mac_addressType" class="badge badge-type-prominent badge-type-complex">MAC Address</a></div><div class="option-description">
+          <p>The MAC address to use, if no
+          <code>MACAddressPolicy=</code>
+          is specified.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddress=12:34:56:78:9a:bc
+MACAddress=none
+</code></pre></div></div><div id="Link-MTUBytes" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-MTUBytes" class="anchor-link">#</a>MTUBytes</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="MTUBytes"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#MTUBytesType" class="badge badge-type-prominent badge-type-complex">MTU (Bytes)</a></div><div class="option-description">
+          <p>The maximum transmission unit in bytes to set for the
+          device. The usual suffixes K, M, G, are supported and are
+          understood to the base of 1024.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
+MTUBytes=9000
+MTUBytes=auto
+</code></pre></div></div><div id="Link-GenericReceiveOffload" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-GenericReceiveOffload" class="anchor-link">#</a>GenericReceiveOffload</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="GenericReceiveOffload"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v232+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+          <p>The Generic Receive Offload (GRO) when true enables
+          generic receive offload. Defaults to &quot;unset&quot;.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericReceiveOffload=yes
+</code></pre></div></div><div id="Link-GenericSegmentationOffload" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-GenericSegmentationOffload" class="anchor-link">#</a>GenericSegmentationOffload</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="GenericSegmentationOffload"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v232+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+          <p>The Generic Segmentation Offload (GSO) when true enables
+          generic segmentation offload. Defaults to &quot;unset&quot;.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentationOffload=yes
+</code></pre></div></div><div id="Link-LargeReceiveOffload" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-LargeReceiveOffload" class="anchor-link">#</a>LargeReceiveOffload</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="LargeReceiveOffload"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v232+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+          <p>The Large Receive Offload (LRO) when true enables
+          large receive offload. Defaults to &quot;unset&quot;.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LargeReceiveOffload=yes
+</code></pre></div></div><div id="Link-TCPSegmentationOffload" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-TCPSegmentationOffload" class="anchor-link">#</a>TCPSegmentationOffload</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="TCPSegmentationOffload"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v232+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+          <p>The TCP Segmentation Offload (TSO) when true enables
+          TCP segmentation offload. Defaults to &quot;unset&quot;.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCPSegmentationOffload=yes
+</code></pre></div></div><div id="Link-Alias" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-Alias" class="anchor-link">#</a>Alias</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Alias"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
           <p>The <code>ifalias</code> is set to this
           value.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=my-interface
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Alias=my-interface
 Alias=uplink-to-isp
-</code></pre></div></div>
-                <div id="Link-MACAddressPolicy" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-MACAddressPolicy" class="anchor-link">#</a>MACAddressPolicy
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22MACAddressPolicy%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#rateType" class="badge badge-type-prominent badge-type-complex">Data Rate</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
+</code></pre></div></div><div id="Link-AutoNegotiation" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-AutoNegotiation" class="anchor-link">#</a>AutoNegotiation</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="AutoNegotiation"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v233+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+          <p>Enables or disables automatic negotiation of transmission parameters.
+          Autonegotiation is a procedure by which two connected ethernet devices choose
+          common transmission parameters, such as speed, duplex mode, and flow control.
+          Unset by default, which means that the kernel default
+          will be used.</p>
+
+          <p>Note that if autonegotiation is enabled, speed and duplex settings are
+          read-only. If autonegotation is disabled, speed and duplex settings are writable
+          if the driver supports multiple link modes.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoNegotiation=yes
+</code></pre></div></div><div id="Link-BitsPerSecond" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-BitsPerSecond" class="anchor-link">#</a>BitsPerSecond</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="BitsPerSecond"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#rateType" class="badge badge-type-prominent badge-type-complex">Data Rate</a></div><div class="option-description">
+          <p>The speed to set for the device, the value is rounded
+          down to the nearest Mbps. The usual suffixes K, M, G, are
+          supported and are understood to the base of 1000.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BitsPerSecond=1G
+BitsPerSecond=100M
+</code></pre></div></div><div id="Link-Description" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-Description" class="anchor-link">#</a>Description</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Description"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
+          <p>A description of the device.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Description=My Interface
+Description=Uplink to ISP
+</code></pre></div></div><div id="Link-Duplex" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-Duplex" class="anchor-link">#</a>Duplex</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Duplex"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#enum" class="badge badge-type-prominent badge-type-enum">enum</a></div><div class="option-description">
+          <p>The duplex mode to set for the device. The accepted
+          values are <code>half</code> and
+          <code>full</code>.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Duplex=full
+</code></pre></div></div><div id="Link-MACAddressPolicy" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-MACAddressPolicy" class="anchor-link">#</a>MACAddressPolicy</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="MACAddressPolicy"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#rateType" class="badge badge-type-prominent badge-type-complex">Data Rate</a></div><div class="option-description">
           <p>The policy by which the MAC address should be set. The
           available policies are:
           </p>
@@ -549,39 +212,27 @@ Alias=uplink-to-isp
                 <p>Keeps the MAC address assigned by the kernel.</p>
               </dd>
           </dl>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=1G
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddressPolicy=1G
 MACAddressPolicy=100M
-</code></pre></div></div>
-                <div id="Link-NamePolicy" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-NamePolicy" class="anchor-link">#</a>NamePolicy
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22NamePolicy%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v216+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
+</code></pre></div></div><div id="Link-Name" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-Name" class="anchor-link">#</a>Name</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Name"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a></div><div class="option-description">
+          <p>The interface name to use in case all the
+          policies specified in
+          <a href="#Link-NamePolicy" class="attribute-ref"><code class="varname">NamePolicy=</code></a> fail, or in case
+          <a href="#Link-NamePolicy" class="attribute-ref"><code class="varname">NamePolicy=</code></a> is missing or
+          disabled.</p>
+
+          <p>Note that specifying a name that the kernel might use for another
+          interface (for example <code>eth0</code>) is dangerous because the
+          name assignment done by udev will race with the assignment done by the
+          kernel, and only one interface may use the name. Depending on the order of
+          operations, either udev or the kernel will win, making the naming
+          unpredictable. It is best to use some different prefix, for example
+          <code>internal0</code>/<code>external0</code> or
+          <code>lan0</code>/<code>lan1</code>/<code>lan3</code>.
+          </p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Name=eth0
+Name=br0
+</code></pre></div></div><div id="Link-NamePolicy" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-NamePolicy" class="anchor-link">#</a>NamePolicy</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="NamePolicy"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v216+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
           <p>An ordered, space-separated list of policies by which
           the interface name should be set.
           <code>NamePolicy</code> may be disabled by specifying
@@ -629,199 +280,42 @@ MACAddressPolicy=100M
                 <code>ID_NET_NAME_MAC</code>.</p>
               </dd>
           </dl>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=kernel database onboard slot path
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>NamePolicy=kernel database onboard slot path
 NamePolicy=keep kernel database onboard slot path mac
-</code></pre></div></div>
-                <div id="Link-Name" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-Name" class="anchor-link">#</a>Name
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Name%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#interfacenameType" class="badge badge-type-prominent badge-type-complex">Interface Name</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The interface name to use in case all the
-          policies specified in
-          <a href="#Link-NamePolicy" class="attribute-ref"><code class="varname">NamePolicy=</code></a> fail, or in case
-          <a href="#Link-NamePolicy" class="attribute-ref"><code class="varname">NamePolicy=</code></a> is missing or
-          disabled.</p>
+</code></pre></div></div><div id="Link-Port" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-Port" class="anchor-link">#</a>Port</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="Port"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v234+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description">
+          <p>The port option is used to select the device port. The
+          supported values are:</p>
 
-          <p>Note that specifying a name that the kernel might use for another
-          interface (for example <code>eth0</code>) is dangerous because the
-          name assignment done by udev will race with the assignment done by the
-          kernel, and only one interface may use the name. Depending on the order of
-          operations, either udev or the kernel will win, making the naming
-          unpredictable. It is best to use some different prefix, for example
-          <code>internal0</code>/<code>external0</code> or
-          <code>lan0</code>/<code>lan1</code>/<code>lan3</code>.
-          </p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Name=eth0
-Name=br0
-</code></pre></div></div>
-                <div id="Link-BitsPerSecond" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-BitsPerSecond" class="anchor-link">#</a>BitsPerSecond
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22BitsPerSecond%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#rateType" class="badge badge-type-prominent badge-type-complex">Data Rate</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The speed to set for the device, the value is rounded
-          down to the nearest Mbps. The usual suffixes K, M, G, are
-          supported and are understood to the base of 1000.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>BitsPerSecond=1G
-BitsPerSecond=100M
-</code></pre></div></div>
-                <div id="Link-Duplex" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-Duplex" class="anchor-link">#</a>Duplex
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Duplex%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#enum" class="badge badge-type-prominent badge-type-enum">enum</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The duplex mode to set for the device. The accepted
-          values are <code>half</code> and
-          <code>full</code>.</p>
-        
-                    </div>
-                <div class="option-values"><strong>Allowed:</strong> <code>full</code>, <code>half</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Duplex=full
-</code></pre></div></div>
-                <div id="Link-AutoNegotiation" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-AutoNegotiation" class="anchor-link">#</a>AutoNegotiation
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22AutoNegotiation%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v233+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>Enables or disables automatic negotiation of transmission parameters.
-          Autonegotiation is a procedure by which two connected ethernet devices choose
-          common transmission parameters, such as speed, duplex mode, and flow control.
-          Unset by default, which means that the kernel default
-          will be used.</p>
-
-          <p>Note that if autonegotiation is enabled, speed and duplex settings are
-          read-only. If autonegotation is disabled, speed and duplex settings are writable
-          if the driver supports multiple link modes.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>AutoNegotiation=yes
-</code></pre></div></div>
-                <div id="Link-WakeOnLan" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-WakeOnLan" class="anchor-link">#</a>WakeOnLan
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22WakeOnLan%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#enum" class="badge badge-type-prominent badge-type-enum">enum</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
+          <dl>
+            <dt><code>tp</code></dt><dd>
+                <p>An Ethernet interface using Twisted-Pair cable as the medium.</p>
+              </dd>
+            <dt><code>aui</code></dt><dd>
+                <p>Attachment Unit Interface (AUI). Normally used with hubs.
+                </p>
+              </dd>
+            <dt><code>bnc</code></dt><dd>
+                <p>An Ethernet interface using BNC connectors and co-axial cable.</p>
+              </dd>
+            <dt><code>mii</code></dt><dd>
+                <p>An Ethernet interface using a Media Independent Interface (MII).</p>
+              </dd>
+            <dt><code>fibre</code></dt><dd>
+                <p>An Ethernet interface using Optical Fibre as the medium.</p>
+              </dd>
+          </dl>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=tp
+Port=mii
+Port=fibre
+</code></pre></div></div><div id="Link-TCP6SegmentationOffload" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-TCP6SegmentationOffload" class="anchor-link">#</a>TCP6SegmentationOffload</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="TCP6SegmentationOffload"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v235+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+          <p>The TCP6 Segmentation Offload (tx-tcp6-segmentation) when true enables
+          TCP6 segmentation offload. Defaults to &quot;unset&quot;.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCP6SegmentationOffload=yes
+</code></pre></div></div><div id="Link-UDPSegmentationOffload" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-UDPSegmentationOffload" class="anchor-link">#</a>UDPSegmentationOffload</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="UDPSegmentationOffload"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+          <p>The UDP Segmentation Offload (USO) when true enables
+          UDP segmentation offload. Defaults to &quot;unset&quot;.</p>
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDPSegmentationOffload=yes
+</code></pre></div></div><div id="Link-WakeOnLan" class="option-block"><div class="option-header"><div class="option-title"><a href="#Link-WakeOnLan" class="anchor-link">#</a>WakeOnLan</div><div class="option-meta"><a href="../schemas/v237/systemd.link.schema.json#:~:text="WakeOnLan"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v211+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#enum" class="badge badge-type-prominent badge-type-enum">enum</a></div><div class="option-description">
           <p>The Wake-on-LAN policy to set for the device. The
           supported values are:</p>
 
@@ -855,341 +349,7 @@ BitsPerSecond=100M
           </dl>
 
           <p>Defaults to <code>off</code>.</p>
-        
-                    </div>
-                <div class="option-values"><strong>Allowed:</strong> <code>off</code>, <code>phy</code>, <code>unicast</code>, <code>multicast</code>, <code>broadcast</code>, <code>arp</code>, <code>magic</code>, <code>secureon</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>WakeOnLan=off
-</code></pre></div></div>
-                <div id="Link-Port" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-Port" class="anchor-link">#</a>Port
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22Port%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v234+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The port option is used to select the device port. The
-          supported values are:</p>
-
-          <dl>
-            <dt><code>tp</code></dt><dd>
-                <p>An Ethernet interface using Twisted-Pair cable as the medium.</p>
-              </dd>
-            <dt><code>aui</code></dt><dd>
-                <p>Attachment Unit Interface (AUI). Normally used with hubs.
-                </p>
-              </dd>
-            <dt><code>bnc</code></dt><dd>
-                <p>An Ethernet interface using BNC connectors and co-axial cable.</p>
-              </dd>
-            <dt><code>mii</code></dt><dd>
-                <p>An Ethernet interface using a Media Independent Interface (MII).</p>
-              </dd>
-            <dt><code>fibre</code></dt><dd>
-                <p>An Ethernet interface using Optical Fibre as the medium.</p>
-              </dd>
-          </dl>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Port=tp
-Port=mii
-Port=fibre
-</code></pre></div></div>
-                <div id="Link-TCP6SegmentationOffload" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-TCP6SegmentationOffload" class="anchor-link">#</a>TCP6SegmentationOffload
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22TCP6SegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v235+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The TCP6 Segmentation Offload (tx-tcp6-segmentation) when true enables
-          TCP6 segmentation offload. Defaults to &quot;unset&quot;.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCP6SegmentationOffload=yes
-</code></pre></div></div>
-                <div id="Link-UDPSegmentationOffload" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-UDPSegmentationOffload" class="anchor-link">#</a>UDPSegmentationOffload
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22UDPSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
-                            
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The UDP Segmentation Offload (USO) when true enables
-          UDP segmentation offload. Defaults to &quot;unset&quot;.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UDPSegmentationOffload=yes
-</code></pre></div></div><h3 class="subcategory-header">Hardware</h3>
-                <div id="Link-MACAddress" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-MACAddress" class="anchor-link">#</a>MACAddress
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22MACAddress%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#mac_addressType" class="badge badge-type-prominent badge-type-complex">MAC Address</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The MAC address to use, if no
-          <code>MACAddressPolicy=</code>
-          is specified.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MACAddress=12:34:56:78:9a:bc
-MACAddress=none
-</code></pre></div></div>
-                <div id="Link-MTUBytes" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-MTUBytes" class="anchor-link">#</a>MTUBytes
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22MTUBytes%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v211+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#MTUBytesType" class="badge badge-type-prominent badge-type-complex">MTU (Bytes)</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The maximum transmission unit in bytes to set for the
-          device. The usual suffixes K, M, G, are supported and are
-          understood to the base of 1024.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>MTUBytes=1500
-MTUBytes=9000
-MTUBytes=auto
-</code></pre></div></div><h3 class="subcategory-header">Offload</h3>
-                <div id="Link-TCPSegmentationOffload" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-TCPSegmentationOffload" class="anchor-link">#</a>TCPSegmentationOffload
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22TCPSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v232+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The TCP Segmentation Offload (TSO) when true enables
-          TCP segmentation offload. Defaults to &quot;unset&quot;.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>TCPSegmentationOffload=yes
-</code></pre></div></div>
-                <div id="Link-GenericSegmentationOffload" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-GenericSegmentationOffload" class="anchor-link">#</a>GenericSegmentationOffload
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22GenericSegmentationOffload%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v232+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The Generic Segmentation Offload (GSO) when true enables
-          generic segmentation offload. Defaults to &quot;unset&quot;.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericSegmentationOffload=yes
-</code></pre></div></div>
-                <div id="Link-GenericReceiveOffload" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-GenericReceiveOffload" class="anchor-link">#</a>GenericReceiveOffload
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22GenericReceiveOffload%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v232+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The Generic Receive Offload (GRO) when true enables
-          generic receive offload. Defaults to &quot;unset&quot;.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>GenericReceiveOffload=yes
-</code></pre></div></div>
-                <div id="Link-LargeReceiveOffload" class="option-block">
-                    <div class="option-header">
-                        <div class="option-title">
-                            <a href="#Link-LargeReceiveOffload" class="anchor-link">#</a>LargeReceiveOffload
-                        </div>
-                        <div class="option-meta">
-                            <a href="../schemas/v237/systemd.link.schema.json#:~:text=%22LargeReceiveOffload%22" target="_blank" class="badge badge-schema">Schema</a>
-                            <span class="badge badge-version">v232+</span>
-                            <span class="badge badge-default">Optional</span>
-                            
-                        </div>
-                    </div>
-                    <!-- Type Prominence (User Request) -->
-                    <div class="option-type-line">
-                         <!-- Dynamically assign class based on type -->
-                         <!-- boolean, integer, string, enum, complex -->
-                         <!-- Logic: -->
-                         <!-- If type is 'boolean' -> badge-type-boolean -->
-                         <!-- If type is 'integer' -> badge-type-integer -->
-                         <!-- If type contains '|' -> badge-type-complex -->
-                         <!-- If type is 'string' or similar -> badge-type-string -->
-                         <!-- Fallback -> badge-type-complex -->
-                         
-                         <a href="types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
-                         
-                    </div>
-                    <div class="option-desc">
-                        
-          <p>The Large Receive Offload (LRO) when true enables
-          large receive offload. Defaults to &quot;unset&quot;.</p>
-        
-                    </div>
-                <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>LargeReceiveOffload=yes
+        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>WakeOnLan=off
 </code></pre></div></div></div>
     </div>
 

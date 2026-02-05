@@ -4,8 +4,8 @@ import os
 
 try:
     import jsonschema
-    # Try getting the newest validator
-    Validator = getattr(jsonschema, 'Draft202012Validator', getattr(jsonschema, 'Draft201909Validator', getattr(jsonschema, 'Draft7Validator', None)))
+    # Enforce Draft-07 Validator
+    Validator = getattr(jsonschema, 'Draft7Validator', None)
     HAS_JSONSCHEMA = True
 except ImportError:
     HAS_JSONSCHEMA = False

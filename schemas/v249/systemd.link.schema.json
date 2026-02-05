@@ -1,81 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/remcovanmook/networkd-schema/main/schemas/v249/systemd.link.schema.json",
-  "$comment": "Documentation: https://remcovanmook.github.io/networkd-schema/v257/systemd.link.html",
+  "$comment": "Documentation: https://remcovanmook.github.io/networkd-schema/v257/systemd.link.html Definitions organization: 1. Base Types (uint, etc.), 2. Network Types (IP, etc.), 3. Common Types, 4. Specific Types, 5. Sections.",
   "title": "Systemd link Configuration (v249)",
   "type": "object",
   "additionalProperties": false,
   "definitions": {
-    "MTUBytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 68,
-          "maximum": 65535
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
-        }
-      ],
-      "title": "MTU (Bytes)",
-      "examples": [
-        "1500",
-        "9000"
-      ]
-    },
-    "MTUv6BytesType": {
-      "description": "Maximum Transmission Unit (MTU) in bytes",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 1280,
-          "maximum": 65535
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
-        }
-      ],
-      "title": "IPv6 MTU (Bytes)",
-      "examples": [
-        "1280",
-        "1500"
-      ]
-    },
-    "absolutePathType": {
-      "type": "string",
-      "description": "Absolute filesystem path.",
-      "pattern": "^/[^\\0]*$",
-      "title": "Absolute Path",
-      "examples": [
-        "/etc/systemd/network/key.pem",
-        "/run/credentials/wireguard.key"
-      ]
-    },
-    "addressLabelType": {
-      "type": "string",
-      "description": "IPv4 address label (7-bit ASCII, prefixed with interface name).",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9:.]*$",
-      "minLength": 1,
-      "maxLength": 15,
-      "title": "Address Label",
-      "examples": [
-        "eth0:0",
-        "lan:primary"
-      ]
-    },
-    "base64KeyType": {
-      "type": "string",
-      "description": "Base64-encoded cryptographic key (e.g. WireGuard keys).",
-      "pattern": "^[A-Za-z0-9+/]{42,44}={0,2}$",
-      "title": "Base64 Key",
-      "examples": [
-        "yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=",
-        "xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14="
-      ]
-    },
     "bytesType": {
       "description": "Size in bytes (Integer or String with suffix B, K, M, G, T, P, E)",
       "oneOf": [
@@ -95,34 +25,76 @@
         "1024"
       ]
     },
-    "dhcpOptionType": {
+    "percentageType": {
       "type": "string",
-      "description": "DHCP option in 'number:type:value' format (type: uint8, uint16, uint32, ipv4address, ipv6address, string, hex).",
-      "pattern": "^[0-9]+:(uint8|uint16|uint32|ipv4address|ipv6address|string|hex):.+$",
-      "title": "DHCP Option",
+      "pattern": "^[0-9]+(\\.[0-9]+)?%$",
+      "description": "Percentage value (e.g. 10%, 0.5%)",
+      "title": "Percentage",
       "examples": [
-        "224:string:openwrt",
-        "43:hex:0102030405"
+        "10%",
+        "0.5%"
       ]
     },
-    "domainnameType": {
-      "type": "string",
-      "title": "Domain Name",
-      "description": "A DNS domain name (no host label).",
-      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+    "rateType": {
+      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "Data Rate",
       "examples": [
-        "example.com",
-        "sub.example.org"
+        "1G",
+        "100M"
       ]
     },
-    "duidRawDataType": {
+    "secondsType": {
       "type": "string",
-      "description": "DHCP DUID as hexadecimal string with colon separators.",
-      "pattern": "^([0-9a-fA-F]{2}:)*[0-9a-fA-F]{2}$",
-      "title": "DUID Raw Data",
+      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
+      "description": "Time duration (e.g. 5s, 1min, 500ms)",
+      "title": "Duration",
       "examples": [
-        "00:01:00:01:2a:3b:4c:5d:6e:7f:80:91",
-        "00:02:00:00:ab:cd:ef:01:23:45"
+        "5s",
+        "100ms",
+        "1min"
+      ]
+    },
+    "uint16Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535,
+      "description": "Unsigned 16-bit integer (0...65535).",
+      "title": "Integer (16-bit)",
+      "examples": [
+        100,
+        200
+      ]
+    },
+    "uint32Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967294,
+      "description": "Unsigned 32-bit integer (0...4294967294).",
+      "title": "Integer (32-bit)",
+      "examples": [
+        100,
+        200
+      ]
+    },
+    "uint8Type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Unsigned 8-bit integer (0...255).",
+      "title": "Integer (8-bit)",
+      "examples": [
+        10,
+        20
       ]
     },
     "endpointType": {
@@ -134,92 +106,6 @@
         "vpn.example.com:51820",
         "192.0.2.1:51820",
         "[2001:db8::1]:51820"
-      ]
-    },
-    "flowLabelType": {
-      "description": "IPv6 flow label (0-0xFFFFF) or 'inherit'.",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 1048575
-        },
-        {
-          "type": "string",
-          "enum": [
-            "inherit"
-          ]
-        }
-      ],
-      "title": "Flow Label",
-      "examples": [
-        "0",
-        "12345",
-        "inherit"
-      ]
-    },
-    "globsType": {
-      "type": "string",
-      "description": "A whitespace-separated list of shell-style globs.",
-      "title": "Shell Globs",
-      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
-      "examples": [
-        "eth*",
-        "en* wlan*",
-        "!virbr*",
-        "!eth0 eth1"
-      ]
-    },
-    "groupnameOrGidType": {
-      "type": "string",
-      "description": "Unix group name or numeric GID.",
-      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+)$",
-      "title": "Group",
-      "examples": [
-        "nogroup",
-        "1000"
-      ]
-    },
-    "hexKeyType": {
-      "type": "string",
-      "description": "Hexadecimal-encoded cryptographic key (e.g. MACsec 128-bit keys).",
-      "pattern": "^[0-9a-fA-F]{32}$",
-      "title": "Hex Key",
-      "examples": [
-        "0011223344556677889900aabbccddeeff",
-        "deadbeefcafebabedeadbeefcafebabe"
-      ]
-    },
-    "hostType": {
-      "description": "IP Address or Hostname",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/ip_addressType"
-        },
-        {
-          "type": "string",
-          "format": "hostname",
-          "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])$",
-          "title": "Hostname"
-        }
-      ],
-      "title": "Host",
-      "examples": [
-        "192.168.1.1",
-        "example.com"
-      ]
-    },
-    "interfacenameType": {
-      "type": "string",
-      "title": "Interface Name",
-      "description": "Network interface device name (kernel interface name).",
-      "minLength": 1,
-      "maxLength": 16,
-      "pattern": "^[-a-z0-9:._/]+$",
-      "examples": [
-        "eth0",
-        "enp0s3",
-        "br0"
       ]
     },
     "ip_addressType": {
@@ -312,41 +198,13 @@
     },
     "mac_addressType": {
       "type": "string",
-      "description": "MAC Address (Hex separated by colons or hyphens)",
-      "pattern": "^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$",
+      "description": "MAC Address (Hex separated by colons or hyphens, or dot-delimited groups of 4 hex digits)",
+      "pattern": "^(([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})|[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4})$",
       "title": "MAC Address",
       "examples": [
-        "00:11:22:33:44:55"
-      ]
-    },
-    "netLabelType": {
-      "type": "string",
-      "description": "Linux NetLabel for security labeling (SELinux/SMACK).",
-      "pattern": "^[a-zA-Z_][a-zA-Z0-9_:.-]*$",
-      "title": "NetLabel",
-      "examples": [
-        "system_u:object_r:netlabel_peer_t:s0",
-        "web_traffic"
-      ]
-    },
-    "nftSetType": {
-      "type": "string",
-      "description": "nftables set specification in family:table:set format.",
-      "pattern": "^(ip|ip6|inet|arp|bridge|netdev):[a-zA-Z_][a-zA-Z0-9_]*:[a-zA-Z_][a-zA-Z0-9_]*$",
-      "title": "NFT Set",
-      "examples": [
-        "inet:filter:allowed_addrs",
-        "ip:nat:masq_addrs"
-      ]
-    },
-    "percentageType": {
-      "type": "string",
-      "pattern": "^[0-9]+(\\.[0-9]+)?%$",
-      "description": "Percentage value (e.g. 10%, 0.5%)",
-      "title": "Percentage",
-      "examples": [
-        "10%",
-        "0.5%"
+        "00:11:22:33:44:55",
+        "00-11-22-33-44-55",
+        "aabb.ccdd.eeff"
       ]
     },
     "portRangeType": {
@@ -379,6 +237,212 @@
       "examples": [
         "51820",
         "auto"
+      ]
+    },
+    "MTUBytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 68,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "MTU (Bytes)",
+      "examples": [
+        "1500",
+        "9000"
+      ]
+    },
+    "MTUv6BytesType": {
+      "description": "Maximum Transmission Unit (MTU) in bytes",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 1280,
+          "maximum": 65535
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]+(\\s*[KMGTPE]i?)?$"
+        }
+      ],
+      "title": "IPv6 MTU (Bytes)",
+      "examples": [
+        "1280",
+        "1500"
+      ]
+    },
+    "absolutePathType": {
+      "type": "string",
+      "description": "Absolute filesystem path.",
+      "pattern": "^/[^\\0]*$",
+      "title": "Absolute Path",
+      "examples": [
+        "/etc/systemd/network/key.pem",
+        "/run/credentials/wireguard.key"
+      ]
+    },
+    "addressLabelType": {
+      "type": "string",
+      "description": "IPv4 address label (7-bit ASCII, prefixed with interface name).",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9:.]*$",
+      "minLength": 1,
+      "maxLength": 15,
+      "title": "Address Label",
+      "examples": [
+        "eth0:0",
+        "lan:primary"
+      ]
+    },
+    "base64KeyType": {
+      "type": "string",
+      "description": "Base64-encoded cryptographic key (e.g. WireGuard keys).",
+      "pattern": "^[A-Za-z0-9+/]{42,44}={0,2}$",
+      "title": "Base64 Key",
+      "examples": [
+        "yAnz5TF+lXXJte14tji3zlMNq+hd2rYUIgJBgB3fBmk=",
+        "xTIBA5rboUvnH4htodjb60Y7YAf21J7YQMlNGC8HQ14="
+      ]
+    },
+    "dhcpOptionType": {
+      "type": "string",
+      "description": "DHCP option in 'number:type:value' format (type: uint8, uint16, uint32, ipv4address, ipv6address, string, hex).",
+      "pattern": "^[0-9]+:(uint8|uint16|uint32|ipv4address|ipv6address|string|hex):.+$",
+      "title": "DHCP Option",
+      "examples": [
+        "224:string:openwrt",
+        "43:hex:0102030405"
+      ]
+    },
+    "domainnameType": {
+      "type": "string",
+      "title": "Domain Name",
+      "description": "A DNS domain name (no host label).",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)+([a-zA-Z]{2,})$",
+      "examples": [
+        "example.com",
+        "sub.example.org"
+      ]
+    },
+    "duidRawDataType": {
+      "type": "string",
+      "description": "DHCP DUID as hexadecimal string with colon separators.",
+      "pattern": "^([0-9a-fA-F]{2}:)*[0-9a-fA-F]{2}$",
+      "title": "DUID Raw Data",
+      "examples": [
+        "00:01:00:01:2a:3b:4c:5d:6e:7f:80:91",
+        "00:02:00:00:ab:cd:ef:01:23:45"
+      ]
+    },
+    "flowLabelType": {
+      "description": "IPv6 flow label (0-0xFFFFF) or 'inherit'.",
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048575
+        },
+        {
+          "type": "string",
+          "enum": [
+            "inherit"
+          ]
+        }
+      ],
+      "title": "Flow Label",
+      "examples": [
+        "0",
+        "12345",
+        "inherit"
+      ]
+    },
+    "globsType": {
+      "type": "string",
+      "description": "A whitespace-separated list of shell-style globs.",
+      "title": "Shell Globs",
+      "pattern": "^(!\\s*)?\\S+(\\s+\\S+)*$",
+      "examples": [
+        "eth*",
+        "en* wlan*",
+        "!virbr*",
+        "!eth0 eth1"
+      ]
+    },
+    "groupnameOrGidType": {
+      "type": "string",
+      "description": "Unix group name or numeric GID.",
+      "pattern": "^([a-z_][a-z0-9_-]*[$]?|[0-9]+)$",
+      "title": "Group",
+      "examples": [
+        "nogroup",
+        "1000"
+      ]
+    },
+    "hexKeyType": {
+      "type": "string",
+      "description": "Hexadecimal-encoded cryptographic key (e.g. MACsec 128-bit keys).",
+      "pattern": "^[0-9a-fA-F]{32}$",
+      "title": "Hex Key",
+      "examples": [
+        "0011223344556677889900aabbccddeeff",
+        "deadbeefcafebabedeadbeefcafebabe"
+      ]
+    },
+    "hostType": {
+      "description": "IP Address or Hostname",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ip_addressType"
+        },
+        {
+          "type": "string",
+          "format": "hostname",
+          "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])$",
+          "title": "Hostname"
+        }
+      ],
+      "title": "Host",
+      "examples": [
+        "192.168.1.1",
+        "example.com"
+      ]
+    },
+    "interfacenameType": {
+      "type": "string",
+      "title": "Interface Name",
+      "description": "Network interface device name (kernel interface name).",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[-a-z0-9:._/]+$",
+      "examples": [
+        "eth0",
+        "enp0s3",
+        "br0"
+      ]
+    },
+    "netLabelType": {
+      "type": "string",
+      "description": "Linux NetLabel for security labeling (SELinux/SMACK).",
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_:.-]*$",
+      "title": "NetLabel",
+      "examples": [
+        "system_u:object_r:netlabel_peer_t:s0",
+        "web_traffic"
+      ]
+    },
+    "nftSetType": {
+      "type": "string",
+      "description": "nftables set specification in family:table:set format.",
+      "pattern": "^(ip|ip6|inet|arp|bridge|netdev):[a-zA-Z_][a-zA-Z0-9_]*:[a-zA-Z_][a-zA-Z0-9_]*$",
+      "title": "NFT Set",
+      "examples": [
+        "inet:filter:allowed_addrs",
+        "ip:nat:masq_addrs"
       ]
     },
     "property_comments": {
@@ -427,24 +491,6 @@
         "1:1"
       ]
     },
-    "rateType": {
-      "description": "Data rate in bits per second (e.g. 1G, 100M, 500K)",
-      "oneOf": [
-        {
-          "type": "integer",
-          "minimum": 0
-        },
-        {
-          "type": "string",
-          "pattern": "^[0-9]+(\\.[0-9]+)?(\\s*[KMGTPE]i?)?$"
-        }
-      ],
-      "title": "Data Rate",
-      "examples": [
-        "1G",
-        "100M"
-      ]
-    },
     "routeTableNameType": {
       "type": "string",
       "description": "Routing table name or numeric ID.",
@@ -455,17 +501,6 @@
         "local",
         "custom_table",
         "200"
-      ]
-    },
-    "secondsType": {
-      "type": "string",
-      "pattern": "^[0-9]+(\\.[0-9]+)?(us|ms|s|min|h|d|w|M|y)?$",
-      "description": "Time duration (e.g. 5s, 1min, 500ms)",
-      "title": "Duration",
-      "examples": [
-        "5s",
-        "100ms",
-        "1min"
       ]
     },
     "section_comments": {
@@ -484,27 +519,6 @@
         "1234",
         "192.168.1.1"
       ]
-    },
-    "uint16Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 65535,
-      "description": "Unsigned 16-bit integer (0...65535).",
-      "title": "Integer (16-bit)"
-    },
-    "uint32Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 4294967294,
-      "description": "Unsigned 32-bit integer (0...4294967294).",
-      "title": "Integer (32-bit)"
-    },
-    "uint8Type": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 255,
-      "description": "Unsigned 8-bit integer (0...255).",
-      "title": "Integer (8-bit)"
     },
     "usernameOrUidType": {
       "type": "string",
