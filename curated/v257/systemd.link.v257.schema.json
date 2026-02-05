@@ -1038,39 +1038,87 @@
           "version_added": "250"
         },
         "RxChannels": {
-          "type": "string",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "string",
+              "enum": [
+                "max"
+              ]
+            }
+          ],
           "description": "Specifies the number of receive, transmit, other, or combined channels, respectively. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
           "title": "Rx Channels",
           "examples": [
-            "4",
+            4,
             "max"
           ],
           "version_added": "239"
         },
         "TxChannels": {
-          "type": "string",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "string",
+              "enum": [
+                "max"
+              ]
+            }
+          ],
           "description": "Specifies the number of transmit channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
           "title": "Tx Channels",
           "examples": [
-            "4",
+            4,
             "max"
           ]
         },
         "OtherChannels": {
-          "type": "string",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "string",
+              "enum": [
+                "max"
+              ]
+            }
+          ],
           "description": "Specifies the number of other channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
           "title": "Other Channels",
           "examples": [
-            "1",
+            1,
             "max"
           ]
         },
         "CombinedChannels": {
-          "type": "string",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "string",
+              "enum": [
+                "max"
+              ]
+            }
+          ],
           "description": "Specifies the number of combined channels. Takes an unsigned integer in the range 1...4294967295 or 'max'. If set to 'max', the advertised maximum value of the hardware will be used. When unset, the number will not be changed. Defaults to unset.",
           "title": "Combined Channels",
           "examples": [
-            "4",
+            4,
             "max"
           ]
         },
@@ -1212,7 +1260,7 @@
           "version_added": "250"
         },
         "RxMaxCoalescedFrames": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "These properties configure the maximum number of frames that are sent/received before a Rx/Tx interrupt is generated. The 'Irq' properties come into effect when the host is servicing an IRQ. The 'Low' and 'High' properties come into effect when the packet rate drops below the low packet rate threshold or exceeds the high packet rate threshold respectively if adaptive Rx/Tx coalescing is enabled. When unset, the kernel's defaults will be used.",
           "title": "Rx Max Coalesced Frames",
           "examples": [
@@ -1222,7 +1270,7 @@
           "version_added": "250"
         },
         "RxCoalesceIrqSec": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "These properties configure the delay before Rx/Tx interrupts are generated after a packet is sent/received. The 'Irq' properties come into effect when the host is servicing an IRQ. The 'Low' and 'High' properties come into effect when the packet rate drops below the low packet rate threshold or exceeds the high packet rate threshold respectively if adaptive Rx/Tx coalescing is enabled. When unset, the kernel's defaults will be used.",
           "title": "Rx Coalesce Irq Sec",
           "examples": [
@@ -1231,7 +1279,7 @@
           ]
         },
         "RxMaxCoalescedIrqFrames": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Maximum number of frames received before generating an interrupt while servicing an IRQ. When unset, the kernel's defaults will be used.",
           "title": "Rx Max Coalesced Irq Frames",
           "examples": [
@@ -1240,7 +1288,7 @@
           ]
         },
         "TxCoalesceSec": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Delay before Tx interrupts are generated after a packet is sent. When unset, the kernel's defaults will be used.",
           "title": "Tx Coalesce Sec",
           "examples": [
@@ -1249,7 +1297,7 @@
           ]
         },
         "TxMaxCoalescedFrames": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Maximum number of frames transmitted before generating an interrupt. When unset, the kernel's defaults will be used.",
           "title": "Tx Max Coalesced Frames",
           "examples": [
@@ -1258,7 +1306,7 @@
           ]
         },
         "TxCoalesceIrqSec": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Delay before Tx interrupts are generated after a packet is sent while servicing an IRQ. When unset, the kernel's defaults will be used.",
           "title": "Tx Coalesce Irq Sec",
           "examples": [
@@ -1267,7 +1315,7 @@
           ]
         },
         "TxMaxCoalescedIrqFrames": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Maximum number of frames transmitted before generating an interrupt while servicing an IRQ. When unset, the kernel's defaults will be used.",
           "title": "Tx Max Coalesced Irq Frames",
           "examples": [
@@ -1277,6 +1325,8 @@
         },
         "StatisticsBlockCoalesceSec": {
           "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295,
           "description": "How long to delay driver in-memory statistics block updates. If the driver does not have an in-memory statistic block, this property is ignored. This property cannot be zero. If unset, the kernel's default will be used.",
           "title": "Statistics Block Coalesce Sec",
           "examples": [
@@ -1296,7 +1346,7 @@
           "title": "Use Adaptive Tx Coalesce"
         },
         "CoalescePacketRateLow": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "These properties configure the low and high packet rate (expressed in packets per second) threshold respectively and are used to determine when the corresponding coalescing settings for low and high packet rates come into effect if adaptive Rx/Tx coalescing is enabled. If unset, the kernel's defaults will be used.",
           "title": "Coalesce Packet Rate Low",
           "examples": [
@@ -1306,7 +1356,7 @@
           "version_added": "250"
         },
         "RxCoalesceLowSec": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Delay before Rx interrupts when packet rate is below low threshold. When unset, the kernel's defaults will be used.",
           "title": "Rx Coalesce Low Sec",
           "examples": [
@@ -1315,7 +1365,7 @@
           ]
         },
         "RxMaxCoalescedLowFrames": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Maximum frames received before interrupt when packet rate is below low threshold. When unset, the kernel's defaults will be used.",
           "title": "Rx Max Coalesced Low Frames",
           "examples": [
@@ -1324,7 +1374,7 @@
           ]
         },
         "TxCoalesceLowSec": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Delay before Tx interrupts when packet rate is below low threshold. When unset, the kernel's defaults will be used.",
           "title": "Tx Coalesce Low Sec",
           "examples": [
@@ -1333,7 +1383,7 @@
           ]
         },
         "TxMaxCoalescedLowFrames": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Maximum frames transmitted before interrupt when packet rate is below low threshold. When unset, the kernel's defaults will be used.",
           "title": "Tx Max Coalesced Low Frames",
           "examples": [
@@ -1342,7 +1392,7 @@
           ]
         },
         "CoalescePacketRateHigh": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "High packet rate threshold (packets per second) for adaptive coalescing. When unset, the kernel's defaults will be used.",
           "title": "Coalesce Packet Rate High",
           "examples": [
@@ -1351,7 +1401,7 @@
           ]
         },
         "RxCoalesceHighSec": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Delay before Rx interrupts when packet rate exceeds high threshold. When unset, the kernel's defaults will be used.",
           "title": "Rx Coalesce High Sec",
           "examples": [
@@ -1360,7 +1410,7 @@
           ]
         },
         "RxMaxCoalescedHighFrames": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Maximum frames received before interrupt when packet rate exceeds high threshold. When unset, the kernel's defaults will be used.",
           "title": "Rx Max Coalesced High Frames",
           "examples": [
@@ -1369,7 +1419,7 @@
           ]
         },
         "TxCoalesceHighSec": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Delay before Tx interrupts when packet rate exceeds high threshold. When unset, the kernel's defaults will be used.",
           "title": "Tx Coalesce High Sec",
           "examples": [
@@ -1378,7 +1428,7 @@
           ]
         },
         "TxMaxCoalescedHighFrames": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Maximum frames transmitted before interrupt when packet rate exceeds high threshold. When unset, the kernel's defaults will be used.",
           "title": "Tx Max Coalesced High Frames",
           "examples": [
@@ -1426,16 +1476,17 @@
           ]
         },
         "SR-IOVVirtualFunctions": {
-          "type": "string",
-          "description": "Specifies the number of SR-IOV virtual functions as a string. Defaults to unset.",
+          "type": "integer",
+          "minimum": 0,
+          "description": "Specifies the number of SR-IOV virtual functions. Defaults to unset.",
           "title": "SR-IOV Virtual Functions",
           "examples": [
-            "8",
-            "16"
+            8,
+            16
           ]
         },
         "IOVVirtualFunctions": {
-          "type": "integer",
+          "$ref": "#/definitions/uint32Type",
           "description": "Specifies the number of SR-IOV virtual functions. Defaults to unset, and automatically determined from the values specified in the VirtualFunction= settings in the [SR-IOV] sections.",
           "title": "IOV Virtual Functions",
           "examples": [

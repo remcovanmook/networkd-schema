@@ -766,7 +766,7 @@
           "x-subcategory": "Hardware"
         },
         "Group": {
-          "type": "string",
+          "$ref": "#/definitions/uint32Type",
           "description": "Link groups are similar to port ranges found in managed switches. When network interfaces are added to a numbered group, operations on all the interfaces from that group can be performed at once. Takes an unsigned integer in the range 0...2147483647. Defaults to unset.",
           "title": "Group",
           "version_added": "246"
@@ -1708,7 +1708,7 @@
                 ]
               },
               "RouteMetric": {
-                "type": "string",
+                "$ref": "#/definitions/uint32Type",
                 "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
                 "version_added": "246",
                 "title": "Route Metric"
@@ -2105,13 +2105,13 @@
             "type": "object",
             "properties": {
               "TypeOfService": {
-                "type": "string",
+                "$ref": "#/definitions/uint8Type",
                 "description": "This specifies the Type of Service (ToS) field of packets to match; it takes an unsigned integer in the range 0...255. The field can be used to specify precedence (the first 3 bits) and ToS (the next 3 bits). The field can be also used to specify Differentiated Services Code Point (DSCP) (the first 6 bits) and Explicit Congestion Notification (ECN) (the last 2 bits). See Type of Service and Differentiated services for more details.",
                 "version_added": "235",
                 "title": "Type Of Service"
               },
               "Priority": {
-                "type": "string",
+                "$ref": "#/definitions/uint32Type",
                 "description": "Specifies the priority of this rule. Priority= is an integer in the range 0...4294967295. Higher number means lower priority, and rules get processed in order of increasing number. Defaults to unset, and the kernel will pick a value dynamically.",
                 "version_added": "235",
                 "title": "Priority",
@@ -2499,7 +2499,9 @@
               "title": "Suppress Interface Group"
             },
             "SuppressPrefixLength": {
-              "type": "string",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 128,
               "description": "Takes a number N in the range 0...128 and rejects routing decisions that have a prefix length of N or less. Defaults to unset.",
               "version_added": "245",
               "title": "Suppress Prefix Length"
@@ -3510,7 +3512,7 @@
                 "title": "User Class"
               },
               "IAID": {
-                "type": "string",
+                "$ref": "#/definitions/uint32Type",
                 "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
                 "version_added": "230",
                 "title": "IAID"
@@ -3618,7 +3620,7 @@
                 ]
               },
               "SocketPriority": {
-                "type": "string",
+                "$ref": "#/definitions/uint8Type",
                 "description": "The Linux socket option 'SO_PRIORITY' applied to the raw IP socket used for initial DHCPv4 messages. Unset by default. Usual values range from 0 to 6. More details about 'SO_PRIORITY' socket option in socket7. Can be used in conjunction with [VLAN] section EgressQOSMaps= setting of.netdev file to set the 802.1Q VLAN ethernet tagged header priority, see systemd.netdev5.",
                 "version_added": "253",
                 "title": "Socket Priority"
@@ -3929,7 +3931,7 @@
               "title": "User Class"
             },
             "IAID": {
-              "type": "string",
+              "$ref": "#/definitions/uint32Type",
               "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
               "version_added": "230",
               "title": "IAID"
@@ -4037,7 +4039,7 @@
               ]
             },
             "SocketPriority": {
-              "type": "string",
+              "$ref": "#/definitions/uint8Type",
               "description": "The Linux socket option 'SO_PRIORITY' applied to the raw IP socket used for initial DHCPv4 messages. Unset by default. Usual values range from 0 to 6. More details about 'SO_PRIORITY' socket option in socket7. Can be used in conjunction with [VLAN] section EgressQOSMaps= setting of.netdev file to set the 802.1Q VLAN ethernet tagged header priority, see systemd.netdev5.",
               "version_added": "253",
               "title": "Socket Priority"
@@ -4312,7 +4314,7 @@
                 "title": "Send Option"
               },
               "IAID": {
-                "type": "string",
+                "$ref": "#/definitions/uint32Type",
                 "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
                 "version_added": "230",
                 "title": "IAID"
@@ -4518,7 +4520,7 @@
               "title": "Send Option"
             },
             "IAID": {
-              "type": "string",
+              "$ref": "#/definitions/uint32Type",
               "description": "The DHCP Identity Association Identifier (IAID) for the interface, a 32-bit unsigned integer.",
               "version_added": "230",
               "title": "IAID"
@@ -4698,7 +4700,15 @@
                 ]
               },
               "RouteMetric": {
-                "type": "string",
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/uint32Type"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^[0-9]+:[0-9]+:[0-9]+$"
+                  }
+                ],
                 "default": "512:1024:2048",
                 "description": "Set the routing metric for the routes received in the Router Advertisement. Takes an unsigned integer in the range 0...4294967295, or three unsigned integer separated with ':', in that case the first one is used when the router preference is high, the second is for medium preference, and the last is for low preference ('high:medium:low'). Defaults to '512:1024:2048'.",
                 "version_added": "249",
@@ -7639,7 +7649,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "LimitBytes": {
@@ -7675,7 +7685,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "LimitBytes": {
@@ -8174,7 +8184,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "_comments": {
@@ -8200,7 +8210,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "_comments": {
@@ -8322,7 +8332,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "Bands": {
@@ -8332,7 +8342,9 @@
                 "title": "Bands"
               },
               "StrictBands": {
-                "type": "string",
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 16,
                 "description": "Specifies the number of bands that should be created in strict mode. An unsigned integer in the range 1...16.",
                 "version_added": "246",
                 "title": "Strict Bands"
@@ -8376,7 +8388,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "Bands": {
@@ -8386,7 +8398,9 @@
               "title": "Bands"
             },
             "StrictBands": {
-              "type": "string",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 16,
               "description": "Specifies the number of bands that should be created in strict mode. An unsigned integer in the range 1...16.",
               "version_added": "246",
               "title": "Strict Bands"
@@ -8445,7 +8459,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
@@ -8477,7 +8491,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
@@ -8524,7 +8538,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "_comments": {
@@ -8550,7 +8564,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "_comments": {
@@ -8591,7 +8605,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "PacketLimit": {
@@ -8623,7 +8637,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "PacketLimit": {
@@ -8670,7 +8684,7 @@
                 ]
               },
               "Handle": {
-                "type": "string",
+                "$ref": "#/definitions/qdisc_handleType",
                 "title": "Handle"
               },
               "_comments": {
@@ -8696,7 +8710,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "_comments": {
@@ -10483,7 +10497,7 @@
               "title": "Parent"
             },
             "Handle": {
-              "type": "string",
+              "$ref": "#/definitions/qdisc_handleType",
               "title": "Handle"
             },
             "Rate": {
