@@ -254,6 +254,73 @@ footer {
     background: #d29922;
 }
 
+/* Category Badges */
+.badge-category-basic {
+    background: #238636;  /* Green - essential/core */
+}
+
+.badge-category-advanced {
+    background: #1f6feb;  /* Blue - advanced */
+}
+
+.badge-category-expert {
+    background: #6e7681;  /* Gray - expert/specialized */
+}
+
+/* Sidebar category indicators */
+.sidebar-category-indicator {
+    font-size: 0.65em;
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-left: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    vertical-align: middle;
+}
+
+.sidebar-cat-basic {
+    background: rgba(35, 134, 54, 0.3);
+    color: #3fb950;
+}
+
+.sidebar-cat-advanced {
+    background: rgba(31, 111, 235, 0.3);
+    color: #58a6ff;
+}
+
+.sidebar-cat-expert {
+    background: rgba(110, 118, 129, 0.3);
+    color: #8b949e;
+}
+
+/* Sidebar category headers */
+.sidebar-category-header {
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 8px 4px 12px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+}
+
+.sidebar-category-header.sidebar-cat-basic {
+    color: #3fb950;
+    border-left: 3px solid #238636;
+}
+
+.sidebar-category-header.sidebar-cat-advanced {
+    color: #58a6ff;
+    border-left: 3px solid #1f6feb;
+}
+
+.sidebar-category-header.sidebar-cat-expert {
+    color: #8b949e;
+    border-left: 3px solid #6e7681;
+}
+
 /* Sidebar */
 #sidebar {
     position: fixed;

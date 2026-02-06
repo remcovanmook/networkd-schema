@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Systemd networkd.conf (v257)</title>
     <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .docbook-para { margin-bottom: 1em; }
-    </style>
+    <style>.docbook-para { margin-bottom: 1em; }</style>
 </head>
 <body>
     
@@ -21,23 +19,35 @@
              </div>
              <div class="sidebar-links" style="padding: 0 20px; margin-top: 10px; font-size: 0.9em;">
                  <a href="index.html">Index</a> &middot; <a href="../types.html">Types</a> 
-                 &middot; <a href="changes.html">Changes</a>
              </div>
-             <select class="version-selector" onchange="window.location.href=this.value;">
-                <option value="../latest/networkd.conf.html" >latest</option><option value="../v259/networkd.conf.html" >v259</option><option value="../v258/networkd.conf.html" >v258</option><option value="../v257/networkd.conf.html" selected>v257</option><option value="../v256/networkd.conf.html" >v256</option><option value="../v255/networkd.conf.html" >v255</option><option value="../v254/networkd.conf.html" >v254</option><option value="../v253/networkd.conf.html" >v253</option><option value="../v252/networkd.conf.html" >v252</option><option value="../v251/networkd.conf.html" >v251</option><option value="../v250/networkd.conf.html" >v250</option><option value="../v249/networkd.conf.html" >v249</option><option value="../v248/networkd.conf.html" >v248</option><option value="../v247/networkd.conf.html" >v247</option><option value="../v246/networkd.conf.html" >v246</option><option value="../v245/networkd.conf.html" >v245</option><option value="../v244/networkd.conf.html" >v244</option><option value="../v243/networkd.conf.html" >v243</option><option value="../v242/networkd.conf.html" >v242</option><option value="../v241/networkd.conf.html" >v241</option><option value="../v240/networkd.conf.html" >v240</option><option value="../v239/networkd.conf.html" >v239</option><option value="../v238/networkd.conf.html" >v238</option><option value="../v237/networkd.conf.html" >v237</option>
-            </select>
-             <h2>networkd.conf</h2>
+             <p style="color:var(--meta-color); font-size:0.8em; margin-bottom:20px;">Version v257</p><h2>networkd.conf</h2>
         </div>
          <div class="sidebar-content">
             <ul>
-                <li><details><summary><a href="#section-Network">Network</a></summary><ul class="sub-menu"><li><a href="#Network-IPv4Forwarding" style="font-size: 0.9em; margin-left: 20px;">IPv4Forwarding</a></li><li><a href="#Network-IPv6Forwarding" style="font-size: 0.9em; margin-left: 20px;">IPv6Forwarding</a></li><li><a href="#Network-IPv6PrivacyExtensions" style="font-size: 0.9em; margin-left: 20px;">IPv6PrivacyExtensions</a></li><li><a href="#Network-ManageForeignNextHops" style="font-size: 0.9em; margin-left: 20px;">ManageForeignNextHops</a></li><li><a href="#Network-ManageForeignRoutes" style="font-size: 0.9em; margin-left: 20px;">ManageForeignRoutes</a></li><li><a href="#Network-ManageForeignRoutingPolicyRules" style="font-size: 0.9em; margin-left: 20px;">ManageForeignRoutingPolicyRules</a></li><li><a href="#Network-RouteTable" style="font-size: 0.9em; margin-left: 20px;">RouteTable</a></li><li><a href="#Network-SpeedMeter" style="font-size: 0.9em; margin-left: 20px;">SpeedMeter</a></li><li><a href="#Network-SpeedMeterIntervalSec" style="font-size: 0.9em; margin-left: 20px;">SpeedMeterIntervalSec</a></li><li><a href="#Network-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li><li><details><summary><a href="#section-IPv6AcceptRA">IPv6AcceptRA</a></summary><ul class="sub-menu"><li><a href="#IPv6AcceptRA-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li><li><details><summary><a href="#section-IPv6AddressLabel">IPv6AddressLabel</a></summary><ul class="sub-menu"><li><a href="#IPv6AddressLabel-Label" style="font-size: 0.9em; margin-left: 20px;">Label</a></li><li><a href="#IPv6AddressLabel-Prefix" style="font-size: 0.9em; margin-left: 20px;">Prefix</a></li></ul></details></li><li><details><summary><a href="#section-DHCPv4">DHCPv4</a></summary><ul class="sub-menu"><li><a href="#DHCPv4-DUIDRawData" style="font-size: 0.9em; margin-left: 20px;">DUIDRawData</a></li><li><a href="#DHCPv4-DUIDType" style="font-size: 0.9em; margin-left: 20px;">DUIDType</a></li><li><a href="#DHCPv4-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li><li><details><summary><a href="#section-DHCPv6">DHCPv6</a></summary><ul class="sub-menu"><li><a href="#DHCPv6-DUIDRawData" style="font-size: 0.9em; margin-left: 20px;">DUIDRawData</a></li><li><a href="#DHCPv6-DUIDType" style="font-size: 0.9em; margin-left: 20px;">DUIDType</a></li><li><a href="#DHCPv6-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li><li><details><summary><a href="#section-DHCPServer">DHCPServer</a></summary><ul class="sub-menu"><li><a href="#DHCPServer-PersistLeases" style="font-size: 0.9em; margin-left: 20px;">PersistLeases</a></li><li><a href="#DHCPServer-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li>
+                <li><details><summary><a href="#section-Network">Network</a><span class="sidebar-category-indicator sidebar-cat-expert">expert</span></summary><ul class="sub-menu"><li class="sidebar-category-header sidebar-cat-expert">Expert</li><li><a href="#Network-IPv4Forwarding" style="font-size: 0.9em; margin-left: 20px;">IPv4Forwarding</a></li><li><a href="#Network-IPv6Forwarding" style="font-size: 0.9em; margin-left: 20px;">IPv6Forwarding</a></li><li><a href="#Network-IPv6PrivacyExtensions" style="font-size: 0.9em; margin-left: 20px;">IPv6PrivacyExtensions</a></li><li><a href="#Network-ManageForeignNextHops" style="font-size: 0.9em; margin-left: 20px;">ManageForeignNextHops</a></li><li><a href="#Network-ManageForeignRoutes" style="font-size: 0.9em; margin-left: 20px;">ManageForeignRoutes</a></li><li><a href="#Network-ManageForeignRoutingPolicyRules" style="font-size: 0.9em; margin-left: 20px;">ManageForeignRoutingPolicyRules</a></li><li><a href="#Network-RouteTable" style="font-size: 0.9em; margin-left: 20px;">RouteTable</a></li><li><a href="#Network-SpeedMeter" style="font-size: 0.9em; margin-left: 20px;">SpeedMeter</a></li><li><a href="#Network-SpeedMeterIntervalSec" style="font-size: 0.9em; margin-left: 20px;">SpeedMeterIntervalSec</a></li><li><a href="#Network-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li><li><details><summary><a href="#section-IPv6AcceptRA">IPv6AcceptRA</a><span class="sidebar-category-indicator sidebar-cat-expert">expert</span></summary><ul class="sub-menu"><li class="sidebar-category-header sidebar-cat-expert">Expert</li><li><a href="#IPv6AcceptRA-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li><li><details><summary><a href="#section-IPv6AddressLabel">IPv6AddressLabel</a><span class="sidebar-category-indicator sidebar-cat-expert">expert</span></summary><ul class="sub-menu"><li class="sidebar-category-header sidebar-cat-expert">Expert</li><li><a href="#IPv6AddressLabel-Label" style="font-size: 0.9em; margin-left: 20px;">Label</a></li><li><a href="#IPv6AddressLabel-Prefix" style="font-size: 0.9em; margin-left: 20px;">Prefix</a></li></ul></details></li><li><details><summary><a href="#section-DHCPv4">DHCPv4</a><span class="sidebar-category-indicator sidebar-cat-expert">expert</span></summary><ul class="sub-menu"><li class="sidebar-category-header sidebar-cat-expert">Expert</li><li><a href="#DHCPv4-DUIDRawData" style="font-size: 0.9em; margin-left: 20px;">DUIDRawData</a></li><li><a href="#DHCPv4-DUIDType" style="font-size: 0.9em; margin-left: 20px;">DUIDType</a></li><li><a href="#DHCPv4-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li><li><details><summary><a href="#section-DHCPv6">DHCPv6</a><span class="sidebar-category-indicator sidebar-cat-expert">expert</span></summary><ul class="sub-menu"><li class="sidebar-category-header sidebar-cat-expert">Expert</li><li><a href="#DHCPv6-DUIDRawData" style="font-size: 0.9em; margin-left: 20px;">DUIDRawData</a></li><li><a href="#DHCPv6-DUIDType" style="font-size: 0.9em; margin-left: 20px;">DUIDType</a></li><li><a href="#DHCPv6-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li><li><details><summary><a href="#section-DHCPServer">DHCPServer</a><span class="sidebar-category-indicator sidebar-cat-expert">expert</span></summary><ul class="sub-menu"><li class="sidebar-category-header sidebar-cat-expert">Expert</li><li><a href="#DHCPServer-PersistLeases" style="font-size: 0.9em; margin-left: 20px;">PersistLeases</a></li><li><a href="#DHCPServer-UseDomains" style="font-size: 0.9em; margin-left: 20px;">UseDomains</a></li></ul></details></li>
             </ul>
         </div>
     </div>
     
     <div id="content">
-        <h1>networkd.conf <span style="font-size:0.5em; color:var(--meta-color); font-weight:normal;">/ v257</span></h1>
-        <div id="section-Network" class="section-block"><h2>Network Section</h2><div id="Network-IPv4Forwarding" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-IPv4Forwarding" class="anchor-link">#</a>IPv4Forwarding</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="IPv4Forwarding"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+        <h1>networkd.conf <span style="font-size:0.5em; color:var(--meta-color); font-weight:normal;">/ v257</span></h1><div class="file-description" style="margin-bottom: 30px;"><p>These configuration files control global network parameters.</p>
+  </div><hr style="border-color: #30363d; margin-bottom: 30px;"><div id="section-Network" class="section-block"><h2>Network Section<span class="badge badge-category-expert" style="margin-left: 10px; font-size: 0.6em; vertical-align: middle;">Expert</span></h2><div class="section-intro" style="margin-bottom: 20px;"><p>The following options are available in the <a href="#section-Network" class="section-ref">[Network]</a> section:</p>
+
+    </div>
+        <div id="Network-IPv4Forwarding" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-IPv4Forwarding" class="anchor-link">#</a>IPv4Forwarding
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                
+            </div>
+            <div class="option-description">
           <p>Configures IPv4 packet forwarding for the system. This controls the
           <code>net.ipv4.conf.default.forwarding</code> and
           <code>net.ipv4.conf.all.forwarding</code>sysctl options. See
@@ -51,9 +61,26 @@
           <a href="systemd.network.html">systemd.network</a>
           for more details.</p>
 
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv4Forwarding=yes
-</code></pre></div></div><div id="Network-IPv6Forwarding" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-IPv6Forwarding" class="anchor-link">#</a>IPv6Forwarding</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="IPv6Forwarding"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description">
+          <p>Added in version 256.</p>
+  </div>
+            
+            
+        </div>
+        
+        <div id="Network-IPv6Forwarding" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-IPv6Forwarding" class="anchor-link">#</a>IPv6Forwarding
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                
+            </div>
+            <div class="option-description">
           <p>Configures IPv6 packet forwarding for the system. This controls the
           <code>net.ipv6.conf.default.forwarding</code> and
           <code>net.ipv6.conf.all.forwarding</code> sysctl options. See
@@ -67,26 +94,77 @@
           <a href="systemd.network.html">systemd.network</a>
           for more details.</p>
 
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6Forwarding=yes
-</code></pre></div></div><div id="Network-IPv6PrivacyExtensions" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-IPv6PrivacyExtensions" class="anchor-link">#</a>IPv6PrivacyExtensions</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="IPv6PrivacyExtensions"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v254+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a></div><div class="option-description">
+          <p>Added in version 256.</p>
+  </div>
+            
+            
+        </div>
+        
+        <div id="Network-IPv6PrivacyExtensions" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-IPv6PrivacyExtensions" class="anchor-link">#</a>IPv6PrivacyExtensions
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v254+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                
+            </div>
+            <div class="option-description">
           <p>Specifies the default value for per-network <code class="varname">IPv6PrivacyExtensions=</code>.
           Takes a boolean or the special values <code>prefer-public</code> and
           <code>kernel</code>. See for details in
           <a href="systemd.network.html">systemd.network</a>.
           Defaults to <code>no</code>.</p>
 
+        <p>Added in version 254.</p>
+  </div>
+            <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div>
+            
+        </div>
         
-        </div><div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>IPv6PrivacyExtensions=false
-IPv6PrivacyExtensions=kernel
-</code></pre></div></div><div id="Network-ManageForeignNextHops" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-ManageForeignNextHops" class="anchor-link">#</a>ManageForeignNextHops</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="ManageForeignNextHops"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description"><p>When true, <code class="command">systemd-networkd</code> will remove nexthops
+        <div id="Network-ManageForeignNextHops" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-ManageForeignNextHops" class="anchor-link">#</a>ManageForeignNextHops
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                
+            </div>
+            <div class="option-description"><p>When true, <code class="command">systemd-networkd</code> will remove nexthops
         that are not configured in .network files (except for routes with protocol
         <code>kernel</code>). When false, it will
         not remove any foreign nexthops, keeping them even if they are not configured in a .network file.
         Defaults to yes.</p>
 
-        </div><div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignNextHops=yes
-</code></pre></div></div><div id="Network-ManageForeignRoutes" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-ManageForeignRoutes" class="anchor-link">#</a>ManageForeignRoutes</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="ManageForeignRoutes"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v246+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description"><p>When true, <code class="command">systemd-networkd</code> will remove routes
+        <p>Added in version 256.</p>
+  </div>
+            <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div>
+            
+        </div>
+        
+        <div id="Network-ManageForeignRoutes" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-ManageForeignRoutes" class="anchor-link">#</a>ManageForeignRoutes
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v246+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                
+            </div>
+            <div class="option-description"><p>When true, <code class="command">systemd-networkd</code> will remove routes
         that are not configured in .network files (except for routes with protocol
         <code>kernel</code>, <code>dhcp</code> when <code class="varname">KeepConfiguration=</code>
         is true or <code>dhcp</code>, and <code>static</code> when
@@ -94,15 +172,51 @@ IPv6PrivacyExtensions=kernel
         not remove any foreign routes, keeping them even if they are not configured in a .network file.
         Defaults to yes.</p>
 
-        </div><div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignRoutes=yes
-</code></pre></div></div><div id="Network-ManageForeignRoutingPolicyRules" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-ManageForeignRoutingPolicyRules" class="anchor-link">#</a>ManageForeignRoutingPolicyRules</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="ManageForeignRoutingPolicyRules"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v249+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description"><p>When true, <code class="command">systemd-networkd</code> will remove rules
+        <p>Added in version 246.</p>
+  </div>
+            <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div>
+            
+        </div>
+        
+        <div id="Network-ManageForeignRoutingPolicyRules" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-ManageForeignRoutingPolicyRules" class="anchor-link">#</a>ManageForeignRoutingPolicyRules
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v249+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                
+            </div>
+            <div class="option-description"><p>When true, <code class="command">systemd-networkd</code> will remove rules
         that are not configured in .network files (except for rules with protocol
         <code>kernel</code>). When false, it will not remove any foreign rules, keeping them even
         if they are not configured in a .network file. Defaults to yes.
         </p>
 
-        </div><div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>ManageForeignRoutingPolicyRules=yes
-</code></pre></div></div><div id="Network-RouteTable" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-RouteTable" class="anchor-link">#</a>RouteTable</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="RouteTable"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v248+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a></div><div class="option-description"><p>Defines the route table name. Takes a whitespace-separated list of the pairs of
+        <p>Added in version 249.</p>
+  </div>
+            <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>yes</code></div>
+            
+        </div>
+        
+        <div id="Network-RouteTable" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-RouteTable" class="anchor-link">#</a>RouteTable
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v248+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#string" class="badge badge-type-prominent badge-type-string">string</a>
+                <span class="badge badge-multiple" title="Can be specified multiple times">Multiple</span>
+            </div>
+            <div class="option-description"><p>Defines the route table name. Takes a whitespace-separated list of the pairs of
         route table name and number. The route table name and number in each pair are separated with a
         colon, i.e., <code><span class="docbook-replaceable">name</span>:<span class="docbook-replaceable">number</span></code>.
         The route table name must not be <code>default</code>, <code>main</code>, or
@@ -112,31 +226,104 @@ IPv6PrivacyExtensions=kernel
         If an empty string is specified, then the list specified earlier are cleared. Defaults to unset.
         </p>
 
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteTable=custom:200
-RouteTable=private:100 special:101
-</code></pre></div></div><div id="Network-SpeedMeter" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-SpeedMeter" class="anchor-link">#</a>SpeedMeter</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="SpeedMeter"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v244+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description"><p>If set to yes, then <code class="command">systemd-networkd</code>
+        <p>Added in version 248.</p>
+  </div>
+            
+            <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>RouteTable=custom:200
+RouteTable=private:100 special:101</code></pre></div>
+        </div>
+        
+        <div id="Network-SpeedMeter" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-SpeedMeter" class="anchor-link">#</a>SpeedMeter
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v244+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                
+            </div>
+            <div class="option-description"><p>If set to yes, then <code class="command">systemd-networkd</code>
         measures the traffic of each interface, and
         <code class="command">networkctl status <span class="docbook-replaceable">INTERFACE</span></code> shows the measured speed.
         Defaults to no.</p>
 
-        </div><div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeter=no
-</code></pre></div></div><div id="Network-SpeedMeterIntervalSec" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-SpeedMeterIntervalSec" class="anchor-link">#</a>SpeedMeterIntervalSec</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="SpeedMeterIntervalSec"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v244+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#secondsType" class="badge badge-type-prominent badge-type-complex">Duration</a></div><div class="option-description"><p>Specifies the time interval to calculate the traffic speed of each interface.
+        <p>Added in version 244.</p>
+  </div>
+            <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>no</code></div>
+            
+        </div>
+        
+        <div id="Network-SpeedMeterIntervalSec" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-SpeedMeterIntervalSec" class="anchor-link">#</a>SpeedMeterIntervalSec
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v244+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#secondsType" class="badge badge-type-prominent badge-type-complex">Duration</a>
+                
+            </div>
+            <div class="option-description"><p>Specifies the time interval to calculate the traffic speed of each interface.
         If <a href="#Network-SpeedMeter" class="attribute-ref"><code class="varname">SpeedMeter=no</code></a>, the value is ignored. Defaults to 10sec.</p>
 
-        </div><div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>10sec</code></div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeterIntervalSec=5s
+        <p>Added in version 244.</p>
+  </div>
+            <div class="option-default" style="margin-top:10px; font-size:0.9em; color:#8b949e;"><strong>Default:</strong> <code>10sec</code></div>
+            <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>SpeedMeterIntervalSec=5s
 SpeedMeterIntervalSec=100ms
-SpeedMeterIntervalSec=1min
-</code></pre></div></div><div id="Network-UseDomains" class="option-block"><div class="option-header"><div class="option-title"><a href="#Network-UseDomains" class="anchor-link">#</a>UseDomains</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="UseDomains"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a></div><div class="option-description">
+SpeedMeterIntervalSec=1min</code></pre></div>
+        </div>
+        
+        <div id="Network-UseDomains" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#Network-UseDomains" class="anchor-link">#</a>UseDomains
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                
+            </div>
+            <div class="option-description">
           <p>Specifies the network- and protocol-independent default value for the same settings in
           <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a>, <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a>, and <a href="#section-DHCPv6" class="section-ref">[DHCPv6]</a> sections below. Takes a boolean, or the special value
           <span class="docbook-option">route</span>. See the same setting in
           <a href="systemd.network.html">systemd.network</a>.
           Defaults to <code>no</code>.</p>
 
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=false
-UseDomains=route
-</code></pre></div></div></div><div id="section-IPv6AcceptRA" class="section-block"><h2>IPv6AcceptRA Section</h2><div id="IPv6AcceptRA-UseDomains" class="option-block"><div class="option-header"><div class="option-title"><a href="#IPv6AcceptRA-UseDomains" class="anchor-link">#</a>UseDomains</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="UseDomains"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a></div><div class="option-description">
+          <p>Added in version 256.</p>
+  </div>
+            
+            
+        </div>
+        </div><div id="section-IPv6AcceptRA" class="section-block"><h2>IPv6AcceptRA Section<span class="badge badge-category-expert" style="margin-left: 10px; font-size: 0.6em; vertical-align: middle;">Expert</span></h2><div class="section-intro" style="margin-bottom: 20px;"><p>This section configures the default setting of the Neighbor Discovery. The following options are
+    available in the <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a> section:</p>
+
+    </div>
+        <div id="IPv6AcceptRA-UseDomains" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#IPv6AcceptRA-UseDomains" class="anchor-link">#</a>UseDomains
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                
+            </div>
+            <div class="option-description">
           <p>Specifies the network-independent default value for the same setting in the <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a>
           section in
           <a href="systemd.network.html">systemd.network</a>.
@@ -145,23 +332,87 @@ UseDomains=route
           <a href="networkd.conf.html">networkd.conf</a>,
           which defaults to <code>no</code>, will be used.</p>
 
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=false
-UseDomains=route
-</code></pre></div></div></div><div id="section-IPv6AddressLabel" class="section-block"><h2>IPv6AddressLabel Section</h2><div id="IPv6AddressLabel-Label" class="option-block"><div class="option-header"><div class="option-title"><a href="#IPv6AddressLabel-Label" class="anchor-link">#</a>Label</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="Label"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v257+</span><span class="badge badge-required">Required</span></div></div><div class="option-type-line"><a href="../types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a></div><div class="option-description">
+          <p>Added in version 256.</p>
+  </div>
+            
+            
+        </div>
+        </div><div id="section-IPv6AddressLabel" class="section-block"><h2>IPv6AddressLabel Section<span class="badge badge-category-expert" style="margin-left: 10px; font-size: 0.6em; vertical-align: middle;">Expert</span></h2><div class="section-intro" style="margin-bottom: 20px;"><p>An <a href="#section-IPv6AddressLabel" class="section-ref">[IPv6AddressLabel]</a> section accepts the following keys. Specify multiple <a href="#section-IPv6AddressLabel" class="section-ref">[IPv6AddressLabel]</a>
+    sections to configure multiple address labels. IPv6 address labels are used for address selection.
+    See <a href="https://tools.ietf.org/html/rfc3484" target="_blank">RFC 3484</a>. Precedence is managed by
+    userspace, and only the label itself is stored in the kernel.</p>
+
+    </div>
+        <div id="IPv6AddressLabel-Label" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#IPv6AddressLabel-Label" class="anchor-link">#</a>Label
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v257+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#uint32Type" class="badge badge-type-prominent badge-type-complex">Integer (32-bit)</a>
+                
+            </div>
+            <div class="option-description">
           <p>The label for the prefix, an unsigned integer in the range 0…4294967294. 0xffffffff is
           reserved. This setting is mandatory.</p>
 
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Label=100
-Label=200
-</code></pre></div></div><div id="IPv6AddressLabel-Prefix" class="option-block"><div class="option-header"><div class="option-title"><a href="#IPv6AddressLabel-Prefix" class="anchor-link">#</a>Prefix</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="Prefix"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v257+</span><span class="badge badge-required">Required</span></div></div><div class="option-type-line"><a href="../types.html#ipv6_prefix" class="badge badge-type-prominent badge-type-complex">ipv6_prefix</a></div><div class="option-description">
+          <p>Added in version 257.</p>
+  </div>
+            
+            <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Label=100
+Label=200</code></pre></div>
+        </div>
+        
+        <div id="IPv6AddressLabel-Prefix" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#IPv6AddressLabel-Prefix" class="anchor-link">#</a>Prefix
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v257+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#ipv6_prefix" class="badge badge-type-prominent badge-type-complex">ipv6_prefix</a>
+                
+            </div>
+            <div class="option-description">
           <p>IPv6 prefix is an address with a prefix length, separated by a slash
           <code>/</code> character. This setting is mandatory.</p>
 
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>Prefix=SomeString
-</code></pre></div></div></div><div id="section-DHCPv4" class="section-block"><h2>DHCPv4 Section</h2><div id="DHCPv4-DUIDRawData" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCPv4-DUIDRawData" class="anchor-link">#</a>DUIDRawData</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="DUIDRawData"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v230+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#duidRawDataType" class="badge badge-type-prominent badge-type-complex">DUID Raw Data</a></div><div class="option-description"><p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
+          <p>Added in version 257.</p>
+  </div>
+            
+            
+        </div>
+        </div><div id="section-DHCPv4" class="section-block"><h2>DHCPv4 Section<span class="badge badge-category-expert" style="margin-left: 10px; font-size: 0.6em; vertical-align: middle;">Expert</span></h2><div class="section-intro" style="margin-bottom: 20px;"><p>This section configures the DHCP Unique Identifier (DUID) value used by DHCP protocol. DHCPv4
+    client protocol sends IAID and DUID to the DHCP server when acquiring a dynamic IPv4 address if
+    <span class="docbook-option">ClientIdentifier=duid</span>. IAID and DUID allows a DHCP server to uniquely identify the
+    machine and the interface requesting a DHCP IP address. To configure IAID and ClientIdentifier, see
+    <a href="systemd.network.html">systemd.network</a>.
+    </p>
+
+    <p>The following options are understood:</p>
+
+    </div>
+        <div id="DHCPv4-DUIDRawData" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#DHCPv4-DUIDRawData" class="anchor-link">#</a>DUIDRawData
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v230+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#duidRawDataType" class="badge badge-type-prominent badge-type-complex">DUID Raw Data</a>
+                
+            </div>
+            <div class="option-description"><p>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each
         byte separated by <code>:</code>. The DUID that is sent is composed of the DUID type specified by
         <a href="#DHCPv6-DUIDType" class="attribute-ref"><code class="varname">DUIDType=</code></a> and the value configured here.</p>
 
@@ -175,7 +426,7 @@ Label=200
         <a href="systemd.network.html">systemd.network</a>.</p>
 
         <span class="docbook-example">
-          <span class="docbook-title">A <span class="docbook-option">DUIDType=vendor</span> with a custom value</span>
+          <h4>A <span class="docbook-option">DUIDType=vendor</span> with a custom value</h4>
 
           <pre><code>DUIDType=vendor
 DUIDRawData=00:00:ab:11:f9:2a:c2:77:29:f9:5c:00</code></pre>
@@ -185,10 +436,27 @@ DUIDRawData=00:00:ab:11:f9:2a:c2:77:29:f9:5c:00</code></pre>
           </p>
         </span>
 
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDRawData=00:01:00:01:2a:3b:4c:5d:6e:7f:80:91
-DUIDRawData=00:02:00:00:ab:cd:ef:01:23:45
-</code></pre></div></div><div id="DHCPv4-DUIDType" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCPv4-DUIDType" class="anchor-link">#</a>DUIDType</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="DUIDType"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v230+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#Integer (16-bit) | string" class="badge badge-type-prominent badge-type-string">Integer (16-bit) | string</a></div><div class="option-description"><p>Specifies how the DUID should be generated. See
+          <p>Added in version 230.</p>
+  </div>
+            
+            <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDRawData=00:01:00:01:2a:3b:4c:5d:6e:7f:80:91
+DUIDRawData=00:02:00:00:ab:cd:ef:01:23:45</code></pre></div>
+        </div>
+        
+        <div id="DHCPv4-DUIDType" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#DHCPv4-DUIDType" class="anchor-link">#</a>DUIDType
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v230+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#Integer (16-bit) | string" class="badge badge-type-prominent badge-type-string">Integer (16-bit) | string</a>
+                
+            </div>
+            <div class="option-description"><p>Specifies how the DUID should be generated. See
         <a href="https://tools.ietf.org/html/rfc3315#section-9" target="_blank">RFC 3315</a>
         for a description of all the options.</p>
 
@@ -200,7 +468,8 @@ DUIDRawData=00:02:00:00:ab:cd:ef:01:23:45
             This is the default if <code class="varname">DUIDType=</code> is not specified.
             </p>
 
-            </dd>
+            <p>Added in version 230.</p>
+  </dd>
 
           <dt><span class="docbook-option">uuid</span></dt><dd><p>If <code>DUIDType=uuid</code>, and <a href="#DHCPv4-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> is not set,
             then the product UUID is used as a DUID value. If a system does not have valid product UUID, then
@@ -210,7 +479,8 @@ DUIDRawData=00:02:00:00:ab:cd:ef:01:23:45
             <a href="https://www.freedesktop.org/software/systemd/man/latest/sd_id128_get_machine_app_specific.html" target="_blank" class="external-link">sd_id128_get_machine_app_specific</a>.
             </p>
 
-            </dd>
+            <p>Added in version 230.</p>
+  </dd>
 
           <dt><span class="docbook-option">link-layer-time[:<span class="docbook-replaceable">TIME</span>]</span></dt><dd><p>If <code>link-layer-time</code> or <code>link-layer</code> is specified,
             then the MAC address of the interface is used as a DUID value. The value <code>link-layer-time</code>
@@ -218,43 +488,165 @@ DUIDRawData=00:02:00:00:ab:cd:ef:01:23:45
             The default time value is <code>2000-01-01 00:00:00 UTC</code>.
             </p>
 
-            </dd>
+            <p>Added in version 240.</p>
+  </dd>
         </dl>
         </p>
 
         <p>In all cases, <a href="#DHCPv4-DUIDRawData" class="attribute-ref"><code class="varname">DUIDRawData=</code></a> can be used to override the
         actual DUID value that is used.</p>
 
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDType=SomeString
-</code></pre></div></div><div id="DHCPv4-UseDomains" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCPv4-UseDomains" class="anchor-link">#</a>UseDomains</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="UseDomains"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a></div><div class="option-description">
+        <p>Added in version 230.</p>
+  </div>
+            
+            
+        </div>
+        
+        <div id="DHCPv4-UseDomains" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#DHCPv4-UseDomains" class="anchor-link">#</a>UseDomains
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                
+            </div>
+            <div class="option-description">
           <p>Same as the one in the <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a> section, but applied for DHCPv4 protocol.</p>
 
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=false
-UseDomains=route
-</code></pre></div></div></div><div id="section-DHCPv6" class="section-block"><h2>DHCPv6 Section</h2><div id="DHCPv6-DUIDRawData" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCPv6-DUIDRawData" class="anchor-link">#</a>DUIDRawData</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="DUIDRawData"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v230+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#duidRawDataType" class="badge badge-type-prominent badge-type-complex">DUID Raw Data</a></div><div class="option-description"><span style="display:inline-block; margin-bottom:5px; padding: 2px 6px; font-size: 0.75em; font-weight: 600; line-height: 1; color: #856404; background-color: #fff3cd; border-radius: 0.25rem; border: 1px solid #ffeeba;">Schema Only</span><br>Specifies the DHCP DUID value as a single newline-terminated, hexadecimal string, with each byte separated by &#x27;:&#x27;. The DUID that is sent is composed of the DUID type specified by DUIDType= and the value configured here. The DUID value specified here overrides the DUID that systemd-networkd.service8 generates from the machine ID. To configure DUID per-network, see systemd.network5. The configured DHCP DUID should conform to the specification in RFC 3315, RFC 6355. To configure IAID, see systemd.network5. This specifies a 14 byte DUID, with the type DUID-EN (&#x27;00:02&#x27;), enterprise number 43793 (&#x27;00:00:ab:11&#x27;), and identifier value &#x27;f9:2a:c2:77:29:f9:5c:00&#x27;.</div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDRawData=00:01:00:01:2a:3b:4c:5d:6e:7f:80:91
-DUIDRawData=00:02:00:00:ab:cd:ef:01:23:45
-</code></pre></div></div><div id="DHCPv6-DUIDType" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCPv6-DUIDType" class="anchor-link">#</a>DUIDType</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="DUIDType"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v249+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#Integer (16-bit) | string" class="badge badge-type-prominent badge-type-string">Integer (16-bit) | string</a></div><div class="option-description"><p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section.</p>
+          <p>Added in version 256.</p>
+  </div>
+            
+            
+        </div>
+        </div><div id="section-DHCPv6" class="section-block"><h2>DHCPv6 Section<span class="badge badge-category-expert" style="margin-left: 10px; font-size: 0.6em; vertical-align: middle;">Expert</span></h2><div class="section-intro" style="margin-bottom: 20px;"><p>This section configures the DHCP Unique Identifier (DUID) value used by DHCPv6 protocol.
+    DHCPv6 client protocol sends the DHCP Unique Identifier and the interface Identity Association
+    Identifier (IAID) to a DHCPv6 server when acquiring a dynamic IPv6 address. IAID and DUID allows a
+    DHCPv6 server to uniquely identify the machine and the interface requesting a DHCP IP address. To
+    configure IAID, see
+    <a href="systemd.network.html">systemd.network</a>.
+    </p>
 
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDType=SomeString
-</code></pre></div></div><div id="DHCPv6-UseDomains" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCPv6-UseDomains" class="anchor-link">#</a>UseDomains</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="UseDomains"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a></div><div class="option-description"><p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section.</p>
+    <p>The following options are understood:</p>
 
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=false
-UseDomains=route
-</code></pre></div></div></div><div id="section-DHCPServer" class="section-block"><h2>DHCPServer Section</h2><div id="DHCPServer-PersistLeases" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCPServer-PersistLeases" class="anchor-link">#</a>PersistLeases</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="PersistLeases"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a></div><div class="option-description"><span style="display:inline-block; margin-bottom:5px; padding: 2px 6px; font-size: 0.75em; font-weight: 600; line-height: 1; color: #856404; background-color: #fff3cd; border-radius: 0.25rem; border: 1px solid #ffeeba;">Schema Only</span><br>This property exists within the code but has no published documentation.</div></div><div id="DHCPServer-UseDomains" class="option-block"><div class="option-header"><div class="option-title"><a href="#DHCPServer-UseDomains" class="anchor-link">#</a>UseDomains</div><div class="option-meta"><a href="../schemas/v257/systemd.networkd.conf.schema.json#:~:text="UseDomains"" target="_blank" class="badge badge-schema">Schema</a><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span></div></div><div class="option-type-line"><a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a></div><div class="option-description">
-          <p>Same as the one in the <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a> section, but applied for DHCPv4 protocol.</p>
-
-          
-        </div><div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>UseDomains=false
-UseDomains=route
-</code></pre></div></div></div>
     </div>
+        <div id="DHCPv6-DUIDRawData" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#DHCPv6-DUIDRawData" class="anchor-link">#</a>DUIDRawData
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v230+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#duidRawDataType" class="badge badge-type-prominent badge-type-complex">DUID Raw Data</a>
+                
+            </div>
+            <div class="option-description"><p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section.</p>
 
+        <p>Added in version 249.</p>
+  </div>
+            
+            <div class="option-examples" style="margin-top:10px;"><strong>Examples:</strong><pre><code>DUIDRawData=00:01:00:01:2a:3b:4c:5d:6e:7f:80:91
+DUIDRawData=00:02:00:00:ab:cd:ef:01:23:45</code></pre></div>
+        </div>
+        
+        <div id="DHCPv6-DUIDType" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#DHCPv6-DUIDType" class="anchor-link">#</a>DUIDType
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v249+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#Integer (16-bit) | string" class="badge badge-type-prominent badge-type-string">Integer (16-bit) | string</a>
+                
+            </div>
+            <div class="option-description"><p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section.</p>
+
+        <p>Added in version 249.</p>
+  </div>
+            
+            
+        </div>
+        
+        <div id="DHCPv6-UseDomains" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#DHCPv6-UseDomains" class="anchor-link">#</a>UseDomains
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                
+            </div>
+            <div class="option-description"><p>As in the <a href="#section-DHCPv4" class="section-ref">[DHCPv4]</a> section.</p>
+
+        <p>Added in version 256.</p>
+  </div>
+            
+            
+        </div>
+        </div><div id="section-DHCPServer" class="section-block"><h2>DHCPServer Section<span class="badge badge-category-expert" style="margin-left: 10px; font-size: 0.6em; vertical-align: middle;">Expert</span></h2><div class="section-intro" style="margin-bottom: 20px;"><p>This section configures the default setting of the DHCP server. The following options are available
+    in the <a href="#section-DHCPServer" class="section-ref">[DHCPServer]</a> section:</p>
+
+    </div>
+        <div id="DHCPServer-PersistLeases" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#DHCPServer-PersistLeases" class="anchor-link">#</a>PersistLeases
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean" class="badge badge-type-prominent badge-type-boolean">boolean</a>
+                
+            </div>
+            <div class="option-description"><span style="display:inline-block; margin-bottom:5px; padding: 2px 6px; font-size: 0.75em; font-weight: 600; line-height: 1; color: #856404; background-color: #fff3cd; border-radius: 0.25rem; border: 1px solid #ffeeba;">Schema Only</span><br>This property exists within the code but has no published documentation.</div>
+            
+            
+        </div>
+        
+        <div id="DHCPServer-UseDomains" class="option-block">
+            <div class="option-header">
+                <div class="option-title">
+                    <a href="#DHCPServer-UseDomains" class="anchor-link">#</a>UseDomains
+                </div>
+                <div class="option-meta">
+                    <span class="badge badge-category-expert">Expert</span><span class="badge badge-version">v256+</span><span class="badge badge-default">Optional</span>
+                </div>
+            </div>
+            <div class="option-type-line">
+                <a href="../types.html#boolean | enum" class="badge badge-type-prominent badge-type-complex">boolean | enum</a>
+                
+            </div>
+            <div class="option-description">
+          <p>Same as the one in the <a href="#section-IPv6AcceptRA" class="section-ref">[IPv6AcceptRA]</a> section, but applied for DHCPv4 protocol.</p>
+
+          <p>Added in version 256.</p>
+  </div>
+            
+            
+        </div>
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sidebarLinks = document.querySelectorAll('#sidebar a');
             const sections = document.querySelectorAll('.section-block, .option-block');
-            const sidebar = document.getElementById('sidebar');
             
             // Map IDs to sidebar links
             const linkMap = new Map();
@@ -271,10 +663,7 @@ UseDomains=route
                         const id = entry.target.id;
                         const link = linkMap.get(id);
                         if (link) {
-                            // Remove active from all
                             sidebarLinks.forEach(l => l.classList.remove('active'));
-                            
-                            // Add active to current
                             link.classList.add('active');
                             
                             // Open parent details
@@ -283,27 +672,22 @@ UseDomains=route
                                 if (parent.tagName === 'DETAILS') {
                                     parent.open = true;
                                 }
-                                if (parent.tagName === 'SUMMARY') {
-                                     // Should not happen as summary is sibling
-                                } else if (parent.tagName === 'LI') {
-                                     // Check if it has details child?
-                                     // The structure is li > details > summary
-                                }
                                 parent = parent.parentElement;
                             }
                         }
                     }
                 });
             }, {
-                root: null, // Use viewport
+                root: null, 
                 threshold: 0.1,
-                rootMargin: "-40% 0px -40% 0px" // Trigger when element is in middle of screen
+                rootMargin: "-40% 0px -40% 0px"
             });
 
             sections.forEach(section => observer.observe(section));
         });
     </script>
     <script src="../js/search.js"></script>
+        
+    
 </body>
 </html>
-    

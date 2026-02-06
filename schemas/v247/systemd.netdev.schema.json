@@ -710,7 +710,8 @@
           "title": "Mode",
           "examples": [
             "active-backup"
-          ]
+          ],
+          "x-category": "basic"
         },
         "TransmitHashPolicy": {
           "type": "string",
@@ -726,7 +727,8 @@
           "title": "Transmit Hash Policy",
           "examples": [
             "encap2+3"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "LACPTransmitRate": {
           "type": "string",
@@ -739,7 +741,8 @@
           "title": "LACP Transmit Rate",
           "examples": [
             "fast"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "AdSelect": {
           "type": "string",
@@ -788,7 +791,8 @@
           "title": "ARP Validate",
           "examples": [
             "active"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "ARPAllTargets": {
           "type": "string",
@@ -801,7 +805,8 @@
           "title": "ARP All Targets",
           "examples": [
             "all"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "PrimaryReselectPolicy": {
           "type": "string",
@@ -815,7 +820,8 @@
           "title": "Primary Reselect Policy",
           "examples": [
             "always"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "ResendIGMP": {
           "type": "integer",
@@ -867,7 +873,8 @@
           ],
           "description": "Specifies the frequency that Media Independent Interface link monitoring will occur. A value of zero disables MII link monitoring. This value is rounded down to the nearest millisecond. The default value is 0.",
           "version_added": "216",
-          "title": "MII Monitor Sec"
+          "title": "MII Monitor Sec",
+          "x-category": "advanced"
         },
         "UpDelaySec": {
           "allOf": [
@@ -877,7 +884,8 @@
           ],
           "description": "Specifies the delay before a link is enabled after a link up status has been detected. This value is rounded down to a multiple of MIIMonitorSec=. The default value is 0.",
           "version_added": "216",
-          "title": "Up Delay Sec"
+          "title": "Up Delay Sec",
+          "x-category": "advanced"
         },
         "DownDelaySec": {
           "allOf": [
@@ -887,7 +895,8 @@
           ],
           "description": "Specifies the delay before a link is disabled after a link down status has been detected. This value is rounded down to a multiple of MIIMonitorSec=. The default value is 0.",
           "version_added": "216",
-          "title": "Down Delay Sec"
+          "title": "Down Delay Sec",
+          "x-category": "advanced"
         },
         "ARPIntervalSec": {
           "allOf": [
@@ -897,7 +906,8 @@
           ],
           "description": "Specifies the ARP link monitoring frequency. A value of 0 disables ARP monitoring. The default value is 0, and the default unit seconds.",
           "version_added": "220",
-          "title": "ARP Interval Sec"
+          "title": "ARP Interval Sec",
+          "x-category": "advanced"
         },
         "LearnPacketIntervalSec": {
           "allOf": [
@@ -953,7 +963,8 @@
         }
       },
       "description": "[Bond] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "BridgeSection": {
       "type": "object",
@@ -1006,7 +1017,8 @@
           "examples": [
             100,
             20
-          ]
+          ],
+          "x-category": "advanced"
         },
         "GroupForwardMask": {
           "$ref": "#/definitions/uint16Type",
@@ -1028,7 +1040,8 @@
           ],
           "description": "This specifies the default port VLAN ID of a newly attached bridge port. Set this to an integer in the range 1...4094 or 'none' to disable the PVID.",
           "version_added": "232",
-          "title": "Default PVID"
+          "title": "Default PVID",
+          "x-category": "advanced"
         },
         "MulticastQuerier": {
           "type": "boolean",
@@ -1046,7 +1059,8 @@
           "type": "boolean",
           "description": "This setting controls the IFLA_BR_VLAN_FILTERING option in the kernel. If enabled, the bridge will be started in VLAN-filtering mode. When unset, the kernel's default will be used.",
           "version_added": "231",
-          "title": "VLAN Filtering"
+          "title": "VLAN Filtering",
+          "x-category": "advanced"
         },
         "VLANProtocol": {
           "type": "string",
@@ -1058,7 +1072,8 @@
           "type": "boolean",
           "description": "This enables the bridge's Spanning Tree Protocol (STP). When unset, the kernel's default will be used.",
           "version_added": "232",
-          "title": "STP"
+          "title": "STP",
+          "x-category": "basic"
         },
         "MulticastIGMPVersion": {
           "type": "integer",
@@ -1084,7 +1099,8 @@
         }
       },
       "description": "[Bridge] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "FooOverUDPSection": {
       "type": "object",
@@ -1993,7 +2009,8 @@
           ],
           "default": "any",
           "description": "A static local address for tunneled packets. It must be an address on another interface of this host, or the special value \"any\".",
-          "title": "Local"
+          "title": "Local",
+          "x-category": "basic"
         },
         "Remote": {
           "oneOf": [
@@ -2008,7 +2025,8 @@
             }
           ],
           "description": "The remote IP address of the tunnel. Takes an IP address or the special value \"any\".",
-          "title": "Remote"
+          "title": "Remote",
+          "x-category": "basic"
         },
         "TOS": {
           "type": "integer",
@@ -2025,7 +2043,8 @@
           ],
           "default": 0,
           "description": "A fixed Time To Live N on tunneled packets. N is a number in the range 1...255. 0 is a special value meaning that packets inherit the TTL value. The default value for IPv4 tunnels is: inherit. The default value for IPv6 tunnels is 64.",
-          "title": "TTL"
+          "title": "TTL",
+          "x-category": "advanced"
         },
         "Key": {
           "$ref": "#/definitions/tunnelKeyType",
@@ -2050,7 +2069,8 @@
           "default": false,
           "description": "When true, enables Path MTU Discovery on the tunnel. When IgnoreDontFragment= is enabled, defaults to false. Otherwise, defaults to true.",
           "version_added": "215",
-          "title": "Discover Path MTU"
+          "title": "Discover Path MTU",
+          "x-category": "advanced"
         },
         "IgnoreDontFragment": {
           "type": "boolean",
@@ -2217,7 +2237,8 @@
         "FOUDestinationPort"
       ],
       "description": "[Tunnel] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "VLANSection": {
       "type": "object",
@@ -2225,7 +2246,8 @@
         "Id": {
           "$ref": "#/definitions/vlan_idType",
           "description": "The VLAN ID to use. An integer in the range 0...4094. This is mandatory.",
-          "title": "Id"
+          "title": "Id",
+          "x-category": "basic"
         },
         "Protocol": {
           "type": "string",
@@ -2239,25 +2261,29 @@
           "type": "boolean",
           "description": "The Generic VLAN Registration Protocol (GVRP) is a protocol that allows automatic learning of VLANs on a network. When unset, the kernel's default will be used.",
           "version_added": "234",
-          "title": "GVRP"
+          "title": "GVRP",
+          "x-category": "advanced"
         },
         "MVRP": {
           "type": "boolean",
           "description": "Multiple VLAN Registration Protocol (MVRP) formerly known as GARP VLAN Registration Protocol (GVRP) is a standards-based Layer 2 network protocol, for automatic configuration of VLAN information on switches. It was defined in the 802.1ak amendment to 802.1Q-2005. When unset, the kernel's default will be used.",
           "version_added": "234",
-          "title": "MVRP"
+          "title": "MVRP",
+          "x-category": "advanced"
         },
         "LooseBinding": {
           "type": "boolean",
           "description": "The VLAN loose binding mode, in which only the operational state is passed from the parent to the associated VLANs, but the VLAN device state is not changed. When unset, the kernel's default will be used.",
           "version_added": "234",
-          "title": "Loose Binding"
+          "title": "Loose Binding",
+          "x-category": "advanced"
         },
         "ReorderHeader": {
           "type": "boolean",
           "description": "When enabled, the VLAN reorder header is used and VLAN interfaces behave like physical interfaces. When unset, the kernel's default will be used.",
           "version_added": "234",
-          "title": "Reorder Header"
+          "title": "Reorder Header",
+          "x-category": "advanced"
         },
         "EgressQOSMaps": {
           "type": "string",
@@ -2289,7 +2315,8 @@
         "Id"
       ],
       "description": "[VLAN] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "VRFSection": {
       "type": "object",
@@ -2330,7 +2357,8 @@
         "Table"
       ],
       "description": "[VRF] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "VXCANSection": {
       "type": "object",
@@ -2364,7 +2392,8 @@
           "description": "The VXLAN Network Identifier (or VXLAN Segment ID).",
           "version_added": "243",
           "title": "VNI",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "basic"
         },
         "Id": {
           "allOf": [
@@ -2385,7 +2414,8 @@
           "description": "Configures VXLAN multicast group IP address. All members of a VXLAN must use the same multicast group address.",
           "version_added": "243",
           "title": "Group",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "advanced"
         },
         "Local": {
           "allOf": [
@@ -2396,7 +2426,8 @@
           "description": "Configures local IP address. It must be an address on the underlying interface of the VXLAN interface, or one of the special values 'ipv4_link_local', 'ipv6_link_local', 'dhcp4', 'dhcp6', and 'slaac'. If one of the special values is specified, an address which matches the corresponding type on the underlying interface will be used. Defaults to unset.",
           "version_added": "233",
           "title": "Local",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "advanced"
         },
         "Remote": {
           "allOf": [
@@ -2407,7 +2438,8 @@
           "description": "Configures destination IP address.",
           "version_added": "233",
           "title": "Remote",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "advanced"
         },
         "TOS": {
           "type": "integer",
@@ -2562,7 +2594,8 @@
           "description": "Configures the default destination UDP port. If the destination port is not specified then Linux kernel default will be used. Set to 4789 to get the IANA assigned value.",
           "version_added": "229",
           "title": "Destination Port",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "advanced"
         },
         "FlowLabel": {
           "type": "integer",
@@ -2597,7 +2630,8 @@
         "VNI"
       ],
       "description": "[VXLAN] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "WLANSection": {
       "type": "object",
@@ -2661,21 +2695,24 @@
           "description": "Sets a comma-separated list of IP (v4 or v6) addresses with CIDR masks from which this peer is allowed to send incoming traffic and to which outgoing traffic for this peer is directed. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared. The catch-all 0.0.0.0/0 may be specified for matching all IPv4 addresses, and ::/0 may be specified for matching all IPv6 addresses. Note that this only affects routing inside the network interface itself, i.e. the packets that pass through the tunnel itself. To cause packets to be sent via the tunnel in the first place, an appropriate route needs to be added as well -- either in the '[Routes]' section on the '.network' matching the wireguard interface, or externally to systemd-networkd.",
           "version_added": "237",
           "title": "Allowed I Ps",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "basic"
         },
         "Endpoint": {
           "$ref": "#/definitions/endpointType",
           "description": "Sets an endpoint IP address or hostname, followed by a colon, and then a port number. IPv6 address must be in the square brackets. For example, '111.222.333.444:51820' for IPv4 and '[1111:2222::3333]:51820' for IPv6 address. This endpoint will be updated automatically once to the most recent source IP address and port of correctly authenticated packets from the peer at configuration time. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section.",
           "version_added": "237",
           "title": "Endpoint",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "basic"
         },
         "PublicKey": {
           "$ref": "#/definitions/base64KeyType",
           "description": "Sets a Base64 encoded public key calculated by wg pubkey (see wg8) from a private key, and usually transmitted out of band to the author of the configuration file. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section. This option is mandatory for this section.",
           "version_added": "237",
           "title": "Public Key",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "basic"
         },
         "PublicKeyFile": {
           "$ref": "#/definitions/absolutePathType",
@@ -2688,20 +2725,23 @@
           "description": "Optional preshared key for the interface. It can be generated by the wg genpsk command. This option adds an additional layer of symmetric-key cryptography to be mixed into the already existing public-key cryptography, for post-quantum resistance. This option honors the '@' prefix in the same way as the 'PrivateKey=' setting of the '[WireGuard]' section. Note that because this information is secret, it's strongly recommended to use an (encrypted) credential. Alternatively, you may want to set the permissions of the.netdev file to be owned by 'root:systemd-network' with a '0640' file mode.",
           "version_added": "237",
           "title": "Preshared Key",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "advanced"
         },
         "PresharedKeyFile": {
           "$ref": "#/definitions/absolutePathType",
           "description": "Takes an absolute path to a file which contains the Base64 encoded preshared key for the peer. When this option is specified, then PresharedKey= is ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
           "version_added": "242",
           "title": "Preshared Key File",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "advanced"
         },
         "PersistentKeepalive": {
           "$ref": "#/definitions/secondsType",
           "description": "Sets a seconds interval, between 1 and 65535 inclusive, of how often to send an authenticated empty packet to the peer for the purpose of keeping a stateful firewall or NAT mapping valid persistently. For example, if the interface very rarely sends traffic, but it might at anytime receive traffic from a peer, and it is behind NAT, the interface might benefit from having a persistent keepalive interval of 25 seconds. If set to 0 or \"off\", this option is disabled. By default or when unspecified, this option is off. Most users will not need this.",
           "version_added": "237",
-          "title": "Persistent Keepalive"
+          "title": "Persistent Keepalive",
+          "x-category": "advanced"
         },
         "RouteTable": {
           "oneOf": [
@@ -2719,13 +2759,15 @@
           ],
           "description": "The table identifier for the routes to the addresses specified in the AllowedIPs=. Takes a negative boolean value, one of the predefined names 'default', 'main', and 'local', names defined in RouteTable= in networkd.conf5, or a number in the range 1...4294967295. Defaults to unset, and the value specified in the same setting in the [WireGuard] section will be used.",
           "version_added": "250",
-          "title": "Route Table"
+          "title": "Route Table",
+          "x-category": "advanced"
         },
         "RouteMetric": {
           "$ref": "#/definitions/uint32Type",
           "description": "The priority of the routes to the addresses specified in the AllowedIPs=. Defaults to unset, and the value specified in the same setting in the [WireGuard] section will be used.",
           "version_added": "250",
-          "title": "Route Metric"
+          "title": "Route Metric",
+          "x-category": "advanced"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -2738,7 +2780,8 @@
         "PublicKey"
       ],
       "description": "[WireGuardPeer] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "WireGuardSection": {
       "type": "object",
@@ -2750,7 +2793,8 @@
           "description": "Sets a firewall mark on outgoing WireGuard packets from this interface.",
           "version_added": "243",
           "title": "Firewall Mark",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "advanced"
         },
         "FwMark": {
           "type": "integer",
@@ -2763,21 +2807,24 @@
           "description": "Sets UDP port for listening. Takes either value between 1 and 65535 or 'auto'. If 'auto' is specified, the port is automatically generated based on interface name. Defaults to 'auto'.",
           "version_added": "237",
           "title": "Listen Port",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "basic"
         },
         "PrivateKey": {
           "$ref": "#/definitions/base64KeyType",
           "description": "The Base64 encoded private key for the interface. It can be generated using the wg genkey command (see wg8). Specially, if the specified key is prefixed with '@', it is interpreted as the name of the credential from which the actual key shall be read. systemd-networkd.service8 automatically imports credentials matching 'network.wireguard.*'. For more details on credentials, refer to systemd.exec5. A private key is mandatory to use WireGuard. If not set, the credential 'network.wireguard.private.netdev' is used if exists. I.e. for '50-foobar.netdev', 'network.wireguard.private.50-foobar' is tried. Note that because this information is secret, it's strongly recommended to use an (encrypted) credential. Alternatively, you may want to set the permissions of the.netdev file to be owned by 'root:systemd-network' with a '0640' file mode.",
           "version_added": "237",
           "title": "Private Key",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "basic"
         },
         "PrivateKeyFile": {
           "$ref": "#/definitions/absolutePathType",
           "description": "Takes an absolute path to a file which contains the Base64 encoded private key for the interface. When this option is specified, then PrivateKey= is ignored. Note that the file must be readable by the user 'systemd-network', so it should be, e.g., owned by 'root:systemd-network' with a '0640' file mode. If the path refers to an 'AF_UNIX' stream socket in the file system a connection is made to it and the key read from it.",
           "version_added": "242",
           "title": "Private Key File",
-          "x-subcategory": "Configuration"
+          "x-subcategory": "Configuration",
+          "x-category": "basic"
         },
         "RouteTable": {
           "oneOf": [
@@ -2796,14 +2843,16 @@
           "default": "false",
           "description": "The table identifier for the routes to the addresses specified in the AllowedIPs=. Takes a negative boolean value, one of the predefined names 'default', 'main', and 'local', names defined in RouteTable= in networkd.conf5, or a number in the range 1...4294967295. When 'off' the routes to the addresses specified in the AllowedIPs= setting will not be configured. Defaults to false. This setting will be ignored when the same setting is specified in the [WireGuardPeer] section.",
           "version_added": "250",
-          "title": "Route Table"
+          "title": "Route Table",
+          "x-category": "advanced"
         },
         "RouteMetric": {
           "$ref": "#/definitions/uint32Type",
           "default": 0,
           "description": "The priority of the routes to the addresses specified in the AllowedIPs=. Defaults to 0 for IPv4 addresses, and 1024 for IPv6 addresses. This setting will be ignored when the same setting is specified in the [WireGuardPeer] section.",
           "version_added": "250",
-          "title": "Route Metric"
+          "title": "Route Metric",
+          "x-category": "advanced"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -2816,7 +2865,8 @@
         "PrivateKey"
       ],
       "description": "[WireGuard] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "XfrmSection": {
       "type": "object",
@@ -2868,7 +2918,8 @@
             "myserver",
             "web*",
             "!testhost"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "Virtualization": {
           "type": "string",
@@ -2879,7 +2930,8 @@
             "qemu",
             "!kvm"
           ],
-          "x-subcategory": "Virtualization"
+          "x-subcategory": "Virtualization",
+          "x-category": "advanced"
         },
         "KernelCommandLine": {
           "type": "string",
@@ -2915,7 +2967,8 @@
       },
       "title": "Match",
       "description": "[Match] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "basic"
     },
     "NetDev": {
       "type": "object",
@@ -2929,7 +2982,8 @@
             "Uplink to ISP"
           ],
           "version_added": "215",
-          "x-subcategory": "Identity"
+          "x-subcategory": "Identity",
+          "x-category": "basic"
         },
         "Name": {
           "$ref": "#/definitions/interfacenameType",
@@ -2940,7 +2994,8 @@
             "br0"
           ],
           "version_added": "211",
-          "x-subcategory": "Identity"
+          "x-subcategory": "Identity",
+          "x-category": "basic"
         },
         "Kind": {
           "type": "string",
@@ -2953,7 +3008,8 @@
             "veth"
           ],
           "version_added": "211",
-          "x-subcategory": "Identity"
+          "x-subcategory": "Identity",
+          "x-category": "basic"
         },
         "MTUBytes": {
           "allOf": [
@@ -2969,7 +3025,8 @@
             "auto"
           ],
           "version_added": "215",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "x-category": "advanced"
         },
         "MACAddress": {
           "allOf": [
@@ -2984,7 +3041,8 @@
             "none"
           ],
           "version_added": "215",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "x-category": "advanced"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -2999,7 +3057,8 @@
       ],
       "title": "Net Dev",
       "description": "[NetDev] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "basic"
     },
     "VLAN": {
       "oneOf": [
@@ -3014,7 +3073,8 @@
         }
       ],
       "description": "[VLAN] configuration (Can be repeated)",
-      "title": "VLAN"
+      "title": "VLAN",
+      "x-category": "advanced"
     },
     "MACVLAN": {
       "oneOf": [
@@ -3089,7 +3149,8 @@
         }
       ],
       "description": "[Tunnel] configuration (Can be repeated)",
-      "title": "Tunnel"
+      "title": "Tunnel",
+      "x-category": "advanced"
     },
     "FooOverUDP": {
       "oneOf": [
@@ -3179,7 +3240,8 @@
         }
       ],
       "description": "[VXLAN] configuration (Can be repeated)",
-      "title": "VXLAN"
+      "title": "VXLAN",
+      "x-category": "advanced"
     },
     "GENEVE": {
       "oneOf": [
@@ -3299,7 +3361,8 @@
         }
       ],
       "description": "[Bond] configuration (Can be repeated)",
-      "title": "Bond"
+      "title": "Bond",
+      "x-category": "advanced"
     },
     "Bridge": {
       "oneOf": [
@@ -3314,7 +3377,8 @@
         }
       ],
       "description": "[Bridge] configuration (Can be repeated)",
-      "title": "Bridge"
+      "title": "Bridge",
+      "x-category": "advanced"
     },
     "VRF": {
       "oneOf": [
@@ -3329,7 +3393,8 @@
         }
       ],
       "description": "[VRF] configuration (Can be repeated)",
-      "title": "VRF"
+      "title": "VRF",
+      "x-category": "advanced"
     },
     "BareUDP": {
       "oneOf": [
@@ -3359,7 +3424,8 @@
         }
       ],
       "description": "[WireGuard] configuration (Can be repeated)",
-      "title": "Wire Guard"
+      "title": "Wire Guard",
+      "x-category": "advanced"
     },
     "WireGuardPeer": {
       "oneOf": [
@@ -3374,7 +3440,8 @@
         }
       ],
       "description": "[WireGuardPeer] configuration (Can be repeated)",
-      "title": "Wire Guard Peer"
+      "title": "Wire Guard Peer",
+      "x-category": "advanced"
     },
     "Xfrm": {
       "oneOf": [

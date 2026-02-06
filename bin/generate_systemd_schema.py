@@ -679,5 +679,21 @@ def main():
                 else:
                     print(f"Warning: XML source not found: {xml_src}")
 
+        # Copy shared XML include files needed for documentation generation
+        shared_xml_files = [
+            "man/tc.xml",           # Traffic control shared documentation
+            "man/version-info.xml", # Version information references
+            "man/standard-conf.xml" # Standard configuration documentation
+        ]
+        print("\nCopying shared XML include files...")
+        for xml_file in shared_xml_files:
+            xml_src = os.path.join(temp_dir, xml_file)
+            xml_dst = os.path.join(args.out, os.path.basename(xml_file))
+            if os.path.exists(xml_src):
+                shutil.copy2(xml_src, xml_dst)
+                print(f" -> Copied {os.path.basename(xml_file)} to {args.out}")
+            else:
+                print(f"Warning: Shared XML file not found: {xml_src}")
+
 if __name__ == "__main__":
     main()

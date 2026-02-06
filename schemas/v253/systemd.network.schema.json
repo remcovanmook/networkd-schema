@@ -823,7 +823,8 @@
         }
       },
       "description": "[Bridge] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "BridgeVLANSection": {
       "type": "object",
@@ -898,7 +899,8 @@
         }
       },
       "description": "[BridgeVLAN] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "CAKESection": {
       "type": "object",
@@ -1304,7 +1306,8 @@
         }
       },
       "description": "[DHCPPrefixDelegation] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "DHCPServerStaticLeaseSection": {
       "type": "object",
@@ -1339,7 +1342,8 @@
         }
       },
       "description": "[DHCPServerStaticLease] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "DHCPv4Section": {
       "type": "object",
@@ -1366,13 +1370,15 @@
           "title": "Client Identifier",
           "examples": [
             "duid"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "UseDNS": {
           "type": "boolean",
           "description": "When true (the default), the DNS servers received from the DHCP server will be used. This corresponds to the 'nameserver' option in resolv.conf5.",
           "version_added": "211",
-          "title": "Use DNS"
+          "title": "Use DNS",
+          "x-category": "basic"
         },
         "UseDNR": {
           "type": "boolean",
@@ -1391,7 +1397,8 @@
           "type": "boolean",
           "description": "When true (the default), the NTP servers received from the DHCP server will be used by 'systemd-timesyncd.service'.",
           "version_added": "220",
-          "title": "Use NTP"
+          "title": "Use NTP",
+          "x-category": "basic"
         },
         "RoutesToNTP": {
           "type": "boolean",
@@ -1410,39 +1417,45 @@
           "type": "boolean",
           "description": "When true (the default), the captive portal advertised by the DHCP server will be recorded and made available to client programs and displayed in the networkctl1 status output per-link.",
           "version_added": "254",
-          "title": "Use Captive Portal"
+          "title": "Use Captive Portal",
+          "x-category": "advanced"
         },
         "UseMTU": {
           "type": "boolean",
           "default": false,
           "description": "When true, the interface maximum transmission unit from the DHCP server will be used on the current link. If MTUBytes= is set, then this setting is ignored. Defaults to false. Note, some drivers will reset the interfaces if the MTU is changed. For such interfaces, please try to use IgnoreCarrierLoss= with a short timespan, e.g. '3 seconds'.",
           "version_added": "211",
-          "title": "Use MTU"
+          "title": "Use MTU",
+          "x-category": "advanced"
         },
         "UseHostname": {
           "type": "boolean",
           "description": "When true (the default), the hostname received from the DHCP server will be set as the transient hostname of the system.",
           "version_added": "211",
-          "title": "Use Hostname"
+          "title": "Use Hostname",
+          "x-category": "basic"
         },
         "UseDomains": {
           "type": "boolean",
           "default": false,
           "description": ", or the special value 'route'. When true, the domain name received from the DHCP server will be used as DNS search domain over this link, similarly to the effect of the 'Domains=' setting. If set to 'route', the domain name received from the DHCP server will be used for routing DNS queries only, but not for searching, similarly to the effect of the 'Domains=' setting when the argument is prefixed with '~'. When unspecified, the value specified in the same setting in the [Network] section will be used. When it is unspecified, the value specified in the same setting in the [DHCPv4] section in networkd.conf5 will be used. When it is unspecified, the value specified in the same setting in the [Network] section in networkd.conf5 will be used. When none of them are specified, defaults to 'no'. It is recommended to enable this option only on trusted networks, as setting this affects resolution of all hostnames, in particular of single-label names. It is generally safer to use the supplied domain only as routing domain, rather than as search domain, in order to not have it affect local resolution of single-label names. When set to true, this setting corresponds to the 'domain' option in resolv.conf5.",
           "version_added": "216",
-          "title": "Use Domains"
+          "title": "Use Domains",
+          "x-category": "advanced"
         },
         "UseRoutes": {
           "type": "boolean",
           "description": "When true (the default), the static routes will be requested from the DHCP server and added to the routing table with a metric of 1024, and a scope of 'global', 'link' or 'host', depending on the route's destination and gateway. If the destination is on the local host, e.g., 127.x.x.x, or the same as the link's own address, the scope will be set to 'host'. Otherwise if the gateway is null (a direct route), a 'link' scope will be used. For anything else, scope defaults to 'global'.",
           "version_added": "215",
-          "title": "Use Routes"
+          "title": "Use Routes",
+          "x-category": "advanced"
         },
         "UseGateway": {
           "type": "boolean",
           "description": "When true, and the DHCP server provides a Router option, the default gateway based on the router address will be configured. Defaults to unset, and the value specified with UseRoutes= will be used. Note, when the server provides both the Router and Classless Static Routes option, and UseRoutes= is enabled, the Router option is always ignored regardless of this setting. See RFC 3442.",
           "version_added": "246",
-          "title": "Use Gateway"
+          "title": "Use Gateway",
+          "x-category": "advanced"
         },
         "QuickAck": {
           "type": "boolean",
@@ -1467,13 +1480,15 @@
           "type": "string",
           "description": "When true (the default), the machine's hostname (or the value specified with Hostname=, described below) will be sent to the DHCP server. Note that the hostname must consist only of 7-bit ASCII lower-case characters and no spaces or dots, and be formatted as a valid DNS domain name. Otherwise, the hostname is not sent even if this option is true.",
           "version_added": "215",
-          "title": "Send Hostname"
+          "title": "Send Hostname",
+          "x-category": "advanced"
         },
         "Hostname": {
           "type": "string",
           "description": "Use this value for the hostname which is sent to the DHCP server, instead of machine's hostname. Note that the specified hostname must consist only of 7-bit ASCII lower-case characters and no spaces or dots, and be formatted as a valid DNS domain name.",
           "version_added": "223",
-          "title": "Hostname"
+          "title": "Hostname",
+          "x-category": "advanced"
         },
         "Label": {
           "$ref": "#/definitions/addressLabelType",
@@ -1491,7 +1506,8 @@
           "type": "string",
           "description": "The vendor class identifier used to identify vendor type and configuration.",
           "version_added": "216",
-          "title": "Vendor Class Identifier"
+          "title": "Vendor Class Identifier",
+          "x-category": "advanced"
         },
         "MUDURL": {
           "type": "string",
@@ -1548,7 +1564,8 @@
           "default": 1024,
           "description": "Set the routing metric for routes specified by the DHCP server (including the prefix route added for the specified prefix). Takes an unsigned integer in the range 0...4294967295. Defaults to 1024.",
           "version_added": "217",
-          "title": "Route Metric"
+          "title": "Route Metric",
+          "x-category": "advanced"
         },
         "RouteTable": {
           "oneOf": [
@@ -1571,14 +1588,16 @@
           ],
           "description": "The table identifier for DHCP routes. conf5, or a number between 1...4294967295. When used in combination with VRF=, the VRF's routing table is used when this parameter is not specified.",
           "version_added": "232",
-          "title": "Route Table"
+          "title": "Route Table",
+          "x-category": "advanced"
         },
         "UseTimezone": {
           "type": "boolean",
           "default": false,
           "description": "When true, the timezone received from the DHCP server will be set as timezone of the local system. Defaults to false.",
           "version_added": "226",
-          "title": "Use Timezone"
+          "title": "Use Timezone",
+          "x-category": "advanced"
         },
         "ListenPort": {
           "$ref": "#/definitions/portType",
@@ -1757,7 +1776,8 @@
         }
       },
       "description": "[DHCPv4] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "DHCPv6Section": {
       "type": "object",
@@ -1766,19 +1786,22 @@
           "type": "boolean",
           "description": "When true (the default), the IP addresses provided by the DHCPv6 server will be assigned.",
           "version_added": "248",
-          "title": "Use Address"
+          "title": "Use Address",
+          "x-category": "basic"
         },
         "UseDelegatedPrefix": {
           "type": "boolean",
           "description": "When true (the default), the client will request the DHCPv6 server to delegate prefixes. If the server provides prefixes to be delegated, then subnets of the prefixes are assigned to the interfaces that have DHCPPrefixDelegation=yes. See also the DHCPPrefixDelegation= setting in the [Network] section, settings in the [DHCPPrefixDelegation] section, and RFC 8415.",
           "version_added": "250",
-          "title": "Use Delegated Prefix"
+          "title": "Use Delegated Prefix",
+          "x-category": "advanced"
         },
         "UseDNS": {
           "type": "boolean",
           "description": "As in the [DHCPv4] section.",
           "version_added": "243",
-          "title": "Use DNS"
+          "title": "Use DNS",
+          "x-category": "basic"
         },
         "UseDNR": {
           "type": "boolean",
@@ -1790,25 +1813,29 @@
           "type": "boolean",
           "description": "When true (the default), the hostname received from the DHCP server will be set as the transient hostname of the system.",
           "version_added": "211",
-          "title": "Use Hostname"
+          "title": "Use Hostname",
+          "x-category": "basic"
         },
         "UseDomains": {
           "type": "boolean",
           "description": "Specifies the protocol-independent default value for the same settings in [IPv6AcceptRA], [DHCPv4], and [DHCPv6] sections below. Takes a boolean, or the special value 'route'. See also the same setting in [DHCPv4] below. Defaults to unset.",
           "version_added": "256",
-          "title": "Use Domains"
+          "title": "Use Domains",
+          "x-category": "advanced"
         },
         "UseNTP": {
           "type": "boolean",
           "description": "When true (the default), the NTP servers received from the DHCP server will be used by 'systemd-timesyncd.service'.",
           "version_added": "220",
-          "title": "Use NTP"
+          "title": "Use NTP",
+          "x-category": "basic"
         },
         "UseCaptivePortal": {
           "type": "boolean",
           "description": "When true (the default), the captive portal advertised by the DHCPv6 server will be recorded and made available to client programs and displayed in the networkctl1 status output per-link.",
           "version_added": "254",
-          "title": "Use Captive Portal"
+          "title": "Use Captive Portal",
+          "x-category": "advanced"
         },
         "MUDURL": {
           "type": "string",
@@ -1820,13 +1847,15 @@
           "type": "string",
           "description": "When true (the default), the machine's hostname (or the value specified with Hostname=, described below) will be sent to the DHCPv6 server. Note that the hostname must consist only of 7-bit ASCII lower-case characters and no spaces or dots, and be formatted as a valid DNS domain name. Otherwise, the hostname is not sent even if this option is true.",
           "version_added": "255",
-          "title": "Send Hostname"
+          "title": "Send Hostname",
+          "x-category": "advanced"
         },
         "Hostname": {
           "type": "string",
           "description": "Use this value for the hostname which is sent to the DHCPv6 server, instead of machine's hostname. Note that the specified hostname must consist only of 7-bit ASCII lower-case characters and no spaces or dots, and be formatted as a valid DNS domain name.",
           "version_added": "255",
-          "title": "Hostname"
+          "title": "Hostname",
+          "x-category": "advanced"
         },
         "RequestOptions": {
           "type": "string",
@@ -1860,7 +1889,8 @@
           ],
           "description": "Takes an IPv6 address with prefix length in the same format as the Address= in the [Network] section. The DHCPv6 client will include a prefix hint in the DHCPv6 solicitation sent to the server. The prefix length Defaults to unset.",
           "version_added": "244",
-          "title": "Prefix Delegation Hint"
+          "title": "Prefix Delegation Hint",
+          "x-category": "advanced"
         },
         "UnassignedSubnetPolicy": {
           "type": "string",
@@ -1962,7 +1992,8 @@
         }
       },
       "description": "[DHCPv6] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "FairQueueingControlledDelaySection": {
       "type": "object",
@@ -2564,7 +2595,8 @@
         }
       },
       "description": "[IPv6RoutePrefix] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "IPv6SendRASection": {
       "type": "object",
@@ -2733,7 +2765,8 @@
         }
       },
       "description": "[IPv6SendRA] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "LLDPSection": {
       "type": "object",
@@ -2752,7 +2785,8 @@
         }
       },
       "description": "[LLDP] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "NeighborSection": {
       "type": "object",
@@ -2798,7 +2832,8 @@
         }
       },
       "description": "[Neighbor] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "NetworkEmulatorSection": {
       "type": "object",
@@ -2946,7 +2981,8 @@
         "Id"
       ],
       "description": "[NextHop] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "advanced"
     },
     "PIESection": {
       "type": "object",
@@ -3079,7 +3115,8 @@
           "examples": [
             "192.168.1.1",
             "fe80::1"
-          ]
+          ],
+          "x-category": "basic"
         },
         "Destination": {
           "oneOf": [
@@ -3097,7 +3134,8 @@
             "0.0.0.0/0",
             "192.168.1.0/24",
             "::/0"
-          ]
+          ],
+          "x-category": "basic"
         },
         "Source": {
           "oneOf": [
@@ -3113,13 +3151,15 @@
           "title": "Source",
           "examples": [
             "192.168.1.5"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "Metric": {
           "$ref": "#/definitions/uint32Type",
           "description": "The metric of the route. Takes an unsigned integer in the range 0...4294967295. Defaults to unset, and the kernel's default will be used.",
           "version_added": "216",
-          "title": "Metric"
+          "title": "Metric",
+          "x-category": "basic"
         },
         "Scope": {
           "type": "string",
@@ -3138,7 +3178,8 @@
             "global",
             "link",
             "host"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "PreferredSource": {
           "allOf": [
@@ -3151,7 +3192,8 @@
           "title": "Preferred Source",
           "examples": [
             "192.168.1.5"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "Table": {
           "oneOf": [
@@ -3181,14 +3223,16 @@
             "local",
             "default",
             100
-          ]
+          ],
+          "x-category": "advanced"
         },
         "GatewayOnLink": {
           "type": "boolean",
           "default": false,
           "description": "If set to true, the kernel does not have to check if the gateway is reachable directly by the current machine (i.e., attached to the local network), so that we can insert the route in the kernel table without it being complained about. Defaults to 'no'.",
           "version_added": "234",
-          "title": "Gateway On Link"
+          "title": "Gateway On Link",
+          "x-category": "advanced"
         },
         "IPv6Preference": {
           "type": "string",
@@ -3259,7 +3303,8 @@
             "global",
             "link",
             "host"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "MultiPathRoute": {
           "type": "string",
@@ -3366,7 +3411,8 @@
         }
       },
       "description": "[Route] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "basic"
     },
     "StochasticFairBlueSection": {
       "type": "object",
@@ -3658,12 +3704,14 @@
             "00:11:22:33:44:55 66:77:88:99:aa:bb"
           ],
           "version_added": "218",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "x-category": "basic"
         },
         "PermanentMACAddress": {
           "$ref": "#/definitions/mac_addressType",
           "title": "Permanent MAC Address",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "x-category": "advanced"
         },
         "Path": {
           "allOf": [
@@ -3678,7 +3726,8 @@
             "pci-0000:00:1f.6",
             "pci-0000:02:00.0-usb-0:1:1.0"
           ],
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "x-category": "advanced"
         },
         "Driver": {
           "type": "string",
@@ -3688,7 +3737,8 @@
             "virtio_net",
             "r8169"
           ],
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "x-category": "advanced"
         },
         "Type": {
           "description": "A whitespace-separated list of shell-style globs matching the device type, as exposed by networkctl list. If the list is prefixed with a \"!\", the test is inverted.",
@@ -3701,7 +3751,8 @@
           ],
           "version_added": "211",
           "x-subcategory": "Hardware",
-          "$ref": "#/definitions/globsType"
+          "$ref": "#/definitions/globsType",
+          "x-category": "basic"
         },
         "Kind": {
           "type": "string",
@@ -3712,7 +3763,8 @@
             "vlan",
             "veth"
           ],
-          "x-subcategory": "Virtualization"
+          "x-subcategory": "Virtualization",
+          "x-category": "advanced"
         },
         "WLANInterfaceType": {
           "type": "string",
@@ -3725,7 +3777,8 @@
             "!monitor"
           ],
           "version_added": "244",
-          "x-subcategory": "Network"
+          "x-subcategory": "Network",
+          "x-category": "advanced"
         },
         "SSID": {
           "description": "A whitespace-separated list of shell-style globs matching the SSID of the currently connected wireless LAN. If the list is prefixed with a \"!\", the test is inverted.",
@@ -3737,7 +3790,8 @@
           ],
           "version_added": "244",
           "x-subcategory": "Network",
-          "$ref": "#/definitions/globsType"
+          "$ref": "#/definitions/globsType",
+          "x-category": "advanced"
         },
         "BSSID": {
           "type": "string",
@@ -3749,7 +3803,8 @@
             "!aa:bb:cc:dd:ee:ff"
           ],
           "version_added": "244",
-          "x-subcategory": "Network"
+          "x-subcategory": "Network",
+          "x-category": "advanced"
         },
         "Name": {
           "description": "A whitespace-separated list of shell-style globs matching the device name, as exposed by the udev property 'INTERFACE', or device's alternative names. If the list is prefixed with a \"!\", the test is inverted.",
@@ -3760,7 +3815,8 @@
           ],
           "version_added": "211",
           "x-subcategory": "Network",
-          "$ref": "#/definitions/globsType"
+          "$ref": "#/definitions/globsType",
+          "x-category": "basic"
         },
         "Property": {
           "type": "string",
@@ -3777,7 +3833,8 @@
             "myserver",
             "web*",
             "!testhost"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "Virtualization": {
           "type": "string",
@@ -3788,7 +3845,8 @@
             "qemu",
             "!kvm"
           ],
-          "x-subcategory": "Virtualization"
+          "x-subcategory": "Virtualization",
+          "x-category": "advanced"
         },
         "KernelCommandLine": {
           "type": "string",
@@ -3840,7 +3898,8 @@
       },
       "title": "Match",
       "description": "[Match] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "basic"
     },
     "Link": {
       "type": "object",
@@ -3858,7 +3917,8 @@
             "none"
           ],
           "version_added": "218",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "x-category": "advanced"
         },
         "MTUBytes": {
           "allOf": [
@@ -3874,7 +3934,8 @@
             "auto"
           ],
           "version_added": "218",
-          "x-subcategory": "Hardware"
+          "x-subcategory": "Hardware",
+          "x-category": "basic"
         },
         "Group": {
           "$ref": "#/definitions/uint32Type",
@@ -3890,7 +3951,8 @@
             "yes",
             "no"
           ],
-          "version_added": "232"
+          "version_added": "232",
+          "x-category": "advanced"
         },
         "Multicast": {
           "type": "boolean",
@@ -3900,7 +3962,8 @@
             "yes",
             "no"
           ],
-          "version_added": "239"
+          "version_added": "239",
+          "x-category": "advanced"
         },
         "AllMulticast": {
           "type": "boolean",
@@ -3910,7 +3973,8 @@
             "yes",
             "no"
           ],
-          "version_added": "239"
+          "version_added": "239",
+          "x-category": "advanced"
         },
         "Promiscuous": {
           "type": "boolean",
@@ -3920,7 +3984,8 @@
             "yes",
             "no"
           ],
-          "version_added": "248"
+          "version_added": "248",
+          "x-category": "advanced"
         },
         "Unmanaged": {
           "type": "boolean",
@@ -3953,7 +4018,8 @@
             "down",
             "always-down"
           ],
-          "version_added": "248"
+          "version_added": "248",
+          "x-category": "advanced"
         },
         "RequiredForOnline": {
           "type": "string",
@@ -3966,7 +4032,8 @@
             "carrier",
             "degraded:routable"
           ],
-          "version_added": "256"
+          "version_added": "256",
+          "x-category": "advanced"
         },
         "RequiredFamilyForOnline": {
           "type": "string",
@@ -3988,7 +4055,8 @@
             "both",
             "any"
           ],
-          "version_added": "249"
+          "version_added": "249",
+          "x-category": "advanced"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -3999,7 +4067,8 @@
       },
       "title": "Link",
       "description": "[Link] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "basic"
     },
     "Network": {
       "type": "object",
@@ -4012,7 +4081,8 @@
             "My Interface",
             "Uplink to ISP"
           ],
-          "version_added": "211"
+          "version_added": "211",
+          "x-category": "basic"
         },
         "KeepMaster": {
           "type": "boolean",
@@ -4029,15 +4099,18 @@
         },
         "Bond": {
           "$ref": "#/definitions/interfacenameType",
-          "title": "Bond"
+          "title": "Bond",
+          "x-category": "advanced"
         },
         "Bridge": {
           "$ref": "#/definitions/interfacenameType",
-          "title": "Bridge"
+          "title": "Bridge",
+          "x-category": "advanced"
         },
         "VRF": {
           "$ref": "#/definitions/interfacenameType",
-          "title": "VRF"
+          "title": "VRF",
+          "x-category": "advanced"
         },
         "IPoIB": {
           "$ref": "#/definitions/interfacenameType",
@@ -4071,7 +4144,8 @@
         },
         "Tunnel": {
           "$ref": "#/definitions/interfacenameType",
-          "title": "Tunnel"
+          "title": "Tunnel",
+          "x-category": "advanced"
         },
         "VLAN": {
           "allOf": [
@@ -4082,11 +4156,13 @@
           "minimum": 1,
           "description": "The VLAN ID allowed on the port. This can be either a single ID or a range M-N. This setting can be specified multiple times. If an empty string is assigned, then the all previous assignments are cleared.",
           "title": "VLAN",
-          "version_added": "231"
+          "version_added": "231",
+          "x-category": "advanced"
         },
         "VXLAN": {
           "$ref": "#/definitions/interfacenameType",
-          "title": "VXLAN"
+          "title": "VXLAN",
+          "x-category": "advanced"
         },
         "Xfrm": {
           "$ref": "#/definitions/interfacenameType",
@@ -4110,7 +4186,8 @@
             "ipv6"
           ],
           "version_added": "211",
-          "x-subcategory": "DHCP/IPv6"
+          "x-subcategory": "DHCP/IPv6",
+          "x-category": "basic"
         },
         "DHCPServer": {
           "type": "boolean",
@@ -4122,7 +4199,8 @@
             "no"
           ],
           "version_added": "215",
-          "x-subcategory": "DHCP/IPv6"
+          "x-subcategory": "DHCP/IPv6",
+          "x-category": "advanced"
         },
         "LinkLocalAddressing": {
           "oneOf": [
@@ -4150,7 +4228,8 @@
             "ipv6"
           ],
           "version_added": "219",
-          "x-subcategory": "Link Configuration"
+          "x-subcategory": "Link Configuration",
+          "x-category": "advanced"
         },
         "IPv6LinkLocalAddressGenerationMode": {
           "type": "string",
@@ -4195,14 +4274,16 @@
           "default": false,
           "description": "If set to true, sets up the route needed for non-IPv4LL hosts to communicate with IPv4LL-only hosts. Defaults to false.",
           "title": "IPv4 LL Route",
-          "version_added": "216"
+          "version_added": "216",
+          "x-category": "advanced"
         },
         "DefaultRouteOnDevice": {
           "type": "boolean",
           "default": false,
           "description": "If set to true, sets up the IPv4 default route bound to the interface. Defaults to false. This is useful when creating routes on point-to-point interfaces. This is equivalent to e.g. the following, ip route add default dev veth99 or, [Route] Gateway=0.0.0.0 Currently, there are no way to specify e.g., the table for the route configured by this setting. To configure the default route with such an additional property, please use the following instead: [Route] Gateway=0.0.0.0 Table=1234 If you'd like to create an IPv6 default route bound to the interface, please use the following: [Route] Gateway=:: Table=1234",
           "title": "Default Route On Device",
-          "version_added": "243"
+          "version_added": "243",
+          "x-category": "advanced"
         },
         "LLDP": {
           "oneOf": [
@@ -4222,7 +4303,8 @@
           "default": "routers-only",
           "description": "Controls support for Ethernet LLDP packet reception. LLDP is a link-layer protocol commonly implemented on professional routers and bridges which announces which physical port a system is connected to, as well as other related data. Accepts a boolean or the special value 'routers-only'. When true, incoming LLDP packets are accepted and a database of all LLDP neighbors maintained. If 'routers-only' is set only LLDP data of various types of routers is collected and LLDP data about other types of devices ignored (such as stations, telephones and others). If false, LLDP reception is disabled. Defaults to 'routers-only'. Use networkctl1 to query the collected neighbor data. LLDP is only available on Ethernet links. See EmitLLDP= below for enabling LLDP packet emission from the local system.",
           "title": "LLDP",
-          "version_added": "219"
+          "version_added": "219",
+          "x-category": "advanced"
         },
         "EmitLLDP": {
           "oneOf": [
@@ -4244,7 +4326,8 @@
           "default": "false",
           "description": "Controls support for Ethernet LLDP packet emission. Accepts a boolean parameter or the special values 'nearest-bridge', 'non-tpmr-bridge' and 'customer-bridge'. Defaults to false, which turns off LLDP packet emission. If not false, a short LLDP packet with information about the local system is sent out in regular intervals on the link. The LLDP packet will contain information about the local hostname, the local machine ID (as stored in machine-id5) and the local interface name, as well as the pretty hostname of the system (as set in machine-info5). LLDP emission is only available on Ethernet links. Note that this setting passes data suitable for identification of host to the network and should thus not be enabled on untrusted networks, where such identification data should not be made available. Use this option to permit other systems to identify on which interfaces they are connected to this system. The three special values control propagation of the LLDP packets. The 'nearest-bridge' setting permits propagation only to the nearest connected bridge, 'non-tpmr-bridge' permits propagation across Two-Port MAC Relays, but not any other bridges, and 'customer-bridge' permits propagation until a customer bridge is reached. For details about these concepts, see IEEE 802.1AB-2016. Note that configuring this setting to true is equivalent to 'nearest-bridge', the recommended and most restricted level of propagation. See LLDP= above for an option to enable LLDP reception.",
           "title": "Emit LLDP",
-          "version_added": "230"
+          "version_added": "230",
+          "x-category": "advanced"
         },
         "Address": {
           "type": "array",
@@ -4254,7 +4337,8 @@
           "description": "A static IPv4 or IPv6 address and its prefix length, separated by a '/' character. Specify this key more than once to configure several addresses. The format of the address must be as described in inet_pton3. This is a short-hand for an [Address] section only containing an Address key (see below). This option may be specified more than once. If the specified address is '0.0.0.0' (for IPv4) or '::' (for IPv6), a new address range of the requested size is automatically allocated from a system-wide pool of unused ranges. Note that the prefix length must be equal or larger than 8 for IPv4, and 64 for IPv6. The allocated range is checked against all current network interfaces and all known network configuration files to avoid address range conflicts. The default system-wide pool consists of 192.168.0.0/16, 172.16.0.0/12 and 10.0.0.0/8 for IPv4, and fd00::/8 for IPv6. This functionality is useful to manage a large number of dynamically created network interfaces with the same network configuration and automatic address range assignment. If an IPv4 link-local address (169.254.0.0/16) is specified, IPv4 Address Conflict Detection (RFC 5227) is enabled for the address. To assign an IPv4 link-local address without IPv4 Address Conflict Detection, please use [Address] section to configure the address and disable DuplicateAddressDetection=. [Address] Address=169.254.10.1/24 DuplicateAddressDetection=none If an empty string is specified, then the all previous assignments in both [Network] and [Address] sections are cleared.",
           "title": "Address",
           "version_added": "211",
-          "x-subcategory": "Addressing"
+          "x-subcategory": "Addressing",
+          "x-category": "basic"
         },
         "Gateway": {
           "type": "array",
@@ -4268,7 +4352,8 @@
             "fe80::1"
           ],
           "version_added": "211",
-          "x-subcategory": "Addressing"
+          "x-subcategory": "Addressing",
+          "x-category": "basic"
         },
         "Domains": {
           "type": "array",
@@ -4282,7 +4367,8 @@
             "~."
           ],
           "version_added": "216",
-          "x-subcategory": "Addressing"
+          "x-subcategory": "Addressing",
+          "x-category": "basic"
         },
         "DNS": {
           "type": "array",
@@ -4296,20 +4382,23 @@
             "2001:4860:4860::8888"
           ],
           "version_added": "211",
-          "x-subcategory": "Addressing"
+          "x-subcategory": "Addressing",
+          "x-category": "basic"
         },
         "DNSDefaultRoute": {
           "type": "boolean",
           "description": "If true, this link's configured DNS servers are used for resolving domain names that do not match any link's configured Domains= setting. If false, this link's configured DNS servers are never used for such domains, and are exclusively used for resolving names that match at least one of the domains configured on this link. If not specified defaults to an automatic mode: queries not matching any link's configured domains will be routed to this link if it has no routing-only domains configured.",
           "title": "DNS Default Route",
-          "version_added": "240"
+          "version_added": "240",
+          "x-category": "advanced"
         },
         "LLMNR": {
           "type": "boolean",
           "default": true,
           "description": "or 'resolve'. When true, enables Link-Local Multicast Name Resolution on the link. When set to 'resolve', only resolution is enabled, but not host registration and announcement. Defaults to true. This setting is read by systemd-resolved.service8.",
           "title": "LLMNR",
-          "version_added": "216"
+          "version_added": "216",
+          "x-category": "advanced"
         },
         "MulticastDNS": {
           "oneOf": [
@@ -4329,7 +4418,8 @@
           "description": "Takes a boolean or 'resolve'. When true, enables Multicast DNS support on the link. When set to 'resolve', only resolution is enabled, but not host or service registration and announcement. Defaults to false. This setting is read by systemd-resolved.service8.",
           "default": "false",
           "title": "Multicast DNS",
-          "version_added": "229"
+          "version_added": "229",
+          "x-category": "advanced"
         },
         "DNSOverTLS": {
           "oneOf": [
@@ -4348,7 +4438,8 @@
           ],
           "description": "Takes a boolean or 'opportunistic'. When true, enables DNS-over-TLS support on the link. When set to 'opportunistic', compatibility with non-DNS-over-TLS servers is increased, by automatically turning off DNS-over-TLS servers in this case. This option defines a per-interface setting for resolved.conf5's global DNSOverTLS= option. Defaults to unset, and the global setting will be used. This setting is read by systemd-resolved.service8.",
           "title": "DNS Over TLS",
-          "version_added": "239"
+          "version_added": "239",
+          "x-category": "advanced"
         },
         "DNSSEC": {
           "oneOf": [
@@ -4367,7 +4458,8 @@
           ],
           "description": "Takes a boolean or 'allow-downgrade'. When true, enables DNSSEC DNS validation support on the link. When set to 'allow-downgrade', compatibility with non-DNSSEC capable networks is increased, by automatically turning off DNSSEC in this case. This option defines a per-interface setting for resolved.conf5's global DNSSEC= option. Defaults to unset, and the global setting will be used. This setting is read by systemd-resolved.service8.",
           "title": "DNSSEC",
-          "version_added": "229"
+          "version_added": "229",
+          "x-category": "advanced"
         },
         "DNSSECNegativeTrustAnchors": {
           "type": "string",
@@ -4390,7 +4482,8 @@
             "pool.ntp.org"
           ],
           "version_added": "216",
-          "x-subcategory": "Addressing"
+          "x-subcategory": "Addressing",
+          "x-category": "advanced"
         },
         "IPMasquerade": {
           "type": "string",
@@ -4407,7 +4500,8 @@
           "x-subcategory": "Routing",
           "examples": [
             "both"
-          ]
+          ],
+          "x-category": "advanced"
         },
         "IPv6PrivacyExtensions": {
           "oneOf": [
@@ -4428,7 +4522,8 @@
           "default": false,
           "description": "Configures use of stateless temporary addresses that change over time (see RFC 4941, Privacy Extensions for Stateless Address Autoconfiguration in IPv6). Takes a boolean or the special values 'prefer-public' and 'kernel'. When true, enables the privacy extensions and prefers temporary addresses over public addresses. When 'prefer-public', enables the privacy extensions, but prefers public addresses over temporary addresses. When false, the privacy extensions remain disabled. When 'kernel', the kernel's default setting will be left in place. When unspecified, the value specified in the same setting in networkd.conf5, which defaults to 'no', will be used.",
           "title": "IPv6 Privacy Extensions",
-          "version_added": "222"
+          "version_added": "222",
+          "x-category": "advanced"
         },
         "IPv6AcceptRA": {
           "type": "boolean",
@@ -4440,7 +4535,8 @@
             "no"
           ],
           "version_added": "231",
-          "x-subcategory": "DHCP/IPv6"
+          "x-subcategory": "DHCP/IPv6",
+          "x-category": "advanced"
         },
         "IPv6AcceptRouterAdvertisements": {
           "type": "boolean",
@@ -4577,7 +4673,8 @@
             "no"
           ],
           "version_added": "247",
-          "x-subcategory": "DHCP/IPv6"
+          "x-subcategory": "DHCP/IPv6",
+          "x-category": "advanced"
         },
         "DHCPPrefixDelegation": {
           "type": "boolean",
@@ -4611,7 +4708,8 @@
       },
       "title": "Network",
       "description": "[Network] section configuration",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "x-category": "basic"
     },
     "Address": {
       "oneOf": [
@@ -4953,7 +5051,8 @@
         }
       ],
       "description": "[Address] configuration (Can be repeated)",
-      "title": "Address"
+      "title": "Address",
+      "x-category": "basic"
     },
     "IPv6AddressLabel": {
       "oneOf": [
@@ -4983,7 +5082,8 @@
         }
       ],
       "description": "[Neighbor] configuration (Can be repeated)",
-      "title": "Neighbor"
+      "title": "Neighbor",
+      "x-category": "advanced"
     },
     "RoutingPolicyRule": {
       "oneOf": [
@@ -5430,7 +5530,8 @@
         }
       ],
       "description": "[Route] configuration (Can be repeated)",
-      "title": "Route"
+      "title": "Route",
+      "x-category": "basic"
     },
     "NextHop": {
       "oneOf": [
@@ -5445,7 +5546,8 @@
         }
       ],
       "description": "[NextHop] configuration (Can be repeated)",
-      "title": "Next Hop"
+      "title": "Next Hop",
+      "x-category": "advanced"
     },
     "DHCPv4": {
       "oneOf": [
@@ -5460,7 +5562,8 @@
         }
       ],
       "description": "[DHCPv4] configuration (Can be repeated)",
-      "title": "DHC Pv4"
+      "title": "DHC Pv4",
+      "x-category": "advanced"
     },
     "DHCPv6": {
       "oneOf": [
@@ -5475,7 +5578,8 @@
         }
       ],
       "description": "[DHCPv6] configuration (Can be repeated)",
-      "title": "DHC Pv6"
+      "title": "DHC Pv6",
+      "x-category": "advanced"
     },
     "IPv6AcceptRA": {
       "oneOf": [
@@ -5878,7 +5982,8 @@
       "examples": [
         "yes",
         "no"
-      ]
+      ],
+      "x-category": "advanced"
     },
     "DHCPServer": {
       "oneOf": [
@@ -6360,7 +6465,8 @@
       "examples": [
         "yes",
         "no"
-      ]
+      ],
+      "x-category": "advanced"
     },
     "DHCPServerStaticLease": {
       "oneOf": [
@@ -6375,7 +6481,8 @@
         }
       ],
       "description": "[DHCPServerStaticLease] configuration (Can be repeated)",
-      "title": "DHCP Server Static Lease"
+      "title": "DHCP Server Static Lease",
+      "x-category": "advanced"
     },
     "Bridge": {
       "oneOf": [
@@ -6390,7 +6497,8 @@
         }
       ],
       "description": "[Bridge] configuration (Can be repeated)",
-      "title": "Bridge"
+      "title": "Bridge",
+      "x-category": "advanced"
     },
     "BridgeFDB": {
       "oneOf": [
@@ -6435,7 +6543,8 @@
         }
       ],
       "description": "[BridgeVLAN] configuration (Can be repeated)",
-      "title": "Bridge VLAN"
+      "title": "Bridge VLAN",
+      "x-category": "advanced"
     },
     "DHCPPrefixDelegation": {
       "oneOf": [
@@ -6450,7 +6559,8 @@
         }
       ],
       "description": "[DHCPPrefixDelegation] configuration (Can be repeated)",
-      "title": "DHCP Prefix Delegation"
+      "title": "DHCP Prefix Delegation",
+      "x-category": "advanced"
     },
     "IPv6SendRA": {
       "oneOf": [
@@ -6469,7 +6579,8 @@
       "examples": [
         "yes",
         "no"
-      ]
+      ],
+      "x-category": "advanced"
     },
     "IPv6Prefix": {
       "oneOf": [
@@ -6622,7 +6733,8 @@
         }
       ],
       "description": "[IPv6Prefix] configuration (Can be repeated)",
-      "title": "IPv6 Prefix"
+      "title": "IPv6 Prefix",
+      "x-category": "advanced"
     },
     "IPv6RoutePrefix": {
       "oneOf": [
@@ -6637,7 +6749,8 @@
         }
       ],
       "description": "[IPv6RoutePrefix] configuration (Can be repeated)",
-      "title": "IPv6 Route Prefix"
+      "title": "IPv6 Route Prefix",
+      "x-category": "advanced"
     },
     "LLDP": {
       "oneOf": [
@@ -6652,7 +6765,8 @@
         }
       ],
       "description": "[LLDP] configuration (Can be repeated)",
-      "title": "LLDP"
+      "title": "LLDP",
+      "x-category": "advanced"
     },
     "CAN": {
       "oneOf": [
