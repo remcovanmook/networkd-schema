@@ -9,4 +9,5 @@ __pycache__/
 
 # Build Artifacts
 src/original/
+public/
 .github/copilot-instructions.md
