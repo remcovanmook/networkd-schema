@@ -543,6 +543,109 @@
         4094
       ]
     },
+    "CommonTunTapSection": {
+      "type": "object",
+      "properties": {
+        "OneQueue": {
+          "type": "string",
+          "title": "One Queue",
+          "x-deprecated": true
+        },
+        "MultiQueue": {
+          "type": "boolean",
+          "default": false,
+          "description": "Configures whether to use multiple file descriptors (queues) to parallelize packets sending and receiving. Defaults to 'no'.",
+          "version_added": "215",
+          "title": "Multi Queue",
+          "x-deprecated-alias": "Tun-MultiQueue"
+        },
+        "PacketInfo": {
+          "type": "boolean",
+          "default": false,
+          "description": "Configures whether packets should be prepended with four extra bytes (two flag bytes and two protocol bytes). If disabled, it indicates that the packets will be pure IP packets. Defaults to 'no'.",
+          "version_added": "215",
+          "title": "Packet Info",
+          "x-deprecated-alias": "Tun-PacketInfo"
+        },
+        "VNetHeader": {
+          "type": "boolean",
+          "default": false,
+          "description": "Configures IFF_VNET_HDR flag for a tun or tap device. It allows sending and receiving larger Generic Segmentation Offload (GSO) packets. This may increase throughput significantly. Defaults to 'no'.",
+          "version_added": "223",
+          "title": "V Net Header",
+          "x-deprecated-alias": "Tun-VNetHeader"
+        },
+        "User": {
+          "$ref": "#/definitions/usernameOrUidType",
+          "description": "User to grant access to the '/dev/net/tun' device.",
+          "version_added": "215",
+          "title": "User",
+          "x-deprecated-alias": "Tun-User"
+        },
+        "Group": {
+          "$ref": "#/definitions/groupnameOrGidType",
+          "description": "Group to grant access to the '/dev/net/tun' device.",
+          "version_added": "215",
+          "title": "Group",
+          "x-deprecated-alias": "Tun-Group"
+        },
+        "KeepCarrier": {
+          "type": "boolean",
+          "default": false,
+          "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'.",
+          "version_added": "252",
+          "title": "Keep Carrier",
+          "x-deprecated-alias": "Tun-KeepCarrier"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CommonIPVLANSection": {
+      "type": "object",
+      "properties": {
+        "Mode": {
+          "type": "string",
+          "enum": [
+            "L2",
+            "L3",
+            "L3S"
+          ],
+          "description": "The IPVLAN mode to use.",
+          "version_added": "219",
+          "title": "Mode",
+          "examples": [
+            "L2"
+          ]
+        },
+        "Flags": {
+          "type": "string",
+          "enum": [
+            "bridge",
+            "private",
+            "vepa"
+          ],
+          "description": "The IPVLAN flags to use.",
+          "version_added": "237",
+          "title": "Flags",
+          "examples": [
+            "bridge"
+          ]
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
+        }
+      },
+      "additionalProperties": false
+    },
     "BareUDPSection": {
       "type": "object",
       "properties": {
@@ -1287,89 +1390,21 @@
     },
     "IPVLANSection": {
       "type": "object",
-      "properties": {
-        "Mode": {
-          "type": "string",
-          "enum": [
-            "L2",
-            "L3",
-            "L3S"
-          ],
-          "description": "The IPVLAN mode to use.",
-          "version_added": "219",
-          "title": "Mode",
-          "examples": [
-            "L2"
-          ]
-        },
-        "Flags": {
-          "type": "string",
-          "enum": [
-            "bridge",
-            "private",
-            "vepa"
-          ],
-          "description": "The IPVLAN flags to use.",
-          "version_added": "237",
-          "title": "Flags",
-          "examples": [
-            "bridge"
-          ]
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonIPVLANSection"
         }
-      },
-      "description": "[IPVLAN] section configuration",
-      "additionalProperties": false
+      ],
+      "description": "[IPVLAN] section configuration"
     },
     "IPVTAPSection": {
       "type": "object",
-      "properties": {
-        "Mode": {
-          "type": "string",
-          "enum": [
-            "bridge",
-            "passthru",
-            "private",
-            "source",
-            "vepa"
-          ],
-          "description": "The IPVTAP mode to use.",
-          "version_added": "211",
-          "title": "Mode",
-          "examples": [
-            "bridge"
-          ],
-          "x-deprecated": true
-        },
-        "Flags": {
-          "type": "string",
-          "enum": [
-            "bridge",
-            "private",
-            "vepa"
-          ],
-          "description": "The IPVTAP flags to use.",
-          "version_added": "237",
-          "title": "Flags",
-          "examples": [
-            "bridge"
-          ],
-          "x-deprecated": true
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonIPVLANSection"
         }
-      },
-      "description": "[IPVTAP] section configuration",
-      "additionalProperties": false
+      ],
+      "description": "[IPVTAP] section configuration"
     },
     "IPoIBSection": {
       "type": "object",
@@ -1891,125 +1926,21 @@
     },
     "TapSection": {
       "type": "object",
-      "properties": {
-        "OneQueue": {
-          "type": "string",
-          "title": "One Queue",
-          "x-deprecated": true
-        },
-        "MultiQueue": {
-          "type": "boolean",
-          "default": false,
-          "description": "Configures whether to use multiple file descriptors (queues) to parallelize packets sending and receiving. Defaults to 'no'.",
-          "version_added": "215",
-          "title": "Multi Queue",
-          "x-deprecated-alias": "Tun-MultiQueue"
-        },
-        "PacketInfo": {
-          "type": "boolean",
-          "default": false,
-          "description": "Configures whether packets should be prepended with four extra bytes (two flag bytes and two protocol bytes). If disabled, it indicates that the packets will be pure IP packets. Defaults to 'no'.",
-          "version_added": "215",
-          "title": "Packet Info",
-          "x-deprecated-alias": "Tun-PacketInfo"
-        },
-        "VNetHeader": {
-          "type": "boolean",
-          "default": false,
-          "description": "Configures IFF_VNET_HDR flag for a tun or tap device. It allows sending and receiving larger Generic Segmentation Offload (GSO) packets. This may increase throughput significantly. Defaults to 'no'.",
-          "version_added": "223",
-          "title": "V Net Header",
-          "x-deprecated-alias": "Tun-VNetHeader"
-        },
-        "User": {
-          "$ref": "#/definitions/usernameOrUidType",
-          "description": "User to grant access to the '/dev/net/tun' device.",
-          "version_added": "215",
-          "title": "User",
-          "x-deprecated-alias": "Tun-User"
-        },
-        "Group": {
-          "$ref": "#/definitions/groupnameOrGidType",
-          "description": "Configures VXLAN multicast group IP address. All members of a VXLAN must use the same multicast group address.",
-          "version_added": "243",
-          "title": "Group",
-          "x-deprecated-alias": "Tun-Group"
-        },
-        "KeepCarrier": {
-          "type": "boolean",
-          "default": false,
-          "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'.",
-          "version_added": "252",
-          "title": "Keep Carrier",
-          "x-deprecated-alias": "Tun-KeepCarrier"
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonTunTapSection"
         }
-      },
-      "description": "[Tap] section configuration",
-      "additionalProperties": false
+      ],
+      "description": "[Tap] section configuration"
     },
     "TunSection": {
       "type": "object",
-      "properties": {
-        "OneQueue": {
-          "type": "string",
-          "title": "One Queue",
-          "x-deprecated": true
-        },
-        "MultiQueue": {
-          "type": "boolean",
-          "default": false,
-          "description": "Configures whether to use multiple file descriptors (queues) to parallelize packets sending and receiving. Defaults to 'no'.",
-          "version_added": "215",
-          "title": "Multi Queue"
-        },
-        "PacketInfo": {
-          "type": "boolean",
-          "default": false,
-          "description": "Configures whether packets should be prepended with four extra bytes (two flag bytes and two protocol bytes). If disabled, it indicates that the packets will be pure IP packets. Defaults to 'no'.",
-          "version_added": "215",
-          "title": "Packet Info"
-        },
-        "VNetHeader": {
-          "type": "boolean",
-          "default": false,
-          "description": "Configures IFF_VNET_HDR flag for a tun or tap device. It allows sending and receiving larger Generic Segmentation Offload (GSO) packets. This may increase throughput significantly. Defaults to 'no'.",
-          "version_added": "223",
-          "title": "V Net Header"
-        },
-        "User": {
-          "$ref": "#/definitions/usernameOrUidType",
-          "description": "User to grant access to the '/dev/net/tun' device.",
-          "version_added": "215",
-          "title": "User"
-        },
-        "Group": {
-          "$ref": "#/definitions/groupnameOrGidType",
-          "description": "Group to grant access to the '/dev/net/tun' device.",
-          "version_added": "215",
-          "title": "Group"
-        },
-        "KeepCarrier": {
-          "type": "boolean",
-          "default": false,
-          "description": "If enabled, to make the interface maintain its carrier status, the file descriptor of the interface is kept open. This may be useful to keep the interface in running state, for example while the backing process is temporarily shutdown. Defaults to 'no'.",
-          "version_added": "252",
-          "title": "Keep Carrier"
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonTunTapSection"
         }
-      },
-      "description": "[Tun] section configuration",
-      "additionalProperties": false
+      ],
+      "description": "[Tun] section configuration"
     },
     "TunnelSection": {
       "type": "object",

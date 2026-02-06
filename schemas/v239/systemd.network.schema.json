@@ -543,7 +543,7 @@
         4094
       ]
     },
-    "BandMultiQueueingSection": {
+    "CommonPacketSchedSection": {
       "type": "object",
       "properties": {
         "Parent": {
@@ -565,8 +565,39 @@
       "required": [
         "Parent"
       ],
-      "description": "[BandMultiQueueing] section configuration",
       "additionalProperties": false
+    },
+    "CommonQDiscSection": {
+      "type": "object",
+      "properties": {
+        "Parent": {
+          "$ref": "#/definitions/qdisc_parentType",
+          "version_added": "244",
+          "title": "Parent"
+        },
+        "Handle": {
+          "$ref": "#/definitions/qdisc_handleType",
+          "title": "Handle"
+        },
+        "_comments": {
+          "$ref": "#/definitions/section_comments"
+        },
+        "_property_comments": {
+          "$ref": "#/definitions/property_comments"
+        }
+      },
+      "required": [
+        "Parent"
+      ],
+      "additionalProperties": false
+    },
+    "BandMultiQueueingSection": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonQDiscSection"
+        }
+      ],
+      "description": "[BandMultiQueueing] section configuration"
     },
     "BridgeFDBSection": {
       "type": "object",
@@ -1213,29 +1244,12 @@
       "additionalProperties": false
     },
     "ClassfulMultiQueueingSection": {
-      "type": "object",
-      "properties": {
-        "Parent": {
-          "$ref": "#/definitions/qdisc_parentType",
-          "version_added": "244",
-          "title": "Parent"
-        },
-        "Handle": {
-          "$ref": "#/definitions/qdisc_handleType",
-          "title": "Handle"
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonQDiscSection"
         }
-      },
-      "required": [
-        "Parent"
       ],
-      "description": "[ClassfulMultiQueueing] section configuration",
-      "additionalProperties": false
+      "description": "[ClassfulMultiQueueing] section configuration"
     },
     "DHCPPrefixDelegationSection": {
       "type": "object",
@@ -1758,15 +1772,18 @@
         },
         "BlackList": {
           "type": "string",
-          "title": "Black List"
+          "title": "Black List",
+          "x-deprecated-alias": "DenyList"
         },
         "UseDomainName": {
           "type": "string",
-          "title": "Use Domain Name"
+          "title": "Use Domain Name",
+          "x-deprecated-alias": "UseDomains"
         },
         "CriticalConnection": {
           "type": "boolean",
-          "title": "Critical Connection"
+          "title": "Critical Connection",
+          "x-deprecated": true
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -1978,11 +1995,13 @@
           "$ref": "#/definitions/uint32Type",
           "description": "The metric of the prefix route, which is pointing to the subnet of the configured IP address, taking the configured prefix length into account. Takes an unsigned integer in the range 0...4294967295. When unset or set to 0, the kernel's default value is used. This setting will be ignored when AddPrefixRoute= is false.",
           "version_added": "246",
-          "title": "Route Metric"
+          "title": "Route Metric",
+          "x-deprecated": true
         },
         "ForceDHCPv6PDOtherInformation": {
           "type": "boolean",
-          "title": "Force DHC Pv6 PD Other Information"
+          "title": "Force DHC Pv6 PD Other Information",
+          "x-deprecated": true
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -2083,11 +2102,13 @@
         },
         "MemoryLimit": {
           "$ref": "#/definitions/bytesType",
-          "title": "Memory Limit"
+          "title": "Memory Limit",
+          "x-deprecated-alias": "MemoryLimitBytes"
         },
         "Quantum": {
           "$ref": "#/definitions/bytesType",
-          "title": "Quantum"
+          "title": "Quantum",
+          "x-deprecated-alias": "QuantumBytes"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -2196,11 +2217,13 @@
         },
         "Quantum": {
           "$ref": "#/definitions/bytesType",
-          "title": "Quantum"
+          "title": "Quantum",
+          "x-deprecated-alias": "QuantumBytes"
         },
         "InitialQuantum": {
           "$ref": "#/definitions/bytesType",
-          "title": "Initial Quantum"
+          "title": "Initial Quantum",
+          "x-deprecated-alias": "InitialQuantumBytes"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -2216,35 +2239,20 @@
       "additionalProperties": false
     },
     "FlowQueuePIESection": {
-      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonPacketSchedSection"
+        }
+      ],
       "properties": {
-        "Parent": {
-          "$ref": "#/definitions/qdisc_parentType",
-          "version_added": "244",
-          "title": "Parent"
-        },
-        "Handle": {
-          "$ref": "#/definitions/qdisc_handleType",
-          "title": "Handle"
-        },
         "PacketLimit": {
           "$ref": "#/definitions/bytesType",
           "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. An unsigned integer ranges 1 to 4294967294. Defaults to unset and kernel's default is used.",
           "version_added": "247",
           "title": "Packet Limit"
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
         }
       },
-      "required": [
-        "Parent"
-      ],
-      "description": "[FlowQueuePIE] section configuration",
-      "additionalProperties": false
+      "description": "[FlowQueuePIE] section configuration"
     },
     "GenericRandomEarlyDetectionSection": {
       "type": "object",
@@ -2294,17 +2302,12 @@
       "additionalProperties": false
     },
     "HeavyHitterFilterSection": {
-      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonPacketSchedSection"
+        }
+      ],
       "properties": {
-        "Parent": {
-          "$ref": "#/definitions/qdisc_parentType",
-          "version_added": "244",
-          "title": "Parent"
-        },
-        "Handle": {
-          "$ref": "#/definitions/qdisc_handleType",
-          "title": "Handle"
-        },
         "PacketLimit": {
           "allOf": [
             {
@@ -2314,19 +2317,9 @@
           "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
           "version_added": "246",
           "title": "Packet Limit"
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
         }
       },
-      "required": [
-        "Parent"
-      ],
-      "description": "[HeavyHitterFilter] section configuration",
-      "additionalProperties": false
+      "description": "[HeavyHitterFilter] section configuration"
     },
     "HierarchyTokenBucketSection": {
       "type": "object",
@@ -2822,7 +2815,8 @@
           ],
           "description": "The hardware address to set for the device.",
           "version_added": "218",
-          "title": "MAC Address"
+          "title": "MAC Address",
+          "x-deprecated-alias": "LinkLayerAddress"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -2985,17 +2979,12 @@
       "x-category": "advanced"
     },
     "PIESection": {
-      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonPacketSchedSection"
+        }
+      ],
       "properties": {
-        "Parent": {
-          "$ref": "#/definitions/qdisc_parentType",
-          "version_added": "244",
-          "title": "Parent"
-        },
-        "Handle": {
-          "$ref": "#/definitions/qdisc_handleType",
-          "title": "Handle"
-        },
         "PacketLimit": {
           "allOf": [
             {
@@ -3005,44 +2994,17 @@
           "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
           "version_added": "246",
           "title": "Packet Limit"
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
         }
       },
-      "required": [
-        "Parent"
-      ],
-      "description": "[PIE] section configuration",
-      "additionalProperties": false
+      "description": "[PIE] section configuration"
     },
     "QDiscSection": {
-      "type": "object",
-      "properties": {
-        "Parent": {
-          "$ref": "#/definitions/qdisc_parentType",
-          "version_added": "244",
-          "title": "Parent"
-        },
-        "Handle": {
-          "$ref": "#/definitions/qdisc_handleType",
-          "title": "Handle"
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonQDiscSection"
         }
-      },
-      "required": [
-        "Parent"
       ],
-      "description": "[QDisc] section configuration",
-      "additionalProperties": false
+      "description": "[QDisc] section configuration"
     },
     "QuickFairQueueingClassSection": {
       "type": "object",
@@ -3401,7 +3363,8 @@
         },
         "TTLPropagate": {
           "type": "string",
-          "title": "TTL Propagate"
+          "title": "TTL Propagate",
+          "x-deprecated": true
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -3415,17 +3378,12 @@
       "x-category": "basic"
     },
     "StochasticFairBlueSection": {
-      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonPacketSchedSection"
+        }
+      ],
       "properties": {
-        "Parent": {
-          "$ref": "#/definitions/qdisc_parentType",
-          "version_added": "244",
-          "title": "Parent"
-        },
-        "Handle": {
-          "$ref": "#/definitions/qdisc_handleType",
-          "title": "Handle"
-        },
         "PacketLimit": {
           "allOf": [
             {
@@ -3435,19 +3393,9 @@
           "description": "Specifies the hard limit on the queue size in number of packets. When this limit is reached, incoming packets are dropped. Defaults to unset and kernel's default is used.",
           "version_added": "246",
           "title": "Packet Limit"
-        },
-        "_comments": {
-          "$ref": "#/definitions/section_comments"
-        },
-        "_property_comments": {
-          "$ref": "#/definitions/property_comments"
         }
       },
-      "required": [
-        "Parent"
-      ],
-      "description": "[StochasticFairBlue] section configuration",
-      "additionalProperties": false
+      "description": "[StochasticFairBlue] section configuration"
     },
     "StochasticFairnessQueueingSection": {
       "type": "object",
@@ -3574,11 +3522,13 @@
         },
         "Burst": {
           "$ref": "#/definitions/bytesType",
-          "title": "Burst"
+          "title": "Burst",
+          "x-deprecated-alias": "BurstBytes"
         },
         "LimitSize": {
           "type": "string",
-          "title": "Limit Size"
+          "title": "Limit Size",
+          "x-deprecated-alias": "LimitBytes"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -4307,7 +4257,8 @@
         },
         "IPv6AcceptRouterAdvertisements": {
           "type": "boolean",
-          "title": "IPv6 Accept Router Advertisements"
+          "title": "IPv6 Accept Router Advertisements",
+          "x-deprecated-alias": "IPv6AcceptRA"
         },
         "IPv6DuplicateAddressDetection": {
           "type": "integer",
@@ -4363,7 +4314,8 @@
           "type": "boolean",
           "description": "Configures whether proxy ARP to be enabled on this port. When unset, the kernel's default will be used.",
           "title": "Proxy ARP",
-          "version_added": "243"
+          "version_added": "243",
+          "x-deprecated-alias": "IPv4ProxyARP"
         },
         "IPv6ProxyNDPAddress": {
           "allOf": [
@@ -4393,15 +4345,18 @@
         },
         "IPv4LL": {
           "type": "string",
-          "title": "IPv4 LL"
+          "title": "IPv4 LL",
+          "x-deprecated-alias": "LinkLocalAddressing"
         },
         "IPv6Token": {
           "$ref": "#/definitions/ipv6TokenType",
-          "title": "IPv6 Token"
+          "title": "IPv6 Token",
+          "x-deprecated-alias": "IPv6AcceptRA-Token"
         },
         "IPv6PrefixDelegation": {
           "type": "string",
-          "title": "IPv6 Prefix Delegation"
+          "title": "IPv6 Prefix Delegation",
+          "x-deprecated-alias": "DHCPPrefixDelegation"
         },
         "_comments": {
           "$ref": "#/definitions/section_comments"
@@ -4640,7 +4595,8 @@
               "title": "Prefix Route",
               "examples": [
                 "yes"
-              ]
+              ],
+              "x-deprecated": true
             },
             "AddPrefixRoute": {
               "type": "boolean",
@@ -5375,15 +5331,18 @@
               "type": "string",
               "description": "A whitespace-separated list of IPv4 addresses. Each address can optionally take a prefix length after '/'. DHCP offers from servers in the list are rejected. Note that if AllowList= is configured then DenyList= is ignored. Note that this filters only DHCP offers, so the filtering might not work when RapidCommit= is enabled. See also RapidCommit= above.",
               "version_added": "246",
-              "title": "Deny List"
+              "title": "Deny List",
+              "x-deprecated-alias": "PrefixDenyList"
             },
             "BlackList": {
               "type": "string",
-              "title": "Black List"
+              "title": "Black List",
+              "x-deprecated-alias": "PrefixDenyList"
             },
             "UseICMP6RateLimit": {
               "$ref": "#/definitions/bytesType",
-              "title": "Use ICMP6 Rate Limit"
+              "title": "Use ICMP6 Rate Limit",
+              "x-deprecated": true
             },
             "_comments": {
               "$ref": "#/definitions/section_comments"

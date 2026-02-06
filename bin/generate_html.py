@@ -469,6 +469,29 @@ class PageGenerator(HtmlGenerator):
              return any(self.check_is_multiple(v, depth+1) for v in s['anyOf'])
          
          return False
+    def _get_effective_properties(self, schema):
+        props = {}
+        s = self.resolve_ref(schema)
+        
+        # Handle allOf composition (merge all)
+        if 'allOf' in s:
+            for sub in s['allOf']:
+                props.update(self._get_effective_properties(sub))
+        
+        # Handle oneOf (pick first valid object)
+        if 'oneOf' in s:
+            for v in s['oneOf']:
+                resolved_v = self.resolve_ref(v)
+                if resolved_v.get('type') == 'object' or 'properties' in resolved_v:
+                    props.update(self._get_effective_properties(resolved_v))
+                    break
+
+        # Handle local properties (overrides)
+        if 'properties' in s:
+            props.update(s['properties'])
+            
+        return props
+
 
     def generate(self, doc_name, available_versions=None, force=False):
         xml_file = os.path.join(self.src_dir, f"{doc_name}.xml")
@@ -554,19 +577,7 @@ class PageGenerator(HtmlGenerator):
         self.attribute_map = {}
         for section_name, entries in sections_xml.items():
             if section_name not in self.schema['properties']: continue
-            section_schema = self.schema['properties'][section_name]
-            
-            # Resolve section wrapper
-            if 'oneOf' in section_schema:
-                for v in section_schema['oneOf']:
-                    resolved_v = self.resolve_ref(v)
-                    if resolved_v.get('type') == 'object' or 'properties' in resolved_v:
-                        section_schema = resolved_v
-                        break
-            elif '$ref' in section_schema:
-                 section_schema = self.resolve_ref(section_schema)
-            
-            props = section_schema.get('properties', {})
+            props = self._get_effective_properties(self.schema['properties'][section_name])
             for entry in entries:
                 name = self.get_option_name(entry)
                 if name and name in props:
@@ -741,18 +752,7 @@ class PageGenerator(HtmlGenerator):
         options_data = []
         processed_options = set()
 
-        section_schema = self.schema['properties'][section_name]
-        # Resolve wrapper
-        if 'oneOf' in section_schema:
-            for v in section_schema['oneOf']:
-                resolved_v = self.resolve_ref(v)
-                if resolved_v.get('type') == 'object' or 'properties' in resolved_v:
-                    section_schema = resolved_v
-                    break
-        elif '$ref' in section_schema:
-             section_schema = self.resolve_ref(section_schema)
-
-        props_schema_map = section_schema.get('properties', {})
+        props_schema_map = self._get_effective_properties(self.schema['properties'][section_name])
 
         # Build a map from option names to XML entries (handles multi-term varlistentries)
         name_to_entry = {}
