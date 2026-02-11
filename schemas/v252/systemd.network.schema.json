@@ -4595,7 +4595,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "#/definitions/timespan"
+              "$ref": "#/definitions/secondsType"
             }
           ],
           "description": "When true, systemd-networkd retains both the static and dynamic configuration of the interface even if its carrier is lost. When false, systemd-networkd drops both the static and dynamic configuration of the interface. When a timespan is specified, systemd-networkd waits for the specified timespan, and ignores the carrier loss if the link regain its carrier within the timespan. Setting 0 seconds is equivalent to 'no', and 'infinite' is equivalent to 'yes'. Setting a finite timespan may be useful when e.g. in the following cases: A wireless interface connecting to a network which has multiple access points with the same SSID. Enslaving a wireless interface to a bond interface, which may disconnect from the connected access point and causes its carrier to be lost. The driver of the interface resets when the MTU is changed. A wireless interface connecting to a network which has multiple access points with the same SSID. Enslaving a wireless interface to a bond interface, which may disconnect from the connected access point and causes its carrier to be lost. The driver of the interface resets when the MTU is changed. When Bond= is specified to a wireless interface, defaults to 3 seconds. When the DHCPv4 client is enabled and UseMTU= in the [DHCPv4] section enabled, defaults to 5 seconds. Otherwise, defaults to the value specified with ConfigureWithoutCarrier=. When ActivationPolicy= is set to 'always-up', this is forced to 'yes', and ignored any user specified values.",
@@ -6031,7 +6031,7 @@
               "NTP": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/hostnameType"
+                    "$ref": "#/definitions/hostType"
                   }
                 ],
                 "description": "An NTP server address (either an IP address, or a hostname). This option may be specified more than once. This setting is read by systemd-timesyncd.service8.",
