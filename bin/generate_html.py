@@ -632,7 +632,11 @@ class PageGenerator(HtmlGenerator):
 
             html_blocks.append(f'<div id="{section_id}" class="section-block">')
             section_cat_badge = f'<span class="badge badge-category-{section_category}" style="margin-left: 10px; font-size: 0.6em; vertical-align: middle;">{section_category.title()}</span>'
+            section_is_multiple = self.check_is_multiple(self.schema['properties'][section_name])
             html_blocks.append(f'<h2>{section_name} Section{section_cat_badge}</h2>')
+
+            if section_is_multiple:
+                html_blocks.append('<p class="section-multiple-note" style="font-size: 0.9em; color: #8b949e; margin-top: -10px; margin-bottom: 15px; font-style: italic;">This section can occur multiple times.</p>')
 
             if section_name in section_intros and section_intros[section_name]:
                 html_blocks.append('<div class="section-intro" style="margin-bottom: 20px;">')
@@ -930,8 +934,10 @@ class PageGenerator(HtmlGenerator):
         type_badge = f'<a href="../types.html#{opt["type_slug"]}" class="badge badge-type-prominent {t_cls}">{t_raw}</a>'
         
         multiple_badge = ""
+        multiple_note = ""
         if opt['multiple']:
              multiple_badge = '<span class="badge badge-multiple" title="Can be specified multiple times">Multiple</span>'
+             multiple_note = '<p style="font-size: 0.85em; color: #8b949e; margin-top: 5px; margin-bottom: 5px; font-style: italic;">This option can be specified multiple times.</p>'
 
         undoc_badge = ""
         if opt.get('deprecated_alias'):
@@ -979,7 +985,7 @@ class PageGenerator(HtmlGenerator):
                 {type_badge}
                 {multiple_badge}
             </div>
-            <div class="option-description">{undoc_badge}{opt["desc_html"]}</div>
+            <div class="option-description">{undoc_badge}{multiple_note}{opt["desc_html"]}</div>
             {default_html}
             {examples_html}
         </div>
