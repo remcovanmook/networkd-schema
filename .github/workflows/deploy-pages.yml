@@ -43,6 +43,14 @@ jobs:
       - name: Install dependencies
         run: pip install jsonschema
 
+      - name: Cache src/original
+        uses: actions/cache@v4
+        with:
+          path: src/original
+          key: src-original-${{ hashFiles('build.py', 'bin/generate_systemd_schema.py') }}
+          restore-keys: |
+            src-original-
+
       - name: Validate Schemas
         run: |
           python3 bin/validate_schema.py schemas/v*/*.json
@@ -50,7 +58,8 @@ jobs:
       - name: Fetch XML sources and build schemas
         run: |
           # build.py fetches XML from systemd repo and generates schemas
-          python3 build.py --force
+          # Omit --force so cached src/original/ files are reused
+          python3 build.py
 
       - name: Build Documentation
         run: python3 bin/rebuild_docs.py --force
