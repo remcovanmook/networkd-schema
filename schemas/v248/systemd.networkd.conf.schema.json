@@ -574,13 +574,13 @@
           "oneOf": [
             {
               "type": "string",
-              "pattern": "^((?!default|main|local)[a-zA-Z0-9_]+:[0-9]+(\\s+(?!default|main|local)[a-zA-Z0-9_]+:[0-9]+)*)?$"
+              "pattern": "^([a-zA-Z0-9_]+:[0-9]+(\\s+[a-zA-Z0-9_]+:[0-9]+)*)?$"
             },
             {
               "type": "array",
               "items": {
                 "type": "string",
-                "pattern": "^((?!default|main|local)[a-zA-Z0-9_]+:[0-9]+(\\s+(?!default|main|local)[a-zA-Z0-9_]+:[0-9]+)*)?$"
+                "pattern": "^([a-zA-Z0-9_]+:[0-9]+(\\s+[a-zA-Z0-9_]+:[0-9]+)*)?$"
               }
             }
           ],

@@ -5482,7 +5482,7 @@
               "NTP": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/hostnameType"
+                    "$ref": "#/definitions/hostType"
                   }
                 ],
                 "description": "An NTP server address (either an IP address, or a hostname). This option may be specified more than once. This setting is read by systemd-timesyncd.service8.",

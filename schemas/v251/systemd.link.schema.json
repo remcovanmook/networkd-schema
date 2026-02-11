@@ -731,11 +731,7 @@
       "type": "object",
       "properties": {
         "Description": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/string"
-            }
-          ],
+          "type": "string",
           "description": "A description of the device.",
           "title": "Description",
           "examples": [

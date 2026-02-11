@@ -586,13 +586,13 @@
           "oneOf": [
             {
               "type": "string",
-              "pattern": "^((?!default|main|local)[a-zA-Z0-9_]+:[0-9]+(\\s+(?!default|main|local)[a-zA-Z0-9_]+:[0-9]+)*)?$"
+              "pattern": "^([a-zA-Z0-9_]+:[0-9]+(\\s+[a-zA-Z0-9_]+:[0-9]+)*)?$"
             },
             {
               "type": "array",
               "items": {
                 "type": "string",
-                "pattern": "^((?!default|main|local)[a-zA-Z0-9_]+:[0-9]+(\\s+(?!default|main|local)[a-zA-Z0-9_]+:[0-9]+)*)?$"
+                "pattern": "^([a-zA-Z0-9_]+:[0-9]+(\\s+[a-zA-Z0-9_]+:[0-9]+)*)?$"
               }
             }
           ],
@@ -739,7 +739,7 @@
             "type": "object",
             "properties": {
               "Prefix": {
-                "$ref": "#/definitions/ipv6_prefix",
+                "$ref": "#/definitions/ipv6_prefixType",
                 "description": "IPv6 prefix is an address with a prefix length, separated by a slash '/' character. This setting is mandatory.",
                 "version_added": "257"
               },
@@ -767,7 +767,7 @@
           "type": "object",
           "properties": {
             "Prefix": {
-              "$ref": "#/definitions/ipv6_prefix",
+              "$ref": "#/definitions/ipv6_prefixType",
               "description": "IPv6 prefix is an address with a prefix length, separated by a slash '/' character. This setting is mandatory.",
               "version_added": "257"
             },
